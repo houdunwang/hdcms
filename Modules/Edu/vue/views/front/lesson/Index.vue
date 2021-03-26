@@ -7,7 +7,7 @@
             <hd-skeleton-card v-if="loading" :num="12" class="md:grid md:grid-cols-4 md:gap-3 p-6" />
             <div class="card-body grid md:grid-cols-4 gap-5" style="min-height:100px;" v-else>
                 <div v-for="lesson in lessons.data" :key="lesson.id">
-                    <lesson-card :lesson="lesson" />
+                    <x-lesson-card :lesson="lesson" />
                 </div>
             </div>
             <div class="card-footer text-muted flex justify-center">

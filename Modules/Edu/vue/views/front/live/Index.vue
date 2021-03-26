@@ -8,7 +8,7 @@
             src="https://liveshare.huya.com/iframe/19909817"
         ></iframe> -->
         <div class="w-1/4 m-auto flex justify-content mt-10">
-            <img src="/images/douyin.png" alt="感谢你的关注吧" />
+            <img src="/images/douyin.png" alt="感谢您的关注吧" />
         </div>
         <!-- <div class="fixed bottom-0 text-center py-5 text-white left-1/2 transform translate-x-1/2 text-xl  font-bold">
             晚八点直播

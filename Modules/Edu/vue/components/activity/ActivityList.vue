@@ -1,9 +1,8 @@
 <template>
     <div>
-        <!-- <hd-skeleton-list v-if="loading" :num="15" class="md:full mt-2 border-0" /> -->
         <div>
             <div v-for="activity in activities" :key="activity.id">
-                <component :is="`Activity${activity.type}`" :activity="activity"></component>
+                <component :is="`XActivity${activity.type}`" :activity="activity"></component>
             </div>
             <div class="flex justify-center mt-3">
                 <el-pagination

@@ -20,7 +20,6 @@
                         </router-link>
                     </div>
                 </div>
-
                 <div class="card-footer text-muted flex justify-center">
                     <el-pagination
                         :small="true"

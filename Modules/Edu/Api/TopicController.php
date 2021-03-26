@@ -86,7 +86,7 @@ class TopicController extends Controller
      * @throws MassAssignmentException
      * @throws InvalidArgumentException
      */
-    public function update(Request $request, Site $site, Topic $topic)
+    public function update(TopicRequest $request, Site $site, Topic $topic)
     {
         $this->authorize('update', $topic);
         $topic->fill($request->input())->save();

@@ -11,7 +11,7 @@
                 <div class="list-group-item" v-for="video in videos" :key="video.id">
                     <div class="d-flex align-items-start justify-content-start">
                         <div class="pt-1 mr-2">
-                            <user-avatar :user="video.user" classname="w-10 h-10" />
+                            <x-user-avatar :user="video.user" classname="w-10 h-10" />
                         </div>
                         <div class="flex-1">
                             <router-link

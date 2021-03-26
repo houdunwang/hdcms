@@ -2,7 +2,7 @@
     <div class="py-4 border-b border-gray-200">
         <div class="row flex items-center">
             <div class="col-auto">
-                <user-avatar :user="activity.causer" />
+                <x-user-avatar :user="activity.causer" />
             </div>
             <div class="col">
                 <router-link :to="{ name: 'front.sign.index' }" class="text-base text-gray-700 hover:text-gray-900 ">

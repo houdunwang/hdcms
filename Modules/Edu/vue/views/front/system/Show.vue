@@ -15,7 +15,7 @@
                         课程列表
                     </div>
                     <div class="card-body md:px-14">
-                        <lesson-list :lessons="form.lessons" />
+                        <x-lesson-list :lessons="form.lessons" />
                     </div>
                 </div>
             </div>

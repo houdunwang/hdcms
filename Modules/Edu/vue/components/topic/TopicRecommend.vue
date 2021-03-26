@@ -4,7 +4,7 @@
         <div class="py-4 border-b border-gray-200" v-else v-for="topic in topics" :key="topic.id">
             <div class="row flex items-center">
                 <div class="col-auto">
-                    <user-avatar :user="topic.user" />
+                    <x-user-avatar :user="topic.user" />
                 </div>
                 <div class="col">
                     <router-link :to="{ name: 'front.topic.show', params: { id: topic.id } }" class="text-base text-gray-600 hover:text-gray-900">
@@ -22,9 +22,7 @@
 </template>
 
 <script>
-import UserAvatar from './UserAvatar.vue'
 export default {
-    components: { UserAvatar },
     data() {
         return {
             loading: true,

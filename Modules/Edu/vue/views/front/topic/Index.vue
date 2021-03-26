@@ -11,7 +11,7 @@
                         <div v-for="topic in topics.data" :key="topic.id" class="py-4 border-b border-gray-200">
                             <div class="row">
                                 <div class="col-auto">
-                                    <user-avatar :user="topic.user" />
+                                    <x-user-avatar :user="topic.user" />
                                 </div>
                                 <div class="col">
                                     <router-link
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="md:w-3/12">
-                <community-tip />
+                <x-community-tip />
             </div>
         </div>
     </div>

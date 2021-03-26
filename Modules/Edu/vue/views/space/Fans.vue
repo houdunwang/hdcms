@@ -6,7 +6,7 @@
                 <h3 class="card-title">TA的粉丝</h3>
             </div>
             <div class="grid grid-cols-2 gap-1 md:grid-cols-5 md:gap-3 p-5" v-if="users.data && users.data.length > 0">
-                <user-card :member="user" v-for="user in users.data" :key="user.id" />
+                <x-user-card :member="user" v-for="user in users.data" :key="user.id" />
             </div>
             <div class="list-group list-group-flush flex  justify-center items-center text-gray-700 py-6" v-else>
                 关注TA吧，可能就是未来的大牛...

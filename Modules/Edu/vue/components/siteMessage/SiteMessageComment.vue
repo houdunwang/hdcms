@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center">
         <div class="">
             <div v-if="message.model" class="flex items-center">
-                <user-avatar :user="message.model.user" classname="w-10 h-10 mr-2 flex-1" />
+                <x-user-avatar :user="message.model.user" classname="w-10 h-10 mr-2 flex-1" />
                 <div class="flex flex-col">
                     <a href="#" target="_blank" @click.prevent="redirect" class="align-middle" v-if="message.model">
                         {{ message.model.title | truncate(titleLen || 50) }}
@@ -28,9 +28,7 @@
 </template>
 
 <script>
-import UserAvatar from '../UserAvatar.vue'
 export default {
-    components: { UserAvatar },
     props: ['message', 'titleLen'],
     methods: {
         async redirect() {

@@ -35,7 +35,7 @@
                     </div>
                     <!-- 正文内容 -->
                     <div
-                        class="card-body leading-8 p-3 md:p-8 text-gray-700 markdown"
+                        class="card-body leading-8 p-3 md:p-8 text-gray-700 markdown text-base"
                         v-if="topic.content"
                         style="min-height:100px;"
                         v-html="topic.content"
@@ -44,7 +44,7 @@
                     <!-- 正文内容END -->
                 </div>
                 <!-- 贴子内容END -->
-                <comment-list
+                <x-comment-list
                     class="mt-5"
                     :key="$route.params.id"
                     :action-list="`comment/topic/${$route.params.id}`"
@@ -52,8 +52,8 @@
                 />
             </div>
             <div class="md:w-3/12">
-                <user-card :member="topic.user" class="mb-5" />
-                <community-tip />
+                <x-user-card :member="topic.user" class="mb-5" />
+                <x-community-tip />
             </div>
             <hd-image-preview />
         </div>
@@ -61,9 +61,7 @@
 </template>
 
 <script>
-import CommentList from '../../../components/CommentList.vue'
 export default {
-    components: { CommentList },
     route: { path: `topic/:id/show/:comment_id?` },
     data() {
         return {

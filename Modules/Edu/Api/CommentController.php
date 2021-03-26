@@ -33,7 +33,7 @@ class CommentController extends Controller
      */
     public function topic(Site $site, Topic $topic)
     {
-        $comments = $topic->comments()->with(['replys.user', 'user', 'commentable'])->whereNull('reply_id')->latest('id')->paginate(15);
+        $comments = $topic->comments()->whereNull('reply_comment_id')->latest('id')->paginate(15);
         return CommentResource::collection($comments);
     }
 
@@ -64,7 +64,7 @@ class CommentController extends Controller
      */
     public function video(Site $site, Video $video)
     {
-        $comments = $video->comments()->with(['replys'])->where('site_id', $site['id'])->whereNull('reply_id')->latest()->paginate();
+        $comments = $video->comments()->with(['replys'])->where('site_id', $site['id'])->whereNull('reply_comment_id')->latest()->paginate();
         return CommentResource::collection($comments);
     }
 
@@ -114,7 +114,7 @@ class CommentController extends Controller
      */
     public function page($id, $cid)
     {
-        $total = Comment::where('comment_id', $id)->where('id', '>=', $cid)->whereNull('reply_id')->latest('id')->count();
+        $total = Comment::where('comment_id', $id)->where('id', '>=', $cid)->whereNull('reply_comment_id')->latest('id')->count();
         return ceil($total / 15);
     }
 }

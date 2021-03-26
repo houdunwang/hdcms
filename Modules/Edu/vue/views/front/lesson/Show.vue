@@ -9,11 +9,11 @@
                     </p>
                 </div>
                 <div class="card-body md:px-10">
-                    <video-list :videos="form.videos" />
+                    <x-video-list :videos="form.videos" />
                 </div>
             </div>
             <div class="md:w-3/12">
-                <community-tip />
+                <x-community-tip />
             </div>
         </div>
     </div>

@@ -16,8 +16,6 @@ use Modules\Edu\Entities\Comment;
  */
 class Topic extends Model
 {
-    // use Favorite, Favour, Activity, Comment;
-    // protected static $recordEvents = ['created'];
     protected $table = 'edu_topic';
     protected $fillable = ['title', 'content', 'reply_id'];
     protected $casts = [

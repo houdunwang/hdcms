@@ -7,7 +7,6 @@ system.keys().map(path => {
         .split('/')
         .pop()
         .split('.')[0]
-
     Vue.component(`Hd${name}`, system(path).default)
 })
 
@@ -19,7 +18,7 @@ files.keys().map(path => {
         .pop()
         .split('.')[0]
 
-    Vue.component(name, files(path).default)
+    Vue.component(`X${name}`, files(path).default)
 })
 
 //注册布局组件

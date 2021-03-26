@@ -12,7 +12,7 @@
             </h1>
             <div class="navbar-nav flex-row order-md-last" v-if="user.id">
                 <!-- 通知 -->
-                <site-message :title-len="10" />
+                <x-site-message :title-len="10" />
                 <!-- 通知 end-->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">

@@ -1,5 +1,5 @@
 <template>
-    <el-dialog :visible.sync="dialogVisible" :width="width">
+    <el-dialog :visible.sync="dialogVisible" :width="minWidth">
         <img :src="imagePreview" style="width:100%;" />
     </el-dialog>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
     props: {
-        minWidth: { type: Number, default: 500 }
+        width: { type: Number, default: 300 }
     },
     data() {
         return {
@@ -19,7 +19,7 @@ export default {
         this.$nextTick(_ => {
             this.$parent.$el.addEventListener('click', event => {
                 if (event.target.nodeName == 'IMG') {
-                    if (event.target.clientWidth > this.minWidth) {
+                    if (event.target.clientWidth > this.width) {
                         const src = event.target.getAttribute('src')
                         this.dialogVisible = true
                         this.imagePreview = src
@@ -29,7 +29,7 @@ export default {
         })
     },
     computed: {
-        width() {
+        minWidth() {
             return document.documentElement.clientWidth < 768 ? '100%' : '50%'
         }
     }

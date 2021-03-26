@@ -7,9 +7,10 @@
                         社区动态
                     </div>
                     <div class="card-body">
-                        <topic-recommend />
+                        <x-topic-recommend />
                         <div v-if="activity.data">
-                            <activity-list :activities="activity.data" />
+                            <!-- 动态列表 -->
+                            <x-activity-list :activities="activity.data" />
                             <div class="flex justify-center mt-3">
                                 <el-pagination
                                     :small="true"
@@ -28,20 +29,16 @@
                     </div>
                 </div>
             </div>
-
             <div class="md:w-3/12">
-                <community-tip />
-                <user-video-play-list class="mt-3" />
+                <x-community-tip />
+                <x-video-play-list class="mt-3" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import CommunityTip from '../../components/CommunityTip.vue'
-import TopicRecommend from '../../components/TopicRecommend.vue'
 export default {
-    components: { CommunityTip, TopicRecommend },
     route: { path: '//', meta: { keepAlive: true } },
     data() {
         return {
@@ -62,7 +59,7 @@ export default {
     methods: {
         async load(page) {
             this.page = page || this.page
-            this.activity = await this.axios.get(`activity?page=${page}`)
+            this.activity = await axios.get(`activity?page=${page}`)
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }
     }
