@@ -4,7 +4,7 @@
             <div class="md:w-9/12 md:mr-5 mb-5">
                 <hd-skeleton-list v-if="loading" :num="15" />
                 <div class="card" v-else>
-                    <div class="card-header h-14">
+                    <div class="card-header h-14 text-base">
                         话题讨论
                     </div>
                     <div class="card-body" v-loading="loading" style="min-height:100px;">

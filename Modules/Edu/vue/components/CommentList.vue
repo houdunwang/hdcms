@@ -1,6 +1,6 @@
 <template>
     <div v-loading="loading" id="comment-list">
-        <div :id="`comment-${comment.id}`" class="card shadow mb-5" v-for="comment in comments.data" :key="comment.id">
+        <div :id="`comment-${comment.id}`" class="card mb-5" v-for="comment in comments.data" :key="comment.id">
             <!-- 评论 -->
             <div class="card-header bg-white d-flex justify-content-start p-2 md:p-4">
                 <router-link :to="{ name: 'space.follower', params: { id: comment.user.id } }">
@@ -117,7 +117,7 @@
         </div>
         <!-- 分页END -->
         <!-- 评论框 -->
-        <div class="card mt-5" id="comment-form" v-if="isLogin">
+        <div class="card " id="comment-form" v-if="isLogin">
             <div class="card-header h-14">
                 <div v-if="form.comment" class="text-sm">
                     回复：<span class="text-blue-700 font-bold">{{ form.comment.user.name }}</span>

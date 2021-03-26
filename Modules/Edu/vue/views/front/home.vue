@@ -3,7 +3,7 @@
         <div class="md:flex">
             <div class="md:w-9/12 md:mr-5 mb-5">
                 <div class="card ">
-                    <div class="card-header flex justify-between h-14">
+                    <div class="card-header flex justify-between h-14 text-base text-gray-800">
                         社区动态
                     </div>
                     <div class="card-body">

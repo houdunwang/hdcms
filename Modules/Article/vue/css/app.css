@@ -10,7 +10,7 @@ html {
     /* font-family: 'Jetbrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; */
 }
 body {
-    background-color: #f3f3f3 !important;
+    background-color: #fffefc !important;
 }
 
 [v-cloak] {

@@ -2,7 +2,7 @@
     <div class="container-xl mt-10">
         <div class="flex justify-center">
             <div class="card mb-5 w-full">
-                <div class="card-header h-14">
+                <div class="card-header h-14 text-base">
                     系统课程
                 </div>
                 <hd-skeleton-card v-if="loading" :num="9" class=" md:grid md:grid-cols-3 md:gap-5 p-6" />

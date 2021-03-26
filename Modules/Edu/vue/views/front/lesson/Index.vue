@@ -1,7 +1,7 @@
 <template>
     <div class="container-xl mt-10">
-        <div class="card border-0">
-            <div class="card-header h-14">
+        <div class="card border">
+            <div class="card-header h-14 text-base">
                 实战课程
             </div>
             <hd-skeleton-card v-if="loading" :num="12" class="md:grid md:grid-cols-4 md:gap-3 p-6" />

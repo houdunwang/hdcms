@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="card mt-3">
-                    <div class="card-header md:px-14">
+                    <div class="card-header md:px-14 text-base">
                         课程列表
                     </div>
                     <div class="card-body md:px-14">

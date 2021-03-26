@@ -52,7 +52,7 @@
             </div>
             <div class="md:w-3/12 order-1 md:order-2">
                 <div class="card">
-                    <div class="card-header h-14">
+                    <div class="card-header h-14 text-base">
                         课程列表
                     </div>
                     <div class="card-body">

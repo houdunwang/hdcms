@@ -1,5 +1,5 @@
 <template>
-    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd">
+    <header class="navbar navbar-expand-md navbar-light d-print-none border-t-4 border-hd">
         <div class="container-xl flex items-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>
@@ -52,7 +52,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item" v-for="(menu, index) in menus" :key="index">
                             <router-link
-                                class="nav-link text-gray-500 font-semibold hover:text-hd"
+                                class="nav-link text-gray-500 font-semibold hover:text-hd text-base"
                                 :class="{ 'text-hd': $route.name == menu.name }"
                                 :to="{ name: menu.name }"
                             >
@@ -63,7 +63,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a
-                                class="nav-link dropdown-toggle text-gray-500 font-semibold hover:text-hd"
+                                class="nav-link dropdown-toggle text-gray-500 font-semibold hover:text-hd text-base"
                                 href="#navbar-layout"
                                 data-bs-toggle="dropdown"
                                 role="button"

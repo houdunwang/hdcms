@@ -3,7 +3,7 @@
         <div class="m-auto md:w-9/12 mb-5">
             <hd-skeleton-list v-if="loading" :num="15" />
             <div class="card" v-else>
-                <div class="card-header flex justify-between h-14">
+                <div class="card-header flex justify-between h-14 text-base">
                     最近课程
                 </div>
                 <div class="card-body" v-loading="loading" style="min-height:200px;">
