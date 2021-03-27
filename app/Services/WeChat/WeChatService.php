@@ -28,7 +28,7 @@ class WeChatService
     public function saveUser(array $account): User
     {
         //微信粉丝是否已经记录到表
-        if ($account['unionid']) {
+        if (isset($account['unionid'])) {
             $wechatUser = WeChatUser::where('unionid', $account['unionid'] ?? '')->first();
         } else {
             $wechatUser = WeChatUser::where('openid', $account['openid'] ?? '')->first();

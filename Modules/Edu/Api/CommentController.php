@@ -64,7 +64,7 @@ class CommentController extends Controller
      */
     public function video(Site $site, Video $video)
     {
-        $comments = $video->comments()->with(['replys'])->where('site_id', $site['id'])->whereNull('reply_comment_id')->latest()->paginate();
+        $comments = $video->comments()->whereNull('reply_comment_id')->latest()->paginate();
         return CommentResource::collection($comments);
     }
 

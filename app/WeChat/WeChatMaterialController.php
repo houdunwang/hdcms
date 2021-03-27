@@ -33,7 +33,7 @@ class WeChatMaterialController extends Controller
     public function index(Request $request, Site $site, WeChat $wechat)
     {
         $materials = $wechat->materials()->where('type', $request->type)->when($request->duration, function ($query, $duration) {
-            return $query->where('duration', $duration);
+            return $query->where('duration', request('type') == 'news' ? 'long' : $duration);
         })->paginate(10);
         return WeChatMaterialResource::collection($materials);
     }
@@ -58,7 +58,6 @@ class WeChatMaterialController extends Controller
     public function store(WeChatMaterialRequest $request, Site $site, WeChat $wechat, WeChatMaterial $material)
     {
         $package = app(Material::class)->init($wechat);
-        // return $request->input();
         if ($request->type == 'news') {
             $response = $package->addNews($request->content);
         } else {

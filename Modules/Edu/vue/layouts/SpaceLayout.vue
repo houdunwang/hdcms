@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-base">
         <top-menu />
         <div class="">
             <div class="h-36 overflow-hidden shadow-sm">

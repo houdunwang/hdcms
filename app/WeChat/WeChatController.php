@@ -58,8 +58,6 @@ class WeChatController extends Controller
     public function store(WeChatRequest $request, Site $site, WeChat $wechat, Message $message)
     {
         try {
-            //连接微信服务器验证TOKEN是否正确
-            $message->config($request->all())->token();
             $wechat->site_id = $site->id;
             $wechat->fill($request->all())->save();
             return $this->message('公众号添加成功', new WeChatResource($wechat));

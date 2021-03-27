@@ -4,7 +4,7 @@
             <div v-if="message.model" class="flex items-center">
                 <x-user-avatar :user="message.model.user" classname="w-10 h-10 mr-2 flex-1" />
                 <div class="flex flex-col">
-                    <a href="#" target="_blank" @click.prevent="redirect" class="align-middle" v-if="message.model">
+                    <a href="#" target="_blank" @click.prevent="redirect" class="align-middle text-sm" v-if="message.model">
                         {{ message.model.title | truncate(titleLen || 50) }}
                     </a>
                     <div v-else>评论已经删除无法查看</div>

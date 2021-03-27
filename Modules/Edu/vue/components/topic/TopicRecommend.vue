@@ -7,7 +7,10 @@
                     <x-user-avatar :user="topic.user" />
                 </div>
                 <div class="col">
-                    <router-link :to="{ name: 'front.topic.show', params: { id: topic.id } }" class="text-base text-gray-600 hover:text-gray-900">
+                    <router-link
+                        :to="{ name: 'front.topic.show', params: { id: topic.id } }"
+                        class="text-base font-medium text-gray-700 opacity-80 hover:opacity-90"
+                    >
                         {{ topic['title'] | truncate }}
                     </router-link>
                     <div class="text-xs text-gray-500 mt-2">

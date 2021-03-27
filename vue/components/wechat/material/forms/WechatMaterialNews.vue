@@ -40,21 +40,20 @@
                                 <el-input v-model="article.title"></el-input>
                             </el-form-item>
                             <el-form-item label="缩略图">
-                                <div class="flex flex-col">
-                                    <el-image :src="article.pic" fit="fill" v-if="article.pic" class="w-36 h-auto"></el-image>
-                                    <div>
-                                        <hd-wechat-material-select
-                                            :wechat="wechat"
-                                            type="thumb"
-                                            duration-type="long"
-                                            :show-button="false"
-                                            :show.sync="selectMaterialDialog"
-                                            @select="selectMediaHandle"
-                                        />
-                                        <el-button type="primary" size="mini" @click="selectMaterialDialog = true">选择素材</el-button>
-                                        <hd-tip>只能选择永久缩略图素材</hd-tip>
-                                    </div>
-                                </div>
+                                <el-image :src="article.pic" fit="cover" v-if="article.pic" class="w-60" />
+                                <el-dialog title="选择缩略图素材" :visible.sync="materialDialog" width="60%" :append-to-body="true">
+                                    <hd-wechat-material
+                                        :wechat="wechat"
+                                        material-type="thumb"
+                                        #default="{material}"
+                                        :show-type-button="false"
+                                        :show-duration-button="false"
+                                        duration-type="long"
+                                    >
+                                        <el-button type="primary" size="mini" @click="selectMediaHandle(material)">选择</el-button>
+                                    </hd-wechat-material>
+                                </el-dialog>
+                                <el-button type="primary" size="mini" @click="materialDialog = true" class="mt-3 block">选择素材</el-button>
                             </el-form-item>
                             <el-form-item label="作者">
                                 <el-input v-model="article.author"></el-input>
@@ -69,7 +68,7 @@
                                 </el-radio-group>
                             </el-form-item>
                             <el-form-item label="正文内容">
-                                <hd-wang-editor v-model="article.content" :sid="wechat.site_id" />
+                                <hd-wang-editor v-model="article.content" :sid="wechat.site_id" :key="article.key" />
                             </el-form-item>
                             <el-form-item label="原文链接">
                                 <el-input v-model="article.content_source_url"></el-input>
@@ -114,7 +113,8 @@ const article = {
     content_source_url: '',
     need_open_comment: 1,
     only_fans_can_comment: 1,
-    hd: true
+    hd: true,
+    key: Math.random()
 }
 const form = {
     title: '',
@@ -131,7 +131,7 @@ export default {
             form: _.merge({}, this.material || form),
             dialogShow: false,
             article: {},
-            selectMaterialDialog: false
+            materialDialog: false
         }
     },
     //编辑数据
@@ -147,15 +147,18 @@ export default {
     methods: {
         //选择素材回调
         selectMediaHandle(material) {
+            console.log(material)
             this.article.pic = material.file
-            this.article.thumb_media_id = material.media.media_id
+            this.article.thumb_media_id = material.response.media_id
+            this.materialDialog = false
         },
         //添加
         add() {
             if (this.form.content.length >= 5) {
                 return this.$message('图文消息只能添加5个')
             }
-            this.form.content.push((this.article = _.merge({}, article)))
+            this.article = _.cloneDeep({ ...article, key: Math.random() })
+            this.form.content.push(this.article)
         },
         //编辑
         edit(article) {

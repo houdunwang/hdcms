@@ -21,7 +21,7 @@ trait Send
     public function preview(array $data)
     {
         $url = $this->api . '/message/mass/preview?access_token=' . $this->token();
-        $response = Http::post($url, ["body" => $data])->throw()->json();
+        $response = Http::post($url, $data)->throw()->json();
         return $this->return($response);
     }
 
@@ -34,7 +34,7 @@ trait Send
     public function sendAll(array $data)
     {
         $url = $this->api . '/message/mass/sendall?access_token=' . $this->token();
-        $response = Http::post($url, ["body" => $data])->throw()->json();
+        $response = Http::post($url, $data)->throw()->json();
         return $this->return($response);
     }
 }

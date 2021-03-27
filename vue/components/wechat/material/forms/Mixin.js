@@ -1,7 +1,7 @@
 //素材组件Mixin
 import _ from 'lodash'
 export default form => ({
-    props: ['wechat', 'material', 'show', 'durationType'],
+    props: ['wechat', 'material', 'show', 'durationType', 'showDurationButton'],
     data() {
         return {
             initForm: form,

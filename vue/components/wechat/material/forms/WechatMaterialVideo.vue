@@ -9,7 +9,7 @@
                         <hd-form-error name="title" />
                     </el-form-item>
                     <el-form-item label="素材类型">
-                        <el-radio-group v-model="form.duration" :disabled="!!form.id">
+                        <el-radio-group v-model="form.duration" :disabled="!!form.id || !showDurationButton">
                             <el-radio label="short">临时素材</el-radio>
                             <el-radio label="long">永久素材</el-radio>
                         </el-radio-group>

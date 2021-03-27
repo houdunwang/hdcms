@@ -1,5 +1,7 @@
 <template>
     <div>
+        <el-alert effect="light" closable class="mb-2"> 正在管理【{{ wechat.title }}】公众号的粉丝 </el-alert>
+
         <div class="mt-3 flex">
             <el-input placeholder="请输入粉丝昵称" v-model="keyword"> </el-input>
             <el-button-group class="flex ml-2">
@@ -7,7 +9,9 @@
                 <el-button type="primary" size="mini" @click="sync('')">同步粉丝</el-button>
             </el-button-group>
         </div>
-        <hd-wechat-user-list :users="users.data" v-if="users.meta" />
+        <hd-wechat-user-list :users="users.data" v-if="users.meta" #default="{user}" v-bind="$attrs">
+            <slot :user="user"> </slot>
+        </hd-wechat-user-list>
         <el-pagination
             @current-change="load"
             :page-size="10"
@@ -34,14 +38,23 @@ export default {
             page: 1
         }
     },
-    async created() {
-        this.load()
+    watch: {
+        wechat: {
+            handler(wechat) {
+                this.wechat = wechat
+                this.load()
+            },
+            immediate: true
+        }
     },
+    // async created() {
+    //     this.load()
+    // },
     methods: {
         async load(page) {
             this.page = page || this.page
             this.loading = true
-            this.users = await axios.get(`site/${this.query('sid')}/wechat/${this.query('wid')}/user?page=${this.page}&keyword=${this.keyword}`)
+            this.users = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/user?page=${this.page}&keyword=${this.keyword}`)
             this.loading = false
         },
         //同步粉丝

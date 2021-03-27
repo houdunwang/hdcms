@@ -2,6 +2,7 @@
     <div>
         <el-alert type="info" class="mb-3">
             <ul>
+                <li>正在管理【{{ wechat.title }}】公众号的二维码</li>
                 <li>因为微信服务器不允许删除素材，所以删除素材只是从网站数据库中删除</li>
             </ul>
         </el-alert>

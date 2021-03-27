@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pt-3 text-secondary text-sm mr-5">
+                        <div class="pt-2 text-secondary text-sm mr-5">
                             <div class="markdown text-base" v-html="reply.html" v-markdown></div>
                             <!-- 快速回复框 -->
                             <div class="mt-2" v-if="isLogin && form.comment && form.comment.id == reply.id && form.editor == false">

@@ -9,12 +9,11 @@
             <span class="badge bg-teal absolute -top-2 -right-2" v-else>会员</span>
         </div>
         <div class="card-body border-0">
-            <div class="mb-1 text-gray-600">
+            <div class="mb-1 text-gray-600 font-bold">
                 {{ lesson.title | truncate(15) }}
             </div>
             <div class="text-sm flex justify-start items-center ">
-                <!-- <img :src="lesson.user.icon" class="w-6 h-6 rounded-full mr-2" /> -->
-                <span class="font-light">共有{{ lesson.video_num }}个视频</span>
+                <span class="font-light text-gray-500">共有{{ lesson.video_num }}个视频</span>
             </div>
         </div>
     </router-link>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <el-alert effect="light" closable class="mb-2"> 正在管理【{{ wechat.title }}】公众号的黑名单 </el-alert>
         <div class="mt-3 flex">
             <el-input placeholder="请输入粉丝昵称" v-model="keyword"> </el-input>
             <el-button-group class="flex ml-2">

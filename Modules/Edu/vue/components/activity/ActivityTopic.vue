@@ -5,7 +5,10 @@
                 <x-user-avatar :user="activity.causer" />
             </div>
             <div class="col">
-                <router-link :to="{ name: 'front.topic.show', params: { id: activity.subject.id } }" class="text-base text-gray-600 hover:text-gray-900">
+                <router-link
+                    :to="{ name: 'front.topic.show', params: { id: activity.subject.id } }"
+                    class="text-base font-medium text-gray-700 opacity-80 hover:opacity-90"
+                >
                     {{ activity.subject.title | truncate(50) }}
                 </router-link>
                 <div class="text-xs text-gray-500 mt-2">

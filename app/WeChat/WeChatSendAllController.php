@@ -8,6 +8,9 @@ use App\Models\WeChatSendAll;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\WeChat;
+use App\Models\WeChatUser;
+use Houdunwang\WeChat\SendAll;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 微信群发消息
@@ -27,8 +30,20 @@ class WeChatSendAllController extends Controller
         return $this->message('群发消息保存成功');
     }
 
-    public function show(WeChatSendAll $weChatSendAll)
+    /**
+     * 预览消息
+     * @param Request $request
+     * @param Site $site
+     * @param WeChat $wechat
+     * @param WeChatSendAll $message
+     * @param WeChatUser $user
+     * @return mixed
+     * @throws BindingResolutionException
+     */
+    public function preview(Request $request, Site $site, WeChat $wechat,  WeChatSendAll $message, WeChatUser $user)
     {
+        // return $message->content + ['touser' => $user->openid];
+        app(SendAll::class)->init($wechat)->preview($message->content + ['touser' => $user->openid]);
     }
 
     public function update(Request $request, Site $site, WeChat $wechat,  WeChatSendAll $message)

@@ -33,7 +33,7 @@ class SiteMessageController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications()->paginate();
+        $notifications = Auth::user()->notifications()->paginate(10);
         return SiteMessageResource::collection($notifications);
     }
 

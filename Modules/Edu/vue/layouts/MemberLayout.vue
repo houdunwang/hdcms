@@ -7,10 +7,10 @@
                     <router-link :to="{ name: 'space.follower', params: { id: user.id } }">
                         <img :src="user.icon" class="w-full object-cover cursor-pointer" />
                     </router-link>
-                    <div class="text-gray-800 px-3 py-4  border-b border-gray-200">{{ user.name }}</div>
+                    <div class="text-gray-800 px-3 py-4 border border-gray-200">{{ user.name }}</div>
                 </div>
-                <div class="mt-0 bg-white">
-                    <div v-for="(menu, index) in menus" :key="index" class="border-b border-gray-200">
+                <div class="mt-3 border bg-white border-b-0">
+                    <div v-for="(menu, index) in menus" :key="index" class="border-b border-gray-200 text-base">
                         <router-link
                             :to="menu.to"
                             class="text-gray-500 block py-3 px-3 pl-3 hover:bg-gray-100"

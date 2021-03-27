@@ -2,11 +2,8 @@
     <el-dialog title="群发消息设置" :visible.sync="showDialog" width="50%">
         <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
             <el-card shadow="nerver" :body-style="{ padding: '20px' }">
-                <!-- <div slot="header">
-                    <span>基本设置</span>
-                </div> -->
                 <el-form-item label="群发消息描述">
-                    <el-input v-model="form.title" placeholder="二维码用途描述"></el-input>
+                    <el-input v-model="form.title" />
                     <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="群发类型" size="normal">
@@ -29,9 +26,9 @@
                     <span>群发内容</span>
                 </div>
                 <div v-if="form.type != 'text'">
-                    <hd-wechat-material-preview :material="material" v-if="material.id" />
+                    <hd-wechat-material-preview :material="material" v-if="material" />
                     <el-dialog title="选择素材" :visible.sync="materialDialogShow" width="60%" :append-to-body="true">
-                        <hd-wechat-material :wechat="wechat" #default="{material}" :material-type="form.type" :show-type-button="false">
+                        <hd-wechat-material :wechat="wechat" #default="{material}" :material-type="materialType" :show-type-button="false">
                             <el-button type="primary" size="mini" @click="selectMaterial(material)">选择</el-button>
                         </hd-wechat-material>
                     </el-dialog>
@@ -51,11 +48,11 @@
 <script>
 import field from './field'
 const types = [
-    { label: '图文消息', id: 'news', type: 'mpnews' },
-    { label: '图片消息', id: 'image', type: 'images' },
-    { label: '语音群发', id: 'voice', type: 'voice' },
-    { label: '文本消息', id: 'text', type: 'text' },
-    { label: '视频消息', id: 'video', type: 'mpvideo' }
+    { label: '图文消息', mtype: 'news', id: 'mpnews' },
+    { label: '图片消息', mtype: 'image', id: 'images' },
+    { label: '语音群发', mtype: 'voice', id: 'voice' },
+    { label: '文本消息', mtype: 'text', id: 'text' },
+    { label: '视频消息', mtype: 'video', id: 'mpvideo' }
 ]
 export default {
     props: ['show', 'wechat', 'module', 'message'],
@@ -63,22 +60,29 @@ export default {
         return {
             showDialog: this.show,
             isSubmit: false,
-            form: {},
+            form: _.cloneDeep(field),
             materialDialogShow: false,
             types,
             //选择的素材
-            material: {}
+            material: null
+        }
+    },
+    computed: {
+        //素材类型
+        materialType() {
+            return this.types.find(t => t.id == this.form.type).mtype
         }
     },
     watch: {
+        'form.type'() {
+            this.form = _.merge(field, this.message ?? {})
+            this.material = null
+        },
+        //父组件传递消息
         message: {
             handler(message) {
-                this.form = _.cloneDeep({ title: '', type: 'news', material_id: null, content: field })
-                this.material = {}
-                if (message?.id) {
-                    this.form = message
-                    this.material = message.material
-                }
+                this.form = message ?? _.cloneDeep(field)
+                this.material = message?.material
             },
             immediate: true
         },
@@ -109,11 +113,10 @@ export default {
             this.material = material
             this.materialDialogShow = false
             //设置群发消息media_id
-            const type = types.find(t => t.id == material.type).type
-            if (type == 'images') {
-                this.form.content[type].media_ids = [material.id]
+            if (this.form.type == 'images') {
+                this.form.content[this.form.type].media_ids = [material.id]
             } else {
-                this.form.content[type].media_id = material.id
+                this.form.content[this.form.type].media_id = material.response.media_id
             }
         }
     }

@@ -79,7 +79,7 @@ class UploadService
      * @param string $path
      * @return void
      */
-    public function delete(string $path)
+    public function delete(?string $path)
     {
         $attachment = Attachment::where('path', $path)->first();
         if ($attachment) {

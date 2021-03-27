@@ -5,7 +5,7 @@
                 <x-user-avatar :user="activity.causer" />
             </div>
             <div class="col">
-                <a href="#" @click.prevent="to(activity.subject)" class="text-base text-gray-600 hover:text-gray-900 ">
+                <a href="#" @click.prevent="to(activity.subject)" class="text-base font-medium text-gray-700 opacity-80 hover:opacity-90">
                     {{ activity.subject.title | truncate(45) }}
                 </a>
                 <div class="text-xs text-gray-500 mt-2">

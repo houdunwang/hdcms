@@ -1,5 +1,6 @@
 <template>
     <div>
+        <el-alert effect="light" closable class="mb-2"> 正在管理【{{ wechat.title }}】公众号的群发消息 </el-alert>
         <el-table :data="messages.data" border stripe v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
             <el-table-column prop="scene_type" label="群发内容" #default="{row:message}">
@@ -18,11 +19,18 @@
                 <el-button-group>
                     <el-button type="success" size="mini" @click="edit(message)">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(message)">删除</el-button>
-                    <el-button type="primary" size="mini" @click="del(message)">预览</el-button>
+                    <el-button type="primary" size="mini" @click="preview(message)">预览</el-button>
                     <el-button type="warning" size="mini" @click="del(message)">发送</el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>
+        <!-- 预览消息 -->
+        <el-dialog title="选择预览用户" :visible.sync="previewMessageDialog" width="80%">
+            <hd-wechat-user :wechat="wechat">
+                <el-button type="primary" size="mini" @click="sendPreviewMessage(user)">预览消息</el-button>
+            </hd-wechat-user>
+        </el-dialog>
+        <!-- 消息管理组件 -->
         <hd-wechat-send-all-form :wechat="wechat" :message="message" :module="module" :show.sync="showFormDialog" v-if="wechat.id" />
         <el-button type="primary" size="small" class="mt-3" @click="edit({})">添加群发消息</el-button>
         <div class="mt-3">
@@ -56,8 +64,11 @@ export default {
             loading: true,
             messages: { data: [] },
             showFormDialog: false,
-            //消息数据
-            message: {}
+            //管理数据
+            message: null,
+            //预览消息
+            previewMessage: null,
+            previewMessageDialog: false
         }
     },
     created() {
@@ -78,7 +89,14 @@ export default {
         edit(message) {
             this.message = message
             this.showFormDialog = true
-        }
+        },
+        // 预览消息
+        preview(message) {
+            this.previewMessageDialog = true
+            this.previewMessage = message
+        },
+        // 发送预览消息
+        sendPreviewMessage(user) {}
     }
 }
 </script>

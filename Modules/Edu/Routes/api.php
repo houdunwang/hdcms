@@ -15,7 +15,7 @@ use Modules\Edu\Api\CommentController;
 use Modules\Edu\Api\SiteMessageController;
 use Modules\Edu\Api\UserController;
 
-Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], function () {
+Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module'], 'as' => 'edu.'], function () {
     //配置
     Route::get('config', [ConfigController::class, 'show']);
     Route::put('config', [ConfigController::class, 'update']);

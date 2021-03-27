@@ -3,6 +3,7 @@
         <el-form ref="form" label-width="80px">
             <el-alert type="info" class="mb-3">
                 <ul>
+                    <li>正在管理【{{ wechat.title }}】公众号的菜单</li>
                     <li>需要先保存菜单后，再进行微信菜单推送</li>
                     <li>一级菜单最多4个汉字，二级菜单最多7个汉字</li>
                     <li>推送菜单后需要等段时间者可以看到，你也可以取关再关注后立即看到效果</li>

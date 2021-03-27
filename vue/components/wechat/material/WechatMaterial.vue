@@ -1,12 +1,13 @@
 <template>
     <div>
+        <el-alert effect="light" closable class="mb-2"> 正在管理【{{ wechat.title }}】公众号的素材 </el-alert>
         <!-- 素材类型选择按钮 -->
         <el-button-group v-if="showTypeButton">
             <el-button size="mini" v-for="(t, index) in types" :key="index" :type="type == t.type ? 'primary' : ''" @click="type = t.type">
                 {{ t.title }}
             </el-button>
         </el-button-group>
-        <div class="mt-2" v-if="type != 'news' || showDurationButton">
+        <div class="mt-2" v-if="type != 'news' && showDurationButton">
             <el-radio-group v-model="duration" size="mini" @click="load">
                 <el-radio-button label="short">临时素材</el-radio-button>
                 <el-radio-button label="long">永久素材</el-radio-button>
@@ -58,7 +59,15 @@
         </div>
         <el-button type="danger" size="mini" @click="edit()" class="mt-3" v-if="showAddButton">添加素材</el-button>
         <!-- 动态加载组件 -->
-        <component :is="component" class="mt-3" :wechat="wechat" :material="form" :show.sync="showDialog" :duration-type="duration" />
+        <component
+            class="mt-3"
+            :is="component"
+            :wechat="wechat"
+            :material="form"
+            :show.sync="showDialog"
+            :duration-type="duration"
+            :show-duration-button="showDurationButton"
+        />
     </div>
 </template>
 

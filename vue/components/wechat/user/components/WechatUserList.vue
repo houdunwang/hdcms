@@ -14,11 +14,12 @@
             <el-table-column label="关注时间" #default="{row:user}" width="150">
                 {{ user.subscribe_time | format }}
             </el-table-column>
-            <el-table-column width="200" #default="{row:user}" align="center">
-                <el-button-group>
-                    <el-button type="success" size="mini" @click="remark(user)">备注名称</el-button>
-                    <el-button type="danger" size="mini" @click="black(user)" v-if="!user.black">拉黑用户</el-button>
+            <el-table-column width="220" #default="{row:user}" align="center">
+                <el-button-group v-if="!$attrs['show-button']">
+                    <el-button type="success" size="mini" @click="remark(user)">备注</el-button>
+                    <el-button type="danger" size="mini" @click="black(user)" v-if="!user.black">拉黑</el-button>
                     <el-button type="danger" size="mini" @click="removeBlack(user)" v-else>移除黑名单</el-button>
+                    <slot :user="user"></slot>
                 </el-button-group>
             </el-table-column>
         </el-table>

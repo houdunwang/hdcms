@@ -26,14 +26,14 @@
             <el-popover placement="top" width="250" trigger="hover">
                 <ul class="border">
                     <li v-for="(article, index) in material.content" :key="index" class="flex border-b" :class="{ 'flex-col': !index, 'p-2': index }">
-                        <el-image :src="article.picurl" fit="cover" :class="{ 'w-10 h-10 order-2': index, 'w-full h-20': !index }"></el-image>
+                        <el-image :src="article.pic" fit="cover" :class="{ 'w-10 h-10 order-2': index, 'w-full h-20': !index }"></el-image>
                         <h2 class="text-white bg-gray-700 py-2 text-center" v-show="index == 0">{{ article.title }}</h2>
                         <p class="text-sm flex-1" v-show="index">
                             {{ article.description }}
                         </p>
                     </li>
                 </ul>
-                <el-image slot="reference" :src="material.content[0].picurl" fit="cover" class="w-10 h-10"></el-image>
+                <el-image slot="reference" :src="material.content[0].pic" fit="cover" class="w-10 h-10"></el-image>
             </el-popover>
         </div>
         <div v-if="material.type == 'module'"><i class="fas fa-info-circle    "></i> 回复内容由模块处理</div>

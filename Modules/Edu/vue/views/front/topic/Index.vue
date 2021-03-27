@@ -16,11 +16,11 @@
                                 <div class="col">
                                     <router-link
                                         :to="{ name: 'front.topic.show', params: { id: topic.id } }"
-                                        class="text-base font-bold text-gray-500 hover:text-gray-900"
+                                        class="text-base font-bold text-gray-800 opacity-70 hover:opacity-90"
                                     >
                                         {{ topic['title'] | truncate }}
                                     </router-link>
-                                    <div class="text-xs text-gray-500 mt-2">{{ user.name }} 更新于 {{ topic['created_at'] | fromNow }}</div>
+                                    <div class="text-sm font-light  text-gray-500 mt-2">{{ user.name }} 更新于 {{ topic['created_at'] | fromNow }}</div>
                                 </div>
                             </div>
                         </div>

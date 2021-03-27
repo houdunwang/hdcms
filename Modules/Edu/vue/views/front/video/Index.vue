@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body" v-loading="loading" style="min-height:200px;">
                     <div v-for="video in videos.data" :key="video.id" class="py-4 border-b border-gray-200 flex justify-between">
-                        <router-link :to="{ name: 'front.video.show', params: { id: video.id } }" class="text-base text-gray-700 hover:text-gray-900">
+                        <router-link :to="{ name: 'front.video.show', params: { id: video.id } }" class="text-base text-gray-500 hover:text-gray-900">
                             {{ video['title'] | truncate }}
                         </router-link>
                         <span class="text-sm text-gray-400">
