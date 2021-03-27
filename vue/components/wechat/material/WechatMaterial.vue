@@ -57,8 +57,8 @@
             >
             </el-pagination>
         </div>
-        <el-button type="danger" size="mini" @click="edit()" class="mt-3" v-if="showAddButton">添加素材</el-button>
         <!-- 动态加载组件 -->
+        <el-button type="danger" size="mini" @click="edit()" class="mt-3" v-if="showAddButton">添加素材</el-button>
         <component
             class="mt-3"
             :is="component"

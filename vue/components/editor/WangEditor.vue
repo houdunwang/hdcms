@@ -18,14 +18,6 @@ export default {
             editor: null
         }
     },
-    // watch: {
-    //     value: {
-    //         handler(n,o) {
-
-    //         },
-    //         immediate: true
-    //     }
-    // },
     computed: {
         //图片上传地址
         uploadAction() {

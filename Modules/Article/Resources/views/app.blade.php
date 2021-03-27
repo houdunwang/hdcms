@@ -35,6 +35,9 @@
         window.site = @json(site(),JSON_FORCE_OBJECT);
         window.module = @json(module(),JSON_FORCE_OBJECT);
     </script>
+    <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </body>
 
 </html>

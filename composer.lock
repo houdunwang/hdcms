@@ -158,16 +158,16 @@
         },
         {
             "name": "alibabacloud/sdk",
-            "version": "1.8.916",
+            "version": "1.8.919",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aliyun/openapi-sdk-php.git",
-                "reference": "67d575e5405ed50907713dd919f0ae423f2b55f7"
+                "reference": "f9b4a079c4e2aceb93076b60ad47269afa62fe2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aliyun/openapi-sdk-php/zipball/67d575e5405ed50907713dd919f0ae423f2b55f7",
-                "reference": "67d575e5405ed50907713dd919f0ae423f2b55f7",
+                "url": "https://api.github.com/repos/aliyun/openapi-sdk-php/zipball/f9b4a079c4e2aceb93076b60ad47269afa62fe2c",
+                "reference": "f9b4a079c4e2aceb93076b60ad47269afa62fe2c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -398,7 +398,7 @@
                 "issues": "https://github.com/aliyun/openapi-sdk-php/issues",
                 "source": "https://github.com/aliyun/openapi-sdk-php"
             },
-            "time": "2021-03-25T09:25:21+00:00"
+            "time": "2021-03-26T06:38:30+00:00"
         },
         {
             "name": "aliyuncs/oss-sdk-php",

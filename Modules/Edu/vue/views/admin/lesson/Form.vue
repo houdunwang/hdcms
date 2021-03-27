@@ -54,7 +54,7 @@
                 <div slot="header">
                     标签选择
                 </div>
-                <tags v-model="form.tags" />
+                <x-tags v-model="form.tags" />
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">

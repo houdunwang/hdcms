@@ -7,9 +7,9 @@
             <div class="card-body">
                 <el-input v-model="form.title" placeholder="请输入贴子标题" size="normal" clearable></el-input>
                 <hd-form-error name="title" />
-                <tags v-model="form.tags" class="mt-3" />
+                <x-tags v-model="form.tags" class="mt-3" />
                 <hd-form-error name="tags" />
-                <hd-tui-editor v-model="form.content" class="border mt-3" :sid="site.id" />
+                <x-tui-editor v-model="form.content" class="border mt-3" :sid="site.id" />
                 <hd-form-error name="content" />
             </div>
             <div class="card-footer text-muted">

@@ -58,7 +58,7 @@
                             <hd-form-error name="preview" />
                         </el-form-item>
                         <el-form-item label="文章内容" v-if="form.type == 3">
-                            <wang-editor v-model="form.content" />
+                            <hd-wang-editor v-model="form.content" />
                             <hd-form-error name="content" />
                         </el-form-item>
                     </el-card>

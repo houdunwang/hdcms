@@ -41,12 +41,6 @@ _axios.interceptors.response.use(
                 break
             default:
                 el.Message.error(data.message)
-            // el.MessageBox.confirm(data.message, '温馨提示', {
-            //     showCancelButton: false,
-            //     confirmButtonText: '关闭',
-            //     type: 'warning',
-            //     showClose: true
-            // })
         }
         return Promise.reject(error)
     }

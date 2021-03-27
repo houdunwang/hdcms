@@ -44,6 +44,7 @@ class WeChatSendAllController extends Controller
     {
         // return $message->content + ['touser' => $user->openid];
         app(SendAll::class)->init($wechat)->preview($message->content + ['touser' => $user->openid]);
+        return $this->message('预览消息已经发送');
     }
 
     public function update(Request $request, Site $site, WeChat $wechat,  WeChatSendAll $message)

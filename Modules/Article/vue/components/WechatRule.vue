@@ -44,7 +44,7 @@
                 <error name="title" />
             </el-form-item>
             <el-form-item label="内容">
-                <wang-editor v-model="form.content" />
+                <hd-wang-editor v-model="form.content" />
                 <error name="title" />
             </el-form-item>
         </el-card>

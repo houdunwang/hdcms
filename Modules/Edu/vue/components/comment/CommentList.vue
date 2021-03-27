@@ -100,7 +100,7 @@
                 <div v-else class="font-bold text-gray-600">发表评论</div>
             </div>
             <div>
-                <hd-tui-editor v-model="form.content" :sid="site.id" />
+                <x-tui-editor v-model="form.content" :sid="site.id" />
                 <hd-form-error name="content" />
             </div>
             <div class="card-footer text-muted">

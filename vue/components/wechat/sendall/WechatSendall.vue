@@ -32,7 +32,7 @@
         </el-dialog>
         <!-- 消息管理组件 -->
         <hd-wechat-send-all-form :wechat="wechat" :message="message" :module="module" :show.sync="showFormDialog" v-if="wechat.id" />
-        <el-button type="primary" size="small" class="mt-3" @click="edit({})">添加群发消息</el-button>
+        <el-button type="primary" size="small" class="mt-3" @click="edit()">添加群发消息</el-button>
         <div class="mt-3">
             <el-pagination
                 v-if="messages.meta"

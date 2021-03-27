@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.31.0.
+ * Generated for Laravel 8.34.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1255,6 +1255,7 @@
          * @param \Closure|string $concrete
          * @return mixed 
          * @throws \Illuminate\Contracts\Container\BindingResolutionException
+         * @throws \Illuminate\Contracts\Container\CircularDependencyException
          * @static 
          */ 
         public static function build($concrete)
@@ -1897,6 +1898,7 @@
          * @param string $password
          * @param string $attribute
          * @return bool|null 
+         * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
         public static function logoutOtherDevices($password, $attribute = 'password')
@@ -4570,6 +4572,17 @@
                         $instance->recordsHaveBeenModified($value);
         }
                     /**
+         * Reset the record modification state.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function forgetRecordModificationState()
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        $instance->forgetRecordModificationState();
+        }
+                    /**
          * Is Doctrine available?
          *
          * @return bool 
@@ -5281,6 +5294,19 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Events\Dispatcher::hasMacro($name);
+        }
+                    /**
+         * Assert if an event has a listener attached to it.
+         *
+         * @param string $expectedEvent
+         * @param string $expectedListener
+         * @return void 
+         * @static 
+         */ 
+        public static function assertListening($expectedEvent, $expectedListener)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\EventFake $instance */
+                        $instance->assertListening($expectedEvent, $expectedListener);
         }
                     /**
          * Assert if an event was dispatched based on a truth-test callback.
@@ -6367,6 +6393,8 @@
      * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withoutRedirecting()
      * @method static \Illuminate\Http\Client\PendingRequest withoutVerifying()
+     * @method static \Illuminate\Http\Client\PendingRequest dump()
+     * @method static \Illuminate\Http\Client\PendingRequest dd()
      * @method static \Illuminate\Http\Client\Response delete(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response get(string $url, array $query = [])
      * @method static \Illuminate\Http\Client\Response head(string $url, array $query = [])
@@ -7118,7 +7146,7 @@
          * Get a mailer instance by name.
          *
          * @param string|null $name
-         * @return \Illuminate\Mail\Mailer 
+         * @return \Illuminate\Contracts\Mail\Mailer 
          * @static 
          */ 
         public static function mailer($name = null)
@@ -14696,10 +14724,10 @@
                     /**
          * 用户后台菜单
          *
-         * @param \App\Services\Menu\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
-         * @param \App\Services\Menu\User $user
-         * @return \App\Services\Menu\Collection 
+         * @param \App\Models\User $user
+         * @return \Illuminate\Support\Collection 
          * @static 
          */ 
         public static function lists($site, $module, $user)
@@ -14734,7 +14762,7 @@
                     /**
          * 加载模块配置
          *
-         * @param \App\Services\Module\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
          * @return void 
          * @static 
@@ -14771,7 +14799,7 @@
                     /**
          * 站点模块检测
          *
-         * @param \App\Services\Module\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
          * @return boolean 
          * @static 
@@ -14785,7 +14813,7 @@
          * 系统中所有模块
          * 包括安装与未安装的
          *
-         * @return \App\Services\Module\Collection|null 
+         * @return \Illuminate\Support\Collection|null 
          * @static 
          */ 
         public static function all()
@@ -14796,8 +14824,8 @@
                     /**
          * 站点模块列表
          *
-         * @param \App\Services\Module\Site $site
-         * @return \App\Services\Module\Collection 
+         * @param \App\Models\Site $site
+         * @return \Illuminate\Support\Collection 
          * @static 
          */ 
         public static function siteModules($site)
@@ -14808,9 +14836,9 @@
                     /**
          * 用户可用的站点模块
          *
-         * @param \App\Services\Module\Site $site
-         * @param \App\Services\Module\User $user
-         * @return \App\Services\Module\Collection 
+         * @param \App\Models\Site $site
+         * @param \App\Models\User $user
+         * @return \Illuminate\Support\Collection 
          * @static 
          */ 
         public static function userSiteModules($site, $user)
@@ -14876,9 +14904,9 @@
                     /**
          * 权限验证
          *
-         * @param \App\Services\Permission\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
-         * @param \App\Services\Permission\User $user
+         * @param \App\Models\User $user
          * @param string $permission
          * @return bool 
          * @throws InvalidCastException
@@ -14894,7 +14922,7 @@
                     /**
          * 完整权限标识
          *
-         * @param \App\Services\Permission\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
          * @param string $name
          * @return string 
@@ -14910,9 +14938,9 @@
                     /**
          * 用户是否可使用站点的模块
          *
-         * @param \App\Services\Permission\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
-         * @param \App\Services\Permission\User $user
+         * @param \App\Models\User $user
          * @return bool 
          * @throws InvalidCastException
          * @throws LogicException
@@ -14926,8 +14954,8 @@
                     /**
          * 站点权限列表
          *
-         * @param \App\Services\Permission\Site $site
-         * @return \App\Services\Permission\Collection 
+         * @param \App\Models\Site $site
+         * @return \Illuminate\Support\Collection 
          * @static 
          */ 
         public static function sitePermissions($site)
@@ -14938,7 +14966,7 @@
                     /**
          * 同步站点权限到权限表
          *
-         * @param \App\Services\Permission\Site $site
+         * @param \App\Models\Site $site
          * @return void 
          * @static 
          */ 
@@ -14950,7 +14978,7 @@
                     /**
          * 删除站点无效的权限
          *
-         * @param \App\Services\Permission\Site $site
+         * @param \App\Models\Site $site
          * @return void 
          * @static 
          */ 
@@ -14962,7 +14990,7 @@
                     /**
          * 权限标识添加站点前缀
          *
-         * @param \App\Services\Permission\Site $site
+         * @param \App\Models\Site $site
          * @param \Module $module
          * @return array 
          * @throws InvalidCastException
@@ -14988,7 +15016,7 @@
                     /**
          * 根据域名获取站点
          *
-         * @return null|\App\Services\Site\Site 
+         * @return null|\App\Models\Site 
          * @throws BindingResolutionException
          * @throws SuspiciousOperationException
          * @throws ConflictingHeadersException
@@ -15002,8 +15030,8 @@
                     /**
          * 缓存或读取当前站点
          *
-         * @param \App\Services\Site\Site|null $site
-         * @return \App\Services\Site\Site|null 
+         * @param \App\Models\Site|null $site
+         * @return \App\Models\Site|null 
          * @static 
          */ 
         public static function cache($site = null)
@@ -15014,7 +15042,7 @@
                     /**
          * 加载站点配置
          *
-         * @param \App\Services\Site\Site $site
+         * @param \App\Models\Site $site
          * @return void 
          * @static 
          */ 
@@ -15026,8 +15054,8 @@
                     /**
          * 站点管理员
          *
-         * @param \App\Services\Site\Site $site
-         * @param \App\Services\Site\User $user
+         * @param \App\Models\Site $site
+         * @param \App\Models\User $user
          * @return boolean 
          * @static 
          */ 
@@ -15074,7 +15102,7 @@
                     /**
          * 所有模板
          *
-         * @return \App\Services\Template\Collection 
+         * @return \Nwidart\Modules\Collection 
          * @static 
          */ 
         public static function all()
@@ -15085,7 +15113,7 @@
                     /**
          * 所有已经安装的模板
          *
-         * @return \App\Services\Template\Collection 
+         * @return \Nwidart\Modules\Collection 
          * @static 
          */ 
         public static function allInstalled()
@@ -15096,7 +15124,7 @@
                     /**
          * 获取站点所有模板
          *
-         * @param \App\Services\Template\Site $site
+         * @param \App\Models\Site $site
          * @return mixed 
          * @static 
          */ 
@@ -15109,7 +15137,7 @@
          * 安装模块
          *
          * @param string $name
-         * @return \App\Services\Template\Template 
+         * @return \App\Models\Template 
          * @throws BindingResolutionException
          * @static 
          */ 
@@ -15133,7 +15161,7 @@
                     /**
          * 当前站点使用的视图路径
          *
-         * @param \App\Services\Template\Site $site
+         * @param \App\Models\Site $site
          * @return \App\Services\Template\exit 
          * @throws BindingResolutionException
          * @static 
@@ -15157,7 +15185,7 @@
                     /**
          * 站点上传
          *
-         * @param \App\Services\Upload\UploadedFile $file
+         * @param \Illuminate\Http\UploadedFile $file
          * @return mixed 
          * @throws BindingResolutionException
          * @static 
@@ -15166,6 +15194,18 @@
         {
                         /** @var \App\Services\Upload\UploadService $instance */
                         return $instance->make($file);
+        }
+                    /**
+         * 删除文章
+         *
+         * @param string $path
+         * @return void 
+         * @static 
+         */ 
+        public static function delete($path)
+        {
+                        /** @var \App\Services\Upload\UploadService $instance */
+                        $instance->delete($path);
         }
          
     }
@@ -15192,7 +15232,7 @@
                     /**
          * 超级管理员检测
          *
-         * @param \App\Services\User\User $user
+         * @param \App\Models\User $user
          * @return boolean 
          * @static 
          */ 
@@ -15204,8 +15244,8 @@
                     /**
          * 站点管理员检测
          *
-         * @param \App\Services\User\Site $site
-         * @param \App\Services\User\User $user
+         * @param \App\Models\Site $site
+         * @param \App\Models\User $user
          * @return boolean 
          * @static 
          */ 
@@ -15218,8 +15258,8 @@
          * 是否为站点管理员
          * 如果管理员没有配置权限将无法管理站点
          *
-         * @param \App\Services\User\User $user
-         * @param \App\Services\User\Site $site
+         * @param \App\Models\User $user
+         * @param \App\Models\Site $site
          * @return boolean 
          * @static 
          */ 
@@ -15254,7 +15294,7 @@
          * 保存微信用户到数据表
          *
          * @param array $account
-         * @return \App\Services\WeChat\User 
+         * @return \App\Models\User 
          * @static 
          */ 
         public static function saveUser($account)
@@ -15276,11 +15316,11 @@
                     /**
          * 记录活动
          *
-         * @param \App\Services\Activity\User $user
-         * @param \App\Services\Activity\Model $model
+         * @param \App\Models\User $user
+         * @param \Illuminate\Database\Eloquent\Model $model
          * @param string $description
          * @param array $properties
-         * @return void|\App\Services\Activity\Ac 
+         * @return void|\Spatie\Activitylog\Contracts\Activity 
          * @throws BindingResolutionException
          * @throws InvalidArgumentException
          * @throws CouldNotLogActivity
@@ -15296,7 +15336,7 @@
                     /**
          * 获取用户动态
          *
-         * @param \App\Services\Activity\User $user
+         * @param \App\Models\User $user
          * @return mixed 
          * @static 
          */ 
@@ -15370,7 +15410,7 @@
                     /**
          * Adds a data collector
          *
-         * @param \Barryvdh\Debugbar\DataCollectorInterface $collector
+         * @param \DebugBar\DataCollector\DataCollectorInterface $collector
          * @throws DebugBarException
          * @return \Barryvdh\Debugbar\LaravelDebugbar 
          * @static 
@@ -15579,7 +15619,7 @@
          * Returns a data collector
          *
          * @param string $name
-         * @return \DebugBar\DataCollectorInterface 
+         * @return \DebugBar\DataCollector\DataCollectorInterface 
          * @throws DebugBarException
          * @static 
          */ 
@@ -18125,6 +18165,34 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->eachById($callback, $count, $column, $alias);
+            }
+             
+                /**
+             * Query lazily, by chunks of the given size.
+             *
+             * @param int $chunkSize
+             * @return \Illuminate\Support\LazyCollection 
+             * @static 
+             */ 
+            public static function lazy($chunkSize = 1000)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->lazy($chunkSize);
+            }
+             
+                /**
+             * Query lazily, by chunking the results of a query by comparing IDs.
+             *
+             * @param int $count
+             * @param string|null $column
+             * @param string|null $alias
+             * @return \Illuminate\Support\LazyCollection 
+             * @static 
+             */ 
+            public static function lazyById($chunkSize = 1000, $column = null, $alias = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->lazyById($chunkSize, $column, $alias);
             }
              
                 /**

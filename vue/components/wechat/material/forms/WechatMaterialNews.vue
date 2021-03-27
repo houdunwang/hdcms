@@ -34,7 +34,7 @@
                         </draggable>
                         <el-button type="primary" size="mini" @click="add">添加图文</el-button>
                     </div>
-                    <div class="flex-1 pl-3" v-if="article.hd">
+                    <div class="flex-1 pl-3" v-if="article">
                         <el-card shadow="nerver" :body-style="{ padding: '20px' }">
                             <el-form-item label="文章标题">
                                 <el-input v-model="article.title"></el-input>
@@ -113,14 +113,13 @@ const article = {
     content_source_url: '',
     need_open_comment: 1,
     only_fans_can_comment: 1,
-    hd: true,
     key: Math.random()
 }
 const form = {
     title: '',
     type: 'news',
     duration: 'long',
-    content: [{ ...article }]
+    content: []
 }
 export default {
     mixins: [Mixin(form)],
@@ -139,7 +138,11 @@ export default {
         material: {
             handler(material) {
                 this.form = _.merge({}, material || form)
-                this.article = this.form.content[0]
+                if (!this.form.content.length) {
+                    this.article = this.form.content[0]
+                } else {
+                    this.add()
+                }
             },
             immediate: true
         }

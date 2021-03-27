@@ -7,7 +7,7 @@
                     <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="群发类型" size="normal">
-                    <el-radio-group v-model="form.type">
+                    <el-radio-group v-model="form.type" :disabled="!!form.id">
                         <el-radio v-for="type in types" :key="type.id" :label="type.id">
                             {{ type.label }}
                         </el-radio>
@@ -60,7 +60,7 @@ export default {
         return {
             showDialog: this.show,
             isSubmit: false,
-            form: _.cloneDeep(field),
+            form: null,
             materialDialogShow: false,
             types,
             //选择的素材
@@ -74,8 +74,8 @@ export default {
         }
     },
     watch: {
-        'form.type'() {
-            this.form = _.merge(field, this.message ?? {})
+        'form.type'(n) {
+            this.form.content.msgtype = n
             this.material = null
         },
         //父组件传递消息

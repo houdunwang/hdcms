@@ -2,7 +2,7 @@
     <div v-loading="loading" :class="{ 'h-screen': loading }">
         <!-- 视频播放 -->
         <div v-if="loading == false">
-            <div class="bg-gray-900" v-if="video.id && video.permissions.show">
+            <div class="bg-gray-900" v-if="canPlay">
                 <div class="container-xl">
                     <div id="mse" style="z-index:1000"></div>
                 </div>
@@ -77,7 +77,7 @@ import Player from 'xgplayer'
 export default {
     route: { path: `video/:id/show/:comment_id?`, meta: { auth: true } },
     beforeRouteLeave(to, from, next) {
-        this.player.destroy(true)
+        if (this.player) this.player.destroy(true)
         next()
     },
     data() {
@@ -97,6 +97,9 @@ export default {
         },
         prev() {
             return this.lesson.videos[this.currentIndex - 1]
+        },
+        canPlay() {
+            return this.video.id && this.video.permissions.show
         }
     },
     watch: {
@@ -112,21 +115,26 @@ export default {
             this.video = await this.axios.get(`video/${id}`)
             this.lesson = this.video.lesson
             this.loading = false
-            if (this.player) this.player.destroy(true)
-            setTimeout(() => {
-                this.player = new Player({
-                    id: 'mse',
-                    url: this.video.path,
-                    autoplay: this.player,
-                    fluid: true,
-                    poster: '/images/poster.jpeg',
-                    playbackRate: [0.5, 0.75, 1, 1.5, 2]
+            this.initPlayer()
+        },
+        initPlayer() {
+            if (this.canPlay) {
+                if (this.player) this.player.destroy(true)
+                setTimeout(() => {
+                    this.player = new Player({
+                        id: 'mse',
+                        url: this.video.path,
+                        autoplay: this.player,
+                        fluid: true,
+                        poster: '/images/poster.jpeg',
+                        playbackRate: [0.5, 0.75, 1, 1.5, 2]
+                    })
+                    //没有评论参数时滚动顶部播放器位置
+                    if (!this.$route.params.comment_id) {
+                        document.documentElement.scroll({ top: 0, behavior: 'smooth' })
+                    }
                 })
-                //没有评论参数时滚动顶部播放器位置
-                if (!this.$route.params.comment_id) {
-                    document.documentElement.scroll({ top: 0, behavior: 'smooth' })
-                }
-            })
+            }
         }
     }
 }

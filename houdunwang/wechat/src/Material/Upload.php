@@ -34,7 +34,7 @@ trait Upload
     public function addNews(array $data)
     {
         $api = $this->api . '/material/add_news?access_token=' . $this->token();
-        $response = Http::post($api, ['articles' => $data])->json();
+        $response = Http::withBody(json_encode(['articles' => $data], JSON_UNESCAPED_UNICODE), 'application/json')->post($api)->json();
         return $this->return($response);
     }
 
