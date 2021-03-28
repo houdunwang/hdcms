@@ -1,11 +1,9 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
             <el-card shadow="never" :body-style="{ padding: '20px' }">
-                <div slot="header">
-                    基本资料
-                </div>
+                <div slot="header">基本资料</div>
                 <el-form-item label="套餐标题">
                     <el-input v-model="form.title"></el-input>
                     <hd-form-error name="title" />

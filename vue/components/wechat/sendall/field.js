@@ -2,6 +2,9 @@ export default {
     title: '',
     type: 'mpnews',
     content: {
+        filter: {
+            is_to_all: true
+        },
         msgtype: 'mpnews',
         send_ignore_reprint: 1,
         filter: {

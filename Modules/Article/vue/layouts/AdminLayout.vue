@@ -260,7 +260,7 @@
                     </el-button>
                 </el-button-group>
             </div>
-            <div class="p-5 bg-white shadow-sm mx-5 mb-10 rounded-sm">
+            <div class="p-5 bg-white mx-5 mb-10 rounded-sm border border-gray-100">
                 <router-view></router-view>
             </div>
             <!-- <div class="p-5 my-10 ">

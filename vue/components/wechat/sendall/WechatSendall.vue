@@ -18,12 +18,12 @@
             <el-table-column prop="scene_type" label="创建时间" #default="{row:message}" width="150">
                 {{ message.created_at | format }}
             </el-table-column>
-            <el-table-column width="250" align="center" #default="{row:message}">
+            <el-table-column width="280" align="center" #default="{row:message}">
                 <el-button-group>
                     <el-button type="success" size="mini" @click="edit(message)">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(message)">删除</el-button>
                     <el-button type="primary" size="mini" @click="preview(message)">预览</el-button>
-                    <el-button type="warning" size="mini" @click="del(message)">发送</el-button>
+                    <el-button type="warning" size="mini" @click="sendAll(message)">开始群发</el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>
@@ -110,6 +110,12 @@ export default {
         // 发送预览消息
         async sendPreviewMessage(user) {
             await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/sendall/message/${this.previewMessage.id}/user/${user.id}/preview`)
+        },
+        // 执行群发
+        async sendAll(message) {
+            this.$confirm('确定执行群发吗？', '温馨提示').then(async _ => {
+                await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/sendall/message/${message.id}/send`)
+            })
         }
     }
 }

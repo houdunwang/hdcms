@@ -1,47 +1,47 @@
 //素材组件Mixin
-import _ from 'lodash'
-export default form => ({
-    props: ['wechat', 'material', 'show', 'durationType', 'showDurationButton'],
+export default {
+    props: {
+        //公众号
+        wechat: { required: true, type: Object },
+        //素材
+        material: { default: null },
+        //素材临时、永久素材选择按钮
+        showDurationButton: { type: Boolean, default: true }
+    },
     data() {
         return {
-            initForm: form,
             //提交动作
             isSubmit: false,
-            //表单数据
-            form,
-            //临时或永久
-            duration: this.durationType,
-            //显示对话框
-            dialogShow: false
-        }
-    },
-    watch: {
-        //显示对话框
-        show(show) {
-            this.dialogShow = show
-            this.form = _.cloneDeep(this.material || form)
-            this.form.duration = this.durationType
-        },
-        dialogShow(show) {
-            this.$emit('update:show', show)
+            //临时或永久类型
+            duration: this.durationType
         }
     },
     methods: {
         onSubmit() {
+            if (this.material.type == 'news' && this.checkNews()) {
+                return this.$message.error('有文章数据不完整')
+            }
             this.isSubmit = true
-            const url = `site/${this.wechat.site_id}/wechat/${this.wechat.id}/material` + (this.form.id ? `/${this.form.id}` : ``)
-            axios[this.form.id ? 'put' : 'post'](url, this.form)
-                .then(_ => {
-                    this.$parent.load(1, this.form.type)
-                    this.dialogShow = false
-                    //添加时初始化
-                    if (!this.form.id) {
-                        this.$set(this, 'form', this.initForm)
-                    }
+            const url = `site/${this.wechat.site_id}/wechat/${this.wechat.id}/material` + (this.material.id ? `/${this.material.id}` : ``)
+            axios[this.material.id ? 'put' : 'post'](url, this.material)
+                .then(() => {
+                    this.$emit('onSubmit')
                 })
-                .finally(_ => {
+                .finally(() => {
                     this.isSubmit = false
                 })
+        },
+        //验证图文消息
+        checkNews() {
+            return this.material.content.some(
+                content =>
+                    !content['title'] ||
+                    !content['thumb_media_id'] ||
+                    !content['author'] ||
+                    !content['digest'] ||
+                    !content['content'] ||
+                    !content['content_source_url']
+            )
         }
     }
-})
+}

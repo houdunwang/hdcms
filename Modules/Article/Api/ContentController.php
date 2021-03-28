@@ -9,6 +9,13 @@ use Modules\Article\Http\Requests\ContentRequest;
 use Auth;
 use Modules\Article\Transformers\ContentResource;
 use DB;
+use Throwable;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+use InvalidArgumentException;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
  * 文章内容
@@ -21,9 +28,13 @@ class ContentController extends Controller
         $this->middleware(['auth:sanctum'])->except(['index', 'show']);
     }
 
+    /**
+     * 内容列表
+     * @return AnonymousResourceCollection
+     */
     public function index()
     {
-        $contents = Content::where('site_id', site('id'))->paginate(15);
+        $contents = Content::where('site_id', site('id'))->latest('id')->paginate(15);
         return ContentResource::collection($contents);
     }
 
@@ -32,6 +43,18 @@ class ContentController extends Controller
         return new ContentResource($content);
     }
 
+    /**
+     * 保存文章
+     * @param ContentRequest $request
+     * @param Site $site
+     * @param Content $content
+     * @return void
+     * @throws Throwable
+     * @throws AuthorizationException
+     * @throws MassAssignmentException
+     * @throws InvalidArgumentException
+     * @throws BindingResolutionException
+     */
     public function store(ContentRequest $request, Site $site, Content $content)
     {
         DB::beginTransaction();
@@ -40,12 +63,25 @@ class ContentController extends Controller
         $content->site_id = site('id');
         $content->user_id = Auth::id();
         $content->save();
+        $this->syncWeChatMessage($content);
         //保存标签
         $content->tags()->sync($request->tags);
         DB::commit();
         return $this->message('文章添加成功', $content);
     }
 
+    /**
+     * 更新
+     * @param ContentRequest $request
+     * @param Site $site
+     * @param Content $content
+     * @return void
+     * @throws Throwable
+     * @throws AuthorizationException
+     * @throws MassAssignmentException
+     * @throws InvalidArgumentException
+     * @throws BindingResolutionException
+     */
     public function update(ContentRequest $request, Site $site, Content $content)
     {
         DB::beginTransaction();
@@ -60,6 +96,31 @@ class ContentController extends Controller
         return $this->message('文章更新成功', $content);
     }
 
+    /**
+     * 微信关键词回复
+     * @param mixed $content
+     * @return void
+     * @throws BindingResolutionException
+     * @throws RouteNotFoundException
+     */
+    protected function syncWeChatMessage($content)
+    {
+        //微信关键词
+        $content->wechatMessage()->updateOrCreate(['id' => $content['id'] ?? null], [
+            'title' => $content['title'],
+            'wechat_id' => $content->wechat_id,
+            'keyword' => $content->keyword,
+            'type' => 'news',
+            'content' => [
+                [
+                    'title' => $content['title'],
+                    'picurl' => $content['preview'],
+                    'description' => $content['description'],
+                    'url' => route('article.content', $content)
+                ]
+            ]
+        ]);
+    }
     public function destroy(Site $site, Content $content)
     {
         $this->authorize('delete', $content);

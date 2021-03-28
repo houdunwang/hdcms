@@ -42,9 +42,25 @@ class WeChatSendAllController extends Controller
      */
     public function preview(Request $request, Site $site, WeChat $wechat,  WeChatSendAll $message, WeChatUser $user)
     {
-        // return $message->content + ['touser' => $user->openid];
         app(SendAll::class)->init($wechat)->preview($message->content + ['touser' => $user->openid]);
         return $this->message('预览消息已经发送');
+    }
+
+    /**
+     * 执行群发
+     * @param Request $request
+     * @param Site $site
+     * @param WeChat $wechat
+     * @param WeChatSendAll $message
+     * @return void
+     * @throws BindingResolutionException
+     */
+    public function send(Request $request, Site $site, WeChat $wechat,  WeChatSendAll $message)
+    {
+        app(SendAll::class)->init($wechat)->sendAll($message->content);
+        $message->status = true;
+        $message->save();
+        return $this->message('消息群发成功');
     }
 
     public function update(Request $request, Site $site, WeChat $wechat,  WeChatSendAll $message)

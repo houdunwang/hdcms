@@ -1,11 +1,9 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
             <el-card shadow="never" :body-style="{ padding: '20px' }">
-                <div slot="header">
-                    基本资料
-                </div>
+                <div slot="header">基本资料</div>
                 <el-form-item label="课程名称">
                     <el-input v-model="form.title"></el-input>
                     <hd-form-error name="title" />
@@ -20,10 +18,8 @@
                 </el-form-item>
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
-                <div slot="header">
-                    课程列表
-                </div>
-                <lesson :lessons.sync="form.lessons" :width="100" #default="{lesson}">
+                <div slot="header">课程列表</div>
+                <lesson :lessons.sync="form.lessons" :width="100" #default="{ lesson }">
                     <el-button-group>
                         <el-button type="danger" size="mini" @click="delLesson(lesson)">删除</el-button>
                     </el-button-group>

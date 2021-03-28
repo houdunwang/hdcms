@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <el-card shadow="nerver" :body-style="{ padding: '20px' }">
             <div slot="header">
                 标签管理

@@ -9,6 +9,8 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
+use App\Models\WeChatMessage;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Modules\Article\Database\factories\ContentFactory;
 
 /**
@@ -71,5 +73,14 @@ class Content extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * 微信消息多态关联
+     * @return MorphOne
+     */
+    public function wechatMessage()
+    {
+        return $this->morphOne(WeChatMessage::class, 'message');
     }
 }

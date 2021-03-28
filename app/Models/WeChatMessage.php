@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * 微信消息
@@ -32,5 +33,14 @@ class WeChatMessage extends Model
     public function module()
     {
         return $this->belongsTo(Module::class, 'module_id');
+    }
+
+    /**
+     * 模块多态反向关联
+     * @return MorphTo
+     */
+    public function messageable()
+    {
+        return $this->morphTo('message');
     }
 }

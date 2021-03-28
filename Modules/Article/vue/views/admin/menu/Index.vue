@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <ul class="alert alert-info text-sm text-gray-500 text-light leading-relaxed" role="alert">
             <li>缺少名称或链接的菜单将不会保存</li>
         </ul>

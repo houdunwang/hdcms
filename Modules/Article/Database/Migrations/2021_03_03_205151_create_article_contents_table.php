@@ -17,7 +17,9 @@ class CreateArticleContentsTable extends Migration
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('model_id')->constrained('article_models')->onDelete('cascade');
+            $table->foreignId('wechat_id')->nullable()->constrained('we_chats')->onDelete('set null');
             $table->foreignId('category_id')->constrained('article_categories')->onDelete('cascade');
+            $table->string('keyword', 20)->index()->nullable()->comment('微信回复关键词');
             $table->string('title', 100)->nullable()->comment('标题');
             $table->string('url')->nullable()->comment('跳转链接');
             $table->text('content')->nullable()->comment('内容');

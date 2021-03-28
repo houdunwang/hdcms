@@ -1,23 +1,17 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
             <el-card shadow="never" :body-style="{ padding: '20px' }">
-                <div slot="header">
-                    基本资料
-                </div>
+                <div slot="header">基本资料</div>
                 <el-form-item label="课程名称">
                     <el-input v-model="form.title"></el-input>
                     <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="课程上架">
                     <el-radio-group v-model="form.status" size="mini">
-                        <el-radio-button :label="true">
-                            上架
-                        </el-radio-button>
-                        <el-radio-button :label="false">
-                            下架
-                        </el-radio-button>
+                        <el-radio-button :label="true"> 上架 </el-radio-button>
+                        <el-radio-button :label="false"> 下架 </el-radio-button>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="推荐课程">
@@ -37,9 +31,7 @@
                 </el-form-item>
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
-                <div slot="header">
-                    销售
-                </div>
+                <div slot="header">销售</div>
                 <el-form-item label="免费观看数量" size="normal">
                     <el-input v-model="form.free_num" placeholder="" size="normal" clearable></el-input>
                     <hd-form-error name="free_num" />
@@ -51,15 +43,11 @@
             </el-card>
 
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
-                <div slot="header">
-                    标签选择
-                </div>
+                <div slot="header">标签选择</div>
                 <x-tags v-model="form.tags" />
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
-                <div slot="header">
-                    课程视频
-                </div>
+                <div slot="header">课程视频</div>
 
                 <draggable v-model="form.videos" group="people" class="grid grid-cols-1 md:grid-cols-4 gap-2">
                     <el-card shadow="never" :body-style="{ padding: '20px' }" class="relative overflow-visible" v-for="(video, i) in form.videos" :key="i">

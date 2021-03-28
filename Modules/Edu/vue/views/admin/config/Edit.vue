@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
             <el-card shadow="never" :body-style="{ padding: '20px' }">
                 <el-form-item label="直播公告">

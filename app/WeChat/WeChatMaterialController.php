@@ -33,7 +33,9 @@ class WeChatMaterialController extends Controller
     public function index(Request $request, Site $site, WeChat $wechat)
     {
         $materials = $wechat->materials()->where('type', $request->type)->when($request->duration, function ($query, $duration) {
-            return $query->where('duration', request('type') == 'news' ? 'long' : $duration);
+            if (request('type') != 'news') {
+                return $query->where('duration',  $duration);
+            }
         })->paginate(10);
         return WeChatMaterialResource::collection($materials);
     }

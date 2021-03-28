@@ -19,11 +19,27 @@ class WeChatMaterialRequest extends FormRequest
 
     public function rules()
     {
-        return [];
+        return [
+            'title' => ['required', 'between:3,20'],
+            'type' => ['required'],
+            'file' => ['exclude_if:type,news', 'required'],
+            'duration' => ['exclude_if:type,news', 'required'],
+            'content' => ['exclude_unless:type,news', 'required', 'array'],
+            'description.title' => ['exclude_unless:type,video', 'required'],
+            'description.introduction' => ['exclude_unless:type,video', 'required'],
+        ];
     }
 
     public function attributes()
     {
-        return [];
+        return [
+            'title' => '素材描述',
+            'type' => '素材类型',
+            'file' => '素材文件',
+            'duration' => '素材时长类型',
+            'content' => '文章内容',
+            'description.title' => '视频标题',
+            'description.introduction' => '视频描述'
+        ];
     }
 }

@@ -10,6 +10,10 @@ use Browser;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware(['module']);
+    }
     /**
      * 网站首页
      *
@@ -64,9 +68,9 @@ class HomeController extends Controller
     protected function defineTemplate()
     {
         $theme = config('module.template');
-        $config = include module_path('Article') . '/template/' . $theme . '/config.php';
-        $template = Browser::isMobile() ? $config['mobile'] : $config['pc'];
+        $config = include "modules/Article/template/{$theme}/config.php";
+        $device = Browser::isMobile() ? $config['mobile'] : $config['pc'];
 
-        \View::addLocation(base_path('Modules/Article/template/' . $theme . '/' . $template));
+        \View::addLocation(public_path("modules/Article/template/{$theme}/{$device}"));
     }
 }

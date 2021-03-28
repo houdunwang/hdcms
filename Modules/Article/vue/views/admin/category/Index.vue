@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <el-table :data="categories" border stripe>
             <el-table-column prop="id" label="编号" width="80" />
             <el-table-column prop="title" label="栏目名称" #default="{row:category}">

@@ -34,7 +34,7 @@ trait Send
     public function sendAll(array $data)
     {
         $url = $this->api . '/message/mass/sendall?access_token=' . $this->token();
-        $response = Http::post($url, $data)->throw()->json();
+        $response = Http::withBody(json_encode($data, JSON_UNESCAPED_UNICODE), 'application/json')->post($url)->throw()->json();
         return $this->return($response);
     }
 }

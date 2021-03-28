@@ -16,6 +16,7 @@ class CreateWeChatMessagesTable extends Migration
             $table->id();
             $table->foreignId('wechat_id')->constrained('we_chats')->onDelete('cascade');
             $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade')->commit('模块');
+            $table->nullableMorphs('message');
             $table->string('type')->nullable()->comment('消息类型')->comment('text:文本 news:文章 image:图片等');
             $table->string('title')->comment('规则名称');
             $table->string('keyword')->comment('关键词');

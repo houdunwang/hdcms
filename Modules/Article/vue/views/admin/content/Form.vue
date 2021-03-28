@@ -1,51 +1,53 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
-        <el-card shadow="never" :body-style="{ padding: '20px' }" v-loading="loading">
-            <div slot="header">
-                文章管理
-            </div>
-            <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
-                <el-form-item label="栏目选择">
-                    <el-select v-model="form.category_id" placeholder="请选择">
-                        <el-option
-                            v-for="category in categories"
-                            :key="category.id"
-                            :label="category.title"
-                            :value="category.id"
-                            :disabled="disabled(category)"
-                        >
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="标签" v-if="tags.length">
-                    <el-checkbox-group v-model="form.tags" size="mini" :max="3">
-                        <el-checkbox-button v-for="t in tags" :label="t.id" :key="t.id">{{ t.title }}</el-checkbox-button>
-                    </el-checkbox-group>
-                </el-form-item>
-                <div v-if="model">
+        <hd-tab :tabs="tabs" />
+        <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
+            <el-form-item label="栏目选择" v-if="categories">
+                <el-select v-model="form.category_id" placeholder="请选择">
+                    <el-option v-for="category in categories" :key="category.id" :label="category.title" :value="category.id" :disabled="disabled(category)">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <hd-wechat-message-module-rule :id.sync="form.wechat_id" :keyword.sync="form.keyword" />
+            <el-card shadow="nerver" :body-style="{ padding: '20px' }" v-if="model" class="mt-3">
+                <div slot="header">
+                    <span>内容设置</span>
+                </div>
+                <div>
+                    <el-form-item label="标签" v-if="tags.length">
+                        <el-checkbox-group v-model="form.tags" size="mini" :max="3">
+                            <el-checkbox-button v-for="t in tags" :label="t.id" :key="t.id">{{ t.title }}</el-checkbox-button>
+                        </el-checkbox-group>
+                    </el-form-item>
                     <div v-for="(field, index) in model.fields" :key="index">
                         <el-form-item :label="field.title" v-if="field.show">
                             <component v-bind:is="`field-${field.type}`" :field="field" :form="form"></component>
-                            <error :name="field.name" />
+                            <hd-form-error :name="field.name" />
                         </el-form-item>
                     </div>
                 </div>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>
                 </el-form-item>
-            </el-form>
-        </el-card>
+            </el-card>
+        </el-form>
     </div>
 </template>
 
 <script>
-const form = { tags: [] }
+const form = { category_id: null, tags: [], keyword: null, wechat_id: null }
 import tabs from './tabs'
 export default {
     props: ['id'],
     data() {
-        return { form: Object.assign({}, form), tabs, tags: [], loading: true, categories: [], model: null }
+        return {
+            form: _.merge({}, form),
+            tabs,
+            tags: [],
+            loading: true,
+            categories: null,
+            model: null
+        }
     },
     async created() {
         this.tags = await axios.get(`tag`)
@@ -61,6 +63,7 @@ export default {
         'form.category_id'() {
             this.model = this.categories.find(category => category.id == this.form.category_id).model
             if (!this.id) {
+                //添加时设置初始字段
                 this.model.fields.forEach(field => this.$set(this.form, field.name, ''))
             }
         }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tab :tabs="tabs" />
+        <hd-tab :tabs="tabs" />
         <div class="grid md:grid-cols-6 gap-5">
             <div class="card d-flex flex-column" v-for="template in templates" :key="template.name">
                 <a href="#">

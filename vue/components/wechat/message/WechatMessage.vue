@@ -47,10 +47,7 @@ export default {
     props: {
         wechat: { required: true, type: Object },
         messageType: { type: String, default: 'text' },
-        module: {
-            type: Object,
-            default: () => null
-        }
+        module: { type: Number, default: null }
     },
     data() {
         return {
@@ -80,7 +77,7 @@ export default {
     methods: {
         async load() {
             this.loading = true
-            this.messageData = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message?type=${this.type}`)
+            this.messageData = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message?type=${this.type}&module=${this.module ?? ''}`)
             this.loading = false
         },
         //编辑数据

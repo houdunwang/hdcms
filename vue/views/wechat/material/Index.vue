@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <hd-wechat-material :wechat="wechat" v-if="wechat.id" :material-type="$route.query.type" />
+        <hd-wechat-material :wechat_id="$route.query.wid" :site_id="$route.query.sid" :material-type="$route.query.type" v-if="wechat" />
     </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
         return {
             tabs: tabs(this.$route.query.sid),
             sid: this.$route.query.sid,
-            wechat: {}
+            wechat: null
         }
     },
     async created() {
