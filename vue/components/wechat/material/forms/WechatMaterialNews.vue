@@ -117,6 +117,12 @@ export default {
             materialDialog: false
         }
     },
+    created() {
+        if (!this.material.content.length) {
+            this.add()
+        }
+        this.article = this.material.content[0]
+    },
     methods: {
         //选择素材回调
         selectMediaHandle(material) {
@@ -141,6 +147,11 @@ export default {
             this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
                 const index = this.material.content.indexOf(article)
                 this.material.content.splice(index, 1)
+                if (this.material.content.length) {
+                    this.article = this.material.content[0]
+                } else {
+                    this.article = null
+                }
             })
         }
     }

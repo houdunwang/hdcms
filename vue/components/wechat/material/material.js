@@ -1,4 +1,5 @@
 export default {
+    key: Math.random(),
     title: '',
     wechat_id: null,
     module_id: null,

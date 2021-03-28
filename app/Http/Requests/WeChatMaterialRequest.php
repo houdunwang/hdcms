@@ -24,7 +24,7 @@ class WeChatMaterialRequest extends FormRequest
             'type' => ['required'],
             'file' => ['exclude_if:type,news', 'required'],
             'duration' => ['exclude_if:type,news', 'required'],
-            'content' => ['exclude_unless:type,news', 'required', 'array'],
+            'content' => ['exclude_unless:type,news', 'required', 'min:1', 'array'],
             'description.title' => ['exclude_unless:type,video', 'required'],
             'description.introduction' => ['exclude_unless:type,video', 'required'],
         ];

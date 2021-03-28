@@ -27,6 +27,9 @@
             </el-radio-group>
             <el-table :data="list.data" border stripe class="mt-3" v-loading="loading">
                 <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
+                <el-table-column label="模块" width="150" prop="duration" #default="{ row: material }">
+                    {{ material.module && material.module.title }}
+                </el-table-column>
                 <el-table-column label="素材预览" width="200" #default="{ row: material }">
                     <el-popover placement="top" width="200" trigger="hover" v-if="material.type == 'image' || material.type == 'thumb'">
                         <el-image :src="material.file" fit="cover"></el-image>
@@ -172,6 +175,7 @@ export default {
         //初始化素材表单
         initMaterial() {
             this.material = _.cloneDeep(this.material)
+            this.material.key = Math.random()
             this.material.content = []
             this.material.description = { title: '', introduction: '' }
         },

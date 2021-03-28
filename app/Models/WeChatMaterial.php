@@ -24,4 +24,13 @@ class WeChatMaterial extends Model
     {
         return $this->belongsTo(WeChat::class);
     }
+
+    /**
+     * 模块关联
+     * @return BelongsTo
+     */
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }
