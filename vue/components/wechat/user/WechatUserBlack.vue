@@ -8,7 +8,6 @@
                 <el-button type="primary" size="mini" @click="sync('')">同步黑名单</el-button>
             </el-button-group>
         </div>
-
         <hd-wechat-user-list :users="users.data" v-if="users.meta" />
         <el-pagination
             @current-change="load"

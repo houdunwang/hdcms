@@ -3,7 +3,10 @@
         <el-alert effect="light" closable class="mb-2"> 正在管理【{{ wechat.title }}】公众号的群发消息 </el-alert>
         <el-table :data="messages.data" border stripe v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
-            <el-table-column prop="scene_type" label="群发内容" #default="{row:message}">
+            <el-table-column label="消息类型" #default="{row:message}" width="150">
+                {{ types[message.type] }}
+            </el-table-column>
+            <el-table-column prop="scene_type" label="群发内容" #default="{row:message}" width="200">
                 <hd-wechat-material-preview :material="message.material" v-if="message.type != 'text'" />
                 <div v-else class="text-sm text-gray-500">
                     {{ message.content.text.content | truncate(30) }}
@@ -26,8 +29,8 @@
         </el-table>
         <!-- 预览消息 -->
         <el-dialog title="选择预览用户" :visible.sync="previewMessageDialog" width="80%">
-            <hd-wechat-user :wechat="wechat">
-                <el-button type="primary" size="mini" @click="sendPreviewMessage(user)">预览消息</el-button>
+            <hd-wechat-user :wechat="wechat" #default="{ user }">
+                <el-button type="primary" size="mini" @click="sendPreviewMessage(user)"> 预览消息</el-button>
             </hd-wechat-user>
         </el-dialog>
         <!-- 消息管理组件 -->
@@ -53,6 +56,13 @@ const columns = [
     { label: '编号', id: 'id', width: 60 },
     { label: '群发消息描述', id: 'title' }
 ]
+const types = {
+    mpnews: '图文消息',
+    images: '图片消息',
+    voice: '语音群发',
+    text: '文本消息',
+    mpvideo: '视频消息'
+}
 export default {
     props: {
         wechat: { required: true, type: Object },
@@ -64,6 +74,7 @@ export default {
             loading: true,
             messages: { data: [] },
             showFormDialog: false,
+            types,
             //管理数据
             message: null,
             //预览消息
@@ -71,6 +82,7 @@ export default {
             previewMessageDialog: false
         }
     },
+
     created() {
         this.load()
     },
@@ -96,7 +108,9 @@ export default {
             this.previewMessage = message
         },
         // 发送预览消息
-        sendPreviewMessage(user) {}
+        async sendPreviewMessage(user) {
+            await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/sendall/message/${this.previewMessage.id}/user/${user.id}/preview`)
+        }
     }
 }
 </script>

@@ -138,7 +138,7 @@ export default {
         material: {
             handler(material) {
                 this.form = _.merge({}, material || form)
-                if (!this.form.content.length) {
+                if (this.form.content.length) {
                     this.article = this.form.content[0]
                 } else {
                     this.add()
