@@ -2,7 +2,7 @@
 
 use Modules\Article\Http\Controllers\HomeController;
 
-Route::group(['prefix' => 'article', 'middleware' => ['module'], 'as' => 'article.'], function () {
+Route::group(['prefix' => 'Article', 'middleware' => ['module'], 'as' => 'article.'], function () {
     Route::get('/', [HomeController::class, 'home']);
     Route::get('category/{category}.html', [HomeController::class, 'category'])->name('category');
     Route::get('content/{content}.html', [HomeController::class, 'content'])->name('content');

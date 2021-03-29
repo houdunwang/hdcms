@@ -13,13 +13,9 @@
         </div>
         <div v-if="material.type == 'video'">
             <el-popover placement="top" width="500" trigger="hover">
-                <!-- <video muted controls width="100%" class="outline-none">
-                    <source :src="material.file" type="video/mp4" />
-                </video> -->
                 <video slot="reference" muted controls class="outline-none w-52">
                     <source :src="material.file" type="video/mp4" />
                 </video>
-                <!-- <i slot="reference" class="fas fa-video w-10 h-10 text-xl"></i> -->
             </el-popover>
         </div>
         <div v-if="material.type == 'news'">

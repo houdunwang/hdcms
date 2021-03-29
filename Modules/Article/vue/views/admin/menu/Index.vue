@@ -40,6 +40,7 @@
 import tabs from './tabs'
 import draggable from 'vuedraggable'
 export default {
+    route: { meta: { title: '菜单设置' } },
     components: { draggable },
     data() {
         return { tabs, menus: [] }

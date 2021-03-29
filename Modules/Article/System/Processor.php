@@ -18,6 +18,16 @@ class Processor extends Message
      */
     public function handle(WeChatMessage $message)
     {
-        return $this->text('返回的消息内容');
+        $article = $message->messageable;
+        return $this->news(
+            [
+                [
+                    'title' => $article->title,
+                    'description' => $article->description,
+                    'picurl' => $article->preview,
+                    'url' => route('article.content', $article)
+                ]
+            ]
+        );
     }
 }

@@ -109,7 +109,7 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     Route::get('site/{site}/wechat/{wechat}/sync/black', [WeChatUserController::class, 'syncBlack']);
     Route::get('site/{site}/wechat/{wechat}/user/{user}/remove/black', [WeChatUserController::class, 'removeBlack']);
     //消息
-    Route::get('site/{site}/wechat/{wechat}/message/{keyword}', [WeChatMessageController::class, 'getByKeyword']);
+    Route::get('site/{site}/wechat/{wechat}/message/keyword/{keyword}', [WeChatMessageController::class, 'getByKeyword']);
     Route::apiResource('site.wechat.message', WeChatMessageController::class);
     //素材管理
     Route::apiResource('site.wechat.material', WeChatMaterialController::class);

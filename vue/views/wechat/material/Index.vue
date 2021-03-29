@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <hd-wechat-material :wechat_id="$route.query.wid" :site_id="$route.query.sid" :material-type="$route.query.type" v-if="wechat" />
+        <hd-wechat-material :wechat_id="$route.query.wid" :site_id="$route.query.sid" :material-type="$route.query.type" />
     </div>
 </template>
 

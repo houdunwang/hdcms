@@ -34,7 +34,7 @@ const columns = [
 ]
 import tabs from './tabs'
 export default {
-    route: { path: '' },
+    route: { meta: { title: '内容模型' } },
     data() {
         return { tabs, models: [], columns }
     },

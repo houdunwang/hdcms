@@ -18,7 +18,7 @@
 <script>
 export default {
     props: {
-        sid: { type: Number },
+        sid: { default: '' },
         value: { type: String },
         type: {
             type: Array,

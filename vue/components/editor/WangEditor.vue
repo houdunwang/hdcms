@@ -8,7 +8,7 @@
 import wangEditor from 'wangEditor'
 export default {
     props: {
-        sid: { type: Number },
+        sid: { default: '' },
         name: { type: String, default: 'editor' },
         value: { type: String, default: '' },
         action: { type: String, default: '' }

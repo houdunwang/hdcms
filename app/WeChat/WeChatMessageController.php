@@ -54,6 +54,7 @@ class WeChatMessageController extends Controller
         $message = $wechat->messages()->where('keyword', request('keyword'))->first();
         return new WeChatMessageResource($message);
     }
+
     /**
      * 添加消息
      * @param WeChatMessageRequest $request
@@ -67,8 +68,7 @@ class WeChatMessageController extends Controller
      */
     public function store(WeChatMessageRequest $request, Site $site, WeChat $wechat, WeChatMessage $message)
     {
-        $data = $request->input() + ['wechat_id' => $wechat['id'], 'module_id' => request('module')];
-        $message->fill($data)->save();
+        $message->fill($request->input())->save();
         return $this->message('消息添加成功');
     }
 
@@ -87,7 +87,7 @@ class WeChatMessageController extends Controller
      */
     public function update(WeChatMessageRequest $request, Site $site, WeChat $wechat, WeChatMessage $message)
     {
-        $message->fill($request->except(['keywordTypeTitle']))->save();
+        $message->fill($request->input())->save();
         return $this->message('消息修改成功');
     }
 

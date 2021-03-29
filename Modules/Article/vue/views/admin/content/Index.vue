@@ -57,12 +57,14 @@ const columns = [
     { id: 'id', label: '编号', width: 60 },
     { id: 'title', label: '标题' },
     { id: 'tags', label: '标签' },
+    { id: 'keyword', label: '微信关键词' },
     { id: 'preview', label: '缩略图', width: 100 },
     { id: 'created_at', label: '创建时间', width: 200 },
     { id: 'updated_at', label: '修改时间', width: 200 }
 ]
 import tabs from './tabs'
 export default {
+    route: { meta: { title: '文章列表' } },
     data() {
         return { tabs, contents: [], columns }
     },

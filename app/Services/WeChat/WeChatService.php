@@ -45,4 +45,20 @@ class WeChatService
         }
         return $wechatUser->user;
     }
+
+    /**
+     * 模块微信回复消息规则
+     * @param mixed $model
+     * @param array $data
+     * @return void
+     */
+    public function saveModuleRule($model, array $data = [])
+    {
+        //保存微信消息
+        $model->wechatMessage()->updateOrCreate(['id' => $model->wechatMessage->id ?? null], [
+            'site_id' => site('id'),
+            'module_id' => module('id'),
+            'type' => 'module',
+        ] + $data);
+    }
 }

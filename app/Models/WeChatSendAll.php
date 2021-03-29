@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class WeChatSendAll extends Model
 {
     use HasFactory;
-    protected $fillable = ['wechat_id', 'module_id', 'title', 'type', 'material_id', 'media_id', 'content', 'response'];
+    protected $fillable = ['site_id', 'wechat_id', 'module_id', 'title', 'type', 'material_id', 'media_id', 'content', 'response'];
     protected $casts = ['content' => 'array', 'response' => 'array'];
 
     /**

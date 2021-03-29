@@ -55,6 +55,7 @@ const columns = [
     { label: '编号', id: 'id', width: 100 }
 ]
 export default {
+    route: { meta: { title: '栏目列表' } },
     data() {
         return { tabs, categories: [] }
     },

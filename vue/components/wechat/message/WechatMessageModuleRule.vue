@@ -24,15 +24,10 @@ export default {
     props: ['id', 'keyword'],
     data() {
         return {
-            form: { id: this.id },
+            form: { id: this.id, keyword: this.keyword },
             wechats: []
         }
     },
-    // watch: {
-    //     'form.id'(n) {
-    //         this.$emit('update:id', n)
-    //     }
-    // },
     created() {
         this.loadWechats()
     },

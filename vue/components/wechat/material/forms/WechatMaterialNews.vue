@@ -1,14 +1,14 @@
 <template>
-    <el-form :model="material" ref="form" label-width="100px" :inline="false" size="normal">
+    <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
         <el-form-item label="素材描述">
-            <el-input v-model="material.title"></el-input>
+            <el-input v-model="form.title"></el-input>
             <hd-form-error name="title" />
         </el-form-item>
         <div class="flex border p-3">
             <div class="w-60 preview">
-                <draggable v-model="material.content">
+                <draggable v-model="form.content">
                     <div
-                        v-for="(art, index) in material.content"
+                        v-for="(art, index) in form.content"
                         :key="index"
                         class="border border-gray-200 mb-1 cursor-pointer flex relative"
                         :class="{ ' p-2 items-start': index, 'border-green-600': article == art, 'flex-col': !index }"
@@ -38,8 +38,9 @@
                         <el-image :src="article.pic" fit="cover" v-if="article.pic" class="w-60" />
                         <el-dialog title="选择缩略图素材" :visible.sync="materialDialog" width="60%" top="1rem" :append-to-body="true">
                             <hd-wechat-material
-                                :site_id="wechat.id"
-                                :wechat_id="wechat.id"
+                                :site_id="site_id"
+                                :wechat_id="wechat_id"
+                                :show-wechat-button="false"
                                 :show-type-button="false"
                                 :show-duration-button="false"
                                 material-type="thumb"
@@ -64,7 +65,7 @@
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item label="正文内容">
-                        <hd-wang-editor v-model="article.content" :sid="wechat.site_id" :key="article.key" />
+                        <hd-wang-editor v-model="article.content" :sid="site_id" :key="article.key" />
                     </el-form-item>
                     <el-form-item label="跳转链接">
                         <el-input v-model="article.content_source_url"></el-input>
@@ -92,36 +93,22 @@
 
 <script>
 import draggable from 'vuedraggable'
-import Mixin from './Mixin'
-//文章
-const article = {
-    title: '',
-    thumb_media_id: '',
-    author: '',
-    digest: '',
-    show_cover_pic: 1,
-    pic: '',
-    content: '',
-    content_source_url: '',
-    need_open_comment: 1,
-    only_fans_can_comment: 1,
-    key: Math.random()
-}
+import mixin from './mixin'
+import { article } from '../data'
 export default {
-    mixins: [Mixin],
+    mixins: [mixin],
     components: { draggable },
     data() {
         return {
-            dialogShow: false,
-            article: null,
-            materialDialog: false
+            field: { type: 'news', content: [], duration: 'long' },
+            article: null
         }
     },
     created() {
-        if (!this.material.content.length) {
+        if (!this.form.content.length) {
             this.add()
         }
-        this.article = this.material.content[0]
+        this.article = this.form.content[0]
     },
     methods: {
         //选择素材回调
@@ -132,11 +119,11 @@ export default {
         },
         //添加
         add() {
-            if (this.material.content.length >= 5) {
+            if (this.form.content.length >= 5) {
                 return this.$message('图文消息只能添加5个')
             }
-            this.article = _.cloneDeep({ ...article, key: Math.random() })
-            this.material.content.push(this.article)
+            this.article = _.cloneDeep(article)
+            this.form.content.push(this.article)
         },
         //编辑
         edit(article) {
@@ -145,10 +132,10 @@ export default {
         //删除
         del(article) {
             this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
-                const index = this.material.content.indexOf(article)
-                this.material.content.splice(index, 1)
-                if (this.material.content.length) {
-                    this.article = this.material.content[0]
+                const index = this.form.content.indexOf(article)
+                this.form.content.splice(index, 1)
+                if (this.form.content.length) {
+                    this.article = this.form.content[0]
                 } else {
                     this.article = null
                 }

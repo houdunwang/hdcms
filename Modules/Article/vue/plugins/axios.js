@@ -8,7 +8,7 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 // axios.defaults.withCredentials = true;
 const _axios = axios.create({
     baseURL: `/api/${window.module.name}/${window.site.id}`,
-    timeout: 5000
+    timeout: 30000
 })
 
 window.axios = Vue.prototype.axios = _axios

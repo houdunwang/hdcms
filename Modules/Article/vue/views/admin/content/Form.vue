@@ -8,7 +8,7 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <hd-wechat-message-module-rule :id.sync="form.wechat_id" :keyword.sync="form.keyword" />
+            <hd-wechat-message-module-rule :id.sync="form.wechat_id" :keyword.sync="form.keyword" v-if="form.id" />
             <el-card shadow="nerver" :body-style="{ padding: '20px' }" v-if="model" class="mt-3">
                 <div slot="header">
                     <span>内容设置</span>

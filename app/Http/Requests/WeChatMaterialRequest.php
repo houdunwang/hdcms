@@ -20,7 +20,7 @@ class WeChatMaterialRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'between:3,20'],
+            'title' => ['required', 'between:3,100'],
             'type' => ['required'],
             'file' => ['exclude_if:type,news', 'required'],
             'duration' => ['exclude_if:type,news', 'required'],

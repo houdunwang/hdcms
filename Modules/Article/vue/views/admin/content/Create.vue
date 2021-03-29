@@ -5,6 +5,7 @@
 <script>
 import XForm from './Form'
 export default {
+    route: { meta: { title: '发表文章' } },
     components: { XForm }
 }
 </script>

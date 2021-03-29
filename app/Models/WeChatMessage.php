@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class WeChatMessage extends Model
 {
     use HasFactory;
-    protected $fillable = ['wechat_id', 'module_id', 'type', 'file', 'title', 'keyword', 'content'];
+    protected $fillable = ['site_id', 'wechat_id', 'module_id', 'type', 'file', 'title', 'keyword', 'content'];
     protected $casts = ['content' => 'array'];
 
     /**

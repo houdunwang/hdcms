@@ -16,6 +16,7 @@ use InvalidArgumentException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use WeChatService;
 
 /**
  * 文章内容
@@ -63,7 +64,8 @@ class ContentController extends Controller
         $content->site_id = site('id');
         $content->user_id = Auth::id();
         $content->save();
-        $this->syncWeChatMessage($content);
+
+        WeChatService::saveModuleRule($content, $content->toArray());
         //保存标签
         $content->tags()->sync($request->tags);
         DB::commit();
@@ -90,37 +92,14 @@ class ContentController extends Controller
         $content->site_id = site('id');
         $content->user_id = Auth::id();
         $content->save();
+
+        WeChatService::saveModuleRule($content, $content->toArray());
         //保存标签
         $content->tags()->sync($request->tags);
         DB::commit();
         return $this->message('文章更新成功', $content);
     }
 
-    /**
-     * 微信关键词回复
-     * @param mixed $content
-     * @return void
-     * @throws BindingResolutionException
-     * @throws RouteNotFoundException
-     */
-    protected function syncWeChatMessage($content)
-    {
-        //微信关键词
-        $content->wechatMessage()->updateOrCreate(['id' => $content['id'] ?? null], [
-            'title' => $content['title'],
-            'wechat_id' => $content->wechat_id,
-            'keyword' => $content->keyword,
-            'type' => 'news',
-            'content' => [
-                [
-                    'title' => $content['title'],
-                    'picurl' => $content['preview'],
-                    'description' => $content['description'],
-                    'url' => route('article.content', $content)
-                ]
-            ]
-        ]);
-    }
     public function destroy(Site $site, Content $content)
     {
         $this->authorize('delete', $content);

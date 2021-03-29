@@ -1,38 +1,36 @@
-export default form => ({
-    props: ['wechat', 'message', 'show'],
+export default {
+    props: {
+        //消息
+        message: { default: null },
+        //站点编号
+        site_id: { required: true },
+        //微信编号
+        wechat_id: { default: null },
+        //模块编号
+        module_id: { default: '' }
+    },
     data() {
         return {
             isSubmit: false,
-            form: _.cloneDeep(this.message || form),
-            //消息编辑dialog
-            dialogShow: this.show,
+            form: null,
             //选择素材dialog
             materialDialogShow: false
         }
     },
-    watch: {
-        //父组件props
-        show(show) {
-            this.dialogShow = show
-            this.form = _.cloneDeep(this.message || form)
-        },
-        //同步父组件状态
-        dialogShow(state) {
-            this.$emit('update:show', state)
-        }
+    created() {
+        this.$store.commit('errors')
+        //初始表单数据
+        this.form = _.cloneDeep(this.message || { title: '', keyword: '', file: '', ...this.$props, ...this.field })
     },
     methods: {
+        //提交表单
         async onSubmit() {
             this.isSubmit = true
-            const url = `site/${this.wechat.site_id}/wechat/${this.wechat.id}/message` + (this.message ? `/${this.message.id}` : ``)
-            axios[this.message ? 'put' : 'post'](url, this.form)
-                .then(_ => {
-                    this.$parent.load()
-                    this.dialogShow = false
-                })
-                .finally(_ => {
-                    this.isSubmit = false
-                })
+            const url = `/api/site/${this.site_id}/wechat/${this.wechat_id}/message/${this.form.id ?? ''}`
+            const action = this.form.id ? 'put' : 'post'
+            axios[action](url, this.form)
+                .then(_ => this.$emit('onSubmit'))
+                .finally(_ => (this.isSubmit = false))
         },
         //选择素材
         selectMaterial(material) {
@@ -41,4 +39,4 @@ export default form => ({
             this.materialDialogShow = false
         }
     }
-})
+}

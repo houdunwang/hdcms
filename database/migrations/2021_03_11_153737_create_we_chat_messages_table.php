@@ -14,6 +14,7 @@ class CreateWeChatMessagesTable extends Migration
     {
         Schema::create('we_chat_messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('wechat_id')->constrained('we_chats')->onDelete('cascade');
             $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade')->commit('模块');
             $table->nullableMorphs('message');

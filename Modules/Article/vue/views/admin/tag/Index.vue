@@ -33,6 +33,7 @@ const columns = [
 ]
 import tabs from './tabs'
 export default {
+    route: { meta: { title: '标签管理' } },
     data() {
         return { tabs, tags: [], columns }
     },

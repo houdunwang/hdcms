@@ -1,18 +1,18 @@
 <template>
-    <el-form :model="material" ref="form" label-width="100px" :inline="false" size="normal">
+    <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
         <el-form-item label="素材描述">
-            <el-input v-model="material.title"></el-input>
+            <el-input v-model="form.title"></el-input>
             <hd-form-error name="title" />
         </el-form-item>
         <el-form-item label="素材类型">
-            <el-radio-group v-model="material.duration" :disabled="!!material.id || !showDurationButton">
+            <el-radio-group v-model="form.duration" :disabled="!!form.id || !showDurationButton">
                 <el-radio label="short">临时素材</el-radio>
                 <el-radio label="long">永久素材</el-radio>
             </el-radio-group>
             <hd-form-error name="duration" />
         </el-form-item>
         <el-form-item label="语音文件">
-            <hd-upload-voice v-model="material.file" :sid="wechat.site_id" />
+            <hd-upload-voice v-model="form.file" :sid="site_id" />
             <hd-form-error name="file" />
         </el-form-item>
         <el-form-item>
@@ -22,9 +22,16 @@
 </template>
 
 <script>
-import Mixin from './Mixin'
+import mixin from './mixin'
 export default {
-    mixins: [Mixin]
+    mixins: [mixin],
+    data() {
+        return {
+            field: {
+                type: 'voice'
+            }
+        }
+    }
 }
 </script>
 

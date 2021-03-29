@@ -1,27 +1,18 @@
 <template>
     <div>
-        <div class="mb-3">
-            <el-radio-group v-model="material.wechat_id" size="mini" @change="load(1)">
-                <el-radio-button :label="wechat.id" v-for="wechat in wechats" :key="wechat.id">
-                    {{ wechat.title }}
-                </el-radio-button>
-            </el-radio-group>
-        </div>
+        <el-radio-group v-model="wid" v-if="showWechatButton" size="mini" @change="load(1)">
+            <el-radio-button :label="wechat.id" v-for="wechat in wechats" :key="wechat.id">
+                {{ wechat.title }}
+            </el-radio-button>
+        </el-radio-group>
         <!-- 素材类型选择按钮 -->
-        <div v-if="wechat">
-            <el-radio-group v-model="material.type" size="mini" v-if="showTypeButton" class="mt-2 block" @change="load(1)">
+        <div v-if="wid">
+            <el-radio-group v-model="type" size="mini" v-if="showTypeButton" class="mt-2 block" @change="load(1)">
                 <el-radio-button :label="t.type" v-for="(t, index) in types" :key="index">
                     {{ t.title }}
                 </el-radio-button>
             </el-radio-group>
-            <el-radio-group
-                v-model="material.duration"
-                size="mini"
-                @click="load"
-                v-if="material.type != 'news' && showDurationButton"
-                @change="load(1)"
-                class="mt-2 block"
-            >
+            <el-radio-group v-model="duration" size="mini" v-if="type != 'news' && showDurationButton" @change="load(1)" class="mt-2 block">
                 <el-radio-button label="short">临时素材</el-radio-button>
                 <el-radio-button label="long">永久素材</el-radio-button>
             </el-radio-group>
@@ -72,14 +63,17 @@
             </el-pagination>
             <!-- 管理素材 -->
             <el-button type="danger" size="mini" @click="add()" class="mt-3" v-if="showAddButton">添加素材</el-button>
-            <el-dialog title="素材管理" :visible.sync="showDialog" width="60%" top="1rem" :append-to-body="true">
+            <el-dialog title="素材管理" :visible.sync="showDialog" width="60%" top="1rem" :append-to-body="true" :close-on-click-modal="false">
                 <component
-                    class="mt-3"
                     :is="component"
                     :material="material"
-                    :wechat="wechat"
+                    :site_id="site_id"
+                    :wechat_id="wid"
+                    :module_id="module_id"
+                    :durationType="duration"
                     :showDurationButton="showDurationButton"
-                    :key="material.key"
+                    :key="showDialog"
+                    class="mt-3"
                     @onSubmit="onSubmit"
                 />
             </el-dialog>
@@ -88,19 +82,7 @@
 </template>
 
 <script>
-//素材类型
-const types = [
-    { title: '图片素材', type: 'image' },
-    { title: '语音素材', type: 'voice' },
-    { title: '视频素材', type: 'video' },
-    { title: '缩略图素材', type: 'thumb' },
-    { title: '图文素材', type: 'news' }
-]
-const columns = [
-    { label: '编号', id: 'id', width: 60 },
-    { label: '素材说明', id: 'title' }
-]
-import material from './material'
+import { types, columns } from './data'
 export default {
     props: {
         //站点编号
@@ -114,7 +96,7 @@ export default {
         //临时或永久
         durationType: { type: String, default: 'short' },
         //公众号选择按钮
-        showWeChatButton: { type: Boolean, default: true },
+        showWechatButton: { type: Boolean, default: true },
         //素材类型选择按钮
         showTypeButton: { type: Boolean, default: true },
         //素材临时、永久素材选择按钮
@@ -127,10 +109,14 @@ export default {
             loading: false,
             //公众号集合
             wechats: [],
-            //当前公众号编号
+            //选择的微信
             wid: this.wechat_id,
             //素材类型
             types,
+            //选择的类型
+            type: this.materialType,
+            //素材时效
+            duration: this.durationType,
             //表格列表
             columns,
             //素材列表
@@ -138,55 +124,42 @@ export default {
             //显示对话框
             showDialog: false,
             //编辑的数据
-            material: _.cloneDeep(material)
+            material: null
         }
     },
-    created() {
-        this.material.type = this.materialType
-        this.material.duration = this.durationType
-        this.loadWechats()
+    async created() {
+        await this.loadWechats()
+        this.load()
     },
     computed: {
-        //当前公众号
-        wechat() {
-            return this.wechats.find(w => w.id == this.material.wechat_id)
-        },
         //素材编辑组件
         component() {
-            return `hdWechatMaterial${_.upperFirst(this.material.type)}`
+            return `hdWechatMaterial${_.upperFirst(this.type)}`
         }
     },
     methods: {
         //加载公众号列表
         async loadWechats() {
             this.wechats = await axios.get(`/api/site/${this.site_id}/wechat`)
-            if (!this.material.wechat_id && this.wechats) this.material.wechat_id = this.wechats[0].id
-            this.load()
+            if (!this.wid && this.wechats.length) {
+                this.wid = this.wechats[0].id
+            }
         },
         //加载素材
         async load(page = 1) {
             this.loading = true
-            const material = this.material
-            this.list = await axios.get(
-                `/api/site/${this.site_id}/wechat/${material.wechat_id}/material?type=${material.type}&duration=${material.duration}&page=${page}`
-            )
+            const url = `/api/site/${this.site_id}/wechat/${this.wid}/material?type=${this.type}&duration=${this.duration}&page=${page}&module=${this.module_id}`
+            this.list = await axios.get(url)
             this.loading = false
-        },
-        //初始化素材表单
-        initMaterial() {
-            this.material = _.cloneDeep(this.material)
-            this.material.key = Math.random()
-            this.material.content = []
-            this.material.description = { title: '', introduction: '' }
         },
         //编辑素材
         edit(material) {
-            this.material = _.cloneDeep(material)
+            this.material = material
             this.showDialog = true
         },
         //添加素材
         add() {
-            this.initMaterial()
+            this.material = null
             this.showDialog = true
         },
         async del(material) {
@@ -199,7 +172,6 @@ export default {
         onSubmit() {
             this.load()
             this.showDialog = false
-            this.initMaterial()
         }
     }
 }

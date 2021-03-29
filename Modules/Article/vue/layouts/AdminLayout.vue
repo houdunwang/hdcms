@@ -57,16 +57,15 @@
                             <div class="dropdown-menu show">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <a
-                                            href="#"
-                                            @click.prevent="go(item)"
+                                        <router-link
+                                            :to="item.route"
+                                            v-for="(item, index) in menu.items"
+                                            :key="index"
+                                            :class="{ 'bg-green-600 text-gray-100': item.route.name == $route.name }"
                                             class="dropdown-item hover:bg-green-600 hover:text-gray-100 font-bold"
-                                            v-for="(item, i) in menu.items"
-                                            :key="i"
-                                            :class="{ 'bg-green-600 text-gray-100': routeName == item.route.name }"
                                         >
                                             {{ item.title }}
-                                        </a>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -177,33 +176,6 @@
                                     </span>
                                 </a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="/site/site/index">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="icon"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="2"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        >
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <rect x="3" y="3" width="6" height="6" rx="1" />
-                                            <rect x="15" y="15" width="6" height="6" rx="1" />
-                                            <path d="M21 11v-3a2 2 0 0 0 -2 -2h-6l3 3m0 -6l-3 3" />
-                                            <path d="M3 13v3a2 2 0 0 0 2 2h6l-3 -3m0 6l3 -3" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        我的站点
-                                    </span>
-                                </a>
-                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -247,25 +219,11 @@
             </div>
         </header>
         <div class="content md:ml-48">
-            <div class="mx-5 mb-2 bg-white shadow-sm p-2 rounded-sm" v-if="$store.state.historyMenus.length">
-                <el-button-group>
-                    <el-button
-                        size="mini"
-                        v-for="(menu, index) in $store.state.historyMenus"
-                        :key="index"
-                        :type="$route.name == menu.route.name ? 'primary' : 'default'"
-                        @click.prevent="$router.push(menu.route)"
-                    >
-                        {{ menu.title }}
-                    </el-button>
-                </el-button-group>
-            </div>
+            <!-- 历史快捷菜单 -->
+            <hd-history-menu />
             <div class="p-5 bg-white mx-5 mb-10 rounded-sm border border-gray-100">
                 <router-view></router-view>
             </div>
-            <!-- <div class="p-5 my-10 ">
-                <el-divider class="text-xs text-gray-600">编码 @ 向军老师</el-divider>
-            </div> -->
         </div>
         <el-backtop> </el-backtop>
     </div>
@@ -287,11 +245,7 @@ export default {
 
     methods: {
         go(menu) {
-            window.localStorage.setItem('route_name', (this.routeName = menu.route.name))
-            this.$store.commit('addHistoryMenus', menu)
-            if (this.$route.name != menu.route.name) {
-                this.$router.push(menu.route)
-            }
+            this.$router.push(menu.route)
         }
     }
 }

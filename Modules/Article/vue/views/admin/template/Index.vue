@@ -30,6 +30,7 @@
 <script>
 import tabs from './tabs'
 export default {
+    route: { meta: { title: '模板风格' } },
     data() {
         return { tabs, templates: [] }
     },

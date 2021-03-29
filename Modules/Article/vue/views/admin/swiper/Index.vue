@@ -34,6 +34,7 @@
 <script>
 import tabs from './tabs'
 export default {
+    route: { meta: { title: '幻灯片' } },
     data() {
         return { tabs, swipers: [] }
     },

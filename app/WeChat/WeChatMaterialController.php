@@ -36,6 +36,8 @@ class WeChatMaterialController extends Controller
             if (request('type') != 'news') {
                 return $query->where('duration',  $duration);
             }
+        })->when($request->module, function ($query, $module) {
+            return $query->where('module_id', $module);
         })->paginate(10);
         return WeChatMaterialResource::collection($materials);
     }
