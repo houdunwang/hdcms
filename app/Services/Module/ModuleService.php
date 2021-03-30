@@ -75,7 +75,7 @@ class ModuleService
     }
 
     /**
-     * 站点模块检测
+     * 站点是否拥有模块
      * @param Site $site
      * @param Module $module
      * @return boolean
@@ -87,13 +87,12 @@ class ModuleService
         if (isset($cache[$cacheName])) {
             return $cache[$cacheName];
         }
-        return $cache[$cacheName] = (bool)$this->siteModules($site)->contains('name', $module['name']);
+        return $cache[$cacheName] = (bool)$site->modules->contains('name', $module['name']);
     }
 
     /**
      * 系统中所有模块
      * 包括安装与未安装的
-     *
      * @return Collection|null
      */
     public function all(): ?Collection
@@ -105,32 +104,10 @@ class ModuleService
                 $id = Module::where('name', $name)->value('id');
                 return
                     $this->config($name, 'config')
-                    + [
-                        'id' => $id,
-                        'preview' => url("/modules/{$name}/static/preview.jpeg"),
-                        'isInstall' => (bool)$id
-                    ];
+                    + ['id' => $id, 'preview' => url("/modules/{$name}/static/preview.jpeg"), 'isInstall' => (bool)$id];
             })->values();
         }
         return $cache;
-    }
-
-    /**
-     * 站点模块列表
-     * @param Site $site
-     * @return Collection
-     */
-    public function siteModules(Site $site): Collection
-    {
-        static $cache = [];
-        if (isset($cache[$site['id']])) {
-            return $cache[$site['id']];
-        }
-        return $cache[$site['id']] = $site->master->group->modules->map(function ($module) use ($site) {
-            $module['permissions'] =
-                PermissionService::formatSiteModulePermissions($site, $module);
-            return $module;
-        });
     }
 
     /**
@@ -146,8 +123,8 @@ class ModuleService
         if (isset($cache[$cacheName])) {
             return $cache[$cacheName];;
         }
-        return $cache[$cacheName] = $this->siteModules($site)->filter(function ($module) use ($site, $user) {
-            return PermissionService::checkUserModuleAccess($site, $module, $user);
+        return $cache[$cacheName] = $site->modules->filter(function ($module) use ($site, $user) {
+            return PermissionService::checkModuleAccess($site, $module, $user);
         });
     }
 }

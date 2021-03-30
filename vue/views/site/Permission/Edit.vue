@@ -39,16 +39,17 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.modules = await this.axios.get(`module/site/${this.site.id}`)
-        this.role = await this.axios.get(`site/${this.site.id}/role/${this.$route.params.rid}`)
+        this.loading = true
+        this.site = await axios.get(`site/${this.$route.params.sid}`)
+        this.modules = await axios.get(`permissions/site/${this.site.id}`)
+        this.role = await axios.get(`site/${this.site.id}/role/${this.$route.params.rid}`)
         //保存已经存在的权限
         this.form.permissions = this.role.permissions.map(p => p.name)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`site//${this.site.id}/role/${this.role.id}/permission/`, this.form)
+            await this.axios.put(`permission/site/${this.site.id}/role/${this.role.id}`, this.form)
             this.route(`site.role.index`, { sid: this.site.id })
         }
     }

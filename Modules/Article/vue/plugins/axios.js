@@ -1,71 +1,49 @@
-import Vue from 'vue'
+import el from 'element-ui'
 import axios from 'axios'
-import { Message } from 'element-ui'
-import httpStatus from '../utils/httpStatus'
+import Vue from 'vue'
 import store from '../store'
-
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-// axios.defaults.withCredentials = true;
-const _axios = axios.create({
-    baseURL: `/api/${window.module.name}/${window.site.id}`,
-    timeout: 30000
-})
-
-window.axios = Vue.prototype.axios = _axios
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+const _axios = axios.create({ baseURL: `/api/${window.module.name}/site/${window.site.id}`, timeout: 20000 })
+window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {
-        if (config.url[0] == '/') {
-            config.baseURL = ''
-        }
-        const token = window.localStorage.getItem('token')
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`
-        }
+        if (config.url[0] == '/') config.baseURL = ''
         return config
     },
     function(error) {
         return Promise.reject(error)
     }
 )
-
 //响应拦截
 _axios.interceptors.response.use(
-    //请求成功
+    //成功拦截
     function(response) {
         let { message } = response.data
         if (message) {
-            Message({
+            el.Message({
                 message,
-                type: 'success'
+                type: 'success',
+                showClose: true
             })
         }
         return response.data
     },
-    //请求失败
+    //错误拦截
     function(error) {
-        let {
-            status,
-            data: { message, errors }
-        } = error.response
-
+        let { status, data } = error.response
         switch (status) {
             case 422:
-                store.commit('errors', errors)
+                store.commit('errors', data.errors)
                 break
             case 401:
-                window.localStorage.removeItem('token')
                 location.href = '/login'
                 break
             default:
-                Message({
-                    message: message || httpStatus(status),
-                    type: 'error'
-                })
+                el.Message.error(data.message)
         }
-
         return Promise.reject(error)
     }
 )
+
+export default _axios

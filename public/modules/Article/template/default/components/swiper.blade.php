@@ -2,17 +2,16 @@
 @php
 $swiper = $swiper->find($id)
 @endphp
+@if ($swiper)
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        @foreach($swiper->items as $item)
-        <a href="#" class="swiper-slide">
-            <img src="{{ $item['img'] }}" class="w-full" />
+        @foreach($swiper['items'] as $item)
+        <a href="{{ $item['url']??route('article.content',$item['id']) }}" class="swiper-slide">
+            <img src="{{ $item['img'] }}" class="w-cover w-full" />
         </a>
         @endforeach
     </div>
-    <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
-    <!-- Add Arrows -->
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
@@ -34,7 +33,9 @@ $swiper = $swiper->find($id)
   })
 })
 </script>
+
 @endpush
+
 
 @push('styles')
 <style>
@@ -46,3 +47,4 @@ $swiper = $swiper->find($id)
     }
 </style>
 @endpush
+@endif

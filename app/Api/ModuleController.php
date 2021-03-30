@@ -41,8 +41,7 @@ class ModuleController extends Controller
      */
     public function site(Site $site)
     {
-        $modules = ModuleService::siteModules($site);
-        return ModuleResource::collection($modules->load('packages'));
+        return ModuleResource::collection($site->modules->load('packages'));
     }
 
     /**

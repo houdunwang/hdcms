@@ -22,7 +22,6 @@ class ModuleMiddleware
         //共享数据
         view()->share('site', site());
         view()->share('module', module());
-
         return $next($request);
     }
 

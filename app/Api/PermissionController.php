@@ -20,6 +20,16 @@ class PermissionController extends Controller
     }
 
     /**
+     * 站点权限规则
+     * @param Site $site
+     * @return void
+     */
+    public function sitePermissionRules(Site $site)
+    {
+        return PermissionService::siteAllPermissions($site);
+    }
+
+    /**
      * 保存权限
      * @param Request $request
      * @param Role $role
@@ -41,8 +51,6 @@ class PermissionController extends Controller
     public function sync(Request $request, Site $site)
     {
         $this->authorize('update', $site);
-        //删除无效的权限，即模块permissions.php已经移除的权限
-        PermissionService::delInvalidSitePermissions($site);
         //同步模块权限到站点
         PermissionService::syncSitePermissions($site);
         return $this->message('站点权限表更新成功');

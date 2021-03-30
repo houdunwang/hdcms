@@ -107,7 +107,7 @@ export default {
             })
         },
         async syncPermission(site) {
-            await this.axios.get(`site/${site.id}/permission/sync`)
+            await this.axios.get(`permission/site/${site.id}/sync`)
         }
     }
 }

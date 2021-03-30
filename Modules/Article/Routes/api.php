@@ -9,7 +9,7 @@ use Modules\Article\Api\SwiperController;
 use Modules\Article\Api\TemplateController;
 use Modules\Article\Api\MenuController;
 
-Route::group(['prefix' => 'Article/{site}', 'middleware' => ['module'], 'as' => 'article.'], function () {
+Route::group(['prefix' => 'Article/site/{site}', 'middleware' => ['module'], 'as' => 'article.'], function () {
     //模型
     Route::apiResource('model', ModelController::class);
     //标签

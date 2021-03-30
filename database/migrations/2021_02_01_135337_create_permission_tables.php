@@ -24,7 +24,8 @@ class CreatePermissionTables extends Migration
             $table->bigIncrements('id');
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('name');
+            $table->string('name')->index();
+            $table->string('title');
             $table->string('guard_name');
             $table->timestamps();
 

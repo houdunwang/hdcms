@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiteResource;
 use App\Http\Requests\SiteRequest;
+use App\Http\Resources\ModuleResource;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use Auth;
@@ -25,11 +26,20 @@ class SiteController extends Controller
      * 当前站点
      * @return null|Site
      */
-    public function current()
+    // public function current()
+    // {
+    //     $site = site()->toArray();
+    //     return $site;
+    // }
+
+    /**
+     * 站点模块
+     * @param Site $site
+     * @return AnonymousResourceCollection
+     */
+    public function modules(Site $site)
     {
-        $site = site()->toArray();
-        $site['config'] = ['abc'];
-        return $site;
+        return ModuleResource::collection($site->modules->load('packages'));
     }
 
     /**

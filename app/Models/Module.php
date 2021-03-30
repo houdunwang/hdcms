@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use ModuleService;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 系统模块
@@ -59,5 +61,15 @@ class Module extends Model
     public function packages()
     {
         return $this->belongsToMany(Package::class);
+    }
+
+    /**
+     * 模块的权限表
+     * 不含系统权限
+     * @return HasMany
+     */
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'module_id');
     }
 }

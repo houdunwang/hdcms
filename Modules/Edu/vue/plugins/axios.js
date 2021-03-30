@@ -2,7 +2,7 @@ import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
 import store from '../store'
-const _axios = axios.create({ baseURL: `/api/${window.module.name}/site/${window.site.id}`, timeout: 10000 })
+const _axios = axios.create({ baseURL: `/api/${window.module.name}/site/${window.site.id}`, timeout: 20000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
@@ -37,7 +37,7 @@ _axios.interceptors.response.use(
                 store.commit('errors', data.errors)
                 break
             case 401:
-                // location.href = '/login'
+                location.href = '/login'
                 break
             default:
                 el.Message.error(data.message)

@@ -13,7 +13,6 @@
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
-                    <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>

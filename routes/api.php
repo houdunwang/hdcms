@@ -79,11 +79,12 @@ Route::put('module/config/site/{site}/module/{module}', [ModuleConfigController:
 //模块配置
 Route::put('module/config/{site}/{module}', [ModuleConfigController::class, 'update']);
 //站点
-Route::get('site/current', [SiteController::class, 'current']);
+// Route::get('site/current', [SiteController::class, 'current']);
 Route::apiResource('site', SiteController::class);
 //权限
-Route::get('site/{site}/permission/sync', [PermissionController::class, 'sync']);
-Route::put('site/{site}/role/{role}/permission', [PermissionController::class, 'update']);
+Route::get('permissions/site/{site}', [PermissionController::class, 'sitePermissionRules']);
+Route::get('permission/site/{site}/sync', [PermissionController::class, 'sync']);
+Route::put('permission/site/{site}/role/{role}', [PermissionController::class, 'update']);
 //角色
 Route::apiResource('site/{site}/role', RoleController::class);
 //管理员
