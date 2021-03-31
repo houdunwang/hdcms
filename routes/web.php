@@ -37,12 +37,12 @@ Route::get('/', function () {
         return app("Modules\\{$module['name']}\Http\Controllers\HomeController")->home();
     }
     abort(404);
-});
+})->name('home');
 
 //系统应用
 Route::get('{app}/{path?}', function () {
     return view('app');
-})->where('app', 'system|admin|site|login|register|forget')->where('path', '.*');
+})->where('app', 'system|admin|member|site|login|register|forget')->where('path', '.*');
 
 //模块应用
 Route::get('{module}/site/{site}/{path?}', function (string $module) {

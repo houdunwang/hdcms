@@ -12,13 +12,14 @@
     <link href="/tabler/dist/css/tabler-payments.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-vendors.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/demo.min.css" rel="stylesheet" />
-    <script src="/modules/Article/js/app.js" defer></script>
     {{-- tabler end --}}
     <link rel="stylesheet" href="/modules/Article/css/app.css">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     {{-- swiper --}}
     <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.js"></script>
+    {{-- swiper end--}}
+    <script src="/modules/Article/js/app.js" defer></script>
 </head>
 
 <body>

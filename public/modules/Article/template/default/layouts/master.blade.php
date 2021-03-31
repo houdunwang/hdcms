@@ -15,12 +15,12 @@
     {{-- tabler end --}}
     <link rel="stylesheet" href="/modules/Article/css/app.css">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
-
     <title>{{ site('title') }}</title>
     @stack('styles')
 </head>
 
 <body>
+    @include('hd')
     @include('components.topmenu')
     <div id="app" class="mt-10">
         <div class="container-xl">
@@ -35,13 +35,7 @@
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/tabler/dist/js/tabler.min.js"></script>
     {{-- tabler end--}}
-    <script>
-        window.uid = @json(Auth::id(),JSON_FORCE_OBJECT);
-        window.site = @json(site(),JSON_FORCE_OBJECT);
-        window.module = @json(module(),JSON_FORCE_OBJECT);
-    </script>
     @stack('scripts')
-
     @include('components.footer')
 </body>
 

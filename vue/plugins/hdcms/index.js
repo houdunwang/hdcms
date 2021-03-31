@@ -11,7 +11,6 @@ const install = function(Vue) {
                         isLogin: window.hd.user,
                         //路由跳转
                         router: (name, params, query) => {
-                            console.log(this.$router)
                             return this.$router.push({ name, params, query })
                         },
                         //退出登录

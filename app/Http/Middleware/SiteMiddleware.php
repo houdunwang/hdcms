@@ -14,6 +14,7 @@ use Browser;
 use WeChatService;
 use App\Models\SystemConfig;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Route;
 
 /**
  * 站点中间件
@@ -71,11 +72,16 @@ class SiteMiddleware
      */
     protected function site()
     {
-        $site = request('site');
-        $site = is_numeric($site) ? Site::findOrFail($site) : $site;
-        $site = $site instanceof Site ? $site : SiteService::getByDomain();
-        if ($site instanceof Site) {
+        //主页
+        if (Route::currentRouteName() == 'home') {
+            SiteService::cache(SiteService::getByDomain());
+        } else {
+            $site = request('site');
+            $site = is_numeric($site) ? Site::findOrFail($site) : $site;
+            // $site = $site instanceof Site ? $site : SiteService::getByDomain();
+            // if ($site instanceof Site) {
             SiteService::cache($site);
+            // }
         }
     }
 
@@ -88,13 +94,18 @@ class SiteMiddleware
      */
     protected function module()
     {
-        if (site()) {
-            $module = request('module');
-            $module = is_numeric($module) ? Module::findOrFail($module) : $module;
-            $module = $module instanceof Module ? $module : ModuleService::getByDomain();
-            if ($module instanceof Module) {
-                ModuleService::cache($module);
-            }
+        //主页
+        if (Route::currentRouteName() == 'home') {
+            ModuleService::cache(site('module'));
+        } else {
+            $module = ModuleService::getByDomain();
+            ModuleService::cache($module);
+            // $module = request('module');
+            // $module = is_numeric($module) ? Module::findOrFail($module) : $module;
+            // $module = $module instanceof Module ? $module : ModuleService::getByDomain();
+            // if ($module instanceof Module) {
+            //     ModuleService::cache($module);
+            // }
         }
     }
 }

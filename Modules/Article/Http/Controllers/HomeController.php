@@ -18,9 +18,8 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return 33;
-        // $this->defineTemplate();
-        // return view('home');
+        $this->defineTemplate();
+        return view('home');
     }
 
     /**
@@ -52,7 +51,6 @@ class HomeController extends Controller
      */
     public function content(Site $site, Content $content)
     {
-        dd(33);
         $this->defineTemplate();
         $content['click'] += 1;
         $content->save();

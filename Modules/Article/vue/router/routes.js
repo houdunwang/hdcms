@@ -21,8 +21,6 @@ components.keys().map(path => {
         const name = path.replace(/\//g, '.').toLowerCase()
         const route = { path: url, component, name }
         //添加到路由组，组件中如果定义了route，他的优先级更高
-        console.log(groupName)
-
         groups[groupName].children.push(Object.assign(route, component.route || {}))
     }
 })
