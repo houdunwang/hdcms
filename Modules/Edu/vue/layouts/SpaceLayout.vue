@@ -9,10 +9,10 @@
                 <div class="position-relative h-full">
                     <div class="transform -translate-y-1/4 md:-translate-y-1/2 flex flex-col items-center justify-center md:flex-row md:justify-between">
                         <div class="flex flex-col md:flex-row items-center md:items-end justify-content">
-                            <img :src="member.icon" class="w-28 rounded-md object-cover cursor-pointer shadow-lg" @click.prevent="space(user)" />
+                            <img :src="member.icon" class="w-28 rounded-md object-cover cursor-pointer shadow-lg" @click.prevent="space(hd.user)" />
                             <div class="md:ml-5 flex flex-col md:flex-row">
                                 <div class="mt-2 md:mr-5 text-center">{{ member.name }}</div>
-                                <div class="flex ml-2" v-if="user.id != member.id" v-loading="loading">
+                                <div class="flex ml-2" v-if="hd.user.id != member.id" v-loading="loading">
                                     <a href="#" class="btn btn-orange" @click.prevent="unFollow" v-if="member.is_following">取消关注</a>
                                     <a href="#" class="btn mr-1" @click.prevent="follow" v-else>关注TA </a>
                                 </div>
@@ -74,11 +74,11 @@ export default {
             this.loading = false
         },
         async follow() {
-            await axios.post(`/api/site/${this.site.id}/follow/user/${this.member.id}`)
+            await axios.post(`/api/site/${this.hd.site.id}/follow/user/${this.member.id}`)
             this.member.is_following = true
         },
         async unFollow() {
-            await axios.delete(`/api/site/${this.site.id}/follow/user/${this.member.id}`)
+            await axios.delete(`/api/site/${this.hd.site.id}/follow/user/${this.member.id}`)
             this.member.is_following = false
         }
     }

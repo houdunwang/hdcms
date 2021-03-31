@@ -4,7 +4,7 @@
             <div slot="header">
                 修改头像
             </div>
-            <hd-upload-image v-model="form.avatar" :sid="site.id" />
+            <hd-upload-image v-model="form.avatar" :sid="hd.site.id" />
         </el-card>
     </el-form>
 </template>
@@ -12,10 +12,9 @@
 <script>
 export default {
     route: { meta: { keepAlive: true } },
-    inject: ['site'],
     data() {
         return {
-            form: this.$store.state.user
+            form: window.hd.user
         }
     },
     watch: {

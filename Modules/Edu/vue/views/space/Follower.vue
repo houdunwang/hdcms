@@ -44,7 +44,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.users = await this.axios.get(`/api/site/${this.site.id}/follow/user/${this.$route.params.id}?page=${page}`)
+            this.users = await this.axios.get(`/api/site/${this.hd.site.id}/follow/user/${this.$route.params.id}?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }

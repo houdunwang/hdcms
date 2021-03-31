@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 站点模型
@@ -20,20 +21,29 @@ class Site extends Model
     protected $casts = ['config' => 'array',];
     protected $hidden = ['config'];
     protected $appends = [
-        'permissions', 'setting'
+        'permission', 'setting', 'isMaster'
     ];
 
     /**
      * 模型权限
      * @return void
      */
-    public function getPermissionsAttribute()
+    public function getPermissionAttribute()
     {
         return [
             'view' => Auth::check() && Auth::user()->can('view', $this),
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this)
         ];
+    }
+
+    /**
+     * 是否为管理员
+     * @return bool
+     */
+    public function getIsMasterAttribute()
+    {
+        return (bool)$this->user_id == Auth::id();
     }
 
     /**
@@ -110,5 +120,15 @@ class Site extends Model
     public function wechats()
     {
         return $this->hasMany(WeChat::class, 'site_id');
+    }
+
+    /**
+     * 站点权限表
+     * 不含系统权限
+     * @return HasMany
+     */
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'site_id');
     }
 }

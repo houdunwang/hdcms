@@ -2,14 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
     state: {
-        errors: {},
-        user: {},
-        device: window.device,
-        //系统配置
-        systemConfig: {}
+        errors: {}
     },
     getters: {
         errors: state => name => {
@@ -19,20 +14,7 @@ export default new Vuex.Store({
     mutations: {
         errors(state, errors = {}) {
             state.errors = errors
-        },
-        user(state, user) {
-            state.user = user
-        },
-        systemConfig(state, config) {
-            state.systemConfig = config
         }
     },
-    actions: {
-        async user({ commit }) {
-            commit('user', await axios.get(`user/info`))
-        },
-        async systemConfig({ commit }) {
-            commit('systemConfig', await axios.get(`system/config`))
-        }
-    }
+    actions: {}
 })

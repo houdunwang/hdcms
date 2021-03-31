@@ -20,7 +20,6 @@
 <script>
 export default {
     route: { meta: { keepAlive: true } },
-    inject: ['site'],
     data() {
         return {
             wechat: {},
@@ -28,15 +27,15 @@ export default {
         }
     },
     async created() {
-        this.wechat = await this.axios.get(`/api/site/${this.site.id}}/user/wechat`)
+        this.wechat = await this.axios.get(`/api/site/${this.hd.site.id}}/user/wechat`)
         this.loading = false
     },
     methods: {
         //解除绑定
         async unbind() {
             this.$confirm('确定解除微信绑定吗？', '温馨提示').then(async _ => {
-                await axios.delete(`/api/site/${this.site.id}/user/wechat/unbind`)
-                this.wechat = await this.axios.get(`/api/site/${this.site.id}}/user/wechat`)
+                await axios.delete(`/api/site/${this.hd.site.id}/user/wechat/unbind`)
+                this.wechat = await this.axios.get(`/api/site/${this.hd.site.id}}/user/wechat`)
             })
         }
     }

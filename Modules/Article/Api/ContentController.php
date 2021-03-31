@@ -64,7 +64,6 @@ class ContentController extends Controller
         $content->site_id = site('id');
         $content->user_id = Auth::id();
         $content->save();
-
         WeChatService::saveModuleRule($content, $content->toArray());
         //保存标签
         $content->tags()->sync($request->tags);

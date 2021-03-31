@@ -6,7 +6,6 @@ use App\Http\Resources\ModuleResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Module;
-use App\Models\Group;
 use ModuleService;
 use Auth;
 use App\Models\Site;
@@ -22,7 +21,6 @@ class ModuleController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->except(['current']);
-        $this->middleware(['module'])->only('current');
     }
 
     /**

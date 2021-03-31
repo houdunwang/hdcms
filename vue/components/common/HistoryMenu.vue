@@ -23,8 +23,6 @@ export default {
     },
     watch: {
         $route(route) {
-            console.log(route)
-
             if (route.meta.title && !Object.keys(route.params).length && !Object.keys(route.query).length) {
                 const has = this.routes.some(r => r.name == route.name)
                 if (!has) {

@@ -75,7 +75,7 @@ export default {
             }
             const url = this.id ? `content/${this.id}` : 'content'
             await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('admin.content.index')
+            this.hd.router('admin.content.index')
         },
         //栏目是否可以选择
         disabled(category) {

@@ -42,7 +42,7 @@ export default {
             this.templates = await axios.get(`template`)
         },
         async onSubmit(template) {
-            await axios.put(`/api/module/config/site/${this.site.id}/module/${this.module.id}`, { template: template.name })
+            await axios.put(`/api/module/config/site/${this.hd.site.id}/module/${this.hd.module.id}`, { template: template.name })
             this.load()
         }
     }

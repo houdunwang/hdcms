@@ -27,6 +27,7 @@ use App\WeChat\WeChatSendAllController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
 Route::post('site/{site}/register', [AuthController::class, 'register']);
 Route::post('site/{site}/register/code', [AuthController::class, 'registerCode']);
 Route::post('site/{site}/forget', [AuthController::class, 'forget']);
@@ -46,7 +47,6 @@ Route::get('site/{site}/user/wechat', [UserController::class, 'wechat']);
 Route::delete('site/{site}/user/wechat/unbind', [UserController::class, 'unBindWechat']);
 Route::put('user/password', [UserController::class, 'password']);
 Route::apiResource('user', UserController::class);
-
 //验证码
 Route::post('site/{site}/code/send', [CodeController::class, 'send']);
 Route::post('site/{site}/code/exist', [CodeController::class, 'exist']);
@@ -82,7 +82,9 @@ Route::put('module/config/{site}/{module}', [ModuleConfigController::class, 'upd
 // Route::get('site/current', [SiteController::class, 'current']);
 Route::apiResource('site', SiteController::class);
 //权限
-Route::get('permissions/site/{site}', [PermissionController::class, 'sitePermissionRules']);
+Route::get('permission/user', [PermissionController::class, 'userPermissions']);
+Route::get('permission/site/{site}', [PermissionController::class, 'sitePermissionlists']);
+Route::get('permission/site/{site}/rules', [PermissionController::class, 'sitePermissionRules']);
 Route::get('permission/site/{site}/sync', [PermissionController::class, 'sync']);
 Route::put('permission/site/{site}/role/{role}', [PermissionController::class, 'update']);
 //角色
@@ -98,7 +100,7 @@ Route::post('upload/wangeditor', [UploadController::class, 'wangEditor']);
 Route::get('captcha', [CaptchaController::class, 'make']);
 
 //站点公众号
-Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
     //菜单
     Route::put('site/{site}/wechat/{wechat}/menu', [WeChatMenuController::class, 'update']);
     Route::get('site/{site}/wechat/{wechat}/menu/push', [WeChatMenuController::class, 'push']);

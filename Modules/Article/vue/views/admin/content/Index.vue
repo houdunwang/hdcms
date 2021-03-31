@@ -29,7 +29,7 @@
                     <el-button type="primary" size="mini">
                         <a :href="`/Article/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
                     </el-button>
-                    <el-button type="success" size="mini" @click="router('admin.content.edit', { id: content.id })">编辑</el-button>
+                    <el-button type="success" size="mini" @click="$router.push({ name: 'admin.content.edit', params: { id: content.id } })">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(content)">删除</el-button>
                     <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`/Article/content/${content.id}.html`">
                         复制链接
@@ -64,7 +64,7 @@ const columns = [
 ]
 import tabs from './tabs'
 export default {
-    route: { meta: { title: '文章列表' } },
+    route: { path: '/', meta: { title: '文章列表' } },
     data() {
         return { tabs, contents: [], columns }
     },

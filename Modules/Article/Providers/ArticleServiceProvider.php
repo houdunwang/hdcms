@@ -35,9 +35,9 @@ class ArticleServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
         //注册观察者
-        $this->observer();
+        // $this->observer();
         //扩展Blade
-        app(BladeService::class)->register();
+        // app(BladeService::class)->register();
     }
 
     /**

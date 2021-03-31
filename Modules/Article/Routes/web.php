@@ -1,10 +1,10 @@
 <?php
 
 use Modules\Article\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'Article', 'middleware' => ['module'], 'as' => 'article.'], function () {
-    Route::get('/', [HomeController::class, 'home']);
+Route::group(['prefix' => 'Article/site/{site}', 'middleware' => ['module'], 'as' => 'article.'], function () {
+    Route::get('/', [HomeController::class, 'home'])->middleware(['module']);
     Route::get('category/{category}.html', [HomeController::class, 'category'])->name('category');
     Route::get('content/{content}.html', [HomeController::class, 'content'])->name('content');
-    Route::get('site/{site}/{path?}', fn () => view('article::app'))->where('path', '.*');
 });

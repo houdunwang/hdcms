@@ -16,7 +16,26 @@ class PermissionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'site']);
+        $this->middleware(['auth:sanctum']);
+    }
+
+    /**
+     * 站点权限表
+     * @return mixed
+     */
+    public function userPermissions()
+    {
+        return Auth()->user()->getAllPermissions()->pluck('name');
+    }
+
+    /**
+     * 站点权限表
+     * @param Site $site
+     * @return mixed
+     */
+    public function sitePermissionlists(Site $site)
+    {
+        return $site->permissions()->pluck('name');
     }
 
     /**

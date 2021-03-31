@@ -4,7 +4,7 @@
             <hd-skeleton-card v-if="loading" :num="1" class="h-40 mb-10" />
             <div v-else>
                 <div v-if="isSign">
-                    <div class="card shadow-sm" v-if="isLogin">
+                    <div class="card shadow-sm" v-if="hd.isLogin">
                         <div class="card-header bg-white">签到快乐，再接再厉</div>
                         <div class="card-body text-sm text-gray-700">
                             您上次签到时间: {{ my.created_at | format }} <br />
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div v-else>
-                    <div class="card shadow-sm" v-if="isLogin">
+                    <div class="card shadow-sm" v-if="hd.isLogin">
                         <div class="card-header bg-white">签到快乐，再接再厉</div>
                         <div class="card-body h6 font-weight-normal">
                             <input
@@ -107,12 +107,12 @@ export default {
     },
     computed: {
         isSign() {
-            if (this.isLogin) {
-                return this.signs.some(s => s.user.id == this.user.id)
+            if (this.hd.isLogin) {
+                return this.signs.some(s => s.user.id == this.hd.user.id)
             }
         },
         my() {
-            const sign = this.signs.find(s => s.user.id == this.user.id)
+            const sign = this.signs.find(s => s.user.id == this.hd.user.id)
             return sign
         }
     },

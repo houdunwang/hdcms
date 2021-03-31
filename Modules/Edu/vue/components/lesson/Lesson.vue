@@ -89,7 +89,6 @@ export default {
     methods: {
         drag(...v) {
             this.$emit('update:lessons', this.lessonData)
-            // console.log(this.lessonData)
         }
     }
 }

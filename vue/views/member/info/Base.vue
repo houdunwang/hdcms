@@ -25,20 +25,16 @@ const fields = [
 ]
 export default {
     route: { path: '/member', meta: { keepAlive: true } },
-    inject: ['site'],
     data() {
         return {
-            form: this.$store.state.user,
+            form: window.hd.user,
             fields
         }
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`user/${this.user.id}`, this.form)
-            this.$store.dispatch('user')
+            await this.axios.put(`user/${this.hd.user.id}`, this.form)
         }
     }
 }
 </script>
-
-<style></style>

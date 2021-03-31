@@ -69,7 +69,7 @@ export default {
         }
     },
     async created() {
-        this.form = this.$store.state.user
+        this.form = this.hd.user
     },
     methods: {
         async onSubmitBase() {

@@ -9,16 +9,16 @@ const router = new VueRouter({
     mode: 'history'
 })
 
-const isLogin = window.uid
+const isLogin = window.hd.user
 router.beforeEach(async (to, from, next) => {
+    //清除表单验证错误
     store.commit('errors')
-    //用户经常被用到，所以登录用户在这里获取资料
-    if (isLogin) await store.dispatch('user')
     //匹配的路由列表中是否有需要验证的
     if (to.matched.some(route => route.meta.auth)) {
+        window.sessionStorage.setItem('redirect_url', to.fullPath)
         isLogin ? next() : (location.href = '/login')
     } else if (to.matched.some(route => route.meta.guest)) {
-        //页面只能为游客访问时s
+        //页面只能为游客访问
         isLogin ? (location.href = '/') : next()
     } else {
         next()

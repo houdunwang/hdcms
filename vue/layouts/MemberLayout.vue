@@ -6,22 +6,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                    <a href="/" class="font-weight-lighter text-gray-600"> <i class="fas fa-home"></i> {{ site.title }} </a>
+                    <a href="/" class="font-weight-lighter text-gray-600"> <i class="fas fa-home"></i> {{ hd.site.title }} </a>
                 </h1>
                 <!-- 用户头像菜单 -->
                 <div class="navbar-nav flex-row order-md-last">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
+                            <el-image :src="hd.user.avatar" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
-                                <div>{{ user.name }}</div>
-                                <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
+                                <div>{{ hd.user.name }}</div>
+                                <div class="mt-1 small text-muted">注册于{{ hd.user.created_at | fromNow }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a href="/" class="dropdown-item">网站首页</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item" @click="logout">退出</a>
+                            <a href="#" class="dropdown-item" @click="hd.logout">退出</a>
                         </div>
                     </div>
                 </div>
@@ -56,21 +56,19 @@
 <script>
 export default {
     route: { meta: { auth: true } },
-    provide() {
-        return {
-            site: this.site
-        }
-    },
+    // provide() {
+    //     return {
+    //         site: this.site
+    //     }
+    // },
     data() {
         return {
-            modules: [],
-            site: window.site
+            modules: []
+            // site: window.site
         }
     },
     async created() {
-        this.modules = await axios.get(`module/site/${this.site.id}`)
+        this.modules = await axios.get(`module/site/${this.hd.site.id}`)
     }
 }
 </script>
-
-<style></style>

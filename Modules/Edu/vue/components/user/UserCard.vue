@@ -30,7 +30,7 @@
                 </el-popover>
             </div>
         </div>
-        <div class="grid grid-cols-2 border-t" v-if="isLogin">
+        <div class="grid grid-cols-2 border-t" v-if="hd.isLogin">
             <a href="" class="py-2 bg-gray-100 hover:bg-gray-200 text-center border-r text-sm" v-if="member.is_following" @click.prevent="unFollow">
                 已关注
             </a>
@@ -48,11 +48,11 @@ export default {
     props: ['member'],
     methods: {
         async follow() {
-            await axios.post(`/api/site/${this.site.id}/follow/user/${this.member.id}`)
+            await axios.post(`/api/site/${this.hd.site.id}/follow/user/${this.member.id}`)
             this.member.is_following = true
         },
         async unFollow() {
-            await axios.delete(`/api/site/${this.site.id}/follow/user/${this.member.id}`)
+            await axios.delete(`/api/site/${this.hd.site.id}/follow/user/${this.member.id}`)
             this.member.is_following = false
         }
     }

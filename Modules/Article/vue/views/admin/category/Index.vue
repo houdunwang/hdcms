@@ -34,9 +34,9 @@
             </el-table-column>
             <el-table-column label="" #default="{row:category}" width="220" align="right">
                 <el-button-group>
-                    <el-button type="success" size="mini" @click="router('admin.category.edit', { id: category.id })">编辑</el-button>
+                    <el-button type="success" size="mini" @click="$router.push({ name: 'admin.category.edit', params: { id: category.id } })">编辑</el-button>
                     <el-button type="danger" size="mini">删除</el-button>
-                    <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`${site.domain}/Article/category/${category.id}.html`">
+                    <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`${hd.site.domain}/Article/category/${category.id}.html`">
                         复制链接
                     </el-button>
                 </el-button-group>

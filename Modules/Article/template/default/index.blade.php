@@ -5,7 +5,7 @@
     <div class="card mt-5 md:mt-0">
         <div class="card-header flex justify-between items-center">
             {{ $category['title'] }}
-            <a href="{{ route('article.category',$category) }}">
+            <a href="{{ route('article.category',[site(),$category]) }}">
                 more
             </a>
         </div>
@@ -13,7 +13,7 @@
             <ul>
                 @foreach($category->contents()->limit(5)->get() as $content)
                 <li class="flex justify-between py-2">
-                    <a href="{{ route('article.content',$content) }}">
+                    <a href="{{ route('article.content',[site(),$content]) }}">
                         {{ $content['title'] }}
                     </a>
                     <span class="text-xs text-gray-500">

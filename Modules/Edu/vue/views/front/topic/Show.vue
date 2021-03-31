@@ -8,7 +8,7 @@
                         {{ topic.title }}
                         <div class="w-full flex justify-between items-center mt-2">
                             <div class="text-sm text-gray-500">{{ topic.user.name }} 更新于{{ topic.updated_at | fromNow }}</div>
-                            <div v-if="isLogin && topic.permissions">
+                            <div v-if="hd.isLogin && topic.permissions">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="">
                                     <button type="button" class="btn btn-outline-danger" v-if="topic.permissions.delete" @click.prevent="del(topic)">
                                         删除
@@ -87,7 +87,7 @@ export default {
         async del() {
             this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
                 await axios.delete(`front/topic/${this.topic.id}`)
-                this.router('front.topic.index')
+                this.hd.router('front.topic.index')
             })
         },
         //推荐设置
@@ -98,7 +98,7 @@ export default {
         async del(topic) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
                 await axios.delete(`topic/${topic.id}`)
-                this.router('front.topic.index')
+                this.hd.router('front.topic.index')
             })
         }
     }

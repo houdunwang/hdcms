@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     {{-- tabler --}}
     <link href="/tabler/dist/css/tabler.css" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-flags.min.css" rel="stylesheet" />
@@ -23,6 +22,7 @@
 </head>
 
 <body>
+    @include('hd')
     <div id="app">
         <router-view />
     </div>
@@ -30,14 +30,7 @@
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/tabler/dist/js/tabler.min.js"></script>
     {{-- tabler end--}}
-    <script>
-        window.uid = @json(Auth::id(),JSON_FORCE_OBJECT);
-        window.site = @json(site(),JSON_FORCE_OBJECT);
-        window.module = @json(module(),JSON_FORCE_OBJECT);
-    </script>
-    <script
-            type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </body>
 
 </html>

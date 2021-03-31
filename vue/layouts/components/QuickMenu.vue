@@ -2,7 +2,7 @@
     <div class="grid justify-items-stretch md:justify-between md:grid-cols-12 items-center px-4 md:py-10 mb-3">
         <div class="logo hidden md:block md:w-96 md:col-span-9">
             <a href="#">
-                <img :src="$store.state.systemConfig.logo" />
+                <img :src="hd.systemConfig.logo" />
             </a>
         </div>
         <div class="grid grid-flow-col auto-cols-fr gap-1 mt-3 md:mt-0 md:col-span-3">
@@ -18,7 +18,7 @@
             <router-link
                 to="/system/index"
                 class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
-                v-if="user.isSuperAdmin"
+                v-if="hd.user.isSuperAdmin"
             >
                 <i class="text-2xl far fa-life-ring" aria-hidden="true"></i>
                 <span class="text-sm">系统设置</span>
@@ -26,7 +26,7 @@
             <a
                 href="#"
                 class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
-                @click.prevent="logout"
+                @click.prevent="hd.logout"
             >
                 <i class="text-2xl far fa-life-ring" aria-hidden="true"></i>
                 <span class="text-sm">退出</span>

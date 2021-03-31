@@ -41,12 +41,12 @@ class User extends Authenticatable
 
     protected $appends = [
         'isSuperAdmin',
-        'permissions',
+        'permission',
         'gender',
         'icon'
     ];
 
-    public function getPermissionsAttribute()
+    public function getPermissionAttribute()
     {
         return [
             'view' => Auth::check() && Auth::user()->can('view', $this),
@@ -97,7 +97,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->morphToMany(Role::class, 'model', 'model_has_roles')->where('site_id', site()['id']);
+        return $this->morphToMany(Role::class, 'model', 'model_has_roles');
     }
 
     /**

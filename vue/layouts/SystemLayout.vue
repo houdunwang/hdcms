@@ -16,10 +16,7 @@ import XFooter from './components/Footer'
 
 export default {
     route: { meta: { auth: true } },
-    components: { TopMenu, QuickMenu, XFooter },
-    created() {
-        this.$store.dispatch('systemConfig')
-    }
+    components: { TopMenu, QuickMenu, XFooter }
 }
 </script>
 

@@ -39,7 +39,7 @@ export default {
                 this.form.fields = fields
             }
             await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('admin.model.index')
+            this.hd.router('admin.model.index')
         }
     }
 }

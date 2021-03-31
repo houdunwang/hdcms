@@ -24,7 +24,6 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['site']);
         $this->middleware(['auth:sanctum'])->except(['show']);
     }
 

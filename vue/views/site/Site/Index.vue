@@ -33,9 +33,9 @@
                     <div class="card-footer text-sm text-gray-500 bg-white flex flex-col md:flex-row justify-between">
                         <div class="text-sm ">
                             # {{ site.id }} 创建时间: {{ site.created_at | format }} 站长: {{ site.master.name }} 所属组:
-                            <router-link :to="{ name: 'system.group.index' }" v-if="user.isSuperAdmin" class=" text-gray-500 duration-300 hover:text-gray-900">
+                            <span v-if="hd.user.isSuperAdmin" class=" text-gray-500 duration-300 hover:text-gray-900">
                                 {{ site.master.group.title }}
-                            </router-link>
+                            </span>
                             <span v-else>{{ site.master.group.title }}</span>
                             <span v-if="site.module"> 默认模块: {{ site.module.title }} </span>
                         </div>
@@ -51,25 +51,32 @@
                             <router-link
                                 v-for="(menu, index) in menus"
                                 :key="index"
-                                :to="{ name: menu.name, params: { sid: site.id }, query: { sid: site.id } }"
+                                :to="{ name: menu.name, query: { sid: site.id } }"
                                 class="mr-2 text-gray-500 duration-300 hover:text-gray-900"
+                                v-show="hd.access(menu.permission, site)"
                             >
                                 <i :class="menu.icon"></i>
                                 {{ menu.title }}
                             </router-link>
-                            <a href="#" @click.prevent="syncPermission(site)" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
+                            <a
+                                href="#"
+                                @click.prevent="syncPermission(site)"
+                                class="mr-2 text-gray-500 duration-300 hover:text-gray-900"
+                                v-show="hd.access('hd-site-permission-sync', site)"
+                            >
                                 <i class="fas fa-life-ring"></i>
                                 更新权限表
                             </a>
                             <router-link
-                                :to="{ name: 'site.site.edit', params: { id: site.id } }"
-                                v-if="site.permissions.update"
+                                :to="{ name: 'site.site.edit', query: { sid: site.id } }"
+                                v-if="site.permission.update"
                                 class="mr-2 text-gray-500 duration-300 hover:text-gray-900"
+                                v-show="hd.access('hd-site', site)"
                             >
                                 <i class="fas fa-pen"></i>
                                 编辑站点
                             </router-link>
-                            <a href="#" @click.prevent="del(site)" v-if="site.permissions.delete" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
+                            <a href="#" @click.prevent="del(site)" v-if="site.permission.delete" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
                                 <i class="fas fa-trash"></i>
                                 删除
                             </a>
@@ -86,12 +93,13 @@
 
 <script>
 const menus = [
-    { title: '网站配置', name: `site.config.edit`, icon: 'fas fa-check-circle' },
-    { title: '微信公众号', name: `wechat.wechat.index`, icon: 'fab fa-weixin' },
-    { title: '管理员设置', name: `site.admin.index`, icon: 'fas fa-user-alt' },
-    { title: '角色管理', name: `site.role.index`, icon: 'fas fa-user-lock' }
+    { title: '网站配置', name: `site.config.edit`, icon: 'fas fa-check-circle', permission: 'hd-site-config' },
+    { title: '微信公众号', name: `wechat.wechat.index`, icon: 'fab fa-weixin', permission: 'hd-wechat' },
+    { title: '管理员设置', name: `site.admin.index`, icon: 'fas fa-user-alt', permission: 'hd-site-admin' },
+    { title: '角色管理', name: `site.role.index`, icon: 'fas fa-user-lock', permission: 'hd-site-role' }
 ]
 export default {
+    route: { path: '/admin' },
     data() {
         return { sites: [], menus, loading: true }
     },

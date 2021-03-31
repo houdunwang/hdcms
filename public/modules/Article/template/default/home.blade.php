@@ -3,10 +3,6 @@
 @extends('layouts.master')
 @section('content')
 <div class="mt-8 shadow-md">
-    {{-- @if(\Browser::isMobile())
-    @else
-    @swiper(id="1")
-    @endif --}}
     @include('components.swiper',['id'=>1,'delay'=>5000])
 </div>
 <div class="md:grid md:grid-cols-2 md:gap-5 mt-5">

@@ -6,14 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Article\Entities\Category;
 use Modules\Article\Entities\Content;
+use App\Models\Site;
 use Browser;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware(['module']);
-    }
     /**
      * 网站首页
      *
@@ -21,8 +18,9 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $this->defineTemplate();
-        return view('home');
+        return 33;
+        // $this->defineTemplate();
+        // return view('home');
     }
 
     /**
@@ -31,7 +29,7 @@ class HomeController extends Controller
      * @param Category $category
      * @return void
      */
-    public function category(Category $category)
+    public function category(Site $site, Category $category)
     {
         $this->defineTemplate();
         switch ($category->type) {
@@ -52,8 +50,9 @@ class HomeController extends Controller
      * @param Content $content
      * @return void
      */
-    public function content(Content $content)
+    public function content(Site $site, Content $content)
     {
+        dd(33);
         $this->defineTemplate();
         $content['click'] += 1;
         $content->save();
@@ -71,6 +70,6 @@ class HomeController extends Controller
         $config = include "modules/Article/template/{$theme}/config.php";
         $device = Browser::isMobile() ? $config['mobile'] : $config['pc'];
 
-        \View::addLocation(public_path("modules/Article/template/{$theme}/{$device}"));
+        \View::addLocation(base_path("Modules/Article/template/{$theme}/{$device}"));
     }
 }

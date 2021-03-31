@@ -26,7 +26,7 @@ class SwiperRequest extends FormRequest
     {
         return [
             'title' => '幻灯片标题',
-            'items' => '元素'
+            'items' => '图片'
         ];
     }
 }

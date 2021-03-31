@@ -54,11 +54,13 @@ class WeChatService
      */
     public function saveModuleRule($model, array $data = [])
     {
-        //保存微信消息
-        $model->wechatMessage()->updateOrCreate(['id' => $model->wechatMessage->id ?? null], [
-            'site_id' => site('id'),
-            'module_id' => module('id'),
-            'type' => 'module',
-        ] + $data);
+        if ($data['keyword']) {
+            $model->wechatMessage()->updateOrCreate(['id' => $model->wechatMessage->id ?? null], [
+                'site_id' => site('id'),
+                'module_id' => module('id'),
+                'type' => 'module',
+                'keyword' => $data['keyword'],
+            ]);
+        }
     }
 }

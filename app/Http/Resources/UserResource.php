@@ -16,9 +16,9 @@ class UserResource extends JsonResource
         return  [
             'name' => $this->name ?? '盾友',
             'avatar' => $this->icon,
-            'wechat' => $this->when($this->permissions['update'], $this->wechat),
-            'mobile' => $this->when($this->permissions['update'], $this->mobile),
-            'email' => $this->when($this->permissions['update'], $this->email),
+            'wechat' => $this->when($this->permission['update'], $this->wechat),
+            'mobile' => $this->when($this->permission['update'], $this->mobile),
+            'email' => $this->when($this->permission['update'], $this->email),
             'roles' => $this->whenLoaded('roles'),
             'group' => new GroupResource($this->whenLoaded('group')),
             'is_following' => Auth::check() && Auth::user()->isFollow($this->resource),

@@ -19,7 +19,7 @@ class WeChatBindController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['module', 'auth:sanctum']);
+        $this->middleware(['auth:sanctum']);
     }
 
     /**

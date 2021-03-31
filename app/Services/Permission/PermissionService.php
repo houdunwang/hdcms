@@ -82,7 +82,6 @@ class PermissionService
         //删除无效的站点权限
         $names = $permissionCollection->map(fn ($p) => $p['permission_name']);
         Permission::where('site_id', $site['id'])->whereNotIn('name', $names)->delete();
-
         //同步权限
         $permissionCollection->each(function ($permission) use ($site) {
             Permission::updateOrCreate(

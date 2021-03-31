@@ -125,7 +125,7 @@ export default {
         async onSubmit() {
             const url = this.id ? `category/${this.id}` : 'category'
             await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('admin.category.index')
+            this.hd.router('admin.category.index')
         },
         //栏目是否可以选择
         disabled(category) {

@@ -1,5 +1,5 @@
 import groups from './groups'
-import NotFound from '../views/errors/NotFound'
+import NotFound from '../views/error/NotFound'
 
 const components = require.context('../views', true, /\.vue$/i)
 

@@ -35,11 +35,8 @@
                 </div>
                 <div class="grid grid-cols-3 gap-5 mt-5">
                     <div v-for="(item, index) in form.items" :key="index" class="relative shadow-md p-3 box-border flex rounded-sm border border-gray-100">
-                        <hd-upload-image v-model="item.img" :sid="site.id" class="w-1/2" />
+                        <hd-upload-image v-model="item.img" :sid="hd.site.id" class="w-1/2" />
                         <div class="w-1/2">
-                            <!-- <el-form-item label="标题" label-width="50px">
-                                <el-input v-model="item.title" placeholder="幻灯片文字"></el-input>
-                            </el-form-item> -->
                             <el-form-item label="链接" label-width="50px">
                                 <el-input v-model="item.url" placeholder="点击后的跳转链接"></el-input>
                             </el-form-item>
@@ -56,6 +53,7 @@
                             @click="del(index)"
                         ></i>
                     </div>
+                    <hd-form-error name="items" />
                 </div>
             </el-card>
             <div class="mt-3">
@@ -102,7 +100,7 @@ export default {
             const url = this.id ? `swiper/${this.id}` : 'swiper'
             await axios[this.id ? 'put' : 'post'](url, this.form)
             this.form = Object.assign({}, form)
-            this.router('admin.swiper.index')
+            this.hd.router('admin.swiper.index')
         }
     }
 }

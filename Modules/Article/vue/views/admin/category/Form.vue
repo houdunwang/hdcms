@@ -54,7 +54,7 @@
                             <hd-form-error name="url" />
                         </el-form-item>
                         <el-form-item label="预览图">
-                            <hd-upload-image v-model="form.preview" :sid="site.id" />
+                            <hd-upload-image v-model="form.preview" :sid="hd.site.id" />
                             <hd-form-error name="preview" />
                         </el-form-item>
                         <el-form-item label="文章内容" v-if="form.type == 3">
@@ -125,7 +125,7 @@ export default {
         async onSubmit() {
             const url = this.id ? `category/${this.id}` : 'category'
             await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('admin.category.index')
+            this.$router.push({ name: 'admin.category.index' })
         },
         //栏目是否可以选择
         disabled(category) {

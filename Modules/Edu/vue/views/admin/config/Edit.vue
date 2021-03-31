@@ -70,7 +70,7 @@ const form = {
     }
 }
 export default {
-    route: { path: `/Edu/site/${window.site.id}/admin` },
+    route: { path: `/Edu/site/${hd.site.id}/admin` },
     data() {
         return {
             tabs,
@@ -78,11 +78,11 @@ export default {
         }
     },
     async created() {
-        this.form = _.merge(form, await axios.get(`/api/module/config/site/${this.site.id}/module/${this.module.id}`))
+        this.form = _.merge(form, await axios.get(`/api/module/config/site/${this.hd.site.id}/module/${this.hd.module.id}`))
     },
     methods: {
         onSubmit() {
-            this.axios.put(`/api/module/config/site/${this.site.id}/module/${this.module.id}`, this.form)
+            this.axios.put(`/api/module/config/site/${this.hd.site.id}/module/${this.hd.module.id}`, this.form)
         }
     }
 }

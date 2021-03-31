@@ -15,7 +15,7 @@
             </el-table-column>
             <el-table-column width="160" #default="{row:tag}" align="center">
                 <el-button-group>
-                    <el-button type="success" size="mini" @click="router('admin.tag.edit', { id: tag.id })">编辑</el-button>
+                    <el-button type="success" size="mini" @click="hd.router('admin.tag.edit', { id: tag.id })">编辑</el-button>
                     <el-button type="primary" size="mini" @click="del(tag)">删除</el-button>
                 </el-button-group>
             </el-table-column>

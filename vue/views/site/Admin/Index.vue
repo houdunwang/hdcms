@@ -5,25 +5,44 @@
             <i class="fa fa-info-circle" aria-hidden="true"></i> 站长拥有对 <span class="text-green-800">{{ site.title }}</span> 站点管理的全部权限
         </el-alert>
         <el-table :data="users" style="width: 100%" border class="mt-3" :stripe="true" :highlight-current-row="true" v-loading="loading">
-            <el-table-column prop="id" label="编号" width="100"> </el-table-column>
-            <el-table-column prop="name" label="昵称"> </el-table-column>
-            <el-table-column prop="email" label="邮箱"> </el-table-column>
+            <el-table-column prop="id" label="编号" width="60"> </el-table-column>
+            <el-table-column prop="name" label="昵称" width="200"> </el-table-column>
+            <el-table-column label="头像" width="150" #default="{row:admin}">
+                <el-popover placement="top" width="200" trigger="hover">
+                    <el-image :src="admin.icon" fit="cover" class="w-200 h-200"></el-image>
+                    <el-image slot="reference" :src="admin.icon" fit="cover" class="w-8 h-8"></el-image>
+                </el-popover>
+            </el-table-column>
+            <el-table-column prop="email" label="邮箱" width="200"> </el-table-column>
             <el-table-column prop="mobile" label="手机号" width="200"> </el-table-column>
-            <el-table-column prop="mobile" label="角色" width="200" #default="{row:admin}">
+            <el-table-column prop="mobile" label="角色" #default="{row:admin}">
                 <el-tag
                     v-for="role in admin.roles"
                     :key="role.id"
                     effect="plain"
                     type="mini"
-                    class="mr-2 cursor-pointer"
-                    @click="$router.push({ name: 'site.role.edit', params: { sid, id: role.id } })"
+                    class="mr-1 cursor-pointer"
+                    @click="$router.push({ name: 'site.role.edit', query: { sid, id: role.id } })"
                 >
-                    {{ role.title }}
+                    <el-popover placement="top" width="600" trigger="hover">
+                        <el-tag
+                            type="primary"
+                            effect="plain"
+                            size="mini"
+                            v-for="permission in role.permissions"
+                            :key="permission.id"
+                            class="mr-2 mb-2 opacity-90"
+                        >
+                            {{ permission.title }}
+                            <span class="text-xs text-gray-500 opacity-75">{{ permission.name }}</span>
+                        </el-tag>
+                        <span slot="reference">{{ role.title }}</span>
+                    </el-popover>
                 </el-tag>
             </el-table-column>
             <el-table-column width="200" align="center" #default="{row:user}">
                 <el-button-group>
-                    <el-button type="danger" :user="user" size="small" @click="$router.push({ name: 'site.admin.role', params: { sid, id: user.id } })">
+                    <el-button type="danger" :user="user" size="small" @click="$router.push({ name: 'site.admin.role', query: { sid, id: user.id } })">
                         设置角色
                     </el-button>
                     <el-button type="info" size="small" @click="remove(user)">移除</el-button>
@@ -38,9 +57,8 @@
 <script>
 import tabs from './tabs'
 export default {
-    route: { path: `:sid/admin/index` },
     data() {
-        return { tabs: tabs({ sid: this.$route.params.sid }), site: {}, users: [], sid: this.$route.params.sid, loading: true }
+        return { tabs, site: {}, users: [], sid: this.$route.query.sid, loading: true }
     },
     async created() {
         this.site = await axios.get(`site/${this.sid}`)

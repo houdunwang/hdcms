@@ -16,7 +16,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'site']);
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
@@ -26,7 +26,9 @@ class AdminController extends Controller
      */
     public function index(Site $site)
     {
-        return UserResource::collection($site->admins->load('roles'));
+        return UserResource::collection($site->admins->load(['roles.permissions', 'roles' => function ($query) {
+            $query->where('site_id', site('id'));
+        }]));
     }
 
     /**

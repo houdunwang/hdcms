@@ -16,11 +16,6 @@ use WeChatService;
  */
 class WeChatLoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['module', 'guest']);
-    }
-
     /**
      * 将用户重定向到授权页面
      *

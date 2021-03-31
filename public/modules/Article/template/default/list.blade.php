@@ -5,7 +5,6 @@
 <div class="mb-5">
     @include('components.imagearticle',['limit'=>10])
 </div>
-
 @php
 $contents = $category->contents()->paginate(15)
 @endphp

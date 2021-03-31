@@ -1,15 +1,15 @@
 <template>
     <div class="md:w-2/12 mb-2">
         <div class="border bg-white hidden md:block">
-            <img :src="user.avatar" class="w-full object-cover cursor-pointer" @click="$router.push({ name: 'member.info.avatar' })" />
-            <div class="text-gray-800 mx-3 py-4  border-b border-gray-200">{{ user.name }}</div>
+            <img :src="hd.user.avatar" class="w-full object-cover cursor-pointer" @click="$router.push({ name: 'member.info.avatar' })" />
+            <div class="text-gray-800 mx-3 py-4  border-b border-gray-200">{{ hd.user.name }}</div>
             <div class="my-4 mx-3 flex justify-between text-gray-500">
-                <i class="fa fa-envelope" :class="{ 'text-info': user.email }"></i>
-                <i class="fas fa-phone" :class="{ 'text-info': user.mobile }"></i>
-                <i class="fab fa-weibo" :class="{ 'text-info': user.weibo }"></i>
-                <i class="fab fa-weixin" :class="{ 'text-info': user.wechat }"></i>
-                <i class="fab fa-github" :class="{ 'text-info': user.github }"></i>
-                <i class="fab fa-qq" :class="{ 'text-info': user.qq }"></i>
+                <i class="fa fa-envelope" :class="{ 'text-info': hd.user.email }"></i>
+                <i class="fas fa-phone" :class="{ 'text-info': hd.user.mobile }"></i>
+                <i class="fab fa-weibo" :class="{ 'text-info': hd.user.weibo }"></i>
+                <i class="fab fa-weixin" :class="{ 'text-info': hd.user.wechat }"></i>
+                <i class="fab fa-github" :class="{ 'text-info': hd.user.github }"></i>
+                <i class="fab fa-qq" :class="{ 'text-info': hd.user.qq }"></i>
             </div>
         </div>
 

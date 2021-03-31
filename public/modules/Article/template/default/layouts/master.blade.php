@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/modules/Article/css/app.css">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
 
-    <title>{{ $site['title'] }}</title>
+    <title>{{ site('title') }}</title>
     @stack('styles')
 </head>
 

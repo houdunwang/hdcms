@@ -5,7 +5,7 @@
                   class="navbar-toggler-icon"></span></button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="/" aria-current="page"
-               class="text-hd hover:text-red-800 text-red-500 text-xl router-link-exact-active router-link-active">
+               class="hover:text-red-800 text-red-500 text-xl router-link-exact-active router-link-active">
                 <i class="fas fa-code"></i>
                 houdunren.com
             </a></h1>

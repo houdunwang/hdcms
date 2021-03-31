@@ -35,7 +35,7 @@ export default {
         async onSubmit() {
             const url = this.id ? `tag/${this.id}` : 'tag'
             await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('admin.tag.index')
+            this.hd.router('admin.tag.index')
         }
     }
 }

@@ -45,14 +45,14 @@
                         <div class="pt-2 text-secondary text-sm mr-5">
                             <div class="markdown text-base" v-html="reply.html" v-markdown></div>
                             <!-- 快速回复框 -->
-                            <div class="mt-2" v-if="isLogin && form.comment && form.comment.id == reply.id && form.editor == false">
+                            <div class="mt-2" v-if="hd.isLogin && form.comment && form.comment.id == reply.id && form.editor == false">
                                 <el-input class="flex-1 rounded-none mr-1 mb-2" type="textarea" v-model="form.content" placeholder="支持markdown语法" />
                                 <el-button type="primary" size="mini" @click.prevent="onSubmit" class="flex-grow-0">发送</el-button>
                             </div>
                             <!-- 快速回复框 END -->
                             <div class="mt-2">
                                 <span class="text-xs text-gray-500 mr-2"> <i class="far fa-clock"></i> {{ reply.created_at | fromNow }} </span>
-                                <a @click.prevent="replyComment(reply)" class="d-inline-block text-gray-500 text-xs mr-2" v-if="reply.user_id != user.id">
+                                <a @click.prevent="replyComment(reply)" class="d-inline-block text-gray-500 text-xs mr-2" v-if="reply.user_id != hd.user.id">
                                     <i aria-hidden="true" class="fa fa-reply"></i> 回复
                                 </a>
                                 <a class="d-inline-block text-gray-500 text-xs" v-if="reply.permissions.delete" @click.prevent="del(reply)">
@@ -64,16 +64,6 @@
                 </div>
                 <!-- 回复列表 END-->
             </div>
-            <!-- <div class="card-footer text-muted bg-white text-sm">
-                # {{ comment.id }}
-                <a class="d-inline-block mr-2 ml-2 text-gray-500" @click.prevent="replyComment(comment, true)">
-                    <i aria-hidden="true" class="fa fa-reply"></i> 回复
-                </a>
-                <a class="d-inline-block text-gray-500" v-if="comment.permissions.delete" @click.prevent="del(comment)">
-                    <i class="fas fa-times-circle"></i> 删除
-                </a>
-            </div> -->
-            <!-- 回复 END -->
         </div>
         <!-- 分页 -->
         <div class="bg-white p-3 border border-gray-200 rounded-sm shadow-sm" v-if="comments.meta && comments.meta.total > 10">
@@ -91,7 +81,7 @@
             </el-pagination>
         </div>
         <!-- 评论框 -->
-        <div class="card mt-3" id="comment-editor" v-if="isLogin">
+        <div class="card mt-3" id="comment-editor" v-if="hd.isLogin">
             <div class="card-header h-14">
                 <div v-if="form.comment" class="text-sm">
                     回复：<span class="text-blue-700 font-bold">{{ form.comment.user.name }}</span>
@@ -100,7 +90,7 @@
                 <div v-else class="font-bold text-gray-600">发表评论</div>
             </div>
             <div>
-                <x-tui-editor v-model="form.content" :sid="site.id" />
+                <x-tui-editor v-model="form.content" :sid="hd.site.id" />
                 <hd-form-error name="content" />
             </div>
             <div class="card-footer text-muted">
@@ -131,7 +121,7 @@ export default {
     async created() {
         this.load(1)
         const commentId = this.$route.params.comment_id
-        this.scrollTo(`#comment-${commentId}`)
+        this.hd.scrollTo(`#comment-${commentId}`)
     },
     methods: {
         //加载评论
@@ -150,7 +140,7 @@ export default {
             const { data: comment } = await axios.post(`${this.actionPost}`, this.form)
             this.form = _.cloneDeep(form)
             await this.load()
-            this.scrollTo(`#comment-${comment.id}`)
+            this.hd.scrollTo(`#comment-${comment.id}`)
         },
         //删除评论
         async del(comment) {
@@ -161,12 +151,12 @@ export default {
         },
         //回复
         replyComment(comment, editor = false) {
-            if (comment.user_id == this.user.id) {
+            if (comment.user_id == this.hd.user.id) {
                 return this.$message.error('不能回复自己')
             }
             this.form = _.merge(this.form, { reply_id: comment.id, reply_comment_id: comment.reply_comment_id || comment.id, content: '', editor, comment })
             //使用编辑器
-            if (editor) this.scrollTo('#comment-editor')
+            if (editor) this.hd.scrollTo('#comment-editor')
         }
     }
 }

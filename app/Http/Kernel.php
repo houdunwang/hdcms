@@ -5,8 +5,6 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use App\Http\Middleware\SiteMiddleware;
-use App\Http\Middleware\SystemMiddleware;
-use App\Http\Middleware\ModuleMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -41,12 +39,14 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SiteMiddleware::class,
         ],
 
         'api' => [
             EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SiteMiddleware::class,
         ],
     ];
 
@@ -58,9 +58,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'system' => SystemMiddleware::class,
-        'site' => SiteMiddleware::class,
-        'module' => ModuleMiddleware::class,
         //
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

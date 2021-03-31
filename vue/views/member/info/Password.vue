@@ -23,7 +23,6 @@ const fields = [
 ]
 export default {
     route: { meta: { keepAlive: true } },
-    inject: ['site'],
     data() {
         return {
             form: { old_password: '', password: '', password_confirmation: '' },

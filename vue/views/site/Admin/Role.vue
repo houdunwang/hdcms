@@ -17,13 +17,12 @@
 <script>
 import tabs from './tabs'
 export default {
-    route: { path: `:sid/admin/:id/role` },
     data() {
         return {
             admin: {},
-            tabs: tabs({ sid: this.$route.params.sid }),
-            sid: this.$route.params.sid,
-            id: this.$route.params.id,
+            tabs,
+            sid: this.$route.query.sid,
+            id: this.$route.query.id,
             roles: [],
             form: { role: [] },
             loading: true
@@ -37,7 +36,7 @@ export default {
     methods: {
         async onSubmit() {
             await this.axios.put(`site/${this.sid}/admin/${this.id}/role`, this.form)
-            this.$router.push({ name: 'site.admin.index', params: { sid: this.sid } })
+            this.$router.push({ name: 'site.admin.index', query: { sid: this.sid } })
         }
     }
 }

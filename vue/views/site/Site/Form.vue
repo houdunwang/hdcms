@@ -31,7 +31,7 @@ import tabs from './tabs'
 const form = { title: '', domain: '', module_id: 0 }
 export default {
     route: false,
-    props: ['id'],
+    props: ['sid'],
     data() {
         return {
             tabs,
@@ -41,14 +41,14 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`site/${this.id}`)
+        if (this.sid) this.form = await this.axios.get(`site/${this.sid}`)
         this.modules = await this.axios.get(`module/user`)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `site/${this.id}` : 'site'
-            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            const url = this.sid ? `site/${this.sid}` : 'site'
+            await this.axios[this.sid ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'site.site.index' })
         }
     }

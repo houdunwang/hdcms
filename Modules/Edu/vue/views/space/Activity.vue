@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div v-if="activity.data">
-                <activity-list :activities="activity.data" />
+                <x-activity-list :activities="activity.data" />
                 <div class="flex justify-center mt-3">
                     <el-pagination
                         :small="true"

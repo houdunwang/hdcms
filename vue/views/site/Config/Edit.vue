@@ -32,7 +32,6 @@ import Sms from './Components/Sms'
 import _ from 'lodash'
 import tabs from './tabs'
 export default {
-    route: { path: `site/config/:sid/edit` },
     components: { BaseConfig, User, Aliyun, Alipay, Wepay, Upload, Email, Sms },
     provide() {
         return { form: this.site.config }
@@ -41,13 +40,14 @@ export default {
         return { loading: true, tabs, activeName: 'base', wechats: {}, site: { config } }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.site = await this.axios.get(`site/${this.$route.query.sid}`)
         this.site.config = _.merge(config, this.site.config)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`site/${this.$route.params.sid}`, this.site)
+            await this.axios.put(`site/${this.$route.query.sid}`, this.site)
+            this.$router.push({ name: 'site.site.index' })
         }
     }
 }

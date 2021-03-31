@@ -43,7 +43,7 @@ export default {
             }
             const url = this.id ? `topic/${this.id}` : `topic`
             const { data: form } = await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('front.topic.show', { id: form.id })
+            this.hd.router('front.topic.show', { id: form.id })
         }
     }
 }

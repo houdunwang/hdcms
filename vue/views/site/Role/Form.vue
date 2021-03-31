@@ -30,8 +30,8 @@ export default {
     props: ['id'],
     data() {
         return {
-            tabs: tabs({ sid: this.$route.params.sid, id: this.$route.params.id }),
-            sid: this.$route.params.sid,
+            tabs,
+            sid: this.$route.query.sid,
             form: Object.assign({}, form)
         }
     },
@@ -42,7 +42,7 @@ export default {
         async onSubmit() {
             const url = this.id ? `site/${this.sid}/role/${this.id}` : `site/${this.sid}/role`
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
-            this.$router.push(`/site/${this.sid}/role`)
+            this.$router.push({ name: `site.role.index`, query: { sid: this.sid } })
         }
     }
 }

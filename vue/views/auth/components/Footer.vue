@@ -1,9 +1,9 @@
 <template>
-    <div class="text-center mt-4" v-if="site.id">
+    <div class="text-center mt-4" v-if="hd.site.id">
         <a
             href="/wechat/login"
             class="no-underline hover:text-gray-900 text-blue-dark text-xs"
-            v-if="site.setting.wechatweb_login && (device.wechat || device.desktop)"
+            v-if="hd.site.setting.wechatweb_login && (hd.device.wechat || hd.device.desktop)"
         >
             微信登录 ·
         </a>

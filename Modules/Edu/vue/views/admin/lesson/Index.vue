@@ -1,12 +1,12 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <lesson :lessons.sync="lessons.data" #default="{ lesson }">
+        <x-lesson :lessons.sync="lessons.data" #default="{ lesson }">
             <el-button-group>
                 <el-button type="primary" size="mini" @click="$router.push({ name: 'admin.lesson.edit', params: { id: lesson.id } })">编辑</el-button>
                 <el-button type="danger" size="mini" @click="del(lesson)">删除</el-button>
             </el-button-group>
-        </lesson>
+        </x-lesson>
         <el-pagination
             v-if="lessons.meta"
             class="mt-3"

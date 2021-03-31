@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         async loadWechats() {
-            const url = `/api/site/${this.site.id}/wechat`
+            const url = `/api/site/${this.hd.site.id}/wechat`
             this.wechats = await axios.get(url)
         }
     }

@@ -1,6 +1,6 @@
 <div class="container-xl pt-6 pb-20 text-center mt-16 border-t text-xs text-gray-500">
     <div class="">
-        {{ $site->title }} <br />
+        {{ site('title') }} <br />
         {{ config('site.base.copyright') }}
     </div>
     <div>

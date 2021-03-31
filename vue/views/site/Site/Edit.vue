@@ -1,13 +1,12 @@
 <template>
     <div>
-        <XForm :id="$route.params.id" />
+        <XForm :sid="$route.query.sid" />
     </div>
 </template>
 
 <script>
 import XForm from './Form'
 export default {
-    route: { path: 'site/:id/edit' },
     components: { XForm }
 }
 </script>

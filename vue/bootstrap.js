@@ -14,8 +14,8 @@ require('./plugins/element')
 require('./plugins/axios')
 require('./plugins/dayjs')
 require('./utils/autoload')
-require('./utils/filters')
-require('./utils/directive')
+// require('./utils/filters')
+// require('./utils/directive')
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

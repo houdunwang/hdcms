@@ -3,9 +3,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import mixin from './utils/mixin'
+import hdcms from './plugins/hdcms'
+// import mixin from './utils/mixin'
 
-Vue.mixin(mixin)
+Vue.use(hdcms)
+// Vue.mixin(mixin)
 
 new Vue({
     router,

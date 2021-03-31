@@ -13,6 +13,9 @@
 		"path": "vue"
 	},
 	{
+		"path": "Modules/Edu"
+	},
+	{
 		"path": "Modules/Article"
 	}
 ],

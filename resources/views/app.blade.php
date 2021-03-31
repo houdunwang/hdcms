@@ -19,14 +19,10 @@
 </head>
 
 <body>
-    @include('message')
+    @include('hd')
     <div id="app"></div>
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1611412966"></script>
     <script src="/tabler/dist/js/tabler.min.js?1611412966"></script>
-    <script>
-        window.device=@json(['mobile'=>\Browser::isMobile(),'desktop'=>\Browser::isDesktop(),'wechat'=>\WeChatService::isWeChat()]);
-        window.uid=@json(Auth::id());window.site = @json(site(),JSON_FORCE_OBJECT);
-    </script>
 </body>
 
 </html>

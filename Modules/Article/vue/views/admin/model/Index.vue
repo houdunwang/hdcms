@@ -16,8 +16,8 @@
 
             <el-table-column width="250" #default="{row:model}" align="center">
                 <el-button-group>
-                    <el-button type="success" size="mini" @click="router('admin.model.edit', { id: model.id })">编辑</el-button>
-                    <el-button type="danger" size="mini" @click="router('admin.field.index', { mid: model.id })">字段管理</el-button>
+                    <el-button type="success" size="mini" @click="$router.push({ name: 'admin.model.edit', params: { id: model.id } })">编辑</el-button>
+                    <el-button type="danger" size="mini" @click="$router.push({ name: 'admin.field.index', params: { mid: model.id } })">字段管理</el-button>
                     <el-button type="primary" size="mini" @click="del(model)">删除</el-button>
                 </el-button-group>
             </el-table-column>

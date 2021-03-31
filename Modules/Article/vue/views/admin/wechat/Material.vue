@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <hd-wechat-material :site_id="site.id" :show-type-button="true" :module_id="module.id" />
+        <hd-wechat-material :site_id="hd.site.id" :show-type-button="true" :module_id="hd.module.id" />
     </div>
 </template>
 

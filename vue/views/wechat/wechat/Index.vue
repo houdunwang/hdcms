@@ -2,7 +2,6 @@
     <div>
         <hd-tab :tabs="tabs" />
         <el-alert effect="light" closable> 正在管理【{{ site.title }}】站点的公众号 </el-alert>
-
         <el-table :data="wechats" style="width: 100%" border v-loading="loading" class="mt-3">
             <el-table-column prop="id" label="编号" width="100"> </el-table-column>
             <el-table-column prop="title" label="公众号名称"> </el-table-column>
@@ -27,7 +26,13 @@
                         <el-button size="small" type="success">公众号管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <router-link :to="{ name: 'wechat.wechat.edit', query: { sid: site.id, id: wechat.id } }" href="#" type="primary" size="small">
+                                <router-link
+                                    v-if="hd.access('hd-wechat_message')"
+                                    :to="{ name: 'wechat.wechat.edit', query: { sid: site.id, id: wechat.id } }"
+                                    href="#"
+                                    type="primary"
+                                    size="small"
+                                >
                                     编辑
                                 </router-link>
                             </el-dropdown-item>
