@@ -78,10 +78,7 @@ class SiteMiddleware
         } else {
             $site = request('site');
             $site = is_numeric($site) ? Site::findOrFail($site) : $site;
-            // $site = $site instanceof Site ? $site : SiteService::getByDomain();
-            // if ($site instanceof Site) {
             SiteService::cache($site);
-            // }
         }
     }
 
@@ -100,12 +97,6 @@ class SiteMiddleware
         } else {
             $module = ModuleService::getByDomain();
             ModuleService::cache($module);
-            // $module = request('module');
-            // $module = is_numeric($module) ? Module::findOrFail($module) : $module;
-            // $module = $module instanceof Module ? $module : ModuleService::getByDomain();
-            // if ($module instanceof Module) {
-            //     ModuleService::cache($module);
-            // }
         }
     }
 }
