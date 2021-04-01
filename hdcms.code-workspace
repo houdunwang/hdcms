@@ -17,6 +17,9 @@
 	},
 	{
 		"path": "Modules/Article"
+	},
+	{
+		"path": "install"
 	}
 ],
   "settings": {

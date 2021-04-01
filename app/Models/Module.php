@@ -14,7 +14,6 @@ use Spatie\Permission\Models\Permission;
 class Module extends Model
 {
     protected $fillable = ['title', 'name', 'description', 'author'];
-
     protected $appends = ['config', 'preview', 'version'];
 
     /**
