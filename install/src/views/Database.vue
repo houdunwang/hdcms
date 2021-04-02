@@ -9,8 +9,8 @@
                 <el-form-item label="连接端口" prop="port">
                     <el-input v-model="form.port"></el-input>
                 </el-form-item>
-                <el-form-item label="用户名" prop="user">
-                    <el-input v-model="form.user"></el-input>
+                <el-form-item label="用户名" prop="username">
+                    <el-input v-model="form.username"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input v-model="form.password"></el-input>
@@ -22,18 +22,18 @@
             <div class="flex justify-center mt-10">
                 <el-button type="danger" size="default" @click="connection">测试连接</el-button>
                 <el-button type="success" size="default" @click="$router.push({ name: 'env' })">上一步</el-button>
-                <el-button type="primary" @click="$router.push({ name: 'env' })" v-if="isConnection">下一步</el-button>
+                <el-button type="primary" @click="$router.push({ name: 'migration' })" v-if="isConnection">下一步</el-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-const form = { host: '192.168.10.10', port: 3306, user: 'homestead', password: 'secret', database: 'hdcms' }
+const form = { host: '192.168.10.10', port: 3306, username: 'homestead', password: 'secret', database: 'xj' }
 const rules = {
     host: [{ required: true, message: '请输入主机地址', trigger: 'blur' }],
     port: [{ required: true, message: '连接端口', trigger: 'blur' }],
-    user: [{ required: true, message: '用户名', trigger: 'blur' }],
+    username: [{ required: true, message: '用户名', trigger: 'blur' }],
     password: [{ required: true, message: '密码', trigger: 'blur' }],
     database: [{ required: true, message: '数据库', trigger: 'blur' }]
 }
@@ -55,6 +55,8 @@ export default {
             if (state == 'success') {
                 this.$message.success('连接成功')
                 this.isConnection = true
+            } else {
+                this.$message.error('连接失败，请检查参数')
             }
         }
     }

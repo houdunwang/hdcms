@@ -23,7 +23,7 @@
             <div class="flex justify-center mt-5">
                 <el-checkbox v-model="accept">接受协议</el-checkbox>
             </div>
-            <div class="flex justify-center mt-10">
+            <div class="flex justify-center mt-10 mb-5">
                 <el-button type="success" size="default" @click="$router.push({ name: 'welcome' })">上一步</el-button>
                 <el-button type="primary" size="default" @click="$router.push({ name: 'env' })" v-if="accept">下一步</el-button>
                 <el-button plain disabled v-else>下一步</el-button>

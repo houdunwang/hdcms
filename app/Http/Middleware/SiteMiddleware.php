@@ -24,6 +24,9 @@ class SiteMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
+        if (!IS_INSTALL && Route::currentRouteName() == 'install.migration') {
+            return $next($request);
+        }
         $this->site();
         $this->module();
         $this->share();

@@ -4,6 +4,8 @@ import Welcome from '@/views/Welcome.vue'
 import Copyright from '@/views/Copyright.vue'
 import Env from '@/views/Env.vue'
 import Database from '@/views/Database.vue'
+import Migration from '@/views/Migration.vue'
+import Done from '@/views/Done.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,16 @@ const routes = [
         path: '/database',
         name: 'database',
         component: Database
+    },
+    {
+        path: '/migration',
+        name: 'migration',
+        component: Migration
+    },
+    {
+        path: '/done',
+        name: 'done',
+        component: Done
     }
 ]
 

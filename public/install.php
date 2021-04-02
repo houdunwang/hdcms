@@ -5,6 +5,8 @@ header("Access-Control-Allow-Credentials: true");
 $dirs = ['./', '../data', '../storage', './modules'];
 $exts = ['gd', 'bcmath', 'Ctype', 'Fileinfo', 'JSON', 'Mbstring', 'OpenSSL', 'PDO', 'Tokenizer', 'XML'];
 switch ($_GET['action']) {
+    case 'welcome':
+        die(is_file('install.lock') ? 'isInstall' : 'success');
     case 'env':
         $response = ["dir" => [], "exts" => []];
         foreach ($dirs as $d) {
@@ -19,10 +21,13 @@ switch ($_GET['action']) {
         $config = json_decode(file_get_contents('php://input'), true);
         try {
             $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8', $config['host'], $config['database'], 'utf8');
-            $pdo = new PDO($dsn, $config['user'], $config['password']);
+            $pdo = new PDO($dsn, $config['username'], $config['password']);
             file_put_contents('../data/database.php', "<?php return " . var_export($config, true) . ';');
             die('success');
         } catch (PDOException $e) {
             die('fail');
         }
+    case 'done':
+        file_put_contents('install.lock', 'done...');
+        die('success');
 }

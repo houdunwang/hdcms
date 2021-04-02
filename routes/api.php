@@ -24,6 +24,7 @@ use App\WeChat\WeChatMessageController;
 use App\WeChat\WeChatMaterialController;
 use App\WeChat\WeChatQrController;
 use App\WeChat\WeChatSendAllController;
+use App\Api\InstallController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -125,3 +126,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //公众号
     Route::apiResource('site.wechat', WeChatController::class);
 });
+
+//安装系统
+Route::get('install/migration', [InstallController::class, 'migration'])->name('install.migration');

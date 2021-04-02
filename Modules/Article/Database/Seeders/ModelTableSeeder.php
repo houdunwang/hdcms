@@ -9,7 +9,6 @@ class ModelTableSeeder extends Seeder
 {
     public function run()
     {
-        // Model::unguard();
         Model::factory()->count(1)->create();
     }
 }

@@ -9,7 +9,7 @@ class ContentTableSeeder extends Seeder
 {
     public function run()
     {
-        Content::factory()->count(100)->create([
+        Content::factory()->count(30)->create([
             'model_id' => 1
         ]);
     }

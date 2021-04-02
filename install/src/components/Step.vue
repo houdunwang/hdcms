@@ -5,6 +5,7 @@
             <el-step title="安装协议"></el-step>
             <el-step title="环境检测"></el-step>
             <el-step title="数据库"></el-step>
+            <el-step title="导入数据"></el-step>
             <el-step title="完成安装"></el-step>
         </el-steps>
     </div>

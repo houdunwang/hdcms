@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    created() {
+    async created() {
         this.$store.state.step = 0
     }
 }
