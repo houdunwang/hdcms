@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center mt-4" v-if="hd.site.id">
+    <div class="text-center mt-4" v-if="hd.site">
         <a
             href="/wechat/login"
             class="no-underline hover:text-gray-900 text-blue-dark text-xs"
@@ -27,13 +27,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-export default {
-    inject: ['site'],
-    computed: {
-        ...mapState(['device'])
-    }
-}
+export default {}
 </script>
 
 <style></style>

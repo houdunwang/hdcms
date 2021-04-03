@@ -108,12 +108,14 @@ export default {
         this.loading = false
     },
     methods: {
+        //删除站点
         async del(site) {
             this.$confirm('确定删除站点吗？', '提示').then(async _ => {
                 await this.axios.delete(`site/${site.id}`, site)
                 this.sites.splice(this.sites.indexOf(site), 1)
             })
         },
+        //同步站点权限
         async syncPermission(site) {
             await this.axios.get(`permission/site/${site.id}/sync`)
         }

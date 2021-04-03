@@ -24,8 +24,11 @@ class SiteMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!IS_INSTALL && Route::currentRouteName() == 'install.migration') {
-            return $next($request);
+        if (!IS_INSTALL) {
+            if (Route::currentRouteName() == 'install.migration') {
+                return $next($request);
+            }
+            return redirect('/install');
         }
         $this->site();
         $this->module();
@@ -41,9 +44,9 @@ class SiteMiddleware
     {
         View::share('hd', [
             'site' => site(),
-            'permissions' => Auth()->user()->getAllPermissions()->pluck('name'),
+            'permissions' => Auth::check() and Auth()->user()->getAllPermissions()->pluck('name'),
             'module' => module(),
-            'systemConfig' => SystemConfig::find(1),
+            'systemConfig' => SystemConfig::where('id', 1)->value('config'),
             'device' => ['mobile' => Browser::isMobile(), 'desktop' => Browser::isDesktop(), 'wechat' => WeChatService::isWeChat()],
             'user' => Auth::user(),
             'version' => $this->version()
