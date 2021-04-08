@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
             'site_id' => 1,
             'user_id' => 1,
             'model_id' => 1,
-            'title' => $this->faker->sentence(),
+            'title' => $this->faker->name(),
             'pid' => 0,
             'preview' => $this->faker->imageUrl(300, 300),
             'description' => $this->faker->sentence(),

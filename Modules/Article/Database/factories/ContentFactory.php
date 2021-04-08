@@ -22,9 +22,9 @@ class ContentFactory extends Factory
             'model_id' => 1,
             'category_id' => $category->id,
             'title' => $this->faker->sentence(),
-            'content' => $this->faker->paragraph(10),
-            'preview' => $this->faker->imageUrl(300, 300),
-            'description' => $this->faker->sentence(),
+            'content' => nl2br($this->faker->paragraphs(50, true)),
+            'preview' => "https://hdcms-dev.oss-cn-hangzhou.aliyuncs.com/images/b" . mt_rand(1, 110) . ".jpg",
+            'description' => $this->faker->sentences(3, true),
         ];
     }
 }

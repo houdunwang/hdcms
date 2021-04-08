@@ -17,16 +17,18 @@ $contents = $category->contents()->paginate(15)
             <div class="card-body">
                 @foreach($contents as $content)
                 <li class="flex justify-between py-2 border-b border-gray-200">
-                    <a href="{{ route('article.content',$content) }}">
+                    <a href="{{ route('article.content',[site(),$content]) }}">
                         <div class="text-gray-700 font-bold py-2"> {{ $content->title }}</div>
                         <div class="flex">
                             @if($content->preview)
                             <img src="{{ $content->preview }}" class="w-20 h-20 object-cover mr-2">
                             @endif
-                            {{ $content['description'] }}
+                            <div>
+                                {{ $content['description'] }}
+                            </div>
                         </div>
                     </a>
-                    <span class="text-xs text-gray-500">
+                    <span class="text-xs text-gray-500 w-40 d-block text-right mt-8">
                         {{ $content->updated_at->diffForHumans() }}
                     </span>
                 </li>

@@ -27,7 +27,7 @@
             <el-table-column width="280" #default="{row:content}" align="center">
                 <el-button-group>
                     <el-button type="primary" size="mini">
-                        <a :href="`/Article/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
+                        <a :href="`/Article/${hd.site.id}/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
                     </el-button>
                     <el-button type="success" size="mini" @click="$router.push({ name: 'admin.content.edit', params: { id: content.id } })">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(content)">删除</el-button>

@@ -17,7 +17,7 @@
                 <ul class="navbar-nav">
                     @foreach($category->limit(6)->get() as $category)
                     <li class="nav-item">
-                        <a href="{{ route('article.category',$category) }}" class="nav-link text-gray-500 font-semibold hover:text-hd">
+                        <a href="{{ route('article.category',[site(),$category]) }}" class="nav-link text-gray-500 font-semibold hover:text-hd">
                             <span class="nav-link-title">
                                 {{ mb_substr($category->title,0,5,'utf-8') }}
                             </span>

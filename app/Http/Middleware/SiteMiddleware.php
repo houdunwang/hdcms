@@ -30,6 +30,7 @@ class SiteMiddleware
             }
             return redirect('/install');
         }
+
         $this->site();
         $this->module();
         $this->share();

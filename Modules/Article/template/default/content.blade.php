@@ -8,12 +8,12 @@
                 {{ $content->title }}
                 <div class="text-xs text-gray-500 mt-3 pt-3 w-full">
                     阅读：{{ $content->click }} 次 / 发表时间:{{ $content->created_at }} /
-                    <a href="{{ route('article.category',$content->category) }}" class="text-blue-600">
+                    <a href="{{ route('article.category',[site(),$content->category]) }}" class="text-blue-600">
                         {{ $content->category->title }}
                     </a>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body content">
                 {!! $content->content !!}
             </div>
         </div>
@@ -26,3 +26,16 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .content {
+        text-indent: 2em;
+    }
+
+    .content p {
+        margin-bottom: 10px;
+    }
+</style>
+
+@endpush

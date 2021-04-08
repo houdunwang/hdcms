@@ -65,7 +65,7 @@ class HomeController extends Controller
     protected function defineTemplate()
     {
         $theme = config('module.template');
-        $config = include "modules/Article/template/{$theme}/config.php";
+        $config = include base_path("Modules/Article/template/{$theme}/config.php");
         $device = Browser::isMobile() ? $config['mobile'] : $config['pc'];
 
         \View::addLocation(base_path("Modules/Article/template/{$theme}/{$device}"));

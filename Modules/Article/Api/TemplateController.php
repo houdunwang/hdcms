@@ -18,7 +18,7 @@ class TemplateController extends Controller
 
     public function index()
     {
-        $dirs = glob('./modules/Article/template/*');
+        $dirs = glob(base_path('Modules/Article/template/*'));
         $templates = [];
         foreach ($dirs as $dir) {
             $config = include $dir . '/config.php';

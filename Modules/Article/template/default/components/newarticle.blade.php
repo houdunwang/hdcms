@@ -7,7 +7,7 @@
         <ul>
             @foreach($contentModel->limit(5)->get() as $content)
             <li class="flex justify-between py-2">
-                <a href="{{ route('article.content',$content) }}">
+                <a href="{{ route('article.content',[site(),$content]) }}">
                     {{ mb_substr( $content['title'],0,30,'utf-8')}}
                 </a>
             </li>
