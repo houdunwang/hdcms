@@ -1,0 +1,132 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.uni-nav-bar-text.data-v-6bda1a90 {
+  font-size: 32rpx;
+}
+.uni-nav-bar-right-text.data-v-6bda1a90 {
+  font-size: 28rpx;
+}
+.uni-navbar__content.data-v-6bda1a90 {
+  position: relative;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.uni-navbar__content_view.data-v-6bda1a90 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.uni-navbar__header.data-v-6bda1a90 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+}
+.uni-navbar__header-btns.data-v-6bda1a90 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  width: 120rpx;
+  padding: 0 6px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.uni-navbar__header-btns-left.data-v-6bda1a90 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 150rpx;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+}
+.uni-navbar__header-btns-right.data-v-6bda1a90 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 150rpx;
+  padding-right: 30rpx;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.uni-navbar__header-container.data-v-6bda1a90 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.uni-navbar__header-container-inner.data-v-6bda1a90 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  font-size: 28rpx;
+}
+.uni-navbar__placeholder-view.data-v-6bda1a90 {
+  height: 44px;
+}
+.uni-navbar--fixed.data-v-6bda1a90 {
+  position: fixed;
+  z-index: 998;
+}
+.uni-navbar--shadow.data-v-6bda1a90 {
+  -webkit-box-shadow: 0 1px 6px #ccc;
+          box-shadow: 0 1px 6px #ccc;
+}
+.uni-navbar--border.data-v-6bda1a90 {
+  border-bottom-width: 1rpx;
+  border-bottom-style: solid;
+  border-bottom-color: #c8c7cc;
+}
+

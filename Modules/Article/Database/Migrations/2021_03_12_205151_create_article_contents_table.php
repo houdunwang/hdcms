@@ -21,7 +21,8 @@ class CreateArticleContentsTable extends Migration
             $table->foreignId('category_id')->constrained('article_categories')->onDelete('cascade');
             $table->string('keyword', 20)->index()->nullable()->comment('微信回复关键词');
             $table->string('title', 100)->nullable()->comment('标题');
-            $table->string('url')->nullable()->comment('跳转链接');
+            $table->string('url')->nullable()->comment('跳转链接@');
+            $table->json('images')->nullable()->comment('图集');
             $table->text('content')->nullable()->comment('内容');
             $table->string('source', 30)->nullable()->comment('来源');
             $table->unsignedInteger('click')->nullable()->comment('点击数');

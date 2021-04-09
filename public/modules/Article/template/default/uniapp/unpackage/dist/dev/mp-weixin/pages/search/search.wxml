@@ -1,0 +1,1 @@
+<view><u-button vue-id="50cad900-1" bind:__l="__l" vue-slots="{{['default']}}">search...</u-button></view>

@@ -23,7 +23,6 @@
                     {{ content[col.id] }}
                 </span>
             </el-table-column>
-
             <el-table-column width="280" #default="{row:content}" align="center">
                 <el-button-group>
                     <el-button type="primary" size="mini">

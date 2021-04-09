@@ -4,6 +4,6 @@ return [
     'description' => '训练营网站',
     'version' => 'v1.0.0',
     'author' => '向军老师',
-    'mobile' => '',
-    'pc' => '',
+    'pc' => 'pc',
+    'h5' => 'pc',
 ];

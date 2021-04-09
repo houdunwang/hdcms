@@ -21,8 +21,8 @@ class Content extends Model
 {
     use HasFactory;
     protected $table = 'article_contents';
-    protected $guarded = ['thumb', 'permissions', 'tags'];
-    protected $casts = [];
+    protected $guarded = ['thumb', 'permissions', 'tags', 'images'];
+    protected $casts = ['images' => 'array'];
     protected $appends = ['permissions'];
 
     /**

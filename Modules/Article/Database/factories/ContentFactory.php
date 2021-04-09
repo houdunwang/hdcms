@@ -24,7 +24,17 @@ class ContentFactory extends Factory
             'title' => $this->faker->sentence(),
             'content' => nl2br($this->faker->paragraphs(50, true)),
             'preview' => "https://hdcms-dev.oss-cn-hangzhou.aliyuncs.com/images/b" . mt_rand(1, 110) . ".jpg",
+            'images' => $this->images(),
             'description' => $this->faker->sentences(3, true),
         ];
+    }
+
+    protected function images()
+    {
+        $images = [];
+        for ($i = 0; $i < 4; $i++) {
+            array_push($images, "https://hdcms-dev.oss-cn-hangzhou.aliyuncs.com/images/b" . mt_rand(1, 110) . ".jpg");
+        }
+        return $images;
     }
 }

@@ -8,6 +8,7 @@ use Modules\Article\Entities\Category;
 use Modules\Article\Entities\Content;
 use App\Models\Site;
 use Browser;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -64,10 +65,14 @@ class HomeController extends Controller
      */
     protected function defineTemplate()
     {
-        $theme = config('module.template');
-        $config = include base_path("Modules/Article/template/{$theme}/config.php");
-        $device = Browser::isMobile() ? $config['mobile'] : $config['pc'];
+        try {
+            $theme = config('module.template');
+            $config = include base_path("modules/Article/template/{$theme}/config.php");
+            $device = Browser::isMobile() ? $config['h5'] : $config['pca'];
 
-        \View::addLocation(base_path("Modules/Article/template/{$theme}/{$device}"));
+            \View::addLocation(base_path("modules/Article/template/{$theme}/{$device}"));
+        } catch (Exception $e) {
+            abort('404', '模板文件不存在');
+        }
     }
 }
