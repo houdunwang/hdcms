@@ -67,10 +67,10 @@ class HomeController extends Controller
     {
         try {
             $theme = config('module.template');
-            $config = include base_path("modules/Article/template/{$theme}/config.php");
-            $device = Browser::isMobile() ? $config['h5'] : $config['pca'];
+            $config = include public_path("modules/Article/template/{$theme}/config.php");
+            $device = Browser::isMobile() ? $config['h5'] : $config['pc'];
 
-            \View::addLocation(base_path("modules/Article/template/{$theme}/{$device}"));
+            \View::addLocation(public_path("modules/Article/template/{$theme}/{$device}"));
         } catch (Exception $e) {
             abort('404', '模板文件不存在');
         }

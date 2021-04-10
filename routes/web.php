@@ -7,7 +7,6 @@ use App\Http\Controllers\WeChatLoginController;
 use App\Http\Controllers\WeChatBindController;
 use App\WeChat\ApiController;
 
-
 //支付通知
 Route::group(['prefix' => 'pay/{module}', 'middleware' => ['site']], function () {
     Route::any('alipay/return', [PayNotifyController::class, 'alipayReturn'])->name('pay.alipay.return');
@@ -45,12 +44,6 @@ Route::get('{app}/{path?}', function () {
     return view('app');
 })->where('app', 'system|admin|member|site|login|register|wechat|forget')->where('path', '.*');
 
-//模块应用
-Route::get('{module}/site/{site}/{path?}', function (string $module) {
-    $name = strtolower($module);
-    return view("{$name}::app");
-})->where('path', '.*')->where('path', '.*');
-
-// Route::fallback(function () {
-//     abort(404);
-// });
+Route::fallback(function () {
+    abort(404);
+});

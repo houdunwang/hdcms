@@ -20,7 +20,6 @@
 </head>
 
 <body>
-    @include('hd')
     @include('components.topmenu')
     <div id="app" class="mt-10">
         <div class="container-xl">

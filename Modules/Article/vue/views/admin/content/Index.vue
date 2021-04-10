@@ -63,7 +63,8 @@ const columns = [
 ]
 import tabs from './tabs'
 export default {
-    route: { path: '/', meta: { title: '文章列表' } },
+    // route: { path: '/', meta: { title: '文章列表' } },
+    route: { path: `/Article/site/${hd.site.id}/admin`, meta: { title: '文章列表' } },
     data() {
         return { tabs, contents: [], columns }
     },

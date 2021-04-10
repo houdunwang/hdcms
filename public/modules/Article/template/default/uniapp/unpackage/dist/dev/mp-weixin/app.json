@@ -9,11 +9,11 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "后盾人",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColor": "#000000"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#bd000a",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [

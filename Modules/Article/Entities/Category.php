@@ -56,16 +56,28 @@ class Category extends Model
         return CategoryFactory::new();
     }
 
+    /**
+     * 类型中方
+     * @return string
+     */
     public function getTypeTitleAttribute()
     {
         return $this->types[$this->type];
     }
 
+    /**
+     * 栏目层级
+     * @return int
+     */
     public function getLevelAttribute()
     {
         return count(explode('-', $this->path)) - 2;
     }
 
+    /**
+     * 用户关联
+     * @return BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

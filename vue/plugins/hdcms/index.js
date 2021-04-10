@@ -1,6 +1,5 @@
 import _ from 'lodash'
 
-require('./filters')
 const install = function(Vue) {
     Vue.mixin({
         computed: {

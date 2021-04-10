@@ -1,1 +1,0 @@
-<view><uni-nav-bar vue-id="8dd740cc-1" left-icon="back" left-text="返回" right-text="菜单" title="导航栏组件" bind:__l="__l"></uni-nav-bar></view>

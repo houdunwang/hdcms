@@ -16,7 +16,7 @@ class CategoryFactory extends Factory
             'model_id' => 1,
             'title' => $this->faker->name(),
             'pid' => 0,
-            'preview' => $this->faker->imageUrl(300, 300),
+            'preview' => "https://hdcms-dev.oss-cn-hangzhou.aliyuncs.com/images/b" . mt_rand(1, 110) . ".jpg",
             'description' => $this->faker->sentence(),
             'content' => $this->faker->paragraph(3)
         ];

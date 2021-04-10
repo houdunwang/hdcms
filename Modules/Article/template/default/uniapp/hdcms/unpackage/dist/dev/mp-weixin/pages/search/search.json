@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "文章搜索",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "u-button": "/uview-ui/components/u-button/u-button"
-  }
-}

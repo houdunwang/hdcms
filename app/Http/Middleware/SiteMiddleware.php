@@ -79,14 +79,11 @@ class SiteMiddleware
      */
     protected function site()
     {
-        //主页
-        if (Route::currentRouteName() == 'home') {
-            SiteService::cache(SiteService::getByDomain());
-        } else {
-            $site = request('site');
-            $site = is_numeric($site) ? Site::findOrFail($site) : $site;
-            SiteService::cache($site);
-        }
+        $site = request('site');
+        $site = is_numeric($site) ? Site::findOrFail($site) : $site;
+        //其他情况解析域名获取站点
+        $site = $site ?? SiteService::getByDomain();
+        SiteService::cache($site);
     }
 
     /**
@@ -98,12 +95,8 @@ class SiteMiddleware
      */
     protected function module()
     {
-        //主页
-        if (Route::currentRouteName() == 'home') {
-            ModuleService::cache(site('module'));
-        } else {
-            $module = ModuleService::getByDomain();
-            ModuleService::cache($module);
-        }
+        $module = ModuleService::getByDomain();
+        $module = $module ?? site('module');
+        ModuleService::cache($module);
     }
 }

@@ -44,8 +44,10 @@ _axios.interceptors.response.use(
                 store.commit('errors', data.errors)
                 break
             case 401:
-                // window.localStorage.removeItem('token')
                 location.href = '/login'
+                break
+            case 429:
+                el.Message.error('请求次数过多')
                 break
             default:
                 el.Message.error(data.message)
