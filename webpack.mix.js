@@ -6,6 +6,6 @@ mix.js('vue/app.js', 'public/js')
     .webpackConfig(require('./webpack.config'))
 
 mix.browserSync({
-    proxy: 'hdcms.test',
+    proxy: 'e19.test',
     files: 'vue/**'
 })

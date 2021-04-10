@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Str;
 //数据库连接
-$database =  include base_path('data/database.php');
+$file = base_path('data/database.php');
+$database = is_file($file) ? include $file : [];
 
 return [
 

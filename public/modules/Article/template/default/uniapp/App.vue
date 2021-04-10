@@ -16,4 +16,10 @@
 	/*每个页面公共css */
 	@import "uview-ui/index.scss";
 	@import url("css/app.css");
+	::-webkit-scrollbar {
+	  display:none;
+	  width:0;
+	  height:0;
+	  color:transparent;
+	}
 </style>

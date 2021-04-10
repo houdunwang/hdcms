@@ -1,0 +1,24 @@
+{
+	"id": "uni-list-detail", // 必选 插件标识，需要保证唯一性
+	"name": "云端一体新闻详情模板", // 必选 插件名称
+	"version": "0.0.3", // 必选 插件版本
+	"description": "云端一体新闻详情模板", // 插件描述
+	"author": "DCloud", // 插件作者
+	"license": "MIT",
+	"homepage": "https://ext.dcloud.net.cn/plugin?id=2717", // 插件地址
+	"files": [ // 必选 插件自身文件列表（支持通配，规范：https://docs.npmjs.com/files/package.json#files）
+		"components/u-parse",
+		"components/uni-badge",
+		"components/uni-icons",
+		"components/uni-list",
+		"components/uni-list-item",
+		"components/uni-load-more",
+		"components/uni-section",
+		"pages/uni-list-detail/uni-list-detail.vue"
+	],
+	"bundledFiles": [ // 插件依赖的文件列表，通常是依赖的三方插件的 files 合并
+		"cloudfunctions/uni-clientDB",
+		"cloudfunctions/common/uni-id",
+		"js_sdk"
+	]
+}

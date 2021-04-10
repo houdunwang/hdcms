@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/hdcms":{"type":null,"mount_options":["uid=1000","gid=1000"],"guestpath":"/home/vagrant/hdcms","hostpath":"/Users/hd/hdcms","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/hd/hdcms","disabled":false,"__vagrantfile":true}}}

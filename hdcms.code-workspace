@@ -4,22 +4,7 @@
 		"path": "."
 	},
 	{
-		"path": "houdunwang"
-	},
-	{
-		"path": "app/WeChat"
-	},
-	{
-		"path": "vue"
-	},
-	{
-		"path": "Modules/Edu"
-	},
-	{
 		"path": "Modules/Article"
-	},
-	{
-		"path": "install"
 	}
 ],
   "settings": {
