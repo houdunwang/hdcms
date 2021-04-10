@@ -5,17 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ site('title') }}</title>
     {{-- tabler --}}
     <link href="/tabler/dist/css/tabler.css" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-flags.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-payments.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-vendors.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/demo.min.css" rel="stylesheet" />
-    <script src="/modules/Article/js/app.js" defer></script>
     {{-- tabler end --}}
-    <link rel="stylesheet" href="/modules/Article/css/app.css">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
-    <title>{{ site('title') }}</title>
+    <link rel="stylesheet" href="/modules/Article/dist/app.css?v={{ config('module_version') }}">
     @stack('styles')
 </head>
 

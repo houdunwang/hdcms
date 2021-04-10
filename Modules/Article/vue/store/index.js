@@ -35,7 +35,7 @@ export default new Vuex.Store({
             commit('user', await axios.get(`/api/user/info`))
         },
         async site({ commit }) {
-            commit('site', await axios.get(`site/current`))
+            commit('site', await axios.get(`/api/site/current`))
         }
     }
 })

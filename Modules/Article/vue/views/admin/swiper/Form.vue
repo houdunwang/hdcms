@@ -67,7 +67,7 @@
 </template>
 
 <script>
-const form = { title: '', width: '100%', height: 'auto', delay: 3000, items: [] }
+const form = { title: '', width: '100%', height: '300px', delay: 3000, items: [] }
 import tabs from './tabs'
 export default {
     props: ['id'],
@@ -80,13 +80,6 @@ export default {
             this.form = await axios.get(`swiper/${this.id}`)
         }
     },
-    // watch:{
-    //     $route(route){
-    //         if(route.name =='admin.swiper.create'){
-    //             this.form =  Object.assign({}, form)
-    //         }
-    //     }
-    // },
     methods: {
         add() {
             this.form.items.push({ img: '', title: '', url: '', show: true })

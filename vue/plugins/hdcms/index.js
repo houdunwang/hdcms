@@ -1,5 +1,4 @@
 import _ from 'lodash'
-
 const install = function(Vue) {
     Vue.mixin({
         computed: {

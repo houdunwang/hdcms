@@ -18,13 +18,12 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.js"></script>
     {{-- swiper end--}}
-    <link rel="stylesheet" href="/modules/{{ module('name') }}/css/app.css">
+    <link rel="stylesheet" href="/modules/{{ module('name') }}/dist/app.css">
     <script src="/modules/{{ module('name') }}/dist/app.js?v={{ config('module_version') }}" defer></script>
-    @yield('head')
+    @stack('styles')
 </head>
 
 <body>
-    @yield('bodyBefore')
     <script>
         window.hd = @json($hd);
     </script>
@@ -35,8 +34,8 @@
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/tabler/dist/js/tabler.min.js"></script>
     {{-- tabler end--}}
-    @yield('bodyEnd')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>
