@@ -19,7 +19,7 @@ export default {
     },
     watch: {
         async 'form.avatar'() {
-            await this.axios.put(`user/${this.user.id}`, this.form)
+            await this.axios.put(`user/${this.hd.user.id}`, this.form)
             this.$store.dispatch('user')
         }
     }

@@ -25,7 +25,7 @@ class SystemConfigController extends Controller
     public function show()
     {
         $config = SystemConfig::where('id', 1)->value('config');
-        $config['logo'] = empty($config['logo']) ? url("system/images/logo.png") : $config['logo'];
+        $config['logo'] = empty($config['logo']) ? url("/images/logo.png") : $config['logo'];
         return $config;
     }
 
