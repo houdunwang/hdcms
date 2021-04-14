@@ -9,7 +9,7 @@
                     {{ activity.subject.content | truncate }}
                 </router-link>
 
-                <div class="text-xs text-gray-500 mt-2">
+                <div class="text-sm text-gray-500 mt-2">
                     <span class="badge bg-teal">每日签到</span>
                     <a href="#" @click.prevent="space(activity.causer)">{{ activity.causer.name }}</a>
                     • 签到于{{ activity.updated_at | fromNow }}

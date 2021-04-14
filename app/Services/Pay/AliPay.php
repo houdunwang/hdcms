@@ -30,6 +30,12 @@ class AliPay
         $config =  [
             'return_url' => route('pay.alipay.return', [module('id')]),
             'notify_url' => route('pay.alipay.notify', [module('id')]),
+            'log' => [ // optional
+                'file' => './system/logs/alipay.log',
+                'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
+                'type' => 'single', // optional, 可选 daily.
+                'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
+            ],
         ] + config('site.alipay');
         if (empty($config['mode'])) unset($config['mode']);
         $this->pay = Pay::alipay($config);

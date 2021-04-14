@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-footer text-sm text-gray-500 bg-white flex flex-col md:flex-row justify-between">
                         <div class="text-sm ">
-                            # {{ site.id }} 创建时间: {{ site.created_at | format }} 站长: {{ site.master.name }} 所属组:
+                            # {{ site.id }} 创建时间: {{ site.created_at | dateFormat }} 站长: {{ site.master.name }} 所属组:
                             <span v-if="hd.user.isSuperAdmin" class=" text-gray-500 duration-300 hover:text-gray-900">
                                 {{ site.master.group.title }}
                             </span>

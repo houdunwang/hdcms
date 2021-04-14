@@ -32,7 +32,7 @@ class ContentFactory extends Factory
     protected function images()
     {
         $images = [];
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < mt_rand(1, 4); $i++) {
             array_push($images, "https://hdcms-dev.oss-cn-hangzhou.aliyuncs.com/images/b" . mt_rand(1, 110) . ".jpg");
         }
         return $images;

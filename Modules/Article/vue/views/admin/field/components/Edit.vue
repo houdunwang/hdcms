@@ -12,7 +12,7 @@
                                 <el-input v-model="field.title" required placeholder="字段中文标题" size="normal" />
                             </el-form-item>
                             <el-form-item label="字段名" size="normal">
-                                <el-input v-model="field.name" placeholder="英文字母表示的字段名" size="normal" />
+                                <el-input v-model="field.name" placeholder="英文字母表示的字段名" size="normal" :disabled="field.system" />
                             </el-form-item>
                             <el-form-item label="提示信息" size="normal">
                                 <el-input v-model="field.placeholder" placeholder="" size="normal" />
@@ -28,7 +28,7 @@
                     <el-tab-pane label="字段类型" name="second">
                         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-2">
                             <el-form-item label="表单类型" size="normal">
-                                <el-select v-model="field.type" placeholder="请选择">
+                                <el-select v-model="field.type" placeholder="请选择" :disabled="field.system">
                                     <el-option v-for="(item, index) in types" :key="index" :label="item.label" :value="item.type" />
                                 </el-select>
                             </el-form-item>

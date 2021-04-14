@@ -5,13 +5,12 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "后盾人",
 			"enablePullDownRefresh": false
 		}
 	}, {
-		"path": "pages/news/news",
+		"path": "pages/category/category",
 		"style": {
-			"navigationBarTitleText": "最新文章",
+			"navigationBarTitleText": "频道",
 			"enablePullDownRefresh": false
 		}
 	}, {
@@ -19,13 +18,29 @@
 		"style": {
 			"navigationBarTitleText": "文章搜索",
 			"enablePullDownRefresh": false
+			// "app-plus": {
+			// 	"titleNView": {
+			// 		"type": "transparent", //透明渐变导航栏 App-nvue 2.4.4+ 支持
+			// 		"searchInput": {
+			// 			"backgroundColor": "#fff",
+			// 			"borderRadius": "6px", //输入框圆角
+			// 			"placeholder": "请输入搜索内容",
+			// 			"disabled": true
+			// 		}
+			// 	}
+			// }
+		}
+	}, {
+		"path": "pages/content/content",
+		"style": {
+			"enablePullDownRefresh": false
 		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "后盾人",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#000000"
+		"backgroundColor": "#f8f8f8"
 	},
 	"tabBar": {
 		"color": "#7A7E83",
@@ -38,16 +53,38 @@
 				"selectedIconPath": "static/tabbar/home-select.png",
 				"text": "首页"
 			}, {
-				"pagePath": "pages/news/news",
+				"pagePath": "pages/category/category",
 				"iconPath": "static/tabbar/image-text.png",
 				"selectedIconPath": "static/tabbar/image-text-select.png",
-				"text": "最新"
+				"text": "频道"
 			},
 			{
 				"pagePath": "pages/search/search",
 				"iconPath": "static/tabbar/layers.png",
 				"selectedIconPath": "static/tabbar/layers-select.png",
 				"text": "搜索"
+			}
+		]
+	},
+	"condition": {
+		"current": 3,
+		"list": [{
+				"name": "index",
+				"path": "pages/index/index",
+				"query": ""
+			}, {
+				"name": "category",
+				"path": "pages/category/category",
+				"query": ""
+			}, {
+				"name": "content",
+				"path": "pages/content/content",
+				"query": "?id=600"
+			},
+			{
+				"name": "search",
+				"path": "pages/search/search",
+				"query": ""
 			}
 		]
 	}

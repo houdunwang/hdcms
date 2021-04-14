@@ -23,7 +23,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -54,7 +54,32 @@
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "name": "index",
+          "query": "",
+          "id": 0,
+          "pathName": "pages/index/index"
+        },
+        {
+          "name": "category",
+          "query": "",
+          "id": 1,
+          "pathName": "pages/category/category"
+        },
+        {
+          "name": "content",
+          "query": "?id=600",
+          "id": 2,
+          "pathName": "pages/content/content"
+        },
+        {
+          "name": "search",
+          "query": "",
+          "id": 3,
+          "pathName": "pages/search/search"
+        }
+      ]
     }
   }
 }

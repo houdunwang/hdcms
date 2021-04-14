@@ -15,9 +15,7 @@ class SwiperRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'width' => ['required'],
-            'height' => ['required'],
-            'delay' => ['required'],
+            'name' => ['required', 'regex:/^[a-z]+$/i'],
             'items' => ['required', 'between:1,10'],
         ];
     }

@@ -7,7 +7,7 @@ html {
         sans-serif !important;
 }
 body {
-    background-color: #fffefc !important;
+    background-color: #f2f5f9 !important;
 }
 
 [v-cloak] {
@@ -29,7 +29,10 @@ a {
 a:hover {
     text-decoration: none !important;
 }
-
+.card{
+    border-radius:6px;
+    overflow: hidden;
+}
 .hljs {
     background-color: #3c4b53 !important;
     font-family: 'Jetbrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;

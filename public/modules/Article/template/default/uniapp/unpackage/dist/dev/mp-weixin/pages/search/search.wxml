@@ -1,1 +1,1 @@
-<view><u-button vue-id="50cad900-1" bind:__l="__l" vue-slots="{{['default']}}">search...</u-button><u-button vue-id="50cad900-2" ripple="{{true}}" bind:__l="__l" vue-slots="{{['default']}}">十年</u-button></view>
+<view><uni-search-bar bind:confirm="__e" vue-id="50cad900-1" data-event-opts="{{[['^confirm',[['confirm']]]]}}" bind:__l="__l"></uni-search-bar><view class="p-20"><block wx:for="{{articles}}" wx:for-item="article" wx:for-index="__i0__" wx:key="id"><hd-article vue-id="{{'50cad900-2-'+__i0__}}" article="{{article}}" bind:__l="__l"></hd-article></block></view></view>

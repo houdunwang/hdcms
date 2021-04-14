@@ -1,71 +1,39 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <el-table :data="contents.data" border stripe v-loading="loading">
-            <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width" #default="{row:content}">
-                <span v-if="col.id == 'created_at' || col.id == 'updated_at'">
-                    {{ content[col.id] | dateFormat }}
-                </span>
-                <div v-else-if="col.id == 'tags'">
-                    <el-tag size="mini" v-for="tag in content.tags" :key="tag.id" class="mr-2">
-                        {{ tag.title }}
-                    </el-tag>
-                </div>
-                <div v-else-if="col.id == 'preview'">
-                    <el-popover placement="top-start" width="200" height="200" trigger="hover">
-                        <img slot="reference" :src="content.preview" class="w-8 h-8 object-cover" />
-                        <div>
-                            <img :src="content.preview" class="w-full h-20 object-cover" />
-                        </div>
-                    </el-popover>
-                </div>
-                <span v-else>
-                    {{ content[col.id] }}
-                </span>
-            </el-table-column>
-            <el-table-column width="280" #default="{row:content}" align="center">
-                <el-button-group>
-                    <el-button type="primary" size="mini">
-                        <a :href="`/Article/${hd.site.id}/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
-                    </el-button>
-                    <el-button type="success" size="mini" @click="$router.push({ name: 'admin.content.edit', params: { id: content.id } })">编辑</el-button>
-                    <el-button type="danger" size="mini" @click="del(content)">删除</el-button>
-                    <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`/Article/content/${content.id}.html`">
-                        复制链接
-                    </el-button>
-                </el-button-group>
-            </el-table-column>
-        </el-table>
-        <div class="mt-3">
-            <el-pagination
-                v-if="contents.meta"
-                background
-                @current-change="load"
-                :total="contents.meta.total"
-                :page-size="contents.meta.per_page"
-                :hide-on-single-page="true"
-            >
-            </el-pagination>
-        </div>
+        <x-article-table :data="contents.data" v-loading="loading" #default="{content}">
+            <el-button-group>
+                <el-button type="primary" size="mini">
+                    <a :href="`/Article/${hd.site.id}/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
+                </el-button>
+                <el-button type="success" size="mini" @click="$router.push({ name: 'admin.content.edit', params: { id: content.id } })">编辑</el-button>
+                <el-button type="danger" size="mini" @click="del(content)">删除</el-button>
+                <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`/Article/content/${content.id}.html`">
+                    复制链接
+                </el-button>
+            </el-button-group>
+        </x-article-table>
+        <el-pagination
+            v-if="contents.meta"
+            :total="contents.meta.total"
+            :page-size="contents.meta.per_page"
+            :hide-on-single-page="true"
+            background
+            @current-change="load"
+            class="mt-3"
+        >
+        </el-pagination>
     </div>
 </template>
 
 <script>
 import ClipboardJS from 'clipboard'
-const columns = [
-    { id: 'id', label: '编号', width: 60 },
-    { id: 'title', label: '标题' },
-    { id: 'tags', label: '标签' },
-    { id: 'keyword', label: '微信关键词' },
-    { id: 'preview', label: '缩略图', width: 100 },
-    { id: 'created_at', label: '创建时间', width: 200 },
-    { id: 'updated_at', label: '修改时间', width: 200 }
-]
+
 import tabs from './tabs'
 export default {
     route: { path: `/Article/site/${hd.site.id}/admin`, meta: { title: '文章列表' } },
     data() {
-        return { tabs, contents: [], columns, loading: true }
+        return { tabs, contents: [], loading: true }
     },
     async created() {
         this.load()

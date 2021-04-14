@@ -1,9 +1,7 @@
 <template>
-    <div
-        class="mx-5 flex flex-col justify-between items-center md:flex-row mt-8"
-    >
+    <div class="mx-5 flex flex-col justify-between items-center md:flex-row mt-8">
         <div class="w-3/12 hidden md:block">
-            <img src="/images/logo.png" class="object-cover" />
+            <img src="/system/images/logo.png" class="object-cover" />
         </div>
         <div class="w-full md:w-3/12 grid gap-2 grid-cols-3">
             <router-link
@@ -30,17 +28,17 @@
 <script>
 const menus = [
     {
-        title: "站点管理",
-        to: "/site/site/index",
-        icon: "fas fa-calendar-check"
+        title: '站点管理',
+        to: '/site/site/index',
+        icon: 'fas fa-calendar-check'
     },
-    { title: "系统设置", to: "/system/home", icon: "fas fa-cloud" }
-];
+    { title: '系统设置', to: '/system/home', icon: 'fas fa-cloud' }
+]
 export default {
     data() {
-        return { menus };
+        return { menus }
     }
-};
+}
 </script>
 
 <style></style>

@@ -1,37 +1,41 @@
 <template>
-	<view>
-		<hd-category-tab :index="index" @change="change" id="categoryTab"></hd-category-tab>
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000"
-		:style="{height:'300rpx'}">
-			<swiper-item>
-				<view class="swiper-item"></view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item"></view>
-			</swiper-item>
-		</swiper>
-		<hd-category-article-swiper :index="index" @change="change" :height="categoryArticleSwiperHeight">
-		</hd-category-article-swiper>
+	<view class="p-20" style="">
+		<scroll-view class="" :scroll-y="true" @scrolltolower="scrolltolower" :style="{height:`${scrollViewHeight}px`}">
+			<hd-swiper name="home" class="mb-30" ></hd-swiper>
+			<hd-article v-for="(article,index) in articles" :key="index" :article="article"></hd-article>
+		</scroll-view>
 	</view>
 </template>
+
 
 <script>
 	export default {
 		data() {
 			return {
-				index: 0,
-				categoryArticleSwiperHeight: 600
+				articles: [],
+				page: 1
 			}
 		},
-		async onLoad() {
-			const categories = await this.api.get(`category`)
-			const info = uni.getSystemInfoSync();
-			this.categoryArticleSwiperHeight = info.windowHeight - uni.upx2px(80)-uni.upx2px(300);
+		computed: {
+			scrollViewHeight() {
+				const info = uni.getSystemInfoSync()
+				return info.windowHeight
+			}
+		},
+		onLoad: function(options) {
+			// uni.startPullDownRefresh();
+			this.scrolltolower()
+		},
+		async onPullDownRefresh() {
+			// const articles = await this.api.get(`content?page=${++this.page}`).then(_ => _.data)
+			// this.articles.unshift(...articles)
+			// uni.stopPullDownRefresh();
 		},
 		methods: {
-			change(index) {
-				this.index = index;
-				console.log(index);
+			async scrolltolower() {
+				console.log(this.page);
+				const articles = await this.api.get(`content?page=${this.page++}`).then(_ => _.data)
+				this.articles.unshift(...articles)
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="mt-8 shadow-md">
-    @include('components.swiper',['id'=>1,'delay'=>5000])
+    @include('components.swiper',['name'=>'home','delay'=>5000])
 </div>
 <div class="md:grid md:grid-cols-2 md:gap-5 mt-5">
     @foreach($category::get() as $category)

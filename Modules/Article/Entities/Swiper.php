@@ -17,9 +17,18 @@ class Swiper extends Model
 {
     use HasFactory;
     protected $table = 'article_swipers';
-    protected $fillable = ['title', 'items', 'site_id', 'user_id', 'width', 'height', 'delay'];
+    protected $fillable = ['title', 'items', 'site_id', 'user_id', 'name'];
     protected $casts = ['items' => 'array'];
     protected $appends = ['permissions'];
+
+    /**
+     * 自定义路由slug
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 
     /**
      * 操作权限

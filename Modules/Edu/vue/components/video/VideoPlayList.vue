@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-skeleton-list v-if="loading" :num="10" />
-        <div class="card rounded shadow-sm mb-2" v-else>
+        <div class="card shadow-sm mb-2" v-else>
             <div class="card-header bg-white text-muted">
                 <i aria-hidden="true" class="fa fa-check-circle-o mr-1"></i>
                 学习动态
@@ -20,7 +20,7 @@
                             >
                                 {{ video.video.title }}
                             </router-link>
-                            <div class="text-xs text-gray-500">
+                            <div class="text-sm text-gray-500">
                                 <a href="#" @click.prevent="space(video.user)" class="text-gray-500">{{ video.user.name }}</a>
                                 <i class="fa fa-clock-o"></i>
                                 {{ video.updated_at | fromNow }}

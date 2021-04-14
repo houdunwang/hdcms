@@ -1,12 +1,12 @@
 @inject('swiper','Modules\Article\Entities\Swiper')
 @php
-$swiper = $swiper->find($id)
+$swiper = $swiper->where('name',$name)->first()
 @endphp
 @if ($swiper)
 <div class="swiper-container">
     <div class="swiper-wrapper">
         @foreach($swiper['items'] as $item)
-        <a href="{{ $item['url']??route('article.content',$item['id']) }}" class="swiper-slide">
+        <a href="{{ route('article.content',[site(),$item['article_id']]) }}" class="swiper-slide">
             <img src="{{ $item['img'] }}" class="w-cover w-full" />
         </a>
         @endforeach

@@ -6,11 +6,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         //表单验证错误
-        errors: {},
+        errors: {}
         //登录用户
-        user: {},
-        site: window.site,
-        module: window.module
+        // user: {},
+        // site: window.site,
+        // module: window.module
     },
     getters: {
         //表单验证
@@ -21,21 +21,21 @@ export default new Vuex.Store({
         //设置验证错误
         errors(state, errors = {}) {
             state.errors = errors
-        },
-        user(state, user) {
-            state.user = user
-        },
-        site(state, site) {
-            state.site = site
         }
+        // user(state, user) {
+        //     state.user = user
+        // },
+        // site(state, site) {
+        //     state.site = site
+        // }
     },
     //用来执行异步动作
     actions: {
-        async user({ commit }) {
-            commit('user', await axios.get(`/api/user/info`))
-        },
-        async site({ commit }) {
-            commit('site', await axios.get(`/api/site/current`))
-        }
+        // async user({ commit }) {
+        //     commit('user', await axios.get(`/api/user/info`))
+        // },
+        // async site({ commit }) {
+        //     commit('site', await axios.get(`/api/site/current`))
+        // }
     }
 })

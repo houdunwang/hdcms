@@ -7,11 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- tabler --}}
-    <link href="/tabler/dist/css/tabler.css" rel="stylesheet" />
-    <link href="/tabler/dist/css/tabler-flags.min.css" rel="stylesheet" />
-    <link href="/tabler/dist/css/tabler-payments.min.css" rel="stylesheet" />
-    <link href="/tabler/dist/css/tabler-vendors.min.css" rel="stylesheet" />
-    <link href="/tabler/dist/css/demo.min.css" rel="stylesheet" />
+    <link href="/system/tabler/dist/css/tabler.css" rel="stylesheet" />
+    <link href="/system/tabler/dist/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/system/tabler/dist/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/system/tabler/dist/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/system/tabler/dist/css/demo.min.css" rel="stylesheet" />
     {{-- tabler end --}}
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     {{-- swiper --}}
@@ -31,8 +31,8 @@
         <router-view />
     </div>
     {{-- tabler --}}
-    <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/tabler/dist/js/tabler.min.js"></script>
+    <script src="/system/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/system/tabler/dist/js/tabler.min.js"></script>
     {{-- tabler end--}}
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
     @stack('scripts')

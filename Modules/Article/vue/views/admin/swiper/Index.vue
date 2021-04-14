@@ -3,7 +3,7 @@
         <hd-tab :tabs="tabs" />
         <div class="grid md:grid-cols-4 gap-5" v-if="swipers.length">
             <el-card shadow="nerver" :body-style="{ padding: '0px' }" v-for="swiper in swipers" :key="swiper.id">
-                <div class="py-3 text-center">{{ swiper.title }} / 编号:{{ swiper.id }}</div>
+                <div class="py-3 text-center">{{ swiper.title }} / 标识:{{ swiper.name }}</div>
                 <div class="swiper-container relative h-24" :id="`swiper${swiper.id}`">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for="(item, index) in swiper.items" :key="index" v-show="item.show">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex justify-center py-2 bg-gray-100">
                     <el-button-group>
-                        <el-button type="success" size="mini" @click="router('admin.swiper.edit', { id: swiper.id })">编辑</el-button>
+                        <el-button type="success" size="mini" @click="hd.router('admin.swiper.edit', { id: swiper.id })">编辑</el-button>
                         <el-button type="danger" size="mini" @click="del(swiper)">删除</el-button>
                     </el-button-group>
                 </div>

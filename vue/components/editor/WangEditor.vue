@@ -35,7 +35,7 @@ export default {
             this.editor.config.uploadImgMaxSize = 3 * 1024 * 1024
             this.editor.config.uploadImgMaxLength = 5
             this.editor.config.uploadFileName = 'file'
-            this.editor.config.uploadImgHooks = this.uploadHandle
+            this.editor.config.uploadImgHooks = this.uploadHandle()
             this.editor.config.showLinkImg = false
             this.editor.config.debug = true
             this.editor.config.onchange = this.updateContent
@@ -73,13 +73,12 @@ export default {
             this.$emit('input', this.editor.txt.html())
         },
         uploadHandle() {
+            const This = this
             return {
-                before: function(xhr, editor, files) {},
-                success: function(xhr, editor, result) {},
-                fail: function(xhr, editor, result) {},
-                error: function(xhr, editor) {},
-                timeout: function(xhr, editor) {},
-                customInsert: function(insertImg, result, editor) {}
+                success: function(xhr) {
+                    const response = JSON.parse(xhr.response)
+                    This.$emit('uploadImage', response.data[0].url)
+                }
             }
         }
     }

@@ -18,3 +18,4 @@ yarn-error.log
 /public/logs
 node_modules
 .DS_Store
+unpackage

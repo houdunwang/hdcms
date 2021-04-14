@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\MassAssignmentException;
 use InvalidArgumentException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use WeChatService;
 
 /**
@@ -35,7 +34,11 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::where('site_id', site('id'))->latest('id')->paginate(15);
+        $contents = Content::where('site_id', site('id'))->when(request('keyword'), function ($query, $keyword) {
+            $query->where('title', 'like', "%{$keyword}%");
+        })->when(request('category_id'), function ($query, $category_id) {
+            $query->where('category_id', $category_id);
+        })->latest('id')->paginate(15);
         return ContentResource::collection($contents);
     }
 

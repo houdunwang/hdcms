@@ -15,8 +15,6 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         //
     ];
-    // protected $messages = [404 => '你请求的页面不存在', 419 => '页面访问过期，请重新刷新',  429 => '请求过于频繁，请稍候再试', 422 => '表单验证失败'];
-
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *

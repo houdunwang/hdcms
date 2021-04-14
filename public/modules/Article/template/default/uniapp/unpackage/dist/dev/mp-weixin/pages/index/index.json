@@ -1,5 +1,7 @@
 {
+  "enablePullDownRefresh": false,
   "usingComponents": {
-    "hd": "/components/hd/hd"
+    "hd-swiper": "/components/hd-swiper/hd-swiper",
+    "hd-article": "/components/hd-article/hd-article"
   }
 }

@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 use Socialite;
 use App\Models\WeChatUser;
 use Auth;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use InvalidArgumentException;
 
 /**
  * 微信登录

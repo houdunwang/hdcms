@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
+        <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal" v-loading="loading">
             <el-form-item label="栏目选择" v-if="categories">
                 <el-select v-model="form.category_id" placeholder="请选择">
                     <el-option v-for="category in categories" :key="category.id" :label="category.title" :value="category.id" :disabled="disabled(category)">

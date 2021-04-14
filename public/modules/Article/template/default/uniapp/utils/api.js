@@ -1,30 +1,42 @@
-const host = `https://dev.hdcms.com/api/Article/site/1`;
-
+const host = `https://dev.hdcms.com/api/Article/site/1`
 export default {
-	async request(data={}){
+	request(data) {
 		data.url = `${host}/${data.url}`
-		return uni.request(data).then(response=>{
-			const [error,data] = response
+		return uni.request(data).then(data => {
+			const [error, res] = data;
 			if(error){
-				return uni.showModal({
-				    title: '友情提示',
+				uni.showModal({
+				    title: '温馨提示',
 				    content: error??'请求失败',
 					showCancel:false,
 					confirmText:'关闭'
 				});
+			}else{
+				return res.data;
 			}
-			return data.data
-		})
+		});
 	},
 	get(url,params={}){
-		url+=Object.entries(params).map((v,k)=>k+'='+v).join('&');
+		if(Object.keys(params).length){
+			url+='?'+Object.entries(params).map((v,k)=>k+'='+v).join('&');
+		}
 		return this.request({
 			url
 		})
 	},
-	post(url,data){
-		this.request({
-			url,data
+	post(url,data={}){
+		return this.request({
+			url,data,method:'POST'
 		})
-	}
+	},
+	put(url,data={}){
+		return this.request({
+			url,data,method:'PUT'
+		})
+	},
+	delete(url){
+		return this.request({
+			url,method:'DELETE'
+		})
+	},
 }

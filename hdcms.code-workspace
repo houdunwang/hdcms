@@ -5,11 +5,17 @@
 	},
 	{
 		"path": "Modules/Article"
+	},
+	{
+		"path": "Modules/Edu"
+	},
+	{
+		"path": "Modules/Edu/vue"
 	}
 ],
   "settings": {
     "git.ignoreLimitWarning": true,
-	"compile-hero.disable-compile-files-on-did-save-code": true,
+	"compile-hero.disable-compile-files-on-did-save-code": false,
 	"liveServer.settings.multiRootWorkspaceName": "hdcms"
   }
 }

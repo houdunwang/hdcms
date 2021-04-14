@@ -11,7 +11,7 @@
                 >
                     {{ activity.subject.title | truncate(50) }}
                 </router-link>
-                <div class="text-xs text-gray-500 mt-2">
+                <div class="text-sm text-gray-500 mt-2">
                     <span class="badge bg-purple">贴子</span>
                     <a href="#" @click.prevent="space(activity.causer)">{{ activity.causer.name }}</a>
                     • 发表于{{ activity.updated_at | fromNow }}

@@ -1,15 +1,16 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/news/news",
-    "pages/search/search"
+    "pages/category/category",
+    "pages/search/search",
+    "pages/content/content"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "后盾人",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#000000"
+    "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
     "color": "#7A7E83",
@@ -24,10 +25,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/news/news",
+        "pagePath": "pages/category/category",
         "iconPath": "static/tabbar/image-text.png",
         "selectedIconPath": "static/tabbar/image-text-select.png",
-        "text": "最新"
+        "text": "频道"
       },
       {
         "pagePath": "pages/search/search",
@@ -37,5 +38,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

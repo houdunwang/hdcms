@@ -1,7 +1,7 @@
 <template>
     <div class="relative">
         <el-upload
-            class="avatar-uploader"
+            class="hd-image-uploader"
             :action="action"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
@@ -9,7 +9,7 @@
             :headers="headers"
         >
             <img v-if="imageUrl" :src="imageUrl" class="avatar object-cover" />
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            <i v-else class="el-icon-plus hd-image-uploader-icon"></i>
         </el-upload>
         <i class="fas fa-window-close absolute fa-2x text-white top-2 left-2 cursor-pointer" @click="del"></i>
     </div>
@@ -75,29 +75,31 @@ export default {
 }
 </script>
 
-<style>
-.avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-    border-color: #409eff;
-}
-.avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-}
-.avatar {
-    width: auto;
-    height: 178px;
-    display: block;
-    background: #f3f3f3;
+<style lang="scss">
+.hd-image-uploader {
+    .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        &:hover {
+            border-color: #409eff;
+        }
+    }
+    .hd-image-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+    .avatar {
+        width: auto;
+        height: 178px;
+        display: block;
+        background: #f3f3f3;
+    }
 }
 </style>

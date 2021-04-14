@@ -41,6 +41,12 @@ class WePay
             'cert_client' => base_path('Modules') . '/' . module()['name'] . '/cert/' . site('id') . '/apiclient_cert.pem', // optional，退款等情况时用到
             'cert_key' => base_path('Modules') . '/' . module()['name'] . '/cert/' . site('id') . '/apiclient_key.pem', // optional，退款等情况时用到
             'notify_url' => route('pay.notify.notify', [module('id'), 'wepay']),
+            'log' => [
+                'file' => './system/logs/wechat.log',
+                'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
+                'type' => 'single', // optional, 可选 daily.
+                'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
+            ]
         ] + config('site.wepay');
 
         if (empty($config['mode'])) unset($config['mode']);

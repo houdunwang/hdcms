@@ -29,6 +29,7 @@ class SwiperController extends Controller
 
     public function show(Site $site, Swiper $swiper)
     {
+        return $swiper;
         return new SwiperResource($swiper);
     }
 

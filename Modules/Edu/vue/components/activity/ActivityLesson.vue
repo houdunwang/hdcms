@@ -12,7 +12,7 @@
                 >
                     {{ activity.subject.title | truncate }}
                 </router-link>
-                <div class="text-xs text-gray-500 mt-2">
+                <div class="text-sm text-gray-500 mt-2">
                     <a href="#" @click.prevent="space(activity.causer)">{{ activity.causer.name }}</a>
                     • 发布于{{ activity.updated_at | fromNow }}
                 </div>

@@ -1,3 +1,9 @@
 @import url(hd.css);
-page {
-  background-color: #FFFFFF; }
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  display: none; }
+
+img {
+  max-width: 100%; }

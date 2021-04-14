@@ -20,19 +20,31 @@ export default [
         options: '',
         rank: 0,
         show: true,
-        system: false,
+        system: true,
         validate_rule: ''
     },
     {
         name: 'preview',
-        title: '缩略图',
+        title: '预览图',
         type: 'image',
         placeholder: '',
         value: '',
         options: '',
         rank: 0,
         show: true,
-        system: false,
+        system: true,
+        validate_rule: ''
+    },
+    {
+        name: 'images',
+        title: '图集',
+        type: 'images',
+        placeholder: '',
+        value: '',
+        options: '',
+        rank: 0,
+        show: true,
+        system: true,
         validate_rule: ''
     },
     {
@@ -69,7 +81,7 @@ export default [
         options: '',
         rank: 0,
         show: true,
-        system: false,
+        system: true,
         validate_rule: ''
     },
     {
@@ -81,7 +93,7 @@ export default [
         options: '',
         rank: 0,
         show: true,
-        system: false,
+        system: true,
         validate_rule: ''
     }
 ]

@@ -1,5 +1,7 @@
 <template>
-    <hd-upload-image v-model="form[field.name]" />
+    <div>
+        <hd-upload-image v-model="form[field.name]" />
+    </div>
 </template>
 
 <script>

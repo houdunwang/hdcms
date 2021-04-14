@@ -8,13 +8,13 @@ use App\Http\Controllers\WeChatBindController;
 use App\WeChat\ApiController;
 
 //支付通知
-Route::group(['prefix' => 'pay/{module}', 'middleware' => ['site']], function () {
+Route::group(['prefix' => 'pay/{module}'], function () {
     Route::any('alipay/return', [PayNotifyController::class, 'alipayReturn'])->name('pay.alipay.return');
     Route::any('alipay/notify', [PayNotifyController::class, 'alipayNotify'])->name('pay.alipay.notify');
 });
 
 //微信登录
-Route::group(['prefix' => 'wechat', 'middleware' => ['site']], function () {
+Route::group(['prefix' => 'wechat'], function () {
     Route::get('login', [WeChatLoginController::class, 'login']);
     Route::get('login/callback', [WeChatLoginController::class, 'loginCallback'])->name('wechat.login.callback');
     //绑定微信
@@ -23,7 +23,7 @@ Route::group(['prefix' => 'wechat', 'middleware' => ['site']], function () {
 });
 
 //微信接口
-Route::any('wechat/api/{site}/{model}', [ApiController::class, 'handle'])->middleware(['site']);
+Route::any('wechat/api/{site}/{model}', [ApiController::class, 'handle']);
 
 //退出登录
 Route::get('logout', function () {

@@ -6,7 +6,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                    <a href="/" class="font-weight-lighter text-gray-600"> <i class="fas fa-home"></i> {{ hd.site.title }} </a>
+                    <a href="/" class="text-hd hover:text-hd text-semibold text-lg font-bold"> <i class="fas fa-home"></i> {{ hd.site.title }} </a>
                 </h1>
                 <!-- 用户头像菜单 -->
                 <div class="navbar-nav flex-row order-md-last">
@@ -31,7 +31,7 @@
                     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                         <ul class="navbar-nav">
                             <li class="nav-item" v-for="(module, index) in modules" :key="index">
-                                <a :href="`/${module.name}`" class="nav-link text-base font-weight-lighter text-gray-700 hover:text-hd">
+                                <a :href="`/${module.name}`" class="nav-link text-base font-semibold text-gray-500 hover:text-hd">
                                     {{ module.title }}
                                 </a>
                             </li>

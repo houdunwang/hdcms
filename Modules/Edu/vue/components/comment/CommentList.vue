@@ -18,12 +18,12 @@
                     </div>
                 </div>
             </div>
-            <div class="text-secondary p-2 md:p-4 comment-content reply-container">
-                <div class="markdown" v-html="comment.html" v-markdown></div>
+            <div class="text-secondary p-2 md:p-6 comment-content reply-container leading-8">
+                <div class="comment-markdown" v-html="comment.html" v-markdown></div>
             </div>
             <!-- 评论 END-->
             <!-- 回复 -->
-            <div v-if="comment.comments && comment.comments.length > 0" class="text-secondary pb-5 pl-8 reply-container">
+            <div v-if="comment.comments && comment.comments.length > 0" class="text-secondary pb-2 pl-8 reply-container">
                 <!-- 回复列表 -->
                 <div class="border-t border-dashed border-gray-200 py-3 flex" v-for="reply in comment.comments" :key="reply.id" :id="`comment-${reply.id}`">
                     <router-link :to="{ name: 'space.follower', params: { id: reply.user.id } }">
@@ -39,11 +39,15 @@
                                     <router-link v-if="reply.reply" :to="{ name: 'space.follower', params: { id: reply.reply.user.id } }" class="text-sm">
                                         @ {{ reply.reply.user.name }}
                                     </router-link>
+                                    <span class="text-xs text-gray-500 mr-2"> <i class="far fa-clock"></i> {{ reply.created_at | fromNow }} </span>
+                                    <a class="d-inline-block text-gray-500 text-xs" v-if="reply.permissions.delete" @click.prevent="del(reply)">
+                                        删除
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="pt-2 text-secondary text-sm mr-5">
-                            <div class="markdown text-base" v-html="reply.html" v-markdown></div>
+                            <div class="markdown text-base " v-html="reply.html" v-markdown></div>
                             <!-- 快速回复框 -->
                             <div class="mt-2" v-if="hd.isLogin && form.comment && form.comment.id == reply.id && form.editor == false">
                                 <el-input class="flex-1 rounded-none mr-1 mb-2" type="textarea" v-model="form.content" placeholder="支持markdown语法" />
@@ -51,12 +55,8 @@
                             </div>
                             <!-- 快速回复框 END -->
                             <div class="mt-2">
-                                <span class="text-xs text-gray-500 mr-2"> <i class="far fa-clock"></i> {{ reply.created_at | fromNow }} </span>
                                 <a @click.prevent="replyComment(reply)" class="d-inline-block text-gray-500 text-xs mr-2" v-if="reply.user_id != hd.user.id">
                                     <i aria-hidden="true" class="fa fa-reply"></i> 回复
-                                </a>
-                                <a class="d-inline-block text-gray-500 text-xs" v-if="reply.permissions.delete" @click.prevent="del(reply)">
-                                    删除
                                 </a>
                             </div>
                         </div>
@@ -162,7 +162,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .comment-content pre {
     padding: 0 !important;
     margin: 0 -1rem !important;
@@ -175,7 +175,7 @@ export default {
 .reply-container pre {
     padding: 0 !important;
 }
-.markdown pre code.hljs {
+.comment-markdown pre code.hljs {
     word-break: break-word !important;
 }
 #comment-list a {

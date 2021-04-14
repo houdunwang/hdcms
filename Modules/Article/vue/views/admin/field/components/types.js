@@ -2,6 +2,7 @@ export default [
     { label: '单行文本', type: 'input' },
     { label: '多行文本', type: 'textarea' },
     { label: '图片', type: 'image' },
+    { label: '多图', type: 'images' },
     { label: '富文本编辑器', type: 'editor' },
     { label: '单选框', type: 'radio' },
     { label: '富选框', type: 'checkbox' },

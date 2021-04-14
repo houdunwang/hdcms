@@ -1,11 +1,11 @@
 const mix = require('laravel-mix')
 
-mix.js('vue/app.js', 'public/js')
+mix.js('vue/app.js', 'public/system/dist')
     .vue()
-    .postCss('vue/css/app.css', 'public/css', [require('postcss-import'), require('tailwindcss'), require('autoprefixer')])
+    .postCss('vue/css/app.css', 'public/system/dist', [require('postcss-import'), require('tailwindcss'), require('autoprefixer')])
     .webpackConfig(require('./webpack.config'))
 
 mix.browserSync({
-    proxy: 'e19.test',
+    proxy: 'hdcms.test',
     files: 'vue/**'
 })

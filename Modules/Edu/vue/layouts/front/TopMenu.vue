@@ -1,11 +1,11 @@
 <template>
-    <header class="navbar navbar-expand-md navbar-light d-print-none border-t-4 border-hd">
+    <header class="navbar navbar-expand-md navbar-light d-print-none border-hd top-menu py-2">
         <div class="container-xl flex items-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                <router-link to="/" class="text-hd hover:text-hd text-semibold text-xl">
+                <router-link to="/" class="text-hd hover:text-hd text-semibold text-xl font-extrabold">
                     <i class="fas fa-code"></i>
                     {{ hd.site.title }}
                 </router-link>
@@ -44,7 +44,7 @@
             </div>
             <div class="flex-row order-md-last flex" v-else>
                 <a class="btn btn-danger mr-3" href="/login" role="button">登录</a>
-                <a class="btn btn-light " href="/register" role="button">注册</a>
+                <a class="btn btn-light" href="/register" role="button">注册</a>
             </div>
             <!-- 菜单列表 -->
             <div class="collapse navbar-collapse" id="navbar-menu">
@@ -69,9 +69,7 @@
                                 role="button"
                                 aria-expanded="false"
                             >
-                                <span class="nav-link-title">
-                                    在线文档
-                                </span>
+                                <span class="nav-link-title"> 在线文档 </span>
                             </a>
                             <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
@@ -131,4 +129,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.top-menu {
+    box-shadow: 0px -5px 10px 0px #dededb;
+    border-top-width: 5px;
+}
+</style>
