@@ -11,6 +11,9 @@
 	},
 	{
 		"path": "Modules/Edu/vue"
+	},
+	{
+		"path": "Modules/Shop"
 	}
 ],
   "settings": {

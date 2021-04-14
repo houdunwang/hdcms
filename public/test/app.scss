@@ -1,5 +1,0 @@
-@for $i from 1 through 10 {
-    .w-#{$i} {
-        width: #{$i * 10}rpx;
-    }
-}

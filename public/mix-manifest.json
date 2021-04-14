@@ -1,4 +1,6 @@
 {
     "/system/dist/app.js": "/system/dist/app.js",
-    "/system/dist/app.css": "/system/dist/app.css"
+    "/system/dist/app.css": "/system/dist/app.css",
+    "/modules/Shop/dist/app.js": "/modules/Shop/dist/app.js",
+    "/modules/Shop/dist/app.css": "/modules/Shop/dist/app.css"
 }
