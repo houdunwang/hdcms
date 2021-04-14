@@ -64,7 +64,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Modules\\": "Modules/",
+            "Modules\\": "public/modules/",
             "Houdunwang\\WeChat\\": "houdunwang/wechat/src/"
         }
     },

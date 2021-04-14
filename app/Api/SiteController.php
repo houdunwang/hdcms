@@ -49,7 +49,6 @@ class SiteController extends Controller
     public function index()
     {
         $sites = Auth::user()->sites->load('master.group.packages.modules');
-        // return $sites;
         return SiteResource::collection($sites);
     }
 

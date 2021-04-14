@@ -16,7 +16,7 @@ class SystemConfigSeeder extends Seeder
     {
         SystemConfig::create([
             'config' => [
-                'logo' => '/system/images/logo.png',
+                'logo' => '/images/logo.png',
             ]
         ]);
     }

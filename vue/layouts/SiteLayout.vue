@@ -1,5 +1,5 @@
 <template>
-    <div style="background-image: url(/system/images/admin.jpg)" class="min-h-screen bg-cover bg-top">
+    <div style="background-image: url(/images/admin.jpg)" class="min-h-screen bg-cover bg-top">
         <top-menu />
         <quick-menu />
         <div class="bg-white mx-3 px-5 py-4 shadow-md rounded-sm">

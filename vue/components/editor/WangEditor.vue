@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import wangEditor from 'wangEditor'
+// import wangEditor from 'wangEditor'
 export default {
     props: {
         sid: { default: '' },
@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         initEditor() {
-            this.editor = new wangEditor('#' + this.name)
+            this.editor = new window.wangEditor('#' + this.name)
             this.editor.config.uploadImgServer = this.uploadAction
             this.editor.config.uploadImgMaxSize = 3 * 1024 * 1024
             this.editor.config.uploadImgMaxLength = 5

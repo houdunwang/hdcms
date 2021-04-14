@@ -22,9 +22,9 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <router-link :to="`/${module.name}/site/${site.id}/admin`" class="text-white" target="_blank">
+                            <a :href="`/${module.name}/site/${site.id}/admin`" class="text-white">
                                 管理模块
-                            </router-link>
+                            </a>
                         </el-button>
                     </div>
                 </div>

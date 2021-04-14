@@ -4,16 +4,7 @@
 		"path": "."
 	},
 	{
-		"path": "Modules/Article"
-	},
-	{
-		"path": "Modules/Edu"
-	},
-	{
-		"path": "Modules/Edu/vue"
-	},
-	{
-		"path": "Modules/Shop"
+		"path": "public/modules/Edu"
 	}
 ],
   "settings": {

@@ -2,9 +2,10 @@ import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
 import store from '../store'
+axios.defaults.withCredentials = true
 const _axios = axios.create({ baseURL: `/api`, timeout: 20000 })
-window.axios = Vue.axios = Vue.prototype.axios = _axios
 
+window.axios = Vue.axios = Vue.prototype.axios = _axios
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {

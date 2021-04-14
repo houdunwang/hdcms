@@ -1,0 +1,30 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "2.2.2",
+        "laravel-mix": "^6.0.6",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "3.1.0",
+        "vue-loader": "^15.9.5",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "@toast-ui/editor": "^2.5.1",
+        "codemirror": "^5.60.0",
+        "highlight.js": "^10.7.1",
+        "laravel-mix-merge-manifest": "v2",
+        "postcss-import": "^14.0.0",
+        "tailwindcss": "^2.1.1",
+        "xgplayer": "^2.17.12"
+    }
+}

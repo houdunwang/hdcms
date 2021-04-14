@@ -32,7 +32,6 @@ class WeChatBindController extends Controller
 
     /**
      * 获取用户信息
-     * 下面有数据表操作，请根据你项目进行修改
      * @return \Illuminate\Http\Response
      */
     public function bindCallback()

@@ -70,7 +70,7 @@ return [
         |
         */
 
-        'modules' => base_path('Modules'),
+        'modules' => public_path('modules'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path

@@ -81,7 +81,7 @@ class SiteMiddleware
     {
         $site = request('site');
         $site = is_numeric($site) ? Site::findOrFail($site) : $site;
-        //其他情况解析域名获取站点
+        //前台根据域名获取站点
         $site = $site ?? SiteService::getByDomain();
         SiteService::cache($site);
     }
@@ -95,8 +95,10 @@ class SiteMiddleware
      */
     protected function module()
     {
-        $module = ModuleService::getByDomain();
-        $module = $module ?? site('module');
-        ModuleService::cache($module);
+        if (site()) {
+            $module = ModuleService::getByDomain();
+            $module = $module ?? site('module');
+            ModuleService::cache($module);
+        }
     }
 }
