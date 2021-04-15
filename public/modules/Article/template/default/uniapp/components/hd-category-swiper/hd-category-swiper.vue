@@ -1,8 +1,7 @@
 <template>
-	<view class="px-20">
-		<view class="hd-category-tab mb-20">
-			<scroll-view scroll-x="true" class="scroll-view" :scroll-with-animation="true" :scroll-into-view="activeId"
-				:show-scrollbar="false">
+	<view class="p-20">
+		<view class="hd-category-tab mb-20" id="category-tab">
+			<scroll-view scroll-x="true" class="scroll-view" :scroll-with-animation="true" :scroll-into-view="activeId">
 				<view v-for="(category,index) in categories" :key="category.id" class="item">
 					<view class="title" @click="change(index)" :class="{active:currentIndex==index}"
 						:id="`id-${index}`">
@@ -11,19 +10,19 @@
 				</view>
 			</scroll-view>
 		</view>
-		<!-- 显示区域 -->
+		<!-- 可滑动列表 -->
 		<swiper class="swiper" :duration="500" @change="swiperChagne" :current="currentIndex"
 			:style="{height:`${swiperHeight}px`}">
 			<swiper-item v-for="(category,index) in categories" :key="category.id" class="swiper-item">
-				<scroll-view class="" :scroll-y="true" @scrolltolower="scrolltolower"
+				<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="scrolltolower"
 					:style="{height:`${swiperHeight}px`}">
-					<hd-article v-for="article in category.article.list" :key="article.id" :article="article">
+					<hd-article v-for="(article) in category.article.list" :key="article.id" :article="article">
 					</hd-article>
-					<view class="" v-if="category.article.isAll" style="text-align: center;">
-						暂无新文章
-					</view>
-					<view class="py-30" v-if="loading && category.article.isAll==false" style="text-align: center;">
+					<view v-if="category.article.loading" style="text-center py-20">
 						加载中...
+					</view>
+					<view v-if="category.article.isAll" style="text-center py-20">
+						没有新内容了》。。
 					</view>
 				</scroll-view>
 			</swiper-item>
@@ -33,21 +32,28 @@
 
 <script>
 	export default {
+		props: ['index'],
 		data() {
 			return {
 				//当前标签索引
-				currentIndex: 0,
+				currentIndex: this.index ?? 0,
 				//栏目数据
 				categories: [],
-				swiperHeight: 500,
-				articles: [],
-				loading: false,
+			}
+		},
+		watch: {
+			index(n) {
+				this.currentIndex = n;
 			}
 		},
 		computed: {
 			activeId() {
 				return `id-${this.currentIndex}`
 			},
+			swiperHeight() {
+				const info = uni.getSystemInfoSync()
+				return info.windowHeight - uni.upx2px(120);
+			}
 		},
 		async created() {
 			const categories = await this.api.get(`category`)
@@ -55,52 +61,51 @@
 				c.article = {
 					list: [],
 					page: 1,
-					isLoad: false,
-					isAll: false
+					loading: false,
+					isAll:false,
 				}
 				return c;
 			})
-			const info = uni.getSystemInfoSync();
-			this.swiperHeight = info.windowHeight - uni.upx2px(80) - uni.upx2px(20)
-			this.initArticle()
+			this.loadArticle()
 		},
 		methods: {
-			//tab点击
 			change(index) {
 				this.currentIndex = index
-				this.initArticle()
+				this.initCategoryArticle()
 			},
-			//内容滑动
-			async swiperChagne(c) {
-				this.currentIndex = c.detail.current
-				this.initArticle()
+			swiperChagne(c) {
+				const index = c.detail.current;
+				this.currentIndex = index
+				this.initCategoryArticle()
 			},
-			//加载栏目文章
-			async initArticle() {
+			initCategoryArticle(){
 				const category = this.categories[this.currentIndex];
-				if (category.article.isLoad) return;
+				if (category.article.list.length == 0) {
+					this.loadArticle()
+				}
+			},
+			async loadArticle() {
 				uni.showLoading({
-					title: '加载中',
+					title: '加载中...',
 					mask: true
 				});
-				if (category.article.isLoad === false) {
-					category.article.list = await this.api.get(`content?category_id=${category.id}`).then(_ => _.data)
-					category.article.isLoad = true;
-				}
+				const category = this.categories[this.currentIndex];
+				const articles = await this.api.get(
+					`content?category_id=${category.id}&page=${category.article.page}`).then(_ => _.data)
+				category.article.list.push(...articles)
 				uni.hideLoading()
 			},
+			// 滚动到面板底部
 			async scrolltolower() {
-				if (this.loading) return;
-				this.loading = true
 				const category = this.categories[this.currentIndex];
+				if(category.article.loading )return;
 				category.article.page++;
-				const articles = await this.api.get(`content?category_id=${category.id}&page=${category.article.page}`)
-					.then(_ => _.data);
+				category.article.loading = true
+				const articles = await this.api.get(
+					`content?category_id=${category.id}&page=${category.article.page}`).then(_ => _.data)
 				category.article.list.push(...articles)
-				if (articles.length == 0) {
-					category.article.isAll = true
-				}
-				this.loading = false
+				category.article.loading = false
+				category.article.isAll = articles.length==0
 			}
 		}
 	}
@@ -112,22 +117,24 @@
 			white-space: nowrap;
 			border-bottom: solid 1px #dedede;
 			box-shadow: 0 3px 2px #efefef;
+			height: 60rpx;
+			box-sizing: border-box;
 
 			.item {
 				display: inline-block;
 				margin-right: 20rpx;
 
 				.title {
-					height: 80rpx;
+					height: 60rpx;
 					display: flex;
 					align-items: center;
-					margin-right: 20rpx;
-
+					box-sizing: border-box;
+						border-bottom: solid 4px #fff;
 					&.active {
-						border-bottom: solid 2px #0c67d9;
-						color: #007AFF;
+						color:#0c67d9;
+						font-size:30rpx;
 						font-weight: bold;
-						font-size: 30rpx;
+						border-bottom: solid 4px #0c67d9;
 					}
 				}
 			}

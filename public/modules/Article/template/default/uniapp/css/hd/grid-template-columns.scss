@@ -1,0 +1,5 @@
+@for $i from 1 through 12 {
+	.grid-cols-#{$i}{
+		grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+	}
+}

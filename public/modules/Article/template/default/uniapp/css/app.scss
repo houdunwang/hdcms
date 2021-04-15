@@ -1,14 +1,5 @@
-@import "hd.css";
-
-
-// 隐藏scroll-view滚动条
-::-webkit-scrollbar {
-	width: 0;
-	height: 0;
-	background-color: transparent;
-	display: none;
-} 
+@import "hd.scss";
 
 img{
-		max-width: 100%;
-	}
+	max-width:100%;
+}

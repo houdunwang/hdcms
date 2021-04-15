@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "文章搜索",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
-    "hd-article": "/components/hd-article/hd-article"
-  }
-}

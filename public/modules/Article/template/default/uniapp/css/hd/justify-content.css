@@ -1,3 +1,6 @@
+.flex {
+  display: flex; }
+
 .justify-start {
   justify-content: flex-start; }
 

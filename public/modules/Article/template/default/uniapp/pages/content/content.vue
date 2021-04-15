@@ -1,10 +1,10 @@
 <template>
-	<view class="p-20 overflow-hidden">
-		<view class="" v-if="article">
-			<view class="text-lg mb-20">
-				{{article.title}}
-			</view>
-			<rich-text :nodes="article.content" style="overflow: hidden;" class="content"></rich-text>
+	<view class="p-20">
+		<view class="text-xl mb-30">
+			{{article.title}}
+		</view>
+		<view>
+			 <rich-text :nodes="article.content"></rich-text>
 		</view>
 	</view>
 </template>
@@ -13,27 +13,20 @@
 	export default {
 		data() {
 			return {
-				article: null,
+				article: {}
 			}
 		},
-		async onLoad(e) {
-			
+		async onLoad(option) {
 			uni.showLoading({
 				title: '加载中',
 				mask: true
 			});
-			this.article = await this.api.get(`content/${e.id}`)
+			this.article = await this.api.get(`content/${option.id}`)
 			uni.hideLoading()
 		},
-		created() {},
-		methods: {
-			async load() {
-				// this.articles = await this.api.get(`content?page=${this.page}`)
-			}
-		}
 	}
 </script>
 
-<style lang="scss">
-	.content {}
+<style>
+
 </style>

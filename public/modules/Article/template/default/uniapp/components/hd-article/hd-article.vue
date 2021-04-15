@@ -1,39 +1,41 @@
 <template>
 	<view>
-		<view class="mb-30">
-			<view class="flex justify-between border-b-1 border-gray-200 pb-20"
-				v-if="article.images.length<3" @tap="redirect(article.id)">
-				<view class="flex-1">
-					{{article.description}}
-				</view>
-				<image :src="article.images[0]" mode="aspectFill" class="h-200 w-230 overflow-hidden"></image>
+		<view v-if="article.images.length<3" class="flex border-gray-200 border-0 border-b-1 border-solid pb-20 mb-30" @click="redirect(article.id)">
+			<view class="flex-1 mr-20">
+				{{article.description}}
 			</view>
-			<view class="flex flex-col border-b-1 border-gray-200 pb-20" v-else  @tap="redirect(article.id)">
-				<view class="flex-1 mb-20">
-					{{article.description}}
-				</view>
-				<view class="flex justify-between">
-					<view v-for="(image,index) in article.images" :key="index" v-if="index<3" class="overflow-hidden">
-						<image :src="image" mode="aspectFill" class="h-200 w-230"></image>
-					</view>
-				</view>
+			<view class="w-250 h-250">
+				<image :src="article.images[0]" mode="aspectFill" class="w-220 h-220 rounded-md"></image>
 			</view>
 		</view>
+		<view v-else class="flex flex-col border-gray-200 border-0 border-b-1 border-solid pb-20 mb-30"  @click="redirect(article.id)">
+			<view class="flex-1 mr-20 mb-10">
+				{{article.description}}
+			</view>
+			<view class="flex justify-between flex-1">
+				<view class="w-230 h-250" v-for="(img,index) in article.images" :key="index" style="overflow: hidden;"  v-if="index<3">
+					<image :src="img" mode="aspectFill" class="w-220 h-220 rounded-md"></image>
+				</view>
+			</view>
+		</view> 
+		
 	</view>
 </template>
 
 <script>
 	export default {
-		props: ['article'],
+		props:['article'],
 		data() {
-			return {}
+			return {
+				
+			};
 		},
 		methods:{
-			redirect(id){
-				return uni.navigateTo({
-					url: `/pages/content/content?id=${id}`,
-				});
-			}
+			 redirect(id){
+				 uni.navigateTo({
+				 	url: `../../pages/content/content?id=${id}`
+				 });
+			 }
 		}
 	}
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<view class="hd-category-tab">
-		<scroll-view scroll-x="true" class="scroll-view" :scroll-with-animation="true" :scroll-into-view="activeId"
-			:show-scrollbar="false">
+		<scroll-view scroll-x="true" class="scroll-view" :scroll-with-animation="true"
+			:scroll-into-view="activeId">
 			<view v-for="(category,index) in $store.state.categories" :key="category.id" class="item">
 				<view class="title" @click="change(index)" :class="{active:currentIndex==index}" :id="`id-${index}`">
 					{{category.title}}
@@ -67,9 +67,6 @@
 
 					&.active {
 						border-bottom: solid 2px #0c67d9;
-						color: #007AFF;
-						font-weight: bold;
-						font-size: 30rpx;
 					}
 				}
 			}

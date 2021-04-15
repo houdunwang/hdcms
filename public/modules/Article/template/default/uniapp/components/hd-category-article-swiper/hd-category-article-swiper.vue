@@ -24,9 +24,6 @@
 		watch: {
 			index(n) {
 				this.currentIndex = n
-			},
-			height(n){
-				this.swiperHeight = n
 			}
 		},
 		async created() {

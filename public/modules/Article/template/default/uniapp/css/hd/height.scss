@@ -1,0 +1,5 @@
+@for $i from 1 through 75 {
+	.h-#{$i*10}{
+		height:#{$i*10}rpx;
+	}
+}

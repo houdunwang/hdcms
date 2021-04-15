@@ -1,23 +1,2 @@
-.flex {
-  display: flex; }
-
-.flex-row {
-  flex-direction: row; }
-
-.flex-row-reverse {
-  flex-direction: row-reverse; }
-
-.flex-col {
-  flex-direction: column; }
-
-.flex-col-reverse {
-  flex-direction: column-reverse; }
-
-.flex-row {
-  flex-direction: row; }
-
-.flex-grow {
-  flex-grow: 1; }
-
 .flex-1 {
   flex: 1 1 0%; }

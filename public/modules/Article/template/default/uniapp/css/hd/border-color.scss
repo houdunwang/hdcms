@@ -1,0 +1,9 @@
+@import './color.scss';
+
+@each $key,$value in $colors{
+	.border-#{$key}{
+		border-color: #{$value}
+	}
+}
+
+

@@ -2,45 +2,44 @@
 	"easycom": {
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"enablePullDownRefresh": false
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px",
+							"placeholder": "请输入搜索内容",
+							"disabled": true
+						}
+					}
+				}
+			}
+		}, {
+			"path": "pages/category/category",
+			"style": {
+				"navigationBarTitleText": "频道",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/content/content",
+			"style": {}
 		}
-	}, {
-		"path": "pages/category/category",
-		"style": {
-			"navigationBarTitleText": "频道",
-			"enablePullDownRefresh": false
-		}
-	}, {
-		"path": "pages/search/search",
-		"style": {
-			"navigationBarTitleText": "文章搜索",
-			"enablePullDownRefresh": false
-			// "app-plus": {
-			// 	"titleNView": {
-			// 		"type": "transparent", //透明渐变导航栏 App-nvue 2.4.4+ 支持
-			// 		"searchInput": {
-			// 			"backgroundColor": "#fff",
-			// 			"borderRadius": "6px", //输入框圆角
-			// 			"placeholder": "请输入搜索内容",
-			// 			"disabled": true
-			// 		}
-			// 	}
-			// }
-		}
-	}, {
-		"path": "pages/content/content",
-		"style": {
-			"enablePullDownRefresh": false
-		}
-	}],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "后盾人",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#f8f8f8"
+		"backgroundColor": "#000000"
 	},
 	"tabBar": {
 		"color": "#7A7E83",
@@ -68,18 +67,21 @@
 	},
 	"condition": {
 		"current": 3,
-		"list": [{
+		"list": [
+			{
 				"name": "index",
 				"path": "pages/index/index",
 				"query": ""
-			}, {
+			},
+			{
 				"name": "category",
 				"path": "pages/category/category",
 				"query": ""
-			}, {
+			},
+			{
 				"name": "content",
 				"path": "pages/content/content",
-				"query": "?id=600"
+				"query": "id=600"
 			},
 			{
 				"name": "search",

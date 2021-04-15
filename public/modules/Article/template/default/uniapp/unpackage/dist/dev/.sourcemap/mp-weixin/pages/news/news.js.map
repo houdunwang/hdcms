@@ -1,1 +1,0 @@
-{"version":3,"sources":["uni-app:///main.js"],"names":["createPage","Page"],"mappings":";;;;wEAAA,qBACA,sBACA,uC,mDACAA,EAAWC,a","file":"pages/news/news.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './pages/news/news.vue'\ncreatePage(Page)"],"sourceRoot":""}
