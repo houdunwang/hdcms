@@ -16,6 +16,9 @@ class CategoryRequest extends FormRequest
         return [
             'title' => ['required'],
             'preview' => ['required'],
+            'unit' => ['required'],
+            'pid' => ['required'],
+            'description' => ['nullable', 'max:200']
         ];
     }
 
@@ -23,7 +26,10 @@ class CategoryRequest extends FormRequest
     {
         return [
             'title' => '栏目名称',
-            'preview' => '栏目图片'
+            'preview' => '栏目图片',
+            'pid' => '所属栏目',
+            'unit' => '商品单位',
+            'description' => '栏目介绍'
         ];
     }
 

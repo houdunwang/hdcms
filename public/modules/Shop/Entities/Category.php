@@ -15,30 +15,29 @@ class Category extends Model
 
     protected $table = "shop_categories";
 
-    protected $fillable = ['site_id', 'title', 'preview', 'keywords', 'description', 'is_show', 'unit', 'pid', 'path'];
+    protected $fillable = ['site_id', 'title', 'preview', 'keywords', 'description', 'pid', 'unit'];
 
     protected $casts = ['is_show' => 'boolean'];
 
-    protected $appends = ['level', 'levelTitle'];
+    protected $appends = ['levelTitle'];
 
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\CategoryFactory::new();
     }
 
+    /**
+     * 带前缀的栏目名称
+     * @return string
+     */
+    protected function getLevelTitleAttribute()
+    {
+        $level = count(explode('-', $this->path)) - 1;
+        return str_repeat('-', $level * 3) . ' ' . $this->title;
+    }
+
     public function scopeSite($query)
     {
         return $query->where('site_id', site('id'));
-    }
-
-    protected function getLevelAttribute()
-    {
-        return max(count(explode('-', $this->path)) - 1, 0);
-    }
-
-    protected function getLevelTitleAttribute()
-    {
-        $level = max(count(explode('-', $this->path)) - 1, 0);
-        return str_repeat('-', $level * 3)   . ' ' . $this->title;
     }
 }

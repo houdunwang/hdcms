@@ -6,12 +6,13 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Shop\Entities\Category;
 
-/**
- * 栏目
- * @package Modules\Shop\Database\Seeders
- */
 class CategoryTableSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
         Model::unguard();

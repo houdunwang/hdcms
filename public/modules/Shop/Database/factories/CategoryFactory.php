@@ -2,22 +2,28 @@
 
 namespace Modules\Shop\Database\factories;
 
-use App\Models\Site;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
     protected $model = \Modules\Shop\Entities\Category::class;
 
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
     public function definition()
     {
         return [
             'title' => $this->faker->name(),
-            'site_id' => Site::first()->id,
+            'site_id' => 1,
             'preview' => image_random(),
-            'is_show' => true,
-            'keywords' => true,
-            'description' => $this->faker->name(),
         ];
     }
 }

@@ -19,16 +19,16 @@ class CategoryController extends Controller
 {
     public function index(Site $site)
     {
-        $sites = Category::site()->orderByRaw("concat(path,'-',id) ASC")->get();
+        $sites = Category::site()->orderByRaw("concat(path,'-',id) asc")->get();
         return CategoryResource::collection($sites);
     }
 
     public function store(CategoryRequest $request, Site $site, Category $category)
     {
         $category->fill($request->all() + ['site_id' => $site['id']]);
+        //栏目多级路径
         if ($pid = $request->pid) {
-            $parent = Category::find($pid);
-            $category['path'] = $parent['path'] . '-' . $pid;
+            $category['path'] = Category::find($pid)->path . '-' . $pid;
         }
         $category->save();
         return $this->message('栏目添加成功');
@@ -43,31 +43,31 @@ class CategoryController extends Controller
     {
         DB::beginTransaction();
         $category->fill(['path' => 0] + $request->all());
+        //栏目多级路径
         if ($pid = $request->pid) {
-            $parent = Category::find($pid);
-            $category['path'] = $parent['path'] . '-' . $pid;
+            $category['path'] = Category::find($pid)->path . '-' . $pid;
         }
         $category->save();
-        //更改子栏目PATH
-        $this->replaceChildPath($category);
+        //子栏目同时修改
+        $this->changeChildPath($category);
         DB::commit();
         return $this->message('栏目编辑成功');
     }
 
     /**
-     * 替换子目录PATH
+     * 修改子栏目
      * @param mixed $category
      * @return void
      */
-    protected function replaceChildPath($category)
+    protected function changeChildPath($category)
     {
         Category::all()->each(function ($c) use ($category) {
             $c['path'] = preg_replace([
-                "/.*\\-{$category['id']}$/i",
-                "/.*\\-{$category['id']}\\-/i"
+                "/^.*\-" . $category['id'] . "$/i",
+                "/^.*\-" . $category['id'] . "-/i",
             ], [
                 $category['path'] . '-' . $category['id'],
-                $category['path'] . '-' . $category['id'] . '-'
+                $category['path'] . '-' . $category['id'] . '-',
             ], $c['path']);
             $c->save();
         });

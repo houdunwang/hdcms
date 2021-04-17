@@ -121,7 +121,7 @@ class ModuleService
         static $cache = [];
         $cacheName = $site['id'] . $user['id'];
         if (isset($cache[$cacheName])) {
-            return $cache[$cacheName];;
+            return $cache[$cacheName];
         }
         return $cache[$cacheName] = $site->modules->filter(function ($module) use ($site, $user) {
             return PermissionService::checkModuleAccess($site, $module, $user);

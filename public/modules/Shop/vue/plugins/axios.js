@@ -37,7 +37,6 @@ _axios.interceptors.response.use(
                 store.commit('errors', data.errors)
                 break
             case 401:
-                window.localStorage.removeItem('token')
                 location.href = '/login'
                 break
             default:

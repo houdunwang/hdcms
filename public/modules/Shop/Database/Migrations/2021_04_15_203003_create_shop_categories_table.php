@@ -6,21 +6,24 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateShopCategoriesTable extends Migration
 {
+    /**
+     * 栏目
+     * @return void
+     */
     public function up()
     {
         Schema::create('shop_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('pid')->default(0)->comment('父级目录');
-            $table->string('path')->index()->default(0)->comment('多级目录路径');
             $table->string('title')->comment('分类名称');
-            $table->string('unit')->default('件')->comment('单位');
-            $table->unsignedInteger('goods_num')->default(0)->comment('商品数量');
-            $table->boolean('is_show')->default(true)->comment('是否显示');
-            $table->unsignedMediumInteger('rank')->default(0)->comment('排序');
+            $table->unsignedBigInteger('pid')->default(0)->commit('父级栏目');
+            $table->string('path')->default(0)->comment('栏目多级路径');
+            $table->string('unit')->default('件')->comment('商品单位');
+            $table->unsignedBigInteger('goods_num')->default(0)->comment('商品数量');
+            $table->boolean('is_show')->default(true)->comment('栏目是否显示');
             $table->string('preview')->nullable()->comment('缩略图');
             $table->string('keywords')->nullable()->comment('关键词');
-            $table->string('description')->nullable()->comment('栏目描述');
+            $table->string('description', 200)->nullable()->comment('栏目描述');
             $table->timestamps();
         });
     }
