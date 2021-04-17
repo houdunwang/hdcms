@@ -82,3 +82,11 @@ if (!function_exists('is_master')) {
         return \UserService::isMaster(site(), \Auth::user());
     }
 }
+
+
+if (!function_exists('image_random')) {
+    function image_random()
+    {
+        return "https://hdcms-dev.oss-cn-hangzhou.aliyuncs.com/images/b" . mt_rand(1, 110) . ".jpg";
+    }
+}

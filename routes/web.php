@@ -22,6 +22,11 @@ Route::group(['prefix' => 'pay/{module}'], function () {
     Route::any('alipay/notify', [PayNotifyController::class, 'alipayNotify'])->name('pay.alipay.notify');
 });
 
+//模块后台
+Route::get("{module}/admin", function ($module) {
+    return redirect($module . '/site/' . site('id') . '/admin');
+});
+
 //微信相关
 Route::group(['prefix' => 'wechat'], function () {
     //微信登录

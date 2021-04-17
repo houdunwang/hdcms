@@ -12,6 +12,7 @@
     <link href="/tabler/dist/css/tabler-payments.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-vendors.min.css" rel="stylesheet" />
     <link href="/tabler/dist/css/demo.min.css" rel="stylesheet" />
+
     {{-- tabler end --}}
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     {{-- swiper --}}

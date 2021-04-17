@@ -1,1 +1,1 @@
-export default [{ title: '模块配置', name: 'admin.config.edit' }]
+export default [{ title: '网店配置', name: 'admin.config.edit' }]

@@ -1,0 +1,44 @@
+<?php
+
+namespace Modules\Shop\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+/**
+ * 商品栏目
+ * @package Modules\Shop\Entities
+ */
+class Category extends Model
+{
+    use HasFactory;
+
+    protected $table = "shop_categories";
+
+    protected $fillable = ['site_id', 'title', 'preview', 'keywords', 'description', 'is_show', 'unit', 'pid', 'path'];
+
+    protected $casts = ['is_show' => 'boolean'];
+
+    protected $appends = ['level', 'levelTitle'];
+
+    protected static function newFactory()
+    {
+        return \Modules\Shop\Database\factories\CategoryFactory::new();
+    }
+
+    public function scopeSite($query)
+    {
+        return $query->where('site_id', site('id'));
+    }
+
+    protected function getLevelAttribute()
+    {
+        return max(count(explode('-', $this->path)) - 1, 0);
+    }
+
+    protected function getLevelTitleAttribute()
+    {
+        $level = max(count(explode('-', $this->path)) - 1, 0);
+        return str_repeat('-', $level * 3)   . ' ' . $this->title;
+    }
+}

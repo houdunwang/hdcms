@@ -102,7 +102,7 @@
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-arrow-big-left"
+                                            class="icon icon-tabler icon-tabler-arrow-back-up"
                                             width="24"
                                             height="24"
                                             viewBox="0 0 24 24"
@@ -112,10 +112,8 @@
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
                                         >
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z"
-                                            />
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1"></path>
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
@@ -172,6 +170,32 @@
                                     </span>
                                     <span class="nav-link-title">
                                         会员中心
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.houdunren.com" target="_blank">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-help"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="2"
+                                            stroke="currentColor"
+                                            fill="none"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <circle cx="12" cy="12" r="9"></circle>
+                                            <line x1="12" y1="17" x2="12" y2="17.01"></line>
+                                            <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        帮助文档
                                     </span>
                                 </a>
                             </li>

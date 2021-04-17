@@ -3788,6 +3788,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['menus'],
   data: function data() {
@@ -34374,7 +34398,7 @@ var render = function() {
                                   "svg",
                                   {
                                     staticClass:
-                                      "icon icon-tabler icon-tabler-arrow-big-left",
+                                      "icon icon-tabler icon-tabler-arrow-back-up",
                                     attrs: {
                                       xmlns: "http://www.w3.org/2000/svg",
                                       width: "24",
@@ -34399,7 +34423,7 @@ var render = function() {
                                     _c("path", {
                                       attrs: {
                                         d:
-                                          "M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z"
+                                          "M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1"
                                       }
                                     })
                                   ]
@@ -34551,6 +34575,83 @@ var render = function() {
                             _c("span", { staticClass: "nav-link-title" }, [
                               _vm._v(
                                 "\n                                    会员中心\n                                "
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: {
+                              href: "https://www.houdunren.com",
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "nav-link-icon d-md-none d-lg-inline-block"
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass:
+                                      "icon icon-tabler icon-tabler-help",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      width: "24",
+                                      height: "24",
+                                      viewBox: "0 0 24 24",
+                                      "stroke-width": "2",
+                                      stroke: "currentColor",
+                                      fill: "none",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        stroke: "none",
+                                        d: "M0 0h24v24H0z",
+                                        fill: "none"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("circle", {
+                                      attrs: { cx: "12", cy: "12", r: "9" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("line", {
+                                      attrs: {
+                                        x1: "12",
+                                        y1: "17",
+                                        x2: "12",
+                                        y2: "17.01"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "nav-link-title" }, [
+                              _vm._v(
+                                "\n                                    帮助文档\n                                "
                               )
                             ])
                           ]
