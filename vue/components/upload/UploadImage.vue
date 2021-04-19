@@ -8,8 +8,8 @@
             :before-upload="beforeAvatarUpload"
             :headers="headers"
         >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar object-cover" />
-            <i v-else class="el-icon-plus hd-image-uploader-icon"></i>
+            <img v-if="imageUrl" :src="imageUrl" class="avatar object-cover" :style="{ width: `${width}px`, height: `${height}px` }" />
+            <i v-else class="el-icon-plus hd-image-uploader-icon" :style="{ width: `${width}px`, height: `${height}px` }" />
         </el-upload>
         <i class="fas fa-window-close absolute fa-2x text-white top-2 left-2 cursor-pointer" @click="del"></i>
     </div>
@@ -25,6 +25,14 @@ export default {
             default() {
                 return ['image/jpeg', 'image/png']
             }
+        },
+        width: {
+            type: Number,
+            default: 120
+        },
+        height: {
+            type: Number,
+            default: 120
         },
         size: { type: Number, default: 1024 * 1024 * 2 }
     },
@@ -90,14 +98,17 @@ export default {
     .hd-image-uploader-icon {
         font-size: 28px;
         color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
+        // width: 178px;
+        // height: 178px;
+        // line-height: 178px;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .avatar {
         width: auto;
-        height: 178px;
+        // height: 178px;
         display: block;
         background: #f3f3f3;
     }

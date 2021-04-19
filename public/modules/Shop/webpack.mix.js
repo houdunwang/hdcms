@@ -10,6 +10,6 @@ mix.js('vue/app.js', './dist')
     .extract(['vue', 'vuex', 'lodash', 'vue-router', 'element-ui', '@toast-ui/editor', 'codemirror', 'highlight.js', 'dayjs'])
 
 mix.browserSync({
-    proxy: 'e19.test',
+    proxy: 'hdcms.test',
     files: 'vue/**'
 })

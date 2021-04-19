@@ -5,6 +5,9 @@
 	},
 	{
 		"path": "public/modules/Shop"
+	},
+	{
+		"path": "public/modules/Shop/vue"
 	}
 ],
   "settings": {
