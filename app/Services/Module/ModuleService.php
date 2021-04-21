@@ -75,6 +75,19 @@ class ModuleService
     }
 
     /**
+     * 保存模块配置
+     * @param array $config
+     * @return mixed
+     */
+    public function saveConfig(array $config)
+    {
+        return ModuleConfig::updateOrCreate([
+            'site_id' => site('id'),
+            'module_id' => module('id')
+        ], ['config' => $config]);
+    }
+
+    /**
      * 站点是否拥有模块
      * @param Site $site
      * @param Module $module

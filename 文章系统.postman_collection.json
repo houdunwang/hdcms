@@ -1,0 +1,1094 @@
+{
+	"info": {
+		"_postman_id": "0f10b0d7-77cc-4470-a65f-bff74720cdbd",
+		"name": "文章系统",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "模型",
+			"item": [
+				{
+					"name": "创建模型",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/model",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "模型列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_model_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{article_host}}/model",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "编辑模型",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/model/1",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"model",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除模型",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{article_host}}/model/1",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"model",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "标签",
+			"item": [
+				{
+					"name": "获取列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_tag_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/tag",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加标签",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/tag",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新标签",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/tag/{{article_tag_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"tag",
+								"{{article_tag_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取标签",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{article_host}}/tag/{{article_tag_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"tag",
+								"{{article_tag_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "文章",
+			"item": [
+				{
+					"name": "添加文章",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{{$randomLoremParagraphs}}",
+									"type": "text"
+								},
+								{
+									"key": "thumb",
+									"value": "{{$randomImageUrl}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/content",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"content"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_content_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/content",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"content"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取文章",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_content_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/content/{{article_content_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"content",
+								"{{article_content_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新文章",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/content/{{article_content_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"content",
+								"{{article_content_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除文章",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{article_host}}/content/1",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"content",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "栏目",
+			"item": [
+				{
+					"name": "添加",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								},
+								{
+									"key": "pid",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "index_template",
+									"value": "index.blade.php",
+									"type": "text"
+								},
+								{
+									"key": "list_template",
+									"value": "list.blade.php",
+									"type": "text"
+								},
+								{
+									"key": "content_template",
+									"value": "content.blade.php",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "model_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/category",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_category_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/category",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_content_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/content/{{article_content_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"content",
+								"{{article_content_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加 Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								},
+								{
+									"key": "pid",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "index_template",
+									"value": "index.blade.php",
+									"type": "text"
+								},
+								{
+									"key": "list_template",
+									"value": "list.blade.php",
+									"type": "text"
+								},
+								{
+									"key": "content_template",
+									"value": "content.blade.php",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{article_host}}/category",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{article_host}}/category/{{article_category_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"category",
+								"{{article_category_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "幻灯片",
+			"item": [
+				{
+					"name": "添加",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"{{$randomWords}}\",\n    \"items\": [\n        { \"img\": \"{{$randomImageUrl}}\", \"title\": \"{{$randomWords}}\", \"url\": \"{{$randomUrl}}\", \"show\": true },\n        { \"img\": \"{{$randomImageUrl}}\", \"title\": \"{{$randomWords}}\", \"url\": \"{{$randomUrl}}\", \"show\": true }\n    ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{article_host}}/swiper",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"swiper"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_swiper_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/swiper",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"swiper"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"article_content_id\", jsonData[jsonData.length-1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{article_host}}/swiper/{{article_swiper_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"swiper",
+								"{{article_swiper_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{article_host}}/swiper/{{article_swiper_id}}",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"swiper",
+								"{{article_swiper_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "模板",
+			"item": [
+				{
+					"name": "列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{article_host}}/template",
+							"host": [
+								"{{article_host}}"
+							],
+							"path": [
+								"template"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

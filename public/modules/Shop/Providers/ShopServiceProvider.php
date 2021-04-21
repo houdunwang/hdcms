@@ -4,6 +4,8 @@ namespace Modules\Shop\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Shop\Entities\Goods;
+use Modules\Shop\Observers\GoodsObserver;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,14 @@ class ShopServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        //observer
+        $this->registerObservers();
+    }
+
+    protected function registerObservers()
+    {
+        Goods::observe(GoodsObserver::class);
     }
 
     /**
@@ -51,7 +61,8 @@ class ShopServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 

@@ -16,6 +16,6 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        Category::factory()->count(10)->create();
+        Category::factory()->count(3)->create();
     }
 }

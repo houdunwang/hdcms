@@ -4,6 +4,21 @@
             <el-tab-pane label="基本信息" name="first">
                 <el-form-item label="商品名称">
                     <el-input v-model="form.title"></el-input>
+                    <hd-form-error name="title" />
+                </el-form-item>
+                <el-form-item label="所属栏目">
+                    <el-select v-model="form.category_id" placeholder="选择栏目" clearable filterable v-if="categories">
+                        <el-option
+                            v-for="item in categories"
+                            :key="item.id"
+                            :label="item.levelTitle"
+                            :value="item.id"
+                            :disabled="item.disabled"
+                            :selected="form.pid == item.id"
+                        >
+                        </el-option>
+                    </el-select>
+                    <hd-form-error name="category_id" />
                 </el-form-item>
                 <el-form-item label="推荐">
                     <el-radio-group v-model="form.is_commend" size="mini">
@@ -23,19 +38,16 @@
                     <el-input v-model="form.sn" placeholder="请输入货号" size="normal" clearable></el-input>
                     <hd-tip>如果不输入货号，系统将自动生成货号</hd-tip>
                 </el-form-item>
-                <el-form-item label="上架">
-                    <el-checkbox v-model="form.state" :true-label="1" :false-label="0">
-                        选中表示商品上架销售
-                    </el-checkbox>
-                </el-form-item>
+
                 <el-form-item label="价格" size="normal">
-                    <el-input v-model="form.price" placeholder="" size="normal" clearable></el-input>
+                    <el-input type="number" v-model="form.price" placeholder="" size="normal" clearable></el-input>
                 </el-form-item>
                 <el-form-item label="市场价格" size="normal">
                     <el-input type="number" v-model="form.market_price" placeholder="" size="normal" clearable></el-input>
                 </el-form-item>
                 <el-form-item label="商品图片" size="normal">
-                    <hd-upload-image v-model="form.thumb" :width="100" :height="100" />
+                    <hd-upload-image v-model="form.preview" :width="100" :height="100" />
+                    <hd-form-error name="preview" />
                 </el-form-item>
                 <el-form-item label="列表图片" size="normal">
                     <hd-upload-image v-model="form.thumb" :width="100" :height="100" />
@@ -43,6 +55,11 @@
                 </el-form-item>
             </el-tab-pane>
             <el-tab-pane label="其他信息" name="other">
+                <el-form-item label="上架">
+                    <el-checkbox v-model="form.state" :true-label="1" :false-label="0">
+                        选中表示商品上架销售
+                    </el-checkbox>
+                </el-form-item>
                 <el-form-item label="库存数量" size="normal">
                     <el-input v-model="form.number" placeholder="" size="normal" clearable></el-input>
                 </el-form-item>
@@ -70,10 +87,11 @@
                         style="width:100px;height:100px;"
                     ></el-image>
                 </div>
+                <hd-tip>用于商品详情页的图片展示</hd-tip>
             </el-tab-pane>
         </el-tabs>
         <div class="mt-3">
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            <el-button type="primary" @click="onSubmit" v-loading="isSubmit" :disabled="isSubmit">保存提交</el-button>
         </div>
     </el-form>
 </template>
@@ -96,10 +114,30 @@ const form = {
 }
 export default {
     data() {
-        return { form }
+        return { form, categories: [], isSubmit: false }
     },
+    async created() {
+        this.categories = this.formatCategory(await axios.get(`category`))
+    },
+
     methods: {
-        onSubmit() {}
+        async onSubmit() {
+            this.isSubmit = true
+            const url = `goods/${this.form.id ?? ''}`
+            axios[this.form.id ? 'put' : 'post'](url, this.form)
+                .then(_ => {
+                    // this.$router.push({ name: 'admin.goods.index' })
+                })
+                .finally(_ => {
+                    this.isSubmit = false
+                })
+        },
+        formatCategory(categories) {
+            return categories.map(c => {
+                c.disabled = c.id == this.form.id || c.path.includes(this.form.path + '-' + this.form.id)
+                return c
+            })
+        }
     }
 }
 </script>

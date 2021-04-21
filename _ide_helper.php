@@ -15096,6 +15096,18 @@
                         return $instance->config($name, $filename);
         }
                     /**
+         * 保存模块配置
+         *
+         * @param array $config
+         * @return mixed 
+         * @static 
+         */ 
+        public static function saveConfig($config)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->saveConfig($config);
+        }
+                    /**
          * 站点是否拥有模块
          *
          * @param \App\Models\Site $site

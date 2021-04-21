@@ -8,6 +8,7 @@ use OSS\OssClient;
 use App\Models\Attachment;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Storage;
 
 /**
  * 文件上传
@@ -16,12 +17,12 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 class UploadService
 {
     /**
-     * 站点上传
-     * @param UploadedFile $file
+     * 文件上传处理
+     * @param mixed $file
      * @return mixed
      * @throws BindingResolutionException
      */
-    public function make(UploadedFile $file)
+    public function make($file)
     {
         $driver = config('site.upload.driver', 'local');
         return $this->$driver($file);
@@ -29,53 +30,77 @@ class UploadService
 
     /**
      * 本地上传
-     * @param UploadedFile $file
-     * @return Attachment
-     * @throws Exception
+     * @param mixed $file
+     * @return Attachment|void
      * @throws BindingResolutionException
+     * @throws Exception
      */
-    protected function local(UploadedFile $file)
+    protected function local($file)
     {
-        $path =  $file->store(date('Ym'), 'attachment');
-        return $this->save($file, url("/attachments/{$path}"), 'local');
+        if (is_string($file)) {
+            $info  = pathinfo($file);
+            $path = 'attachments/' . date('Ym') . '/' . date('Ymdhis') . '.' . $info['extension'];
+            copy($file, $path);
+            return $this->save(url($path), filesize($file), basename($file), 'local');
+        } else if ($file instanceof UploadedFile) {
+            $path = $file->store(date('Ym'), 'attachment');
+            return $this->save(url("/attachments/{$path}"), $file->getsize(), $file->getClientOriginalName(), 'local');
+        }
     }
 
     /**
      * 阿里云OSS
-     * @param UploadedFile $file
+     * @param mixed $file
      * @return Attachment
+     * @throws BindingResolutionException
      */
-    protected function oss(UploadedFile $file): Attachment
+    protected function oss($file): Attachment
     {
-        $object = Auth::id() . '-' . date('Ymdhis') . '.' . $file->extension();
+        if (is_string($file)) {
+            $info = $this->ossUploadFile($file, pathinfo($file)['extension']);
+            return $this->save($info['oss-request-url'], filesize($file), basename($file), 'oss');
+        } else if ($file instanceof UploadedFile) {
+            $info = $this->ossUploadFile($file->path(), $file->extension());
+            return $this->save($info['oss-request-url'], $file->getsize(), $file->getClientOriginalName(), 'oss');
+        }
+    }
+
+    /**
+     * OSS客户端
+     * @return OssClient
+     * @throws BindingResolutionException
+     */
+    protected function ossUploadFile($file, $extension)
+    {
+        $object = Auth::id() . '-' . date('Ymdhis') . '.' . $extension;
         $ossClient = new OssClient(config('site.aliyun.accessKeyId'), config('site.aliyun.accessKeySecret'), config('site.upload.oss.endpoint'));
-        $info = $ossClient->uploadFile(config('site.upload.oss.bucket'), $object, $file->path());
-        return $this->save($file, $info['oss-request-url'], 'oss');
+        return $ossClient->uploadFile(config('site.upload.oss.bucket'), $object, $file);
     }
 
     /**
      * 保存入库
-     * @param UploadedFile $file
-     * @param string $path
+     * @param mixed $url  文件链接
+     * @param mixed $size 大小
+     * @param mixed $name 文件名
+     * @param mixed $type 上传方式
      * @return Attachment
      */
-    protected function save(UploadedFile $file, string $path, string $type = null): Attachment
+    protected function save($url, $size, $name, $type): Attachment
     {
-        $realFile = $file->getRealPath();
         return Attachment::create([
-            'path' => $path,
+            'path' => $url,
             'site_id' => site('id'),
             'user_id' => Auth::id(),
             'module_id' => module('id'),
-            'size' => filesize($realFile),
+            'size' => $size,
             'type' => $type,
-            'name' => $file->getClientOriginalName(),
-            'extension' => $file->extension(),
+            'name' => $name,
+            'extension' => pathinfo($url)['extension']
         ]);
     }
 
     /**
-     * 删除文章
+     * 删除文件
      * @param string $path
      * @return void
      */

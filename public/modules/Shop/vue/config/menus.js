@@ -17,7 +17,7 @@ const menus = [
         title: '其他数据',
         icon: 'fas fa-camera',
         items: [
-            { title: '属性分类', permission: 'attribute_type', route: { name: 'admin.attribute_type.index' } },
+            { title: '属性分类', permission: 'attributetype', route: { name: 'admin.attributetype.index' } },
             { title: '品牌管理', permission: 'brand', route: { name: 'admin.brand.index' } },
             { title: '用户评论', permission: 'lesson', route: { name: 'admin.comment.index' } },
             { title: '供货商', permission: 'supplier', route: { name: 'admin.supplier.index' } }
