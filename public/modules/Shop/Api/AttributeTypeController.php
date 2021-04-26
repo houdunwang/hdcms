@@ -5,6 +5,7 @@ namespace Modules\Shop\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Site;
 use Attribute;
+use Auth;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Modules\Shop\Entities\AttributeType;
@@ -19,13 +20,13 @@ class AttributeTypeController extends Controller
 {
     public function index()
     {
-        $attributeTypes = AttributeType::site()->get();
+        $attributeTypes = AttributeType::site()->with(['attributes', 'user'])->get();
         return AttributeTypeResource::collection($attributeTypes);
     }
 
     public function store(AttributeTypeRequest $request, Site $site, AttributeType $attributeType)
     {
-        $attributeType->fill(['site_id' => site('id')] + $request->input())->save();
+        $attributeType->fill(['site_id' => site('id'), 'user_id' => Auth::id()] + $request->input())->save();
         return $this->message('属性类型保存成功');
     }
 
@@ -36,7 +37,7 @@ class AttributeTypeController extends Controller
 
     public function update(AttributeTypeRequest $request, Site $site, AttributeType $attributeType)
     {
-        $attributeType->fill($request->input())->save();
+        $attributeType->fill($request->input() + ['user_id' => Auth::id()])->save();
         return $this->message('属性类型更新成功');
     }
 

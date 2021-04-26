@@ -10,7 +10,7 @@ const menus = [
         items: [
             { title: '分类管理', permission: 'category', route: { name: 'admin.category.index' } },
             { title: '商品列表', permission: 'goods', route: { name: 'admin.goods.index' } },
-            { title: '商品回收站', permission: 'trash', route: { name: 'admin.trash.index' } }
+            { title: '商品回收站', permission: 'trash', route: { name: 'admin.goods.trash' } }
         ]
     },
     {

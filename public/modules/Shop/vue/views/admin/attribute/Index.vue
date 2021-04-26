@@ -50,10 +50,10 @@ export default {
         formTypeTitle(attribute) {
             return formTypes.find(f => f.value == attribute.form_type).label
         },
-        del(attributeType) {
+        del(attribute) {
             this.$confirm('确定删除吗？', '温馨提示').then(_ => {
-                axios.delete(`attributeType/${attributeType.id}`)
-                this.attributes.splice(this.attributes.indexOf(attributeType), 1)
+                axios.delete(`type/${attribute.attribute_type_id}/attribute/${attribute.id}`)
+                this.attributes.splice(this.attributes.indexOf(attribute), 1)
             })
         }
     }

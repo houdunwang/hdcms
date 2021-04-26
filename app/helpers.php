@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Module;
-use App\Models\Site;
 use Facades\App\Services\Site\SiteService;
 use Facades\App\Services\Module\ModuleService;
 

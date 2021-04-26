@@ -2,7 +2,19 @@
     <div>
         <hd-tab :tabs="tabs" />
         <el-table :data="attributeTypes" border stripe v-loading="loading">
-            <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
+            <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width" #default="{row}">
+                <template v-if="col.id == 'user'">
+                    {{ row.user.name }}
+                </template>
+                <template v-else-if="col.id == 'attributes'">
+                    <el-tag size="mini" v-for="a in row.attributes" :key="a.id" class="m-1">
+                        {{ a.title }}
+                    </el-tag>
+                </template>
+                <template v-else>
+                    {{ row[col.id] }}
+                </template>
+            </el-table-column>
             <el-table-column :width="200" #default="{row}">
                 <el-button-group>
                     <el-button type="info" size="mini" @click="$router.push({ name: 'admin.attribute.index', query: { tid: row.id } })">属性值</el-button>
@@ -17,10 +29,13 @@
 <script>
 import tabs from './tabs'
 const columns = [
-    { label: '编号', id: 'id', width: 80 },
-    { label: '类型', id: 'title' }
+    { label: '编号', id: 'id', width: 60 },
+    { label: '类型', id: 'title' },
+    { label: '包含属性', id: 'attributes' },
+    { label: '操作员', id: 'user', width: 150 }
 ]
 export default {
+    route: { meta: { title: '属性类型' } },
     data() {
         return { tabs, attributeTypes: [], loading: true, columns }
     },

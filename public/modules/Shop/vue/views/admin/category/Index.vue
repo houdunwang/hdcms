@@ -48,7 +48,7 @@ const columns = [
     { label: '商品数量', id: 'goods_num', align: 'center', width: 100 }
 ]
 export default {
-    route: { path: '/', meta: { auth: true } },
+    route: { path: '/', meta: { auth: true, title: '栏目管理' } },
     data() {
         return { tabs, columns, categories: [], loading: true }
     },

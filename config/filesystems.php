@@ -29,9 +29,10 @@ return [
     */
 
     'disks' => [
+
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/' . date('Ym')),
+            'root' => storage_path('app'),
         ],
         'attachment' => [
             'driver' => 'local',

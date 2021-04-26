@@ -5,6 +5,7 @@ namespace Modules\Shop\Entities;
 use App\Models\ModuleModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * 模型类型
@@ -20,9 +21,13 @@ class AttributeType extends ModuleModel
 
     protected static function newFactory()
     {
-        // return \Modules\Shop\Database\factories\AttributeTypeFactory::new();
+        return \Modules\Shop\Database\factories\AttributeTypeFactory::new();
     }
 
+    /**
+     * 属性值
+     * @return HasMany
+     */
     public function attributes()
     {
         return $this->hasMany(Attribute::class, 'attribute_type_id');

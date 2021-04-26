@@ -32,7 +32,6 @@
         "socialiteproviders/weixin": "^4.1",
         "socialiteproviders/weixin-web": "^4.1",
         "socialiteproviders/zoho": "^4.1",
-        "spatie/image": "^1.10",
         "spatie/laravel-activitylog": "^3.16",
         "spatie/laravel-permission": "^4.0",
         "yansongda/pay": "^2.10"

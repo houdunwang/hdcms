@@ -2,17 +2,25 @@
 
 namespace Modules\Shop\Entities;
 
+use App\Models\ModuleModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Goods extends Model
+/**
+ * 商品
+ * @package Modules\Shop\Entities
+ */
+class Goods extends ModuleModel
 {
     use HasFactory;
 
     protected $table = 'shop_goods';
 
-    protected $fillable = ['site_id', 'category_id', 'attribute_type_id', 'supplier_id', 'grand_id', 'title', 'is_commend', 'sn', 'state', 'price', 'market_price', 'preview', 'thumb', 'images', 'content', 'number', 'keywords', 'description'];
+    protected $fillable = ['site_id', 'category_id', 'attribute_type_id', 'supplier_id', 'grand_id', 'title', 'is_commend', 'sn', 'state', 'price', 'market_price', 'preview', 'thumb', 'images', 'content', 'number', 'keywords', 'description', 'user_id', 'del_at', 'brand_id'];
+
+    protected $dates = ['del_at'];
 
     protected $casts = [
         'is_commend' => 'boolean',
@@ -23,7 +31,7 @@ class Goods extends Model
 
     protected static function newFactory()
     {
-        // return \Modules\Shop\Database\factories\GoodsFactory::new();
+        return \Modules\Shop\Database\factories\GoodsFactory::new();
     }
 
     /**
@@ -37,6 +45,10 @@ class Goods extends Model
         return $query->where('steate', $state);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     /**
      * 商品类型
      * @return BelongsTo
@@ -56,11 +68,25 @@ class Goods extends Model
     }
 
     /**
+     * 商品属性
+     * @return mixed
+     */
+    public function attributes()
+    {
+        return $this->hasMany(GoodsAttribute::class, 'goods_id');
+    }
+
+    /**
      * 生成货号
      * @return string
      */
     public static function sn()
     {
         return 'S' . site('id') . 'M' . module('id') . '-' . date('Ymdhis');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'goods_id');
     }
 }

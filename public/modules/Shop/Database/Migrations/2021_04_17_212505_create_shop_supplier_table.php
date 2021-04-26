@@ -10,16 +10,14 @@ use Illuminate\Database\Migrations\Migration;
  */
 class CreateShopSupplierTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('shop_supplier', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('site_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title')->comment('供货商');
+            $table->string('description')->comment('供货商介绍');
             $table->timestamps();
         });
     }

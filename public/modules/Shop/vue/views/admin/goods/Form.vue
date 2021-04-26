@@ -1,7 +1,7 @@
 <template>
     <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
-        <el-tabs value="first" type="border-card" class="shadow-sm border-gray-200">
-            <el-tab-pane label="基本信息" name="first">
+        <el-tabs value="base" type="border-card" class="shadow-sm border-gray-200">
+            <el-tab-pane label="基本信息" name="base">
                 <el-form-item label="商品名称">
                     <el-input v-model="form.title"></el-input>
                     <hd-form-error name="title" />
@@ -38,9 +38,9 @@
                     <el-input v-model="form.sn" placeholder="请输入货号" size="normal" clearable></el-input>
                     <hd-tip>如果不输入货号，系统将自动生成货号</hd-tip>
                 </el-form-item>
-
                 <el-form-item label="价格" size="normal">
                     <el-input type="number" v-model="form.price" placeholder="" size="normal" clearable></el-input>
+                    <hd-form-error name="price" />
                 </el-form-item>
                 <el-form-item label="市场价格" size="normal">
                     <el-input type="number" v-model="form.market_price" placeholder="" size="normal" clearable></el-input>
@@ -60,6 +60,17 @@
                         选中表示商品上架销售
                     </el-checkbox>
                 </el-form-item>
+                <el-form-item label="品牌" size="normal">
+                    <el-select v-model="form.brand_id" clearable filterable v-if="brands">
+                        <el-option v-for="item in brands.data" :key="item.id" :label="item.title" :value="item.id"> </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="供货商" size="normal">
+                    <el-select v-model="form.supplier_id" clearable filterable v-if="suppliers">
+                        <el-option v-for="item in suppliers.data" :key="item.id" :label="item.title" :value="item.id"> </el-option>
+                    </el-select>
+                </el-form-item>
+
                 <el-form-item label="库存数量" size="normal">
                     <el-input v-model="form.number" placeholder="" size="normal" clearable></el-input>
                 </el-form-item>
@@ -73,7 +84,14 @@
             <el-tab-pane label="详细介绍" name="content">
                 <hd-wang-editor v-model="form.content" />
             </el-tab-pane>
-            <el-tab-pane label="商品属性" name="attribute"> </el-tab-pane>
+            <el-tab-pane label="商品属性" name="attribute">
+                <el-form-item label="属性类型" size="normal">
+                    <el-select v-model="form.attribute_type_id" clearable filterable>
+                        <el-option v-for="item in attributeTypes" :key="item.id" :label="item.title" :value="item.id"> </el-option>
+                    </el-select>
+                </el-form-item>
+                <attribute :goods="form" v-if="form.attribute_type_id" :key="form.attribute_type_id" />
+            </el-tab-pane>
             <el-tab-pane label="图片集" name="images">
                 <div class="flex">
                     <hd-upload-images :multiple="true" @upload="form.images.push($event)" class="mr-2" />
@@ -82,7 +100,6 @@
                         :key="index"
                         :src="img"
                         fit="cover"
-                        :lazy="true"
                         class="mr-2 rounded-sm"
                         style="width:100px;height:100px;"
                     ></el-image>
@@ -110,14 +127,21 @@ const form = {
     content: '',
     number: 1,
     keywords: '',
-    description: ''
+    description: '',
+    attributes: []
 }
+import Attribute from './components/Attribute'
 export default {
+    components: { Attribute },
+    props: ['goods'],
     data() {
-        return { form, categories: [], isSubmit: false }
+        return { form: _.merge(form, this.goods), categories: [], isSubmit: false, attributeTypes: [], brands: null, suppliers: null }
     },
     async created() {
         this.categories = this.formatCategory(await axios.get(`category`))
+        this.attributeTypes = await axios.get(`attributeType`)
+        this.brands = await axios.get(`brand`)
+        this.suppliers = await axios.get(`supplier`)
     },
 
     methods: {
@@ -125,12 +149,8 @@ export default {
             this.isSubmit = true
             const url = `goods/${this.form.id ?? ''}`
             axios[this.form.id ? 'put' : 'post'](url, this.form)
-                .then(_ => {
-                    // this.$router.push({ name: 'admin.goods.index' })
-                })
-                .finally(_ => {
-                    this.isSubmit = false
-                })
+                .then(_ => this.$router.push({ name: 'admin.goods.index' }))
+                .finally(_ => (this.isSubmit = false))
         },
         formatCategory(categories) {
             return categories.map(c => {

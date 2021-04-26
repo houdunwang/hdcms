@@ -2,6 +2,7 @@
 
 namespace Modules\Shop\Entities;
 
+use App\Models\ModuleModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * 商品栏目
  * @package Modules\Shop\Entities
  */
-class Category extends Model
+class Category extends ModuleModel
 {
     use HasFactory;
 
@@ -34,10 +35,5 @@ class Category extends Model
     {
         $level = count(explode('-', $this->path)) - 1;
         return str_repeat('-', $level * 3) . ' ' . $this->title;
-    }
-
-    public function scopeSite($query)
-    {
-        return $query->where('site_id', site('id'));
     }
 }

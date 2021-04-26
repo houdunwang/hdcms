@@ -22,4 +22,9 @@ class ModuleModel extends Model
     {
         return $query->where('site_id', site('id'));
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

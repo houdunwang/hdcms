@@ -8,7 +8,7 @@ use OSS\OssClient;
 use App\Models\Attachment;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Storage;
+use OSS\Core\OssException;
 
 /**
  * 文件上传
@@ -17,8 +17,8 @@ use Storage;
 class UploadService
 {
     /**
-     * 文件上传处理
-     * @param mixed $file
+     * 站点上传
+     * @param UploadedFile | String $file
      * @return mixed
      * @throws BindingResolutionException
      */
@@ -30,47 +30,50 @@ class UploadService
 
     /**
      * 本地上传
-     * @param mixed $file
-     * @return Attachment|void
-     * @throws BindingResolutionException
+     * @param UploadedFile $file
+     * @return Attachment
      * @throws Exception
+     * @throws BindingResolutionException
      */
     protected function local($file)
     {
-        if (is_string($file)) {
-            $info  = pathinfo($file);
-            $path = 'attachments/' . date('Ym') . '/' . date('Ymdhis') . '.' . $info['extension'];
-            copy($file, $path);
-            return $this->save(url($path), filesize($file), basename($file), 'local');
-        } else if ($file instanceof UploadedFile) {
-            $path = $file->store(date('Ym'), 'attachment');
-            return $this->save(url("/attachments/{$path}"), $file->getsize(), $file->getClientOriginalName(), 'local');
+        if ($file instanceof UploadedFile) {
+            $path =  $file->store(date('Ym'), 'attachment');
+            return $this->save(url("/attachments/{$path}"), $file->getsize(), $file->getClientOriginalName(), $file->extension(), 'local');
+        } else if (is_file($file)) {
+            $info = pathinfo($file);
+            $to = 'attachments/' . date('Ym') . '/' . Auth::id() . date('his') . '.' . $info['extension'];
+            copy($file, public_path($to));
+            return $this->save(url($to), filesize($file), basename($to), $info['extension'], 'local');
         }
     }
 
     /**
      * 阿里云OSS
-     * @param mixed $file
+     * @param UploadedFile | String $file
      * @return Attachment
-     * @throws BindingResolutionException
      */
     protected function oss($file): Attachment
     {
-        if (is_string($file)) {
-            $info = $this->ossUploadFile($file, pathinfo($file)['extension']);
-            return $this->save($info['oss-request-url'], filesize($file), basename($file), 'oss');
-        } else if ($file instanceof UploadedFile) {
-            $info = $this->ossUploadFile($file->path(), $file->extension());
-            return $this->save($info['oss-request-url'], $file->getsize(), $file->getClientOriginalName(), 'oss');
+        if ($file instanceof UploadedFile) {
+            $info = $this->ossUpload($file->path(), $file->extension());
+            return $this->save($info['oss-request-url'], $file->getSize(), $file->getClientOriginalName(), $file->getExtension(), 'oss');
+        } else if (is_file($file)) {
+            $info = pathinfo($file);
+            $oss = $this->ossUpload($file, $info['extension']);
+            return $this->save($oss['oss-request-url'], filesize($file), $info['basename'], $info['extension'], 'oss');
         }
     }
 
     /**
-     * OSS客户端
-     * @return OssClient
+     * OSS上传文件
+     * @param mixed $file
+     * @param mixed $extension
+     * @return null
      * @throws BindingResolutionException
+     * @throws OssException
      */
-    protected function ossUploadFile($file, $extension)
+    protected function ossUpload($file, $extension)
     {
         $object = Auth::id() . '-' . date('Ymdhis') . '.' . $extension;
         $ossClient = new OssClient(config('site.aliyun.accessKeyId'), config('site.aliyun.accessKeySecret'), config('site.upload.oss.endpoint'));
@@ -79,28 +82,28 @@ class UploadService
 
     /**
      * 保存入库
-     * @param mixed $url  文件链接
-     * @param mixed $size 大小
-     * @param mixed $name 文件名
-     * @param mixed $type 上传方式
+     * @param mixed $path 文件链接
+     * @param mixed $size 文件大小
+     * @param mixed $name 源文件名
+     * @param string|null $type 上传方式
      * @return Attachment
      */
-    protected function save($url, $size, $name, $type): Attachment
+    protected function save($path, $size, $name = null, $extension = null, string $type = null): Attachment
     {
         return Attachment::create([
-            'path' => $url,
+            'path' => $path,
             'site_id' => site('id'),
             'user_id' => Auth::id(),
             'module_id' => module('id'),
             'size' => $size,
             'type' => $type,
             'name' => $name,
-            'extension' => pathinfo($url)['extension']
+            'extension' => $extension
         ]);
     }
 
     /**
-     * 删除文件
+     * 删除文章
      * @param string $path
      * @return void
      */

@@ -188,8 +188,7 @@ return [
         App\Services\User\UserServiceProvider::class,
         App\Services\WeChat\WeChatServiceProvider::class,
         App\Services\Activity\ActivityServiceProvider::class,
-
-        //
+        //图片处理
         Intervention\Image\ImageServiceProvider::class
 
     ],
@@ -256,8 +255,8 @@ return [
         'UserService' => App\Services\User\UserFacade::class,
         'WeChatService' => App\Services\WeChat\WeChatFacade::class,
         'ActivityService' => App\Services\Activity\ActivityFacade::class,
-        //
-        'Image' => Intervention\Image\Facades\Image::class,
+        //图片处理
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

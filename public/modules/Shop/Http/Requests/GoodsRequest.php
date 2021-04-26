@@ -15,13 +15,14 @@ class GoodsRequest extends FormRequest
         return [
             'title' => ['required'],
             'category_id' => ['required'],
-            'preview' => ['required']
+            'preview' => ['required'],
+            'price' => ['required']
         ];
     }
 
     public function attributes()
     {
-        return ['title' => '商品名称', 'category_id' => '栏目', 'preview' => '商品图片'];
+        return ['title' => '商品名称', 'category_id' => '栏目', 'preview' => '商品图片', 'price' => '售价'];
     }
 
     public function authorize()

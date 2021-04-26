@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopDatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         Model::unguard();
-
         $this->call(CategoryTableSeeder::class);
+        $this->call(BrandTableSeeder::class);
+        $this->call(SupplierTableSeeder::class);
+        $this->call(GoodsTableSeeder::class);
+        $this->call(AttributeTypeTableSeeder::class);
     }
 }

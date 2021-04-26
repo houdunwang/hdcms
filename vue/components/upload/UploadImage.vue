@@ -48,7 +48,10 @@ export default {
     },
     computed: {
         action() {
-            return this.sid ? `/api/upload?site=${this.sid}` : `/api/upload`
+            if (this.hd.site) {
+                return `/api/upload?site=${this.hd.site.id}`
+            }
+            return `/api/upload`
         },
         headers() {
             return {

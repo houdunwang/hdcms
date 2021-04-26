@@ -19,9 +19,20 @@ class Attribute extends ModuleModel
 
     protected $fillable = ['title', 'attribute_type_id', 'type', 'form_type', 'options'];
 
+    protected $appends = [
+        'optionsList'
+    ];
+
     protected static function newFactory()
     {
         // return \Modules\Shop\Database\factories\AttributeFactory::new();
+    }
+
+    public function getOptionsListAttribute()
+    {
+        if ($this->form_type == 'select') {
+            return explode("\n", $this->options);
+        }
     }
 
     /**

@@ -17,8 +17,9 @@ class CreateShopGoodsTable extends Migration
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained('shop_categories')->onDelete('cascade');
             $table->foreignId('attribute_type_id')->nullable()->constrained('shop_attribute_type')->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('supplier_id')->nullable()->constrained('shop_supplier')->onDelete('cascade');
-            $table->foreignId('grand_id')->nullable()->constrained('shop_grand')->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()->constrained('shop_brand')->onDelete('cascade');
             $table->string('title')->comment('商品名称');
             $table->boolean('is_commend')->nullable()->comment('推荐商品');
             $table->string('sn')->nullable()->comment('商品货号');
@@ -32,6 +33,7 @@ class CreateShopGoodsTable extends Migration
             $table->unsignedInteger('number')->nullable()->comment('库存数量');
             $table->string('keywords')->nullable()->comment('商品关键词');
             $table->string('description')->nullable()->comment('商品简短描述');
+            $table->timestamp('del_at')->nullable()->comment('删除时间');
             $table->timestamps();
         });
     }
