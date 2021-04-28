@@ -15,7 +15,8 @@ export default {
     },
     async created() {
         this.supplier = await axios.get(`supplier/${this.$route.query.id}`)
-    }
+    },
+    methods: {}
 }
 </script>
 

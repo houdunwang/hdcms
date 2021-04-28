@@ -5,10 +5,10 @@ namespace Modules\Shop\Transformers;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * 商品资源
+ * 货品
  * @package Modules\Shop\Transformers
  */
-class GoodsResource extends JsonResource
+class ProductResource extends JsonResource
 {
     public function toArray($request)
     {

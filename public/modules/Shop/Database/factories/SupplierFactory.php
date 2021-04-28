@@ -18,7 +18,7 @@ class SupplierFactory extends Factory
             'site_id' => 1,
             'user_id' => 1,
             'title' => $this->faker->name(),
-            'description' => $this->faker->sentence()
+            'description' => $this->faker->sentence(),
         ];
     }
 }

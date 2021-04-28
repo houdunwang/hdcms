@@ -10,10 +10,8 @@ class ShopDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $this->call(CategoryTableSeeder::class);
         $this->call(BrandTableSeeder::class);
         $this->call(SupplierTableSeeder::class);
-        $this->call(GoodsTableSeeder::class);
-        $this->call(AttributeTypeTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
     }
 }

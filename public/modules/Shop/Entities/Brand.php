@@ -16,7 +16,7 @@ class Brand extends ModuleModel
 
     protected $table = 'shop_brand';
 
-    protected $fillable = ['site_id', 'title', 'user_id', 'logo', 'description'];
+    protected $fillable = ['site_id', 'user_id', 'title', 'description', 'logo'];
 
     protected static function newFactory()
     {

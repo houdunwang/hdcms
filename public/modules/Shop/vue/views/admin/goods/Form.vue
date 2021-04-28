@@ -61,16 +61,14 @@
                     </el-checkbox>
                 </el-form-item>
                 <el-form-item label="品牌" size="normal">
-                    <el-select v-model="form.brand_id" clearable filterable v-if="brands">
-                        <el-option v-for="item in brands.data" :key="item.id" :label="item.title" :value="item.id"> </el-option>
-                    </el-select>
+                    <el-dialog title="选择品牌" :visible.sync="brandDialog" width="80%">
+                        <x-brand #default="{brand}" :width="100">
+                            <el-button type="success" size="mini" @click="changeBrand(brand)">选择</el-button>
+                        </x-brand>
+                    </el-dialog>
+                    <el-image :src="form.brand.logo" fit="cover" class="w-20 h-10" v-if="form.brand.logo"></el-image>
+                    <el-button type="primary" size="mini" @click="brandDialog = true" class="d-block">选择品牌</el-button>
                 </el-form-item>
-                <el-form-item label="供货商" size="normal">
-                    <el-select v-model="form.supplier_id" clearable filterable v-if="suppliers">
-                        <el-option v-for="item in suppliers.data" :key="item.id" :label="item.title" :value="item.id"> </el-option>
-                    </el-select>
-                </el-form-item>
-
                 <el-form-item label="库存数量" size="normal">
                     <el-input v-model="form.number" placeholder="" size="normal" clearable></el-input>
                 </el-form-item>
@@ -128,20 +126,20 @@ const form = {
     number: 1,
     keywords: '',
     description: '',
-    attributes: []
+    attributes: [],
+    brand_id: null,
+    brand: { logo: '' }
 }
 import Attribute from './components/Attribute'
 export default {
     components: { Attribute },
     props: ['goods'],
     data() {
-        return { form: _.merge(form, this.goods), categories: [], isSubmit: false, attributeTypes: [], brands: null, suppliers: null }
+        return { form: _.cloneDeep(_.merge(form, this.goods)), categories: [], isSubmit: false, attributeTypes: [], brandDialog: false }
     },
     async created() {
         this.categories = this.formatCategory(await axios.get(`category`))
         this.attributeTypes = await axios.get(`attributeType`)
-        this.brands = await axios.get(`brand`)
-        this.suppliers = await axios.get(`supplier`)
     },
 
     methods: {
@@ -149,7 +147,7 @@ export default {
             this.isSubmit = true
             const url = `goods/${this.form.id ?? ''}`
             axios[this.form.id ? 'put' : 'post'](url, this.form)
-                .then(_ => this.$router.push({ name: 'admin.goods.index' }))
+                // .then(_ => this.$router.push({ name: 'admin.goods.index' }))
                 .finally(_ => (this.isSubmit = false))
         },
         formatCategory(categories) {
@@ -157,6 +155,12 @@ export default {
                 c.disabled = c.id == this.form.id || c.path.includes(this.form.path + '-' + this.form.id)
                 return c
             })
+        },
+        //选择品牌
+        changeBrand(brand) {
+            this.form.brand_id = brand.id
+            this.form.brand = brand
+            this.brandDialog = false
         }
     }
 }

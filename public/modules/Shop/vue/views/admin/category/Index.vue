@@ -42,7 +42,7 @@ import tabs from './tabs'
 const columns = [
     { label: '编号', id: 'id', width: 60 },
     { label: '栏目名称', id: 'levelTitle' },
-    { label: '显示', id: 'is_show', width: 200, align: 'center' },
+    { label: '显示', id: 'is_show', width: 60, align: 'center' },
     { label: '缩略图', id: 'preview', width: 100, align: 'center' },
     { label: '单位', id: 'unit', width: 100, align: 'center' },
     { label: '商品数量', id: 'goods_num', align: 'center', width: 100 }

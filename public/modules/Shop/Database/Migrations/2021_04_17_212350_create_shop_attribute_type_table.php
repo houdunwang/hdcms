@@ -15,7 +15,6 @@ class CreateShopAttributeTypeTable extends Migration
         Schema::create('shop_attribute_type', function (Blueprint $table) {
             $table->id();
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title')->comment('类型名称');
             $table->timestamps();
         });

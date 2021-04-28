@@ -24,7 +24,7 @@
                     {{ row[col.id] }}
                 </template>
             </el-table-column>
-            <el-table-column :width="150" #default="{row}" align="center">
+            <el-table-column :width="width" #default="{row}" align="left">
                 <slot :goods="row"></slot>
             </el-table-column>
         </el-table>
@@ -48,16 +48,16 @@ const columns = [
     { label: '货号', id: 'sn', width: 200 },
     { label: '操作员', id: 'user', width: 100 },
     { label: '商品名称', id: 'title' },
-    { label: '栏目', id: 'category', width: 100 },
+    { label: '栏目', id: 'category' },
     { label: '上架', id: 'state', width: 60, align: 'center' },
     { label: '推荐', id: 'is_commend', width: 60, align: 'center' },
-    { label: '库存', id: 'number', width: 100 },
-    { label: '价格', id: 'price', width: 100 },
-    { label: '市场价格', id: 'market_price', width: 100 },
+    { label: '库存', id: 'number' },
+    { label: '价格', id: 'price' },
+    { label: '市场价格', id: 'market_price' },
     { label: '商品图片', id: 'preview', width: 100 }
 ]
 export default {
-    props: ['action'],
+    props: { action: { type: String }, width: { type: Number, default: 160 } },
     data() {
         return { lists: { data: [], meta: null }, loading: true, columns }
     },

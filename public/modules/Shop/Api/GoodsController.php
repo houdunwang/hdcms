@@ -25,7 +25,7 @@ class GoodsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Goods::site()->with(['category', 'user']);
+        $query = Goods::site()->with(['category', 'user', 'brand']);
         if ($request->query('del')) {
             $query->whereNotNULL('del_at');
         } else {
@@ -39,21 +39,21 @@ class GoodsController extends Controller
     {
         DB::beginTransaction();
         $goods->fill($request->input() + ['site_id' => $site['id'], 'user_id' => Auth::id()])->save();
-        $this->updateGoodsAttributes($goods, $request->input('attributes'));
+        $this->updateGoodsAttributes($goods);
         DB::commit();
         return $this->message('商品添加成功');
     }
 
     public function show(Site $site, Goods $good)
     {
-        return new GoodsResource($good);
+        return new GoodsResource($good->load('brand'));
     }
 
     public function update(GoodsRequest $request, Site $site, Goods $good)
     {
         DB::beginTransaction();
         $good->fill($request->input())->save();
-        $this->updateGoodsAttributes($good, $request->input('attributes'));
+        $this->updateGoodsAttributes($good);
         DB::commit();
         return $this->message('商品修改成功');
     }
@@ -62,16 +62,15 @@ class GoodsController extends Controller
     /**
      * 更新商品属性
      * @param mixed $goods 商品
-     * @param mixed $attributes 属性列表
      * @return void
      */
-    protected function updateGoodsAttributes($goods, $attributes)
+    protected function updateGoodsAttributes($goods)
     {
-        if (empty($attributes)) return;
+        //商品属性
+        $attributes = request()->input('attributes', []);
         //移除无效的属性
         $ids = collect($attributes)->map(fn ($attr) => $attr['id'] ?? 0);
-        GoodsAttribute::where('goods_id', $goods['id'])->whereNotIn('id', $ids)->delete();
-
+        $goods->attributes()->whereNotIn('id', $ids)->delete();
         //商品属性处理
         foreach ($attributes as $attribute) {
             $attribute['goods_id'] = $goods['id'];

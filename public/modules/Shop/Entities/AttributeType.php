@@ -21,7 +21,7 @@ class AttributeType extends ModuleModel
 
     protected static function newFactory()
     {
-        return \Modules\Shop\Database\factories\AttributeTypeFactory::new();
+        // return \Modules\Shop\Database\factories\AttributeTypeFactory::new();
     }
 
     /**
@@ -30,6 +30,6 @@ class AttributeType extends ModuleModel
      */
     public function attributes()
     {
-        return $this->hasMany(Attribute::class, 'attribute_type_id');
+        return $this->hasMany(Attribute::class, 'attribute_type_id')->orderBy('id', 'desc');
     }
 }

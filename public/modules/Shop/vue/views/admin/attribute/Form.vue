@@ -65,7 +65,7 @@ export default {
             this.isSubmit = true
             const url = `type/${this.attributeType.id}/attribute/${this.form.id ?? ''}`
             axios[this.form.id ? 'put' : 'post'](url, this.form)
-                .then(_ => this.$router.push({ name: 'admin.attribute.index', query: { tid: this.attributeType.id } }))
+                .then(_ => this.$router.push({ name: 'admin.attribute.index', query: { tid: this.$route.query.tid } }))
                 .finally(_ => (this.isSubmit = false))
         }
     }

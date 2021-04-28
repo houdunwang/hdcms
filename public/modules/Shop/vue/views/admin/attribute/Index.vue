@@ -17,9 +17,9 @@
             </el-table-column>
             <el-table-column :width="150" #default="{row}" align="center">
                 <el-button-group>
-                    <el-button type="success" size="mini" @click="$router.push({ name: 'admin.attribute.edit', query: { tid: $route.query.tid, id: row.id } })"
-                        >编辑</el-button
-                    >
+                    <el-button type="success" size="mini" @click="$router.push({ name: 'admin.attribute.edit', query: { tid: $route.query.tid, id: row.id } })">
+                        编辑
+                    </el-button>
                     <el-button type="danger" size="mini" @click="del(row)">删除</el-button>
                 </el-button-group>
             </el-table-column>
@@ -38,7 +38,7 @@ const columns = [
 ]
 export default {
     data() {
-        return { tabs, attributes: [], loading: true, columns, attributeType: {}, formTypes }
+        return { tabs: tabs(this.$route), attributes: [], loading: true, columns, attributeType: {}, formTypes }
     },
     async created() {
         this.attributeType = await axios.get(`attributeType/${this.$route.query.tid}`)

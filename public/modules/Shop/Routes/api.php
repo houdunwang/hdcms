@@ -9,6 +9,7 @@ use Modules\Shop\Api\GoodsController;
 use Modules\Shop\Api\GoodsAttributeController;
 use Modules\Shop\Api\BrandController;
 use Modules\Shop\Api\SupplierController;
+use Modules\Shop\Api\ProductController;
 
 Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::apiResource('category', CategoryController::class)->middleware(['auth:sanctum']);
@@ -23,8 +24,11 @@ Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::get('goods_reset/{goods}', [GoodsController::class, 'reset']);
     //商品属性
     Route::apiResource('goods.attribute', GoodsAttributeController::class);
+    Route::get("goods/{goods}/rule_attribute_list", [GoodsAttributeController::class, 'ruleAttributeList']);
     //品牌
     Route::apiResource('brand', BrandController::class);
     //供货商
     Route::apiResource('supplier', SupplierController::class);
+    //货品
+    Route::apiResource('goods.product', ProductController::class)->shallow();
 });

@@ -14,16 +14,13 @@ class SupplierRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'description' => ['required']
+            'description' => ['required'],
         ];
     }
 
     public function attributes()
     {
-        return [
-            'title' => '供货商',
-            'description' => '供货商介绍'
-        ];
+        return ['title' => '供货商名称', 'description' => '供货商描述'];
     }
 
     public function authorize()

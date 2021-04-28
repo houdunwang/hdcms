@@ -16,7 +16,7 @@ class Supplier extends ModuleModel
 
     protected $table = 'shop_supplier';
 
-    protected $fillable = ['site_id', 'user_id', 'title', 'description'];
+    protected $fillable = ['title', 'description', 'site_id', 'user_id'];
 
     protected static function newFactory()
     {

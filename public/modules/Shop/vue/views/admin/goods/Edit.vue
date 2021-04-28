@@ -9,13 +9,12 @@
 import tabs from './tabs'
 import XForm from './Form'
 export default {
-    route: { path: 'goods/edit/:id' },
     components: { XForm },
     data() {
         return { tabs, goods: null }
     },
     async created() {
-        this.goods = await axios.get(`goods/${this.$route.params.id}`)
+        this.goods = await axios.get(`goods/${this.$route.query.id}`)
     }
 }
 </script>

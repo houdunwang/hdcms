@@ -4,12 +4,12 @@ namespace Modules\Shop\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Site;
+use Auth;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Modules\Shop\Entities\Brand;
 use Modules\Shop\Http\Requests\BrandRequest;
 use Modules\Shop\Transformers\BrandResource;
-use Auth;
 
 /**
  * 品牌
@@ -17,20 +17,17 @@ use Auth;
  */
 class BrandController extends Controller
 {
-    public function __construct()
+    public function index()
     {
-        $this->middleware(['auth:sanctum'])->only(['store', 'update', 'delete']);
-    }
-
-    public function index(Site $site)
-    {
-        $brands = Brand::site()->latest('id')->with(['user'])->paginate(10);
+        $brands = Brand::site()->latest()->with('user')->paginate(10);
         return BrandResource::collection($brands);
     }
 
     public function store(BrandRequest $request, Site $site, Brand $brand)
     {
-        $brand->fill($request->input() + ['site_id' => $site['id'], 'user_id' => Auth::id()])->save();
+        $data = $request->input() + ['site_id' => $site->id, 'user_id' => Auth::id()];
+        $brand->fill($data)->save();
+
         return $this->message('品牌添加成功');
     }
 
@@ -41,8 +38,8 @@ class BrandController extends Controller
 
     public function update(BrandRequest $request, Site $site, Brand $brand)
     {
-        $brand->fill($request->input())->save();
-        return $this->message('品牌更新成功');
+        $brand->fill($request->input() + ['user_id' => Auth::id()])->save();
+        return $this->message('品牌修改成功');
     }
 
     public function destroy(Site $site, Brand $brand)

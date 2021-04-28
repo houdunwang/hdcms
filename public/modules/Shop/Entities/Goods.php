@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * 商品
@@ -18,7 +19,7 @@ class Goods extends ModuleModel
 
     protected $table = 'shop_goods';
 
-    protected $fillable = ['site_id', 'category_id', 'attribute_type_id', 'supplier_id', 'grand_id', 'title', 'is_commend', 'sn', 'state', 'price', 'market_price', 'preview', 'thumb', 'images', 'content', 'number', 'keywords', 'description', 'user_id', 'del_at', 'brand_id'];
+    protected $fillable = ['site_id', 'category_id', 'attribute_type_id', 'supplier_id', 'grand_id', 'title', 'is_commend', 'sn', 'state', 'price', 'market_price', 'preview', 'thumb', 'images', 'content', 'number', 'keywords', 'description', 'user_id', 'del_at'];
 
     protected $dates = ['del_at'];
 
@@ -28,6 +29,9 @@ class Goods extends ModuleModel
         'number' => 'integer',
         'images' => 'array'
     ];
+
+
+    protected $appends = ['isProduct'];
 
     protected static function newFactory()
     {
@@ -85,8 +89,32 @@ class Goods extends ModuleModel
         return 'S' . site('id') . 'M' . module('id') . '-' . date('Ymdhis');
     }
 
+    /**
+     * 品牌关联
+     * @return BelongsTo
+     */
     public function brand()
     {
-        return $this->belongsTo(Brand::class, 'goods_id');
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    /**
+     * 是否含有货品
+     * @return void
+     */
+    public function getIsProductAttribute()
+    {
+        return $this->attributes()->get()->some(function ($goodsAttribute) {
+            return $goodsAttribute->attribute->type == 2;
+        });
+    }
+
+    /**
+     * 货品
+     * @return HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'goods_id');
     }
 }
