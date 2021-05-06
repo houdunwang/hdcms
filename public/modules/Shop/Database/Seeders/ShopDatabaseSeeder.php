@@ -12,6 +12,7 @@ class ShopDatabaseSeeder extends Seeder
         Model::unguard();
         $this->call(BrandTableSeeder::class);
         $this->call(SupplierTableSeeder::class);
+        $this->call(CouponTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
     }
 }

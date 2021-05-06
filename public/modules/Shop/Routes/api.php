@@ -8,8 +8,10 @@ use Modules\Shop\Api\AttributeController;
 use Modules\Shop\Api\GoodsController;
 use Modules\Shop\Api\GoodsAttributeController;
 use Modules\Shop\Api\BrandController;
+use Modules\Shop\Api\CouponController;
 use Modules\Shop\Api\SupplierController;
 use Modules\Shop\Api\ProductController;
+use Modules\Shop\Api\UserCouponController;
 
 Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::get('category/goods_list', [CategoryController::class, 'goodsList']);
@@ -35,4 +37,8 @@ Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::post("goods/{goods}/product", [ProductController::class, 'store']);
     Route::get("goods/{goods}/product/attributes", [ProductController::class, 'attributes']);
     Route::get("goods/{goods}/product", [ProductController::class, 'show']);
+    //优惠券
+    Route::apiResource('coupon', CouponController::class);
+    //用户优惠券
+    Route::apiResource('user/coupon', UserCouponController::class);
 });
