@@ -11,10 +11,6 @@ use Modules\Shop\Entities\AttributeType;
 use Modules\Shop\Http\Requests\AttributeRequest;
 use Modules\Shop\Transformers\AttributeResource;
 
-/**
- * 类型属性
- * @package Modules\Shop\Api
- */
 class AttributeController extends Controller
 {
     public function index(Site $site, AttributeType $type)
@@ -24,6 +20,8 @@ class AttributeController extends Controller
 
     public function store(AttributeRequest $request, Site $site, AttributeType $type, Attribute $attribute)
     {
+        // $attribute->fill($request->input() + ['attribute_type_id' => $type['id']]);
+        // $type->attributes()->save($attribute);
         $type->attributes()->create($request->input());
         return $this->message('属性值添加成功');
     }

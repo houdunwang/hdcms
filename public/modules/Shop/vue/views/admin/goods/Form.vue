@@ -38,6 +38,7 @@
                     <el-input v-model="form.sn" placeholder="请输入货号" size="normal" clearable></el-input>
                     <hd-tip>如果不输入货号，系统将自动生成货号</hd-tip>
                 </el-form-item>
+
                 <el-form-item label="价格" size="normal">
                     <el-input type="number" v-model="form.price" placeholder="" size="normal" clearable></el-input>
                     <hd-form-error name="price" />
@@ -60,6 +61,7 @@
                         选中表示商品上架销售
                     </el-checkbox>
                 </el-form-item>
+
                 <el-form-item label="品牌" size="normal">
                     <el-dialog title="选择品牌" :visible.sync="brandDialog" width="80%">
                         <x-brand #default="{brand}" :width="100">
@@ -67,8 +69,21 @@
                         </x-brand>
                     </el-dialog>
                     <el-image :src="form.brand.logo" fit="cover" class="w-20 h-10" v-if="form.brand.logo"></el-image>
-                    <el-button type="primary" size="mini" @click="brandDialog = true" class="d-block">选择品牌</el-button>
+                    <el-button type="default" size="mini" @click="brandDialog = true" class="d-block">选择品牌</el-button>
                 </el-form-item>
+
+                <el-form-item label="供货商" size="normal">
+                    <el-dialog title="选择供货商" :visible.sync="supplierDialog" width="80%">
+                        <x-supplier #default="{supplier}" :width="100">
+                            <el-button type="success" size="mini" @click="changeSupplier(supplier)">选择</el-button>
+                        </x-supplier>
+                    </el-dialog>
+                    <div v-if="form.supplier_id">
+                        <el-tag type="success" size="normal">{{ form.supplier.title }}</el-tag>
+                    </div>
+                    <el-button type="default" size="mini" @click="supplierDialog = true" class="d-block">选择供货商</el-button>
+                </el-form-item>
+
                 <el-form-item label="库存数量" size="normal">
                     <el-input v-model="form.number" placeholder="" size="normal" clearable></el-input>
                 </el-form-item>
@@ -128,14 +143,15 @@ const form = {
     description: '',
     attributes: [],
     brand_id: null,
-    brand: { logo: '' }
+    brand: { logo: '' },
+    supplier: { title: '' }
 }
 import Attribute from './components/Attribute'
 export default {
     components: { Attribute },
     props: ['goods'],
     data() {
-        return { form: _.cloneDeep(_.merge(form, this.goods)), categories: [], isSubmit: false, attributeTypes: [], brandDialog: false }
+        return { form: _.merge(form, this.goods), categories: [], isSubmit: false, attributeTypes: [], brandDialog: false, supplierDialog: false }
     },
     async created() {
         this.categories = this.formatCategory(await axios.get(`category`))
@@ -147,7 +163,7 @@ export default {
             this.isSubmit = true
             const url = `goods/${this.form.id ?? ''}`
             axios[this.form.id ? 'put' : 'post'](url, this.form)
-                // .then(_ => this.$router.push({ name: 'admin.goods.index' }))
+                .then(_ => this.$router.push({ name: 'admin.goods.index' }))
                 .finally(_ => (this.isSubmit = false))
         },
         formatCategory(categories) {
@@ -161,6 +177,12 @@ export default {
             this.form.brand_id = brand.id
             this.form.brand = brand
             this.brandDialog = false
+        },
+        // 选择供贷商
+        changeSupplier(supplier) {
+            this.form.supplier_id = supplier.id
+            this.form.supplier = supplier
+            this.supplierDialog = false
         }
     }
 }

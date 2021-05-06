@@ -16,7 +16,7 @@ class Category extends Model
 
     protected $table = "shop_categories";
 
-    protected $fillable = ['site_id', 'title', 'preview', 'keywords', 'description', 'pid', 'unit'];
+    protected $fillable = ['site_id', 'title', 'preview', 'keywords', 'description', 'is_commend', 'pid', 'unit'];
 
     protected $casts = ['is_show' => 'boolean'];
 

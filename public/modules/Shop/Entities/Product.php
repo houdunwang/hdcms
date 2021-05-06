@@ -15,17 +15,16 @@ class Product extends Model
 
     protected $table = 'shop_product';
 
-    protected $fillable = ['site_id', 'goods_id', 'attributes', 'sn', 'number', 'user_id'];
+    protected $fillable = ['site_id', 'user_id', 'goods_id', 'attributes', 'sn', 'number'];
 
     protected $appends = ['attributeList'];
-
     protected static function newFactory()
     {
         // return \Modules\Shop\Database\factories\ProductFactory::new();
     }
 
     /**
-     * 转数性为数组
+     * 货品属性转数组
      * @return string[]|false
      */
     public function getAttributeListAttribute()

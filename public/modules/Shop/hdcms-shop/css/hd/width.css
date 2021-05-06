@@ -1,0 +1,602 @@
+.w-5 {
+  width: 10rpx; }
+
+.w-10 {
+  width: 20rpx; }
+
+.w-15 {
+  width: 30rpx; }
+
+.w-20 {
+  width: 40rpx; }
+
+.w-25 {
+  width: 50rpx; }
+
+.w-30 {
+  width: 60rpx; }
+
+.w-35 {
+  width: 70rpx; }
+
+.w-40 {
+  width: 80rpx; }
+
+.w-45 {
+  width: 90rpx; }
+
+.w-50 {
+  width: 100rpx; }
+
+.w-55 {
+  width: 110rpx; }
+
+.w-60 {
+  width: 120rpx; }
+
+.w-65 {
+  width: 130rpx; }
+
+.w-70 {
+  width: 140rpx; }
+
+.w-75 {
+  width: 150rpx; }
+
+.w-80 {
+  width: 160rpx; }
+
+.w-85 {
+  width: 170rpx; }
+
+.w-90 {
+  width: 180rpx; }
+
+.w-95 {
+  width: 190rpx; }
+
+.w-100 {
+  width: 200rpx; }
+
+.w-105 {
+  width: 210rpx; }
+
+.w-110 {
+  width: 220rpx; }
+
+.w-115 {
+  width: 230rpx; }
+
+.w-120 {
+  width: 240rpx; }
+
+.w-125 {
+  width: 250rpx; }
+
+.w-130 {
+  width: 260rpx; }
+
+.w-135 {
+  width: 270rpx; }
+
+.w-140 {
+  width: 280rpx; }
+
+.w-145 {
+  width: 290rpx; }
+
+.w-150 {
+  width: 300rpx; }
+
+.w-155 {
+  width: 310rpx; }
+
+.w-160 {
+  width: 320rpx; }
+
+.w-165 {
+  width: 330rpx; }
+
+.w-170 {
+  width: 340rpx; }
+
+.w-175 {
+  width: 350rpx; }
+
+.w-180 {
+  width: 360rpx; }
+
+.w-185 {
+  width: 370rpx; }
+
+.w-190 {
+  width: 380rpx; }
+
+.w-195 {
+  width: 390rpx; }
+
+.w-200 {
+  width: 400rpx; }
+
+.w-205 {
+  width: 410rpx; }
+
+.w-210 {
+  width: 420rpx; }
+
+.w-215 {
+  width: 430rpx; }
+
+.w-220 {
+  width: 440rpx; }
+
+.w-225 {
+  width: 450rpx; }
+
+.w-230 {
+  width: 460rpx; }
+
+.w-235 {
+  width: 470rpx; }
+
+.w-240 {
+  width: 480rpx; }
+
+.w-245 {
+  width: 490rpx; }
+
+.w-250 {
+  width: 500rpx; }
+
+.w-255 {
+  width: 510rpx; }
+
+.w-260 {
+  width: 520rpx; }
+
+.w-265 {
+  width: 530rpx; }
+
+.w-270 {
+  width: 540rpx; }
+
+.w-275 {
+  width: 550rpx; }
+
+.w-280 {
+  width: 560rpx; }
+
+.w-285 {
+  width: 570rpx; }
+
+.w-290 {
+  width: 580rpx; }
+
+.w-295 {
+  width: 590rpx; }
+
+.w-300 {
+  width: 600rpx; }
+
+.w-305 {
+  width: 610rpx; }
+
+.w-310 {
+  width: 620rpx; }
+
+.w-315 {
+  width: 630rpx; }
+
+.w-320 {
+  width: 640rpx; }
+
+.w-325 {
+  width: 650rpx; }
+
+.w-330 {
+  width: 660rpx; }
+
+.w-335 {
+  width: 670rpx; }
+
+.w-340 {
+  width: 680rpx; }
+
+.w-345 {
+  width: 690rpx; }
+
+.w-350 {
+  width: 700rpx; }
+
+.w-355 {
+  width: 710rpx; }
+
+.w-360 {
+  width: 720rpx; }
+
+.w-365 {
+  width: 730rpx; }
+
+.w-370 {
+  width: 740rpx; }
+
+.w-375 {
+  width: 750rpx; }
+
+.w-380 {
+  width: 760rpx; }
+
+.w-385 {
+  width: 770rpx; }
+
+.w-390 {
+  width: 780rpx; }
+
+.w-395 {
+  width: 790rpx; }
+
+.w-400 {
+  width: 800rpx; }
+
+.w-405 {
+  width: 810rpx; }
+
+.w-410 {
+  width: 820rpx; }
+
+.w-415 {
+  width: 830rpx; }
+
+.w-420 {
+  width: 840rpx; }
+
+.w-425 {
+  width: 850rpx; }
+
+.w-430 {
+  width: 860rpx; }
+
+.w-435 {
+  width: 870rpx; }
+
+.w-440 {
+  width: 880rpx; }
+
+.w-445 {
+  width: 890rpx; }
+
+.w-450 {
+  width: 900rpx; }
+
+.w-455 {
+  width: 910rpx; }
+
+.w-460 {
+  width: 920rpx; }
+
+.w-465 {
+  width: 930rpx; }
+
+.w-470 {
+  width: 940rpx; }
+
+.w-475 {
+  width: 950rpx; }
+
+.w-480 {
+  width: 960rpx; }
+
+.w-485 {
+  width: 970rpx; }
+
+.w-490 {
+  width: 980rpx; }
+
+.w-495 {
+  width: 990rpx; }
+
+.w-500 {
+  width: 1000rpx; }
+
+.w-1-s {
+  width: 1%; }
+
+.w-2-s {
+  width: 2%; }
+
+.w-3-s {
+  width: 3%; }
+
+.w-4-s {
+  width: 4%; }
+
+.w-5-s {
+  width: 5%; }
+
+.w-6-s {
+  width: 6%; }
+
+.w-7-s {
+  width: 7%; }
+
+.w-8-s {
+  width: 8%; }
+
+.w-9-s {
+  width: 9%; }
+
+.w-10-s {
+  width: 10%; }
+
+.w-11-s {
+  width: 11%; }
+
+.w-12-s {
+  width: 12%; }
+
+.w-13-s {
+  width: 13%; }
+
+.w-14-s {
+  width: 14%; }
+
+.w-15-s {
+  width: 15%; }
+
+.w-16-s {
+  width: 16%; }
+
+.w-17-s {
+  width: 17%; }
+
+.w-18-s {
+  width: 18%; }
+
+.w-19-s {
+  width: 19%; }
+
+.w-20-s {
+  width: 20%; }
+
+.w-21-s {
+  width: 21%; }
+
+.w-22-s {
+  width: 22%; }
+
+.w-23-s {
+  width: 23%; }
+
+.w-24-s {
+  width: 24%; }
+
+.w-25-s {
+  width: 25%; }
+
+.w-26-s {
+  width: 26%; }
+
+.w-27-s {
+  width: 27%; }
+
+.w-28-s {
+  width: 28%; }
+
+.w-29-s {
+  width: 29%; }
+
+.w-30-s {
+  width: 30%; }
+
+.w-31-s {
+  width: 31%; }
+
+.w-32-s {
+  width: 32%; }
+
+.w-33-s {
+  width: 33%; }
+
+.w-34-s {
+  width: 34%; }
+
+.w-35-s {
+  width: 35%; }
+
+.w-36-s {
+  width: 36%; }
+
+.w-37-s {
+  width: 37%; }
+
+.w-38-s {
+  width: 38%; }
+
+.w-39-s {
+  width: 39%; }
+
+.w-40-s {
+  width: 40%; }
+
+.w-41-s {
+  width: 41%; }
+
+.w-42-s {
+  width: 42%; }
+
+.w-43-s {
+  width: 43%; }
+
+.w-44-s {
+  width: 44%; }
+
+.w-45-s {
+  width: 45%; }
+
+.w-46-s {
+  width: 46%; }
+
+.w-47-s {
+  width: 47%; }
+
+.w-48-s {
+  width: 48%; }
+
+.w-49-s {
+  width: 49%; }
+
+.w-50-s {
+  width: 50%; }
+
+.w-51-s {
+  width: 51%; }
+
+.w-52-s {
+  width: 52%; }
+
+.w-53-s {
+  width: 53%; }
+
+.w-54-s {
+  width: 54%; }
+
+.w-55-s {
+  width: 55%; }
+
+.w-56-s {
+  width: 56%; }
+
+.w-57-s {
+  width: 57%; }
+
+.w-58-s {
+  width: 58%; }
+
+.w-59-s {
+  width: 59%; }
+
+.w-60-s {
+  width: 60%; }
+
+.w-61-s {
+  width: 61%; }
+
+.w-62-s {
+  width: 62%; }
+
+.w-63-s {
+  width: 63%; }
+
+.w-64-s {
+  width: 64%; }
+
+.w-65-s {
+  width: 65%; }
+
+.w-66-s {
+  width: 66%; }
+
+.w-67-s {
+  width: 67%; }
+
+.w-68-s {
+  width: 68%; }
+
+.w-69-s {
+  width: 69%; }
+
+.w-70-s {
+  width: 70%; }
+
+.w-71-s {
+  width: 71%; }
+
+.w-72-s {
+  width: 72%; }
+
+.w-73-s {
+  width: 73%; }
+
+.w-74-s {
+  width: 74%; }
+
+.w-75-s {
+  width: 75%; }
+
+.w-76-s {
+  width: 76%; }
+
+.w-77-s {
+  width: 77%; }
+
+.w-78-s {
+  width: 78%; }
+
+.w-79-s {
+  width: 79%; }
+
+.w-80-s {
+  width: 80%; }
+
+.w-81-s {
+  width: 81%; }
+
+.w-82-s {
+  width: 82%; }
+
+.w-83-s {
+  width: 83%; }
+
+.w-84-s {
+  width: 84%; }
+
+.w-85-s {
+  width: 85%; }
+
+.w-86-s {
+  width: 86%; }
+
+.w-87-s {
+  width: 87%; }
+
+.w-88-s {
+  width: 88%; }
+
+.w-89-s {
+  width: 89%; }
+
+.w-90-s {
+  width: 90%; }
+
+.w-91-s {
+  width: 91%; }
+
+.w-92-s {
+  width: 92%; }
+
+.w-93-s {
+  width: 93%; }
+
+.w-94-s {
+  width: 94%; }
+
+.w-95-s {
+  width: 95%; }
+
+.w-96-s {
+  width: 96%; }
+
+.w-97-s {
+  width: 97%; }
+
+.w-98-s {
+  width: 98%; }
+
+.w-99-s {
+  width: 99%; }
+
+.w-100-s {
+  width: 100%; }
+
+.w-full {
+  width: 100%; }

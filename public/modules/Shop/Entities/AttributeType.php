@@ -30,6 +30,6 @@ class AttributeType extends ModuleModel
      */
     public function attributes()
     {
-        return $this->hasMany(Attribute::class, 'attribute_type_id')->orderBy('id', 'desc');
+        return $this->hasMany(Attribute::class, 'attribute_type_id');
     }
 }

@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Modules\Shop\Http\Requests\CategoryRequest;
 use Modules\Shop\Entities\Category;
 use App\Models\Site;
+use Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Shop\Transformers\CategoryResource;
+use Modules\Shop\Transformers\GoodsResource;
 
 /**
  * 栏目控制器
@@ -17,6 +19,45 @@ use Modules\Shop\Transformers\CategoryResource;
  */
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware(['auth:sanctum'])->only(['index']);
+    }
+
+    /**
+     * 两级栏目列表
+     * @return void
+     */
+    public function all_chilren()
+    {
+        $all = Category::site()->get();
+        $categories = Category::site()->where('pid', 0)->get()->each(function ($category) use ($all) {
+            $children = [];
+            foreach ($all as $c) {
+                if ($c['pid'] == $category['id'] || strstr($c['path'], "-{$category['id']}-")) {
+                    $children[] = $c;
+                }
+            }
+            $category['children'] = $children;
+        });
+
+        return $categories;
+    }
+
+    /**
+     * 推荐栏目商品
+     * @return mixed
+     */
+    public function goodsList()
+    {
+        $categories = Category::whereNotNULL('goods_total')->where('is_commend', true)->limit(request('row', 6))->get()->map(function ($category) {
+            $goods = $category->goods()->select('id', 'title', 'description', 'price', 'market_price', 'preview')->where('is_commend', true)->limit(6)->get();
+            $category['goods'] = $goods;
+            return $category;
+        });
+        return $categories;
+    }
+
     public function index(Site $site)
     {
         $sites = Category::site()->orderByRaw("concat(path,'-',id) asc")->get();

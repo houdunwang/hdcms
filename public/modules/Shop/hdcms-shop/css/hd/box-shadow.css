@@ -1,0 +1,8 @@
+.shadow-sm {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+
+.shadow-md {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3); }
+
+.shadow-lg {
+  box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.5); }

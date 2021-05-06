@@ -109,12 +109,13 @@ class Goods extends ModuleModel
         });
     }
 
+
     /**
      * 货品
      * @return HasMany
      */
     public function products()
     {
-        return $this->hasMany(Product::class, 'goods_id');
+        return $this->hasMany(Product::class);
     }
 }

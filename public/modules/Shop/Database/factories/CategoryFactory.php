@@ -2,6 +2,7 @@
 
 namespace Modules\Shop\Database\factories;
 
+use Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryFactory extends Factory
@@ -24,6 +25,7 @@ class CategoryFactory extends Factory
             'title' => $this->faker->name(),
             'site_id' => 1,
             'preview' => image_random(),
+            'is_commend' => Arr::random([true, false])
         ];
     }
 }

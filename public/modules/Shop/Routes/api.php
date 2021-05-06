@@ -12,7 +12,9 @@ use Modules\Shop\Api\SupplierController;
 use Modules\Shop\Api\ProductController;
 
 Route::group(['prefix' => "Shop/site/{site}"], function () {
-    Route::apiResource('category', CategoryController::class)->middleware(['auth:sanctum']);
+    Route::get('category/goods_list', [CategoryController::class, 'goodsList']);
+    Route::get('category/all_chilren', [CategoryController::class, 'all_chilren']);
+    Route::apiResource('category', CategoryController::class);
     //模块配置
     Route::get('config', [ConfigController::class, 'get']);
     Route::put('config', [ConfigController::class, 'update']);
@@ -20,15 +22,17 @@ Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::apiResource('attributeType', AttributeTypeController::class);
     Route::apiResource('type.attribute', AttributeController::class);
     //商品
+    Route::get('goods/commend', [GoodsController::class, 'commend']);
     Route::apiResource('goods', GoodsController::class);
     Route::get('goods_reset/{goods}', [GoodsController::class, 'reset']);
     //商品属性
     Route::apiResource('goods.attribute', GoodsAttributeController::class);
-    Route::get("goods/{goods}/rule_attribute_list", [GoodsAttributeController::class, 'ruleAttributeList']);
     //品牌
     Route::apiResource('brand', BrandController::class);
     //供货商
     Route::apiResource('supplier', SupplierController::class);
     //货品
-    Route::apiResource('goods.product', ProductController::class)->shallow();
+    Route::post("goods/{goods}/product", [ProductController::class, 'store']);
+    Route::get("goods/{goods}/product/attributes", [ProductController::class, 'attributes']);
+    Route::get("goods/{goods}/product", [ProductController::class, 'show']);
 });

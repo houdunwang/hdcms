@@ -17,6 +17,9 @@
                         <el-image slot="reference" :src="row.preview" fit="cover" :lazy="true" class="w-10 h-10"></el-image>
                     </el-popover>
                 </template>
+                <template v-else-if="col.id == 'is_commend'">
+                    <i class="fas fa-check-circle text-green-600" v-if="row.is_commend"></i>
+                </template>
                 <template v-else-if="col.id == 'is_show'">
                     <div @click="setShow(row)">
                         <i class="fas fa-check-circle text-green-600 cursor-pointer" v-if="row.is_show"></i>
@@ -42,6 +45,7 @@ import tabs from './tabs'
 const columns = [
     { label: '编号', id: 'id', width: 60 },
     { label: '栏目名称', id: 'levelTitle' },
+    { label: '推荐', id: 'is_commend', width: 100 },
     { label: '显示', id: 'is_show', width: 60, align: 'center' },
     { label: '缩略图', id: 'preview', width: 100, align: 'center' },
     { label: '单位', id: 'unit', width: 100, align: 'center' },

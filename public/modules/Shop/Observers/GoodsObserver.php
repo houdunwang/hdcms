@@ -43,6 +43,8 @@ class GoodsObserver
 
     public function created(Goods $goods)
     {
+        $goods->category->goods_total = $goods->category->goods->count();
+        $goods->category->save();
     }
 
     public function updating(Goods $goods)

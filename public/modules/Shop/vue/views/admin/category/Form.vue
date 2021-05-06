@@ -19,6 +19,20 @@
             </el-select>
             <hd-form-error name="pid" />
         </el-form-item>
+        <el-form-item label="推荐">
+            <el-radio-group v-model="form.is_commend" size="mini">
+                <el-radio-button
+                    v-for="(item, index) in [
+                        { label: '是', value: true },
+                        { label: '否', value: false }
+                    ]"
+                    :key="index"
+                    :label="item.value"
+                >
+                    {{ item.label }}
+                </el-radio-button>
+            </el-radio-group>
+        </el-form-item>
         <el-form-item label="商品单位" size="normal">
             <el-input v-model="form.unit" placeholder="" size="normal" clearable></el-input>
             <hd-form-error name="unit" />
@@ -42,7 +56,7 @@
 </template>
 
 <script>
-const form = { title: '', preview: '', description: '', is_show: true, pid: 0, unit: '件' }
+const form = { title: '', preview: '', description: '', is_commend: false, is_show: true, pid: 0, unit: '件' }
 export default {
     props: ['category'],
     data() {

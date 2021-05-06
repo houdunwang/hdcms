@@ -1,0 +1,22 @@
+@for $i from 0 through 50 {
+	.border-#{$i}{
+		border-width:#{$i}px;
+	}
+
+	.border-t-#{$i}{
+		border-top-width:#{$i}px;
+	}
+	
+	.border-r-#{$i}{
+		border-right-width:#{$i}px;
+	}
+	
+	.border-b-#{$i}{
+		border-bottom-width:#{$i}px;
+	}
+	
+	.border-l-#{$i}{
+		border-left-width:#{$i}px;
+	}
+}
+.border	{border-width: 1px};

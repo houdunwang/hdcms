@@ -16,7 +16,7 @@ class CreateShopProductTable extends Migration
             $table->id();
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('goods_id')->constrained('shop_goods')->onDelete('cascade');
+            $table->foreignId('goods_id')->constrined('shop_goods')->onDelete('cascade');
             $table->string('attributes')->comment('规格属性 1-3');
             $table->string('sn')->comment('货号');
             $table->unsignedInteger('number')->comment('库存');

@@ -5,12 +5,14 @@ namespace Modules\Shop\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Site;
 use Auth;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Http\Request;
+use LogicException;
 use Modules\Shop\Entities\Goods;
-use DB;
 use Modules\Shop\Entities\Product;
-use Modules\Shop\Transformers\ProductResource;
+use DB;
 
 /**
  * 货品
@@ -18,95 +20,66 @@ use Modules\Shop\Transformers\ProductResource;
  */
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth:sanctum']);
-    }
-
     /**
      * 获取商品的规格属性
+     * 属性与商品属性的层级关系
      * @param Site $site
      * @param Goods $goods
      * @return void
      */
     public function attributes(Site $site, Goods $goods)
     {
-        return $goods->attributes()->latest('id')->get()->map(function ($goodsAttribute) {
+        return $goods->attributes()->oldest('attribute_id')->get()->map(function ($goodsAttribute) {
             return $goodsAttribute->attribute;
         })->unique()->filter(function ($attr) {
             return $attr->type == 2;
         })->map(function ($attr) use ($goods) {
-            $attr['attributes'] = $goods->attributes()->where('attribute_id', $attr['id'])->latest('id')->get();
+            $attr['attributes'] = $goods->attributes()->where('attribute_id', $attr['id'])->get();
             return $attr;
         });
     }
 
-    public function index(Site $site, Goods $good)
-    {
-        return ProductResource::collection($good->products);
-    }
-
-    public function store(Request $request, Site $site, Goods $good)
+    /**
+     * 添加货品
+     * @param Request $request
+     * @param Site $site
+     * @param Goods $goods
+     * @return void
+     * @throws InvalidCastException
+     * @throws LogicException
+     * @throws BindingResolutionException
+     */
+    public function store(Request $request, Site $site, Goods $goods)
     {
         DB::beginTransaction();
-        //删除无效的库存
-        $ids = array_map(fn ($p) => $p['id'] ?? 0, $request->input());
-        $good->products()->whereNotIn('id', $ids)->delete();
-        //更新库存
+        //移除无效的货品
+        $pids = collect($request->input())->map(fn ($p) => $p['id'] ?? null);
+        $goods->products()->whereNotIn('id', $pids)->delete();
+
+        //添加货品
         foreach ($request->input() as $product) {
-            if (!empty($product['attributeList'])) {
-                $product['number'] = (int)$product['number'];
-                $product['sn'] = $product['sn'] ?? Goods::sn();
-                $product['goods_id'] = $good['id'];
-                $product['attributes'] = collect($product['attributeList'])->join('-');
-                $product['site_id'] = $site['id'];
-                $product['user_id'] = Auth::id();
-                Product::updateOrCreate(['id' => $product['id'] ?? null], $product);
-            }
+            $product['attributes'] = implode('-', $product['attributeList']);
+            $product['goods_id'] = $goods['id'];
+            $product['user_id'] = Auth::id();
+            $product['sn'] = $product['sn'] ?? Goods::sn();
+            $product['number'] = intval($product['number']);
+            $product['site_id'] = $site['id'];
+            Product::updateOrCreate(['id' => $product['id'] ?? null], $product);
         }
-
         DB::commit();
-        return $this->message('库存更新成功');
+        return $this->message('货品添加成功');
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function show(Site $site, Goods $goods)
     {
-        return view('shop::show');
+        return $goods->products;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('shop::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function destroy($id)
     {
-        //
     }
 }

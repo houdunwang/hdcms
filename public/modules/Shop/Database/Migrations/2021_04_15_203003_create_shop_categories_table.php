@@ -20,7 +20,7 @@ class CreateShopCategoriesTable extends Migration
             $table->string('path')->default(0)->comment('栏目多级路径');
             $table->string('unit')->default('件')->comment('商品单位');
             $table->boolean('is_commend')->default(false)->comment('推荐栏目');
-            $table->unsignedBigInteger('goods_num')->default(0)->comment('商品数量');
+            $table->unsignedBigInteger('goods_total')->nullable()->comment('商品数量');
             $table->boolean('is_show')->default(true)->comment('栏目是否显示');
             $table->string('preview')->nullable()->comment('缩略图');
             $table->string('keywords')->nullable()->comment('关键词');

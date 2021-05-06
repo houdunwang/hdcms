@@ -39,16 +39,9 @@ class Handler extends ExceptionHandler
 
     // public function render($request, Throwable $exception)
     // {
-    //     $response = parent::render($request, $exception);
-    //     $code = $response->status();
-    //     if ($request->expectsJson() && key_exists($code, $this->messages)) {
-    //         $message = $this->messages[$code];
-    //         if ($code == 422) {
-    //             return response(['message' => $message, 'errors' => $exception->errors()], $code);
-    //         } else {
-    //             return response(['message' => $message], $code);
-    //         }
+    //     if ($request->expectsJson()) {
+    //         return response(['message' => $this->messages], 403);
     //     }
-    //     return $response;
+    //     return response(['message' => $this->messages], 403);
     // }
 }

@@ -14992,7 +14992,7 @@ var form = {
         return _this2.$router.push({
           name: 'admin.attribute.index',
           query: {
-            tid: _this2.$route.query.tid
+            tid: _this2.attributeType.id
           }
         });
       })["finally"](function (_) {
@@ -15073,7 +15073,7 @@ var columns = [{
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      tabs: (0,_tabs__WEBPACK_IMPORTED_MODULE_1__.default)(this.$route),
+      tabs: _tabs__WEBPACK_IMPORTED_MODULE_1__.default,
       attributes: [],
       loading: true,
       columns: columns,
@@ -15813,10 +15813,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var form = {
   title: '',
   preview: '',
   description: '',
+  is_commend: false,
   is_show: true,
   pid: 0,
   unit: '件'
@@ -15960,6 +15975,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 var columns = [{
   label: '编号',
@@ -15968,6 +15986,10 @@ var columns = [{
 }, {
   label: '栏目名称',
   id: 'levelTitle'
+}, {
+  label: '推荐',
+  id: 'is_commend',
+  width: 100
 }, {
   label: '显示',
   id: 'is_show',
@@ -16467,6 +16489,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  route: {
+    path: 'goods/edit/:id'
+  },
   components: {
     XForm: _Form__WEBPACK_IMPORTED_MODULE_2__.default
   },
@@ -16485,7 +16510,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios.get("goods/".concat(_this.$route.query.id));
+              return axios.get("goods/".concat(_this.$route.params.id));
 
             case 2:
               _this.goods = _context.sent;
@@ -16635,6 +16660,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var form = {
   title: '',
   is_commend: false,
@@ -16653,6 +16693,9 @@ var form = {
   brand_id: null,
   brand: {
     logo: ''
+  },
+  supplier: {
+    title: ''
   }
 };
 
@@ -16663,11 +16706,12 @@ var form = {
   props: ['goods'],
   data: function data() {
     return {
-      form: _.cloneDeep(_.merge(form, this.goods)),
+      form: _.merge(form, this.goods),
       categories: [],
       isSubmit: false,
       attributeTypes: [],
-      brandDialog: false
+      brandDialog: false,
+      supplierDialog: false
     };
   },
   created: function created() {
@@ -16713,8 +16757,11 @@ var form = {
               case 0:
                 _this2.isSubmit = true;
                 url = "goods/".concat((_this2$form$id = _this2.form.id) !== null && _this2$form$id !== void 0 ? _this2$form$id : '');
-                axios[_this2.form.id ? 'put' : 'post'](url, _this2.form) // .then(_ => this.$router.push({ name: 'admin.goods.index' }))
-                ["finally"](function (_) {
+                axios[_this2.form.id ? 'put' : 'post'](url, _this2.form).then(function (_) {
+                  return _this2.$router.push({
+                    name: 'admin.goods.index'
+                  });
+                })["finally"](function (_) {
                   return _this2.isSubmit = false;
                 });
 
@@ -16739,6 +16786,12 @@ var form = {
       this.form.brand_id = brand.id;
       this.form.brand = brand;
       this.brandDialog = false;
+    },
+    // 选择供贷商
+    changeSupplier: function changeSupplier(supplier) {
+      this.form.supplier_id = supplier.id;
+      this.form.supplier = supplier;
+      this.supplierDialog = false;
     }
   }
 });
@@ -16853,8 +16906,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['goods'],
+  data: function data() {
+    return {};
+  },
   created: function created() {
     var _this = this;
 
@@ -16910,19 +16968,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     return a.attribute_id == goodsAttribute.attribute_id;
                   });
 
-                  if (attribute) {
-                    switch (attribute.type) {
-                      case 1:
-                        //普通属性只改属性值
-                        _.merge(attribute, goodsAttribute);
+                  switch (attribute.type) {
+                    case 1:
+                      //普通属性只改属性值
+                      _.merge(attribute, goodsAttribute);
 
-                        break;
+                      break;
 
-                      case 2:
-                        //添加规格属性
-                        attributes.push(_.merge(_.cloneDeep(attribute), goodsAttribute));
-                        break;
-                    }
+                    case 2:
+                      //添加规格属性
+                      attributes.push(_.merge(_.cloneDeep(attribute), goodsAttribute));
+                      break;
                   }
                 });
 
@@ -16970,10 +17026,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    //添加属性
     add: function add(attribute) {
       attribute = _.cloneDeep(attribute);
-      delete attribute.id;
       attribute.attribute_value = '';
       attribute.price = 0;
       this.goods.attributes.push(attribute);
@@ -17000,20 +17054,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this4.$confirm('确定删除吗?', '温馨提示');
 
               case 2:
+                console.log(attribute);
+
                 if (!attribute.id) {
-                  _context4.next = 5;
+                  _context4.next = 6;
                   break;
                 }
 
-                _context4.next = 5;
+                _context4.next = 6;
                 return axios["delete"]("goods/".concat(_this4.goods.id, "/attribute/").concat(attribute.id));
 
-              case 5:
+              case 6:
                 index = _this4.goods.attributes.indexOf(attribute);
 
                 _this4.goods.attributes.splice(index, 1);
 
-              case 7:
+              case 8:
               case "end":
                 return _context4.stop();
             }
@@ -17256,15 +17312,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+var field = {
+  attributeList: [],
+  sn: '',
+  number: 0
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       tabs: _tabs__WEBPACK_IMPORTED_MODULE_1__.default,
       attributes: [],
       goods: null,
-      products: null,
-      loading: true
+      products: []
     };
   },
   created: function created() {
@@ -17281,7 +17368,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               _this.goods = _context.sent;
               _context.next = 5;
-              return axios.get("goods/".concat(_this.$route.query.gid, "/rule_attribute_list"));
+              return axios.get("goods/".concat(_this.$route.query.gid, "/product/attributes"));
 
             case 5:
               _this.attributes = _context.sent;
@@ -17290,9 +17377,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 8:
               _this.products = _context.sent;
-              _this.loading = false;
 
-            case 10:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -17301,37 +17387,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    //删除
-    del: function del(product) {
-      this.products.splice(this.products.indexOf(product), 1);
-    },
-    //添加属性
     add: function add() {
-      this.products.push({
-        attributeList: [],
-        number: '',
-        sn: ''
+      this.products.push(_.cloneDeep(field));
+    },
+    del: function del(product) {
+      var _this2 = this;
+
+      this.$confirm('确定删除吗?', '温馨提示').then(function (_) {
+        var index = _this2.products.indexOf(product);
+
+        _this2.products.splice(index, 1);
       });
     },
-    //提交
     onSubmit: function onSubmit() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                axios.post("goods/".concat(_this2.goods.id, "/product"), _this2.products);
+                _context2.next = 2;
+                return axios.post("goods/".concat(_this3.goods.id, "/product"), _this3.products);
 
-              case 1:
+              case 2:
+                _this3.$router.push({
+                  name: "admin.goods.index"
+                });
+
+              case 3:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
       }))();
-    }
+    } // changeProductAttribute(product, index, attrbuteId) {
+    //     // console.log(attrbuteId)
+    //     // this.$set(product, index, attrbuteId)
+    //     product.attributeList[1] = 33
+    // }
+
   }
 });
 
@@ -23533,22 +23629,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (route) {
-  return [{
-    title: '属性列表',
-    name: 'admin.attribute.index'
-  }, {
-    title: '添加属性',
-    name: 'admin.attribute.create',
-    query: {
-      tid: route.query.tid
-    }
-  }, {
-    title: '编辑属性',
-    name: 'admin.attribute.edit',
-    current: true
-  }];
-});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  title: '属性列表',
+  name: 'admin.attribute.index'
+}, {
+  title: '添加属性',
+  name: 'admin.attribute.create'
+}, {
+  title: '编辑属性',
+  name: 'admin.attribute.edit',
+  current: true
+}]);
 
 /***/ }),
 
@@ -34645,11 +34736,7 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                    编辑\n                "
-                            )
-                          ]
+                          [_vm._v("编辑")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -35382,6 +35469,47 @@ var render = function() {
       _vm._v(" "),
       _c(
         "el-form-item",
+        { attrs: { label: "推荐" } },
+        [
+          _c(
+            "el-radio-group",
+            {
+              attrs: { size: "mini" },
+              model: {
+                value: _vm.form.is_commend,
+                callback: function($$v) {
+                  _vm.$set(_vm.form, "is_commend", $$v)
+                },
+                expression: "form.is_commend"
+              }
+            },
+            _vm._l(
+              [
+                { label: "是", value: true },
+                { label: "否", value: false }
+              ],
+              function(item, index) {
+                return _c(
+                  "el-radio-button",
+                  { key: index, attrs: { label: item.value } },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(item.label) +
+                        "\n            "
+                    )
+                  ]
+                )
+              }
+            ),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
         { attrs: { label: "商品单位", size: "normal" } },
         [
           _c("el-input", {
@@ -35564,6 +35692,15 @@ var render = function() {
                                 ],
                                 1
                               )
+                            ]
+                          : col.id == "is_commend"
+                          ? [
+                              row.is_commend
+                                ? _c("i", {
+                                    staticClass:
+                                      "fas fa-check-circle text-green-600"
+                                  })
+                                : _vm._e()
                             ]
                           : col.id == "is_show"
                           ? [
@@ -36425,7 +36562,7 @@ var render = function() {
                     "el-button",
                     {
                       staticClass: "d-block",
-                      attrs: { type: "primary", size: "mini" },
+                      attrs: { type: "default", size: "mini" },
                       on: {
                         click: function($event) {
                           _vm.brandDialog = true
@@ -36433,6 +36570,85 @@ var render = function() {
                       }
                     },
                     [_vm._v("选择品牌")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "供货商", size: "normal" } },
+                [
+                  _c(
+                    "el-dialog",
+                    {
+                      attrs: {
+                        title: "选择供货商",
+                        visible: _vm.supplierDialog,
+                        width: "80%"
+                      },
+                      on: {
+                        "update:visible": function($event) {
+                          _vm.supplierDialog = $event
+                        }
+                      }
+                    },
+                    [
+                      _c("x-supplier", {
+                        attrs: { width: 100 },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function(ref) {
+                              var supplier = ref.supplier
+                              return [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { type: "success", size: "mini" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.changeSupplier(supplier)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("选择")]
+                                )
+                              ]
+                            }
+                          }
+                        ])
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.form.supplier_id
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "el-tag",
+                            { attrs: { type: "success", size: "normal" } },
+                            [_vm._v(_vm._s(_vm.form.supplier.title))]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "d-block",
+                      attrs: { type: "default", size: "mini" },
+                      on: {
+                        click: function($event) {
+                          _vm.supplierDialog = true
+                        }
+                      }
+                    },
+                    [_vm._v("选择供货商")]
                   )
                 ],
                 1
@@ -36666,7 +36882,7 @@ var render = function() {
                           click: function($event) {
                             return _vm.$router.push({
                               name: "admin.goods.edit",
-                              query: { id: goods.id }
+                              params: { id: goods.id }
                             })
                           }
                         }
@@ -36701,7 +36917,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                货品\n            ")]
+                          [_vm._v("货品")]
                         )
                       : _c(
                           "el-button",
@@ -36747,125 +36963,66 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "p-3 pt-5 border border-gray-200 rounded-md" },
     _vm._l(_vm.goods.attributes, function(attribute, index) {
       return _c(
         "div",
         { key: index },
         [
-          _c(
-            "el-form-item",
-            { attrs: { size: "normal" } },
-            [
-              _c("template", { slot: "label" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(attribute.title) +
-                    "\n                "
-                ),
-                attribute.type == 2 && _vm.isFirstRule(attribute)
-                  ? _c("i", {
-                      staticClass: "fas fa-plus-square cursor-pointer",
-                      on: {
-                        click: function($event) {
-                          return _vm.add(attribute)
+          [
+            _c(
+              "el-form-item",
+              { attrs: { size: "normal" } },
+              [
+                _c("template", { slot: "label" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(attribute.title) +
+                      "\n                    "
+                  ),
+                  attribute.type == 2 && _vm.isFirstRule(attribute)
+                    ? _c("i", {
+                        staticClass: "fas fa-plus-square cursor-pointer",
+                        on: {
+                          click: function($event) {
+                            return _vm.add(attribute)
+                          }
                         }
-                      }
-                    })
-                  : _vm._e(),
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  attribute.type == 2 && !_vm.isFirstRule(attribute)
+                    ? _c("i", {
+                        staticClass: "fas fa-minus-square cursor-pointer",
+                        on: {
+                          click: function($event) {
+                            return _vm.del(attribute)
+                          }
+                        }
+                      })
+                    : _vm._e()
+                ]),
                 _vm._v(" "),
-                attribute.type == 2 && !_vm.isFirstRule(attribute)
-                  ? _c("i", {
-                      staticClass: "fas fa-minus-square cursor-pointer",
-                      on: {
-                        click: function($event) {
-                          return _vm.del(attribute)
+                _c(
+                  "div",
+                  { staticClass: "flex w-8/12" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        class: {
+                          "w-8/12": attribute.type == 2,
+                          "w-full": attribute.type == 1
                         }
-                      }
-                    })
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex w-8/12" },
-                [
-                  _c(
-                    "div",
-                    {
-                      class: {
-                        "w-8/12": attribute.type == 2,
-                        "w-full": attribute.type == 1
-                      }
-                    },
-                    [
-                      attribute.form_type == "input"
-                        ? [
-                            _c("el-input", {
-                              attrs: {
-                                placeholder: "",
-                                size: "normal",
-                                clearable: ""
-                              },
-                              model: {
-                                value: attribute.attribute_value,
-                                callback: function($$v) {
-                                  _vm.$set(attribute, "attribute_value", $$v)
+                      },
+                      [
+                        attribute.form_type == "input"
+                          ? [
+                              _c("el-input", {
+                                attrs: {
+                                  placeholder: "",
+                                  size: "normal",
+                                  clearable: ""
                                 },
-                                expression: "attribute.attribute_value"
-                              }
-                            })
-                          ]
-                        : attribute.form_type == "textarea"
-                        ? [
-                            _c("el-input", {
-                              attrs: {
-                                type: "textarea",
-                                placeholder: "",
-                                size: "normal",
-                                clearable: ""
-                              },
-                              model: {
-                                value: attribute.attribute_value,
-                                callback: function($$v) {
-                                  _vm.$set(attribute, "attribute_value", $$v)
-                                },
-                                expression: "attribute.attribute_value"
-                              }
-                            })
-                          ]
-                        : attribute.form_type == "image"
-                        ? [
-                            _c("hd-upload-image", {
-                              attrs: { width: 100, height: 100 },
-                              model: {
-                                value: attribute.attribute_value,
-                                callback: function($$v) {
-                                  _vm.$set(attribute, "attribute_value", $$v)
-                                },
-                                expression: "attribute.attribute_value"
-                              }
-                            })
-                          ]
-                        : attribute.form_type == "color"
-                        ? [
-                            _c("el-color-picker", {
-                              model: {
-                                value: attribute.attribute_value,
-                                callback: function($$v) {
-                                  _vm.$set(attribute, "attribute_value", $$v)
-                                },
-                                expression: "attribute.attribute_value"
-                              }
-                            })
-                          ]
-                        : attribute.form_type == "select"
-                        ? [
-                            _c(
-                              "el-select",
-                              {
-                                staticClass: "w-full",
-                                attrs: { clearable: "", filterable: "" },
                                 model: {
                                   value: attribute.attribute_value,
                                   callback: function($$v) {
@@ -36873,49 +37030,117 @@ var render = function() {
                                   },
                                   expression: "attribute.attribute_value"
                                 }
+                              })
+                            ]
+                          : attribute.form_type == "textarea"
+                          ? [
+                              _c("el-input", {
+                                attrs: {
+                                  type: "textarea",
+                                  placeholder: "",
+                                  size: "normal",
+                                  clearable: ""
+                                },
+                                model: {
+                                  value: attribute.attribute_value,
+                                  callback: function($$v) {
+                                    _vm.$set(attribute, "attribute_value", $$v)
+                                  },
+                                  expression: "attribute.attribute_value"
+                                }
+                              })
+                            ]
+                          : attribute.form_type == "image"
+                          ? [
+                              _c("hd-upload-image", {
+                                attrs: { width: 100, height: 100 },
+                                model: {
+                                  value: attribute.attribute_value,
+                                  callback: function($$v) {
+                                    _vm.$set(attribute, "attribute_value", $$v)
+                                  },
+                                  expression: "attribute.attribute_value"
+                                }
+                              })
+                            ]
+                          : attribute.form_type == "color"
+                          ? [
+                              _c("el-color-picker", {
+                                model: {
+                                  value: attribute.attribute_value,
+                                  callback: function($$v) {
+                                    _vm.$set(attribute, "attribute_value", $$v)
+                                  },
+                                  expression: "attribute.attribute_value"
+                                }
+                              })
+                            ]
+                          : attribute.form_type == "select"
+                          ? [
+                              _c(
+                                "el-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: { clearable: "", filterable: "" },
+                                  model: {
+                                    value: attribute.attribute_value,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        attribute,
+                                        "attribute_value",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "attribute.attribute_value"
+                                  }
+                                },
+                                _vm._l(attribute.optionsList, function(
+                                  item,
+                                  index
+                                ) {
+                                  return _c("el-option", {
+                                    key: index,
+                                    attrs: { label: item, value: item }
+                                  })
+                                }),
+                                1
+                              )
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    attribute.type == 2
+                      ? _c(
+                          "el-input",
+                          {
+                            staticClass: "ml-2 w-4/12",
+                            model: {
+                              value: attribute.price,
+                              callback: function($$v) {
+                                _vm.$set(attribute, "price", $$v)
                               },
-                              _vm._l(attribute.optionsList, function(
-                                item,
-                                index
-                              ) {
-                                return _c("el-option", {
-                                  key: index,
-                                  attrs: { label: item, value: item }
-                                })
-                              }),
-                              1
-                            )
-                          ]
-                        : _vm._e()
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  attribute.type == 2
-                    ? _c(
-                        "el-input",
-                        {
-                          staticClass: "ml-2 w-4/12",
-                          model: {
-                            value: attribute.price,
-                            callback: function($$v) {
-                              _vm.$set(attribute, "price", $$v)
-                            },
-                            expression: "attribute.price"
-                          }
-                        },
-                        [_c("template", { slot: "prepend" }, [_vm._v("加价")])],
-                        2
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
-            ],
-            2
-          )
+                              expression: "attribute.price"
+                            }
+                          },
+                          [
+                            _c("template", { slot: "prepend" }, [
+                              _vm._v("加价")
+                            ])
+                          ],
+                          2
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ],
+              2
+            )
+          ]
         ],
-        1
+        2
       )
     }),
     0
@@ -37097,16 +37322,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "loading",
-          rawName: "v-loading",
-          value: _vm.loading,
-          expression: "loading"
-        }
-      ]
-    },
     [
       _c("hd-tab", { attrs: { tabs: _vm.tabs } }),
       _vm._v(" "),
@@ -37121,149 +37336,236 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.products
-        ? _c(
-            "table",
-            {
-              staticClass:
-                "table table-vcenter card-table shadow-sm border border-gray-200"
-            },
-            [
-              _c("thead", [
-                _c(
-                  "tr",
-                  [
-                    _vm._l(_vm.attributes, function(attribute) {
-                      return _c("th", { key: attribute.id }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(attribute.title) +
-                            "\n                "
-                        )
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("货号")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("库存")]),
-                    _vm._v(" "),
-                    _c("th", { attrs: { width: "80" } })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.products, function(product, index) {
-                  return _c(
-                    "tr",
-                    { key: index },
-                    [
-                      _vm._l(_vm.attributes, function(attribute, i) {
-                        return _c(
-                          "td",
-                          { key: attribute.id },
-                          [
-                            _c(
-                              "el-select",
-                              {
-                                attrs: { clearable: "", filterable: "" },
-                                model: {
-                                  value: product.attributeList[i],
-                                  callback: function($$v) {
-                                    _vm.$set(product.attributeList, i, $$v)
-                                  },
-                                  expression: "product.attributeList[i]"
-                                }
-                              },
-                              _vm._l(attribute.attributes, function(item) {
-                                return _c("el-option", {
-                                  key: item.id,
-                                  attrs: {
-                                    label: item.attribute_value,
-                                    value: item.id
+      _c(
+        "table",
+        {
+          staticClass:
+            "table table-vcenter card-table shadow-sm border border-gray-200 "
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              [
+                _vm._l(_vm.attributes, function(attribute) {
+                  return _c("th", { key: attribute.id }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(attribute.title) +
+                        "\n                "
+                    )
+                  ])
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v("货品")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("库存")]),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "80" } })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.products, function(product, index) {
+              return _c(
+                "tr",
+                { key: index },
+                [
+                  _vm._l(_vm.attributes, function(attribute, i) {
+                    return _c(
+                      "td",
+                      { key: attribute.id },
+                      [
+                        attribute.form_type == "color"
+                          ? _vm._l(attribute.attributes, function(item) {
+                              return _c("div", {
+                                key: item.id,
+                                staticClass:
+                                  "w-6 h-6 cursor-pointer border-4 border-gray-50",
+                                class: {
+                                  "border-gray-900":
+                                    product.attributeList[i] == item.id
+                                },
+                                style: {
+                                  "background-color": item.attribute_value
+                                },
+                                on: {
+                                  click: function($event) {
+                                    product.attributeList[i] = item.id
                                   }
-                                })
-                              }),
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("el-input", {
-                            attrs: {
-                              placeholder: "",
-                              size: "default",
-                              clearable: "",
-                              disabled: !!product.id
-                            },
-                            model: {
-                              value: product.sn,
-                              callback: function($$v) {
-                                _vm.$set(product, "sn", $$v)
-                              },
-                              expression: "product.sn"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("el-input", {
-                            attrs: {
-                              type: "number",
-                              placeholder: "",
-                              size: "default",
-                              clearable: ""
-                            },
-                            model: {
-                              value: product.number,
-                              callback: function($$v) {
-                                _vm.$set(product, "number", $$v)
-                              },
-                              expression: "product.number"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "el-button",
-                            {
-                              attrs: { type: "danger", size: "mini" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.del(product)
                                 }
-                              }
-                            },
-                            [_vm._v("删除")]
-                          )
-                        ],
-                        1
+                              })
+                            })
+                          : attribute.form_type == "image"
+                          ? _c(
+                              "div",
+                              { staticClass: "flex" },
+                              _vm._l(attribute.attributes, function(item) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: item.id,
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.$set(
+                                          product.attributeList,
+                                          i,
+                                          item.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "el-popover",
+                                      {
+                                        attrs: {
+                                          placement: "top",
+                                          width: "200",
+                                          trigger: "hover"
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass:
+                                            "h-30 w-full object-cover",
+                                          attrs: { src: item.attribute_value }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("img", {
+                                          staticClass:
+                                            "w-8 h-8 cursor-pointer border-4 border-gray-50",
+                                          class: {
+                                            "border-gray-900":
+                                              product.attributeList[i] ==
+                                              item.id
+                                          },
+                                          attrs: {
+                                            slot: "reference",
+                                            src: item.attribute_value
+                                          },
+                                          slot: "reference"
+                                        })
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              }),
+                              0
+                            )
+                          : [
+                              _c(
+                                "el-select",
+                                {
+                                  attrs: { clearable: "", filterable: "" },
+                                  model: {
+                                    value: product.attributeList[i],
+                                    callback: function($$v) {
+                                      _vm.$set(product.attributeList, i, $$v)
+                                    },
+                                    expression: "product.attributeList[i]"
+                                  }
+                                },
+                                _vm._l(attribute.attributes, function(item) {
+                                  return _c(
+                                    "el-option",
+                                    {
+                                      key: item.id,
+                                      attrs: {
+                                        label: item.attribute_value,
+                                        value: item.id
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(item.attribute_value) +
+                                          "\n                            "
+                                      )
+                                    ]
+                                  )
+                                }),
+                                1
+                              )
+                            ]
+                      ],
+                      2
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          placeholder: "",
+                          size: "default",
+                          clearable: "",
+                          disabled: !!product.goods_id
+                        },
+                        model: {
+                          value: product.sn,
+                          callback: function($$v) {
+                            _vm.$set(product, "sn", $$v)
+                          },
+                          expression: "product.sn"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          placeholder: "",
+                          size: "default",
+                          clearable: ""
+                        },
+                        model: {
+                          value: product.number,
+                          callback: function($$v) {
+                            _vm.$set(product, "number", $$v)
+                          },
+                          expression: "product.number"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { type: "danger", size: "mini" },
+                          on: {
+                            click: function($event) {
+                              return _vm.del(product)
+                            }
+                          }
+                        },
+                        [_vm._v("删除")]
                       )
                     ],
-                    2
+                    1
                   )
-                }),
-                0
+                ],
+                2
               )
-            ]
+            }),
+            0
           )
-        : _vm._e(),
+        ]
+      ),
       _vm._v(" "),
       _c(
         "el-button-group",
@@ -37272,7 +37574,7 @@ var render = function() {
           _c(
             "el-button",
             {
-              attrs: { type: "info", size: "default" },
+              attrs: { type: "default", size: "default" },
               on: { click: _vm.add }
             },
             [_vm._v("添加货品")]
@@ -38983,7 +39285,13 @@ var render = function() {
                 {
                   staticClass: "nav-link text-sm font-bold",
                   class: { active: _vm.$route.name == route.name },
-                  attrs: { to: route }
+                  attrs: {
+                    to: {
+                      name: route.name,
+                      params: route.params || {},
+                      query: _vm.$route.query
+                    }
+                  }
                 },
                 [_vm._v("\n            " + _vm._s(route.title) + "\n        ")]
               )

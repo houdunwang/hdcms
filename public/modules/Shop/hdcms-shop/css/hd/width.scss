@@ -1,0 +1,16 @@
+@for $i from 1 through 100 {
+	.w-#{$i*5}{
+		width:#{$i*10}rpx;
+	}
+}
+
+// 百分比
+@for $i from 1 through 100  {
+	.w-#{$i}-s{
+		width:#{$i+"%"};
+	}
+}
+
+.w-full{
+	width:100%;
+}

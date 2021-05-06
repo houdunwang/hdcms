@@ -17,7 +17,11 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        Category::factory()->count(3)->hasGoods(20)->create();
-        // Category::factory()->count(3)->has(Goods::factory()->count(20),'abc')->create();
+        Category::factory()->count(20)->create()->each(function ($category) {
+            Category::factory()->count(10)->hasGoods(10)->create([
+                'pid' => $category['id'],
+                'path' => "0-{$category['id']}"
+            ]);
+        });
     }
 }

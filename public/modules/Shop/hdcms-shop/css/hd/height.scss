@@ -1,0 +1,9 @@
+@for $i from 1 through 100 {
+	.h-#{$i*5}{
+		height:#{$i*10}rpx;
+	}
+}
+
+.h-full{
+	height:100%;
+}

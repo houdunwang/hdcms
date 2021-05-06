@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\InvalidCastException;
 use LogicException;
 use InvalidArgumentException;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * 商品
@@ -23,23 +24,54 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  */
 class GoodsController extends Controller
 {
+
+    /**
+     * 推荐商品
+     * @return AnonymousResourceCollection
+     */
+    public function commend()
+    {
+        $goods = Goods::where('is_commend', true)->limit(6)->get();
+        return GoodsResource::collection($goods);
+    }
+
+    /**
+     * 商品列表
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     * @throws BindingResolutionException
+     */
+    public function list(Request $request)
+    {
+        $goods = Goods::site()->where('cid', request('cid'))->paginate(2);
+        return GoodsResource::collection($goods);
+    }
+
+    /**
+     * 商品列表
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     */
     public function index(Request $request)
     {
         $query = Goods::site()->with(['category', 'user', 'brand']);
+        if (request('cid')) {
+            $query->where('category_id', request('cid'));
+        }
         if ($request->query('del')) {
             $query->whereNotNULL('del_at');
         } else {
             $query->whereNull('del_at');
         }
 
-        return GoodsResource::collection($query->paginate(10));
+        return GoodsResource::collection($query->paginate(6));
     }
 
     public function store(GoodsRequest $request, Site $site, Goods $goods)
     {
         DB::beginTransaction();
         $goods->fill($request->input() + ['site_id' => $site['id'], 'user_id' => Auth::id()])->save();
-        $this->updateGoodsAttributes($goods);
+        $this->updateGoodsAttributes($goods, $request->input('attributes'));
         DB::commit();
         return $this->message('商品添加成功');
     }
@@ -53,7 +85,7 @@ class GoodsController extends Controller
     {
         DB::beginTransaction();
         $good->fill($request->input())->save();
-        $this->updateGoodsAttributes($good);
+        $this->updateGoodsAttributes($good, $request->input('attributes'));
         DB::commit();
         return $this->message('商品修改成功');
     }
@@ -62,15 +94,16 @@ class GoodsController extends Controller
     /**
      * 更新商品属性
      * @param mixed $goods 商品
+     * @param mixed $attributes 属性列表
      * @return void
      */
-    protected function updateGoodsAttributes($goods)
+    protected function updateGoodsAttributes($goods, $attributes)
     {
-        //商品属性
-        $attributes = request()->input('attributes', []);
+        if (empty($attributes)) return;
         //移除无效的属性
         $ids = collect($attributes)->map(fn ($attr) => $attr['id'] ?? 0);
-        $goods->attributes()->whereNotIn('id', $ids)->delete();
+        GoodsAttribute::where('goods_id', $goods['id'])->whereNotIn('id', $ids)->delete();
+
         //商品属性处理
         foreach ($attributes as $attribute) {
             $attribute['goods_id'] = $goods['id'];

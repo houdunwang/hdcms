@@ -19,7 +19,7 @@ class AttributeTypeController extends Controller
 {
     public function index()
     {
-        $attributeTypes = AttributeType::site()->get();
+        $attributeTypes = AttributeType::site()->with('attributes')->get();
         return AttributeTypeResource::collection($attributeTypes);
     }
 
