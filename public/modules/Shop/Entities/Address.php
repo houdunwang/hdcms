@@ -16,7 +16,7 @@ class Address extends ModuleModel
 
     protected $table = 'shop_address';
 
-    protected $fillable = ['site_id', 'user_id', 'district', 'tel', 'info', 'is_default'];
+    protected $fillable = ['site_id', 'user_id', 'consignee', 'district', 'tel', 'info', 'is_default'];
 
     protected $casts = [
         'is_default' => 'boolean',

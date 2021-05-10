@@ -6,7 +6,7 @@
 		</view>
 		<uni-list>
 			<uni-list-item title="我的资料" link></uni-list-item>
-			<uni-list-item title="地址管理" link></uni-list-item>
+			<uni-list-item title="地址管理" link to="/pages/address/index/index"></uni-list-item>
 			<uni-list-item title="购物车" :show-badge="true" link :badge-text="cartGoodsTotalNumber()+''"
 				@click="switchTab('/pages/cart/cart')">
 			</uni-list-item>

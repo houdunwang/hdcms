@@ -1,5 +1,5 @@
 <template>
-	<view class="bg-white flex py-20 border-t-5 border-opal border-solid rounded-md shadow-sm">
+	<view class="bg-white flex py-20 border-t-10 border-opal border-solid rounded-md shadow-sm">
 		<view class="flex flex-col justify-center w-35-s">
 			<view class="flex justify-center text-lg font-extrabold text-red-600">
 				{{coupon.valueTitle}}

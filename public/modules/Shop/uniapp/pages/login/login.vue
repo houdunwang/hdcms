@@ -47,6 +47,7 @@
 						title: '登录成功',
 						duration: 2000
 					})
+					this.init()
 					uni.navigateBack()
 				});
 			}

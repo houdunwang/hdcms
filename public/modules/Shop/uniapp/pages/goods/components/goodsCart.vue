@@ -1,21 +1,8 @@
 <template>
 	<view>
-		<uni-list>
-			<uni-list-item title="已选:">
-				<template #footer>
-					<view @click="showCart=true">
-						{{cartGoods?cartGoods.title: '选择商品'}}
-					</view>
-				</template>
-			</uni-list-item>
-			<uni-list-item title="送至:">
-				<template #footer>
-					<view class="" @click.native="showAddress=true">
-						北京市朝阳区
-					</view>
-				</template>
-			</uni-list-item>
-		</uni-list>
+		<view @click="showCart=true">
+			{{cartGoods?cartGoods.title: '选择商品'}}
+		</view>
 
 		<!-- 规格选择 -->
 		<u-popup v-model="showCart" mode="bottom" :closeable="true" :mask-close-able="true">
@@ -27,10 +14,12 @@
 		<!-- 底部tabbar -->
 		<footer-bar :goods="goods" :products="products" :rules="rules">
 			<template #right>
-				<u-button type="error" @click="showCart=true" class="mr-10" size="default">加入购物车</u-button>
-				<u-button type="primary" @click="redirect('/pages/pay/pay')" size="default" v-if="totalPrice(true)">
-					去结算
-				</u-button>
+				<view class="flex">
+					<u-button type="error" @click="showCart=true" class="mr-10" size="default">加入购物车</u-button>
+					<u-button type="primary" @click="redirect('/pages/pay/pay')" size="default" v-if="totalPrice(true)">
+						去结算
+					</u-button>
+				</view>
 			</template>
 		</footer-bar>
 

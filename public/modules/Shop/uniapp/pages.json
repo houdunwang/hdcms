@@ -67,6 +67,18 @@
 			"navigationBarTitleText": "",
 			"enablePullDownRefresh": false
 		}
+	}, {
+		"path": "pages/address/update/update",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+	}, {
+		"path": "pages/address/add/add",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
 	}],
 	"tabBar": {
 		"color": "#7A7E83",
@@ -173,6 +185,17 @@
 				"index": 11,
 				"name": "address_index",
 				"path": "pages/address/index/index"
+			},
+			{
+				"index": 12,
+				"name": "address_update",
+				"path": "pages/address/update/update",
+				"query": "id=1"
+			},
+			{
+				"index": 13,
+				"name": "address_add",
+				"path": "pages/address/add/add"
 			}
 		]
 	}

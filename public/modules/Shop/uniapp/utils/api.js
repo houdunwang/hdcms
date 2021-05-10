@@ -16,10 +16,21 @@ export default {
 		if (token) {
 			data.header.Authorization = `Bearer ` + uni.getStorageSync('token')
 		}
-		
+
 		return uni.request(data).then(data => {
 			const [error, res] = data
 			if (error || res.statusCode != 200) {
+				switch (res.statusCode) {
+					case 422:
+						let content = Object.entries(res.data.errors).map(([key,e])=>e.join('\n')).join('\r\n');
+						uni.showModal({
+							title: '提交数据错误',
+							content,
+							showCancel:false,
+							confirmText:'确定'
+						})
+						break;
+				}
 				return Promise.reject(res)
 			}
 			return res.data
@@ -46,11 +57,12 @@ export default {
 			...options
 		})
 	},
-	put(url, data = {}) {
+	put(url, data = {}, options = {}) {
 		return this.request({
 			url,
 			data,
-			method: 'PUT'
+			method: 'PUT',
+			...options
 		})
 	},
 	delete(url) {

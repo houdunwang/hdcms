@@ -2,11 +2,6 @@
 	<view>
 		<view class="bg-white flex flex-row items-center h-60 items-stretch hd-cart-footer px-20">
 			<view class="w-60 flex items-center justify-center">
-				<!-- <navigator open-type="switchTab" url="/pages/index/index"
-					class="flex flex-col items-center justify-center mr-30">
-					<uni-icons type="home" size="20"></uni-icons>
-					<view>首页</view>
-				</navigator> -->
 				<navigator open-type="switchTab" url="/pages/cart/cart"
 					class="flex flex-col items-center justify-center ">
 					<uni-icons type="cart-filled" size="20"></uni-icons>

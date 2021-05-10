@@ -1,15 +1,39 @@
-.border-solid	{
-	border-style: solid;
-}
-.border-dashed	{
-	border-style: dashed;
-}
-.border-dotted	{
-border-style: dotted;
-}
-.border-double	{
-	border-style: double;
-}
-.border-none	{
-	border-style: none;
+// .border-solid{
+// 	border-style: solid;
+// }
+// .border-dashed{
+// 	border-style: dashed;
+// }
+// .border-dotted{
+// border-style: dotted;
+// }
+// .border-double{
+// 	border-style: double;
+// }
+// .border-none{
+// 	border-style: none;
+// }
+
+$styles : (
+	solid:solid,
+	dashed:dashed,
+	dotted:dotted,
+	double:double,
+	none:none
+);
+
+$borders : (
+	border:border-style,
+	border-t:border-top-style,
+	border-r:border-right-style,
+	border-b:border-bottom-style,
+	border-l:border-left-style
+);
+
+@each $k,$b in $borders {
+	@each $n,$m in $styles {
+		.#{$k}-#{$m}{
+			#{$b}: #{$m};
+		}
+	}
 }

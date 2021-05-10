@@ -4,11 +4,13 @@
 	}
 	
 	.px-#{$i*5}{
-		padding:0 #{$i*5}rpx;
+		padding-left:#{$i*5}rpx;
+		padding-right:#{$i*5}rpx;
 	}
 	
 	.py-#{$i*5}{
-		padding:#{$i*5}rpx 0;
+		padding-top:#{$i*5}rpx;
+		padding-bottom:#{$i*5}rpx;
 	}
 	
 	.pt-#{$i*5}{

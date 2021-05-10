@@ -1,17 +1,28 @@
 import store from '@/store/index.js';
-import {mapState} from 'vuex'
+import {
+	mapState
+} from 'vuex'
 
 export default {
 	onLoad() {},
 	computed: {
-		...mapState('user',{
-			user:state=>state.user
+		...mapState('user', {
+			user: state => state.user
 		}),
 		isLogin() {
-			return Boolean(this.user.id)
+			return Boolean(uni.getStorageInfoSync('token'))
 		},
 	},
 	methods: {
+		//初始化
+		init() {
+			if (this.isLogin) {
+				//加载当前用户
+				store.dispatch('user/getCurrentUser')
+				//加载收货地址
+				store.dispatch('address/load')
+			}
+		},
 		//tabbar跳转
 		switchTab(url) {
 			uni.switchTab({

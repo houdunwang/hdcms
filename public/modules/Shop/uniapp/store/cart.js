@@ -3,7 +3,7 @@ export default {
 	namespaced: true,
 	state() {
 		return {
-			cart:[]
+			cart: [],
 		}
 	},
 	getters: {
@@ -40,7 +40,10 @@ export default {
 			const i = state.cart.indexOf(goods)
 			state.cart.splice(i, 1);
 		},
+		//初始化购物车
+		resetCart(state) {
+			state.cart = []
+		}
 	},
-	actions: {
-	}
+	actions: {}
 }

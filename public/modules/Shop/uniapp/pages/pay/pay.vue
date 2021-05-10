@@ -1,17 +1,15 @@
 <template>
 	<view>
-		<hd-navbar :showHomeIcon="true" :showCartIcon="false" :showInput="false" :showUserIcon="true" title="用户结算">
-		</hd-navbar>
-		<view class="mt-20">
-			<uni-card title="收货地址" :is-full="true">
-				<view class="font-bold text-lg">
-					向军 19999999999
-				</view>
-				<view>
-					北京 北京市 朝阳区 左家庄街道 左家庄 (100020)
-				</view>
-			</uni-card>
-		</view>
+		<hd-navbar :showHomeIcon="true" :showCartIcon="false" :showInput="false" :showUserIcon="true" title="用户结算" />
+
+		 <view class="mt-20">
+			<view class="border-t-1 border-b-1 border-t-solid border-b-solid border-gray-100 py-20 px-20">
+				收货地址
+			</view>
+			<view class="py-20 px-20">
+				<hd-address-select />
+			</view>
+		</view> 
 
 		<view class="mt-30">
 			<uni-list>
@@ -32,25 +30,32 @@
 		</view>
 
 		<view class="mt-30">
-			<uni-card title="优惠券" v-if="coupon" :is-full="true">
-				<hd-coupon-item :coupon="coupon">
-					<button type="default" size="mini" @click="coupon=null">取消优惠券</button>
-				</hd-coupon-item>
-			</uni-card>
+			<view class="" v-if="coupon">
+				<view class="border-t-1 border-b-1 border-t-solid border-b-solid border-gray-100 py-20 px-20">
+					优惠券
+				</view>
+				<view class="py-20 px-20">
+					<hd-coupon-item :coupon="coupon">
+						<button type="default" size="mini" @click="coupon=null">取消优惠券</button>
+					</hd-coupon-item>
+				</view>
+			</view>
+
 			<uni-list>
 				<uni-list-item title="优惠券" link clickable @click="couponPopup=true" @select="couponPopup=false"
-					v-if="!coupon">
-				</uni-list-item>
+					v-if="!coupon" />
 			</uni-list>
 			<u-popup v-model="couponPopup" mode="bottom" :mask-close-able="true">
 				<coupon-select @select="selectCoupon"></coupon-select>
 				<button type="default" @click="couponPopup=false">取消选择</button>
 			</u-popup>
 		</view>
+
 		<view class="bg-white flex flex-row h-50 items-stretch hd-cart-footer">
 			<view class="flex-1 flex flex-col justify-center items-center">
 				<view class="text-base flex flex-col items-center justify-center">
-					<view class="text-base text-gray-500">共 <text class=""> {{cartGoodsTotalNumber(true)}} </text> 件
+					<view class="text-base text-gray-500">
+						共 <text class=""> {{cartGoodsTotalNumber(true)}} </text> 件
 					</view>
 					<view class="text-red-600 ">
 						合计：<text class="font-bold">{{totalPrice}}</text>
@@ -101,8 +106,14 @@
 			}
 		},
 		computed: {
-			...mapState(['cart']),
-			...mapGetters(['cartGoodsTotalPrice', 'cartGoodsTotalNumber']),
+			...mapState('cart', {
+				cart: state => state.cart,
+			}),
+			...mapState('address', ['currentAddress']),
+			...mapGetters('cart', {
+				cartGoodsTotalPrice: 'totalPrice',
+				cartGoodsTotalNumber: 'totalNumber'
+			}),
 			totalPrice() {
 				let price = this.cartGoodsTotalPrice(true)
 				if (this.coupon) {
@@ -125,6 +136,12 @@
 			},
 			//提交定单
 			async submit() {
+				if (!this.currentAddress.id) {
+					return uni.showToast({
+						title: '请选择收货地址',
+						duration: 2000
+					});
+				}
 				const goods = this.cart;
 				const coupon = this.coupon;
 
@@ -134,7 +151,7 @@
 				}).then(res => {
 					uni.showToast({
 						title: '支付成功',
-						duration:2000
+						duration: 2000
 					})
 					uni.navigateTo({
 						url: '/pages/order/order'
@@ -155,7 +172,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		z-index: 9999;
+		z-index: 99;
 		border-top: solid 1px #999;
 	}
 </style>

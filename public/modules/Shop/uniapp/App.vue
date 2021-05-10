@@ -4,7 +4,7 @@
 		onLaunch: function() {
 		},
 		onShow: function() {
-			store.dispatch('user/getCurrentUser')
+			this.init()
 		},
 		onHide: function() {
 		}

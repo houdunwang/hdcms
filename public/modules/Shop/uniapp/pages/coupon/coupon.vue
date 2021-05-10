@@ -9,8 +9,8 @@
 		<hd-loading v-if="loading"></hd-loading>
 		<view class="" v-if="!loading">
 			<view class="mx-30" v-if="current==0">
-				<view class="" v-if="dontHaveList.length">
-					<hd-coupon-item :coupon="coupon" v-for="coupon in dontHaveList" :key="coupon.id" class="mt-30"
+				<view class="flex flex-col" v-if="dontHaveList.length">
+					<hd-coupon-item :coupon="coupon" v-for="coupon in dontHaveList" :key="coupon.id" class="mb-20"
 						@add="load" :show-add-button="true">
 						<u-button type="warning" @click="add(coupon)" size="mini">领取优惠券</u-button>
 					</hd-coupon-item>
@@ -20,8 +20,8 @@
 				</view>
 			</view>
 			<view class="mx-30" v-else>
-				<view v-if="haveList.length">
-					<hd-coupon-item :coupon="coupon" v-for="coupon in haveList" :key="coupon.id" class="mt-30">
+				<view v-if="haveList.length" class="flex flex-col">
+					<hd-coupon-item :coupon="coupon" v-for="coupon in haveList" :key="coupon.id" class="mb-20">
 					</hd-coupon-item>
 				</view>
 				<view class="flex justify-center py-50" v-else>

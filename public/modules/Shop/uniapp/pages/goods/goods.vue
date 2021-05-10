@@ -13,7 +13,7 @@
 				</view>
 			</view>
 		</hd-navbar>
-		
+
 		<!-- 商品内容 -->
 		<view v-if="loading===false">
 			<scroll-view ref="scrollView" @scroll="scroll" scroll-y="true" :scroll-into-view="scrollViewId"
@@ -29,13 +29,29 @@
 					</swiper>
 				</view>
 				<view class="mt-20">
-					<goods-cart :goods="goods" :products="products" :rules="rules"></goods-cart>
+					<!-- 商品选择 -->
+					<view class="flex px-30 py-10 border-b-1 border-b-solid border-gray-100 mb-20">
+						<view class="mr-15 font-bold">
+							已选:
+						</view>
+						<view class="flex-1">
+							<goods-cart :goods="goods" :products="products" :rules="rules"/>
+						</view>
+					</view>
+					<!-- 地址选择 -->
+					<view class="flex px-30 py-10 border-b-1 border-b-solid border-gray-100 mb-20">
+						<view class="mr-15 font-bold">
+							送至:
+						</view>
+						<view class="flex-1">
+							<hd-address-select/>
+						</view>
+					</view>
 				</view>
 				<!-- 商品详情 -->
 				<view class="mt-20" id="id1">
 					<uni-card title="商品详情" :is-full="true">
 						<rich-text :nodes="goods.content.replace(/<img/ig,'<img style=max-width:100%')"></rich-text>
-						<!-- <u-parse :html="goods.content"></u-parse> -->
 					</uni-card>
 				</view>
 				<!-- 评论 -->
