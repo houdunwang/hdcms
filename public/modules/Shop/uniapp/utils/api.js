@@ -22,13 +22,20 @@ export default {
 			if (error || res.statusCode != 200) {
 				switch (res.statusCode) {
 					case 422:
-						let content = Object.entries(res.data.errors).map(([key,e])=>e.join('\n')).join('\r\n');
+						let content = Object.entries(res.data.errors).map(([key, e]) => e.join('\n')).join(
+							'\r\n');
 						uni.showModal({
 							title: '提交数据错误',
 							content,
-							showCancel:false,
-							confirmText:'确定'
+							showCancel: false,
+							confirmText: '确定'
 						})
+						break;
+					case 401:
+						uni.removeStorageSync('token');
+						uni.navigateTo({
+							url: '/pages/login/login'
+						});
 						break;
 				}
 				return Promise.reject(res)

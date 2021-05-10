@@ -4,7 +4,6 @@
 		onLaunch: function() {
 		},
 		onShow: function() {
-			this.init()
 		},
 		onHide: function() {
 		}

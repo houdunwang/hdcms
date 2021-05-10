@@ -9,15 +9,22 @@
 <script>
 	import CartList from './components/cartList.vue'
 	import CartTabbar from './components/cartTabBar.vue'
+	import {mapActions} from 'vuex';
 	export default {
 		components: {
 			CartList,CartTabbar
+		},
+		onShow(){
+			this.loadAddress()
 		},
 		data() {
 			return {
 			}
 		},
 		methods: {
+			...mapActions('address',{
+				loadAddress:'load'
+			})
 		}
 	}
 </script>

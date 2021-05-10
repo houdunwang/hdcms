@@ -4,8 +4,7 @@ export default {
 	state: {
 		user: {},
 	},
-	getters: {
-	},
+	getters: {},
 	mutations: {
 		//保存用户
 		saveLoginUser(state, user) {
@@ -40,6 +39,7 @@ export default {
 			return api.post(`/login`, payload).then(res => {
 				commit('saveLoginUser', res.data)
 				uni.setStorageSync('token', res.token)
+
 			}, res => {
 				uni.showToast({
 					title: '帐号或密码错误'

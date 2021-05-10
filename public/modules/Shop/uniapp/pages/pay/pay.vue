@@ -2,14 +2,19 @@
 	<view>
 		<hd-navbar :showHomeIcon="true" :showCartIcon="false" :showInput="false" :showUserIcon="true" title="用户结算" />
 
-		 <view class="mt-20">
+		<view class="mt-20">
 			<view class="border-t-1 border-b-1 border-t-solid border-b-solid border-gray-100 py-20 px-20">
 				收货地址
 			</view>
 			<view class="py-20 px-20">
-				<hd-address-select />
+				<view class="" v-if="address.length">
+					<hd-address-select />
+				</view>
+				<view class="" v-else>
+					<u-button type="success" @click="redirect(`/pages/address/add/add`)">设置收货地址</u-button>
+				</view>
 			</view>
-		</view> 
+		</view>
 
 		<view class="mt-30">
 			<uni-list>
@@ -92,9 +97,13 @@
 		mapState,
 		mapGetters
 	} from 'vuex'
+
 	export default {
 		components: {
 			couponSelect
+		},
+		onShow() {
+			this.loginCheck()
 		},
 		data() {
 			return {
@@ -109,7 +118,7 @@
 			...mapState('cart', {
 				cart: state => state.cart,
 			}),
-			...mapState('address', ['currentAddress']),
+			...mapState('address', ['currentAddress', 'address']),
 			...mapGetters('cart', {
 				cartGoodsTotalPrice: 'totalPrice',
 				cartGoodsTotalNumber: 'totalNumber'

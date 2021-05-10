@@ -71,13 +71,12 @@
 				try {
 					await this.$api[this.form.id ? 'put' : 'post'](url, this.form)
 					this.load();
+
 					uni.showToast({
 						title: '地址保存成功',
 						mask: true,
 						success() {
-							setTimeout(() => uni.navigateTo({
-								url: '/pages/address/index/index'
-							}), 1000)
+							setTimeout(() => uni.navigateBack(), 1000)
 						}
 					})
 				} catch (e) {

@@ -35,16 +35,16 @@
 							已选:
 						</view>
 						<view class="flex-1">
-							<goods-cart :goods="goods" :products="products" :rules="rules"/>
+							<goods-cart :goods="goods" :products="products" :rules="rules" />
 						</view>
 					</view>
 					<!-- 地址选择 -->
-					<view class="flex px-30 py-10 border-b-1 border-b-solid border-gray-100 mb-20">
+					<view class="flex px-30 py-10 border-b-1 border-b-solid border-gray-100 mb-20" v-if="isLogin">
 						<view class="mr-15 font-bold">
 							送至:
 						</view>
 						<view class="flex-1">
-							<hd-address-select/>
+							<hd-address-select />
 						</view>
 					</view>
 				</view>
@@ -82,7 +82,8 @@
 		}],
 		current: 0,
 	}
-	import GoodsCart from './components/goodsCart.vue'
+	import GoodsCart from './components/goodsCart.vue';
+	import {mapActions} from 'vuex';
 	export default {
 		components: {
 			GoodsCart
@@ -102,6 +103,10 @@
 				rules: [],
 			}
 		},
+		onShow() {
+			//加载收货地址
+			this.loadAddress()
+		},
 		computed: {
 			//内容scroll-view高度
 			containerHeight() {
@@ -117,6 +122,9 @@
 			this.loading = false
 		},
 		methods: {
+			...mapActions('address',{
+				loadAddress:'load'
+			}),
 			//更改顶部tab
 			change(index) {
 				this.tab.current = index;

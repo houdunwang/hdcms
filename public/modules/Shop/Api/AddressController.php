@@ -34,19 +34,30 @@ class AddressController extends Controller
     {
         $address->site_id = $site['id'];
         $address->user_id = Auth::id();
+        $address->fill($request->input());
+        //当前地址为默认值时，撤销其他默认地址
         if ($request->is_default) {
             ShopUser::user()->address()->update(['is_default' => false]);
         }
-        $address->fill($request->input())->save();
+        //只有一个地址时设置为默认
+        if (!ShopUser::user()->address()->exists()) {
+            $address->is_default = true;
+        }
+        $address->save();
         return $this->message('地址添加成功');
     }
 
     public function update(Request $request, Site $site, Address $address)
     {
+        $address->fill($request->input());
         if ($request->is_default) {
             ShopUser::user()->address()->update(['is_default' => false]);
         }
-        $address->fill($request->input())->save();
+        //只有一个地址时设置为默认
+        if (!ShopUser::user()->address()->exists()) {
+            $address->is_default = true;
+        }
+        $address->save();
         return $this->message('地址修改成功');
     }
 

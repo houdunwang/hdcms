@@ -6,23 +6,18 @@ import {
 export default {
 	onLoad() {},
 	computed: {
-		...mapState('user', {
-			user: state => state.user
-		}),
+		...mapState('user', ['user']),
 		isLogin() {
-			return Boolean(uni.getStorageInfoSync('token'))
+			return Boolean(this.user.id)
 		},
 	},
+	onShow(){
+		if (uni.getStorageInfoSync('token')) {
+			//加载当前用户
+			store.dispatch('user/getCurrentUser')
+		}
+	},
 	methods: {
-		//初始化
-		init() {
-			if (this.isLogin) {
-				//加载当前用户
-				store.dispatch('user/getCurrentUser')
-				//加载收货地址
-				store.dispatch('address/load')
-			}
-		},
 		//tabbar跳转
 		switchTab(url) {
 			uni.switchTab({

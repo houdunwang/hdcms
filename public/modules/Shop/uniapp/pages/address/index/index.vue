@@ -2,7 +2,8 @@
 	<view>
 		<hd-navbar :back="true" :showHomeIcon="false" :showCartIcon="false" :showInput="false" title="地址管理"></hd-navbar>
 		<view class="">
-			<view class="flex border-b-1 border-b-solid border-gray-200 py-30 px-30" v-for="(add,index) in address" :key="index">
+			<view class="flex border-b-1 border-b-solid border-gray-200 py-30 px-30" v-for="(add,index) in address"
+				:key="index">
 				<view class="flex-1 flex flex-col justify-center">
 					<view class="text-gray-800 font-bold">
 						{{add.consignee}}
@@ -30,17 +31,23 @@
 
 <script>
 	import {
-		mapState
+		mapState,
+		mapActions
 	} from 'vuex'
 	export default {
 		data() {
 			return {}
 		},
+		onShow() {
+			this.loadAddress()
+		},
 		computed: {
 			...mapState('address', ['address'])
 		},
 		methods: {
-
+			...mapActions('address', {
+				loadAddress: 'load'
+			})
 		}
 	}
 </script>

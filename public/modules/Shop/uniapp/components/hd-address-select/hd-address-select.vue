@@ -8,7 +8,7 @@
 				选择地址
 			</view>
 		</view>
-
+		
 		<!-- 弹出地址选择 -->
 		<u-popup v-model="show" mode="center" height="800">
 			<view class="p-20">
