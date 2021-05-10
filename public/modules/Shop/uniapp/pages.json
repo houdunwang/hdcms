@@ -55,6 +55,18 @@
 			"navigationBarTitleText": "",
 			"enablePullDownRefresh": false
 		}
+	}, {
+		"path": "pages/order/order",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+	}, {
+		"path": "pages/address/index/index",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
 	}],
 	"tabBar": {
 		"color": "#7A7E83",
@@ -97,8 +109,6 @@
 	"easycom": {
 		// 下载安装方式
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-		// npm安装方式
-		// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
 	"condition": {
 		"current": 4,
@@ -153,6 +163,16 @@
 				"index": 9,
 				"name": "coupon",
 				"path": "pages/coupon/coupon"
+			},
+			{
+				"index": 10,
+				"name": "coupon",
+				"path": "pages/order/order"
+			},
+			{
+				"index": 11,
+				"name": "address_index",
+				"path": "pages/address/index/index"
 			}
 		]
 	}

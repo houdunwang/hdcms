@@ -16,13 +16,12 @@ class CreateShopOrderTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('goods_id')->constrained('shop_goods')->onDelete('cascade');
-            $table->foreignId('product_id')->nullable()->constrained('shop_product')->onDelete('set null');
             $table->foreignId('coupon_id')->nullable()->constrained('shop_coupon')->onDelete('set null');
+            $table->string('sn')->comment('订单号');
             $table->decimal('price')->comment('价格');
-            $table->string('pay_type')->comment('支付方式如alipay、wepay');
-            $table->string('pay_sn', 100)->index()->comment('支付定单号');
-            $table->boolean('status')->default(false)->comment('支付状态');
+            $table->string('pay_type')->nullable()->comment('支付方式如alipay、wepay');
+            $table->string('pay_sn', 100)->nullable()->index()->comment('支付定单号');
+            $table->boolean('state')->default(1)->comment('定单状态:1 未支付 2 已经支付 3 发货中 4 完成');
             $table->timestamps();
         });
     }

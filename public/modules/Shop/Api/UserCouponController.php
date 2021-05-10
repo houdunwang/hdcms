@@ -26,20 +26,11 @@ class UserCouponController extends Controller
 
     public function store(Request $request)
     {
-        ShopUser::user()->attach([$request->input('coupon')]);
+        $coupon = $request->input('coupon');
+        $has = ShopUser::user()->coupons()->where('coupon_id', $coupon['id'])->exists();
+        if (!$has) {
+            ShopUser::user()->coupons()->attach([$coupon['id']]);
+        }
         return $this->message('购物券添加成功');
-    }
-
-    public function show($id)
-    {
-        return view('shop::show');
-    }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
     }
 }

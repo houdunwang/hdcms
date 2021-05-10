@@ -53,10 +53,14 @@
 			return {}
 		},
 		computed: {
-			...mapState(['cart'])
+			...mapState('cart', {
+				'cart': state => state.cart
+			})
 		},
 		methods: {
-			...mapMutations(['removeCartGoods']),
+			...mapMutations('cart', {
+				removeCartGoods: 'remove'
+			}),
 			remove(goods) {
 				uni.showModal({
 					content: '确定删除吗',

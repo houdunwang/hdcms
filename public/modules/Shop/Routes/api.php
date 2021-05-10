@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Shop\Api\AddressController;
 use Modules\Shop\Api\CategoryController;
 use Modules\Shop\Api\ConfigController;
 use Modules\Shop\Api\AttributeTypeController;
@@ -9,6 +10,7 @@ use Modules\Shop\Api\GoodsController;
 use Modules\Shop\Api\GoodsAttributeController;
 use Modules\Shop\Api\BrandController;
 use Modules\Shop\Api\CouponController;
+use Modules\Shop\Api\OrderController;
 use Modules\Shop\Api\SupplierController;
 use Modules\Shop\Api\ProductController;
 use Modules\Shop\Api\UserCouponController;
@@ -41,4 +43,8 @@ Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::apiResource('coupon', CouponController::class);
     //用户优惠券
     Route::apiResource('user/coupon', UserCouponController::class);
+    //定单
+    Route::apiResource('order', OrderController::class);
+    //地址
+    Route::apiResource('address', AddressController::class);
 });

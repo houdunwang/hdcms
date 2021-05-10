@@ -32,7 +32,10 @@
 			return {}
 		},
 		computed: {
-			...mapGetters(['cartGoodsTotalPrice', 'cartGoodsTotalNumber'])
+			...mapGetters('cart', {
+				cartGoodsTotalPrice: 'totalPrice',
+				cartGoodsTotalNumber: 'totalNumber'
+			})
 		},
 		methods: {
 			toPay() {

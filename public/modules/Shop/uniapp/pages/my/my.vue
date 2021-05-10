@@ -31,10 +31,13 @@
 			this.loginCheck()
 		},
 		computed: {
-			...mapGetters(['cartGoodsTotalPrice', 'cartGoodsTotalNumber'])
+			...mapGetters('cart', {
+				cartGoodsTotalPrice: 'totalPrice',
+				cartGoodsTotalNumber: 'totalNumber'
+			})
 		},
 		methods: {
-			...mapMutations(['logout']),
+			...mapMutations('user',['logout']),
 			exit() {
 				uni.showModal({
 					title: '确定退出吗？',

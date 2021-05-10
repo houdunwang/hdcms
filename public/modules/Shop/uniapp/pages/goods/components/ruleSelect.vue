@@ -47,11 +47,15 @@
 </template>
 
 <script>
+	import {
+		mapMutations
+	} from 'vuex'
+
 	export default {
 		props: {
 			goods: Object,
-			products:Array,
-			rules:Array
+			products: Array,
+			rules: Array
 		},
 		data() {
 			return {
@@ -101,6 +105,7 @@
 			}
 		},
 		methods: {
+		
 			selectAttribute(id, index) {
 				if (!this.validAttributeIds.includes(id)) {
 					this.attributes = []
@@ -111,20 +116,20 @@
 			},
 			addCart() {
 				const goods = {
-					id:this.goods.id,
+					id: this.goods.id,
 					title: this.goodsTitle,
-					preview:this.goods.preview,
+					preview: this.goods.preview,
 					goods_id: this.goods.id,
 					price: this.goods.price,
-					number:this.number,
-					goods_sn:this.product ? this.product.sn : this.goods.sn,
+					number: this.number,
+					goods_sn: this.product ? this.product.sn : this.goods.sn,
 					product_id: this.product ? this.product.id : null,
 					//库存数量
-					goods_number:this.product?this.product.number:this.goods.number,
-					selected:true,
+					goods_number: this.product ? this.product.number : this.goods.number,
+					selected: true,
 				}
-				this.$store.commit('addCart',{goods})
-				this.$emit('change',goods)
+				this.$store.commit('cart/add',goods)
+				this.$emit('change', goods)
 			}
 		}
 	}

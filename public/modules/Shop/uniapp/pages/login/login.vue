@@ -33,11 +33,8 @@
 				},
 			}
 		},
-		computed: {
-			...mapState(['user'])
-		},
 		methods: {
-			...mapActions(['login']),
+			...mapActions('user',['login']),
 			submit() {
 				if (this.form.account == '' || this.form.password == '') {
 					return uni.showToast({

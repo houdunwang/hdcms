@@ -28,7 +28,7 @@
 		<footer-bar :goods="goods" :products="products" :rules="rules">
 			<template #right>
 				<u-button type="error" @click="showCart=true" class="mr-10" size="default">加入购物车</u-button>
-				 <u-button type="primary" @click="redirect('/pages/pay/pay')" size="default" v-if="cartGoodsTotalPrice(true)">
+				<u-button type="primary" @click="redirect('/pages/pay/pay')" size="default" v-if="totalPrice(true)">
 					去结算
 				</u-button>
 			</template>
@@ -61,8 +61,12 @@
 			}
 		},
 		computed: {
-			...mapState(['cart']),
-			...mapGetters(['cartGoodsTotalPrice'])
+			...mapState('cart', {
+				state: state => state.cart
+			}),
+			...mapGetters('cart', [
+				'totalPrice'
+			])
 		},
 		methods: {
 

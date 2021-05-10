@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * 类型的属性
@@ -28,6 +29,15 @@ class ShopUser extends User
      */
     public function coupons()
     {
-        return $this->belongsToMany(Coupon::class, 'shop_user_coupon', 'user_id');
+        return $this->belongsToMany(Coupon::class, 'shop_user_coupon', 'user_id')->withTimestamps();
+    }
+
+    /**
+     * 收货地址
+     * @return HasMany
+     */
+    public function address()
+    {
+        return $this->hasMany(Address::class, 'user_id');
     }
 }

@@ -1,17 +1,15 @@
 import store from '@/store/index.js';
+import {mapState} from 'vuex'
 
 export default {
 	onLoad() {},
 	computed: {
-		user() {
-			return store.state.user
-		},
+		...mapState('user',{
+			user:state=>state.user
+		}),
 		isLogin() {
 			return Boolean(this.user.id)
 		},
-		statusbarHeight() {
-			// return uni.getSystemInfo().getStatusbarHeight()
-		}
 	},
 	methods: {
 		//tabbar跳转
@@ -30,7 +28,7 @@ export default {
 			})
 		},
 		loginCheck() {
-			if (Boolean(store.state.user.id) === false) {
+			if (Boolean(this.user.id) === false) {
 				uni.showToast({
 					title: "请登录后操作",
 					duration: 3000

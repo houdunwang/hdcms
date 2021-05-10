@@ -15,11 +15,11 @@
 			</view>
 			<view class="w-100 flex flex-col justify-center items-center">
 				<view>
-					共有 {{cartGoodsTotalNumber()}} 件
+					共有 {{totalNumber()}} 件
 				</view>
 				<view>
 					<text class="text-red-600 text-lg mr-10" style="font-weight: bold;">
-						{{cartGoodsTotalPrice()}}
+						{{totalPrice()}}
 					</text> 元
 				</view>
 			</view>
@@ -36,6 +36,7 @@
 		mapState,
 		mapGetters
 	} from 'vuex'
+
 	export default {
 		props: {
 			goods: Object
@@ -46,8 +47,13 @@
 			}
 		},
 		computed: {
-			...mapState(['cart']),
-			...mapGetters(['cartGoodsTotalPrice', 'cartGoodsTotalNumber'])
+			...mapState('cart', {
+				'cart': state => state.cart
+			}),
+			...mapGetters('cart', [
+				'totalPrice',
+				'totalNumber'
+			])
 		},
 		methods: {}
 	}

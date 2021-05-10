@@ -13,6 +13,7 @@ class ShopDatabaseSeeder extends Seeder
         $this->call(BrandTableSeeder::class);
         $this->call(SupplierTableSeeder::class);
         $this->call(CouponTableSeeder::class);
+        $this->call(AddressTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
     }
 }

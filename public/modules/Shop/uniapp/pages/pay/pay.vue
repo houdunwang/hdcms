@@ -31,13 +31,29 @@
 			</uni-list>
 		</view>
 
+		<view class="mt-30">
+			<uni-card title="优惠券" v-if="coupon" :is-full="true">
+				<hd-coupon-item :coupon="coupon">
+					<button type="default" size="mini" @click="coupon=null">取消优惠券</button>
+				</hd-coupon-item>
+			</uni-card>
+			<uni-list>
+				<uni-list-item title="优惠券" link clickable @click="couponPopup=true" @select="couponPopup=false"
+					v-if="!coupon">
+				</uni-list-item>
+			</uni-list>
+			<u-popup v-model="couponPopup" mode="bottom" :mask-close-able="true">
+				<coupon-select @select="selectCoupon"></coupon-select>
+				<button type="default" @click="couponPopup=false">取消选择</button>
+			</u-popup>
+		</view>
 		<view class="bg-white flex flex-row h-50 items-stretch hd-cart-footer">
 			<view class="flex-1 flex flex-col justify-center items-center">
 				<view class="text-base flex flex-col items-center justify-center">
 					<view class="text-base text-gray-500">共 <text class=""> {{cartGoodsTotalNumber(true)}} </text> 件
 					</view>
 					<view class="text-red-600 ">
-						合计：<text class="font-bold">{{cartGoodsTotalPrice(true)}}</text>
+						合计：<text class="font-bold">{{totalPrice}}</text>
 					</view>
 				</view>
 			</view>
@@ -45,7 +61,7 @@
 				@click="switchTab('/pages/cart/cart')">
 				购物车
 			</view>
-			<view class="bg-red-500 flex-1 justify-center items-center flex text-white text-lg">
+			<view class="bg-red-500 flex-1 justify-center items-center flex text-white text-lg" @click="submit">
 				去付款
 			</view>
 		</view>
@@ -66,32 +82,70 @@
 			color: '#0BB702'
 		},
 	];
+	import couponSelect from './components/couponSelect.vue'
 	import {
+		mapState,
 		mapGetters
 	} from 'vuex'
 	export default {
+		components: {
+			couponSelect
+		},
 		data() {
 			return {
 				pays,
-				type: 'alipay'
-			}
-		},
-		onShow() {
-			if (this.cartGoodsTotalPrice(true) <= 0) {
-				uni.showModal({
-					title: '提示',
-					content: '你还没有选择商品',
-					success: function(res) {
-						uni.switchTab({
-							url: '/pages/cart/cart'
-						})
-					}
-				});
+				type: 'alipay',
+				//优惠券弹出层
+				couponPopup: false,
+				coupon: null
 			}
 		},
 		computed: {
-			...mapGetters(['cartGoodsTotalPrice', 'cartGoodsTotalNumber'])
+			...mapState(['cart']),
+			...mapGetters(['cartGoodsTotalPrice', 'cartGoodsTotalNumber']),
+			totalPrice() {
+				let price = this.cartGoodsTotalPrice(true)
+				if (this.coupon) {
+					switch (this.coupon.type) {
+						case 'fixed_price':
+							price -= this.coupon.value
+							break;
+						case 'discount':
+							price *= this.coupon.value
+					}
+				}
+				return Math.round(price);
+			}
 		},
+		methods: {
+			//选择优惠券
+			selectCoupon(coupon) {
+				this.couponPopup = false
+				this.coupon = coupon
+			},
+			//提交定单
+			async submit() {
+				const goods = this.cart;
+				const coupon = this.coupon;
+
+				await this.$api.post(`order`, {
+					goods,
+					coupon
+				}).then(res => {
+					uni.showToast({
+						title: '支付成功',
+						duration:2000
+					})
+					uni.navigateTo({
+						url: '/pages/order/order'
+					})
+				}).catch(e => {
+					uni.showModal({
+						title: '订单提交失败'
+					})
+				})
+			}
+		}
 	}
 </script>
 

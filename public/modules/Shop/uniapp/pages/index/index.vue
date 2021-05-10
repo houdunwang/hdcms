@@ -2,7 +2,7 @@
 	<view class="content">
 		<hd-navbar :showHomeIcon="false"></hd-navbar>
 		<!-- 幻灯片 -->
-		<hd-swiper class="rounded-md"/>
+		<hd-swiper class="rounded-md" />
 		<category-icons></category-icons>
 		<!-- 商品区域 -->
 		<goods-commend class="mt-10"></goods-commend>
@@ -21,19 +21,30 @@
 	import HdSwiper from './components/swiper.vue'
 	import CategoryIcons from './components/categoryIcons.vue'
 	import GoodsCommend from './components/goodsCommend.vue'
-	import {mapState} from 'vuex'
+	import {
+		mapState
+	} from 'vuex'
 	export default {
-		components:{CategoryIcons,GoodsCommend,HdSwiper},
+		components: {
+			CategoryIcons,
+			GoodsCommend,
+			HdSwiper
+		},
 		data() {
 			return {
-				
+				show: true,
 			}
 		},
-		computed:{
+		computed: {
 			...mapState(['user'])
 		},
-		onLoad() {
-		},
+		onLoad() {},
+		methods: {
+			onchange(e) {
+				const value = e.detail.value
+			},
+		}
+
 	}
 </script>
 
