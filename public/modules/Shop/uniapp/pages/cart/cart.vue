@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<hd-navbar title="购物车" :showInput="false" :showCartIcon="false" :showHomeIcon="true" :showUserIcon="true"></hd-navbar>
+		<hd-navbar title="购物车" :showInput="false" :showCartIcon="false" :showHomeIcon="true" :showUserIcon="true">
+		</hd-navbar>
 		<cart-list></cart-list>
 		<cart-tabbar></cart-tabbar>
 	</view>
@@ -9,21 +10,25 @@
 <script>
 	import CartList from './components/cartList.vue'
 	import CartTabbar from './components/cartTabBar.vue'
-	import {mapActions} from 'vuex';
+	import {
+		mapActions
+	} from 'vuex';
 	export default {
 		components: {
-			CartList,CartTabbar
+			CartList,
+			CartTabbar
 		},
-		onShow(){
-			this.loadAddress()
-		},
-		data() {
-			return {
+		onShow() {
+			if (this.isLogin) {
+				this.loadAddress()
 			}
 		},
+		data() {
+			return {}
+		},
 		methods: {
-			...mapActions('address',{
-				loadAddress:'load'
+			...mapActions('address', {
+				loadAddress: 'load'
 			})
 		}
 	}

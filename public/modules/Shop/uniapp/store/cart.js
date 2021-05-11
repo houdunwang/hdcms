@@ -45,5 +45,4 @@ export default {
 			state.cart = []
 		}
 	},
-	actions: {}
 }

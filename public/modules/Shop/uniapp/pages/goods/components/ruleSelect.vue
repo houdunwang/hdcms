@@ -94,7 +94,6 @@
 				if (!this.product) return this.goods.title;
 				let title = '';
 				this.rules.map(rule => {
-					console.log(rule);
 					rule.attributes.map(a => {
 						if (this.product.attributeList.includes(a.id)) {
 							title += a.attribute_value + '-'
@@ -105,7 +104,6 @@
 			}
 		},
 		methods: {
-		
 			selectAttribute(id, index) {
 				if (!this.validAttributeIds.includes(id)) {
 					this.attributes = []

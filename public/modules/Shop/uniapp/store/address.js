@@ -16,15 +16,13 @@ export default {
 		//初始地址数据
 		setAddress(state, address) {
 			state.address = address
-			state.currentAddress = address.find(a => a.is_default) || {}
 		}
 	},
 	actions: {
-		async load({
-			commit
-		}) {
+		//加载地址数据
+		async load(context) {
 			const address = await api.get(`address`);
-			commit('setAddress', address);
+			context.commit('setAddress', address);
 		}
 	}
 }

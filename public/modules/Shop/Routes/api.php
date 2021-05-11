@@ -13,6 +13,7 @@ use Modules\Shop\Api\CouponController;
 use Modules\Shop\Api\OrderController;
 use Modules\Shop\Api\SupplierController;
 use Modules\Shop\Api\ProductController;
+use Modules\Shop\Api\SearchController;
 use Modules\Shop\Api\UserCouponController;
 
 Route::group(['prefix' => "Shop/site/{site}"], function () {
@@ -47,4 +48,6 @@ Route::group(['prefix' => "Shop/site/{site}"], function () {
     Route::apiResource('order', OrderController::class);
     //地址
     Route::apiResource('address', AddressController::class);
+    //搜索
+    Route::get('search/goods', [SearchController::class, 'goods']);
 });

@@ -83,7 +83,9 @@
 		current: 0,
 	}
 	import GoodsCart from './components/goodsCart.vue';
-	import {mapActions} from 'vuex';
+	import {
+		mapActions
+	} from 'vuex';
 	export default {
 		components: {
 			GoodsCart
@@ -105,7 +107,9 @@
 		},
 		onShow() {
 			//加载收货地址
-			this.loadAddress()
+			if (this.isLogin) {
+				this.loadAddress()
+			}
 		},
 		computed: {
 			//内容scroll-view高度
@@ -122,8 +126,8 @@
 			this.loading = false
 		},
 		methods: {
-			...mapActions('address',{
-				loadAddress:'load'
+			...mapActions('address', {
+				loadAddress: 'load'
 			}),
 			//更改顶部tab
 			change(index) {

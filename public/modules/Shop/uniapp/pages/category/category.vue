@@ -6,7 +6,6 @@
 			<view class="flex item-stretch" :style="{height:`${height}px`}">
 				<view class="w-80">
 					<scroll-view scroll-y="true" class="category h-full">
-						
 						<view v-for="category in categories" :key="category.id"
 							class="py-20 flex item-center justify-center" @click="pid = category.id"
 							:class="{'bg-red-500 text-white': pid==category.id}">

@@ -4,13 +4,14 @@ export default {
 	state: {
 		user: {},
 	},
-	getters: {},
 	mutations: {
 		//保存用户
 		saveLoginUser(state, user) {
 			state.user = user
 			uni.setStorageSync('user', user)
+
 		},
+		//退出登录
 		logout(state) {
 			uni.removeStorageSync('token')
 			state.user = {}
@@ -18,13 +19,11 @@ export default {
 	},
 	actions: {
 		//获取当前用户资料
-		getCurrentUser({
-			commit
-		}) {
+		getCurrentUser(context) {
 			const token = uni.getStorageSync('token')
 			if (token) {
 				api.get(`/user/info`).then(user => {
-					commit('saveLoginUser', user)
+					context.commit('saveLoginUser', user)
 					return user;
 				}).catch(_ => {
 					uni.removeStorageSync('token')
@@ -32,15 +31,11 @@ export default {
 			}
 		},
 		//会员登录
-		async login({
-			commit,
-			state
-		}, payload) {
+		async login(context, payload) {
 			return api.post(`/login`, payload).then(res => {
-				commit('saveLoginUser', res.data)
+				context.commit('saveLoginUser', res.data)
 				uni.setStorageSync('token', res.token)
-
-			}, res => {
+			}).catch(() => {
 				uni.showToast({
 					title: '帐号或密码错误'
 				})

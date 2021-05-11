@@ -123,7 +123,7 @@
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"condition": {
-		"current": 4,
+		"current": 14,
 		"list": [{
 				"index": 0,
 				"name": "index",
@@ -196,6 +196,11 @@
 				"index": 13,
 				"name": "address_add",
 				"path": "pages/address/add/add"
+			},
+			{
+				"index": 14,
+				"name": "address_add",
+				"path": "pages/search/search"
 			}
 		]
 	}
