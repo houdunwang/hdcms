@@ -1,0 +1,7 @@
+/* @source "../../../packages/ui/src"; */
+/* @source "../node_modules/@houdunyun/ui"; */
+@reference "./shadcn.css";
+
+.active-link{
+  @apply text-destructive;
+}

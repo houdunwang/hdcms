@@ -1,0 +1,16 @@
+{
+  "projectName": "front",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "npm",
+  "git": true,
+  "install": true,
+  "addOnOptions": {},
+  "includeExamples": false,
+  "envVarValues": {},
+  "routerOnly": true,
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": []
+}

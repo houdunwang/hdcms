@@ -1,0 +1,29 @@
+{
+  "name": "framework",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A batteries-included AdonisJS starter kit for building modern APIs with type-safe frontend integration",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {
+    "@adonisjs/prettier-config": "^1.4.5",
+    "prettier": "^3.8.1",
+    "turbo": "^2.8.10"
+  },
+  "packageManager": "pnpm@10.29.3",
+  "prettier": "@adonisjs/prettier-config"
+}
