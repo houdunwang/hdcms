@@ -1,0 +1,49 @@
+{
+  "name": "@hd/wechat",
+  "description": "JS版本微信管理SDK",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "version": "1.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "向军大叔",
+    "email": "2300071698@qq.com",
+    "url": "https://www.houdunyun.com"
+  },
+  "homepage": "https://www.houdunyun.com",
+  "type": "module",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "format": "prettier --write \"./**/*.{js,json}\""
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "wechat",
+    "后盾云"
+  ],
+  "dependencies": {
+    "@types/qrcode": "^1.5.6",
+    "fast-xml-parser": "^5.3.5",
+    "ofetch": "^1.5.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "prettier": "^3.5.3",
+    "tsup": "^8.5.1",
+    "typescript": "~5.8",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+	"include": [
+		"**/*.ts",
+		"**/*.tsx"
+	],
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"lib": [
+			"ES2022",
+			"DOM",
+			"DOM.Iterable"
+		],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"./src/*"
+			]
+		},
+		"strict": true,
+		"skipLibCheck": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedSideEffectImports": true,
+		"verbatimModuleSyntax": true,
+		"noEmit": true
+	}
+}

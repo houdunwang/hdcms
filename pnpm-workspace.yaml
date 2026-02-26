@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@alicloud/openapi-core'
+  - '@swc/core'
+  - better-sqlite3
+  - esbuild
+  - msw
