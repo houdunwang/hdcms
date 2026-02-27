@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { menus } from '@/config/menus'
-import { HdHeader } from '@/components/common/hdHeader'
-import { HdFooter } from '@/components/common/HdFooter'
+import { HdHeader } from '@core/components/common/hdHeader'
+import { HdFooter } from '@core/components/common/HdFooter'
 export const Route = createFileRoute('/_front')({
 	component: RouteComponent,
 })

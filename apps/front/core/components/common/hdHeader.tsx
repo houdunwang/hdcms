@@ -1,5 +1,5 @@
 
-import { ModeToggle } from "@/components/theme/mode-toggle"
+import { ModeToggle } from "core/components/theme/mode-toggle"
 import { Button } from "@/components/ui/button"
 import {
 	DropdownMenu,
@@ -17,7 +17,6 @@ export interface IProps {
 	menus: { title: string, to: string, icon?: React.ReactNode }[]
 }
 export function HdHeader({ menus }: IProps) {
-	toast.info('请求过于频繁，请稍后重试')
 	return (
 		<header className="bg-background flex items-center gap-3 justify-between sticky top-0 z-10 border-b h-[var(--header-height)] px-3 lg:px-12">
 			<div className="flex items-center gap-1">

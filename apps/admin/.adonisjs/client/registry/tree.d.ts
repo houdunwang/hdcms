@@ -12,6 +12,10 @@ export interface ApiDefinition {
     register: typeof routes['auth.register']
     logout: typeof routes['auth.logout']
   }
+  captcha: typeof routes['captcha']
+  codes: {
+    send: typeof routes['codes.send']
+  }
   licenses: typeof routes['licenses']
   orders: {
     index: typeof routes['orders.index']
@@ -20,12 +24,8 @@ export interface ApiDefinition {
   pay: {
     notify: typeof routes['pay.notify']
   }
-  captcha: typeof routes['captcha']
   system: {
     restart: typeof routes['system.restart']
-  }
-  codes: {
-    send: typeof routes['codes.send']
   }
   uploads: typeof routes['uploads']
   users: {

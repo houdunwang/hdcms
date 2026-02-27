@@ -1,4 +1,4 @@
-import { useTheme } from "@/components/theme/theme-provider"
+import { useTheme } from "core/components/theme/theme-provider"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react"
 

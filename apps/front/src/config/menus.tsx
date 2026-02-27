@@ -1,10 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 
 export const menus = [
-	// {
-	// 	title: "欢迎盾友",
-	// 	to: "/",
-	// },
 	{
 		title: "实战课程",
 		to: "/lesson",

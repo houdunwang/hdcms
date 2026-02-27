@@ -10,8 +10,8 @@ export default class UsersController {
  * @description 获取当前认证用户的详细信息
  * @responseBody 200 - <User>
  */
-  async me({ auth }: HttpContext) {
-    return auth.user
+  async me({ auth, serialize }: HttpContext) {
+    return serialize(auth.user)
   }
 
   /**

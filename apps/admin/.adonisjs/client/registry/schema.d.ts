@@ -51,6 +51,28 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
     }
   }
+  'captcha': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/captcha'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/captcha_controller').default['handle']>>>
+    }
+  }
+  'codes.send': {
+    methods: ["POST"]
+    pattern: '/code/sendCode'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['send']>>>
+    }
+  }
   'licenses': {
     methods: ["POST"]
     pattern: '/core/license/check'
@@ -95,17 +117,6 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
     }
   }
-  'captcha': {
-    methods: ["GET","HEAD"]
-    pattern: '/core/captcha'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/captcha_controller').default['handle']>>>
-    }
-  }
   'system.restart': {
     methods: ["POST"]
     pattern: '/core/restart'
@@ -115,17 +126,6 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/systems_controller').default['restart']>>>
-    }
-  }
-  'codes.send': {
-    methods: ["POST"]
-    pattern: '/core/sendCode'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['send']>>>
     }
   }
   'uploads': {

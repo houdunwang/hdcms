@@ -1,7 +1,7 @@
-import { fieldErrorStore } from "@/store/fieldErrorStore"
+import { fieldErrorStore } from "core/store/fieldErrorStore"
 import { useStore } from "@tanstack/react-store"
 import { useEffect, useImperativeHandle, useState, type Ref } from "react"
-import { FieldError } from "../ui/field"
+import { FieldError } from "../../../src/components/ui/field"
 import { CircleAlert, Info, MessageCircleWarning } from "lucide-react"
 
 type Props = {
@@ -18,9 +18,6 @@ export const FormValidateError = ({ name, error, controlRef }: Props) => {
 	const [content, setContent] = useState("")
 
 	useEffect(() => {
-		console.log('apiMessage', apiMessage?.[name])
-		console.log('error', error)
-		console.log(error ?? apiMessage?.[name] ?? "")
 		setContent(error ?? apiMessage?.[name] ?? "")
 	}, [name, error, apiMessage])
 

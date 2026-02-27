@@ -1,11 +1,16 @@
 import { UserSchema } from '#database/schema'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
+import app from '@adonisjs/core/services/app'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { type AccessToken, DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
-export default class User extends compose(UserSchema, withAuthFinder(hash)) {
-  static accessTokens = DbAccessTokensProvider.forModel(User)
+const BaseUser = app.getEnvironment() === 'web' ? compose(UserSchema, withAuthFinder(hash)) : UserSchema
+
+export default class User extends BaseUser {
+  static get accessTokens() {
+    return DbAccessTokensProvider.forModel(User)
+  }
   declare currentAccessToken?: AccessToken
 
   // get initials() {

@@ -6,12 +6,12 @@ import { codeRule } from './rules/codeRule.js'
 import env from '#start/env'
 import { captchaRule } from './rules/captchaRule.js'
 
-export const loginValidator = vine.compile(
+export const loginValidator = vine.create(
   vine.object({
     account: vine
       .string()
       .minLength(3)
-      .maxLength(10)
+      .maxLength(30)
       .exists(async (_db, value, field) => {
         const user = await getUserByName(value)
         if (user) {
@@ -23,7 +23,7 @@ export const loginValidator = vine.compile(
     password: vine
       .string()
       .minLength(5)
-      .maxLength(20)
+      .maxLength(30)
       .exists(async (_db, value, field) => {
         const user = field.meta.user
         if (user) {
@@ -41,7 +41,7 @@ export const loginValidator = vine.compile(
   })
 )
 
-export const registerValidator = vine.compile(
+export const registerValidator = vine.create(
   vine.object({
     name: vine
       .string()
@@ -56,7 +56,7 @@ export const registerValidator = vine.compile(
   })
 )
 
-export const findPasswordValidator = vine.compile(
+export const findPasswordValidator = vine.create(
   vine.object({
     account: vine
       .string()

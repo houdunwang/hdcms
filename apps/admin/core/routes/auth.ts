@@ -1,5 +1,4 @@
 import { middleware } from '#start/kernel'
-import { throttle } from '#start/limiter'
 import router from '@adonisjs/core/services/router'
 
 const AuthController = () => import('#core/controllers/auth_controller')
