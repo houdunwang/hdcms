@@ -9,7 +9,6 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useApi } from '@core/hooks/useApi'
 import { useAuth } from '@core/hooks/useAuth'
 import { userAtom } from '@core/store/userStore'
 import { Link } from '@tanstack/react-router'
@@ -28,19 +27,13 @@ export const UserDropdown = () => {
 
 function IsLoginComponent() {
 	const user = useAtomValue(userAtom)
-	const { api } = useApi()
 	const auth = useAuth()
-	// const { data, isLoading } = useQuery(
-	// 	api.users.me.queryOptions({}, {})
-	// )
-
-	return <>
-		{/* {JSON.stringify(user?.$attributes)} */}
+	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Avatar>
-					<AvatarImage src={user?.avatar || ''} className='rounded-sm' />
-					<AvatarFallback>{user?.name}</AvatarFallback>
+					<AvatarImage src={user?.avatar!} className='rounded-sm' />
+					<AvatarFallback>{user?.name?.slice(0, 2)}</AvatarFallback>
 				</Avatar>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='w-auto'>
@@ -60,7 +53,7 @@ function IsLoginComponent() {
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>
-	</>
+	)
 }
 
 function UnLogin() {
