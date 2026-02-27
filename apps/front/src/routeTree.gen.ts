@@ -13,7 +13,9 @@ import { Route as FrontRouteRouteImport } from './routes/_front/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as FrontIndexRouteImport } from './routes/_front/index'
 import { Route as FrontLessonRouteImport } from './routes/_front/lesson'
+import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthForgetRouteImport } from './routes/_auth/forget'
 
 const FrontRouteRoute = FrontRouteRouteImport.update({
   id: '/_front',
@@ -33,40 +35,58 @@ const FrontLessonRoute = FrontLessonRouteImport.update({
   path: '/lesson',
   getParentRoute: () => FrontRouteRoute,
 } as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const AuthForgetRoute = AuthForgetRouteImport.update({
+  id: '/forget',
+  path: '/forget',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof FrontIndexRoute
+  '/forget': typeof AuthForgetRoute
   '/login': typeof AuthLoginRoute
+  '/register': typeof AuthRegisterRoute
   '/lesson': typeof FrontLessonRoute
 }
 export interface FileRoutesByTo {
   '/': typeof FrontIndexRoute
+  '/forget': typeof AuthForgetRoute
   '/login': typeof AuthLoginRoute
+  '/register': typeof AuthRegisterRoute
   '/lesson': typeof FrontLessonRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_front': typeof FrontRouteRouteWithChildren
+  '/_auth/forget': typeof AuthForgetRoute
   '/_auth/login': typeof AuthLoginRoute
+  '/_auth/register': typeof AuthRegisterRoute
   '/_front/lesson': typeof FrontLessonRoute
   '/_front/': typeof FrontIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/lesson'
+  fullPaths: '/' | '/forget' | '/login' | '/register' | '/lesson'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/lesson'
+  to: '/' | '/forget' | '/login' | '/register' | '/lesson'
   id:
     | '__root__'
     | '/_auth'
     | '/_front'
+    | '/_auth/forget'
     | '/_auth/login'
+    | '/_auth/register'
     | '/_front/lesson'
     | '/_front/'
   fileRoutesById: FileRoutesById
@@ -106,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrontLessonRouteImport
       parentRoute: typeof FrontRouteRoute
     }
+    '/_auth/register': {
+      id: '/_auth/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
@@ -113,15 +140,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRouteRoute
     }
+    '/_auth/forget': {
+      id: '/_auth/forget'
+      path: '/forget'
+      fullPath: '/forget'
+      preLoaderRoute: typeof AuthForgetRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
   }
 }
 
 interface AuthRouteRouteChildren {
+  AuthForgetRoute: typeof AuthForgetRoute
   AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthForgetRoute: AuthForgetRoute,
   AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

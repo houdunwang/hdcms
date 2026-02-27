@@ -11,10 +11,11 @@ import z from "zod"
 import { FieldCaptcha } from "@core/components/form/FieldCaptcha"
 import { FieldInput } from "@core/components/form/FieldInput"
 import { useAuth } from "@core/hooks/useAuth"
+import { Link } from "@tanstack/react-router"
 
 type LoginType = React.ComponentProps<"div">
 
-export function AccountLogin({ className, onSubmit, ...props }: LoginType) {
+export function Forget({ className, onSubmit, ...props }: LoginType) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
@@ -65,7 +66,6 @@ export function AccountLogin({ className, onSubmit, ...props }: LoginType) {
 					<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-2">
-					{/* <FieldGroup> */}
 					<form.AppField name="account" children={field => <field.FieldInput label="帐号" />} />
 					<form.AppField name="password" children={field => <field.FieldInput label="密码" type="password" />} />
 					<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
@@ -75,10 +75,9 @@ export function AccountLogin({ className, onSubmit, ...props }: LoginType) {
 					<Button variant="outline" type="button" className="w-full" size={'lg'}>
 						使用 微信 登录
 					</Button>
-					<FieldDescription className="text-center">
-						没有账号? <a href="#">注册</a>
+					<FieldDescription className="text-center text-sm">
+						没有账号? <Link to="/register">注册</Link>
 					</FieldDescription>
-					{/* </FieldGroup> */}
 				</CardContent>
 			</Card>
 		</form>
