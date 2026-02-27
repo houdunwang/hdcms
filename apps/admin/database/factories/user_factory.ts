@@ -6,7 +6,7 @@ export const UserFactory = factory
 
     return {
       name: faker.person.firstName(),
-      password: 'admin888',
+      // password: 'admin888',
       nickname: faker.person.fullName(),
       home: faker.internet.url(),
       mobile: faker.phone.number(),

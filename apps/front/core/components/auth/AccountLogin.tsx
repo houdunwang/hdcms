@@ -1,9 +1,9 @@
-import { FieldInput } from "@/components/form/FieldInput"
-import { FieldSubscribeButton } from "@/components/form/FieldSubscribeButton"
+import { FieldInput } from "core/components/form/FieldInput"
+import { FieldSubscribeButton } from "core/components/form/FieldSubscribeButton"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Field, FieldDescription, FieldGroup } from "@/components/ui/field"
-import { useApi } from "@/hooks/useApi"
+import { useApi } from "@core/hooks/useApi"
 import { cn } from "@/lib/utils"
 import { fieldContext, formContext } from "@/routes/__root"
 import { createFormHook } from "@tanstack/react-form"
@@ -14,15 +14,21 @@ import { FieldCaptcha } from "../form/FieldCaptcha"
 type LoginType = React.ComponentProps<"div">
 
 export function AccountLogin({ className, onSubmit, ...props }: LoginType) {
-	const api = useApi()
-	const mutation = useMutation({
-		mutationFn: async (data: { account: string; password: string; }) => {
-			return api.post<{ token: { token: string } }>("/core/login", data)
-		},
-		onSuccess: (data) => {
-			localStorage.setItem("token", data.token.token)
-		}
-	})
+	const { api } = useApi()
+	const mutation = useMutation(
+		api.auth.login.mutationOptions({
+			onSuccess: (data) => {
+				data.data.user
+
+			}
+		})
+		// mutationFn: async (data: { account: string; password: string; }) => {
+		// 	return api.post<{ token: { token: string } }>("/core/login", data)
+		// },
+		// onSuccess: (data) => {
+		// 	localStorage.setItem("token", data.token.token)
+		// }
+	)
 
 	const { useAppForm } = createFormHook({
 		fieldComponents: {
@@ -48,8 +54,8 @@ export function AccountLogin({ className, onSubmit, ...props }: LoginType) {
 				captcha: z.string().min(1, '请输入验证码'),
 			}),
 		},
-		onSubmit: ({ value }) => {
-			mutation.mutate(value)
+		onSubmit: ({ value: body }) => {
+			mutation.mutate({ body })
 		}
 	})
 

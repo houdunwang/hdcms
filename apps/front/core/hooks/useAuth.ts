@@ -1,7 +1,7 @@
-import { userStore } from "@/store/userStore"
-import type { User } from "@/types/models/user"
+import { userStore } from "core/store/userStore"
+import type { User } from "core/types/models/user"
 import { useApi } from "./useApi"
-import type { Login200Response } from "@/types/models/login200-response"
+import type { Login200Response } from "core/types/models/login200-response"
 
 export const useAuth = () => {
 	const api = useApi()

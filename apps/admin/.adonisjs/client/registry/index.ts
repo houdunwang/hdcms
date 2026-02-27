@@ -30,6 +30,18 @@ const routes = {
     tokens: [{"old":"/core/logout","type":0,"val":"core","end":""},{"old":"/core/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['auth.logout']['types'],
   },
+  'captcha': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/captcha',
+    tokens: [{"old":"/core/captcha","type":0,"val":"core","end":""},{"old":"/core/captcha","type":0,"val":"captcha","end":""}],
+    types: placeholder as Registry['captcha']['types'],
+  },
+  'codes.send': {
+    methods: ["POST"],
+    pattern: '/code/sendCode',
+    tokens: [{"old":"/code/sendCode","type":0,"val":"code","end":""},{"old":"/code/sendCode","type":0,"val":"sendCode","end":""}],
+    types: placeholder as Registry['codes.send']['types'],
+  },
   'licenses': {
     methods: ["POST"],
     pattern: '/core/license/check',
@@ -54,23 +66,11 @@ const routes = {
     tokens: [{"old":"/core/pay/notify","type":0,"val":"core","end":""},{"old":"/core/pay/notify","type":0,"val":"pay","end":""},{"old":"/core/pay/notify","type":0,"val":"notify","end":""}],
     types: placeholder as Registry['pay.notify']['types'],
   },
-  'captcha': {
-    methods: ["GET","HEAD"],
-    pattern: '/core/captcha',
-    tokens: [{"old":"/core/captcha","type":0,"val":"core","end":""},{"old":"/core/captcha","type":0,"val":"captcha","end":""}],
-    types: placeholder as Registry['captcha']['types'],
-  },
   'system.restart': {
     methods: ["POST"],
     pattern: '/core/restart',
     tokens: [{"old":"/core/restart","type":0,"val":"core","end":""},{"old":"/core/restart","type":0,"val":"restart","end":""}],
     types: placeholder as Registry['system.restart']['types'],
-  },
-  'codes.send': {
-    methods: ["POST"],
-    pattern: '/core/sendCode',
-    tokens: [{"old":"/core/sendCode","type":0,"val":"core","end":""},{"old":"/core/sendCode","type":0,"val":"sendCode","end":""}],
-    types: placeholder as Registry['codes.send']['types'],
   },
   'uploads': {
     methods: ["POST"],

@@ -60,7 +60,6 @@ export default class PaysController extends BaseController {
       const resource = request.input('resource')
       const { ciphertext, associated_data, nonce } = resource
       const params = await this.payService.pay().decipher_gcm(ciphertext, associated_data, nonce, env.get('WECHAT_PAY_KEY')!) as PayResult
-      console.log('params', params)
       const order = await this.orderService.getOrderBySn(params.out_trade_no)
       if (!order.payState && params.trade_state === 'SUCCESS') {
         order.payState = true

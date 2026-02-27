@@ -10,23 +10,21 @@
 */
 
 import limiter from '@adonisjs/limiter/services/main'
-import env from './env.ts'
 
+// 图形验证码频率限制
+export const throttleCaptcha = limiter.define('api', () => {
+  return limiterDefined()
+})
+
+// 发送验证码频率限制
 export const throttleSendCode = limiter.define('api', () => {
-  return limiter
-    .allowRequests(env.get('NODE_ENV') === 'development' ? 10 : 1)
-    .every('1 minute')
-    .limitExceeded((error) => {
-      return error
-        .setStatus(429)
-        .setMessage(`发送验证码次数过快，请${error.response.availableIn}秒后再试`)
-    })
+  return limiterDefined(10)
 })
 
 // 全局请求频率限制
 export const throttle = limiter.define('global', () => {
   return limiter
-    .allowRequests(env.get('NODE_ENV') === 'development' ? 1 : 10)
+    .allowRequests(20)
     .every('1 minute')
     .limitExceeded((error) => {
       error
@@ -34,3 +32,15 @@ export const throttle = limiter.define('global', () => {
         .setMessage(`请求频率过快，请${error.response.availableIn}秒后再试`)
     })
 })
+
+// 定义limiter
+function limiterDefined(requestNumber = 20, message = '请求频率过快', minute = 1) {
+  return limiter
+    .allowRequests(requestNumber)
+    .every(`${minute} minute`)
+    .limitExceeded((error) => {
+      return error
+        .setStatus(429)
+        .setMessage(`${message}，请${error.response.availableIn}秒后再试`)
+    })
+}

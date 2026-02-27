@@ -1,5 +1,5 @@
 
-import { FormValidateError, type FieldErrorHandle } from "@/components/form/FormValidateError"
+import { FormValidateError, type FieldErrorHandle } from "core/components/form/FormValidateError"
 import { useFieldContext } from "@/routes/__root"
 import { useRef } from "react"
 

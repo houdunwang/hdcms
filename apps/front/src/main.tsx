@@ -1,9 +1,9 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
-import { useAuth } from './hooks/useAuth'
+import { useAuth } from '../core/hooks/useAuth'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { api } from './lib/client'
+import { api } from '../core/lib/client'
 
 const router = createRouter({
   context: {

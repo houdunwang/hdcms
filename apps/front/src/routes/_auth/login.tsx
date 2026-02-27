@@ -1,19 +1,14 @@
-import { Login } from '@/components/auth/Login'
+import { AccountLogin } from 'core/components/auth/AccountLogin'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { createFileRoute } from '@tanstack/react-router'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
 export const Route = createFileRoute('/_auth/login')({
 	component: Page
 })
 
 function Page() {
-	useEffect(() => {
-		toast.info('请求过于频繁，请稍后重试')
-	}, [])
 	return <Component>
-		<Login />
+		<AccountLogin />
 	</Component>
 }
 

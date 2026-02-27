@@ -8,13 +8,13 @@ export type ScannedRoutes = {
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
+    'captcha': { paramsTuple?: []; params?: {} }
+    'codes.send': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'pays': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
-    'captcha': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
-    'codes.send': { paramsTuple?: []; params?: {} }
     'uploads': { paramsTuple?: []; params?: {} }
     'users.password': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
@@ -49,12 +49,12 @@ export type ScannedRoutes = {
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
+    'codes.send': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'pays': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
-    'codes.send': { paramsTuple?: []; params?: {} }
     'uploads': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'wechats': { paramsTuple?: []; params?: {} }

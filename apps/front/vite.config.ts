@@ -6,6 +6,7 @@ import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
 import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import path from 'node:path'
 const config = defineConfig({
   envDir: '../../',
   plugins: [
@@ -18,6 +19,7 @@ const config = defineConfig({
   resolve: {
     alias: {
       // '~registry': `${import.meta.dirname}/../admin/.adonisjs/client/registry.ts`,
+      '@core': path.resolve(__dirname, 'core')
     },
   },
 })
