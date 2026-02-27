@@ -1,3 +1,6 @@
 import type { Data } from '@app/admin/data';
-import { createStore } from "@tanstack/react-store";
-export const userStore = createStore<Data.User | undefined>(undefined);
+import { atom } from 'jotai';
+export const userAtom = atom<Data.User | undefined>(undefined)
+// export const userStore = createStore({
+// 	user: undefined as Data.User | undefined,
+// });

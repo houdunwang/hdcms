@@ -7,21 +7,31 @@ export default class UserTransformer extends BaseTransformer<User> {
     super(resource)
   }
   toObject() {
-    const extendFields = this.resource.id != this.user.id ? ['mobile', 'email'] as const : [];
-    return this.omit(this.resource, [
-      'password',
-      'openid',
-      ...extendFields
+    return this.pick(this.resource, [
+      'id',
+      'name',
+      'nickname',
+      'home',
+      'mobile',
+      'email',
+      'address',
+      'sex',
+      'avatar',
+      'home',
+      'github',
+      'qq',
+      'createdAt',
+      'updatedAt',
     ])
   }
 
-  async forDetailedView({ request }: HttpContext) {
-    console.log('request', request)
-    return {
-      ...this.toObject(),
-      can: {
-        view: true,
-      }
-    }
-  }
+  // async forDetailedView({ request }: HttpContext) {
+  //   console.log('request', request)
+  //   return {
+  //     ...this.toObject(),
+  //     can: {
+  //       view: true,
+  //     }
+  //   }
+  // }
 }

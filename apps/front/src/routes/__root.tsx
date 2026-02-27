@@ -14,7 +14,7 @@ interface RootRouteContext {
 }
 export const Route = createRootRouteWithContext<RootRouteContext>()({
   beforeLoad: async ({ context }) => {
-    context.auth.getCurrentUser()
+    await context.auth.getCurrentUser()
   },
   component: RootComponent,
 })

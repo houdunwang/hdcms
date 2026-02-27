@@ -26,9 +26,7 @@ function normalizeErrors(errors: Array<unknown> | undefined) {
 	return errors
 		.map((error) => {
 			if (!error) return undefined
-
 			if (typeof error === "string") return { message: error }
-
 			if (typeof error === "object" && "message" in error) {
 				const message = (error as { message?: unknown }).message
 				if (message) {

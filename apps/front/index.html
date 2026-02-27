@@ -1,18 +1,40 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>front</title>
+    <!-- <link href="https://font.webcache.cn/google/css2?family=Noto+Sans+SC:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Zhi+Mang+Xing&display=swap" rel="stylesheet"> -->
+    <style>
+      .loading {
+        position: fixed;
+        z-index: -999;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .loading::after {
+        content: '';
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(0, 0, 0, 0.2);
+        border-top-color: #3b82f6;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
-  <title>front</title>
-  <!-- <link href="https://font.webcache.cn/google/css2?family=Noto+Sans+SC:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Zhi+Mang+Xing&display=swap" rel="stylesheet"> -->
-</head>
-
-<body>
-  <div id="app"></div>
-  <script type="module"
-          src="/src/main.tsx"></script>
-</body>
-
+  <body>
+    <div id="app"></div>
+    <div class="loading"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

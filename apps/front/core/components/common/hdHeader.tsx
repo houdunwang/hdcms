@@ -1,5 +1,4 @@
 
-import { ModeToggle } from "core/components/theme/mode-toggle"
 import { Button } from "@/components/ui/button"
 import {
 	DropdownMenu,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Link } from "@tanstack/react-router"
 import { MessageCircleCode } from "lucide-react"
-import { toast } from "sonner"
+import { UserDropdown } from "../user/UserDropdown"
 
 export interface IProps {
 	menus: { title: string, to: string, icon?: React.ReactNode }[]
@@ -19,7 +18,9 @@ export interface IProps {
 export function HdHeader({ menus }: IProps) {
 	return (
 		<header className="bg-background flex items-center gap-3 justify-between sticky top-0 z-10 border-b h-[var(--header-height)] px-3 lg:px-12">
+			{/* {JSON.stringify(store)} */}
 			<div className="flex items-center gap-1">
+				{/* {JSON.stringify(user)} */}
 				<Link to="/" className="flex items-center gap-1">
 					<MessageCircleCode />
 					<div className="text-base">houdunren.com</div>
@@ -34,16 +35,11 @@ export function HdHeader({ menus }: IProps) {
 					<DropdownMenuDemo menus={menus} />
 				</div>
 			</div>
-			<div className="flex gap-2">
-				<ModeToggle />
-				<Link to="/login" className="flex items-center gap-1">
-					<Button variant={'outline'}>登录</Button>
-				</Link>
-				<Button variant={'default'}>注册</Button>
-			</div>
+			<UserDropdown />
 		</header>
 	)
 }
+
 
 export function DropdownMenuDemo({ menus }: IProps) {
 	return (

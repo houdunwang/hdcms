@@ -1,8 +1,8 @@
-import { fieldErrorStore } from "core/store/fieldErrorStore"
 import { useStore } from "@tanstack/react-store"
+import { fieldErrorAtom } from "core/store/fieldErrorStore"
+import { useAtomValue } from "jotai"
+import { MessageCircleWarning } from "lucide-react"
 import { useEffect, useImperativeHandle, useState, type Ref } from "react"
-import { FieldError } from "../../../src/components/ui/field"
-import { CircleAlert, Info, MessageCircleWarning } from "lucide-react"
 
 type Props = {
 	name: string
@@ -14,12 +14,12 @@ export type FieldErrorHandle = {
 	clear: () => void
 }
 export const FormValidateError = ({ name, error, controlRef }: Props) => {
-	const apiMessage = useStore(fieldErrorStore, s => (s.errors))
+	const requestError = useAtomValue(fieldErrorAtom)
 	const [content, setContent] = useState("")
 
 	useEffect(() => {
-		setContent(error ?? apiMessage?.[name] ?? "")
-	}, [name, error, apiMessage])
+		setContent(error ?? requestError?.[name] ?? "")
+	}, [name, error, requestError])
 
 	useImperativeHandle(controlRef, () => ({
 		clear: () => setContent("")

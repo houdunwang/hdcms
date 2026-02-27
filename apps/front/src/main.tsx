@@ -1,9 +1,10 @@
+import { useApi } from '@core/hooks/useApi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
-import { routeTree } from './routeTree.gen'
 import { useAuth } from '../core/hooks/useAuth'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { api } from '../core/lib/client'
+import { routeTree } from './routeTree.gen'
+import '@core/index'
 
 const router = createRouter({
   context: {
@@ -20,7 +21,14 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0
+    }
+  }
+})
+// const queryClient = new QueryClient()
 const rootElement = document.getElementById('app')!
 
 if (!rootElement.innerHTML) {
@@ -29,11 +37,19 @@ if (!rootElement.innerHTML) {
 }
 
 function App() {
-  const auth = useAuth()
-  const queryClient = new QueryClient()
+  const { TanstackQueryClientProvider } = useApi()
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} context={{ auth, queryClient }} />
-    </QueryClientProvider>
+    <TanstackQueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterContextProvider />
+      </QueryClientProvider>
+      {/* <RouterProvider router={router} context={{ auth, queryClient }} /> */}
+    </TanstackQueryClientProvider>
   )
+}
+
+function RouterContextProvider() {
+  const auth = useAuth()
+  return <RouterProvider router={router} context={{ auth, queryClient }} />
 }
