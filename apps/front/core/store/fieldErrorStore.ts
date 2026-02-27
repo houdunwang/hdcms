@@ -1,4 +1,5 @@
-import { createStore } from "@tanstack/react-store";
-export const fieldErrorStore = createStore({
-	errors: {} as Record<string, string>,
-});
+import { atom } from "jotai";
+export const fieldErrorAtom = atom<Record<string, string>>({})
+// export const fieldErrorStore = createStore({
+// 	errors: {} as Record<string, string>,
+// });

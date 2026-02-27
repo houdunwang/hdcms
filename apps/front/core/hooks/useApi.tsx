@@ -1,24 +1,16 @@
 import { registry } from '@app/admin/registry'
 import { ThemeProvider } from '@core/components/theme/theme-provider'
-import { fieldErrorStore } from '@core/store/fieldErrorStore'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { fieldErrorAtom } from '@core/store/fieldErrorStore'
 import { createTuyau } from '@tuyau/core/client'
 import { createTuyauReactQueryClient } from '@tuyau/react-query'
+import { useSetAtom } from 'jotai'
 import type { ReactNode } from 'react'
 import { toast, Toaster } from "sonner"
 export const useApi = () => {
-	const tuyauClient = getCreateTuyauClient()
+	const tuyauClient = useTuyauClient()
 	const TanstackQueryClientProvider = ({ children }: { children: ReactNode }) => {
-		const queryClient = new QueryClient({
-			defaultOptions: {
-				queries: {
-					retry: 0
-				}
-			}
-
-		})
 		return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-			<QueryClientProvider client={queryClient}> {children} </QueryClientProvider>
+			{children}
 			<Toaster position='top-center' />
 		</ThemeProvider>
 	}
@@ -27,11 +19,13 @@ export const useApi = () => {
 	return { api, TanstackQueryClientProvider }
 }
 
-function getCreateTuyauClient() {
+export function useTuyauClient() {
+	const setFieldError = useSetAtom(fieldErrorAtom)
 	return createTuyau({
 		baseUrl: import.meta.env.VITE_API_URL,
 		registry,
 		headers: { Accept: 'application/json' },
+		timeout: 600000,
 		hooks: {
 			beforeRequest: [
 				(request) => {
@@ -54,16 +48,11 @@ function getCreateTuyauClient() {
 							break
 						case 422:
 							const response = await error.response.json() as { errors: { message: string, field: string }[] }
+							const errorsFields = {} as Record<string, string>
 							response.errors.forEach(item => {
-								fieldErrorStore.setState(state => {
-									return {
-										errors: {
-											...state.errors,
-											[item.field]: item.message,
-										}
-									}
-								})
+								errorsFields[item.field] = item.message
 							})
+							setFieldError(errorsFields)
 							break;
 						default:
 							console.error('Error:', error.message)

@@ -126,8 +126,8 @@ export function LessonPage() {
 	] as const
 
 	return (
-		<div className="flex min-h-dvh flex-col bg-background container ">
-			<Card className="py-12 lg:py-16 mt-12 bg-primary-foreground">
+		<div className="flex min-h-dvh flex-col container mx-auto">
+			<Card className="py-12 lg:py-16 mt-12 ">
 				<CardHeader>
 					<CardTitle className='text-4xl text-center'>
 						高质量教程
@@ -149,21 +149,22 @@ export function LessonPage() {
 				<CardContent>
 					<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 						{filteredCourses.map((course, index) => (
-							<Card key={course.title} className='object-cover p-0'>
-								<CardHeader className='p-0'>
-									<img src={`/images/${index + 1}.jpg`} alt={course.title} />
+							<Card key={course.title} className='object-cover'>
+								<img src={`/images/${index + 1}.jpg`} alt={course.title} />
+								<CardHeader>
 									<CardTitle className='px-3 pt-3'>{course.title} </CardTitle>
 									<CardDescription className='px-3'>
 										{course.desc}
 									</CardDescription>
 								</CardHeader>
-								<CardFooter className='grid grid-cols-[1fr_auto_1fr] py-2'>
+
+								<CardFooter className='grid grid-cols-[1fr_auto_1fr]'>
 									<div className="text-xs space-x-1">
 										<Button variant={'outline'} size={'xs'}>18</Button>
 										<span>章节</span>
 									</div>
 									<DropdownMenu>
-										<DropdownMenuTrigger asChild className='flex justify-center aaaaaaa'>
+										<DropdownMenuTrigger asChild className='flex justify-center'>
 											<Button variant="outline" size={'sm'} >课程章节</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent className="w-40" align="start">

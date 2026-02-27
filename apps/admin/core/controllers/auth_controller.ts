@@ -21,7 +21,7 @@ export default class AuthController extends BaseController {
    * @requestFormDataBody { "account": { "type": "string", "description": "登录帐号、手机号、邮箱", "example": "admin", "required": "true" }, "password": { "type": "string", "description": "登录密码", "example": "admin888", "required": "true" } , "captcha": { "type": "string", "description": "验证码", "example": "" }, "captcha_key": { "type": "string", "description": "验证码key", "example": "" }}
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  public async login({ request, serialize, auth }: HttpContext) {
+  public async login({ request, serialize }: HttpContext) {
     const payload = await request.validateUsing(loginValidator)
     const user = await getUserByName(payload.account)
     if (!user) {

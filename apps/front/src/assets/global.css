@@ -1,7 +1,15 @@
 /* @source "../../../packages/ui/src"; */
 /* @source "../node_modules/@houdunyun/ui"; */
 @reference "./shadcn.css";
-
-.active-link{
+:root {
+  --header-height: 4rem;
+}
+.active-link {
   @apply text-destructive;
+}
+
+body {
+  button {
+    @apply cursor-pointer;
+  }
 }

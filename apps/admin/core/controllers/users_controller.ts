@@ -1,6 +1,7 @@
 import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
 import { createUserValidator, updateUserValidator, changePasswordValidator } from '#core/validators/user'
+import UserTransformer from '#transformers/user_transformer'
 
 export default class UsersController {
   /**
@@ -11,7 +12,13 @@ export default class UsersController {
  * @responseBody 200 - <User>
  */
   async me({ auth, serialize }: HttpContext) {
-    return serialize(auth.user)
+    const user = auth.user!
+    // await new Promise((r) => {
+    //   setTimeout(() => {
+    //     r('')
+    //   }, 0)
+    // })
+    return serialize(UserTransformer.transform(user, user))
   }
 
   /**
