@@ -28,7 +28,7 @@ export function Component() {
 			if (data?.ticket) {
 				mutation.mutate({ body: { ticket: data.ticket } })
 			}
-		}, 2000)
+		}, 3000)
 		return () => {
 			clearInterval(id)
 		}

@@ -11,13 +11,16 @@ import { useAuth } from './hooks/useAuth'
 import { useApi } from './hooks/useApi'
 import { createFormHookContexts } from '@tanstack/react-form'
 import { useEffect } from 'react'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } = createFormHookContexts()
 
 export const Hd = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }) => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 		<QueryClientProvider client={queryClient}>
-			<HdProvider router={router} queryClient={queryClient} />
+			<TooltipProvider>
+				<HdProvider router={router} queryClient={queryClient} />
+			</TooltipProvider>
 			<Toaster position='top-center' />
 		</QueryClientProvider>
 	</ThemeProvider>
