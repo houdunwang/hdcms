@@ -39,9 +39,9 @@ export interface ApiDefinition {
     destroy: typeof routes['users.destroy']
   }
   wechats: typeof routes['wechats']
-  login: {
-    loginQrCode: typeof routes['login.login_qr_code']
-    login: typeof routes['login.login']
+  wechatLogin: {
+    loginQrCode: typeof routes['wechat_login.login_qr_code']
+    login: typeof routes['wechat_login.login']
   }
   bind: {
     loginQrCode: typeof routes['bind.login_qr_code']

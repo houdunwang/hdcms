@@ -25,8 +25,8 @@ export type ScannedRoutes = {
     'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats': { paramsTuple?: []; params?: {} }
-    'login.login_qr_code': { paramsTuple?: []; params?: {} }
-    'login.login': { paramsTuple?: []; params?: {} }
+    'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
+    'wechat_login.login': { paramsTuple?: []; params?: {} }
     'bind.login_qr_code': { paramsTuple?: []; params?: {} }
     'bind.bind': { paramsTuple?: []; params?: {} }
   }
@@ -37,6 +37,7 @@ export type ScannedRoutes = {
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats': { paramsTuple?: []; params?: {} }
+    'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
@@ -45,6 +46,7 @@ export type ScannedRoutes = {
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats': { paramsTuple?: []; params?: {} }
+    'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'auth.login': { paramsTuple?: []; params?: {} }
@@ -60,8 +62,7 @@ export type ScannedRoutes = {
     'uploads': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'wechats': { paramsTuple?: []; params?: {} }
-    'login.login_qr_code': { paramsTuple?: []; params?: {} }
-    'login.login': { paramsTuple?: []; params?: {} }
+    'wechat_login.login': { paramsTuple?: []; params?: {} }
     'bind.login_qr_code': { paramsTuple?: []; params?: {} }
     'bind.bind': { paramsTuple?: []; params?: {} }
   }

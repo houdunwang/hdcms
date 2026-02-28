@@ -3,7 +3,7 @@ import { HdHeader } from '@core/components/common/hdHeader'
 import { menus } from '@/config/menus'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_auth')({
+export const Route = createFileRoute('/auth')({
 	component: RouteComponent,
 })
 

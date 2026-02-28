@@ -25,6 +25,7 @@
     "@tanstack/router-plugin": "^1.132.0",
     "@tuyau/core": "^1.0.0",
     "@tuyau/react-query": "^1.0.0",
+    "ahooks": "^3.9.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
