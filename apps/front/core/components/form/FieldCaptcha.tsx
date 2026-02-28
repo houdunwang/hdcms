@@ -1,16 +1,15 @@
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useFormField, } from "core/hooks/useFormField"
-import type { FormFieldProps } from "core/types/form"
+import { useFieldContext } from "@core/hd"
+import { useApi } from "@core/hooks/useApi"
 import { useQuery } from "@tanstack/react-query"
+import type { FormFieldProps } from "core/types/form"
 import { useEffect } from "react"
 import { ScaleLoader } from "react-spinners"
-import { useApi } from "@core/hooks/useApi"
-import { useFieldContext } from "@core/hd"
+import { FieldValidateError } from "./FieldValidateError"
 export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {
 	const field = useFieldContext<string>()
 	const { api } = useApi()
-	const { FieldErrorComponent, errorComponentRef } = useFormField()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
 	const { data, isFetching, refetch } = useQuery(
 		api.captcha.queryOptions()
@@ -34,7 +33,6 @@ export function FieldCaptcha({ label, description, className, fieldClassName, ty
 					placeholder="请输入右侧加法结果"
 					onChange={(event) => {
 						field.handleChange(event.target.value)
-						errorComponentRef.current?.clear()
 					}}
 					{...props}
 					autoComplete={autoComplete}
@@ -46,7 +44,7 @@ export function FieldCaptcha({ label, description, className, fieldClassName, ty
 					}
 				</div>}
 			</div>
-			{FieldErrorComponent}
+			<FieldValidateError field={field} />
 		</Field>
 	)
 }

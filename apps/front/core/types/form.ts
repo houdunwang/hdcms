@@ -9,3 +9,12 @@ export type FormFieldProps<T extends keyof JSX.IntrinsicElements | JSXElementCon
 	className?: string
 	fieldClassName?: string
 }
+
+export type IFieldApi = {
+	name: string
+	state: {
+		meta?: {
+			errors: readonly unknown[]
+		}
+	}
+}

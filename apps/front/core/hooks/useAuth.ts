@@ -19,6 +19,7 @@ export const useAuth = () => {
 		if (data.token) {
 			localStorage.setItem(AuthEnum.TOKEN_NAME, data.token)
 			const loginUrl = localStorage.getItem("history") || "/"
+			setUser(data.user)
 			navigate({ href: loginUrl })
 		}
 	}

@@ -11,6 +11,7 @@ export interface ApiDefinition {
     login: typeof routes['auth.login']
     register: typeof routes['auth.register']
     logout: typeof routes['auth.logout']
+    findPassword: typeof routes['auth.find_password']
   }
   captcha: typeof routes['captcha']
   codes: {
