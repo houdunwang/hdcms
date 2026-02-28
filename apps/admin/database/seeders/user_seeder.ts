@@ -1,7 +1,6 @@
 import { UserFactory } from '#database/factories/user_factory'
 import User from '#models/user'
 import env from '#start/env'
-import hash from '@adonisjs/core/services/hash'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 
 export default class extends BaseSeeder {
@@ -12,7 +11,7 @@ export default class extends BaseSeeder {
     user.name = 'admin'
     user.email = env.get('TEST_USER_EMAIL') ?? null
     user.mobile = env.get('TEST_USER_MOBILE') ?? null
-    user.password = await hash.make('admin888')
+    user.password = 'admin888'
     await user.save()
   }
 }

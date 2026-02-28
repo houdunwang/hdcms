@@ -8,149 +8,149 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = ['id', 'tokenableId', 'type', 'name', 'hash', 'abilities', 'createdAt', 'updatedAt', 'lastUsedAt', 'expiresAt'] as const
+  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns
-  @column({ isPrimary: true })
-  declare id: number
-  @column()
-  declare tokenableId: number
-  @column()
-  declare type: string
-  @column()
-  declare name: string | null
-  @column()
-  declare hash: string
   @column()
   declare abilities: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-  @column.dateTime()
-  declare lastUsedAt: DateTime | null
   @column.dateTime()
   declare expiresAt: DateTime | null
+  @column()
+  declare hash: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime()
+  declare lastUsedAt: DateTime | null
+  @column()
+  declare name: string | null
+  @column()
+  declare tokenableId: number
+  @column()
+  declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
 }
 
 export class CacheSchema extends BaseModel {
-  static $columns = ['key', 'value', 'expiresAt'] as const
+  static $columns = ['expiresAt', 'key', 'value'] as const
   $columns = CacheSchema.$columns
+  @column.dateTime()
+  declare expiresAt: DateTime | null
   @column()
   declare key: string
   @column()
   declare value: string | null
-  @column.dateTime()
-  declare expiresAt: DateTime | null
 }
 
 export class OrderSchema extends BaseModel {
-  static $columns = ['id', 'userId', 'orderableType', 'orderableId', 'sn', 'subject', 'price', 'payState', 'payType', 'tradeNo', 'data', 'createdAt', 'updatedAt'] as const
+  static $columns = ['createdAt', 'data', 'id', 'orderableId', 'orderableType', 'payState', 'payType', 'price', 'sn', 'subject', 'tradeNo', 'updatedAt', 'userId'] as const
   $columns = OrderSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare data: string | null
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare userId: number
-  @column()
-  declare orderableType: string
-  @column()
   declare orderableId: bigint | number
   @column()
-  declare sn: string
-  @column()
-  declare subject: string
-  @column()
-  declare price: string
+  declare orderableType: string
   @column()
   declare payState: boolean
   @column()
   declare payType: string | null
   @column()
-  declare tradeNo: string | null
+  declare price: string
   @column()
-  declare data: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
+  declare sn: string
+  @column()
+  declare subject: string
+  @column()
+  declare tradeNo: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
 }
 
 export class RateLimitSchema extends BaseModel {
-  static $columns = ['key', 'points', 'expire'] as const
+  static $columns = ['expire', 'key', 'points'] as const
   $columns = RateLimitSchema.$columns
+  @column()
+  declare expire: bigint | number | null
   @column()
   declare key: string
   @column()
   declare points: number
-  @column()
-  declare expire: bigint | number | null
 }
 
 export class UploadSchema extends BaseModel {
-  static $columns = ['id', 'userId', 'url', 'name', 'extension', 'size', 'driver', 'mime', 'createdAt', 'updatedAt'] as const
+  static $columns = ['createdAt', 'driver', 'extension', 'id', 'mime', 'name', 'size', 'updatedAt', 'url', 'userId'] as const
   $columns = UploadSchema.$columns
-  @column({ isPrimary: true })
-  declare id: number
-  @column()
-  declare userId: number
-  @column()
-  declare url: string
-  @column()
-  declare name: string
-  @column()
-  declare extension: string
-  @column()
-  declare size: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
   @column()
   declare driver: string
   @column()
-  declare mime: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-}
-
-export class UserSchema extends BaseModel {
-  static $columns = ['id', 'name', 'password', 'nickname', 'email', 'mobile', 'sex', 'address', 'realName', 'avatar', 'home', 'weibo', 'wechat', 'github', 'qq', 'openid', 'unionid', 'isLock', 'createdAt', 'updatedAt'] as const
-  $columns = UserSchema.$columns
+  declare extension: string
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare name: string | null
-  @column({ serializeAs: null })
-  declare password: string | null
+  declare mime: string | null
   @column()
-  declare nickname: string | null
+  declare name: string
   @column()
-  declare email: string | null
+  declare size: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
   @column()
-  declare mobile: string | null
+  declare url: string
   @column()
-  declare sex: boolean
+  declare userId: number
+}
+
+export class UserSchema extends BaseModel {
+  static $columns = ['address', 'avatar', 'createdAt', 'email', 'github', 'home', 'id', 'isLock', 'mobile', 'name', 'nickname', 'openid', 'password', 'qq', 'realName', 'sex', 'unionid', 'updatedAt', 'wechat', 'weibo'] as const
+  $columns = UserSchema.$columns
   @column()
   declare address: string | null
   @column()
-  declare realName: string | null
-  @column()
   declare avatar: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
   @column()
-  declare home: string | null
-  @column()
-  declare weibo: string | null
-  @column()
-  declare wechat: string | null
+  declare email: string | null
   @column()
   declare github: string | null
   @column()
-  declare qq: string | null
-  @column()
-  declare openid: string | null
-  @column()
-  declare unionid: string | null
+  declare home: string | null
+  @column({ isPrimary: true })
+  declare id: number
   @column()
   declare isLock: boolean
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  @column()
+  declare mobile: string | null
+  @column()
+  declare name: string | null
+  @column()
+  declare nickname: string | null
+  @column()
+  declare openid: string | null
+  @column({ serializeAs: null })
+  declare password: string | null
+  @column()
+  declare qq: string | null
+  @column()
+  declare realName: string | null
+  @column()
+  declare sex: boolean
+  @column()
+  declare unionid: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare wechat: string | null
+  @column()
+  declare weibo: string | null
 }

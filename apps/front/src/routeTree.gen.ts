@@ -13,6 +13,7 @@ import { Route as FrontRouteRouteImport } from './routes/_front/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as FrontIndexRouteImport } from './routes/_front/index'
 import { Route as FrontLessonRouteImport } from './routes/_front/lesson'
+import { Route as AuthWechatRouteImport } from './routes/_auth/wechat'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthForgetRouteImport } from './routes/_auth/forget'
@@ -35,6 +36,11 @@ const FrontLessonRoute = FrontLessonRouteImport.update({
   path: '/lesson',
   getParentRoute: () => FrontRouteRoute,
 } as any)
+const AuthWechatRoute = AuthWechatRouteImport.update({
+  id: '/wechat',
+  path: '/wechat',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -56,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/forget': typeof AuthForgetRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/wechat': typeof AuthWechatRoute
   '/lesson': typeof FrontLessonRoute
 }
 export interface FileRoutesByTo {
@@ -63,6 +70,7 @@ export interface FileRoutesByTo {
   '/forget': typeof AuthForgetRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/wechat': typeof AuthWechatRoute
   '/lesson': typeof FrontLessonRoute
 }
 export interface FileRoutesById {
@@ -72,14 +80,15 @@ export interface FileRoutesById {
   '/_auth/forget': typeof AuthForgetRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
+  '/_auth/wechat': typeof AuthWechatRoute
   '/_front/lesson': typeof FrontLessonRoute
   '/_front/': typeof FrontIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/forget' | '/login' | '/register' | '/lesson'
+  fullPaths: '/' | '/forget' | '/login' | '/register' | '/wechat' | '/lesson'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/forget' | '/login' | '/register' | '/lesson'
+  to: '/' | '/forget' | '/login' | '/register' | '/wechat' | '/lesson'
   id:
     | '__root__'
     | '/_auth'
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/_auth/forget'
     | '/_auth/login'
     | '/_auth/register'
+    | '/_auth/wechat'
     | '/_front/lesson'
     | '/_front/'
   fileRoutesById: FileRoutesById
@@ -126,6 +136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrontLessonRouteImport
       parentRoute: typeof FrontRouteRoute
     }
+    '/_auth/wechat': {
+      id: '/_auth/wechat'
+      path: '/wechat'
+      fullPath: '/wechat'
+      preLoaderRoute: typeof AuthWechatRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/_auth/register': {
       id: '/_auth/register'
       path: '/register'
@@ -154,12 +171,14 @@ interface AuthRouteRouteChildren {
   AuthForgetRoute: typeof AuthForgetRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthWechatRoute: typeof AuthWechatRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthForgetRoute: AuthForgetRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  AuthWechatRoute: AuthWechatRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

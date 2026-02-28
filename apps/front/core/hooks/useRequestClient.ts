@@ -1,6 +1,7 @@
 import { registry } from '@app/admin/registry'
 import { AuthEnum } from '@core/enum'
 import { fieldErrorAtom } from '@core/store/fieldErrorStore'
+import { useNavigate } from '@tanstack/react-router'
 import { createTuyau } from '@tuyau/core/client'
 import { useSetAtom } from 'jotai'
 import { toast } from "sonner"
@@ -8,6 +9,7 @@ import { toast } from "sonner"
 
 export function useRequestClient() {
 	const setFieldError = useSetAtom(fieldErrorAtom)
+	const navigate = useNavigate()
 	return createTuyau({
 		baseUrl: import.meta.env.VITE_API_URL,
 		registry,
@@ -27,7 +29,7 @@ export function useRequestClient() {
 					switch (error.response.status) {
 						case 401:
 							localStorage.removeItem(AuthEnum.TOKEN_NAME)
-							window.location.href = '/login'
+							navigate({ to: '/login' })
 							break
 						case 429:
 							const msg = await error.response.json() as { errors: { message: string }[] }

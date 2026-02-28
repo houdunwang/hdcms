@@ -10,6 +10,7 @@ import './plugin/dayjs'
 import { useAuth } from './hooks/useAuth'
 import { useApi } from './hooks/useApi'
 import { createFormHookContexts } from '@tanstack/react-form'
+import { useEffect } from 'react'
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } = createFormHookContexts()
 
@@ -29,7 +30,13 @@ function HdProvider({ router, queryClient }: { router: AnyRouter, queryClient: Q
 	const { isLoading, data } = useQuery(api.users.me.queryOptions({},
 		{ enabled: !!localStorage.getItem(AuthEnum.TOKEN_NAME) })
 	)
+
+	useEffect(() => {
+		if (data?.data) {
+			setUser(data.data)
+		}
+	}, [data])
+
 	if (isLoading) return <div className='w-screen h-screen flex justify-center items-center'><HashLoader size={50} color='#fb2c36' /></div>
-	setUser(data?.data)
 	return <RouterProvider router={router} context={{ auth, queryClient }} />
 }

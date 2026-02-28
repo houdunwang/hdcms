@@ -61,12 +61,16 @@ export default class AuthController extends BaseController {
    * @requestFormDataBody { "name": { "type": "string", "minLength": 3, "maxLength": 20, "required": "true" }, "password": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" }, "password_confirmation": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" } }
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  async register({ request, auth }: HttpContext) {
+  async register({ request, auth, serialize }: HttpContext) {
     const payload = await request.validateUsing(registerValidator)
     const user = new User()
-    await user.fill(payload).save()
+    const { captcha, password_confirmation, ...userPayload } = payload
+    await user.fill(userPayload).save()
     const token = await auth.use('api').createToken(user)
-    return { token, user }
+    return serialize({
+      user: UserTransformer.transform(user, user),
+      token: token.value!.release(),
+    })
   }
 
   /**

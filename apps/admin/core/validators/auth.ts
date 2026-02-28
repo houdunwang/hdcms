@@ -53,6 +53,7 @@ export const registerValidator = vine.create(
       }),
     password: vine.string().minLength(5).maxLength(20).confirmed(),
     password_confirmation: vine.string().minLength(5).maxLength(20),
+    captcha: vine.string().use(captchaRule()),
   })
 )
 
