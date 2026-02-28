@@ -8,7 +8,7 @@ const BindController = () => import('#core/wechat/bind_controller')
 router.group(() => {
 	router.any('/', [WechatsController])
 	router.get('/login/qr', [WechatLoginController, 'loginQrCode']).use(throttle)
-	router.post('/login', [WechatLoginController, 'login'])
+	router.post('/login', [WechatLoginController, 'login']).use(throttle)
 
 	// 绑定微信
 	router.post('/bind/qr', [BindController, 'loginQrCode'])

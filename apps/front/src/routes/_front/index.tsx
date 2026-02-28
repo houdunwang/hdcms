@@ -1,19 +1,16 @@
 import { Button } from '@/components/ui/button'
 import { createFileRoute, Link } from '@tanstack/react-router'
-// import { HdHeader } from '@houdunyun/ui'
 import {
   ArrowRight,
   Bell,
-  BookOpen,
   Bookmark,
-  CalendarCheck,
+  BookOpen,
   Code2,
   LayoutGrid,
   ShieldCheck,
   Sparkles,
   Star,
-  Terminal,
-  Video,
+  Terminal
 } from 'lucide-react'
 
 export const Route = createFileRoute('/_front/')({

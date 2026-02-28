@@ -24,7 +24,7 @@ export const throttleSendCode = limiter.define('api', () => {
 // 全局请求频率限制
 export const throttle = limiter.define('global', () => {
   return limiter
-    .allowRequests(20)
+    .allowRequests(30)
     .every('1 minute')
     .limitExceeded((error) => {
       error

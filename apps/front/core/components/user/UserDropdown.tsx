@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from '@core/hooks/useAuth'
 import { userAtom } from '@core/store/userStore'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { useAtomValue } from 'jotai'
 import { ModeToggle } from '../theme/mode-toggle'
@@ -28,6 +28,7 @@ export const UserDropdown = () => {
 function IsLoginComponent() {
 	const user = useAtomValue(userAtom)
 	const auth = useAuth()
+	const navigation = useNavigate()
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -44,7 +45,7 @@ function IsLoginComponent() {
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
-					<DropdownMenuItem>用户中心</DropdownMenuItem>
+					<DropdownMenuItem onClick={() => navigation({ to: '/member' })}>用户中心</DropdownMenuItem>
 					<DropdownMenuItem>订阅状态</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
