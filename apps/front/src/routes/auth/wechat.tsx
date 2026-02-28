@@ -4,6 +4,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useAuth } from '@core/hooks/useAuth'
 import React from 'react'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, RefreshCw, Clock } from 'lucide-react'
+import { Wechat } from '@core/components/login/Wechat'
 
 const highlights = [
 	{
@@ -28,14 +29,15 @@ const highlights = [
 	},
 ] as const
 
-export const Route = createFileRoute('/_auth/wechat')({
+export const Route = createFileRoute('/auth/wechat')({
 	component: Page,
 })
 
 function Page() {
-	return <Component>
-		<WechatLogin />
-	</Component>
+	return <Wechat />
+	// return <Component>
+	// 	<WechatLogin />
+	// </Component>
 }
 
 function Component({ children }: { children: React.ReactNode }) {
@@ -65,7 +67,7 @@ function Component({ children }: { children: React.ReactNode }) {
 								<Card key={item.title} size="sm">
 									<CardContent className="flex items-start gap-3">
 										<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
-											<item.icon className="size-4" />
+											<item.icon className='size-4' />
 										</div>
 										<div>
 											<div className="text-sm font-medium">{item.title}</div>
@@ -104,7 +106,7 @@ function Component({ children }: { children: React.ReactNode }) {
 							</CardContent>
 						</Card>
 						<div className="mt-2 text-xs text-muted-foreground">
-							或者前往<Link to="/login" className="ml-1 text-primary hover:underline">账号密码登录</Link>
+							或者前往<Link to="/auth/login" className="ml-1 text-primary hover:underline">账号密码登录</Link>
 						</div>
 					</CardContent>
 				</Card>

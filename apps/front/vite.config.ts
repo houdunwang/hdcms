@@ -22,6 +22,11 @@ const config = defineConfig({
       '@core': path.resolve(__dirname, 'core')
     },
   },
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+    allowedHosts: ['client.hdcms.com'],
+  },
   // 构建相关配置
   build: {
     // 设置输出目录，默认值是 "dist"

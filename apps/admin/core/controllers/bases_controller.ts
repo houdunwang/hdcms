@@ -5,7 +5,7 @@ export default abstract class BaseController {
   // constructor(protected ctx: HttpContext) { }
 
   success(message: string, data: Record<string, any> = {}) {
-    return this.ctx.response.ok({ success: true, message, data })
+    return this.ctx.serialize({ success: true, message, data })
   }
 
   error(message: string, data: Record<string, any> = {}, status = 400) {

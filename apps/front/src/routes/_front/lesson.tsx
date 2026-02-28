@@ -1,6 +1,20 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card'
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 // import { HdPagination } from '@houdunyun/ui'
 import { createFileRoute } from '@tanstack/react-router'
 import { ArrowRight, BadgeCheck, Lock } from 'lucide-react'
@@ -101,7 +115,6 @@ export function LessonPage() {
 			tags: ['开发环境', 'Javascript/Css'],
 			chapters: ['构建与打包策略', '性能指标分析', '监控与告警', '自动化流程'],
 		},
-
 	]
 
 	const [activeTag, setActiveTag] = useState<(typeof tags)[number]>('全部课程')
@@ -129,10 +142,8 @@ export function LessonPage() {
 		<div className="flex min-h-dvh flex-col container mx-auto">
 			<Card className="py-12 lg:py-16 mt-12 ">
 				<CardHeader>
-					<CardTitle className='text-4xl text-center'>
-						高质量教程
-					</CardTitle>
-					<CardDescription className='text-center text-xl font-light mt-3'>
+					<CardTitle className="text-4xl text-center">高质量教程</CardTitle>
+					<CardDescription className="text-center text-xl font-light mt-3">
 						精选系统课程与实战项目，快速掌握可落地的能力。
 					</CardDescription>
 					<div className="flex justify-center gap-3 mt-8 flex-wrap">
@@ -140,7 +151,8 @@ export function LessonPage() {
 							<Button
 								variant={index == 0 ? 'destructive' : 'outline'}
 								key={tag}
-								onClick={() => setActiveTag(tag)}>
+								onClick={() => setActiveTag(tag)}
+							>
 								{tag}
 							</Button>
 						))}
@@ -149,35 +161,37 @@ export function LessonPage() {
 				<CardContent>
 					<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 						{filteredCourses.map((course, index) => (
-							<Card key={course.title} className='object-cover'>
+							<Card key={course.title} className="object-cover">
 								<img src={`/images/${index + 1}.jpg`} alt={course.title} />
 								<CardHeader>
-									<CardTitle className='px-3 pt-3'>{course.title} </CardTitle>
-									<CardDescription className='px-3'>
-										{course.desc}
-									</CardDescription>
+									<CardTitle className="px-3 pt-3">{course.title} </CardTitle>
+									<CardDescription className="px-3">{course.desc}</CardDescription>
 								</CardHeader>
 
-								<CardFooter className='grid grid-cols-[1fr_auto_1fr]'>
+								<CardFooter className="grid grid-cols-[1fr_auto_1fr]">
 									<div className="text-xs space-x-1">
-										<Button variant={'outline'} size={'xs'}>18</Button>
+										<Button variant={'outline'} size={'xs'}>
+											18
+										</Button>
 										<span>章节</span>
 									</div>
 									<DropdownMenu>
-										<DropdownMenuTrigger asChild className='flex justify-center'>
-											<Button variant="outline" size={'sm'} >课程章节</Button>
+										<DropdownMenuTrigger asChild className="flex justify-center">
+											<Button variant="outline" size={'sm'}>
+												课程章节
+											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent className="w-40" align="start">
 											<DropdownMenuGroup>
 												<DropdownMenuLabel>课程章节</DropdownMenuLabel>
-												<DropdownMenuItem>
-													Profile
-												</DropdownMenuItem>
+												<DropdownMenuItem>Profile</DropdownMenuItem>
 											</DropdownMenuGroup>
 										</DropdownMenuContent>
 									</DropdownMenu>
 									<div className="text-xs space-x-1 justify-self-end">
-										<Button variant={'outline'} size={'xs'}>222</Button>
+										<Button variant={'outline'} size={'xs'}>
+											222
+										</Button>
 										<span>视频</span>
 									</div>
 								</CardFooter>
@@ -185,12 +199,10 @@ export function LessonPage() {
 						))}
 					</div>
 				</CardContent>
-				<CardFooter>
-					{/* <HdPagination /> */}
-				</CardFooter>
+				<CardFooter>{/* <HdPagination /> */}</CardFooter>
 			</Card>
 
-			<section className='container mx-auto mb-12'>
+			<section className="container mx-auto mb-12">
 				<div className="mt-10 rounded-2xl border bg-card p-6 text-card-foreground">
 					<div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
 						<div>
@@ -211,9 +223,7 @@ export function LessonPage() {
 											</div>
 											<div>
 												<div className="text-sm font-medium">{item.title}</div>
-												<div className="mt-1 text-xs text-muted-foreground">
-													{item.desc}
-												</div>
+												<div className="mt-1 text-xs text-muted-foreground">{item.desc}</div>
 											</div>
 										</div>
 									)
@@ -249,8 +259,6 @@ export function LessonPage() {
 					</div>
 				</div>
 			</section>
-
-
 		</div>
 	)
 }

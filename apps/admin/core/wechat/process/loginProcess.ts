@@ -34,8 +34,7 @@ export default class LoginProcess {
 			avatar: userInfo.headimgurl,
 		})
 		if (user) {
-			cache.set({ key: ticket, value: user.id, ttl: '1m' })
-			return user;
+			await cache.set({ key: ticket, value: user.id, ttl: '10m' })
 		}
 	}
 }

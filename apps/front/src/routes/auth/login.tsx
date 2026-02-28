@@ -1,6 +1,6 @@
-import { Login } from '@core/components/auth/Login'
+import { Login } from '@core/components/login/Login'
 import { createFileRoute } from '@tanstack/react-router'
-export const Route = createFileRoute('/_auth/login')({
+export const Route = createFileRoute('/auth/login')({
 	component: Page
 })
 

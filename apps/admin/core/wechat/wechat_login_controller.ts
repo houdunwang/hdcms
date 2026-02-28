@@ -1,13 +1,14 @@
 import BaseController from '#core/controllers/bases_controller';
 import User from '#models/user';
 import env from '#start/env';
+import UserTransformer from '#transformers/user_transformer';
 import cache from '@adonisjs/cache/services/main';
 import { inject } from '@adonisjs/core';
 import { HttpContext } from '@adonisjs/core/http';
 import { Wechat } from '@hd/wechat';
 
 @inject()
-export default class LoginController extends BaseController {
+export default class WechatloginController extends BaseController {
   constructor(protected wechat: Wechat, protected ctx: HttpContext) {
     super()
   }
@@ -47,16 +48,19 @@ export default class LoginController extends BaseController {
    * @summary 使用 ticket 登录
    * @description 用户扫码后，微信服务器会携带 ticket 请求回调地址，使用 ticket 从缓存中获取 userId，然后完成登录
    */
-  async login({ request, auth }: HttpContext) {
+  async login({ request, auth, serialize }: HttpContext) {
     const ticket = request.input('ticket')
-    const userId = await cache.get(ticket)
+    const userId = await cache.get({ key: ticket })
     if (userId) {
       const user = await User.find(userId)
       if (user) {
         const token = await auth.use('api').createToken(user)
-        return { token, user }
+        return serialize({
+          user: UserTransformer.transform(await user.refresh(), user),
+          token: token.value!.release()
+        })
       }
     }
-    return this.success('等待扫码', { status: 'waiting' })
+    return serialize({ user: undefined, token: undefined })
   }
 }

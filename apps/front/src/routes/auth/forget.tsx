@@ -1,8 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Forget } from '@core/components/auth/Forget'
+import { Forget } from '@core/components/login/Forget'
 import { createFileRoute } from '@tanstack/react-router'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
-export const Route = createFileRoute('/_auth/forget')({
+export const Route = createFileRoute('/auth/forget')({
 	component: Page
 })
 
@@ -82,7 +82,7 @@ function Component({ children }: { children: React.ReactNode }) {
 								<CardDescription>完成找回后，你可以快速继续。</CardDescription>
 							</CardHeader>
 							<CardContent className="grid gap-4 sm:grid-cols-3">
-								<Card size="sm">
+								<Card size='sm'>
 									<CardContent className="flex items-start gap-3">
 										<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
 											<CalendarCheck className="size-4" />
@@ -93,10 +93,10 @@ function Component({ children }: { children: React.ReactNode }) {
 										</div>
 									</CardContent>
 								</Card>
-								<Card size="sm">
+								<Card size='sm'>
 									<CardContent className="flex items-start gap-3">
 										<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
-											<BookOpen className="size-4" />
+											<BookOpen className='size-4' />
 										</div>
 										<div>
 											<div className="text-sm font-medium">浏览课程</div>
@@ -104,10 +104,10 @@ function Component({ children }: { children: React.ReactNode }) {
 										</div>
 									</CardContent>
 								</Card>
-								<Card size="sm">
+								<Card size='sm'>
 									<CardContent className="flex items-start gap-3">
 										<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
-											<Sparkles className="size-4" />
+											<Sparkles className='size-4' />
 										</div>
 										<div>
 											<div className="text-sm font-medium">查看项目</div>

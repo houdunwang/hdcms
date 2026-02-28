@@ -238,18 +238,18 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechats_controller').default['handle']>>>
     }
   }
-  'login.login_qr_code': {
-    methods: ["POST"]
+  'wechat_login.login_qr_code': {
+    methods: ["GET","HEAD"]
     pattern: '/core/wechat/login/qr'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/login_controller').default['loginQrCode']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_login_controller').default['loginQrCode']>>>
     }
   }
-  'login.login': {
+  'wechat_login.login': {
     methods: ["POST"]
     pattern: '/core/wechat/login'
     types: {
@@ -257,7 +257,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/login_controller').default['login']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_login_controller').default['login']>>>
     }
   }
   'bind.login_qr_code': {

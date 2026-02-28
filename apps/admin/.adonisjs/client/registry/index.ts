@@ -132,17 +132,17 @@ const routes = {
     tokens: [{"old":"/core/wechat","type":0,"val":"core","end":""},{"old":"/core/wechat","type":0,"val":"wechat","end":""}],
     types: placeholder as Registry['wechats']['types'],
   },
-  'login.login_qr_code': {
-    methods: ["POST"],
+  'wechat_login.login_qr_code': {
+    methods: ["GET","HEAD"],
     pattern: '/core/wechat/login/qr',
     tokens: [{"old":"/core/wechat/login/qr","type":0,"val":"core","end":""},{"old":"/core/wechat/login/qr","type":0,"val":"wechat","end":""},{"old":"/core/wechat/login/qr","type":0,"val":"login","end":""},{"old":"/core/wechat/login/qr","type":0,"val":"qr","end":""}],
-    types: placeholder as Registry['login.login_qr_code']['types'],
+    types: placeholder as Registry['wechat_login.login_qr_code']['types'],
   },
-  'login.login': {
+  'wechat_login.login': {
     methods: ["POST"],
     pattern: '/core/wechat/login',
     tokens: [{"old":"/core/wechat/login","type":0,"val":"core","end":""},{"old":"/core/wechat/login","type":0,"val":"wechat","end":""},{"old":"/core/wechat/login","type":0,"val":"login","end":""}],
-    types: placeholder as Registry['login.login']['types'],
+    types: placeholder as Registry['wechat_login.login']['types'],
   },
   'bind.login_qr_code': {
     methods: ["POST"],
