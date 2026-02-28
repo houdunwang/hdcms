@@ -36,7 +36,7 @@ export class AliyunService {
     })
 
     try {
-      const response = await client.sendSms(request)
+      await client.sendSms(request)
     } catch (error: any) {
       if (error.data?.Recommend) {
         console.log('诊断建议:', error.data.Recommend)

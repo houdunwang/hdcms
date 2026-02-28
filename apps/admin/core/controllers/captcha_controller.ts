@@ -25,14 +25,14 @@ export default class CaptchaController {
     // 在实际项目中，你应该将 captcha.text 存储在缓存或数据库中，并关联一个 key 返回给前端
     const captchaKey = `captcha-${randomUUID()}`
     await cache.set({ key: captchaKey, value: captcha.text, ttl: '20m' })
-    const data = await new Promise((resolve) => {
+    await new Promise((resolve) => {
       setTimeout(() => {
-        resolve({
-          key: captchaKey,
-          svg: captcha.data,
-        })
+        resolve('')
       }, 500)
     })
-    return serialize(data)
+    return serialize({
+      key: captchaKey,
+      svg: captcha.data,
+    })
   }
 }

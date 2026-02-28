@@ -3,14 +3,13 @@ import { OssUploadSuccessResponse } from '#core/types/oss'
 import env from '#start/env'
 import { inject } from '@adonisjs/core'
 import { MultipartFile } from '@adonisjs/core/bodyparser'
-import { cuid } from '@adonisjs/core/helpers'
 import { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import drive from '@adonisjs/drive/services/main'
 import OSS from 'ali-oss'
 import { DateTime } from 'luxon'
-import path from 'node:path'
 import fs from 'node:fs'
+import path from 'node:path'
 
 /**
  * @class UploadService
@@ -112,6 +111,10 @@ export class UploadService {
     })
   }
 
+  fileName() {
+    return this.ctx.auth.user?.id || 'anonymous' + DateTime.now().toFormat('MMddHHmmss')
+  }
+
   /**
    * 将上传的文件移动到本地磁盘。
    *
@@ -124,7 +127,7 @@ export class UploadService {
   async local(file: MultipartFile) {
     // @todo: 检查 `drive.ts` 配置。如果 local disk 的 `root` 已经是 'uploads'，
     // 这里的 `key` 中就不应再包含 'uploads/' 前缀，否则会导致路径重复 (e.g., 'uploads/uploads/...').
-    const key = `uploads/${DateTime.now().toFormat('yyyy/MM')}/${cuid()}.${file.extname}`
+    const key = `uploads/${DateTime.now().toFormat('yyyy/MM')}/${this.fileName()}.${file.extname}`
     await file.moveToDisk(key)
   }
 
@@ -148,7 +151,7 @@ export class UploadService {
       const ext = path.extname(file.clientName) // 从原始文件名获取扩展名，更可靠
       const directory = DateTime.now().toFormat('yyyy/MM')
       // 构造在 OSS 中的存储路径和文件名。
-      const key = `${directory}/${this.ctx.auth.user?.id || 'anonymous'}-${cuid()}${ext}`
+      const key = `${directory}/${this.fileName()}.${ext}`
 
       // 使用流式上传，提高性能和内存效率。
       const result = await this.getOssClient().put(key, fs.createReadStream(localFilePath), { headers })
