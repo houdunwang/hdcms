@@ -1,14 +1,15 @@
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useFormField, } from "core/hooks/useFormField"
-import { api } from "core/lib/client"
-import { useFieldContext } from "@/routes/__root"
 import type { FormFieldProps } from "core/types/form"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
 import { ScaleLoader } from "react-spinners"
+import { useApi } from "@core/hooks/useApi"
+import { useFieldContext } from "@core/hd"
 export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {
 	const field = useFieldContext<string>()
+	const { api } = useApi()
 	const { FieldErrorComponent, errorComponentRef } = useFormField()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
 	const { data, isFetching, refetch } = useQuery(

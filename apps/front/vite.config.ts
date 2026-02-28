@@ -29,7 +29,7 @@ const config = defineConfig({
     // 可选：配置输出目录下的静态资源子目录（默认是 assets）
     assetsDir: 'static',
     // 可选：清空输出目录后再打包（默认 true）
-    // emptyOutDir: true
+    emptyOutDir: true
   }
 })
 

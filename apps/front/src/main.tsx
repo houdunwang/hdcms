@@ -1,10 +1,8 @@
-import { useApi } from '@core/hooks/useApi'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { QueryClient } from '@tanstack/react-query'
+import { createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
-import { useAuth } from '../core/hooks/useAuth'
 import { routeTree } from './routeTree.gen'
-import '@core/index'
+import { Hd } from '@core/hd'
 
 const router = createRouter({
   context: {
@@ -33,23 +31,7 @@ const rootElement = document.getElementById('app')!
 
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
-  root.render(<App />)
+  root.render(<Hd router={router} queryClient={queryClient} />)
 }
 
-function App() {
-  const { TanstackQueryClientProvider } = useApi()
 
-  return (
-    <TanstackQueryClientProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterContextProvider />
-      </QueryClientProvider>
-      {/* <RouterProvider router={router} context={{ auth, queryClient }} /> */}
-    </TanstackQueryClientProvider>
-  )
-}
-
-function RouterContextProvider() {
-  const auth = useAuth()
-  return <RouterProvider router={router} context={{ auth, queryClient }} />
-}

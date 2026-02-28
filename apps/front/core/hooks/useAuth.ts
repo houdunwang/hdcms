@@ -1,13 +1,14 @@
 import { registry } from '@app/admin/registry';
+import { AuthEnum } from '@core/enum';
 import { userAtom } from '@core/store/userStore';
 import { useNavigate } from '@tanstack/react-router';
 import { useAtom } from 'jotai';
 import React from 'react';
-import { useApi, useTuyauClient } from './useApi';
+import { useRequestClient } from './useRequestClient';
 
 export const useAuth = () => {
 	const [user, setUser] = useAtom(userAtom)
-	const tuyauClient = useTuyauClient()
+	const request = useRequestClient()
 	const navigate = useNavigate()
 
 	const isLogin = React.useMemo(() => {
@@ -16,24 +17,23 @@ export const useAuth = () => {
 
 	const login = (data: typeof registry.$tree.auth.login.types.response.data) => {
 		if (data.token) {
-			localStorage.setItem("auth_token", data.token)
+			localStorage.setItem(AuthEnum.TOKEN_NAME, data.token)
 			const loginUrl = localStorage.getItem("history") || "/"
 			navigate({ href: loginUrl })
 		}
 	}
 
 	const getCurrentUser = async () => {
-		if (localStorage.getItem('auth_token')) {
-			await tuyauClient.get('/core/users/me', { retry: 0, })
+		if (localStorage.getItem(AuthEnum.TOKEN_NAME)) {
+			await request.get('/core/users/me', { retry: 0, })
 				.then(({ data }) => {
 					setUser(data)
 				})
 		}
-		document.querySelector('.loading')?.remove()
 	}
 
 	const logout = () => {
-		localStorage.removeItem("auth_token")
+		localStorage.removeItem(AuthEnum.TOKEN_NAME)
 		setUser(undefined)
 		navigate({ to: '/' })
 	}
@@ -43,5 +43,7 @@ export const useAuth = () => {
 		login,
 		getCurrentUser,
 		logout,
+		user,
+		setUser,
 	}
 }
