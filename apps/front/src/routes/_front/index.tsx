@@ -23,34 +23,34 @@ export const Route = createFileRoute('/_front/')({
 export function HomePage() {
   const features = [
     {
-      title: '系统课程',
-      description: '从基础到进阶的体系化内容，学习路线清晰可追踪。',
-      icon: LayoutGrid,
+      title: '工程化标准',
+      description: '告别 Demo 式代码，遵循企业级规范，掌握 Lint、Test 等工程化流程。',
+      icon: Terminal,
     },
     {
-      title: '实战项目',
-      description: '围绕真实业务场景拆解需求，做出可展示的作品集。',
+      title: '类型安全',
+      description: '全线课程拥抱 TypeScript，培养类型思维，编写健壮、可维护的代码。',
+      icon: ShieldCheck,
+    },
+    {
+      title: '源码交付',
+      description: '提供细粒度的 Git 提交记录，轻松定位每一节课的代码变更与演进。',
       icon: Code2,
     },
     {
-      title: '视频学习',
-      description: '用演示讲清思路与细节，关键节点配套示例与资料。',
-      icon: Video,
-    },
-    {
-      title: '学习文档',
-      description: '随学随查、随用随检索，沉淀成你的个人知识库。',
+      title: '深度原理',
+      description: '不只教 API 怎么用，更深入源码与设计模式，理解框架背后的运行机制。',
       icon: BookOpen,
     },
     {
-      title: '学习记录',
-      description: '自动保存章节进度与学习记录，随时续学不掉队。',
-      icon: CalendarCheck,
+      title: '全栈视角',
+      description: '从数据库设计到前端组件封装，建立完整的数据流转与架构设计视角。',
+      icon: LayoutGrid,
     },
     {
-      title: '更新订阅',
-      description: '课程上新与内容迭代第一时间通知，不错过关键更新。',
-      icon: Bell,
+      title: '持续迭代',
+      description: '技术栈快速更新，课程内容也会随之升级，一次订阅，长期受益。',
+      icon: Sparkles,
     },
   ] as const
 
@@ -166,7 +166,7 @@ export function HomePage() {
   return (
     <div className="flex min-h-dvh flex-col">
       <main className="flex-1">
-        <section className="relative overflow-hidden border-b ">
+        <section className="relative overflow-hidden border-b1">
           <div className="container mx-auto lg:px-16 px-6">
             <div className="mx-auto py-14 lg:py-20">
               <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
@@ -279,301 +279,230 @@ export function HomePage() {
               </div>
             </div>
           </div>
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden='true'
-          >
-            <div className="absolute -z-10 -top-24 left-1/2 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-muted blur-3xl opacity-60" />
-            <div className="absolute -z-10 -bottom-24 left-1/3 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-muted blur-3xl opacity-50" />
+          <GradientAnimation />
+        </section>
+
+        <section className="">
+          <div className="container mx-auto px-6 lg:px-16 py-14 lg:py-24">
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+              <div className="lg:col-span-4 lg:sticky lg:top-32 lg:h-fit">
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                  学习体验围绕“可落地”设计
+                </h2>
+                <p className="mt-4 text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  用一致的组件风格与清晰的信息层级，让学习路径、项目产出与进阶方向更直观。
+                </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
+                {features.map((feature, i) => (
+                  <div
+                    key={i}
+                    className="group rounded-xl border bg-card p-4 shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:-translate-y-1"
+                  >
+                    <div className="mb-3 inline-flex rounded-lg bg-primary/5 p-2.5 text-primary transition-colors group-hover:bg-primary/10">
+                      <feature.icon className="size-5" />
+                    </div>
+                    <h3 className="mb-1.5 text-base font-semibold tracking-tight">
+                      {feature.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y bg-muted/30">
+          <div className="container mx-auto px-6 lg:px-16 py-14 lg:py-20">
+            <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                  热门课程与路径
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  从入门到高阶的精选内容，覆盖主流技术栈。
+                </p>
+              </div>
+              <Button variant="outline" className="group">
+                查看全部课程
+                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {courses.map((course, i) => (
+                <div
+                  key={i}
+                  className="group flex flex-col justify-between rounded-xl border bg-background p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+                >
+                  <div>
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                        {course.level}
+                      </span>
+                    </div>
+                    <h3 className="mb-2 text-lg font-semibold tracking-tight group-hover:text-primary">
+                      {course.title}
+                    </h3>
+                    <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
+                      {course.desc}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {course.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="">
           <div className="container mx-auto px-6 lg:px-16 py-14 lg:py-20">
-            <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-              <div className="lg:col-span-4">
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  学习体验围绕“可落地”设计
-                </h2>
-                <p className="mt-3 text-muted-foreground">
-                  用一致的组件风格与清晰的信息层级，让学习路径、项目产出与进阶方向更直观。
-                </p>
-
-                <div className="mt-6 rounded-xl border bg-card p-5 text-card-foreground bg-muted">
-                  <div className="text-sm font-medium">你会得到什么</div>
-                  <div className="mt-4 grid gap-3">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 flex size-8 items-center justify-center rounded-md bg-muted/30">
-                        <Terminal className="size-4 text-muted-foreground" />
-                      </div>
-                      <div className='min-w-0'>
-                        <div className="text-sm font-medium">可复用的工程方法</div>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          把“怎么做”落到项目结构、规范与流程上。
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 flex size-8 items-center justify-center rounded-md bg-muted/30">
-                        <CalendarCheck className="size-4 text-muted-foreground" />
-                      </div>
-                      <div className='min-w-0'>
-                        <div className="text-sm font-medium">学习计划与进度</div>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          记录章节进度与学习节奏，随时从上次位置继续。
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 flex size-8 items-center justify-center rounded-md bg-muted/30">
-                        <BookOpen className="size-4 text-muted-foreground" />
-                      </div>
-                      <div className='min-w-0'>
-                        <div className="text-sm font-medium">随时可查的资料库</div>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          把课程内容沉淀为可以检索的知识点。
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-8">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
-                  {features.map((item, index) => {
-                    const Icon = item.icon
-                    const bentoClass =
-                      index === 0
-                        ? 'sm:col-span-2 lg:col-span-4'
-                        : index === 1
-                          ? 'lg:col-span-2'
-                          : index === 2
-                            ? 'lg:col-span-3'
-                            : index === 3
-                              ? 'lg:col-span-3'
-                              : index === 4
-                                ? 'lg:col-span-2'
-                                : 'lg:col-span-4'
-
-                    return (
-                      <div
-                        key={item.title}
-                        className={`group rounded-xl border bg-card p-3 text-card-foreground transition-colors hover:bg-accent/30 ${bentoClass}`}
-                      >
-                        <div className="flex items-center gap-1">
-                          <div className="flex size-10 items-center justify-center rounded-lg bg-muted/30">
-                            <Icon className="size-5 text-muted-foreground" />
-                          </div>
-                          <div className="text-sm font-medium">{item.title}</div>
-                        </div>
-                        <p className="mt-1 text-sm text-muted-foreground">
-                          {item.description}
-                        </p>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="container mx-auto px-6 lg:px-16">
-          <div className="mx-auto pb-14 lg:pb-20">
-            <div className="flex flex-col gap-3">
+            <div className="mb-10 text-center">
               <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                学员好评
+                学员反馈与评价
               </h2>
-              <p className="max-w-2xl text-muted-foreground">
-                来自真实学习者的反馈，帮助你判断这是否是适合你的学习方式。
+              <p className="mt-2 text-muted-foreground">
+                听听已经在这里学习并成长的同学们怎么说。
               </p>
             </div>
-
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card px-5 py-4 text-card-foreground">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="size-4 fill-current text-foreground"
-                    />
-                  ))}
-                </div>
-                <div className="text-sm font-medium">5.0 / 5.0</div>
-                <div className="text-sm text-muted-foreground">
-                  · {testimonials.length} 条精选评价
-                </div>
-              </div>
-              <div className="text-sm text-muted-foreground">
-                支持横向滑动查看更多
-              </div>
-            </div>
-
-            <div className="relative mt-6 overflow-hidden">
-              <div
-                className="pointer-events-none absolute inset-y-0 left-0 w-12 "
-                aria-hidden='true'
-              />
-              <div
-                className="pointer-events-none absolute inset-y-0 right-0 w-12 "
-                aria-hidden='true'
-              />
-
-              <div className="flex snap-x snap-proximity gap-4 overflow-x-auto overscroll-x-contain px-4 pb-4">
-                {testimonials.map((t) => (
-                  <div
-                    key={t.name + t.course}
-                    className="w-[320px] shrink-0 snap-start rounded-xl border bg-card p-5 text-card-foreground sm:w-[360px] "
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-1">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`size-4 ${i < t.rating
-                              ? 'fill-current text-foreground'
-                              : 'fill-transparent text-muted-foreground'
-                              }`}
-                          />
-                        ))}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((item, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col rounded-xl border bg-card p-6 shadow-sm"
+                >
+                  <div className="mb-4 flex items-center gap-1 text-amber-500">
+                    {Array.from({ length: item.rating }).map((_, j) => (
+                      <Star key={j} className="size-4 fill-current" />
+                    ))}
+                  </div>
+                  <blockquote className="mb-6 flex-1 text-sm text-muted-foreground">
+                    "{item.content}"
+                  </blockquote>
+                  <div className="flex items-center justify-between border-t pt-4">
+                    <div>
+                      <div className="text-sm font-medium">{item.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {item.role}
                       </div>
-                      <span className="rounded-md border bg-background/60 px-2 py-1 text-xs text-muted-foreground">
-                        {t.course}
-                      </span>
                     </div>
-
-                    <p className="mt-4 text-sm text-muted-foreground">
-                      “{t.content}”
-                    </p>
-
-                    <div className="mt-6 flex items-center gap-3">
-                      <div className="flex size-9 items-center justify-center rounded-full border bg-background text-sm font-medium">
-                        {t.name.slice(0, 1)}
-                      </div>
-                      <div className='min-w-0'>
-                        <div className="text-sm font-medium">{t.name}</div>
-                        <div className="text-xs text-muted-foreground">{t.role}</div>
-                      </div>
+                    <div className="text-[10px] text-muted-foreground/60">
+                      {item.course}
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="border-y bg-muted">
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="mx-auto py-14 lg:py-20">
-              <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-                <div className="flex flex-col gap-4">
-                  <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                    系统课程与实战方向
-                  </h2>
-                  <p className="max-w-xl text-muted-foreground">
-                    围绕前端、后端与工程化能力构建课程矩阵，按阶段推进，形成可复用的知识体系。
-                  </p>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {courses.map((c) => (
-                    <div
-                      key={c.title}
-                      className="rounded-xl border bg-card p-5 text-card-foreground"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="text-sm font-medium">{c.title}</div>
-                        <span className="shrink-0 rounded-full border bg-background px-2 py-0.5 text-xs text-muted-foreground">
-                          {c.level}
-                        </span>
-                      </div>
-                      <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {c.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-md border bg-background/60 px-2 py-1 text-xs text-muted-foreground"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-10 rounded-xl border bg-background p-6">
-                <div className="grid gap-6 lg:grid-cols-3 lg:items-center">
-                  <div className="lg:col-span-2">
-                    <div className="text-sm font-medium">
-                      开通会员，解锁完整学习体验
-                    </div>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      系统课程、实战项目与学习资料按需获取，学习记录与更新提醒帮助你持续推进。
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="rounded-md border bg-background/60 px-2 py-1 text-xs text-muted-foreground">
-                        系统课程
-                      </span>
-                      <span className="rounded-md border bg-background/60 px-2 py-1 text-xs text-muted-foreground">
-                        实战项目
-                      </span>
-                      <span className="rounded-md border bg-background/60 px-2 py-1 text-xs text-muted-foreground">
-                        学习资料
-                      </span>
-                      <span className="rounded-md border bg-background/60 px-2 py-1 text-xs text-muted-foreground">
-                        更新提醒
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 lg:justify-end">
-                    <Button size="lg" className="gap-2">
-                      立即开通
-                      <ArrowRight className='size-4' />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="container mx-auto px-6 lg:px-16">
-          <div className="mx-auto py-14 lg:py-20">
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-              <div className="flex flex-col gap-4">
+        <section className="border-t bg-muted/30">
+          <div className="container mx-auto px-6 lg:px-16 py-14 lg:py-20">
+            <div className="mx-auto max-w-3xl">
+              <div className="mb-10 text-center">
                 <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                   常见问题
                 </h2>
-                <p className="max-w-xl text-muted-foreground">
-                  先解决你的疑问，再开始投入学习。
+                <p className="mt-2 text-muted-foreground">
+                  关于课程、学习方式与会员权益的解答。
                 </p>
               </div>
-
-              <div className="grid gap-3">
-                {faqs.map((f) => (
-                  <details
-                    key={f.q}
-                    className="group rounded-lg border bg-card px-5 py-4 text-card-foreground"
+              <div className="grid gap-4">
+                {faqs.map((faq, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border bg-background p-5 shadow-sm"
                   >
-                    <summary className="cursor-pointer list-none text-sm font-medium outline-none">
-                      <div className="flex items-center justify-between gap-3">
-                        <span>{f.q}</span>
-                        <span className="text-muted-foreground transition-transform group-open:rotate-180">
-                          <ArrowRight className="size-4 rotate-90" />
-                        </span>
-                      </div>
-                    </summary>
-                    <p className="mt-3 text-sm text-muted-foreground">{f.a}</p>
-                  </details>
+                    <h3 className="mb-2 text-base font-medium">{faq.q}</h3>
+                    <p className="text-sm text-muted-foreground">{faq.a}</p>
+                  </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="">
+          <div className="container mx-auto px-6 lg:px-16 py-14 lg:py-24">
+            <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 text-center text-primary-foreground shadow-xl lg:px-20">
+              <div className="relative z-10 mx-auto max-w-2xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  准备好开始了吗？
+                </h2>
+                <p className="mx-auto mt-4 max-w-xl text-primary-foreground/80 sm:text-lg">
+                  加入我们，开启你的编程进阶之旅。无论是从零开始还是职场晋升，这里都有适合你的路径。
+                </p>
+                <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="secondary"
+                    className="gap-2 text-primary"
+                  >
+                    <Link to='/'>
+                      免费注册
+                      <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary-foreground"
+                  >
+                    <Link to='/'>浏览课程</Link>
+                  </Button>
+                </div>
+              </div>
+
+              {/* 装饰背景 */}
+              <div className="absolute -left-16 -top-24 size-80 rounded-full bg-primary-foreground/10 blur-3xl" />
+              <div className="absolute -bottom-24 -right-16 size-80 rounded-full bg-primary-foreground/10 blur-3xl" />
             </div>
           </div>
         </section>
       </main>
     </div>
+  )
+}
+
+const GradientAnimation = () => {
+  return (
+    <>
+      <style>{`
+            @keyframes blob {
+                0% { transform: translate(0px, 0px) scale(1); }
+                33% { transform: translate(30px, -50px) scale(1.1); }
+                66% { transform: translate(-20px, 20px) scale(0.9); }
+                100% { transform: translate(0px, 0px) scale(1); }
+            }
+            .animate-blob {
+                animation: blob 3s infinite;
+            }
+            .animation-delay-2000 {
+                animation-delay: 2s;
+            }
+            .animation-delay-4000 {
+                animation-delay: 4s;
+            }
+        `}</style>
+      <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden pointer-events-none">
+        <div className="absolute bottom-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-[100px] animate-blob" />
+        <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[100px] animate-blob animation-delay-2000" />
+        <div className="absolute bottom-[-40%] left-[30%] h-[600px] w-[600px] rounded-full bg-pink-500/10 blur-[120px] animate-blob animation-delay-4000" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+      </div>
+    </>
   )
 }
