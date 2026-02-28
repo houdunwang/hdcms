@@ -13,11 +13,11 @@ export default class UsersController {
  */
   async me({ auth, serialize }: HttpContext) {
     const user = auth.user!
-    // await new Promise((r) => {
-    //   setTimeout(() => {
-    //     r('')
-    //   }, 0)
-    // })
+    await new Promise((r) => {
+      setTimeout(() => {
+        r(user)
+      }, 3000)
+    })
     return serialize(UserTransformer.transform(user, user))
   }
 

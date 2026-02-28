@@ -1,5 +1,5 @@
-import User from '#app/models/user';
 import BaseController from '#core/controllers/bases_controller';
+import User from '#models/user';
 import env from '#start/env';
 import cache from '@adonisjs/cache/services/main';
 import { inject } from '@adonisjs/core';

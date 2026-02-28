@@ -9,7 +9,7 @@ export default class SubscribeProcess {
 	}
 
 	// 根据课程ID从数据库获取价格
-	async getPrice(id: number): Promise<number> {
+	async getPrice(_id: number): Promise<number> {
 		return 1;
 	}
 }

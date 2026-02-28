@@ -22,6 +22,15 @@ const config = defineConfig({
       '@core': path.resolve(__dirname, 'core')
     },
   },
+  // 构建相关配置
+  build: {
+    // 设置输出目录，默认值是 "dist"
+    outDir: '../../build/front', // 这里将输出目录改为 build 文件夹
+    // 可选：配置输出目录下的静态资源子目录（默认是 assets）
+    assetsDir: 'static',
+    // 可选：清空输出目录后再打包（默认 true）
+    // emptyOutDir: true
+  }
 })
 
 export default config

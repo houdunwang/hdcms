@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import User from '#app/models/user'
+import User from '#models/user'
 
 export default class Upload extends BaseModel {
   @column({ isPrimary: true })

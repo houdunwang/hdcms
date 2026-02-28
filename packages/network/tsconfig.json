@@ -18,6 +18,7 @@
 				"./src/*"
 			]
 		},
+		"outDir": "./dist",
 		"strict": true,
 		"skipLibCheck": true,
 		"noUnusedLocals": true,

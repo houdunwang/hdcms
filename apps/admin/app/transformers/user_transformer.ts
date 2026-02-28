@@ -1,9 +1,8 @@
 import type User from '#models/user'
-import { HttpContext } from '@adonisjs/core/http'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class UserTransformer extends BaseTransformer<User> {
-  constructor(protected resource: User, protected user: User) {
+  constructor(protected resource: User, protected user?: User) {
     super(resource)
   }
   toObject() {

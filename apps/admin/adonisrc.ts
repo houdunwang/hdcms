@@ -3,6 +3,8 @@ import { defineConfig } from '@adonisjs/core/app'
 import { generateRegistry } from '@tuyau/core/hooks'
 
 export default defineConfig({
+
+
   /*
   |--------------------------------------------------------------------------
   | Experimental flags
@@ -119,5 +121,6 @@ export default defineConfig({
       }),
       generateRegistry(),
     ],
+    buildFinished: [() => import('./hooks/buildFinished.ts')],
   },
 })
