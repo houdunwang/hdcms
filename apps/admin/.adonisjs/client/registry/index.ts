@@ -30,6 +30,12 @@ const routes = {
     tokens: [{"old":"/core/logout","type":0,"val":"core","end":""},{"old":"/core/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['auth.logout']['types'],
   },
+  'auth.find_password': {
+    methods: ["POST"],
+    pattern: '/core/findPassword',
+    tokens: [{"old":"/core/findPassword","type":0,"val":"core","end":""},{"old":"/core/findPassword","type":0,"val":"findPassword","end":""}],
+    types: placeholder as Registry['auth.find_password']['types'],
+  },
   'captcha': {
     methods: ["GET","HEAD"],
     pattern: '/core/captcha',
@@ -38,8 +44,8 @@ const routes = {
   },
   'codes.send': {
     methods: ["POST"],
-    pattern: '/code/sendCode',
-    tokens: [{"old":"/code/sendCode","type":0,"val":"code","end":""},{"old":"/code/sendCode","type":0,"val":"sendCode","end":""}],
+    pattern: '/core/code/sendCode',
+    tokens: [{"old":"/core/code/sendCode","type":0,"val":"core","end":""},{"old":"/core/code/sendCode","type":0,"val":"code","end":""},{"old":"/core/code/sendCode","type":0,"val":"sendCode","end":""}],
     types: placeholder as Registry['codes.send']['types'],
   },
   'licenses': {

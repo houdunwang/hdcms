@@ -8,10 +8,11 @@ import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import { FieldSubscribeButton } from "core/components/form/FieldSubscribeButton"
-import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, User } from 'lucide-react'
+import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
 import z from "zod"
+import { FieldSendCode } from "../form/FieldSendCode"
 import { Footer } from "./Footer"
-import { Layout } from "./layout"
+import { Layout } from "./Layout"
 
 type LoginType = React.ComponentProps<"div">
 export const Forget = () => {
@@ -24,7 +25,7 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
-		api.auth.login.mutationOptions({
+		api.auth.findPassword.mutationOptions({
 			onSuccess: ({ data }) => {
 				login(data)
 			}
@@ -34,7 +35,8 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	const { useAppForm } = createFormHook({
 		fieldComponents: {
 			FieldInput,
-			FieldCaptcha
+			FieldCaptcha,
+			FieldSendCode,
 		},
 		formComponents: {
 			FieldSubscribeButton
@@ -44,18 +46,13 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	})
 	const form = useAppForm({
 		defaultValues: {
-			captcha: '',
-			account: '',
-			password: '',
-		},
-		validators: {
-			onSubmit: z.object({
-				account: z.string().min(1, '请输入邮箱、手机号、用户名'),
-				password: z.string().min(5, '密码不能少于5位'),
-				captcha: z.string().min(1, '请输入验证码'),
-			}),
+			account: '2300071698@qq.com',
+			code: 'admin',
+			password: 'admin888',
+			password_confirmation: 'admin888'
 		},
 		onSubmit: ({ value: body }) => {
+			console.log('Forget submit body:', body)
 			mutation.mutate({ body })
 		}
 	})
@@ -74,9 +71,15 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 					<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-2">
-					<form.AppField name="account" children={field => <field.FieldInput label="帐号" />} />
-					<form.AppField name="password" children={field => <field.FieldInput label="密码" type="password" />} />
-					<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
+					<form.AppField name="code" validators={{ onChange: z.string().min(1, '请输入验证码') }} children={field => <field.FieldSendCode label="发送验证码" />} />
+					<form.AppField name="password" validators={{ onChange: z.string().min(5, '密码不能少于5位') }} children={field => <field.FieldInput label="密码" type="password" />} />
+					<form.AppField
+						name="password_confirmation"
+						validators={{
+							onChange: z.string().min(5, '密码确认不能少于5位').refine((val) => val === form.getFieldValue('password'), "两次输入的密码不一致")
+						}}
+						children={field => <field.FieldInput label="确认密码" type="password" />}
+					/>
 					<form.AppForm>
 						<form.FieldSubscribeButton type="submit" label="登录" />
 					</form.AppForm>

@@ -51,6 +51,17 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
     }
   }
+  'auth.find_password': {
+    methods: ["POST"]
+    pattern: '/core/findPassword'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/auth').findPasswordValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').findPasswordValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['findPassword']>>>
+    }
+  }
   'captcha': {
     methods: ["GET","HEAD"]
     pattern: '/core/captcha'
@@ -64,7 +75,7 @@ export interface Registry {
   }
   'codes.send': {
     methods: ["POST"]
-    pattern: '/code/sendCode'
+    pattern: '/core/code/sendCode'
     types: {
       body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
       paramsTuple: []

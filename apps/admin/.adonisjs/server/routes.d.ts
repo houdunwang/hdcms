@@ -8,6 +8,7 @@ export type ScannedRoutes = {
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
+    'auth.find_password': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
     'codes.send': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
@@ -49,6 +50,7 @@ export type ScannedRoutes = {
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
+    'auth.find_password': { paramsTuple?: []; params?: {} }
     'codes.send': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }

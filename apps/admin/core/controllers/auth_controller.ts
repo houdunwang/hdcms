@@ -82,13 +82,19 @@ export default class AuthController extends BaseController {
    * @requestFormDataBody { "name": { "type": "string", "minLength": 3, "maxLength": 20, "required": "true" }, "password": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" }, "password_confirmation": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" } }
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  async findPassword({ request, response }: HttpContext) {
+  async findPassword({ request, serialize, auth }: HttpContext) {
     const payload = await request.validateUsing(findPasswordValidator)
     const user = await getUserByName(payload.account)
     if (!user) {
       throw new Error('用户不存在')
     }
-    await user.fill({ password: payload.password }).save()
-    return response.ok({ success: true, message: '密码重置成功' })
+    // return user;
+    // return payload
+    await user.merge({ password: payload.password }).save()
+    const token = await auth.use('api').createToken(user)
+    return serialize({
+      user: UserTransformer.transform(await user.refresh(), user),
+      token: token.value!.release(),
+    })
   }
 }

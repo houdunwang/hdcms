@@ -7,7 +7,10 @@ import router from '@adonisjs/core/services/router'
  * @param value 用户名、邮箱或手机号
  * @returns
  */
-export async function getUserByName(value: string) {
+export async function getUserByName(value?: string | null) {
+  if (!value) {
+    return null
+  }
   return await User.query()
     .where('name', value)
     .orWhere('email', value)

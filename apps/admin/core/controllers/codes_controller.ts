@@ -24,12 +24,11 @@ export default class CodesController extends BaseController {
    */
   public async send({ request }: HttpContext) {
     const payload = await request.validateUsing(sendCodeValidator)
-    try {
-      const action = payload.account.includes('@') ? 'mail' : 'mobile'
-      this.codeService[action](payload.account)
-      return this.success('验证码发送成功')
-    } catch (error) {
-      return this.error('发送验证码失败')
-    }
+    // try {
+    await this.codeService.send(payload.account)
+    return this.success('验证码发送成功')
+    // } catch (error) {
+    // return this.error('发送验证码失败')
+    // }
   }
 }

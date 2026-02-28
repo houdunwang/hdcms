@@ -8,10 +8,10 @@ import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import { FieldSubscribeButton } from "core/components/form/FieldSubscribeButton"
-import { BookOpen, CalendarCheck, LogIn, ShieldCheck, Sparkles, User } from 'lucide-react'
+import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, User } from 'lucide-react'
 import z from "zod"
 import { Footer } from "./Footer"
-import { Layout } from "./layout"
+import { Layout } from "./Layout"
 
 export const Login = () => {
 	return <Layout introduce={<Introduce />}>
