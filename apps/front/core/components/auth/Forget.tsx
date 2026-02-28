@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
-import { FieldDescription } from "@/components/ui/field"
 import { cn } from "@/lib/utils"
 import { FieldCaptcha } from "@core/components/form/FieldCaptcha"
 import { FieldInput } from "@core/components/form/FieldInput"
@@ -9,13 +7,20 @@ import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
-import { Link } from "@tanstack/react-router"
 import { FieldSubscribeButton } from "core/components/form/FieldSubscribeButton"
+import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, User } from 'lucide-react'
 import z from "zod"
+import { Footer } from "./Footer"
+import { Layout } from "./layout"
 
 type LoginType = React.ComponentProps<"div">
+export const Forget = () => {
+	return <Layout introduce={<Introduce />}>
+		<ForgetComponent />
+	</Layout>
+}
 
-export function Forget({ className, onSubmit, ...props }: LoginType) {
+function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
@@ -62,7 +67,10 @@ export function Forget({ className, onSubmit, ...props }: LoginType) {
 		}} >
 			<Card className={cn("flex flex-col gap-6", className)} {...props}>
 				<CardHeader>
-					<CardTitle>登录你的账号</CardTitle>
+					<CardTitle className="flex items-center gap-2">
+						<ShieldCheck />
+						找回密码
+					</CardTitle>
 					<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-2">
@@ -72,14 +80,102 @@ export function Forget({ className, onSubmit, ...props }: LoginType) {
 					<form.AppForm>
 						<form.FieldSubscribeButton type="submit" label="登录" />
 					</form.AppForm>
-					<Button variant="outline" type="button" className="w-full" size={'lg'}>
-						使用 微信 登录
-					</Button>
-					<FieldDescription className="text-center text-sm">
-						没有账号? <Link to="/register">注册</Link>
-					</FieldDescription>
+					<Footer />
 				</CardContent>
 			</Card>
 		</form>
 	)
+}
+
+const highlights = [
+	{
+		title: '支持多方式找回',
+		description: '邮箱 / 手机号 / 用户名均可发起找回。',
+		icon: BookOpen,
+	},
+	{
+		title: '安全重置',
+		description: '流程可控，保障你的账号安全。',
+		icon: ShieldCheck,
+	},
+] as const
+function Introduce() {
+	return <Card>
+		<CardContent className='space-y-6'>
+			<Card size="sm" className="w-fit">
+				<CardContent className="flex items-center gap-2 text-xs text-muted-foreground">
+					<span className="size-2 rounded-full bg-primary" />
+					账号安全与找回支持
+				</CardContent>
+			</Card>
+			<Card>
+				<CardHeader>
+					<CardTitle className="text-3xl font-semibold tracking-tight sm:text-4xl">
+						找回密码，快速恢复账号访问
+					</CardTitle>
+					<CardDescription className="max-w-xl text-sm sm:text-base">
+						通过验证码安全重置密码，支持邮箱/手机号/用户名。完成后即可正常登录。
+					</CardDescription>
+				</CardHeader>
+			</Card>
+			<div className="grid gap-4 sm:grid-cols-1">
+				{highlights.map((item) => (
+					<Card key={item.title} size="sm">
+						<CardContent className="flex items-start gap-3">
+							<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
+								<item.icon className='size-4' />
+							</div>
+							<div>
+								<div className="text-sm font-medium">{item.title}</div>
+								<p className="mt-1 text-xs text-muted-foreground">
+									{item.description}
+								</p>
+							</div>
+						</CardContent>
+					</Card>
+				))}
+			</div>
+			<Card>
+				<CardHeader>
+					<CardTitle className="text-2xl font-semibold">下一步指引</CardTitle>
+					<CardDescription>完成找回后，你可以快速继续。</CardDescription>
+				</CardHeader>
+				<CardContent className="grid gap-4 sm:grid-cols-3">
+					<Card size="sm">
+						<CardContent className="flex items-start gap-3">
+							<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
+								<CalendarCheck className="size-4" />
+							</div>
+							<div>
+								<div className="text-sm font-medium">回到登录</div>
+								<p className="mt-1 text-xs text-muted-foreground">重置完成即可正常使用。</p>
+							</div>
+						</CardContent>
+					</Card>
+					<Card size="sm">
+						<CardContent className="flex items-start gap-3">
+							<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
+								<BookOpen className="size-4" />
+							</div>
+							<div>
+								<div className="text-sm font-medium">浏览课程</div>
+								<p className="mt-1 text-xs text-muted-foreground">循序渐进进入学习节奏。</p>
+							</div>
+						</CardContent>
+					</Card>
+					<Card size="sm">
+						<CardContent className="flex items-start gap-3">
+							<div className="mt-1 rounded-lg border bg-background/70 p-2 text-muted-foreground">
+								<Sparkles className="size-4" />
+							</div>
+							<div>
+								<div className="text-sm font-medium">查看项目</div>
+								<p className="mt-1 text-xs text-muted-foreground">做中学，产出可展示成果。</p>
+							</div>
+						</CardContent>
+					</Card>
+				</CardContent>
+			</Card>
+		</CardContent>
+	</Card>
 }

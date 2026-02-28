@@ -7,6 +7,7 @@ export const Route = createFileRoute('/_auth/forget')({
 })
 
 function Page() {
+	return <Forget />;
 	return <Component>
 		<Forget />
 	</Component>
@@ -29,7 +30,18 @@ function Component({ children }: { children: React.ReactNode }) {
 	return (
 		<section className="container mx-auto mt-20">
 			<div className="grid items-start content-center pb-16 gap-10 lg:grid-cols-[auto_1fr]">
-				<Card className="order-2 lg:order-3">
+				<Card className="lg:justify-self-end w-full lg:min-w-md mx-auto bg-muted">
+					<CardContent>
+						<Card size="sm" className="mb-4 w-fit">
+							<CardContent className="flex items-center gap-2 text-xs text-muted-foreground">
+								<span className="size-2 rounded-full bg-primary" />
+								快速找回，2 分钟完成
+							</CardContent>
+						</Card>
+						{children}
+					</CardContent>
+				</Card>
+				<Card>
 					<CardContent className='space-y-6'>
 						<Card size="sm" className="w-fit">
 							<CardContent className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -108,17 +120,7 @@ function Component({ children }: { children: React.ReactNode }) {
 
 					</CardContent>
 				</Card>
-				<Card className="order-1 lg:order-2 lg:justify-self-end w-full lg:min-w-md mx-auto bg-muted">
-					<CardContent>
-						<Card size="sm" className="mb-4 w-fit">
-							<CardContent className="flex items-center gap-2 text-xs text-muted-foreground">
-								<span className="size-2 rounded-full bg-primary" />
-								快速找回，2 分钟完成
-							</CardContent>
-						</Card>
-						{children}
-					</CardContent>
-				</Card>
+
 			</div>
 		</section>
 	)

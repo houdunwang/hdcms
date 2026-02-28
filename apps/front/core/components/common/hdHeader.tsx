@@ -17,10 +17,8 @@ export interface IProps {
 }
 export function HdHeader({ menus }: IProps) {
 	return (
-		<header className="bg-background flex items-center gap-3 justify-between sticky top-0 z-10 border-b h-[var(--header-height)] px-3 lg:px-12">
-			{/* {JSON.stringify(store)} */}
+		<header className="bg-background flex items-center gap-3 justify-between sticky top-0 z-10 border-b h-[var(--header-height)] px-6 lg:px-12">
 			<div className="flex items-center gap-1">
-				{/* {JSON.stringify(user)} */}
 				<Link to="/" className="flex items-center gap-1">
 					<MessageCircleCode />
 					<div className="text-base">houdunren.com</div>

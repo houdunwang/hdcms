@@ -1,7 +1,7 @@
 export const HdFooter = () => {
 	return (
 		<footer className="border-t bg-muted/20">
-			<div className="container mx-auto px-4">
+			<div className="container mx-auto px-6">
 				<div className="mx-auto max-w-6xl py-10">
 					<div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 						<div className="flex items-center gap-2 text-sm font-medium">

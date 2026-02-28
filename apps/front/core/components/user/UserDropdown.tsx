@@ -61,6 +61,8 @@ function UnLogin() {
 		<Link to="/login" className="flex items-center gap-1">
 			<Button variant={'outline'}>登录</Button>
 		</Link>
-		<Button variant={'outline'}>注册</Button>
+		<Link to="/register" className="flex items-center gap-1">
+			<Button variant={'outline'}>注册</Button>
+		</Link>
 	</>
 }
