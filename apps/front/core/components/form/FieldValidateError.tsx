@@ -24,8 +24,8 @@ export const FieldValidateError = ({ field }: Props) => {
 	}
 
 	return (
-		<div className="bg-muted text-xs px-2 py-1 rounded-sm flex items-center gap-1">
-			<MessageCircleWarning size={15} className="text-primary" />
+		<div className="bg-primary/5 text-xs px-2 py-1 rounded-sm flex items-center gap-1 border border-primary/10">
+			<MessageCircleWarning size={12} className="text-primary" />
 			{content}
 		</div>
 	)

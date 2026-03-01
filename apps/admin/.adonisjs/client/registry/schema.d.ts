@@ -172,6 +172,28 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['me']>>>
     }
   }
+  'users.update': {
+    methods: ["PUT"]
+    pattern: '/core/users/:id?'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>>
+    }
+  }
+  'users.destroy': {
+    methods: ["DELETE"]
+    pattern: '/core/users/:id?'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
+    }
+  }
   'users.index': {
     methods: ["GET","HEAD"]
     pattern: '/core/users'
@@ -203,28 +225,6 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
-    }
-  }
-  'users.update': {
-    methods: ["PUT","PATCH"]
-    pattern: '/core/users/:id'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>>
-    }
-  }
-  'users.destroy': {
-    methods: ["DELETE"]
-    pattern: '/core/users/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
     }
   }
   'wechats': {

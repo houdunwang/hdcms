@@ -32,11 +32,11 @@ export interface ApiDefinition {
   users: {
     password: typeof routes['users.password']
     me: typeof routes['users.me']
+    update: typeof routes['users.update']
+    destroy: typeof routes['users.destroy']
     index: typeof routes['users.index']
     store: typeof routes['users.store']
     show: typeof routes['users.show']
-    update: typeof routes['users.update']
-    destroy: typeof routes['users.destroy']
   }
   wechats: typeof routes['wechats']
   wechatLogin: {

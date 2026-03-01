@@ -1,7 +1,7 @@
 import payConfig from '#config/pay'
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 import type { Infer } from '@vinejs/vine/types'
-import { validateFields, validateMessage } from './lang.js'
+import { validateFields, validateMessage } from './rules/lang.ts'
 
 export const payValidator = vine.compile(
   vine.object({

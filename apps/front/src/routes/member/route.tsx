@@ -10,7 +10,7 @@ export const Route = createFileRoute('/member')({
 })
 
 const navigateMenus = [
-	{ title: '资料管理', to: '/member' },
+	{ title: '资料管理', to: '/member/profile' },
 	{ title: '绑定帐号', to: '/member/bind' },
 ]
 function RouteComponent() {
@@ -19,7 +19,7 @@ function RouteComponent() {
 		<HdHeader menus={menus} />
 		<div className="bg-muted pt-6">
 			<div className="container mx-auto px-12 min-h-[calc(100vh-var(--header-height))] ">
-				<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 ">
+				<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 items-stretch">
 					<section className='hidden lg:block'>
 						<Card>
 							<img src={user?.avatar || ''} />

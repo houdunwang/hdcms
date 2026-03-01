@@ -19,11 +19,11 @@ export type ScannedRoutes = {
     'uploads': { paramsTuple?: []; params?: {} }
     'users.password': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
+    'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
+    'users.destroy': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats': { paramsTuple?: []; params?: {} }
     'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
     'wechat_login.login': { paramsTuple?: []; params?: {} }
@@ -68,18 +68,17 @@ export type ScannedRoutes = {
   }
   PUT: {
     'users.password': { paramsTuple?: []; params?: {} }
-    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'wechats': { paramsTuple?: []; params?: {} }
-  }
-  PATCH: {
-    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'wechats': { paramsTuple?: []; params?: {} }
   }
   DELETE: {
-    'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'users.destroy': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'wechats': { paramsTuple?: []; params?: {} }
   }
   OPTIONS: {
+    'wechats': { paramsTuple?: []; params?: {} }
+  }
+  PATCH: {
     'wechats': { paramsTuple?: []; params?: {} }
   }
 }

@@ -7,7 +7,7 @@ import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
-import { FieldSubscribeButton } from "core/components/form/FieldSubscribeButton"
+import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, User } from 'lucide-react'
 import z from "zod"
 import { Footer } from "./Footer"
@@ -36,7 +36,7 @@ export function LoginComponent() {
 			FieldCaptcha
 		},
 		formComponents: {
-			FieldSubscribeButton
+			FieldSubmitButton
 		},
 		fieldContext,
 		formContext,
@@ -54,8 +54,8 @@ export function LoginComponent() {
 				captcha: z.string().min(1, '请输入验证码'),
 			}),
 		},
-		onSubmit: ({ value: body }) => {
-			mutation.mutate({ body })
+		onSubmit: async ({ value: body }) => {
+			await mutation.mutateAsync({ body })
 		}
 	})
 
@@ -77,7 +77,7 @@ export function LoginComponent() {
 					<form.AppField name="password" children={field => <field.FieldInput label="密码" type="password" />} />
 					<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
 					<form.AppForm>
-						<form.FieldSubscribeButton type="submit" label="登录" />
+						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
 					<Footer />
 				</CardContent>

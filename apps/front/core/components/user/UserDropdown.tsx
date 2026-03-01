@@ -40,13 +40,15 @@ function IsLoginComponent() {
 			<DropdownMenuContent className='w-auto'>
 				<DropdownMenuGroup>
 					<DropdownMenuItem>{user?.nickname || user?.name}</DropdownMenuItem>
-					<DropdownMenuItem className='opacity-50 text-xs'>UID:{user?.id} /  注册于 {dayjs(user!.createdAt).fromNow()}</DropdownMenuItem>
+					<DropdownMenuItem className='opacity-50 text-xs'>
+						UID:{user?.id} /  注册于 {dayjs(user!.createdAt).fromNow()}
+					</DropdownMenuItem>
 					<DropdownMenuSeparator />
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
-					<DropdownMenuItem onClick={() => navigation({ to: '/member' })}>用户中心</DropdownMenuItem>
-					<DropdownMenuItem>订阅状态</DropdownMenuItem>
+					<DropdownMenuItem onClick={() => navigation({ to: '/member/profile' })}>资料管理</DropdownMenuItem>
+					<DropdownMenuItem onClick={() => navigation({ to: '/member/bind' })}>帐号绑定</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuSeparator />
