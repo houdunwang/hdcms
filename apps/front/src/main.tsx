@@ -26,7 +26,7 @@ const queryClient = new QueryClient({
     }
   }
 })
-// const queryClient = new QueryClient()
+
 const rootElement = document.getElementById('app')!
 
 if (!rootElement.innerHTML) {

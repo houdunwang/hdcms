@@ -21,7 +21,8 @@ export const createUserValidator = vine.compile(
     password_confirmation: vine.string(),
     captcha: vine.string().use(captchaRule()),
   })
-).messagesProvider = validateProvider({
+)
+createUserValidator.messagesProvider = validateProvider({
   fields: {
     name: '帐号',
   }
@@ -38,20 +39,25 @@ export const updateUserValidator = vine.create(
     weibo: vine.string().optional(),
     wechat: vine.string().url().optional(),
     github: vine.string().url().optional(),
-    qq: vine.number().optional(),
+    qq: vine.string().regex(/^[1-9]\d{4,10}$/).optional(),
     isLock: vine.boolean().optional(),
   })
 )
 updateUserValidator.messagesProvider = validateProvider({
+  messages: {
+    'qq.regex': '请输入正确的 QQ 号',
+  },
   fields: {
     nickname: '昵称',
   }
 })
 
-export const changePasswordValidator = vine.create(
+export const updatePasswordValidator = vine.create(
   vine.object({
     old_password: vine.string().exists(async (_db, value, field) => {
       const user = field.meta.user
+      // console.log('field.meta', field.meta.user)
+
       if (user) {
         return await hash.verify(user.password, value)
       }
@@ -62,3 +68,8 @@ export const changePasswordValidator = vine.create(
     captcha: vine.string().use(captchaRule()),
   })
 )
+updatePasswordValidator.messagesProvider = validateProvider({
+  messages: {
+    'old_password.database.exists': '旧密码错误',
+  },
+})

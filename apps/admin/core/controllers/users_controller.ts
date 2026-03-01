@@ -1,9 +1,9 @@
+import { createUserValidator, updatePasswordValidator, updateUserValidator } from '#core/validators/user'
 import User from '#models/user'
-import { createUserValidator, updateUserValidator, changePasswordValidator } from '#core/validators/user'
 import UserTransformer from '#transformers/user_transformer'
+import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.ts'
-import { inject } from '@adonisjs/core'
 @inject()
 export default class UsersController extends BaseController {
   constructor(protected ctx: HttpContext) {
@@ -18,6 +18,11 @@ export default class UsersController extends BaseController {
  */
   async me({ auth, serialize }: HttpContext) {
     const user = auth.user!
+    // await new Promise((r) => {
+    //   setTimeout(() => {
+    //     r(null)
+    //   }, 3000)
+    // })
     return serialize(UserTransformer.transform(user, auth))
   }
 
@@ -73,7 +78,7 @@ export default class UsersController extends BaseController {
    * @requestBody <updateUserValidator>
    * @responseBody 200 - <User>
    */
-  async update({ params, request, auth, }: HttpContext) {
+  async update({ params, request, auth, serialize }: HttpContext) {
     const id = params.id ?? auth.user!.id
     if (id !== auth.user!.id && !auth.user!.isAdmin) {
       return this.error('没有操作权限', 403)
@@ -85,7 +90,7 @@ export default class UsersController extends BaseController {
       },
     })
     await user.merge(payload).save()
-    return this.success('更新成功', UserTransformer.transform(user, auth))
+    return serialize(UserTransformer.transform(user, auth))
   }
 
   /**
@@ -97,8 +102,9 @@ export default class UsersController extends BaseController {
    * @responseBody 200 - { "message": "密码修改成功" }
    */
   async password({ request, auth }: HttpContext) {
+
     const user = await auth.authenticate()
-    const payload = await request.validateUsing(changePasswordValidator, {
+    const payload = await request.validateUsing(updatePasswordValidator, {
       meta: { user },
     })
 

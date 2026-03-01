@@ -5,7 +5,7 @@ import { userAtom } from '@core/store/userStore'
 import { createFormHookContexts } from '@tanstack/react-form'
 import { QueryClientProvider, useQuery, type QueryClient } from '@tanstack/react-query'
 import { RouterProvider, type AnyRouter } from '@tanstack/react-router'
-import { useSetAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
@@ -21,7 +21,7 @@ export const Hd = ({ router, queryClient }: { router: AnyRouter, queryClient: Qu
 			<TooltipProvider >
 				<HdProvider router={router} queryClient={queryClient} />
 			</TooltipProvider>
-			<Toaster position='top-center' />
+			<Toaster position='top-center' className='text-primary' />
 		</QueryClientProvider>
 	</ThemeProvider>
 }

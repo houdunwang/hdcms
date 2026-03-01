@@ -16,11 +16,11 @@ import dayjs from 'dayjs'
 import { useAtomValue } from 'jotai'
 import { ModeToggle } from '../theme/mode-toggle'
 export const UserDropdown = () => {
-	const { isLogin } = useAuth()
+	const { isAuthenticated } = useAuth()
 	return (
 		<div className="flex gap-2 items-center">
 			<ModeToggle />
-			{isLogin ? <IsLoginComponent /> : <UnLogin />}
+			{isAuthenticated ? <IsLoginComponent /> : <UnLogin />}
 		</div>
 	)
 }
@@ -31,7 +31,7 @@ function IsLoginComponent() {
 	const navigation = useNavigate()
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
+			<DropdownMenuTrigger asChild className='cursor-pointer'>
 				<Avatar>
 					<AvatarImage src={user?.avatar!} className='rounded-sm' />
 					<AvatarFallback>{user?.name?.slice(0, 2)}</AvatarFallback>
@@ -43,16 +43,20 @@ function IsLoginComponent() {
 					<DropdownMenuItem className='opacity-50 text-xs'>
 						UID:{user?.id} /  注册于 {dayjs(user!.createdAt).fromNow()}
 					</DropdownMenuItem>
-					<DropdownMenuSeparator />
 				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
-					<DropdownMenuItem onClick={() => navigation({ to: '/member/profile' })}>资料管理</DropdownMenuItem>
-					<DropdownMenuItem onClick={() => navigation({ to: '/member/bind' })}>帐号绑定</DropdownMenuItem>
+					<Link to='/member/profile'>
+						<DropdownMenuItem className='cursor-pointer py-1'>资料管理</DropdownMenuItem>
+					</Link>
+					<Link to='/member/bind'>
+						<DropdownMenuItem className='cursor-pointer py-1'>帐号绑定</DropdownMenuItem>
+					</Link>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem onClick={() => auth.logout()}>退出登录</DropdownMenuItem>
+					<DropdownMenuItem className='cursor-pointer py-2 ' onClick={() => auth.logout()}>退出登录</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>
