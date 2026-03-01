@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { useFieldContext } from "@core/hd"
 import { useField } from "@tanstack/react-form"
-import type { FormFieldProps } from "core/types/form"
+import type { FormFieldProps, IFieldApi } from "core/types/form"
 import z from "zod"
 import { FieldValidateError } from "./FieldValidateError"
 import { useApi } from "@core/hooks/useApi"
@@ -25,7 +25,7 @@ export function FieldSendCode({ label, description, className, fieldClassName, t
 		validators: {
 			onChange: accountValidator
 		}
-	})
+	}) as IFieldApi
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
 	return (
 		<div className="space-y-2">

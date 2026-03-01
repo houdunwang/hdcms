@@ -1,10 +1,10 @@
-import { registry } from '@app/admin/registry'
-import { AuthEnum } from '@core/enum'
-import { fieldErrorAtom } from '@core/store/fieldErrorStore'
-import { useNavigate } from '@tanstack/react-router'
-import { createTuyau } from '@tuyau/core/client'
-import { useSetAtom } from 'jotai'
-import { toast } from "sonner"
+import { registry } from '@app/admin/registry';
+import { AuthEnum } from '@core/enum';
+import { fieldErrorAtom } from '@core/store/fieldErrorStore';
+import { useNavigate } from '@tanstack/react-router';
+import { createTuyau } from '@tuyau/core/client';
+import { useSetAtom } from 'jotai';
+import { toast } from "sonner";
 
 
 export function useRequestClient() {
@@ -22,6 +22,7 @@ export function useRequestClient() {
 					if (token) {
 						request.headers.set('Authorization', `Bearer ${token}`)
 					}
+					setFieldError({})
 				}
 			],
 			afterResponse: [
@@ -40,7 +41,6 @@ export function useRequestClient() {
 						toast.error('网络连接失败')
 						return error
 					}
-
 					let responseData
 					try {
 						responseData = await error.response.clone().json()

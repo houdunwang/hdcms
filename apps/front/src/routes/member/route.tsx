@@ -2,10 +2,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { menus } from '@/config/menus'
 import { HdHeader } from '@core/components/common/hdHeader'
 import { useAuth } from '@core/hooks/useAuth'
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Link, Outlet, redirect } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 
 export const Route = createFileRoute('/member')({
+	beforeLoad: ({ context }) => {
+		if (!context.auth.isAuthenticated) {
+			throw redirect({ to: '/auth/login' })
+		}
+	},
 	component: RouteComponent,
 })
 

@@ -122,7 +122,7 @@ export const validateFields = {
 	captcha: '验证码',
 	account: '帐号',
 	password_confirmation: '确认密码',
-	old_password: '原密码',
+	old_password: '旧密码',
 	qq: 'QQ号',
 	wechat: '微信号',
 	github: 'Github账号',

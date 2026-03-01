@@ -1,12 +1,10 @@
 import { getUserByName } from '#core/helper'
-import hash from '@adonisjs/core/services/hash'
-import vine, { SimpleMessagesProvider } from '@vinejs/vine'
-import { codeRule } from './rules/codeRule.js'
 import env from '#start/env'
-import { captchaRule } from './rules/captchaRule.js'
-import { validateMessage } from './config/validateMessage.ts'
-import { validateFields } from './config/validateFields.ts'
+import hash from '@adonisjs/core/services/hash'
+import vine from '@vinejs/vine'
 import { validateProvider } from './config/validateProvider.ts'
+import { captchaRule } from './rules/captchaRule.js'
+import { codeRule } from './rules/codeRule.js'
 
 export const loginValidator = vine.create(
   vine.object({
@@ -41,7 +39,8 @@ export const loginValidator = vine.create(
       })
       .use(captchaRule()),
   })
-).messagesProvider = validateProvider({
+)
+loginValidator.messagesProvider = validateProvider({
   messages: {
     'password.database.exists': '密码错误',
   }
@@ -61,7 +60,8 @@ export const registerValidator = vine.create(
     password_confirmation: vine.string().minLength(5).maxLength(20),
     captcha: vine.string().use(captchaRule()),
   })
-).messagesProvider = validateProvider({
+)
+registerValidator.messagesProvider = validateProvider({
   fields: {
     name: '帐号',
   }

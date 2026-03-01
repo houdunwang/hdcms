@@ -154,10 +154,10 @@ export interface Registry {
     methods: ["PUT"]
     pattern: '/core/users/password'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/user').changePasswordValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').changePasswordValidator)>>
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>>
     }
   }

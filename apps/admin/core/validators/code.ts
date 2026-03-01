@@ -1,6 +1,5 @@
 import { getUserByName } from '#core/helper'
-import vine, { SimpleMessagesProvider } from '@vinejs/vine'
-import { validateMessage } from './rules/lang.ts'
+import vine from '@vinejs/vine'
 
 export const sendCodeValidator = vine.compile(
   vine.object({
@@ -10,6 +9,3 @@ export const sendCodeValidator = vine.compile(
   })
 )
 
-sendCodeValidator.messagesProvider = new SimpleMessagesProvider(validateMessage, {
-  account: '账号',
-})

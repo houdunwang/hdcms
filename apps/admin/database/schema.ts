@@ -75,39 +75,39 @@ export class OrderSchema extends BaseModel {
 }
 
 export class RateLimitSchema extends BaseModel {
-  static $columns = ['expire', 'key', 'points'] as const
+  static $columns = ['key', 'points', 'expire'] as const
   $columns = RateLimitSchema.$columns
-  @column()
-  declare expire: bigint | number | null
   @column()
   declare key: string
   @column()
   declare points: number
+  @column()
+  declare expire: bigint | number | null
 }
 
 export class UploadSchema extends BaseModel {
-  static $columns = ['createdAt', 'driver', 'extension', 'id', 'mime', 'name', 'size', 'updatedAt', 'url', 'userId'] as const
+  static $columns = ['id', 'userId', 'url', 'name', 'extension', 'size', 'driver', 'mime', 'createdAt', 'updatedAt'] as const
   $columns = UploadSchema.$columns
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column()
-  declare driver: string
-  @column()
-  declare extension: string
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare mime: string | null
-  @column()
-  declare name: string
-  @column()
-  declare size: number
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
+  declare userId: number
   @column()
   declare url: string
   @column()
-  declare userId: number
+  declare name: string
+  @column()
+  declare extension: string
+  @column()
+  declare size: number
+  @column()
+  declare driver: string
+  @column()
+  declare mime: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
 }
 
 export class UserSchema extends BaseModel {

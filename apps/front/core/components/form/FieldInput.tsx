@@ -8,6 +8,7 @@ import { FieldValidateError } from "./FieldValidateError"
 export function FieldInput({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {
 	const field = useFieldContext<string>()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
+
 	return (
 		<Field className={className}>
 			{label ? <FieldLabel htmlFor={field.name}>{label}</FieldLabel> : null}

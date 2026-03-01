@@ -11,8 +11,20 @@ export const useAuth = () => {
 	const request = useRequestClient()
 	const navigate = useNavigate()
 
-	const isLogin = React.useMemo(() => {
-		return !!user?.id
+	const authenticate = () => {
+		const status = !!localStorage.getItem(AuthEnum.TOKEN_NAME)
+		if (!status) {
+			localStorage.setItem('history', window.location.href)
+		}
+		return status
+	}
+
+	const isAuthenticated = React.useMemo(() => {
+		const status = !!localStorage.getItem(AuthEnum.TOKEN_NAME)
+		if (!status && !window.location.pathname.includes('/auth/')) {
+			localStorage.setItem('history', window.location.href)
+		}
+		return status
 	}, [user])
 
 	const login = (data: typeof registry.$tree.auth.login.types.response.data) => {
@@ -40,7 +52,8 @@ export const useAuth = () => {
 	}
 
 	return {
-		isLogin,
+		authenticate,
+		isAuthenticated,
 		login,
 		getCurrentUser,
 		logout,

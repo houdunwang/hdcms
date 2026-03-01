@@ -1,17 +1,17 @@
 import { FieldInput } from "@core/components/form/FieldInput"
 import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
-import { createFormHook } from "@tanstack/react-form"
 import { fieldContext, formContext } from "@core/hd"
-import { useAuth } from "@core/hooks/useAuth"
-import { useMutation } from "@tanstack/react-query"
 import { useApi } from "@core/hooks/useApi"
+import { createFormHook } from "@tanstack/react-form"
+import { useMutation } from "@tanstack/react-query"
+import { toast } from "sonner"
 
 export const ProfileInfo = () => {
   const { auth, api } = useApi()
   const mutation = useMutation(api.users.update.mutationOptions({
     onSuccess: ({ data }) => {
-      console.log('data', data)
-      // auth.setUser(data.data)
+      auth.setUser(data)
+      toast.success("更新成功")
     }
   }))
   const { useAppForm } = createFormHook({

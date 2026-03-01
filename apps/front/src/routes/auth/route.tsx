@@ -1,9 +1,14 @@
 import { HdFooter } from '@core/components/common/HdFooter'
 import { HdHeader } from '@core/components/common/hdHeader'
 import { menus } from '@/config/menus'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/auth')({
+	beforeLoad: ({ context }) => {
+		if (context.auth.isAuthenticated) {
+			throw redirect({ to: '/' })
+		}
+	},
 	component: RouteComponent,
 })
 
