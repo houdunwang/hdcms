@@ -35,3 +35,4 @@ yarn-error.log
 
 # Frontend compiled assets
 public/assets
+apps/admin_backup
