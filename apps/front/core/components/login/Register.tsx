@@ -80,7 +80,7 @@ function RegisterComponent({ className, onSubmit, ...props }: LoginType) {
 					<form.AppField name="password_confirmation" children={field => <field.FieldInput label="确认密码" type="password" />} />
 					<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
 					<form.AppForm>
-						<form.FieldSubmitButton type="submit" label="登录" />
+						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
 					<Footer />
 				</CardContent>

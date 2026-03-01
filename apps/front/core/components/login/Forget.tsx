@@ -46,10 +46,10 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	})
 	const form = useAppForm({
 		defaultValues: {
-			account: '2300071698@qq.com',
-			code: 'admin',
-			password: 'admin888',
-			password_confirmation: 'admin888'
+			account: '',
+			code: '',
+			password: '',
+			password_confirmation: ''
 		},
 		onSubmit: async ({ value: body }) => {
 			await mutation.mutateAsync({ body })
@@ -80,7 +80,7 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 						children={field => <field.FieldInput label="确认密码" type="password" />}
 					/>
 					<form.AppForm>
-						<form.FieldSubmitButton type="submit" label="登录" />
+						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
 					<Footer />
 				</CardContent>
