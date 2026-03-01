@@ -7,7 +7,7 @@ import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
-import { FieldSubscribeButton } from "core/components/form/FieldSubscribeButton"
+import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
 import z from "zod"
 import { FieldSendCode } from "../form/FieldSendCode"
@@ -39,7 +39,7 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 			FieldSendCode,
 		},
 		formComponents: {
-			FieldSubscribeButton
+			FieldSubmitButton
 		},
 		fieldContext,
 		formContext,
@@ -51,9 +51,8 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 			password: 'admin888',
 			password_confirmation: 'admin888'
 		},
-		onSubmit: ({ value: body }) => {
-			console.log('Forget submit body:', body)
-			mutation.mutate({ body })
+		onSubmit: async ({ value: body }) => {
+			await mutation.mutateAsync({ body })
 		}
 	})
 
@@ -81,7 +80,7 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 						children={field => <field.FieldInput label="确认密码" type="password" />}
 					/>
 					<form.AppForm>
-						<form.FieldSubscribeButton type="submit" label="登录" />
+						<form.FieldSubmitButton type="submit" label="登录" />
 					</form.AppForm>
 					<Footer />
 				</CardContent>

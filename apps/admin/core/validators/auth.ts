@@ -1,10 +1,12 @@
 import { getUserByName } from '#core/helper'
-import { validateFields, validateMessage } from '#core/validators/lang'
 import hash from '@adonisjs/core/services/hash'
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 import { codeRule } from './rules/codeRule.js'
 import env from '#start/env'
 import { captchaRule } from './rules/captchaRule.js'
+import { validateMessage } from './config/validateMessage.ts'
+import { validateFields } from './config/validateFields.ts'
+import { validateProvider } from './config/validateProvider.ts'
 
 export const loginValidator = vine.create(
   vine.object({
@@ -39,7 +41,11 @@ export const loginValidator = vine.create(
       })
       .use(captchaRule()),
   })
-)
+).messagesProvider = validateProvider({
+  messages: {
+    'password.database.exists': '密码错误',
+  }
+})
 
 export const registerValidator = vine.create(
   vine.object({
@@ -55,7 +61,12 @@ export const registerValidator = vine.create(
     password_confirmation: vine.string().minLength(5).maxLength(20),
     captcha: vine.string().use(captchaRule()),
   })
-)
+).messagesProvider = validateProvider({
+  fields: {
+    name: '帐号',
+  }
+})
+
 
 export const findPasswordValidator = vine.create(
   vine.object({
@@ -71,13 +82,3 @@ export const findPasswordValidator = vine.create(
     code: vine.string().use(codeRule()),
   })
 )
-
-const messageProvider = new SimpleMessagesProvider(
-  {
-    ...validateMessage,
-    'password.database.exists': '密码错误',
-  },
-  { ...validateFields, name: '帐号' }
-)
-loginValidator.messagesProvider = messageProvider
-registerValidator.messagesProvider = messageProvider

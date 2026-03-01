@@ -1,6 +1,6 @@
 import { getUserByName } from '#core/helper'
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
-import { validateMessage } from './lang.js'
+import { validateMessage } from './rules/lang.ts'
 
 export const sendCodeValidator = vine.compile(
   vine.object({

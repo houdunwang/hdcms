@@ -9,9 +9,7 @@ export const Route = createFileRoute('/_front')({
 function RouteComponent() {
 	return <div className=''>
 		<HdHeader menus={menus} />
-		{/* <div className="container mx-auto p-3 "> */}
 		<Outlet />
-		{/* </div> */}
 		<HdFooter />
 	</div>
 }

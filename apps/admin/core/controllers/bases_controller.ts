@@ -8,7 +8,7 @@ export default abstract class BaseController {
     return this.ctx.serialize({ success: true, message, data })
   }
 
-  error(message: string, data: Record<string, any> = {}, status = 400) {
-    return this.ctx.response.abort({ success: false, error: message, data }, status)
+  error(message: string, status = 400, data: Record<string, any> = {}) {
+    return this.ctx.response.abort({ success: false, message: message, data }, status)
   }
 }

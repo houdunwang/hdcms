@@ -1,9 +1,14 @@
 import User from '#models/user'
-import type { HttpContext } from '@adonisjs/core/http'
 import { createUserValidator, updateUserValidator, changePasswordValidator } from '#core/validators/user'
 import UserTransformer from '#transformers/user_transformer'
-
-export default class UsersController {
+import { HttpContext } from '@adonisjs/core/http'
+import BaseController from './bases_controller.ts'
+import { inject } from '@adonisjs/core'
+@inject()
+export default class UsersController extends BaseController {
+  constructor(protected ctx: HttpContext) {
+    super()
+  }
   /**
  * @me
  * @tag 用户管理
@@ -13,12 +18,7 @@ export default class UsersController {
  */
   async me({ auth, serialize }: HttpContext) {
     const user = auth.user!
-    // await new Promise((r) => {
-    //   setTimeout(() => {
-    //     r(user)
-    //   }, 1000)
-    // })
-    return serialize(UserTransformer.transform(user, user))
+    return serialize(UserTransformer.transform(user, auth))
   }
 
   /**
@@ -73,16 +73,19 @@ export default class UsersController {
    * @requestBody <updateUserValidator>
    * @responseBody 200 - <User>
    */
-  async update({ params, request }: HttpContext) {
-    const user = await User.findOrFail(params.id)
+  async update({ params, request, auth, }: HttpContext) {
+    const id = params.id ?? auth.user!.id
+    if (id !== auth.user!.id && !auth.user!.isAdmin) {
+      return this.error('没有操作权限', 403)
+    }
+    const user = auth.user!
     const payload = await request.validateUsing(updateUserValidator, {
       meta: {
-        userId: params.id,
+        user: auth.user!,
       },
     })
-    user.merge(payload)
-    await user.save()
-    return user
+    await user.merge(payload).save()
+    return this.success('更新成功', UserTransformer.transform(user, auth))
   }
 
   /**
@@ -101,7 +104,7 @@ export default class UsersController {
 
     user.password = payload.password
     await user.save()
-    return { message: '密码修改成功' }
+    return this.success('密码修改成功')
   }
 
   /**

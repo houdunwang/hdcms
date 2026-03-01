@@ -12,8 +12,10 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/components/ui/tabs"
+import { ProfileInfo } from './-components/profile-info'
+import { ProfilePassword } from './-components/profile-password'
 
-export const Route = createFileRoute('/member/')({
+export const Route = createFileRoute('/member/profile')({
 	component: RouteComponent,
 })
 
@@ -27,29 +29,15 @@ export function RouteComponent() {
 			</TabsList>
 			<TabsContent value="overview">
 				<Card>
-					<CardHeader>
-						<CardTitle>Overview</CardTitle>
-						<CardDescription>
-							View your key metrics and recent project activity. Track progress
-							across all your active projects.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						You have 12 active projects and 3 pending tasks.
+					<CardContent className="text-muted-foreground">
+						<ProfileInfo />
 					</CardContent>
 				</Card>
 			</TabsContent>
 			<TabsContent value="analytics">
 				<Card>
-					<CardHeader>
-						<CardTitle>Analytics</CardTitle>
-						<CardDescription>
-							Track performance and user engagement metrics. Monitor trends and
-							identify growth opportunities.
-						</CardDescription>
-					</CardHeader>
 					<CardContent className="text-muted-foreground text-sm">
-						Page views are up 25% compared to last month.
+						<ProfilePassword />
 					</CardContent>
 				</Card>
 			</TabsContent>

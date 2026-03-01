@@ -9,9 +9,10 @@ router
 	.group(() => {
 		router.put('/users/password', [UsersController, 'password']).use(middleware.auth())
 		router.get('/users/me', [UsersController, 'me']).use(middleware.auth())
-		router.resource('/users', UsersController).use(['update', 'destroy'], middleware.auth()).apiOnly()
-			.use(['update'], middleware.auth())
-			.use(['destroy'], middleware.admin())
+
+		router.put('/users/:id?', [UsersController, 'update']).use(middleware.auth())
+		router.delete('/users/:id?', [UsersController, 'destroy']).use(middleware.admin())
+		router.resource('/users', UsersController).use(['update', 'destroy'], middleware.auth()).apiOnly().except(['update', 'destroy'])
 	})
 	.prefix('core')
 	.use([throttle])

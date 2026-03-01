@@ -24,6 +24,16 @@ export function useRequestClient() {
 					}
 				}
 			],
+			afterResponse: [
+				async (_request, _options, response) => {
+					if (response.ok) {
+						const res = await response.json() as { data: { message: string } }
+						if (res.data.message) {
+							toast.success(res.data.message)
+						}
+					}
+				}
+			],
 			beforeError: [
 				async (error) => {
 					if (!error.response) {
@@ -44,7 +54,7 @@ export function useRequestClient() {
 					switch (error.response.status) {
 						case 401:
 							localStorage.removeItem(AuthEnum.TOKEN_NAME)
-							navigate({ to: '/login' })
+							navigate({ to: '/auth/login' })
 							break
 						case 429:
 							const msg = responseData as { errors: { message: string }[] } | { message: string } | undefined

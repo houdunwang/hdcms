@@ -96,6 +96,18 @@ const routes = {
     tokens: [{"old":"/core/users/me","type":0,"val":"core","end":""},{"old":"/core/users/me","type":0,"val":"users","end":""},{"old":"/core/users/me","type":0,"val":"me","end":""}],
     types: placeholder as Registry['users.me']['types'],
   },
+  'users.update': {
+    methods: ["PUT"],
+    pattern: '/core/users/:id?',
+    tokens: [{"old":"/core/users/:id?","type":0,"val":"core","end":""},{"old":"/core/users/:id?","type":0,"val":"users","end":""},{"old":"/core/users/:id?","type":3,"val":"id","end":""}],
+    types: placeholder as Registry['users.update']['types'],
+  },
+  'users.destroy': {
+    methods: ["DELETE"],
+    pattern: '/core/users/:id?',
+    tokens: [{"old":"/core/users/:id?","type":0,"val":"core","end":""},{"old":"/core/users/:id?","type":0,"val":"users","end":""},{"old":"/core/users/:id?","type":3,"val":"id","end":""}],
+    types: placeholder as Registry['users.destroy']['types'],
+  },
   'users.index': {
     methods: ["GET","HEAD"],
     pattern: '/core/users',
@@ -113,18 +125,6 @@ const routes = {
     pattern: '/core/users/:id',
     tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['users.show']['types'],
-  },
-  'users.update': {
-    methods: ["PUT","PATCH"],
-    pattern: '/core/users/:id',
-    tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['users.update']['types'],
-  },
-  'users.destroy': {
-    methods: ["DELETE"],
-    pattern: '/core/users/:id',
-    tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['users.destroy']['types'],
   },
   'wechats': {
     methods: ["HEAD","OPTIONS","GET","POST","PUT","PATCH","DELETE"],

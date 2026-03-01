@@ -1,24 +1,24 @@
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { ThemeProvider } from '@core/components/theme/theme-provider'
 import { AuthEnum } from '@core/enum'
 import { userAtom } from '@core/store/userStore'
+import { createFormHookContexts } from '@tanstack/react-form'
 import { QueryClientProvider, useQuery, type QueryClient } from '@tanstack/react-query'
 import { RouterProvider, type AnyRouter } from '@tanstack/react-router'
 import { useSetAtom } from 'jotai'
+import { useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
-import './plugin/dayjs'
-import { useAuth } from './hooks/useAuth'
 import { useApi } from './hooks/useApi'
-import { createFormHookContexts } from '@tanstack/react-form'
-import { useEffect } from 'react'
-import { TooltipProvider } from '@/components/ui/tooltip'
+import { useAuth } from './hooks/useAuth'
+import './plugin/dayjs'
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } = createFormHookContexts()
 
 export const Hd = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }) => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 		<QueryClientProvider client={queryClient}>
-			<TooltipProvider>
+			<TooltipProvider >
 				<HdProvider router={router} queryClient={queryClient} />
 			</TooltipProvider>
 			<Toaster position='top-center' />
