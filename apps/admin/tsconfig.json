@@ -1,8 +1,0 @@
-{
-  "extends": "@adonisjs/tsconfig/tsconfig.app.json",
-  "compilerOptions": {
-    "rootDir": "./",
-    "jsx": "react",
-    "outDir": "../../build/admin"
-  }
-}
