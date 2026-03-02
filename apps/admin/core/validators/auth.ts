@@ -34,9 +34,7 @@ export const loginValidator = vine.create(
     captcha: vine
       .string()
       .optional()
-      .requiredWhen(() => {
-        return env.get('NODE_ENV') !== 'development'
-      })
+      .requiredWhen(() => env.get('NODE_ENV') !== 'development')
       .use(captchaRule()),
   })
 )

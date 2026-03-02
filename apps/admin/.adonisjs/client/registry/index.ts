@@ -96,6 +96,12 @@ const routes = {
     tokens: [{"old":"/core/users/me","type":0,"val":"core","end":""},{"old":"/core/users/me","type":0,"val":"users","end":""},{"old":"/core/users/me","type":0,"val":"me","end":""}],
     types: placeholder as Registry['users.me']['types'],
   },
+  'users.avatar': {
+    methods: ["POST"],
+    pattern: '/core/users/avatar',
+    tokens: [{"old":"/core/users/avatar","type":0,"val":"core","end":""},{"old":"/core/users/avatar","type":0,"val":"users","end":""},{"old":"/core/users/avatar","type":0,"val":"avatar","end":""}],
+    types: placeholder as Registry['users.avatar']['types'],
+  },
   'users.update': {
     methods: ["PUT"],
     pattern: '/core/users/:id?',

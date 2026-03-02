@@ -11,14 +11,6 @@ export const useAuth = () => {
 	const request = useRequestClient()
 	const navigate = useNavigate()
 
-	const authenticate = () => {
-		const status = !!localStorage.getItem(AuthEnum.TOKEN_NAME)
-		if (!status) {
-			localStorage.setItem('history', window.location.href)
-		}
-		return status
-	}
-
 	const isAuthenticated = React.useMemo(() => {
 		const status = !!localStorage.getItem(AuthEnum.TOKEN_NAME)
 		if (!status && !window.location.pathname.includes('/auth/')) {
@@ -52,7 +44,7 @@ export const useAuth = () => {
 	}
 
 	return {
-		authenticate,
+		// authenticate,
 		isAuthenticated,
 		login,
 		getCurrentUser,

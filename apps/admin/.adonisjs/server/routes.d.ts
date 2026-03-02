@@ -19,6 +19,7 @@ export type ScannedRoutes = {
     'uploads': { paramsTuple?: []; params?: {} }
     'users.password': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
+    'users.avatar': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'users.destroy': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'users.index': { paramsTuple?: []; params?: {} }
@@ -60,6 +61,7 @@ export type ScannedRoutes = {
     'pay.notify': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads': { paramsTuple?: []; params?: {} }
+    'users.avatar': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'wechats': { paramsTuple?: []; params?: {} }
     'wechat_login.login': { paramsTuple?: []; params?: {} }

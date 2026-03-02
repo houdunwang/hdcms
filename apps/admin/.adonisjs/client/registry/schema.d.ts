@@ -172,6 +172,17 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['me']>>>
     }
   }
+  'users.avatar': {
+    methods: ["POST"]
+    pattern: '/core/users/avatar'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['avatar']>>>
+    }
+  }
   'users.update': {
     methods: ["PUT"]
     pattern: '/core/users/:id?'
