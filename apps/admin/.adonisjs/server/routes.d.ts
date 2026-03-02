@@ -12,6 +12,7 @@ export type ScannedRoutes = {
     'captcha': { paramsTuple?: []; params?: {} }
     'codes.send': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
+    'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'pays': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
@@ -34,6 +35,7 @@ export type ScannedRoutes = {
   GET: {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'captcha': { paramsTuple?: []; params?: {} }
+    'logs': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -43,6 +45,7 @@ export type ScannedRoutes = {
   HEAD: {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'captcha': { paramsTuple?: []; params?: {} }
+    'logs': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

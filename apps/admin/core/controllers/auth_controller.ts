@@ -21,7 +21,7 @@ export default class AuthController extends BaseController {
    * @requestFormDataBody { "account": { "type": "string", "description": "登录帐号、手机号、邮箱", "example": "admin", "required": "true" }, "password": { "type": "string", "description": "登录密码", "example": "admin888", "required": "true" } , "captcha": { "type": "string", "description": "验证码", "example": "" }, "captcha_key": { "type": "string", "description": "验证码key", "example": "" }}
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  public async login({ request, serialize }: HttpContext) {
+  public async login({ request, serialize, auth }: HttpContext) {
     const payload = await request.validateUsing(loginValidator)
     const user = await getUserByName(payload.account)
     if (!user) {
@@ -30,7 +30,7 @@ export default class AuthController extends BaseController {
     const token = await User.accessTokens.create(user)
 
     return serialize({
-      user: UserTransformer.transform(user, user),
+      user: UserTransformer.transform(user, auth),
       token: token.value!.release(),
     })
   }
@@ -68,13 +68,13 @@ export default class AuthController extends BaseController {
     await user.fill(userPayload).save()
     const token = await auth.use('api').createToken(user)
     return serialize({
-      user: UserTransformer.transform(user, user),
+      user: UserTransformer.transform(user, auth),
       token: token.value!.release(),
     })
   }
 
   /**
-   * @register
+   * @findPassword
    * @tag 登录注册
    * @summary 找回密码
    * @operationId register
@@ -93,7 +93,7 @@ export default class AuthController extends BaseController {
     await user.merge({ password: payload.password }).save()
     const token = await auth.use('api').createToken(user)
     return serialize({
-      user: UserTransformer.transform(await user.refresh(), user),
+      user: UserTransformer.transform(await user.refresh(), auth),
       token: token.value!.release(),
     })
   }

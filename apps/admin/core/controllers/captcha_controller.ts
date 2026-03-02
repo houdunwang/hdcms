@@ -5,7 +5,7 @@ import svgCaptcha from 'svg-captcha'
 
 export default class CaptchaController {
   /**
-   * @captcha
+   * @handle
    * @tag 系统功能
    * @operationId captcha
    * @summary 图形验证码
