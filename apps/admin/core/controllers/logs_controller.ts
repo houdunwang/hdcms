@@ -1,8 +1,8 @@
-import { inject } from '@adonisjs/core';
-import drive from "@adonisjs/drive/services/main";
-import { HttpContext } from '@adonisjs/core/http';
 import { LogService } from '#services/log_service';
+import { inject } from '@adonisjs/core';
+import { HttpContext } from '@adonisjs/core/http';
 import app from '@adonisjs/core/services/app';
+import drive from "@adonisjs/drive/services/main";
 
 @inject()
 export default class LogsController {

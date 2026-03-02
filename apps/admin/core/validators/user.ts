@@ -34,6 +34,7 @@ export const updateUserValidator = vine.create(
   vine.object({
     nickname: vine.string().optional(),
     address: vine.string().optional(),
+    avatar: vine.string().optional(),
     realName: vine.string().optional(),
     home: vine.string().url().optional(),
     weibo: vine.string().optional(),
@@ -56,8 +57,6 @@ export const updatePasswordValidator = vine.create(
   vine.object({
     old_password: vine.string().exists(async (_db, value, field) => {
       const user = field.meta.user
-      // console.log('field.meta', field.meta.user)
-
       if (user) {
         return await hash.verify(user.password, value)
       }
@@ -73,3 +72,4 @@ updatePasswordValidator.messagesProvider = validateProvider({
     'old_password.database.exists': '旧密码错误',
   },
 })
+

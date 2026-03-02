@@ -26,8 +26,8 @@ export function useRequestClient() {
 			afterResponse: [
 				async (_request, _options, response) => {
 					if (response.ok) {
-						const res = await response.json() as { data: { message: string } }
-						if (res.data.message) {
+						const res = await response.json() as { data: { message?: string } }
+						if (res?.data?.message) {
 							toast.success(res.data.message)
 						}
 					}

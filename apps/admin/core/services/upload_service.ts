@@ -42,12 +42,11 @@ export class UploadService {
    * @description
    * 这是文件上传的主要入口点，它协调了本地存储、OSS 上传和数据库记录的全过程。
    */
-  async upload(file: MultipartFile): Promise<Upload | undefined> {
-    if (!file.tmpPath) return
+  async upload(file: MultipartFile): Promise<Upload> {
     //图片缩放处理
-    await this.imageService.resize(file.tmpPath)
+    await this.imageService.resize(file.tmpPath!)
     const action = env.get('UPLOAD_DRIVER');
-    await this[action](file)
+    return await this[action](file)
   }
 
   /**
@@ -59,10 +58,10 @@ export class UploadService {
    * 文件名将基于日期和一个唯一ID（cuid）生成，以避免冲突。
    * `moveToDisk` 方法会自动填充 `file.filePath` 和 `file.meta.url`。
    */
-  private async local(file: MultipartFile): Promise<void> {
+  private async local(file: MultipartFile): Promise<Upload> {
     try {
       await file.moveToDisk(this.fileName(file))
-      await this.saveToDatabase(file)
+      return await this.saveToDatabase(file)
     } catch (error) {
       throw new Error('上传文件到本地失败')
     }
@@ -74,14 +73,12 @@ export class UploadService {
    * @param {MultipartFile} file - 已经调用过 `local()` 方法的文件对象。
    * @returns {Promise<OssUploadSuccessResponse | undefined>} 成功则返回 OSS 的响应，失败则返回 `undefined`。
    */
-  async oss(file: MultipartFile): Promise<void> {
+  async oss(file: MultipartFile): Promise<Upload> {
     try {
-      if (file.tmpPath) {
-        const key = this.fileName(file)
-        const result = await this.ossService.upload(key, file.tmpPath)
-        file.meta.url = result.url || ''
-        await this.saveToDatabase(file)
-      }
+      const key = this.fileName(file)
+      const result = await this.ossService.upload(key, file.tmpPath!)
+      file.meta.url = result.url || ''
+      return await this.saveToDatabase(file)
     } catch (error) {
       throw new Error('上传文件到OSS失败')
     }

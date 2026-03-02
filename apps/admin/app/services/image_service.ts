@@ -21,8 +21,6 @@ export class ImageService {
    * @param height 目标高度，单位为像素。
    */
   async resize(filePath: string): Promise<boolean> {
-    throw new Error('图片调整大小失败')
-
     try {
       if (!await this.isImage(filePath)) return false
       const image = sharp(filePath)

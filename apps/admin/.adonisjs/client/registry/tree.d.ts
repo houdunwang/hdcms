@@ -29,11 +29,13 @@ export interface ApiDefinition {
   system: {
     restart: typeof routes['system.restart']
   }
-  uploads: typeof routes['uploads']
+  uploads: {
+    file: typeof routes['uploads.file']
+    imageSingle: typeof routes['uploads.image_single']
+  }
   users: {
     password: typeof routes['users.password']
     me: typeof routes['users.me']
-    avatar: typeof routes['users.avatar']
     update: typeof routes['users.update']
     destroy: typeof routes['users.destroy']
     index: typeof routes['users.index']

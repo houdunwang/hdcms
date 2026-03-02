@@ -1,4 +1,4 @@
-import { createUserValidator, updatePasswordValidator, updateUserValidator } from '#core/validators/user'
+import { createUserValidator, updatePasswordValidator, updateUserValidator, uploadAvatarValidator } from '#core/validators/user'
 import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
@@ -13,7 +13,7 @@ export default class UsersController extends BaseController {
   /**
  * @me
  * @tag 用户管理
- * @summary 获取当前用户资料
+ * @summary 获取当前登录用户资料
  * @description 获取当前认证用户的详细信息
  * @responseBody 200 - <User>
  */
@@ -132,15 +132,17 @@ export default class UsersController extends BaseController {
    * @summary 更新用户头像
    * @description 更新当前认证用户的头像
    * @consumes multipart/form-data
-   * @requestFormDataBody { "file": { "type": "file", "description": "头像文件", "required": "true" }}
+   * @requestFormDataBody {"avatar":{"type":"file","format":"binary"}}
    * @responseBody 200 - { "url": "https://example.com/avatar.jpg" }
    */
-  async avatar({ request, serialize }: HttpContext) {
-    const file = request.file('file')
-    if (!file) {
-      return this.error('文件不能为空')
-    }
-    const result = await this.uploadService.upload(file);
-    return serialize(result)
-  }
+  // async avatar({ request, serialize, auth }: HttpContext) {
+  //   const user = await auth.authenticate()
+  //   const payload = await request.validateUsing(uploadAvatarValidator)
+  //   const result = await this.uploadService.upload(payload.avatar);
+  //   if (result?.url) {
+  //     user.avatar = result.url
+  //     await user.save()
+  //   }
+  //   return serialize(UserTransformer.transform(user, auth))
+  // }
 }

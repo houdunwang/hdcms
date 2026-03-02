@@ -11,7 +11,7 @@ export type FormFieldProps<T extends keyof JSX.IntrinsicElements | JSXElementCon
 	fieldClassName?: string
 }
 
-export type IFieldApi = FieldApi<any, string, string, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any>
+export type IFieldApi = FieldApi<any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any>
 // {
 // 	name: string
 // 	state: {

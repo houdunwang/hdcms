@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tabs"
 import { ProfileInfo } from './-components/profile-info'
 import { ProfilePassword } from './-components/profile-password'
+import { ProfileAvatar } from './-components/profile-avatar'
 
 export const Route = createFileRoute('/member/profile')({
 	component: RouteComponent,
@@ -21,11 +22,11 @@ export const Route = createFileRoute('/member/profile')({
 
 export function RouteComponent() {
 	return (
-		<Tabs defaultValue="overview">
+		<Tabs defaultValue="avatar">
 			<TabsList>
 				<TabsTrigger value="overview">基础资料</TabsTrigger>
 				<TabsTrigger value="analytics">修改密码</TabsTrigger>
-				<TabsTrigger value="reports">用户头像</TabsTrigger>
+				<TabsTrigger value="avatar">用户头像</TabsTrigger>
 			</TabsList>
 			<TabsContent value="overview">
 				<Card>
@@ -41,31 +42,10 @@ export function RouteComponent() {
 					</CardContent>
 				</Card>
 			</TabsContent>
-			<TabsContent value="reports">
+			<TabsContent value="avatar">
 				<Card>
-					<CardHeader>
-						<CardTitle>Reports</CardTitle>
-						<CardDescription>
-							Generate and download your detailed reports. Export data in
-							multiple formats for analysis.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						You have 5 reports ready and available to export.
-					</CardContent>
-				</Card>
-			</TabsContent>
-			<TabsContent value="settings">
-				<Card>
-					<CardHeader>
-						<CardTitle>Settings</CardTitle>
-						<CardDescription>
-							Manage your account preferences and options. Customize your
-							experience to fit your needs.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						Configure notifications, security, and themes.
+					<CardContent>
+						<ProfileAvatar />
 					</CardContent>
 				</Card>
 			</TabsContent>
