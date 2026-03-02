@@ -27,7 +27,7 @@ function RouteComponent() {
 				<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 items-stretch">
 					<section className='hidden lg:block'>
 						<Card>
-							<img src={user?.avatar || ''} />
+							<img src={user?.avatar || ''} className='w-72 object-cover' />
 							<CardHeader>
 								<CardTitle className='text-center'>
 									{user?.name || ''}

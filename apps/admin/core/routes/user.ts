@@ -10,7 +10,6 @@ router
 		router.put('/users/password', [UsersController, 'password']).use(middleware.auth())
 		router.get('/users/me', [UsersController, 'me']).use(middleware.auth())
 
-		router.post('/users/avatar', [UsersController, 'avatar']).use(middleware.auth())
 		router.put('/users/:id?', [UsersController, 'update']).use(middleware.auth())
 		router.delete('/users/:id?', [UsersController, 'destroy']).use(middleware.admin())
 		router.resource('/users', UsersController).use(['update', 'destroy'], middleware.auth()).apiOnly().except(['update', 'destroy'])

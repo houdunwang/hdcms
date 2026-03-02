@@ -3,6 +3,6 @@ import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class UploadTransformer extends BaseTransformer<Upload> {
   toObject() {
-    return this.pick(this.resource, ['id', 'url', 'user_id'])
+    return this.pick(this.resource, ['id', 'url', 'userId', 'mime'])
   }
 }

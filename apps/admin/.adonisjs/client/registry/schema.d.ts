@@ -150,15 +150,26 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/systems_controller').default['restart']>>>
     }
   }
-  'uploads': {
+  'uploads.file': {
     methods: ["POST"]
-    pattern: '/core/upload'
+    pattern: '/core/upload/file'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['file']>>>
+    }
+  }
+  'uploads.image_single': {
+    methods: ["POST"]
+    pattern: '/core/upload/imageSingle'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>>
     }
   }
   'users.password': {
@@ -181,17 +192,6 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['me']>>>
-    }
-  }
-  'users.avatar': {
-    methods: ["POST"]
-    pattern: '/core/users/avatar'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['avatar']>>>
     }
   }
   'users.update': {

@@ -84,11 +84,17 @@ const routes = {
     tokens: [{"old":"/core/restart","type":0,"val":"core","end":""},{"old":"/core/restart","type":0,"val":"restart","end":""}],
     types: placeholder as Registry['system.restart']['types'],
   },
-  'uploads': {
+  'uploads.file': {
     methods: ["POST"],
-    pattern: '/core/upload',
-    tokens: [{"old":"/core/upload","type":0,"val":"core","end":""},{"old":"/core/upload","type":0,"val":"upload","end":""}],
-    types: placeholder as Registry['uploads']['types'],
+    pattern: '/core/upload/file',
+    tokens: [{"old":"/core/upload/file","type":0,"val":"core","end":""},{"old":"/core/upload/file","type":0,"val":"upload","end":""},{"old":"/core/upload/file","type":0,"val":"file","end":""}],
+    types: placeholder as Registry['uploads.file']['types'],
+  },
+  'uploads.image_single': {
+    methods: ["POST"],
+    pattern: '/core/upload/imageSingle',
+    tokens: [{"old":"/core/upload/imageSingle","type":0,"val":"core","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"upload","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"imageSingle","end":""}],
+    types: placeholder as Registry['uploads.image_single']['types'],
   },
   'users.password': {
     methods: ["PUT"],
@@ -101,12 +107,6 @@ const routes = {
     pattern: '/core/users/me',
     tokens: [{"old":"/core/users/me","type":0,"val":"core","end":""},{"old":"/core/users/me","type":0,"val":"users","end":""},{"old":"/core/users/me","type":0,"val":"me","end":""}],
     types: placeholder as Registry['users.me']['types'],
-  },
-  'users.avatar': {
-    methods: ["POST"],
-    pattern: '/core/users/avatar',
-    tokens: [{"old":"/core/users/avatar","type":0,"val":"core","end":""},{"old":"/core/users/avatar","type":0,"val":"users","end":""},{"old":"/core/users/avatar","type":0,"val":"avatar","end":""}],
-    types: placeholder as Registry['users.avatar']['types'],
   },
   'users.update': {
     methods: ["PUT"],
