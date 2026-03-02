@@ -55,4 +55,5 @@ export const validateMessage = {
 	'unique': '{{field}} 已存在，请更换',
 	'exists': '{{field}} 不存在',
 	'number': '{{field}} 必须为数字',
+	'file.size': '{{field}} 大小不能超过 {{size}}',
 }

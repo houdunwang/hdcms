@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import type { IFieldApi } from "@core/types/form"
 import { useStore } from "@tanstack/react-form"
 import { fieldErrorAtom } from "core/store/fieldErrorStore"
@@ -7,9 +8,10 @@ import { useEffect, useState } from "react"
 
 type Props = {
 	field: IFieldApi
+	className?: string
 }
 
-export const FieldValidateError = ({ field }: Props) => {
+export const FieldValidateError = ({ field, className }: Props) => {
 	const { name } = field
 	const requestError = useAtomValue(fieldErrorAtom)
 	const [content, setContent] = useState("")
@@ -29,7 +31,7 @@ export const FieldValidateError = ({ field }: Props) => {
 	}
 
 	return (
-		<div className="bg-primary/3 text-xs px-2 py-2 rounded-sm flex items-center gap-1 border border-primary/6">
+		<div className={cn("bg-primary/3 text-xs px-2 py-2 rounded-sm flex items-center gap-1 border border-primary/6", className)}>
 			<MessageCircleWarning size={12} className="text-primary/50" />
 			{content}
 		</div>

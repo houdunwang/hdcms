@@ -4,36 +4,50 @@ import { useApi } from "@core/hooks/useApi"
 import { useMutation } from "@tanstack/react-query"
 import type { FormFieldProps } from "core/types/form"
 import { useDropzone } from 'react-dropzone'
+import { FieldValidateError } from "./FieldValidateError"
+import { useAtom, useAtomValue, useSetAtom } from "jotai"
+import { fieldErrorAtom } from "@core/store/fieldErrorStore"
 
 interface Props extends FormFieldProps<'input'> {
 	onSuccess: (url: string) => void
+	maxSize?: number,
 }
-export function FieldImage({ onSuccess, label, description, className, fieldClassName, type, ...props }: Props) {
+export function FieldImage({ onSuccess, label, maxSize, description, className, fieldClassName, type, ...props }: Props) {
 	const field = useFieldContext<string>()
 	const { api } = useApi()
+	const [fieldError, setFieldError] = useAtom(fieldErrorAtom)
+
 	const mutation = useMutation(api.uploads.imageSingle.mutationOptions({
 		onSuccess: ({ data }) => {
 			field.setValue(data.url)
 			onSuccess(data.url)
 		},
 		onError: (error) => {
-			console.log('error', error)
+			const message = error.response?.errors[0].message
+			if (message) {
+				setFieldError(state => ({
+					...state,
+					[field.name]: message,
+				}))
+			}
 		},
 	}))
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: { 'image/*': [] },
-		maxFiles: 2,
-		maxSize: 1024 * 1024 * 2,
-		multiple: true,
+		maxFiles: 1,
+		maxSize: 1024 * 1024 * (maxSize ?? 2),
+		multiple: false,
 		onDrop: files => {
 			const file = files[0]
 			if (file) mutation.mutate({ body: { file } } as any)
 		}
 	});
-	if (field.state.value) return <div {...getRootProps({ className: 'dropzone' })}>
+	if (field.state.value) return <div>
 		<input {...getInputProps()} />
 		<img src={field.state.value}
+			{...getRootProps({ className: 'dropzone' })}
 			className={cn('group-hover:scale-105 duration-300 object-cover h-32 rounded-lg cursor-pointer', fieldClassName)} />
+		<FieldValidateError field={field} className="mt-2" />
 	</div>
 	// const files = <li className="border rounded-lg overflow-hidden group relative object-cover">
 	// 	<img src={field.state.value} className="group-hover:scale-105 duration-300 object-cover h-32" />
