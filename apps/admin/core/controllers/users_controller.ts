@@ -4,9 +4,10 @@ import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.ts'
+import { UploadService } from '#core/services/upload_service'
 @inject()
 export default class UsersController extends BaseController {
-  constructor(protected ctx: HttpContext) {
+  constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
     super()
   }
   /**
@@ -126,5 +127,21 @@ export default class UsersController extends BaseController {
     return { message: 'User deleted successfully' }
   }
 
-  //注销帐号
+  /**
+   * @avatar
+   * @tag 用户管理
+   * @summary 更新用户头像
+   * @description 更新当前认证用户的头像
+   * @consumes multipart/form-data
+   * @requestFormDataBody { "file": { "type": "file", "description": "头像文件", "required": "true" }}
+   * @responseBody 200 - { "url": "https://example.com/avatar.jpg" }
+   */
+  async avatar({ request, serialize }: HttpContext) {
+    const file = request.file('file')
+    if (!file) {
+      return this.error('文件不能为空')
+    }
+    const result = await this.uploadService.upload(file);
+    return serialize(result)
+  }
 }

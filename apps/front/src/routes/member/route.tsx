@@ -33,7 +33,7 @@ function RouteComponent() {
 									{user?.name || ''}
 								</CardTitle>
 								<CardDescription className='text-center'>
-									注册于 {dayjs(user!.createdAt).fromNow()}
+									注册于 {dayjs(user?.createdAt).fromNow()}
 									<br />
 									UID: {user?.id}
 								</CardDescription>
