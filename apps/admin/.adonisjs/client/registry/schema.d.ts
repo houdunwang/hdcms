@@ -95,6 +95,17 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/licenses_controller').default['handle']>>>
     }
   }
+  'logs': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/logs'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['handle']>>>
+    }
+  }
   'orders.index': {
     methods: ["POST"]
     pattern: '/core/order/create'

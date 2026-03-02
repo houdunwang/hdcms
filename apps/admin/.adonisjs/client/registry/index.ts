@@ -54,6 +54,12 @@ const routes = {
     tokens: [{"old":"/core/license/check","type":0,"val":"core","end":""},{"old":"/core/license/check","type":0,"val":"license","end":""},{"old":"/core/license/check","type":0,"val":"check","end":""}],
     types: placeholder as Registry['licenses']['types'],
   },
+  'logs': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/logs',
+    tokens: [{"old":"/core/logs","type":0,"val":"core","end":""},{"old":"/core/logs","type":0,"val":"logs","end":""}],
+    types: placeholder as Registry['logs']['types'],
+  },
   'orders.index': {
     methods: ["POST"],
     pattern: '/core/order/create',

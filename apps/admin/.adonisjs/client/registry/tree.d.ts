@@ -18,6 +18,7 @@ export interface ApiDefinition {
     send: typeof routes['codes.send']
   }
   licenses: typeof routes['licenses']
+  logs: typeof routes['logs']
   orders: {
     index: typeof routes['orders.index']
   }

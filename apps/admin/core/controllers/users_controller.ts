@@ -103,7 +103,6 @@ export default class UsersController extends BaseController {
    * @responseBody 200 - { "message": "密码修改成功" }
    */
   async password({ request, auth }: HttpContext) {
-
     const user = await auth.authenticate()
     const payload = await request.validateUsing(updatePasswordValidator, {
       meta: { user },
