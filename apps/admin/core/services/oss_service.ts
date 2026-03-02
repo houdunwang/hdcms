@@ -32,6 +32,13 @@ export class OssService {
     return client
   }
 
+
+  /**
+   * 上传到OSS 
+   * @param path OSS 中的路径
+   * @param localFilePath 本地文件路径
+   * @returns 
+   */
   async upload(path: string, localFilePath: string) {
     try {
       // 定义上传到 OSS 时附带的 HTTP 头。

@@ -86,8 +86,10 @@
     "luxon": "^3.7.2",
     "mysql2": "^3.18.1",
     "node-cron": "^4.2.1",
+    "pino-roll": "^4.0.0",
     "qrcode": "^1.5.4",
     "reflect-metadata": "^0.2.2",
+    "sharp": "^0.34.5",
     "svg-captcha": "^1.4.0",
     "wechatpay-node-v3": "^2.2.1"
   },
