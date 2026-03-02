@@ -12,6 +12,7 @@ import { randomUUID } from 'node:crypto'
 import fs from 'node:fs'
 import path, { resolve } from 'node:path'
 import { OssService } from './oss_service.ts'
+import string from '@adonisjs/core/helpers/string'
 
 /**
  * @class UploadService
@@ -46,7 +47,7 @@ export class UploadService {
   async upload(file: MultipartFile): Promise<Upload | undefined> {
     // 步骤 1: 将文件移动到本地临时目录。这是所有上传策略的共同起点。
     await this.local(file)
-
+    console.log('string.uuid', file)
     let url = ''
     // 步骤 2: 根据配置的驱动决定下一步操作。
     switch (env.get('UPLOAD_DRIVER')) {
@@ -70,31 +71,6 @@ export class UploadService {
     }
     // 步骤 3: 将文件的最终信息保存到数据库。
     return this.saveToDatabase(file, url)
-  }
-
-  /**
-   * 将文件元数据保存到数据库。
-   *
-   * @param {MultipartFile} file - 文件对象。
-   * @param {string} url - 文件的最终可访问 URL。
-   * @returns {Promise<Upload>} 返回创建成功的 `Upload` 模型实例。
-   */
-  async saveToDatabase(file: MultipartFile, url: string): Promise<Upload> {
-    return await Upload.create({
-      url,
-      name: file.clientName, // 保留文件的原始名称
-      userId: this.ctx.auth.user?.id,
-      driver: env.get('UPLOAD_DRIVER'), // 记录使用的存储驱动
-      size: file.size, // 文件大小（字节）
-      extension: file.extname, // 文件扩展名
-    })
-  }
-
-  fileName(file: MultipartFile) {
-    const dir = `attachments/${DateTime.now().toFormat('yyyy/MM')}`
-    const fileName = 'U' + (this.ctx.auth.user?.id || 'anonymous') + '-' + DateTime.now().toFormat('MMddHHmmss') + '.' + file.extname
-    const path = [dir, fileName].join('/')
-    return path
   }
 
   /**
@@ -122,5 +98,36 @@ export class UploadService {
     const localFilePath = app.makePath('storage', file.filePath!)
     const key = this.fileName(file)
     return await this.ossService.upload(key, localFilePath)
+  }
+
+  /**
+   * 生成文件在存储中的路径。
+   *
+   * @param file - 文件对象，包含文件名、扩展名等信息。
+   * @returns 返回文件在本地存储中的完整路径，包括目录和文件名。
+   */
+  fileName(file: MultipartFile) {
+    const dir = `attachments/${DateTime.now().toFormat('yyyy/MM')}`
+    const fileName = 'U' + (this.ctx.auth.user?.id || 'anonymous') + DateTime.now().toFormat('yyyyMM') + '-' + string.uuid() + '.' + file.extname
+    const path = [dir, fileName].join('/')
+    return path
+  }
+
+  /**
+   * 将文件元数据保存到数据库。
+   *
+   * @param {MultipartFile} file - 文件对象。
+   * @param {string} url - 文件的最终可访问 URL。
+   * @returns {Promise<Upload>} 返回创建成功的 `Upload` 模型实例。
+   */
+  async saveToDatabase(file: MultipartFile, url: string): Promise<Upload> {
+    return await Upload.create({
+      url,
+      name: file.clientName, // 保留文件的原始名称
+      userId: this.ctx.auth.user?.id,
+      driver: env.get('UPLOAD_DRIVER'), // 记录使用的存储驱动
+      size: file.size, // 文件大小（字节）
+      extension: file.extname, // 文件扩展名
+    })
   }
 }
