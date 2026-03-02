@@ -3,16 +3,14 @@ import { OssUploadSuccessResponse } from '#core/types/oss'
 import env from '#start/env'
 import { inject } from '@adonisjs/core'
 import { MultipartFile } from '@adonisjs/core/bodyparser'
+import string from '@adonisjs/core/helpers/string'
 import { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import drive from '@adonisjs/drive/services/main'
-import OSS from 'ali-oss'
 import { DateTime } from 'luxon'
-import { randomUUID } from 'node:crypto'
-import fs from 'node:fs'
-import path, { resolve } from 'node:path'
 import { OssService } from './oss_service.ts'
-import string from '@adonisjs/core/helpers/string'
+import { ImageService } from '#services/image_service'
+import { fileURLToPath } from 'node:url'
 
 /**
  * @class UploadService
@@ -34,7 +32,7 @@ export class UploadService {
    * @constructor
    * @param {HttpContext} ctx - 当前 HTTP 请求的上下文，由 AdonisJS 的依赖注入容器提供。
    */
-  constructor(protected ctx: HttpContext, protected ossService: OssService) { }
+  constructor(protected ctx: HttpContext, protected ossService: OssService, protected imageService: ImageService) { }
 
   /**
    * 处理文件上传的核心业务逻辑。
@@ -45,32 +43,11 @@ export class UploadService {
    * 这是文件上传的主要入口点，它协调了本地存储、OSS 上传和数据库记录的全过程。
    */
   async upload(file: MultipartFile): Promise<Upload | undefined> {
-    // 步骤 1: 将文件移动到本地临时目录。这是所有上传策略的共同起点。
-    await this.local(file)
-    console.log('string.uuid', file)
-    let url = ''
-    // 步骤 2: 根据配置的驱动决定下一步操作。
-    switch (env.get('UPLOAD_DRIVER')) {
-      case 'oss':
-        if (file.filePath) {
-          // 调用 oss 方法将文件上传到云端。
-          const result = await this.oss(file)
-          // 上传成功后，删除本地的临时文件以释放空间。
-          const disk = drive.use()
-          await disk.delete(file.filePath)
-          // 如果 OSS 操作成功并返回结果，则使用 OSS 的 URL。
-          if (result) {
-            url = result.url
-          }
-        }
-        // 修正：确保在 case 'oss' 结束后中断 switch，防止意外执行 default 逻辑。
-        break
-      default:
-        // 对于 'local' 或其他默认驱动，直接使用 `moveToDisk` 后生成的元信息中的 URL。
-        url = file.meta.url
-    }
-    // 步骤 3: 将文件的最终信息保存到数据库。
-    return this.saveToDatabase(file, url)
+    if (!file.tmpPath) return
+    //图片缩放处理
+    await this.imageService.resize(file.tmpPath)
+    const action = env.get('UPLOAD_DRIVER');
+    await this[action](file)
   }
 
   /**
@@ -82,10 +59,13 @@ export class UploadService {
    * 文件名将基于日期和一个唯一ID（cuid）生成，以避免冲突。
    * `moveToDisk` 方法会自动填充 `file.filePath` 和 `file.meta.url`。
    */
-  async local(file: MultipartFile) {
-    // @todo: 检查 `drive.ts` 配置。如果 local disk 的 `root` 已经是 'uploads'，
-    // 这里的 `key` 中就不应再包含 'uploads/' 前缀，否则会导致路径重复 (e.g., 'uploads/uploads/...').
-    await file.moveToDisk(this.fileName(file))
+  private async local(file: MultipartFile): Promise<void> {
+    try {
+      await file.moveToDisk(this.fileName(file))
+      await this.saveToDatabase(file)
+    } catch (error) {
+      throw new Error('上传文件到本地失败')
+    }
   }
 
   /**
@@ -94,10 +74,17 @@ export class UploadService {
    * @param {MultipartFile} file - 已经调用过 `local()` 方法的文件对象。
    * @returns {Promise<OssUploadSuccessResponse | undefined>} 成功则返回 OSS 的响应，失败则返回 `undefined`。
    */
-  async oss(file: MultipartFile): Promise<OssUploadSuccessResponse | undefined> {
-    const localFilePath = app.makePath('storage', file.filePath!)
-    const key = this.fileName(file)
-    return await this.ossService.upload(key, localFilePath)
+  async oss(file: MultipartFile): Promise<void> {
+    try {
+      if (file.tmpPath) {
+        const key = this.fileName(file)
+        const result = await this.ossService.upload(key, file.tmpPath)
+        file.meta.url = result.url || ''
+        await this.saveToDatabase(file)
+      }
+    } catch (error) {
+      throw new Error('上传文件到OSS失败')
+    }
   }
 
   /**
@@ -106,7 +93,7 @@ export class UploadService {
    * @param file - 文件对象，包含文件名、扩展名等信息。
    * @returns 返回文件在本地存储中的完整路径，包括目录和文件名。
    */
-  fileName(file: MultipartFile) {
+  private fileName(file: MultipartFile) {
     const dir = `attachments/${DateTime.now().toFormat('yyyy/MM')}`
     const fileName = 'U' + (this.ctx.auth.user?.id || 'anonymous') + DateTime.now().toFormat('yyyyMM') + '-' + string.uuid() + '.' + file.extname
     const path = [dir, fileName].join('/')
@@ -117,12 +104,11 @@ export class UploadService {
    * 将文件元数据保存到数据库。
    *
    * @param {MultipartFile} file - 文件对象。
-   * @param {string} url - 文件的最终可访问 URL。
    * @returns {Promise<Upload>} 返回创建成功的 `Upload` 模型实例。
    */
-  async saveToDatabase(file: MultipartFile, url: string): Promise<Upload> {
+  private async saveToDatabase(file: MultipartFile): Promise<Upload> {
     return await Upload.create({
-      url,
+      url: file.meta.url,
       name: file.clientName, // 保留文件的原始名称
       userId: this.ctx.auth.user?.id,
       driver: env.get('UPLOAD_DRIVER'), // 记录使用的存储驱动

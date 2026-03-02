@@ -15,7 +15,18 @@ const loggerConfig = defineConfig({
       level: env.get('LOG_LEVEL'),
       desination: !app.inProduction ? await syncDestination() : undefined,
       transport: {
-        targets: [targets.file({ destination: 1 })],
+        targets: targets()
+          .pushIf(app.inProduction, {
+            target: 'pino-roll',
+            level: 'info',
+            options: {
+              file: app.makePath('storage/logs/app.log'),
+              frequency: 'daily',
+              mkdir: true,
+            },
+          })
+          .pushIf(!app.inProduction, targets.file({ destination: 1 }))
+          .toArray(),
       },
     },
   },
@@ -28,5 +39,5 @@ export default loggerConfig
  * in your application.
  */
 declare module '@adonisjs/core/types' {
-  export interface LoggersList extends InferLoggers<typeof loggerConfig> {}
+  export interface LoggersList extends InferLoggers<typeof loggerConfig> { }
 }
