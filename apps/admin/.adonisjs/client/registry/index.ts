@@ -138,11 +138,11 @@ const routes = {
     tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['users.show']['types'],
   },
-  'wechats': {
+  'wechats_message': {
     methods: ["HEAD","OPTIONS","GET","POST","PUT","PATCH","DELETE"],
-    pattern: '/core/wechat',
-    tokens: [{"old":"/core/wechat","type":0,"val":"core","end":""},{"old":"/core/wechat","type":0,"val":"wechat","end":""}],
-    types: placeholder as Registry['wechats']['types'],
+    pattern: '/core/wechat/message',
+    tokens: [{"old":"/core/wechat/message","type":0,"val":"core","end":""},{"old":"/core/wechat/message","type":0,"val":"wechat","end":""},{"old":"/core/wechat/message","type":0,"val":"message","end":""}],
+    types: placeholder as Registry['wechats_message']['types'],
   },
   'wechat_login.login_qr_code': {
     methods: ["GET","HEAD"],
@@ -156,17 +156,17 @@ const routes = {
     tokens: [{"old":"/core/wechat/login","type":0,"val":"core","end":""},{"old":"/core/wechat/login","type":0,"val":"wechat","end":""},{"old":"/core/wechat/login","type":0,"val":"login","end":""}],
     types: placeholder as Registry['wechat_login.login']['types'],
   },
-  'bind.login_qr_code': {
+  'wechat_bind.login_qr_code': {
     methods: ["POST"],
     pattern: '/core/wechat/bind/qr',
     tokens: [{"old":"/core/wechat/bind/qr","type":0,"val":"core","end":""},{"old":"/core/wechat/bind/qr","type":0,"val":"wechat","end":""},{"old":"/core/wechat/bind/qr","type":0,"val":"bind","end":""},{"old":"/core/wechat/bind/qr","type":0,"val":"qr","end":""}],
-    types: placeholder as Registry['bind.login_qr_code']['types'],
+    types: placeholder as Registry['wechat_bind.login_qr_code']['types'],
   },
-  'bind.bind': {
+  'wechat_bind.bind': {
     methods: ["POST"],
     pattern: '/core/wechat/bind',
     tokens: [{"old":"/core/wechat/bind","type":0,"val":"core","end":""},{"old":"/core/wechat/bind","type":0,"val":"wechat","end":""},{"old":"/core/wechat/bind","type":0,"val":"bind","end":""}],
-    types: placeholder as Registry['bind.bind']['types'],
+    types: placeholder as Registry['wechat_bind.bind']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

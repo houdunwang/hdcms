@@ -42,13 +42,13 @@ export interface ApiDefinition {
     store: typeof routes['users.store']
     show: typeof routes['users.show']
   }
-  wechats: typeof routes['wechats']
+  wechatsMessage: typeof routes['wechats_message']
   wechatLogin: {
     loginQrCode: typeof routes['wechat_login.login_qr_code']
     login: typeof routes['wechat_login.login']
   }
-  bind: {
-    loginQrCode: typeof routes['bind.login_qr_code']
-    bind: typeof routes['bind.bind']
+  wechatBind: {
+    loginQrCode: typeof routes['wechat_bind.login_qr_code']
+    bind: typeof routes['wechat_bind.bind']
   }
 }

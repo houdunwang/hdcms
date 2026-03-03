@@ -1,21 +1,21 @@
 import { cn } from "@/lib/utils"
 import { useFieldContext } from "@core/hd"
 import { useApi } from "@core/hooks/useApi"
+import { fieldErrorAtom } from "@core/store/fieldErrorStore"
 import { useMutation } from "@tanstack/react-query"
 import type { FormFieldProps } from "core/types/form"
+import { useSetAtom } from "jotai"
 import { useDropzone } from 'react-dropzone'
 import { FieldValidateError } from "./FieldValidateError"
-import { useAtom, useAtomValue, useSetAtom } from "jotai"
-import { fieldErrorAtom } from "@core/store/fieldErrorStore"
 
 interface Props extends FormFieldProps<'input'> {
 	onSuccess: (url: string) => void
 	maxSize?: number,
 }
-export function FieldImage({ onSuccess, label, maxSize, description, className, fieldClassName, type, ...props }: Props) {
+export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props) {
 	const field = useFieldContext<string>()
 	const { api } = useApi()
-	const [fieldError, setFieldError] = useAtom(fieldErrorAtom)
+	const setFieldError = useSetAtom(fieldErrorAtom)
 
 	const mutation = useMutation(api.uploads.imageSingle.mutationOptions({
 		onSuccess: ({ data }) => {

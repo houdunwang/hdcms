@@ -26,11 +26,11 @@ export type ScannedRoutes = {
     'users.index': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
     'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
     'wechat_login.login': { paramsTuple?: []; params?: {} }
-    'bind.login_qr_code': { paramsTuple?: []; params?: {} }
-    'bind.bind': { paramsTuple?: []; params?: {} }
+    'wechat_bind.login_qr_code': { paramsTuple?: []; params?: {} }
+    'wechat_bind.bind': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
@@ -39,7 +39,7 @@ export type ScannedRoutes = {
     'users.me': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
     'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -49,7 +49,7 @@ export type ScannedRoutes = {
     'users.me': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
     'wechat_login.login_qr_code': { paramsTuple?: []; params?: {} }
   }
   POST: {
@@ -66,25 +66,25 @@ export type ScannedRoutes = {
     'uploads.file': { paramsTuple?: []; params?: {} }
     'uploads.image_single': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
     'wechat_login.login': { paramsTuple?: []; params?: {} }
-    'bind.login_qr_code': { paramsTuple?: []; params?: {} }
-    'bind.bind': { paramsTuple?: []; params?: {} }
+    'wechat_bind.login_qr_code': { paramsTuple?: []; params?: {} }
+    'wechat_bind.bind': { paramsTuple?: []; params?: {} }
   }
   PUT: {
     'users.password': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
   }
   DELETE: {
     'users.destroy': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
   }
   OPTIONS: {
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
-    'wechats': { paramsTuple?: []; params?: {} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

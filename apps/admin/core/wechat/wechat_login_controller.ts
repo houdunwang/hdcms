@@ -1,4 +1,5 @@
 import BaseController from '#core/controllers/bases_controller';
+import { WechatService } from '#core/services/wechat_service';
 import User from '#models/user';
 import env from '#start/env';
 import UserTransformer from '#transformers/user_transformer';
@@ -9,7 +10,7 @@ import { Wechat } from '@hd/wechat';
 
 @inject()
 export default class WechatloginController extends BaseController {
-  constructor(protected wechat: Wechat, protected ctx: HttpContext) {
+  constructor(protected wechatService: WechatService, protected ctx: HttpContext) {
     super()
   }
 
@@ -32,7 +33,7 @@ export default class WechatloginController extends BaseController {
       action_name: 'QR_STR_SCENE',
       action_info: {
         scene: {
-          scene_str: 'core-wechat-login',
+          scene_str: 'wechat-login',
         }
       }
     })
@@ -56,7 +57,7 @@ export default class WechatloginController extends BaseController {
       if (user) {
         const token = await auth.use('api').createToken(user)
         return serialize({
-          user: UserTransformer.transform(await user.refresh(), user),
+          user: UserTransformer.transform(await user.refresh(), auth),
           token: token.value!.release()
         })
       }
