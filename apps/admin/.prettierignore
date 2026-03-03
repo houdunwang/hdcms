@@ -1,3 +1,4 @@
 .adonisjs
 node_modules
 build
+core/routes/bind.ts

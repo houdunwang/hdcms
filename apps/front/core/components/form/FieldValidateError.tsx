@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 import type { IFieldApi } from "@core/types/form"
 import { useStore } from "@tanstack/react-form"
 import { fieldErrorAtom } from "core/store/fieldErrorStore"
-import { useAtomValue } from "jotai"
+import { useAtom } from "jotai"
 import { MessageCircleWarning } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -13,7 +13,7 @@ type Props = {
 
 export const FieldValidateError = ({ field, className }: Props) => {
 	const { name } = field
-	const requestError = useAtomValue(fieldErrorAtom)
+	const [requestError, setRequestError] = useAtom(fieldErrorAtom)
 	const [content, setContent] = useState("")
 	const value = useStore(field.form.store, state => state.values[name])
 	useEffect(() => {
@@ -23,7 +23,7 @@ export const FieldValidateError = ({ field, className }: Props) => {
 	}, [field.state.meta?.errors[0], requestError])
 	useEffect(() => {
 		if (value) {
-			setContent("")
+			setRequestError({ ...requestError, [name]: "" })
 		}
 	}, [value])
 	if (!content) {

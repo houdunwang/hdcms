@@ -9,8 +9,9 @@ export type ScannedRoutes = {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
     'auth.find_password': { paramsTuple?: []; params?: {} }
+    'binds.email': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
-    'codes.send': { paramsTuple?: []; params?: {} }
+    'codes.send': { paramsTuple: [ParamValue]; params: {'type': ParamValue} }
     'licenses': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
@@ -54,7 +55,8 @@ export type ScannedRoutes = {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
     'auth.find_password': { paramsTuple?: []; params?: {} }
-    'codes.send': { paramsTuple?: []; params?: {} }
+    'binds.email': { paramsTuple?: []; params?: {} }
+    'codes.send': { paramsTuple: [ParamValue]; params: {'type': ParamValue} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'pays': { paramsTuple?: []; params?: {} }

@@ -1,5 +1,6 @@
 import { Alert } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useApi } from '@core/hooks/useApi'
@@ -102,7 +103,8 @@ function QrImage({ qrImg, wechatQrMutation, scene_str }: { qrImg?: string, scene
 
 	</div>
 	return <div className="w-56 h-56 flex items-center justify-center text-muted-foreground">
-		<ScaleLoader color='#333' />
+		{/* <ScaleLoader color='#333' /> */}
+		<Spinner className='size-10' />
 	</div>
 }
 

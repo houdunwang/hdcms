@@ -13,6 +13,9 @@ export interface ApiDefinition {
     logout: typeof routes['auth.logout']
     findPassword: typeof routes['auth.find_password']
   }
+  binds: {
+    email: typeof routes['binds.email']
+  }
   captcha: typeof routes['captcha']
   codes: {
     send: typeof routes['codes.send']
