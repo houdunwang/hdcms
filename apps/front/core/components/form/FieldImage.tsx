@@ -7,6 +7,7 @@ import type { FormFieldProps } from "core/types/form"
 import { useSetAtom } from "jotai"
 import { useDropzone } from 'react-dropzone'
 import { FieldValidateError } from "./FieldValidateError"
+import { ImageUp } from "lucide-react"
 
 interface Props extends FormFieldProps<'input'> {
 	onSuccess: (url: string) => void
@@ -42,11 +43,21 @@ export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props) {
 			if (file) mutation.mutate({ body: { file } } as any)
 		}
 	});
-	if (field.state.value) return <div>
+	return <div className="flex justify-start">
 		<input {...getInputProps()} />
-		<img src={field.state.value}
+		<div  {...getRootProps({ className: 'dropzone  p-3 rounded-lg cursor-pointer' })}>
+			{field.state.value ?
+				<img src={field.state.value}
+					className={cn('group-hover:scale-105 duration-300 object-cover h-32 rounded-lg cursor-pointer', fieldClassName)} />
+				: <div className="flex flex-col items-center justify-center border p-3 rounded-lg hover:border-primary/30 duration-200">
+					<ImageUp size={70} strokeWidth={1} className="cursor-pointer" />
+					<div className="text-muted-foreground text-sm mt-2">拖放图片或单击选择</div>
+				</div>
+			}
+		</div>
+		{/* <img src={field.state.value}
 			{...getRootProps({ className: 'dropzone' })}
-			className={cn('group-hover:scale-105 duration-300 object-cover h-32 rounded-lg cursor-pointer', fieldClassName)} />
+			className={cn('group-hover:scale-105 duration-300 object-cover h-32 rounded-lg cursor-pointer', fieldClassName)} /> */}
 		<FieldValidateError field={field} className="mt-2" />
 	</div>
 	// const files = <li className="border rounded-lg overflow-hidden group relative object-cover">

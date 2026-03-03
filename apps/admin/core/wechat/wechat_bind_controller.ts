@@ -1,34 +1,13 @@
 import BaseController from '#core/controllers/bases_controller';
 import { WechatService } from '#core/services/wechat_service';
-import cache from '@adonisjs/cache/services/main';
+import User from '#models/user';
 import { inject } from '@adonisjs/core';
-import type { HttpContext } from '@adonisjs/core/http';
+import { HttpContext } from '@adonisjs/core/http';
 
 @inject()
 export default class WechatBindController extends BaseController {
   constructor(protected wechatService: WechatService, protected ctx: HttpContext) {
     super()
-  }
-
-  /**
-  * @loginQrCode
-  * @tag 微信绑定
-  * @operationId loginQrCode
-  * @summary 获取微信登录二维码
-  * @description 生成用于扫码登录的微信二维码
-  * @responseBody 200 - { ticket: string, expire_seconds: number, url: string }
-  */
-  async loginQrCode({ }: HttpContext) {
-    await this.wechatService.init()
-    const res = await this.wechatService.wechat.services.qr.createQRCode({
-      action_name: 'QR_STR_SCENE',
-      action_info: {
-        scene: {
-          scene_str: 'bind',
-        }
-      }
-    })
-    return res
   }
 
   /**
@@ -39,16 +18,17 @@ export default class WechatBindController extends BaseController {
    * @requestBody { "ticket": "string" }
    * @responseBody 200 - { status: 'success' | 'waiting' }
    */
-  async bind({ request, auth }: HttpContext) {
-    const ticket = request.input('ticket')
-    const openid = await cache.get(ticket)
+  async bind({ auth }: HttpContext) {
+    const openid = await this.wechatService.getQrDataByTicket()
     const user = auth.getUserOrFail()
     if (openid) {
+      const existUser = await User.findBy('openid', openid)
+      if (existUser) {
+        return this.success('该微信已绑定其他用户', { status: 'exist' })
+      }
       user.openid = openid
       await user.save()
       return this.success('绑定成功', { status: 'success' })
     }
-
-    return this.success('等待扫码', { status: 'waiting' })
   }
 }

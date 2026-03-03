@@ -12,6 +12,7 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/components/ui/tabs"
+import { BindWechat } from './-components/bind-wechat'
 
 export const Route = createFileRoute('/member/bind')({
 	component: RouteComponent,
@@ -19,23 +20,17 @@ export const Route = createFileRoute('/member/bind')({
 
 export function RouteComponent() {
 	return (
-		<Tabs defaultValue="overview">
+		<Tabs defaultValue="wechat">
 			<TabsList>
 				<TabsTrigger value="overview">邮箱绑定</TabsTrigger>
 				<TabsTrigger value="analytics">手机号绑定</TabsTrigger>
+				<TabsTrigger value="wechat">微信绑定</TabsTrigger>
 				<TabsTrigger value="reports">注销帐号</TabsTrigger>
 			</TabsList>
-			<TabsContent value="overview">
+			<TabsContent value="wechat">
 				<Card>
-					<CardHeader>
-						<CardTitle>Overview</CardTitle>
-						<CardDescription>
-							View your key metrics and recent project activity. Track progress
-							across all your active projects.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						You have 12 active projects and 3 pending tasks.
+					<CardContent>
+						<BindWechat />
 					</CardContent>
 				</Card>
 			</TabsContent>

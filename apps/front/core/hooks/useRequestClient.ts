@@ -25,11 +25,14 @@ export function useRequestClient() {
 			],
 			afterResponse: [
 				async (_request, _options, response) => {
-					if (response.ok) {
-						const res = await response.json() as { data: { message?: string } }
-						if (res?.data?.message) {
-							toast.success(res.data.message)
+					try {
+						if (response.ok) {
+							const res = await response.json() as { data: { message?: string } }
+							if (res?.data?.message) {
+								toast.success(res.data.message)
+							}
 						}
+					} catch (error) {
 					}
 				}
 			],
@@ -74,8 +77,6 @@ export function useRequestClient() {
 								setFieldError(errorsFields)
 							}
 							break;
-						case 400:
-							break
 						default:
 							try {
 								const res = responseData as { message: string } | undefined
@@ -90,6 +91,7 @@ export function useRequestClient() {
 							break
 					}
 					return error
+					// return Promise.resolve()
 				}
 			]
 		}
