@@ -6,7 +6,7 @@ import type { HttpContext } from '@adonisjs/core/http';
 import { Wechat } from '@hd/wechat';
 
 @inject()
-export default class BindController extends BaseController {
+export default class WechatBindController extends BaseController {
   constructor(protected wechat: Wechat, protected ctx: HttpContext) {
     super()
   }
@@ -30,7 +30,7 @@ export default class BindController extends BaseController {
       action_name: 'QR_STR_SCENE',
       action_info: {
         scene: {
-          scene_str: 'core-wechat-bind',
+          scene_str: 'wechat-bind',
         }
       }
     })

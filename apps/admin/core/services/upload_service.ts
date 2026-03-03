@@ -9,7 +9,7 @@ import app from '@adonisjs/core/services/app'
 import drive from '@adonisjs/drive/services/main'
 import { DateTime } from 'luxon'
 import { OssService } from './oss_service.ts'
-import { ImageService } from '#services/image_service'
+import { ImageService } from '#core/services/image_service'
 import { fileURLToPath } from 'node:url'
 
 /**

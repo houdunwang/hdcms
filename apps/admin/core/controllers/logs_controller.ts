@@ -1,4 +1,4 @@
-import { LogService } from '#services/log_service';
+import { LogService } from '#core/services/log_service';
 import { inject } from '@adonisjs/core';
 import { HttpContext } from '@adonisjs/core/http';
 import app from '@adonisjs/core/services/app';

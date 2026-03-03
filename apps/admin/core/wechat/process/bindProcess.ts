@@ -9,11 +9,14 @@ export default class BindProcess {
 	 * @returns
 	 */
 	async handle() {
-		if (this.wechat.isScan()) {
-			const isBindEvent = this.wechat.message.Ticket && this.wechat.message.EventKey?.includes('core-wechat-bind')
-			if (isBindEvent) {
-				await this.bind(this.wechat.message.Ticket as unknown as string, this.wechat.message.FromUserName)
-				return this.wechat.services.reply.text('绑定成功')
+		const wechat = this.wechat
+		if (wechat.isScan()) {
+			const ticket = wechat.message.Ticket
+			const isBindEvent = wechat.message.EventKey?.includes('wechat-bind')
+
+			if (isBindEvent && ticket) {
+				await this.bind(ticket, wechat.message.FromUserName)
+				return wechat.services.reply.text('绑定成功')
 			}
 		}
 	}

@@ -10,10 +10,14 @@ export default class LoginProcess {
 	 * @returns
 	 */
 	async handle() {
-		if (this.wechat.isScan()) {
-			const isLoginEvent = this.wechat.message.Ticket && this.wechat.message.EventKey?.includes('core-wechat-login')
-			if (isLoginEvent) {
-				await this.login(this.wechat.message.Ticket as unknown as string, this.wechat.message.FromUserName)
+		const wechat = this.wechat
+
+		if (wechat.isScan()) {
+			const ticket = wechat.message.Ticket
+			const isLoginEvent = wechat.message.EventKey?.includes('wechat-login')
+
+			if (isLoginEvent && ticket) {
+				await this.login(ticket, wechat.message.FromUserName)
 				return this.wechat.services.reply.text('登录成功')
 			}
 		}
@@ -36,5 +40,14 @@ export default class LoginProcess {
 		if (user) {
 			await cache.set({ key: ticket, value: user.id, ttl: '10m' })
 		}
+	}
+
+	/**
+	 * 根据 ticket 和 openid 执行绑定操作
+	 * @param ticket 微信推送的 ticket
+	 * @param openid 用户 openid
+	 */
+	async bind(ticket: string, openid: string) {
+		await cache.set({ key: ticket, value: openid, ttl: '10m' })
 	}
 }

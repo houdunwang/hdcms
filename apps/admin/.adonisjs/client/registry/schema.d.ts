@@ -249,15 +249,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
     }
   }
-  'wechats': {
+  'wechats_message': {
     methods: ["HEAD","OPTIONS","GET","POST","PUT","PATCH","DELETE"]
-    pattern: '/core/wechat'
+    pattern: '/core/wechat/message'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechats_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechats_message_controller').default['handle']>>>
     }
   }
   'wechat_login.login_qr_code': {
@@ -282,7 +282,7 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_login_controller').default['login']>>>
     }
   }
-  'bind.login_qr_code': {
+  'wechat_bind.login_qr_code': {
     methods: ["POST"]
     pattern: '/core/wechat/bind/qr'
     types: {
@@ -290,10 +290,10 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/bind_controller').default['loginQrCode']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_bind_controller').default['loginQrCode']>>>
     }
   }
-  'bind.bind': {
+  'wechat_bind.bind': {
     methods: ["POST"]
     pattern: '/core/wechat/bind'
     types: {
@@ -301,7 +301,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/bind_controller').default['bind']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_bind_controller').default['bind']>>>
     }
   }
 }

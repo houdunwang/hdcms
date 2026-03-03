@@ -1,10 +1,10 @@
-import { createUserValidator, updatePasswordValidator, updateUserValidator, uploadAvatarValidator } from '#core/validators/user'
+import { UploadService } from '#core/services/upload_service'
+import { createUserValidator, updatePasswordValidator, updateUserValidator } from '#core/validators/user'
 import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.ts'
-import { UploadService } from '#core/services/upload_service'
 @inject()
 export default class UsersController extends BaseController {
   constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
@@ -125,24 +125,4 @@ export default class UsersController extends BaseController {
     await user.delete()
     return { message: 'User deleted successfully' }
   }
-
-  /**
-   * @avatar
-   * @tag 用户管理
-   * @summary 更新用户头像
-   * @description 更新当前认证用户的头像
-   * @consumes multipart/form-data
-   * @requestFormDataBody {"avatar":{"type":"file","format":"binary"}}
-   * @responseBody 200 - { "url": "https://example.com/avatar.jpg" }
-   */
-  // async avatar({ request, serialize, auth }: HttpContext) {
-  //   const user = await auth.authenticate()
-  //   const payload = await request.validateUsing(uploadAvatarValidator)
-  //   const result = await this.uploadService.upload(payload.avatar);
-  //   if (result?.url) {
-  //     user.avatar = result.url
-  //     await user.save()
-  //   }
-  //   return serialize(UserTransformer.transform(user, auth))
-  // }
 }
