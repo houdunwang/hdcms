@@ -12,7 +12,7 @@ export default class BindProcess {
 		const wechat = this.wechat
 		if (wechat.isScan()) {
 			const ticket = wechat.message.Ticket
-			const isBindEvent = wechat.message.EventKey?.includes('wechat-bind')
+			const isBindEvent = wechat.message.EventKey?.includes('bind')
 
 			if (isBindEvent && ticket) {
 				await this.bind(ticket, wechat.message.FromUserName)

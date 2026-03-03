@@ -38,9 +38,11 @@ export const ProfileAvatar = () => {
         e.preventDefault()
         void form.handleSubmit()
       }} >
-      <form.AppField name="avatar" children={field => <field.FieldImage label="头像" onSuccess={url => {
-        mutation.mutateAsync({ body: { avatar: url } })
-      }} />} />
+      <form.AppField name="avatar"
+        children={field => <field.FieldImage label="头像" onSuccess={url => {
+          mutation.mutateAsync({ body: { avatar: url } })
+        }} />}
+      />
     </form>
   )
 }

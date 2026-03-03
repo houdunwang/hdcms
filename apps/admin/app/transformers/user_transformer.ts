@@ -32,6 +32,7 @@ export default class UserTransformer extends BaseTransformer<User> {
       'mobile': isSelf ? this.resource.mobile : null,
       'realName': isSelf ? this.resource.realName : null,
       'address': isSelf ? this.resource.address : null,
+      'openid': isSelf ? this.resource.openid : null,
     }
   }
 
