@@ -1,38 +1,18 @@
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useApi } from '@core/hooks/useApi'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { BookOpen, CalendarCheck, Clock, RefreshCw, ShieldCheck, Sparkles } from 'lucide-react'
-import { useEffect } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
+import { WechatQrCode } from '../wechat/WechatQrCode'
 import { Layout } from './Layout'
-import { useAuth } from '@core/hooks/useAuth'
+
 export function Wechat() {
 	return <Layout introduce={<Introduce />}>
-		<Component />
+		<WechatScanQrLogin />
 	</Layout>
 }
-export function Component() {
-	const { api } = useApi()
-	const { login } = useAuth()
-	const { data, isFetching, refetch } = useQuery(api.wechatLogin.loginQrCode.queryOptions())
-
-	const mutation = useMutation(api.wechatLogin.login.mutationOptions({
-		onSuccess: ({ data }) => {
-			if (data.token) {
-				login(data)
-			}
-		}
-	}))
-	useEffect(() => {
-		const id = setInterval(() => {
-			if (data?.ticket) {
-				mutation.mutate({ body: { ticket: data.ticket } })
-			}
-		}, 3000)
-		return () => {
-			clearInterval(id)
-		}
-	}, [data?.ticket])
+export function WechatScanQrLogin() {
+	const { api, auth } = useApi()
+	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
 	return (
 		<Card>
 			<CardHeader>
@@ -40,23 +20,14 @@ export function Component() {
 				<CardDescription>打开手机微信扫描二维码，一键授权快速登录</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-4">
-				<div className="flex flex-col items-center gap-3">
-					<div className="rounded-lg bg-background p-3 border">
-						{data?.qrImg ? (
-							<img src={data.qrImg} alt="微信扫码登录二维码" className="w-60 h-60 object-contain" />
-						) : (
-							<div className="w-56 h-56 flex items-center justify-center text-muted-foreground">加载中</div>
-						)}
-					</div>
-					<div className="flex items-center gap-2 text-sm text-muted-foreground">
-						<Clock className="size-4" />
-						扫码失败时请点击刷新二维码
-					</div>
-					<Button type="button" variant="outline" size="lg" onClick={() => void refetch()} disabled={isFetching}>
-						<RefreshCw className="size-4 mr-2" />
-						刷新二维码
-					</Button>
-				</div>
+				<WechatQrCode onSuccess={async (ticket: string) => {
+					const res = await mutation.mutateAsync({ body: { ticket } })
+					if (res.data.token) {
+						auth.login(res.data)
+						return true
+					}
+					return false;
+				}} />
 			</CardContent>
 		</Card>
 	)

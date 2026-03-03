@@ -14,7 +14,7 @@ export default class LoginProcess {
 
 		if (wechat.isScan()) {
 			const ticket = wechat.message.Ticket
-			const isLoginEvent = wechat.message.EventKey?.includes('wechat-login')
+			const isLoginEvent = wechat.message.EventKey?.includes('login')
 
 			if (isLoginEvent && ticket) {
 				await this.login(ticket, wechat.message.FromUserName)
@@ -42,12 +42,4 @@ export default class LoginProcess {
 		}
 	}
 
-	/**
-	 * 根据 ticket 和 openid 执行绑定操作
-	 * @param ticket 微信推送的 ticket
-	 * @param openid 用户 openid
-	 */
-	async bind(ticket: string, openid: string) {
-		await cache.set({ key: ticket, value: openid, ttl: '10m' })
-	}
 }
