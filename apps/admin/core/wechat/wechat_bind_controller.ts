@@ -22,7 +22,7 @@ export default class WechatBindController extends BaseController {
     const openid = await this.wechatService.getQrDataByTicket()
     const user = auth.getUserOrFail()
     if (openid) {
-      const existUser = await User.findBy('openid', openid)
+      const existUser = await User.query().where('openid', openid).whereNot('id', user.id).first()
       if (existUser) {
         return this.success('该微信已绑定其他用户', { status: 'exist' })
       }

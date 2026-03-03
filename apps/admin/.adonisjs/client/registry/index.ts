@@ -36,6 +36,12 @@ const routes = {
     tokens: [{"old":"/core/findPassword","type":0,"val":"core","end":""},{"old":"/core/findPassword","type":0,"val":"findPassword","end":""}],
     types: placeholder as Registry['auth.find_password']['types'],
   },
+  'binds.email': {
+    methods: ["POST"],
+    pattern: '/core/bind/email',
+    tokens: [{"old":"/core/bind/email","type":0,"val":"core","end":""},{"old":"/core/bind/email","type":0,"val":"bind","end":""},{"old":"/core/bind/email","type":0,"val":"email","end":""}],
+    types: placeholder as Registry['binds.email']['types'],
+  },
   'captcha': {
     methods: ["GET","HEAD"],
     pattern: '/core/captcha',
@@ -44,8 +50,8 @@ const routes = {
   },
   'codes.send': {
     methods: ["POST"],
-    pattern: '/core/code/sendCode',
-    tokens: [{"old":"/core/code/sendCode","type":0,"val":"core","end":""},{"old":"/core/code/sendCode","type":0,"val":"code","end":""},{"old":"/core/code/sendCode","type":0,"val":"sendCode","end":""}],
+    pattern: '/core/code/send/:type',
+    tokens: [{"old":"/core/code/send/:type","type":0,"val":"core","end":""},{"old":"/core/code/send/:type","type":0,"val":"code","end":""},{"old":"/core/code/send/:type","type":0,"val":"send","end":""},{"old":"/core/code/send/:type","type":1,"val":"type","end":""}],
     types: placeholder as Registry['codes.send']['types'],
   },
   'licenses': {

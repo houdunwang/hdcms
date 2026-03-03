@@ -21,6 +21,11 @@ export default class WechatQrsController extends BaseController {
 	 */
 	async create({ request }: HttpContext) {
 		await this.wechatService.init()
+		// await new Promise(r => {
+		// 	setTimeout(() => {
+		// 		r('')
+		// 	}, 3000)
+		// })
 		const res = await this.wechatService.wechat.services.qr.createQRCode({
 			action_name: 'QR_STR_SCENE',
 			action_info: {

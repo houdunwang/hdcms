@@ -13,6 +13,7 @@ import {
 	TabsTrigger,
 } from "@/components/ui/tabs"
 import { BindWechat } from './-components/bind-wechat'
+import { BindEmail } from './-components/bind-email'
 
 export const Route = createFileRoute('/member/bind')({
 	component: RouteComponent,
@@ -20,9 +21,9 @@ export const Route = createFileRoute('/member/bind')({
 
 export function RouteComponent() {
 	return (
-		<Tabs defaultValue="wechat">
+		<Tabs defaultValue="email">
 			<TabsList>
-				<TabsTrigger value="overview">邮箱绑定</TabsTrigger>
+				<TabsTrigger value="email">邮箱绑定</TabsTrigger>
 				<TabsTrigger value="analytics">手机号绑定</TabsTrigger>
 				<TabsTrigger value="wechat">微信绑定</TabsTrigger>
 				<TabsTrigger value="reports">注销帐号</TabsTrigger>
@@ -34,17 +35,10 @@ export function RouteComponent() {
 					</CardContent>
 				</Card>
 			</TabsContent>
-			<TabsContent value="analytics">
+			<TabsContent value="email">
 				<Card>
-					<CardHeader>
-						<CardTitle>Analytics</CardTitle>
-						<CardDescription>
-							Track performance and user engagement metrics. Monitor trends and
-							identify growth opportunities.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						Page views are up 25% compared to last month.
+					<CardContent>
+						<BindEmail />
 					</CardContent>
 				</Card>
 			</TabsContent>

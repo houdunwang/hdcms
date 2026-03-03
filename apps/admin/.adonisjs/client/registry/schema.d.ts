@@ -62,6 +62,17 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['findPassword']>>>
     }
   }
+  'binds.email': {
+    methods: ["POST"]
+    pattern: '/core/bind/email'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/bind').bindEmailValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/bind').bindEmailValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['email']>>>
+    }
+  }
   'captcha': {
     methods: ["GET","HEAD"]
     pattern: '/core/captcha'
@@ -75,11 +86,11 @@ export interface Registry {
   }
   'codes.send': {
     methods: ["POST"]
-    pattern: '/core/code/sendCode'
+    pattern: '/core/code/send/:type'
     types: {
       body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
-      paramsTuple: []
-      params: {}
+      paramsTuple: [ParamValue]
+      params: { type: ParamValue }
       query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['send']>>>
     }

@@ -22,13 +22,14 @@ export default class CodesController extends BaseController {
    * @requestFormDataBody { "account": { "type": "string", "required": "true", "description": "邮箱或手机号" ,"example":"2300071698@qq.com" } }
    * @responseBody 200 - { "success": true, "message": "验证码发送成功" }
    */
-  public async send({ request }: HttpContext) {
-    const payload = await request.validateUsing(sendCodeValidator)
-    // try {
+  public async send({ request, auth, params }: HttpContext) {
+    const type = params.type as 'email' | 'mobile'
+    const payload = await request.validateUsing(sendCodeValidator, {
+      meta: {
+        isAuthenticated: auth.isAuthenticated
+      }
+    })
     await this.codeService.send(payload.account)
     return this.success('验证码发送成功')
-    // } catch (error) {
-    // return this.error('发送验证码失败')
-    // }
   }
 }
