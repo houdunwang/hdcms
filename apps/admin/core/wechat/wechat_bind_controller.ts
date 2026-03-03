@@ -1,13 +1,12 @@
 import BaseController from '#core/controllers/bases_controller';
-import env from '#start/env';
+import { WechatService } from '#core/services/wechat_service';
 import cache from '@adonisjs/cache/services/main';
 import { inject } from '@adonisjs/core';
 import type { HttpContext } from '@adonisjs/core/http';
-import { Wechat } from '@hd/wechat';
 
 @inject()
 export default class WechatBindController extends BaseController {
-  constructor(protected wechat: Wechat, protected ctx: HttpContext) {
+  constructor(protected wechatService: WechatService, protected ctx: HttpContext) {
     super()
   }
 
@@ -20,17 +19,12 @@ export default class WechatBindController extends BaseController {
   * @responseBody 200 - { ticket: string, expire_seconds: number, url: string }
   */
   async loginQrCode({ }: HttpContext) {
-    const config = {
-      token: env.get('WECHAT_TOKEN'),
-      appid: env.get('WECHAT_APP_ID'),
-      secret: env.get('WECHAT_APP_SECRET'),
-    };
-    await this.wechat.init(config)
-    const res = await this.wechat.services.qr.createQRCode({
+    await this.wechatService.init()
+    const res = await this.wechatService.wechat.services.qr.createQRCode({
       action_name: 'QR_STR_SCENE',
       action_info: {
         scene: {
-          scene_str: 'wechat-bind',
+          scene_str: 'bind',
         }
       }
     })

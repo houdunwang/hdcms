@@ -144,23 +144,17 @@ const routes = {
     tokens: [{"old":"/core/wechat/message","type":0,"val":"core","end":""},{"old":"/core/wechat/message","type":0,"val":"wechat","end":""},{"old":"/core/wechat/message","type":0,"val":"message","end":""}],
     types: placeholder as Registry['wechats_message']['types'],
   },
-  'wechat_login.login_qr_code': {
-    methods: ["GET","HEAD"],
-    pattern: '/core/wechat/login/qr',
-    tokens: [{"old":"/core/wechat/login/qr","type":0,"val":"core","end":""},{"old":"/core/wechat/login/qr","type":0,"val":"wechat","end":""},{"old":"/core/wechat/login/qr","type":0,"val":"login","end":""},{"old":"/core/wechat/login/qr","type":0,"val":"qr","end":""}],
-    types: placeholder as Registry['wechat_login.login_qr_code']['types'],
+  'wechat_qrs.create': {
+    methods: ["POST"],
+    pattern: '/core/wechat/createQr',
+    tokens: [{"old":"/core/wechat/createQr","type":0,"val":"core","end":""},{"old":"/core/wechat/createQr","type":0,"val":"wechat","end":""},{"old":"/core/wechat/createQr","type":0,"val":"createQr","end":""}],
+    types: placeholder as Registry['wechat_qrs.create']['types'],
   },
   'wechat_login.login': {
     methods: ["POST"],
     pattern: '/core/wechat/login',
     tokens: [{"old":"/core/wechat/login","type":0,"val":"core","end":""},{"old":"/core/wechat/login","type":0,"val":"wechat","end":""},{"old":"/core/wechat/login","type":0,"val":"login","end":""}],
     types: placeholder as Registry['wechat_login.login']['types'],
-  },
-  'wechat_bind.login_qr_code': {
-    methods: ["POST"],
-    pattern: '/core/wechat/bind/qr',
-    tokens: [{"old":"/core/wechat/bind/qr","type":0,"val":"core","end":""},{"old":"/core/wechat/bind/qr","type":0,"val":"wechat","end":""},{"old":"/core/wechat/bind/qr","type":0,"val":"bind","end":""},{"old":"/core/wechat/bind/qr","type":0,"val":"qr","end":""}],
-    types: placeholder as Registry['wechat_bind.login_qr_code']['types'],
   },
   'wechat_bind.bind': {
     methods: ["POST"],
