@@ -62,6 +62,17 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['email']>>>
     }
   }
+  'binds.mobile': {
+    methods: ["POST"]
+    pattern: '/core/bind/mobile'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/bind').bindMobileValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/bind').bindMobileValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['mobile']>>>
+    }
+  }
   'captcha': {
     methods: ["GET","HEAD"]
     pattern: '/core/captcha'
@@ -240,7 +251,7 @@ export interface Registry {
   }
   'users.destroy': {
     methods: ["DELETE"]
-    pattern: '/core/users/:id?'
+    pattern: '/core/users/destroy'
     types: {
       body: {}
       paramsTuple: []

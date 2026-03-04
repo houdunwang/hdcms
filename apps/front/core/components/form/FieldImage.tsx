@@ -55,59 +55,6 @@ export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props) {
 				</div>
 			}
 		</div>
-		{/* <img src={field.state.value}
-			{...getRootProps({ className: 'dropzone' })}
-			className={cn('group-hover:scale-105 duration-300 object-cover h-32 rounded-lg cursor-pointer', fieldClassName)} /> */}
 		<FieldValidateError field={field} className="mt-2" />
 	</div>
-	// const files = <li className="border rounded-lg overflow-hidden group relative object-cover">
-	// 	<img src={field.state.value} className="group-hover:scale-105 duration-300 object-cover h-32" />
-	// 	<div className="absolute right-3 top-3 bg-background rounded-sm p-1 cursor-pointer opacity-0 group-hover:opacity-100 duration-200 hover:scale-125">
-	// 		<Trash className="text-foreground" size={16} />
-	// 	</div>
-	// </li>
-	// const files = acceptedFiles.map(file => (
-	// 	<li key={file.path} className="border rounded-lg overflow-hidden group relative object-cover">
-	// 		<img src={URL.createObjectURL(file)} alt={file.name} className="group-hover:scale-105 duration-300 object-cover h-32" />
-	// 		<div className="absolute right-3 top-3 bg-background rounded-sm p-1 cursor-pointer opacity-0 group-hover:opacity-100 duration-200 hover:scale-125">
-	// 			<Trash className="text-foreground" size={16} />
-	// 		</div>
-	// 	</li>
-	// ));
-	// return (
-	// 	<section className="container">
-	// 		{field.state.value}
-	// 		<div {...getRootProps({ className: 'dropzone' })} className="w-64">
-	// 			<input {...getInputProps()} />
-	// 			<div className="text-sm text-gray-500 border py-6 px-6 rounded-lg flex flex-col justify-center items-center gap-3 cursor-pointer hover:border-primary/10 duration-200">
-	// 				<Upload />
-	// 				拖放图片或单击选择
-	// 			</div>
-	// 		</div>
-	// 		<aside className="mt-3">
-	// 			<ul className="flex gap-3 justify-start">{files}</ul>
-	// 		</aside>
-	// 		<FieldValidateError field={field} />
-	// 	</section>
-	// )
-	// return (
-	// 	<Field className={className}>
-	// 		{label ? <FieldLabel htmlFor={field.name}>{label}</FieldLabel> : null}
-	// 		<Input
-	// 			id={field.name}
-	// 			name={field.name}
-	// 			type={type ?? 'file'}
-	// 			onBlur={field.handleBlur}
-	// 			onChange={(event) => {
-	// 				const file = (event.target as HTMLInputElement).files?.[0] ?? null
-	// 				console.log('file', file)
-	// 				field.handleChange(file)
-	// 			}}
-	// 			className={cn(fieldClassName)}
-	// 			{...props}
-	// 			autoComplete={autoComplete}
-	// 		/>
-	// 		<FieldValidateError field={field} />
-	// 	</Field>
-	// )
 }

@@ -11,7 +11,7 @@ router
 		router.get('/users/me', [UsersController, 'me']).use(middleware.auth())
 
 		router.put('/users/:id?', [UsersController, 'update']).use(middleware.auth())
-		router.delete('/users/:id?', [UsersController, 'destroy']).use(middleware.admin())
+		router.delete('/users/destroy', [UsersController, 'destroy']).use(middleware.auth())
 		router.resource('/users', UsersController).use(['update', 'destroy'], middleware.auth()).apiOnly().except(['update', 'destroy'])
 	})
 	.prefix('core')

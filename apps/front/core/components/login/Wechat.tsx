@@ -10,6 +10,7 @@ export function Wechat() {
 		<WechatScanQrLogin />
 	</Layout>
 }
+
 export function WechatScanQrLogin() {
 	const { api, auth } = useApi()
 	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
@@ -20,14 +21,15 @@ export function WechatScanQrLogin() {
 				<CardDescription>打开手机微信扫描二维码，一键授权快速登录</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-4">
-				<WechatQrCode scene_str='login' onSuccess={async (ticket: string) => {
-					const res = await mutation.mutateAsync({ body: { ticket } })
-					if (res.data.token) {
-						auth.login(res.data)
-						return true
-					}
-					return false;
-				}} />
+				<WechatQrCode
+					scene_str='login'
+					onSuccess={async (ticket: string) => {
+						const res = await mutation.mutateAsync({ body: { ticket } })
+						if (res.data.token) {
+							auth.login(res.data)
+							return 'success'
+						}
+					}} />
 			</CardContent>
 		</Card>
 	)

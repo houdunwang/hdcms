@@ -120,8 +120,8 @@ export default class UsersController extends BaseController {
    * @description 根据ID删除用户
    * @responseBody 200 - { "message": "User deleted successfully" }
    */
-  async destroy({ params }: HttpContext) {
-    const user = await User.findOrFail(params.id)
+  async destroy({ params, auth }: HttpContext) {
+    const user = await User.findOrFail(auth.user!.id)
     await user.delete()
     return { message: 'User deleted successfully' }
   }

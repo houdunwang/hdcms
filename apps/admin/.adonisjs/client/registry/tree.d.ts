@@ -14,6 +14,7 @@ export interface ApiDefinition {
   }
   binds: {
     email: typeof routes['binds.email']
+    mobile: typeof routes['binds.mobile']
   }
   captcha: typeof routes['captcha']
   codes: {

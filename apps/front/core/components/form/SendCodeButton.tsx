@@ -17,7 +17,6 @@ export const SendCodeButton = ({ type, value }: Props) => {
 		mobile: z.string().regex(/^1[3-9]\d{9}$/, '请输入正确的手机号')
 	}
 	const second = dayjs(localStorage.getItem('remainingSeconds')).diff(dayjs(), 'second');
-	console.log('second', second)
 	const [countdown, setCountdown] = useState(second)
 	const { api } = useApi()
 	const mutationOptions = {

@@ -28,7 +28,6 @@ export default class AuthController extends BaseController {
       throw new errors.E_VALIDATION_ERROR([{ message: '账号不存在', field: 'account' }])
     }
     const token = await User.accessTokens.create(user)
-
     return serialize({
       user: UserTransformer.transform(user, auth),
       token: token.value!.release(),
