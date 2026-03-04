@@ -7,7 +7,7 @@ import { captchaRule } from './rules/captchaRule.js'
  * Validator to validate the payload when creating
  * a new user.
  */
-export const createUserValidator = vine.compile(
+export const createUserValidator = vine.create(
   vine.object({
     name: vine
       .string()
@@ -27,8 +27,6 @@ createUserValidator.messagesProvider = validateProvider({
     name: '帐号',
   }
 })
-
-
 
 export const updateUserValidator = vine.create(
   vine.object({
