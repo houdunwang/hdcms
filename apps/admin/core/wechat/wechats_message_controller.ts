@@ -16,7 +16,9 @@ export default class WechatsMessageController {
    * @responseBody 200 - text/plain - 微信服务器要求返回的响应内容，如 "success" 或空字符串。
    */
   async handle() {
+    console.log('request', '999999999999')
     const isBindRequest = await this.WechatService.init()
+    console.log('isBindRequest', isBindRequest)
     if (isBindRequest) return isBindRequest
 
     const processResult = await this.processHandle()

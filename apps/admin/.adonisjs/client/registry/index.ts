@@ -36,6 +36,12 @@ const routes = {
     tokens: [{"old":"/core/bind/email","type":0,"val":"core","end":""},{"old":"/core/bind/email","type":0,"val":"bind","end":""},{"old":"/core/bind/email","type":0,"val":"email","end":""}],
     types: placeholder as Registry['binds.email']['types'],
   },
+  'binds.mobile': {
+    methods: ["POST"],
+    pattern: '/core/bind/mobile',
+    tokens: [{"old":"/core/bind/mobile","type":0,"val":"core","end":""},{"old":"/core/bind/mobile","type":0,"val":"bind","end":""},{"old":"/core/bind/mobile","type":0,"val":"mobile","end":""}],
+    types: placeholder as Registry['binds.mobile']['types'],
+  },
   'captcha': {
     methods: ["GET","HEAD"],
     pattern: '/core/captcha',
@@ -134,8 +140,8 @@ const routes = {
   },
   'users.destroy': {
     methods: ["DELETE"],
-    pattern: '/core/users/:id?',
-    tokens: [{"old":"/core/users/:id?","type":0,"val":"core","end":""},{"old":"/core/users/:id?","type":0,"val":"users","end":""},{"old":"/core/users/:id?","type":3,"val":"id","end":""}],
+    pattern: '/core/users/destroy',
+    tokens: [{"old":"/core/users/destroy","type":0,"val":"core","end":""},{"old":"/core/users/destroy","type":0,"val":"users","end":""},{"old":"/core/users/destroy","type":0,"val":"destroy","end":""}],
     types: placeholder as Registry['users.destroy']['types'],
   },
   'users.index': {

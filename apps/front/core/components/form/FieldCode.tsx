@@ -6,6 +6,7 @@ import type { FormFieldProps } from "core/types/form"
 import z from "zod"
 import { FieldValidateError } from "./FieldValidateError"
 import { SendCodeButton } from "./SendCodeButton"
+import { useEffect } from "react"
 
 type CodeType = 'email' | 'mobile'
 interface Props extends FormFieldProps<'input'> {
@@ -30,7 +31,9 @@ export function FieldCode({ label, description, className, fieldClassName, type,
 			onChange: z.string().min(4, '请输入正确的验证码'),
 		},
 	})
-	form.resetField(type == 'email' ? 'mobile' : 'email')
+	useEffect(() => {
+		form.resetField(type == 'email' ? 'mobile' : 'email')
+	}, [type])
 	return <>
 		<Field>
 			<Input
@@ -39,7 +42,6 @@ export function FieldCode({ label, description, className, fieldClassName, type,
 				value={field.state.value as string ?? ""}
 				onBlur={field.handleBlur}
 				onChange={(event) => {
-					console.log('event.target.value', event.target.value)
 					field.handleChange(event.target.value)
 				}}
 				{...props}

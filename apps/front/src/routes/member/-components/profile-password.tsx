@@ -11,7 +11,6 @@ export const ProfilePassword = () => {
   const { auth, api } = useApi()
   const mutation = useMutation(api.users.password.mutationOptions({
     onSuccess: ({ data }) => {
-      console.log('data', data)
     }
   }))
   const { useAppForm } = createFormHook({

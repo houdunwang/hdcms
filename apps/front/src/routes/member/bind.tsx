@@ -1,10 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
 import {
 	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
+	CardContent
 } from "@/components/ui/card"
 import {
 	Tabs,
@@ -12,8 +8,11 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/components/ui/tabs"
-import { BindWechat } from './-components/bind-wechat'
+import { createFileRoute } from '@tanstack/react-router'
+import { BindDestroy } from './-components/bind-destroy'
 import { BindEmail } from './-components/bind-email'
+import { BindMobile } from './-components/bind-mobile'
+import { BindWechat } from './-components/bind-wechat'
 
 export const Route = createFileRoute('/member/bind')({
 	component: RouteComponent,
@@ -24,9 +23,9 @@ export function RouteComponent() {
 		<Tabs defaultValue="email">
 			<TabsList>
 				<TabsTrigger value="email">邮箱绑定</TabsTrigger>
-				<TabsTrigger value="analytics">手机号绑定</TabsTrigger>
+				<TabsTrigger value="mobile">手机号绑定</TabsTrigger>
 				<TabsTrigger value="wechat">微信绑定</TabsTrigger>
-				<TabsTrigger value="reports">注销帐号</TabsTrigger>
+				<TabsTrigger value="destroy">注销帐号</TabsTrigger>
 			</TabsList>
 			<TabsContent value="wechat">
 				<Card>
@@ -42,31 +41,17 @@ export function RouteComponent() {
 					</CardContent>
 				</Card>
 			</TabsContent>
-			<TabsContent value="reports">
+			<TabsContent value="mobile">
 				<Card>
-					<CardHeader>
-						<CardTitle>Reports</CardTitle>
-						<CardDescription>
-							Generate and download your detailed reports. Export data in
-							multiple formats for analysis.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						You have 5 reports ready and available to export.
+					<CardContent>
+						<BindMobile />
 					</CardContent>
 				</Card>
 			</TabsContent>
-			<TabsContent value="settings">
+			<TabsContent value="destroy">
 				<Card>
-					<CardHeader>
-						<CardTitle>Settings</CardTitle>
-						<CardDescription>
-							Manage your account preferences and options. Customize your
-							experience to fit your needs.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="text-muted-foreground text-sm">
-						Configure notifications, security, and themes.
+					<CardContent>
+						<BindDestroy />
 					</CardContent>
 				</Card>
 			</TabsContent>

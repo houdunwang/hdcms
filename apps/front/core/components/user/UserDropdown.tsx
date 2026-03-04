@@ -10,10 +10,8 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from '@core/hooks/useAuth'
-import { userAtom } from '@core/store/userStore'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { useAtomValue } from 'jotai'
 import { ModeToggle } from '../theme/mode-toggle'
 export const UserDropdown = () => {
 	const { isAuthenticated } = useAuth()
@@ -26,8 +24,7 @@ export const UserDropdown = () => {
 }
 
 function IsLoginComponent() {
-	const user = useAtomValue(userAtom)
-	const auth = useAuth()
+	const { user, logout } = useAuth()
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className='cursor-pointer'>
@@ -55,7 +52,7 @@ function IsLoginComponent() {
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem className='cursor-pointer py-2 ' onClick={() => auth.logout()}>退出登录</DropdownMenuItem>
+					<DropdownMenuItem className='cursor-pointer py-2 ' onClick={() => logout()}>退出登录</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>

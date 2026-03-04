@@ -9,6 +9,7 @@ export type ScannedRoutes = {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
     'binds.email': { paramsTuple?: []; params?: {} }
+    'binds.mobile': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
     'codes.email': { paramsTuple?: []; params?: {} }
     'codes.mobile': { paramsTuple?: []; params?: {} }
@@ -25,7 +26,7 @@ export type ScannedRoutes = {
     'users.password': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
-    'users.destroy': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
+    'users.destroy': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -57,6 +58,7 @@ export type ScannedRoutes = {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
     'binds.email': { paramsTuple?: []; params?: {} }
+    'binds.mobile': { paramsTuple?: []; params?: {} }
     'codes.email': { paramsTuple?: []; params?: {} }
     'codes.mobile': { paramsTuple?: []; params?: {} }
     'find_passwords.email': { paramsTuple?: []; params?: {} }
@@ -80,7 +82,7 @@ export type ScannedRoutes = {
     'wechats_message': { paramsTuple?: []; params?: {} }
   }
   DELETE: {
-    'users.destroy': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
+    'users.destroy': { paramsTuple?: []; params?: {} }
     'wechats_message': { paramsTuple?: []; params?: {} }
   }
   OPTIONS: {

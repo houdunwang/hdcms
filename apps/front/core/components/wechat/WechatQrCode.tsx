@@ -50,9 +50,8 @@ export const WechatQrCode = ({ onSuccess, scene_str, className, requestCount = 3
 				if (status === 'success') {
 					clearInterval(intervalId)
 				}
-				if (status === 'exist') {
-					wechatQrMutation.mutate({ body: { scene_str } })
-				}
+			}).catch(() => {
+				wechatQrMutation.mutate({ body: { scene_str } })
 			})
 		}, timeout)
 		return () => {
