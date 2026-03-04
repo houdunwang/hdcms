@@ -64,19 +64,3 @@ registerValidator.messagesProvider = validateProvider({
     name: '帐号',
   }
 })
-
-
-export const findPasswordValidator = vine.create(
-  vine.object({
-    account: vine
-      .string()
-      .minLength(3)
-      .maxLength(30)
-      .exists(async (_db, value) => {
-        return !!(await getUserByName(value))
-      }),
-    password: vine.string().minLength(5).maxLength(20).confirmed(),
-    password_confirmation: vine.string().minLength(5).maxLength(20),
-    code: vine.string().use(codeRule()),
-  })
-)

@@ -1,5 +1,5 @@
 import { getUserByName } from '#core/helper'
-import { findPasswordValidator, loginValidator, registerValidator } from '#core/validators/auth'
+import { loginValidator, registerValidator } from '#core/validators/auth'
 import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
@@ -73,28 +73,5 @@ export default class AuthController extends BaseController {
     })
   }
 
-  /**
-   * @findPassword
-   * @tag 登录注册
-   * @summary 找回密码
-   * @operationId register
-   * @description 找回密码
-   * @requestFormDataBody { "name": { "type": "string", "minLength": 3, "maxLength": 20, "required": "true" }, "password": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" }, "password_confirmation": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" } }
-   * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
-   */
-  async findPassword({ request, serialize, auth }: HttpContext) {
-    const payload = await request.validateUsing(findPasswordValidator)
-    const user = await getUserByName(payload.account)
-    if (!user) {
-      throw new Error('用户不存在')
-    }
-    // return user;
-    // return payload
-    await user.merge({ password: payload.password }).save()
-    const token = await auth.use('api').createToken(user)
-    return serialize({
-      user: UserTransformer.transform(await user.refresh(), auth),
-      token: token.value!.release(),
-    })
-  }
+
 }

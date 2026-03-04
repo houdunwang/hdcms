@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { Field } from '@/components/ui/field'
+import { Spinner } from '@/components/ui/spinner'
 import { useFormContext } from '@core/hd'
-import { BounceLoader, MoonLoader, PacmanLoader, PuffLoader, ScaleLoader } from 'react-spinners'
 
 type Props = Omit<
 	React.ComponentProps<"button">,
@@ -20,10 +19,11 @@ export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }
 			{(isSubmitting) => {
 				return <div className={fieldClassName}>
 					<Button type='submit' size={'lg'}
-						disabled={isSubmitting} {...props}
+						{...props}
+						disabled={isSubmitting}
 						className={className}
 						variant={isSubmitting ? 'outline' : 'default'}>
-						{isSubmitting ? <><MoonLoader size={15} />提交中...</> : label || "保存提交"}
+						{isSubmitting ? <><Spinner />提交中...</> : label || "保存提交"}
 					</Button>
 				</div>
 			}}

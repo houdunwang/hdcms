@@ -1,19 +1,20 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { FieldCaptcha } from "@core/components/form/FieldCaptcha"
 import { FieldInput } from "@core/components/form/FieldInput"
+import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { fieldContext, formContext } from "@core/hd"
 import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
-import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
+import { useState } from "react"
 import z from "zod"
 import { FieldCode } from "../form/FieldCode"
 import { Footer } from "./Footer"
 import { Layout } from "./Layout"
-import { useState } from "react"
 
 type LoginType = React.ComponentProps<"div">
 export const Forget = () => {
@@ -25,14 +26,14 @@ export const Forget = () => {
 function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	const { api } = useApi()
 	const { login } = useAuth()
-	const [accountField, setAccountField] = useState<'email' | 'mobile'>('mobile')
-	const mutation = useMutation(
-		api.auth.findPassword.mutationOptions({
-			onSuccess: ({ data }) => {
-				login(data)
-			}
-		})
-	)
+	const [codeType, setCodeType] = useState<'email' | 'mobile'>('email')
+	const mutationOptions = {
+		onSuccess: ({ data }: any) => {
+			login(data)
+		}
+	}
+	const mutationEmail = useMutation(api.findPasswords.email.mutationOptions(mutationOptions))
+	const mutationMobile = useMutation(api.findPasswords.mobile.mutationOptions(mutationOptions))
 
 	const { useAppForm } = createFormHook({
 		fieldComponents: {
@@ -48,25 +49,19 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 	})
 	const form = useAppForm({
 		defaultValues: {
-			account: '',
+			email: '',
+			mobile: '',
 			code: '',
 			password: '',
-			password_confirmation: ''
-		},
-		validators: {
-			// onSubmit: z.object({
-			// 	account: z.string().refine((val) => {
-			// 		return accountField === 'email' ? z.email().safeParse(val).success : /^1[3-9]\d{9}$/.test(val)
-			// 	}, {
-			// 		message: accountField === 'email' ? '请输入正确的邮箱' : '请输入正确的手机号',
-			// 	}),
-			// 	code: z.string().min(1, '请输入验证码'),
-			// 	password: z.string().min(5, '密码不能少于5位'),
-			// 	password_confirmation: z.string().min(5, '密码确认不能少于5位')
-			// })
+			password_confirmation: '',
+			captcha: '',
 		},
 		onSubmit: async ({ value: body }) => {
-			await mutation.mutateAsync({ body })
+			if (codeType == 'email') {
+				await mutationEmail.mutateAsync({ body })
+			} else {
+				await mutationMobile.mutateAsync({ body })
+			}
 		}
 	})
 
@@ -84,33 +79,30 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 					<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-2">
-					<form.AppField name="account"
-						validators={{
-							onChange: z.string().refine((val) => {
-								return accountField === 'email' ? z.email().safeParse(val).success : /^1[3-9]\d{9}$/.test(val)
-							}, {
-								message: accountField === 'email' ? '请输入正确的邮箱' : '请输入正确的手机号',
-							})
-						}}
-						children={field => <field.FieldInput label={accountField == 'email' ? '邮箱' : '手机号'} />}
-					/>
-					<form.AppField name="code"
-						validators={{ onChange: z.string().min(1, '请输入验证码') }}
-						children={field => <field.FieldCode type={accountField} />}
-					/>
-
+					<Tabs defaultValue={codeType} className="w-[400px]">
+						<TabsList>
+							<TabsTrigger value="email" onClick={() => setCodeType('email')}>邮箱找回</TabsTrigger>
+							<TabsTrigger value="mobile" onClick={() => setCodeType('mobile')}>手机号找回</TabsTrigger>
+						</TabsList>
+					</Tabs>
+					<form.AppField name={'code'} children={field => <field.FieldCode type={codeType} />} />
 					<form.AppField name="password"
-						validators={{ onChange: z.string().min(5, '密码不能少于5位') }}
+						validators={{
+							onChange: z.string().min(5, '密码不能少于5位'),
+						}}
 						children={field => <field.FieldInput label="密码" type="password" />} />
-
 					<form.AppField
 						name="password_confirmation"
 						validators={{
-							onChange: z.string().min(5, '密码确认不能少于5位')
-								.refine((val) => val === form.getFieldValue('password'), "两次输入的密码不一致")
+							onChange: z.string().min(5, '密码确认不能少于5位').refine((val) => val === form.state.values.password, '两次输入密码不一致'),
 						}}
 						children={field => <field.FieldInput label="确认密码" type="password" />}
 					/>
+					<form.AppField name="captcha"
+						validators={{
+							onChange: z.string().min(1, '请输入验证码'),
+						}}
+						children={field => <field.FieldCaptcha />} />
 					<form.AppForm>
 						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>

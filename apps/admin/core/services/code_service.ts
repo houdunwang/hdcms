@@ -14,23 +14,27 @@ export class CodeService {
     private ctx: HttpContext
   ) { }
 
-  async send(account: string) {
-    const emailOrMobile = account || this.ctx.request.input('account')
-    const cachedData = await cache.get({ key: CodeService.getCacheKey(emailOrMobile) })
-
-    if (cachedData?.time && cachedData.time > Date.now() - 60 * 1000) {
-      const elapsedSeconds = Math.floor((Date.now() - cachedData.time) / 1000)
-      const remainingSeconds = Math.max(0, 60 - elapsedSeconds)
-      this.ctx.response.abort({ message: `验证码已发送，请${remainingSeconds}秒后再试`, remainingSeconds }, 400)
+  async send(field: 'email' | 'mobile', value: string) {
+    if (await this.isExpired(value)) {
+      const remainingSeconds = await this.getElapsedSeconds(value)
+      this.ctx.response.abort({ message: `验证码已发送!!!，请${remainingSeconds}秒后再试`, remainingSeconds }, 400)
     }
-    const action = emailOrMobile.includes('@') ? 'mail' : 'mobile'
-    await this[action](emailOrMobile)
-
+    await this[field](value)
   }
 
+  async getElapsedSeconds(value: string) {
+    const cachedData = await cache.get({ key: this.getCacheKey(value) })
+    const elapsedSeconds = Math.floor((Date.now() - cachedData.time) / 1000)
+    return Math.max(0, 60 - elapsedSeconds)
+  }
+
+  async isExpired(account: string) {
+    const cachedData = await cache.get({ key: this.getCacheKey(account) })
+    return cachedData?.time && cachedData.time > Date.now() - 60 * 1000
+  }
   // 发送邮件验证码
-  async mail(mail: string) {
-    const html = emailVerificationTemplate(env.get('APP_NAME'), this.generateCode(mail))
+  private async email(mail: string) {
+    const html = emailVerificationTemplate(env.get('APP_NAME'), await this.generateCode(mail))
     try {
       await this.mailService.send(mail, html)
     } catch (error) {
@@ -39,32 +43,51 @@ export class CodeService {
   }
 
   // 发送手机验证码
-  async mobile(phone: string) {
+  private async mobile(phone: string) {
     try {
       await this.aliyunService.sendSms(
         phone, // 手机号
         env.get('ALIYUN_SMS_CODE_SIGN')!, // 阿里云短信签名
         env.get('ALIYUN_SMS_CODE_TEMPLATE'), // 模板代码
-        { code: this.generateCode(phone) } // 模板参数
+        { code: await this.generateCode(phone) } // 模板参数
       )
     } catch (error) {
       throw new Error(error.message ?? '发送验证码失败!!')
     }
   }
 
-  private generateCode(account: string) {
+  /**
+   * 生成验证码并缓存
+   * @param value 邮箱或手机号
+   * @returns 
+   */
+  private async generateCode(value: string) {
     const code = Math.floor(1000 + Math.random() * 9000).toString()
-    cache.set({ key: CodeService.getCacheKey(account), value: { code, time: Date.now() }, ttl: '10m' })
+    await cache.set({ key: this.getCacheKey(value), value: { code, time: Date.now() }, ttl: '10m' })
     return code
   }
 
-  private static getCacheKey(account: string) {
-    return `CODE:${account}`
+  /**
+   * 获取验证码缓存键
+   * @param value 邮箱或手机号
+   * @returns 
+   */
+  private getCacheKey(value: string) {
+    if (this.ctx.auth.isAuthenticated) {
+      return `CODE:${this.ctx.auth.user?.id}`
+    }
+    return `CODE:${value}`
   }
 
-  static async verify(account: string, code: string) {
+  /**
+   * 验证验证码是否正确
+   * @param value 邮箱或手机号
+   * @param code 用户提交的验证码
+   * @returns 
+   */
+  public async verify(value: string, code: string) {
     // if (env.get('NODE_ENV') == 'development') return true;
-    const cachedData = await cache.get({ key: CodeService.getCacheKey(account) })
+    const cachedData = await cache.get({ key: this.getCacheKey(value) })
     if (!cachedData) return false
 
     return cachedData.code == code && cachedData.time > Date.now() - 10 * 60 * 1000

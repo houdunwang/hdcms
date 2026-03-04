@@ -8,10 +8,12 @@ export type ScannedRoutes = {
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
-    'auth.find_password': { paramsTuple?: []; params?: {} }
     'binds.email': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
-    'codes.send': { paramsTuple: [ParamValue]; params: {'type': ParamValue} }
+    'codes.email': { paramsTuple?: []; params?: {} }
+    'codes.mobile': { paramsTuple?: []; params?: {} }
+    'find_passwords.email': { paramsTuple?: []; params?: {} }
+    'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
@@ -54,9 +56,11 @@ export type ScannedRoutes = {
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
-    'auth.find_password': { paramsTuple?: []; params?: {} }
     'binds.email': { paramsTuple?: []; params?: {} }
-    'codes.send': { paramsTuple: [ParamValue]; params: {'type': ParamValue} }
+    'codes.email': { paramsTuple?: []; params?: {} }
+    'codes.mobile': { paramsTuple?: []; params?: {} }
+    'find_passwords.email': { paramsTuple?: []; params?: {} }
+    'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'pays': { paramsTuple?: []; params?: {} }

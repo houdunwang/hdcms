@@ -51,17 +51,6 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
     }
   }
-  'auth.find_password': {
-    methods: ["POST"]
-    pattern: '/core/findPassword'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/auth').findPasswordValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').findPasswordValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['findPassword']>>>
-    }
-  }
   'binds.email': {
     methods: ["POST"]
     pattern: '/core/bind/email'
@@ -84,15 +73,48 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/captcha_controller').default['handle']>>>
     }
   }
-  'codes.send': {
+  'codes.email': {
     methods: ["POST"]
-    pattern: '/core/code/send/:type'
+    pattern: '/core/code/email'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
-      paramsTuple: [ParamValue]
-      params: { type: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendCodeValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['send']>>>
+      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendEmailCodeValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendEmailCodeValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['email']>>>
+    }
+  }
+  'codes.mobile': {
+    methods: ["POST"]
+    pattern: '/core/code/mobile'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendMobileCodeValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendMobileCodeValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['mobile']>>>
+    }
+  }
+  'find_passwords.email': {
+    methods: ["POST"]
+    pattern: '/core/findPassword/email'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/findPassword').findPasswordByEmailValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByEmailValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/find_passwords_controller').default['email']>>>
+    }
+  }
+  'find_passwords.mobile': {
+    methods: ["POST"]
+    pattern: '/core/findPassword/mobile'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/findPassword').findPasswordByMobileValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByMobileValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/find_passwords_controller').default['mobile']>>>
     }
   }
   'licenses': {
