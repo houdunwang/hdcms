@@ -10,6 +10,5 @@ router
 		router.post('/login', [AuthController, 'login'])
 		router.post('/register', [AuthController, 'register'])
 		router.post('/logout', [AuthController, 'logout']).use([middleware.auth()])
-		router.post('/findPassword', [AuthController, 'findPassword'])
 	})
 	.prefix('core')

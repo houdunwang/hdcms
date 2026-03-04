@@ -11,14 +11,18 @@ export interface ApiDefinition {
     login: typeof routes['auth.login']
     register: typeof routes['auth.register']
     logout: typeof routes['auth.logout']
-    findPassword: typeof routes['auth.find_password']
   }
   binds: {
     email: typeof routes['binds.email']
   }
   captcha: typeof routes['captcha']
   codes: {
-    send: typeof routes['codes.send']
+    email: typeof routes['codes.email']
+    mobile: typeof routes['codes.mobile']
+  }
+  findPasswords: {
+    email: typeof routes['find_passwords.email']
+    mobile: typeof routes['find_passwords.mobile']
   }
   licenses: typeof routes['licenses']
   logs: typeof routes['logs']

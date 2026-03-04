@@ -30,12 +30,6 @@ const routes = {
     tokens: [{"old":"/core/logout","type":0,"val":"core","end":""},{"old":"/core/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['auth.logout']['types'],
   },
-  'auth.find_password': {
-    methods: ["POST"],
-    pattern: '/core/findPassword',
-    tokens: [{"old":"/core/findPassword","type":0,"val":"core","end":""},{"old":"/core/findPassword","type":0,"val":"findPassword","end":""}],
-    types: placeholder as Registry['auth.find_password']['types'],
-  },
   'binds.email': {
     methods: ["POST"],
     pattern: '/core/bind/email',
@@ -48,11 +42,29 @@ const routes = {
     tokens: [{"old":"/core/captcha","type":0,"val":"core","end":""},{"old":"/core/captcha","type":0,"val":"captcha","end":""}],
     types: placeholder as Registry['captcha']['types'],
   },
-  'codes.send': {
+  'codes.email': {
     methods: ["POST"],
-    pattern: '/core/code/send/:type',
-    tokens: [{"old":"/core/code/send/:type","type":0,"val":"core","end":""},{"old":"/core/code/send/:type","type":0,"val":"code","end":""},{"old":"/core/code/send/:type","type":0,"val":"send","end":""},{"old":"/core/code/send/:type","type":1,"val":"type","end":""}],
-    types: placeholder as Registry['codes.send']['types'],
+    pattern: '/core/code/email',
+    tokens: [{"old":"/core/code/email","type":0,"val":"core","end":""},{"old":"/core/code/email","type":0,"val":"code","end":""},{"old":"/core/code/email","type":0,"val":"email","end":""}],
+    types: placeholder as Registry['codes.email']['types'],
+  },
+  'codes.mobile': {
+    methods: ["POST"],
+    pattern: '/core/code/mobile',
+    tokens: [{"old":"/core/code/mobile","type":0,"val":"core","end":""},{"old":"/core/code/mobile","type":0,"val":"code","end":""},{"old":"/core/code/mobile","type":0,"val":"mobile","end":""}],
+    types: placeholder as Registry['codes.mobile']['types'],
+  },
+  'find_passwords.email': {
+    methods: ["POST"],
+    pattern: '/core/findPassword/email',
+    tokens: [{"old":"/core/findPassword/email","type":0,"val":"core","end":""},{"old":"/core/findPassword/email","type":0,"val":"findPassword","end":""},{"old":"/core/findPassword/email","type":0,"val":"email","end":""}],
+    types: placeholder as Registry['find_passwords.email']['types'],
+  },
+  'find_passwords.mobile': {
+    methods: ["POST"],
+    pattern: '/core/findPassword/mobile',
+    tokens: [{"old":"/core/findPassword/mobile","type":0,"val":"core","end":""},{"old":"/core/findPassword/mobile","type":0,"val":"findPassword","end":""},{"old":"/core/findPassword/mobile","type":0,"val":"mobile","end":""}],
+    types: placeholder as Registry['find_passwords.mobile']['types'],
   },
   'licenses': {
     methods: ["POST"],
