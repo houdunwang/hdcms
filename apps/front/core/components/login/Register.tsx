@@ -49,14 +49,14 @@ function RegisterComponent({ className, onSubmit, ...props }: LoginType) {
 			password_confirmation: '',
 			captcha: '',
 		},
-		validators: {
-			onSubmit: z.object({
-				name: z.string().regex(/^[a-zA-Z0-9_]{3,20}$/, '帐号只能包含字母、数字和下划线,长度为3-20位'),
-				password: z.string().min(5, '密码不能少于5位'),
-				password_confirmation: z.string().min(5, '确认密码不能少于5位'),
-				captcha: z.string().min(1, '请输入验证码'),
-			}),
-		},
+		// validators: {
+		// 	onSubmit: z.object({
+		// 		name: z.string().regex(/^[a-zA-Z0-9_]{3,20}$/, '帐号只能包含字母、数字和下划线,长度为3-20位'),
+		// 		password: z.string().min(5, '密码不能少于5位'),
+		// 		password_confirmation: z.string().min(5, '确认密码不能少于5位'),
+		// 		captcha: z.string().min(1, '请输入验证码'),
+		// 	}),
+		// },
 		onSubmit: async ({ value: body }) => {
 			await mutation.mutateAsync({ body })
 		}
@@ -75,10 +75,26 @@ function RegisterComponent({ className, onSubmit, ...props }: LoginType) {
 					<CardDescription>填写以下信息以注册新帐号</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-2">
-					<form.AppField name="name" children={field => <field.FieldInput label="帐号" />} />
-					<form.AppField name="password" children={field => <field.FieldInput label="密码" type="password" />} />
-					<form.AppField name="password_confirmation" children={field => <field.FieldInput label="确认密码" type="password" />} />
-					<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
+					<form.AppField name="name"
+						validators={{
+							onChange: z.string().regex(/^[a-zA-Z0-9_]{3,20}$/, '帐号只能包含字母、数字和下划线,长度为3-20位'),
+						}}
+						children={field => <field.FieldInput label="帐号" />} />
+					<form.AppField name="password"
+						validators={{
+							onChange: z.string().min(5, '密码不能少于5位'),
+						}}
+						children={field => <field.FieldInput label="密码" type="password" />} />
+					<form.AppField name="password_confirmation"
+						validators={{
+							onChange: z.string().min(5, '确认密码不能少于5位'),
+						}}
+						children={field => <field.FieldInput label="确认密码" type="password" />} />
+					<form.AppField name="captcha"
+						validators={{
+							onChange: z.string().min(1, '请输入验证码'),
+						}}
+						children={field => <field.FieldCaptcha label="验证码" />} />
 					<form.AppForm>
 						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
