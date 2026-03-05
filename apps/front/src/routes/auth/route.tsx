@@ -1,5 +1,5 @@
-import { HdFooter } from '@core/components/common/HdFooter'
-import { HdHeader } from '@core/components/common/hdHeader'
+import { HdFooter } from '@hd/react/components'
+import { HdHeader } from '@hd/react/components'
 import { menus } from '@/config/menus'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 

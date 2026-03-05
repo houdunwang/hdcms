@@ -1,4 +1,4 @@
-import { Register } from '@core/components/login/Register'
+import { Register } from '@hd/react/components'
 import { createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute('/auth/register')({
 	component: Page

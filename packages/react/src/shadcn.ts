@@ -1,0 +1,1 @@
+import './assets/shadcn.css'

@@ -1,6 +1,6 @@
 import { Alert } from "@/components/ui/alert"
-import { WechatQrCode } from "@core/components/wechat/WechatQrCode"
-import { useApi } from "@core/hooks/useApi"
+import { WechatQrCode } from "@hd/react/components"
+import { useApi } from "@hd/react/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 

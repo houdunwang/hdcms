@@ -27,6 +27,9 @@ export default class UsersController extends BaseController {
     return serialize(UserTransformer.transform(user, auth))
   }
 
+  async hd() {
+    return { name: 'ok' }
+  }
   /**
    * @index
    * @tag 用户管理

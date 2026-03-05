@@ -9,6 +9,7 @@ router
 	.group(() => {
 		router.put('/users/password', [UsersController, 'password']).use(middleware.auth())
 		router.get('/users/me', [UsersController, 'me']).use(middleware.auth())
+		router.get('/users/hd', [UsersController, 'hd'])
 
 		router.put('/users/:id?', [UsersController, 'update']).use(middleware.auth())
 		router.delete('/users/destroy', [UsersController, 'destroy']).use(middleware.auth())
