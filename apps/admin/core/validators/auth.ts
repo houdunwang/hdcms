@@ -4,8 +4,6 @@ import hash from '@adonisjs/core/services/hash'
 import vine from '@vinejs/vine'
 import { validateProvider } from './config/validateProvider.ts'
 import { captchaRule } from './rules/captchaRule.js'
-import { codeRule } from './rules/emailCodeRule.ts'
-
 export const loginValidator = vine.create(
   vine.object({
     account: vine

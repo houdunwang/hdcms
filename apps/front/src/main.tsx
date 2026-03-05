@@ -2,7 +2,8 @@ import { QueryClient } from '@tanstack/react-query'
 import { createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
-import { Hd } from '@core/hd'
+import { HdProvider } from '@hd/react'
+// import '@hd/react/styles.css'
 
 const router = createRouter({
   context: {
@@ -31,7 +32,5 @@ const rootElement = document.getElementById('app')!
 
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
-  root.render(<Hd router={router} queryClient={queryClient} />)
+  root.render(<HdProvider router={router} queryClient={queryClient} />)
 }
-
-

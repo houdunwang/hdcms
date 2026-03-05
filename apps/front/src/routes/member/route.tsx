@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { menus } from '@/config/menus'
-import { HdHeader } from '@core/components/common/hdHeader'
-import { useAuth } from '@core/hooks/useAuth'
+import { HdHeader } from '@hd/react/components'
+import { useAuth } from '@hd/react/hooks'
 import { createFileRoute, Link, Outlet, redirect } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 

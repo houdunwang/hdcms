@@ -1,20 +1,18 @@
-import { Button } from "@/components/ui/button"
-import { ConfirmDialog } from "@core/components/common/ConfirmDialog"
-import { useApi } from "@core/hooks/useApi"
-import { useMutation } from "@tanstack/react-query"
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
-import { useState } from "react"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useApi } from "@hd/react/hooks"
+import { useMutation } from "@tanstack/react-query"
+import { useState } from "react"
 
 export const BindDestroy = () => {
   const { api, auth } = useApi()

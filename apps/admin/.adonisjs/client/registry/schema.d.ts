@@ -238,6 +238,17 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['me']>>>
     }
   }
+  'users.hd': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/users/hd'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['hd']>>>
+    }
+  }
   'users.update': {
     methods: ["PUT"]
     pattern: '/core/users/:id?'

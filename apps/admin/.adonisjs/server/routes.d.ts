@@ -25,6 +25,7 @@ export type ScannedRoutes = {
     'uploads.image_single': { paramsTuple?: []; params?: {} }
     'users.password': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
+    'users.hd': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'users.destroy': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
@@ -40,6 +41,7 @@ export type ScannedRoutes = {
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
+    'users.hd': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }
@@ -49,6 +51,7 @@ export type ScannedRoutes = {
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
+    'users.hd': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }

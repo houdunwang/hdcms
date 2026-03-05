@@ -132,6 +132,12 @@ const routes = {
     tokens: [{"old":"/core/users/me","type":0,"val":"core","end":""},{"old":"/core/users/me","type":0,"val":"users","end":""},{"old":"/core/users/me","type":0,"val":"me","end":""}],
     types: placeholder as Registry['users.me']['types'],
   },
+  'users.hd': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/users/hd',
+    tokens: [{"old":"/core/users/hd","type":0,"val":"core","end":""},{"old":"/core/users/hd","type":0,"val":"users","end":""},{"old":"/core/users/hd","type":0,"val":"hd","end":""}],
+    types: placeholder as Registry['users.hd']['types'],
+  },
   'users.update': {
     methods: ["PUT"],
     pattern: '/core/users/:id?',

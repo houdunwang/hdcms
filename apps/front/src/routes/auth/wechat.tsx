@@ -1,10 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useAuth } from '@core/hooks/useAuth'
+import { useAuth } from '@hd/react/hooks'
 import React from 'react'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, RefreshCw, Clock } from 'lucide-react'
-import { Wechat } from '@core/components/login/Wechat'
+import { Wechat } from '@hd/react/components'
 
 const highlights = [
 	{

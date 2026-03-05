@@ -20,7 +20,6 @@ import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthForgetRouteImport } from './routes/auth/forget'
 import { Route as FrontLessonRouteImport } from './routes/_front/lesson'
-import { Route as FrontARouteImport } from './routes/_front/a'
 
 const MemberRouteRoute = MemberRouteRouteImport.update({
   id: '/member',
@@ -76,17 +75,11 @@ const FrontLessonRoute = FrontLessonRouteImport.update({
   path: '/lesson',
   getParentRoute: () => FrontRouteRoute,
 } as any)
-const FrontARoute = FrontARouteImport.update({
-  id: '/a',
-  path: '/a',
-  getParentRoute: () => FrontRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof FrontIndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
-  '/a': typeof FrontARoute
   '/lesson': typeof FrontLessonRoute
   '/auth/forget': typeof AuthForgetRoute
   '/auth/login': typeof AuthLoginRoute
@@ -98,7 +91,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
-  '/a': typeof FrontARoute
   '/lesson': typeof FrontLessonRoute
   '/auth/forget': typeof AuthForgetRoute
   '/auth/login': typeof AuthLoginRoute
@@ -113,7 +105,6 @@ export interface FileRoutesById {
   '/_front': typeof FrontRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
-  '/_front/a': typeof FrontARoute
   '/_front/lesson': typeof FrontLessonRoute
   '/auth/forget': typeof AuthForgetRoute
   '/auth/login': typeof AuthLoginRoute
@@ -129,7 +120,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/member'
-    | '/a'
     | '/lesson'
     | '/auth/forget'
     | '/auth/login'
@@ -141,7 +131,6 @@ export interface FileRouteTypes {
   to:
     | '/auth'
     | '/member'
-    | '/a'
     | '/lesson'
     | '/auth/forget'
     | '/auth/login'
@@ -155,7 +144,6 @@ export interface FileRouteTypes {
     | '/_front'
     | '/auth'
     | '/member'
-    | '/_front/a'
     | '/_front/lesson'
     | '/auth/forget'
     | '/auth/login'
@@ -251,24 +239,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrontLessonRouteImport
       parentRoute: typeof FrontRouteRoute
     }
-    '/_front/a': {
-      id: '/_front/a'
-      path: '/a'
-      fullPath: '/a'
-      preLoaderRoute: typeof FrontARouteImport
-      parentRoute: typeof FrontRouteRoute
-    }
   }
 }
 
 interface FrontRouteRouteChildren {
-  FrontARoute: typeof FrontARoute
   FrontLessonRoute: typeof FrontLessonRoute
   FrontIndexRoute: typeof FrontIndexRoute
 }
 
 const FrontRouteRouteChildren: FrontRouteRouteChildren = {
-  FrontARoute: FrontARoute,
   FrontLessonRoute: FrontLessonRoute,
   FrontIndexRoute: FrontIndexRoute,
 }
