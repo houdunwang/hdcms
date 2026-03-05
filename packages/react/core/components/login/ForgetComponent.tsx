@@ -1,10 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { fieldContext, formContext } from "@/index"
 import { cn } from "@/lib/utils"
 import { FieldCaptcha } from "@core/components/form/FieldCaptcha"
 import { FieldInput } from "@core/components/form/FieldInput"
 import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
-import { fieldContext, formContext } from "@/index"
 import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
@@ -14,16 +14,9 @@ import { useState } from "react"
 import z from "zod"
 import { FieldCode } from "../form/FieldCode"
 import { Footer } from "./Footer"
-import { Layout } from "./Layout"
+import type { LoginProps } from "./type"
 
-type LoginType = React.ComponentProps<"div">
-export const Forget = () => {
-	return <Layout introduce={<Introduce />}>
-		<ForgetComponent />
-	</Layout>
-}
-
-function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
+export function ForgetComponent({ className, footer, showWechatLoginButton }: LoginProps) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const [codeType, setCodeType] = useState<'email' | 'mobile'>('email')
@@ -70,7 +63,7 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6", className)} {...props}>
+			<Card className={cn("flex flex-col gap-6", className)} >
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<ShieldCheck />
@@ -106,8 +99,8 @@ function ForgetComponent({ className, onSubmit, ...props }: LoginType) {
 					<form.AppForm>
 						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
-					<Footer />
 				</CardContent>
+				{footer ?? <Footer showWechatLoginButton={showWechatLoginButton} />}
 			</Card>
 		</form>
 	)
@@ -125,7 +118,7 @@ const highlights = [
 		icon: ShieldCheck,
 	},
 ] as const
-function Introduce() {
+export function ForgetIntroduce() {
 	return <Card>
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">
