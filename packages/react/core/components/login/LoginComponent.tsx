@@ -1,25 +1,19 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { fieldContext, formContext } from "@/index"
 import { cn } from "@/lib/utils"
 import { FieldCaptcha } from "@core/components/form/FieldCaptcha"
 import { FieldInput } from "@core/components/form/FieldInput"
-import { fieldContext, formContext } from "@/index"
+import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
-import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, User } from 'lucide-react'
 import z from "zod"
 import { Footer } from "./Footer"
-import { Layout } from "./Layout"
+import type { LoginProps } from "./type"
 
-export const Login = () => {
-	return <Layout introduce={<Introduce />}>
-		<LoginComponent />
-	</Layout>
-}
-
-export function LoginComponent() {
+export function LoginComponent({ className, footer, showWechatLoginButton }: LoginProps) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
@@ -64,7 +58,7 @@ export function LoginComponent() {
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6")}>
+			<Card className={cn("flex flex-col gap-6", className)}>
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<User className="w-5 h-5" />
@@ -79,8 +73,9 @@ export function LoginComponent() {
 					<form.AppForm>
 						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
-					<Footer />
+					{/* <Footer /> */}
 				</CardContent>
+				{footer ?? <Footer showWechatLoginButton={showWechatLoginButton} />}
 			</Card>
 		</form>
 	)
@@ -110,7 +105,7 @@ const highlights = [
 	},
 ] as const
 
-function Introduce() {
+export function LoginIntroduce() {
 	return <Card>
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

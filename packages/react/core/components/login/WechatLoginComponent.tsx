@@ -3,19 +3,21 @@ import { useApi } from '@core/hooks/useApi'
 import { useMutation } from '@tanstack/react-query'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
 import { WechatQrCode } from '../wechat/WechatQrCode'
-import { Layout } from './Layout'
+import { Footer } from './Footer'
+import type { LoginProps } from './type'
 
-export function Wechat() {
-	return <Layout introduce={<Introduce />}>
-		<WechatScanQrLogin />
-	</Layout>
-}
 
-export function WechatScanQrLogin() {
+// export function WechatLoginPage({ className, introduce, footer, description }: LoginLayoutProps) {
+// 	return <Layout introduce={introduce || <Introduce />} description={description}>
+// 		<LoginComponent className={className} footer={footer} />
+// 	</Layout>
+// }
+
+export function WechatLoginComponent({ className, footer }: LoginProps) {
 	const { api, auth } = useApi()
 	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
 	return (
-		<Card>
+		<Card className={className}>
 			<CardHeader>
 				<CardTitle>微信扫码安全登录</CardTitle>
 				<CardDescription>打开手机微信扫描二维码，一键授权快速登录</CardDescription>
@@ -31,10 +33,10 @@ export function WechatScanQrLogin() {
 						}
 					}} />
 			</CardContent>
+			{footer ?? <Footer showWechatLoginButton={false} />}
 		</Card>
 	)
 }
-
 
 const highlights = [
 	{
@@ -59,7 +61,7 @@ const highlights = [
 	},
 ] as const
 
-function Introduce() {
+export function WechatIntroduce() {
 	return <Card className="order-2 lg:order-11">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

@@ -1,26 +1,26 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { fieldContext, formContext } from "@/index"
 import { cn } from "@/lib/utils"
 import { FieldCaptcha } from "@core/components/form/FieldCaptcha"
 import { FieldInput } from "@core/components/form/FieldInput"
-import { fieldContext, formContext } from "@/index"
+import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { useApi } from "@core/hooks/useApi"
 import { useAuth } from "@core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
-import { FieldSubmitButton } from "@core/components/form/FieldSubmitButton"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, UserPlus } from 'lucide-react'
 import z from "zod"
 import { Footer } from "./Footer"
-import { Layout } from "./Layout"
+import type { LoginProps } from "./type"
 
-type LoginType = React.ComponentProps<"div">
-export const Register = () => {
-	return <Layout introduce={<Introduce />}>
-		<RegisterComponent />
-	</Layout>
-}
+// type LoginType = React.ComponentProps<"div">
+// export const Register = () => {
+// 	return <Layout introduce={<Introduce />}>
+// 		<RegisterPage />
+// 	</Layout>
+// }
 
-function RegisterComponent({ className, onSubmit, ...props }: LoginType) {
+export function RegisterComponent({ className, footer, showWechatLoginButton }: LoginProps) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
@@ -67,7 +67,7 @@ function RegisterComponent({ className, onSubmit, ...props }: LoginType) {
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6", className)} {...props}>
+			<Card className={cn("flex flex-col gap-6", className)}>
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<UserPlus /> 马上注册
@@ -98,8 +98,8 @@ function RegisterComponent({ className, onSubmit, ...props }: LoginType) {
 					<form.AppForm>
 						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
-					<Footer />
 				</CardContent>
+				{footer ?? <Footer showWechatLoginButton={showWechatLoginButton} />}
 			</Card>
 		</form>
 	)
@@ -129,7 +129,7 @@ const highlights = [
 	},
 ] as const
 
-function Introduce() {
+export function RegisterIntroduce() {
 	return <Card className="">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">
