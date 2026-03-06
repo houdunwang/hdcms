@@ -13,6 +13,7 @@ export default defineConfig({
     store: 'src/store.ts',
     enum: 'src/enum.ts',
     provider: 'src/provider.ts',
+    member: 'src/member.ts',
   },
   dts: true,
   format: ['esm', 'cjs'],
