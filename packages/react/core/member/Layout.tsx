@@ -1,37 +1,38 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import type { Data } from '@app/admin/data'
 import { Link, Outlet, useMatch, useMatchRoute } from '@tanstack/react-router'
 import dayjs from 'dayjs'
+import { Dock, UserStar, type LucideIcon } from 'lucide-react'
 import { Profile } from './Profile'
 import { Bind } from './bind'
-import { useResponsive } from '@core/hooks/useResponsive'
-import { Dock, UserStar, type LucideIcon } from 'lucide-react'
 
 
-const SystemMenus: ReadonlyArray<{ name: 'profile' | 'bind', title: string, to: string, icon: LucideIcon }> = [
+type LinkItem = { title: string, to: string, icon?: LucideIcon, target: '_blank' | '_self' };
+const SystemMenus = [
 	{ name: 'profile', title: '资料管理', to: '/member?system=profile', icon: UserStar },
 	{ name: 'bind', title: '绑定帐号', to: '/member?system=bind', icon: Dock },
-] as const
+] as Array<LinkItem & { name: 'profile' | 'bind' }>
 export type SystemMenuName = typeof SystemMenus[number]['name'] | undefined
 
 interface Props {
 	user: Data.User
 	className?: string
-	menus?: Array<{ title: string, to: string, icon?: LucideIcon }>
+	menus?: Array<LinkItem>
 }
 export const useMemberClassName = () => {
-	const responsive = useResponsive()
-	const size = responsive['large'] ? 'px-5 py-3' : 'px-3 py-2'
+	const isMobile = useIsMobile()
+	const size = isMobile ? 'px-3 py-2' : 'px-5 py-3'
 	const menuClassName = {
-		default: `bg-background border-b duration-100 text-sm whitespace-nowrap ${size}`,
+		default: `bg-background border-b duration-100 text-sm whitespace-nowrap hover:bg-muted ${size}`,
 		active: 'lg:bg-destruct1ive text-primary'
 	}
 	return menuClassName
 }
 
 export function Layout({ user, className, menus }: Props) {
-	const responsive = useResponsive()
+	const isMobile = useIsMobile()
 	const route = useMatch({ strict: false })
 	const matchRoute = useMatchRoute()
 	let systemMenu = route.search.system as SystemMenuName | undefined
@@ -42,10 +43,10 @@ export function Layout({ user, className, menus }: Props) {
 	return <div className={cn('bg-muted pt-6', className)}>
 		<div className="container mx-auto px-3 lg:px-12 min-h-[calc(100vh-var(--header-height))] ">
 			<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 items-stretch">
-				{responsive['large'] ?
-					<PcLeft user={user} systemMenu={systemMenu} menus={menus} />
-					:
+				{isMobile ?
 					<MobileLeft systemMenu={systemMenu} menus={menus} />
+					:
+					<PcLeft user={user} systemMenu={systemMenu} menus={menus} />
 				}
 				<Card className="bg-background">
 					<CardContent className='pb-20'>
@@ -101,7 +102,7 @@ function PcLeft({ user, systemMenu, menus }: LeftMenuProps) {
 	const menuClassName = useMemberClassName()
 	return <section className='hidden lg:block'>
 		<Card>
-			<img src={user?.avatar || '/images/avatar.jpeg'} className='w-72 object-cover' />
+			<img src={user?.avatar || '/images/avatar.jpeg'} className='w-72 object-cover max-h-72' />
 			<CardHeader>
 				<CardTitle className='text-center'>
 					{user?.name || ''}
@@ -113,7 +114,7 @@ function PcLeft({ user, systemMenu, menus }: LeftMenuProps) {
 				</CardDescription>
 			</CardHeader>
 		</Card>
-		<div className='mt-6 flex flex-col shadow-s1m rounded-sm overflow-hidden'>
+		<div className='mt-6 flex flex-col shadow-s1m rounded-sm overflow-hidden border'>
 			{SystemMenus.map((menu: typeof SystemMenus[number]) => (
 				<Link key={menu.name}
 					to={menu.to}

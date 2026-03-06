@@ -1,9 +1,9 @@
+@source "../../../../packages/react";
+@import '../../../../packages/react/src/assets/global.css';
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
-@source "../../../../packages/react";
-@import '../../../../packages/react/src/assets/global.css';
 @custom-variant dark (&:is(.dark *));
 
 :root {

@@ -14,24 +14,10 @@ export const Route = createFileRoute('/member')({
 
 const menus = [
 	{
-		title: '订阅状态',
-		to: '/member/a',
+		title: '获取帮助',
+		to: 'https://www.houdunren.com',
 		icon: Handbag,
 	},
-	{
-		title: '学习历史',
-		to: '/member/a',
-		icon: MonitorPlay,
-	},
-	{
-		title: '我的课程',
-		to: '/member/a',
-		icon: BookOpenCheck,
-	},
-	// {
-	// 	title: '订阅课程',
-	// 	to: '/member/a',
-	// },
 ]
 function RouteComponent() {
 	const { user } = useAuth()
