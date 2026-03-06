@@ -43,10 +43,10 @@ function IsLoginComponent() {
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
-					<Link to='/member/profile'>
+					<Link to='/member' search={{ system: 'profile' }}>
 						<DropdownMenuItem className='cursor-pointer py-1'>资料管理</DropdownMenuItem>
 					</Link>
-					<Link to='/member/bind'>
+					<Link to='/member' search={{ system: 'bind' }}>
 						<DropdownMenuItem className='cursor-pointer py-1'>帐号绑定</DropdownMenuItem>
 					</Link>
 				</DropdownMenuGroup>

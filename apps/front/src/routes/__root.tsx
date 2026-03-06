@@ -2,7 +2,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClient } from '@tanstack/react-query'
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import type { useAuth } from '@hd/react/hooks'
+import type { useAuth } from '@houdunyun/react/hooks'
 import '../assets/global.css'
 import '../assets/shadcn.css'
 

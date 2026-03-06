@@ -1,26 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
-import {
-	Tabs,
-	TabsContent,
-	TabsList,
-	TabsTrigger,
-} from "@/components/ui/tabs"
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
+import { ProfileAvatar } from './-components/profile-avatar'
 import { ProfileInfo } from './-components/profile-info'
 import { ProfilePassword } from './-components/profile-password'
-import { ProfileAvatar } from './-components/profile-avatar'
 
-export const Route = createFileRoute('/member/profile')({
-	component: RouteComponent,
-})
-
-export function RouteComponent() {
+export function Profile() {
 	return (
 		<Tabs defaultValue="avatar">
 			<TabsList>

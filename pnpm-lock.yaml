@@ -195,7 +195,7 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.2.8
         version: 5.2.8
-      '@hd/react':
+      '@houdunyun/react':
         specifier: workspace:*
         version: link:../../packages/react
       '@tailwindcss/vite':

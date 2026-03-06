@@ -1,4 +1,4 @@
-import { LoginLayout, LoginComponent, LoginIntroduce } from '@hd/react/components'
+import { LoginLayout, LoginComponent, LoginIntroduce } from '@houdunyun/react/components'
 import { createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute('/auth/login')({
 	component: Page

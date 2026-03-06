@@ -1,24 +1,11 @@
-import {
-	Card,
-	CardContent
-} from "@/components/ui/card"
-import {
-	Tabs,
-	TabsContent,
-	TabsList,
-	TabsTrigger,
-} from "@/components/ui/tabs"
-import { createFileRoute } from '@tanstack/react-router'
-import { BindDestroy } from './-components/bind-destroy'
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
+import { DeleteAccount } from './-components/DeleteAccount'
 import { BindEmail } from './-components/bind-email'
 import { BindMobile } from './-components/bind-mobile'
 import { BindWechat } from './-components/bind-wechat'
 
-export const Route = createFileRoute('/member/bind')({
-	component: RouteComponent,
-})
-
-export function RouteComponent() {
+export function Bind() {
 	return (
 		<Tabs defaultValue="email">
 			<TabsList>
@@ -51,7 +38,7 @@ export function RouteComponent() {
 			<TabsContent value="destroy">
 				<Card>
 					<CardContent>
-						<BindDestroy />
+						<DeleteAccount />
 					</CardContent>
 				</Card>
 			</TabsContent>

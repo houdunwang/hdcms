@@ -14,6 +14,7 @@ export default defineConfig({
     enum: 'src/enum.ts',
     provider: 'src/provider.ts',
     member: 'src/member.ts',
+    form: 'src/form.ts',
   },
   dts: true,
   format: ['esm', 'cjs'],
