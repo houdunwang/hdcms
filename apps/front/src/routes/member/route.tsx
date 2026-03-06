@@ -1,7 +1,8 @@
-import { HdHeader, useAuth } from '@houdunyun/react'
+import { HeaderBar } from '@/components/HeaderBar'
+import { useAuth } from '@houdunyun/react'
 import { Layout } from '@houdunyun/react/member'
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { BookOpenCheck, Handbag, MonitorPlay, SubscriptIcon } from 'lucide-react'
+import { Handbag } from 'lucide-react'
 
 export const Route = createFileRoute('/member')({
 	beforeLoad: ({ context }) => {
@@ -22,7 +23,7 @@ const menus = [
 function RouteComponent() {
 	const { user } = useAuth()
 	return <div>
-		<HdHeader menu={<h1>会员中心</h1>} />
+		<HeaderBar />
 		<Layout user={user!} menus={menus} />
 	</div >
 }

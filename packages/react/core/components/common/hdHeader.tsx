@@ -1,4 +1,5 @@
 
+import type { IUserDropdownMenus } from "@core/components/types"
 import { Link } from "@tanstack/react-router"
 import { MessageCircleCode } from "lucide-react"
 import type { ReactNode } from "react"
@@ -7,9 +8,9 @@ import { UserDropdown } from "../user/UserDropdown"
 export interface IProps {
 	login?: ReactNode
 	menu: ReactNode
+	userDropdownMenus?: IUserDropdownMenus
 }
-
-export function HdHeader({ login, menu }: IProps) {
+export function HdHeader({ login, menu, userDropdownMenus }: IProps) {
 	return (
 		<header className="bg-background flex items-center gap-3 justify-between sticky top-0 z-10 border-b h-[var(--header-height)] px-6 lg:px-12">
 			<div className="flex items-center gap-1">
@@ -22,7 +23,7 @@ export function HdHeader({ login, menu }: IProps) {
 					{menu}
 				</div>
 			</div>
-			<UserDropdown />
+			<UserDropdown menus={userDropdownMenus} />
 		</header>
 	)
 }

@@ -7,19 +7,18 @@ import dayjs from 'dayjs'
 import { Dock, UserStar, type LucideIcon } from 'lucide-react'
 import { Profile } from './Profile'
 import { Bind } from './bind'
+import type { ILinkItem } from '@core/components/types'
 
-
-type LinkItem = { title: string, to: string, icon?: LucideIcon, target: '_blank' | '_self' };
 const SystemMenus = [
 	{ name: 'profile', title: '资料管理', to: '/member?system=profile', icon: UserStar },
 	{ name: 'bind', title: '绑定帐号', to: '/member?system=bind', icon: Dock },
-] as Array<LinkItem & { name: 'profile' | 'bind' }>
+] as Array<ILinkItem & { name: 'profile' | 'bind' }>
 export type SystemMenuName = typeof SystemMenus[number]['name'] | undefined
 
 interface Props {
 	user: Data.User
 	className?: string
-	menus?: Array<LinkItem>
+	menus?: Array<ILinkItem>
 }
 export const useMemberClassName = () => {
 	const isMobile = useIsMobile()

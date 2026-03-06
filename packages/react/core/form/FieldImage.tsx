@@ -3,7 +3,7 @@ import { useFieldContext } from "@/index"
 import { useApi } from "@core/hooks/useApi"
 import { fieldErrorAtom } from "@core/store/fieldErrorStore"
 import { useMutation } from "@tanstack/react-query"
-import type { FormFieldProps } from "core/types/form"
+import type { FormFieldProps } from "@core/form/types"
 import { useSetAtom } from "jotai"
 import { useDropzone } from 'react-dropzone'
 import { FieldValidateError } from "./FieldValidateError"

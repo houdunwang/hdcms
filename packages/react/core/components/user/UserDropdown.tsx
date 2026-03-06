@@ -1,29 +1,25 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import type { IUserDropdownMenus } from '@/index'
 import { useAuth } from '@core/hooks/useAuth'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { ModeToggle } from '../theme/mode-toggle'
-export const UserDropdown = () => {
+interface Props {
+	menus?: IUserDropdownMenus
+}
+export const UserDropdown = ({ menus }: Props) => {
 	const { isAuthenticated } = useAuth()
 	return (
 		<div className="flex gap-2 items-center">
 			<ModeToggle />
-			{isAuthenticated ? <IsLoginComponent /> : <UnLogin />}
+			{isAuthenticated ? <LoginComponent menus={menus} /> : <UnLogin />}
 		</div>
 	)
 }
 
-function IsLoginComponent() {
+function LoginComponent({ menus }: Props) {
 	const { user, logout } = useAuth()
 	return (
 		<DropdownMenu>
@@ -49,6 +45,16 @@ function IsLoginComponent() {
 					<Link to='/member' search={{ system: 'bind' }}>
 						<DropdownMenuItem className='cursor-pointer py-1'>帐号绑定</DropdownMenuItem>
 					</Link>
+
+				</DropdownMenuGroup>
+				<DropdownMenuGroup>
+					{menus?.label && <DropdownMenuSeparator />}
+					{menus?.label && <DropdownMenuLabel>{menus?.label}</DropdownMenuLabel>}
+					{menus?.items.map((item) => (
+						<Link key={item.to} to={item.to} >
+							<DropdownMenuItem className='cursor-pointer py-1'>{item.title}</DropdownMenuItem>
+						</Link>
+					))}
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuSeparator />
