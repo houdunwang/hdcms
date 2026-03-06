@@ -1,5 +1,5 @@
 {
-  "name": "@hd/react",
+  "name": "@houdunyun/react",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -37,6 +37,10 @@
     "./provider": {
       "import": "./dist/provider.mjs",
       "require": "./dist/provider.js"
+    },
+    "./member": {
+      "import": "./dist/member.mjs",
+      "require": "./dist/member.js"
     }
   },
   "typesVersions": {
@@ -58,6 +62,9 @@
       ],
       "provider": [
         "dist/provider.d.ts"
+      ],
+      "member": [
+        "dist/member.d.ts"
       ]
     }
   },

@@ -6,5 +6,6 @@ export * from '@core/components'
 export * from '@core/plugin'
 export * from '@core/store'
 export * from '@core/enum'
+export * from '@core/member'
 export * from '@core/provider/HdProvider'
 

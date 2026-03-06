@@ -1,6 +1,4 @@
-import { HdFooter } from '@hd/react/components'
-import { HdHeader } from '@hd/react/components'
-import { menus } from '@/config/menus'
+import { HdFooter, HdHeader } from '@hd/react/components'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/auth')({
@@ -14,7 +12,7 @@ export const Route = createFileRoute('/auth')({
 
 function RouteComponent() {
 	return <div className=''>
-		<HdHeader menus={menus} />
+		<HdHeader menu={<h1>ok</h1>} />
 		<div className="container mx-auto p-3 min-h-[calc(100vh-var(--header-height))]">
 			<Outlet />
 		</div>

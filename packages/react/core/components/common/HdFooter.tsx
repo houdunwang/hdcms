@@ -8,14 +8,11 @@ export const HdFooter = () => {
 							<div className="size-4 rounded-full bg-muted" />
 							<span>后盾人</span>
 						</div>
-
 						<nav className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground"></nav>
 					</div>
-
 					<p className="mt-2 text-sm text-muted-foreground">
 						订阅会员：解锁系统课程、实战项目与配套资料，学习记录随时可追踪。
 					</p>
-
 					<div className="mt-6 flex flex-col gap-2 border-t pt-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
 						<div>© {new Date().getFullYear()} 后盾人 · houdunren.com</div>
 						<a
