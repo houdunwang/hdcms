@@ -3,7 +3,7 @@ import vine from '@vinejs/vine'
 import type { Infer } from '@vinejs/vine/types'
 import { validateProvider } from './config/validateProvider.ts'
 
-export const payValidator = vine.compile(
+export const payValidator = vine.create(
   vine.object({
     subject: vine.string().trim(),
     orderable_type: vine.enum(Object.keys(payConfig.process) as (keyof typeof payConfig.process)[]),

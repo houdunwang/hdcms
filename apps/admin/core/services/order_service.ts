@@ -23,7 +23,8 @@ export class OrderService {
   async create(data: Infer<typeof payValidator> & { price: number }) {
     const sn = await this.generateOrderSn()
     const order = await Order.create({
-      ...data, sn,
+      ...data,
+      sn,
       userId: this.ctx.auth.user!.id,
     })
     return order

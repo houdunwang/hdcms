@@ -56,7 +56,7 @@ export function useRequestClient() {
 					switch (error.response.status) {
 						case 401:
 							localStorage.removeItem(AuthEnum.TOKEN_NAME)
-							location.href = '/auth/login'
+							location.href = '/auth'
 							break
 						case 429:
 							const msg = responseData as { errors: { message: string }[] } | { message: string } | undefined

@@ -1,6 +1,5 @@
 import { HeaderBar } from '@/components/HeaderBar'
-import { useAuth } from '@houdunyun/react'
-import { Layout } from '@houdunyun/react/member'
+import { MemberLayout, useAuth } from '@houdunyun/react'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Handbag } from 'lucide-react'
 
@@ -24,6 +23,6 @@ function RouteComponent() {
 	const { user } = useAuth()
 	return <div>
 		<HeaderBar />
-		<Layout user={user!} menus={menus} />
+		<MemberLayout user={user!} menus={menus} />
 	</div >
 }

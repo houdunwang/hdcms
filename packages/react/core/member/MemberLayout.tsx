@@ -30,7 +30,7 @@ export const useMemberClassName = () => {
 	return menuClassName
 }
 
-export function Layout({ user, className, menus }: Props) {
+export function MemberLayout({ user, className, menus }: Props) {
 	const isMobile = useIsMobile()
 	const route = useMatch({ strict: false })
 	const matchRoute = useMatchRoute()

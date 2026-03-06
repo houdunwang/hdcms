@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { WePay } from "@houdunyun/react/pay"
+
 import {
   ArrowRight,
   Bell,
@@ -162,6 +164,7 @@ export function HomePage() {
 
   return (
     <div className="flex min-h-dvh flex-col">
+      <WePay orderable_id={1} orderable_type={'subscribe'} subject='订阅' />
       <main className="flex-1">
         <section className="relative overflow-hidden border-b1">
           <div className="container mx-auto lg:px-16 px-6">
