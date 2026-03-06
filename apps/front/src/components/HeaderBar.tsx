@@ -1,4 +1,4 @@
-import { HdHeader, type IUserDropdownMenus } from "@houdunyun/react"
+import { Header, type IUserDropdownMenus } from "@houdunyun/react/components"
 
 export const userDropdownMenus = {
 	label: '其他菜单',
@@ -16,7 +16,7 @@ export const userDropdownMenus = {
 
 export const HeaderBar = () => {
 	return (
-		<HdHeader menu={<h1></h1>} userDropdownMenus={userDropdownMenus} />
+		<Header menu={<h1></h1>} userDropdownMenus={userDropdownMenus} />
 
 	)
 }

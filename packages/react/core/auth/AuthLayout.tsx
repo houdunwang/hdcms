@@ -1,0 +1,72 @@
+import { cn } from '@/lib/utils'
+import { useMatch } from '@tanstack/react-router'
+import { AuthFooter } from './AuthFooter'
+import { Login } from './Login'
+import { Register } from './Register'
+import type { AuthProps } from './types'
+import { FindPassword } from './FindPassword'
+import { WechatLogin } from './WechatLogin'
+
+const components = {
+	login: Login,
+	register: Register,
+	findPassword: FindPassword,
+	wechatLogin: WechatLogin,
+}
+export const AuthLayout = (props: AuthProps) => {
+	const route = useMatch({ strict: false })
+	let action = route.search.action as keyof typeof components | undefined || 'login'
+	const Component = components[action]
+	const helperComponent = props.helperComponent
+	const RightSpaceComponent = props.components?.[action]?.rightSpace
+	return <section className={cn("flex items-start", props.className)}>
+		<div className={cn("container mx-auto  ", {
+			"flex justify-center": !RightSpaceComponent,
+			'content-center gap-10 grid lg:grid-cols-[auto_1fr]': RightSpaceComponent
+		})}>
+			<div className={cn("w-full lg:max-w-md bg-muted pt-5 rounded-lg border", {
+				"pb-5": !helperComponent
+			})}>
+				<div className='px-5'>
+					{Component && <Component {...props} >
+						<AuthFooter {...props} />
+					</Component>}
+				</div>
+				{helperComponent && <div className="border-t flex items-center justify-center py-3 mt-4 px-5 text-muted-foreground text-sm">
+					{helperComponent}
+				</div>}
+			</div>
+			{RightSpaceComponent && RightSpaceComponent}
+		</div>
+		<GradientAnimation />
+	</section>
+}
+
+const GradientAnimation = () => {
+	return (
+		<>
+			<style>{`
+            @keyframes blob {
+                0% { transform: translate(0px, 0px) scale(1); }
+                33% { transform: translate(30px, -50px) scale(1.1); }
+                66% { transform: translate(-20px, 20px) scale(0.9); }
+                100% { transform: translate(0px, 0px) scale(1); }
+            }
+            .animate-blob {
+                animation: blob 3s infinite;
+            }
+            .animation-delay-2000 {
+                animation-delay: 2s;
+            }
+            .animation-delay-4000 {
+                animation-delay: 4s;
+            }
+        `}</style>
+			<div className="fixed inset-0 -z-10 h-screen w-full overflow-hidden pointer-events-none">
+				<div className="absolute bottom-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/20 blur-[100px] animate-blob" />
+				<div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-blue-500/20 blur-[100px] animate-blob animation-delay-2000" />
+				<div className="absolute bottom-[-40%] left-[30%] h-[600px] w-[600px] rounded-full bg-pink-500/20 blur-[120px] animate-blob animation-delay-4000" />
+			</div>
+		</>
+	)
+}

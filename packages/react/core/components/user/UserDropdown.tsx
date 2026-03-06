@@ -67,10 +67,10 @@ function LoginComponent({ menus }: Props) {
 
 function UnLogin() {
 	return <>
-		<Link to="/auth/login" className="flex items-center gap-1">
+		<Link to="/auth?action=login" className="flex items-center gap-1">
 			<Button variant={'default'}>登录</Button>
 		</Link>
-		<Link to="/auth/register" className="flex items-center gap-1">
+		<Link to="/auth?action=register" className="flex items-center gap-1">
 			<Button variant={'outline'}>注册</Button>
 		</Link>
 	</>

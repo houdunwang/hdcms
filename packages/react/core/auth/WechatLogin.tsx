@@ -1,23 +1,16 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useApi } from '@core/hooks/useApi'
 import { useMutation } from '@tanstack/react-query'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
-import { WechatQrCode } from '../wechat/WechatQrCode'
-import { Footer } from './Footer'
-import type { LoginProps } from './type'
+import { WechatQrCode } from '../components/wechat/WechatQrCode'
+import type { AuthComponentProps } from './types'
 
 
-// export function WechatLoginPage({ className, introduce, footer, description }: LoginLayoutProps) {
-// 	return <Layout introduce={introduce || <Introduce />} description={description}>
-// 		<LoginComponent className={className} footer={footer} />
-// 	</Layout>
-// }
-
-export function WechatLoginComponent({ className, footer }: LoginProps) {
+export function WechatLogin(props: AuthComponentProps) {
 	const { api, auth } = useApi()
 	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
 	return (
-		<Card className={className}>
+		<Card className={''}>
 			<CardHeader>
 				<CardTitle>微信扫码安全登录</CardTitle>
 				<CardDescription>打开手机微信扫描二维码，一键授权快速登录</CardDescription>
@@ -33,7 +26,9 @@ export function WechatLoginComponent({ className, footer }: LoginProps) {
 						}
 					}} />
 			</CardContent>
-			{footer ?? <Footer showWechatLoginButton={false} />}
+			<CardFooter className="flex justify-center">
+				{props.children}
+			</CardFooter>
 		</Card>
 	)
 }
@@ -61,7 +56,7 @@ const highlights = [
 	},
 ] as const
 
-export function WechatIntroduce() {
+export function WechatRightSpace() {
 	return <Card className="order-2 lg:order-11">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

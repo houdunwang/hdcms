@@ -45,6 +45,14 @@
     "./form": {
       "import": "./dist/form.mjs",
       "require": "./dist/form.js"
+    },
+    "./auth": {
+      "import": "./dist/auth.mjs",
+      "require": "./dist/auth.js"
+    },
+    "./pay": {
+      "import": "./dist/pay.mjs",
+      "require": "./dist/pay.js"
     }
   },
   "typesVersions": {
@@ -72,6 +80,12 @@
       ],
       "form": [
         "dist/form.d.ts"
+      ],
+      "auth": [
+        "dist/auth.d.ts"
+      ],
+      "pay": [
+        "dist/pay.d.ts"
       ]
     }
   },

@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { fieldContext, formContext } from "@core/form"
 import { cn } from "@/lib/utils"
+import { fieldContext, formContext } from "@core/form"
 import { FieldCaptcha } from "@core/form/FieldCaptcha"
 import { FieldInput } from "@core/form/FieldInput"
 import { FieldSubmitButton } from "@core/form/FieldSubmitButton"
@@ -12,11 +12,10 @@ import { useMutation } from "@tanstack/react-query"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
 import { useState } from "react"
 import z from "zod"
-import { FieldCode } from "../../form/FieldCode"
-import { Footer } from "./Footer"
-import type { LoginProps } from "./type"
+import { FieldCode } from "../form/FieldCode"
+import type { AuthComponentProps } from "./types"
 
-export function ForgetComponent({ className, footer, showWechatLoginButton }: LoginProps) {
+export function FindPassword(props: AuthComponentProps) {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const [codeType, setCodeType] = useState<'email' | 'mobile'>('email')
@@ -63,7 +62,7 @@ export function ForgetComponent({ className, footer, showWechatLoginButton }: Lo
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6", className)} >
+			<Card className={cn("flex flex-col gap-6")} >
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<ShieldCheck />
@@ -100,7 +99,9 @@ export function ForgetComponent({ className, footer, showWechatLoginButton }: Lo
 						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
 					</form.AppForm>
 				</CardContent>
-				{footer ?? <Footer showWechatLoginButton={showWechatLoginButton} />}
+				<CardFooter className="flex justify-center">
+					{props.children}
+				</CardFooter>
 			</Card>
 		</form>
 	)
@@ -118,7 +119,7 @@ const highlights = [
 		icon: ShieldCheck,
 	},
 ] as const
-export function ForgetIntroduce() {
+export function FindPasswordRightSpace() {
 	return <Card>
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">
