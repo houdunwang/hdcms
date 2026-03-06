@@ -88,6 +88,7 @@
   "peerDependencies": {
     "@app/admin": "workspace:*",
     "@fontsource-variable/inter": "^5.2.8",
+    "ahooks": "^3.9.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-dropzone": "^15.0.0",

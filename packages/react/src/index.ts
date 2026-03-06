@@ -8,3 +8,4 @@ export * from '@core/enum'
 export * from '@core/member'
 export * from '@core/provider/HdProvider'
 
+import './assets/shadcn.css'
