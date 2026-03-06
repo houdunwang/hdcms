@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import type { IFieldApi } from "@core/types/form"
+import type { IFieldApi } from "@core/form/types"
 import { useStore } from "@tanstack/react-form"
 import { fieldErrorAtom } from "core/store/fieldErrorStore"
 import { useAtom } from "jotai"

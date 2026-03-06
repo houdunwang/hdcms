@@ -2,7 +2,7 @@ import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { useFieldContext } from "@/index"
-import type { FormFieldProps } from "core/types/form"
+import type { FormFieldProps } from "@core/form/types"
 import { FieldValidateError } from "./FieldValidateError"
 
 export function FieldInput({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {

@@ -1,4 +1,5 @@
-import { HdFooter, HdHeader } from '@houdunyun/react/components'
+import { HeaderBar } from '@/components/HeaderBar'
+import { HdFooter } from '@houdunyun/react/components'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 export const Route = createFileRoute('/_front')({
 	component: RouteComponent,
@@ -6,7 +7,7 @@ export const Route = createFileRoute('/_front')({
 
 function RouteComponent() {
 	return <div className=''>
-		<HdHeader menu={<h1>33</h1>} />
+		<HeaderBar />
 		<Outlet />
 		<HdFooter />
 	</div>
