@@ -15,7 +15,6 @@ import { Route as FrontRouteRouteImport } from './routes/_front/route'
 import { Route as FrontIndexRouteImport } from './routes/_front/index'
 import { Route as MemberProfileRouteImport } from './routes/member/profile'
 import { Route as MemberBindRouteImport } from './routes/member/bind'
-import { Route as MemberARouteImport } from './routes/member/a'
 import { Route as AuthWechatRouteImport } from './routes/auth/wechat'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
@@ -49,11 +48,6 @@ const MemberProfileRoute = MemberProfileRouteImport.update({
 const MemberBindRoute = MemberBindRouteImport.update({
   id: '/bind',
   path: '/bind',
-  getParentRoute: () => MemberRouteRoute,
-} as any)
-const MemberARoute = MemberARouteImport.update({
-  id: '/a',
-  path: '/a',
   getParentRoute: () => MemberRouteRoute,
 } as any)
 const AuthWechatRoute = AuthWechatRouteImport.update({
@@ -91,7 +85,6 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/auth/wechat': typeof AuthWechatRoute
-  '/member/a': typeof MemberARoute
   '/member/bind': typeof MemberBindRoute
   '/member/profile': typeof MemberProfileRoute
 }
@@ -103,7 +96,6 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/auth/wechat': typeof AuthWechatRoute
-  '/member/a': typeof MemberARoute
   '/member/bind': typeof MemberBindRoute
   '/member/profile': typeof MemberProfileRoute
   '/': typeof FrontIndexRoute
@@ -118,7 +110,6 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/auth/wechat': typeof AuthWechatRoute
-  '/member/a': typeof MemberARoute
   '/member/bind': typeof MemberBindRoute
   '/member/profile': typeof MemberProfileRoute
   '/_front/': typeof FrontIndexRoute
@@ -134,7 +125,6 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/auth/wechat'
-    | '/member/a'
     | '/member/bind'
     | '/member/profile'
   fileRoutesByTo: FileRoutesByTo
@@ -146,7 +136,6 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/auth/wechat'
-    | '/member/a'
     | '/member/bind'
     | '/member/profile'
     | '/'
@@ -160,7 +149,6 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/auth/wechat'
-    | '/member/a'
     | '/member/bind'
     | '/member/profile'
     | '/_front/'
@@ -214,13 +202,6 @@ declare module '@tanstack/react-router' {
       path: '/bind'
       fullPath: '/member/bind'
       preLoaderRoute: typeof MemberBindRouteImport
-      parentRoute: typeof MemberRouteRoute
-    }
-    '/member/a': {
-      id: '/member/a'
-      path: '/a'
-      fullPath: '/member/a'
-      preLoaderRoute: typeof MemberARouteImport
       parentRoute: typeof MemberRouteRoute
     }
     '/auth/wechat': {
@@ -294,13 +275,11 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 )
 
 interface MemberRouteRouteChildren {
-  MemberARoute: typeof MemberARoute
   MemberBindRoute: typeof MemberBindRoute
   MemberProfileRoute: typeof MemberProfileRoute
 }
 
 const MemberRouteRouteChildren: MemberRouteRouteChildren = {
-  MemberARoute: MemberARoute,
   MemberBindRoute: MemberBindRoute,
   MemberProfileRoute: MemberProfileRoute,
 }

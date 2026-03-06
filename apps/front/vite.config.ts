@@ -1,12 +1,11 @@
-import { defineConfig } from 'vite'
 import { devtools } from '@tanstack/devtools-vite'
+import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
-import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import path from 'node:path'
+import viteReact from '@vitejs/plugin-react'
 const config = defineConfig({
   envDir: '../../',
   plugins: [
@@ -18,8 +17,7 @@ const config = defineConfig({
   ],
   resolve: {
     alias: {
-      // '~registry': `${import.meta.dirname}/../admin/.adonisjs/client/registry.ts`,
-      '@core': path.resolve(__dirname, 'core')
+      // '@core': path.resolve(__dirname, 'core')
     },
   },
   server: {

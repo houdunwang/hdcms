@@ -1,12 +1,12 @@
 
 import { Link } from "@tanstack/react-router"
 import { MessageCircleCode } from "lucide-react"
-import type React from "react"
+import type { ReactNode } from "react"
 import { UserDropdown } from "../user/UserDropdown"
 
 export interface IProps {
-	login?: React.ReactNode
-	menu: React.ReactNode
+	login?: ReactNode
+	menu: ReactNode
 }
 
 export function HdHeader({ login, menu }: IProps) {
