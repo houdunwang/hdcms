@@ -1,18 +1,15 @@
-import { FieldCaptcha } from "@houdunyun/react/components"
-import { FieldInput } from "@houdunyun/react/components"
-import { FieldSubmitButton } from "@houdunyun/react/components"
-import { fieldContext, formContext } from "@houdunyun/react"
-import { useApi } from "@houdunyun/react/hooks"
+import { FieldCaptcha } from "@core/components"
+import { FieldInput } from "@core/components"
+import { FieldSubmitButton } from "@core/components"
+import { fieldContext, formContext } from "@core/form"
+import { useApi } from "@core/hooks"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import z from "zod"
 
 export const ProfilePassword = () => {
-  const { auth, api } = useApi()
-  const mutation = useMutation(api.users.password.mutationOptions({
-    onSuccess: ({ data }) => {
-    }
-  }))
+  const { api } = useApi()
+  const mutation = useMutation(api.users.password.mutationOptions())
   const { useAppForm } = createFormHook({
     fieldComponents: {
       FieldInput,

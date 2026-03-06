@@ -1,4 +1,4 @@
-import { HdFooter, HdHeader } from '@hd/react/components'
+import { HdFooter, HdHeader } from '@houdunyun/react/components'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 export const Route = createFileRoute('/_front')({
 	component: RouteComponent,

@@ -1,4 +1,4 @@
-import { HdFooter, HdHeader } from '@hd/react/components'
+import { HdFooter, HdHeader } from '@houdunyun/react/components'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/auth')({

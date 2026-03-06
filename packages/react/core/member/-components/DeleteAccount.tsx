@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useApi } from "@houdunyun/react/hooks"
+import { useApi } from "@core/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
 
-export const BindDestroy = () => {
+export const DeleteAccount = () => {
   const { api, auth } = useApi()
   const [isConfirm, setIsConfirm] = useState(false)
   const mutation = useMutation(api.users.destroy.mutationOptions({
@@ -23,7 +23,6 @@ export const BindDestroy = () => {
     }
   }))
 
-  // onClick={() => mutation.mutate({})}
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

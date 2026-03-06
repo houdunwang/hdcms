@@ -1,4 +1,4 @@
-import { ForgetComponent, ForgetIntroduce, LoginLayout } from '@hd/react/components';
+import { ForgetComponent, ForgetIntroduce, LoginLayout } from '@houdunyun/react/components';
 import { createFileRoute } from '@tanstack/react-router';
 export const Route = createFileRoute('/auth/forget')({
 	component: Page
