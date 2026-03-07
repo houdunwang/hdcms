@@ -71,6 +71,4 @@ export default class AuthController extends BaseController {
       token: token.value!.release(),
     })
   }
-
-
 }

@@ -1,5 +1,5 @@
 import cache from '@adonisjs/cache/services/main'
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import { randomUUID } from 'node:crypto'
 import svgCaptcha from 'svg-captcha'
 

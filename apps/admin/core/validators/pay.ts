@@ -13,7 +13,19 @@ export const payValidator = vine.create(
 payValidator.messagesProvider = validateProvider({
   messages: {
     'orderable_type.enum': '订单类型不存在',
-  }
+  },
 })
 
 export type PayPayload = Infer<typeof payValidator>
+
+export const payCheckValidator = vine.create(
+  vine.object({
+    sn: vine.string().trim(),
+  })
+)
+
+payCheckValidator.messagesProvider = validateProvider({
+  fields: {
+    sn: '订单号',
+  },
+})

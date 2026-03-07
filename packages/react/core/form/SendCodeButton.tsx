@@ -6,6 +6,7 @@ import dayjs from "dayjs"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import z from "zod"
+import { registry } from '@app/admin/registry';
 
 interface Props {
 	type: 'email' | 'mobile'
@@ -20,8 +21,8 @@ export const SendCodeButton = ({ type, value }: Props) => {
 	const [countdown, setCountdown] = useState(second)
 	const { api } = useApi()
 	const mutationOptions = {
-		onSuccess: () => {
-			localStorage.setItem('remainingSeconds', dayjs().add(60, 'second').toString())
+		onSuccess: ({ data }: typeof registry.$tree.codes.email.types.response) => {
+			localStorage.setItem('remainingSeconds', dayjs().add(data.remainingSeconds, 'second').toString())
 			setCountdown(60)
 		},
 		onError: (error: TuyauHTTPError) => {
@@ -33,7 +34,7 @@ export const SendCodeButton = ({ type, value }: Props) => {
 				}
 			}
 		}
-	};
+	}
 	const mutationEmail = useMutation(api.codes.email.mutationOptions(mutationOptions))
 	const mutationMobile = useMutation(api.codes.mobile.mutationOptions(mutationOptions))
 

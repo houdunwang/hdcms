@@ -68,11 +68,7 @@ export const WechatQrCode = ({ onSuccess, scene_str, className, requestCount = 3
 						<div className='text-xs text-muted-foreground border py-1 px-3 rounded-sm'>
 							二维码已过期，请点击刷新按钮获取
 						</div>
-						{/* <Button type="button" variant="secondary" size="lg" onClick={() => void wechatQrMutation.mutate({ body: { scene_str } })} disabled={wechatQrMutation.isPending}>
-							刷新二维码
-						</Button> */}
 					</div>
-
 				}
 			</div>
 		</div>
@@ -104,15 +100,3 @@ function QrImage({ qrImg, wechatQrMutation, scene_str }: { qrImg?: string, scene
 		<Spinner className='size-10' />
 	</div>
 }
-
-{/* {data?.qrImg ? (
-						<img src={data.qrImg} alt="微信扫码登录二维码" className="w-60 h-60 object-contain" />
-					) : (
-						<div className="w-56 h-56 flex items-center justify-center text-muted-foreground">
-							<ScaleLoader />
-						</div>
-					)} */}
-{/* <div className="flex items-center gap-2 text-sm text-muted-foreground">
-				<Clock className="size-4" />
-				扫码失败时请点击刷新二维码
-				</div> */}

@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { createFileRoute, Link } from '@tanstack/react-router'
 import { WePay } from "@houdunyun/react/pay"
+import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {
   ArrowRight,
@@ -14,6 +14,7 @@ import {
   Star,
   Terminal
 } from 'lucide-react'
+import { toast } from 'sonner'
 
 export const Route = createFileRoute('/_front/')({
   component: HomePage,
@@ -164,7 +165,10 @@ export function HomePage() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <WePay orderable_id={1} orderable_type={'subscribe'} subject='订阅' />
+      <WePay orderable_id={1} orderable_type={'subscribe'} subject='订阅'
+        onSuccess={() => {
+          toast.success('订阅成功')
+        }} />
       <main className="flex-1">
         <section className="relative overflow-hidden border-b1">
           <div className="container mx-auto lg:px-16 px-6">

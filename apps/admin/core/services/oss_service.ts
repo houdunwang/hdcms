@@ -7,18 +7,18 @@ import fs from 'node:fs'
 
 @inject()
 export class OssService {
-  constructor(protected ctx: HttpContext) { }
+  constructor(protected ctx: HttpContext) {}
 
   /**
-  * 获取并配置阿里云 OSS 客户端实例。
-  *
-  * @private
-  * @returns {OSS} 返回一个配置好的 `ali-oss` 客户端实例。
-  * @description
-  * 此方法从环境变量中读取 OSS 相关的配置（如 region, accessKey, endpoint 等），
-  * 并初始化一个 OSS 客户端。配置 `authorizationV4: true` 以启用 V4 签名，
-  * 这对于某些新的 OSS region 是必需的。
-  */
+   * 获取并配置阿里云 OSS 客户端实例。
+   *
+   * @private
+   * @returns {OSS} 返回一个配置好的 `ali-oss` 客户端实例。
+   * @description
+   * 此方法从环境变量中读取 OSS 相关的配置（如 region, accessKey, endpoint 等），
+   * 并初始化一个 OSS 客户端。配置 `authorizationV4: true` 以启用 V4 签名，
+   * 这对于某些新的 OSS region 是必需的。
+   */
   client(): OSS {
     const client = new OSS({
       region: env.get('UPLOAD_OSS_REGION')!,
@@ -32,12 +32,11 @@ export class OssService {
     return client
   }
 
-
   /**
-   * 上传到OSS 
+   * 上传到OSS
    * @param path OSS 中的路径
    * @param localFilePath 本地文件路径
-   * @returns 
+   * @returns
    */
   async upload(path: string, localFilePath: string) {
     try {

@@ -4,7 +4,7 @@ packages:
   - packages/wechat
   - packages/react
   - packages/network
-  # - packages/frp
+  - packages/frp
 
 onlyBuiltDependencies:
   - '@alicloud/openapi-core'

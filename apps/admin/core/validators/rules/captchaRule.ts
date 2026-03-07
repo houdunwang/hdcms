@@ -1,6 +1,6 @@
 import cache from '@adonisjs/cache/services/main'
 import vine from '@vinejs/vine'
-import { FieldContext } from '@vinejs/vine/types'
+import { type FieldContext } from '@vinejs/vine/types'
 
 async function captcha(value: unknown, _options: void, field: FieldContext) {
   const key = field.data.captcha_key as string

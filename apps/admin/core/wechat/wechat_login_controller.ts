@@ -1,13 +1,16 @@
-import BaseController from '#core/controllers/bases_controller';
-import { WechatService } from '#core/services/wechat_service';
-import User from '#models/user';
-import UserTransformer from '#transformers/user_transformer';
-import { inject } from '@adonisjs/core';
-import { HttpContext } from '@adonisjs/core/http';
+import BaseController from '#core/controllers/bases_controller'
+import { WechatService } from '#core/services/wechat_service'
+import User from '#models/user'
+import UserTransformer from '#transformers/user_transformer'
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
 
 @inject()
 export default class WechatloginController extends BaseController {
-  constructor(protected wechatService: WechatService, protected ctx: HttpContext) {
+  constructor(
+    protected wechatService: WechatService,
+    protected ctx: HttpContext
+  ) {
     super()
   }
 
@@ -28,7 +31,7 @@ export default class WechatloginController extends BaseController {
         const token = await auth.use('api').createToken(user)
         return serialize({
           user: UserTransformer.transform(await user.refresh(), auth),
-          token: token.value!.release()
+          token: token.value!.release(),
         })
       }
     }

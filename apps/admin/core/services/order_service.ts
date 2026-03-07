@@ -1,7 +1,7 @@
-import Order from "#core/models/order"
-import { payValidator } from "#core/validators/pay"
-import { inject } from "@adonisjs/core"
-import { HttpContext } from "@adonisjs/core/http"
+import Order from '#core/models/order'
+import { payValidator } from '#core/validators/pay'
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
 import { Infer } from '@vinejs/vine/types'
 
 /**
@@ -12,9 +12,18 @@ export class OrderService {
   /**
    * @param ctx HTTP 上下文
    */
-  constructor(protected ctx: HttpContext) {
+  constructor(protected ctx: HttpContext) { }
 
+  /**
+   * 检查订单支付状态
+   * @param sn 订单号
+   * @returns 订单支付状态
+   */
+  async checkPaystatus(sn: string) {
+    const order = await this.getOrderBySn(sn)
+    return order.payState
   }
+
   /**
    * 创建新订单
    * @param data 订单数据，包含支付验证器推断的类型和价格
@@ -47,9 +56,7 @@ export class OrderService {
    * @throws 如果找不到订单，则抛出异常
    */
   async getOrderBySn(sn: string) {
-    const order = await Order.query()
-      .where('sn', sn)
-      .firstOrFail()
+    const order = await Order.query().where('sn', sn).firstOrFail()
     return order
   }
 }

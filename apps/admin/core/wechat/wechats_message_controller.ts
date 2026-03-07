@@ -5,7 +5,7 @@ import { inject } from '@adonisjs/core'
 
 @inject()
 export default class WechatsMessageController {
-  constructor(protected WechatService: WechatService) { }
+  constructor(protected WechatService: WechatService) {}
 
   /**
    * @handle
@@ -34,6 +34,8 @@ export default class WechatsMessageController {
   }
 
   async defaultReply() {
-    return this.WechatService.wechat.services.reply.text(env.get('WECHAT_DEFAULT_REPLY', '欢迎回家'))
+    return this.WechatService.wechat.services.reply.text(
+      env.get('WECHAT_DEFAULT_REPLY', '欢迎回家')
+    )
   }
 }

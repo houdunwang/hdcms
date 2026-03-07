@@ -6,5 +6,7 @@
 export const controllers = {
   AccessToken: () => import('#controllers/access_token_controller'),
   FindPasswords: () => import('#controllers/find_passwords_controller'),
+  Packages: () => import('#controllers/packages_controller'),
   Profile: () => import('#controllers/profile_controller'),
+  Subscribes: () => import('#controllers/subscribes_controller'),
 }

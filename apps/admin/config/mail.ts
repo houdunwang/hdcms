@@ -22,7 +22,7 @@ const mailConfig = defineConfig({
    * the brand name to be used within the emails
    */
   globals: {
-    brandName: 'Acme'
+    brandName: 'Acme',
   },
 
   /**
@@ -44,12 +44,11 @@ const mailConfig = defineConfig({
         pass: env.get('SMTP_PASSWORD') ?? '',
       },
     }),
-
   },
 })
 
 export default mailConfig
 
 declare module '@adonisjs/mail/types' {
-  export interface MailersList extends InferMailers<typeof mailConfig> { }
+  export interface MailersList extends InferMailers<typeof mailConfig> {}
 }

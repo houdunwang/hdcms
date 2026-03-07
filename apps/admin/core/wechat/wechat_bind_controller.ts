@@ -1,12 +1,16 @@
-import BaseController from '#core/controllers/bases_controller';
-import { WechatService } from '#core/services/wechat_service';
-import User from '#models/user';
-import { inject } from '@adonisjs/core';
-import { HttpContext } from '@adonisjs/core/http';
+import BaseController from '#core/controllers/bases_controller'
+import { WechatService } from '#core/services/wechat_service'
+import User from '#models/user'
+import UserTransformer from '#transformers/user_transformer'
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
 
 @inject()
 export default class WechatBindController extends BaseController {
-  constructor(protected wechatService: WechatService, protected ctx: HttpContext) {
+  constructor(
+    protected wechatService: WechatService,
+    protected ctx: HttpContext
+  ) {
     super()
   }
 
@@ -18,17 +22,16 @@ export default class WechatBindController extends BaseController {
    * @requestBody { "ticket": "string" }
    * @responseBody 200 - { status: 'success' | 'waiting' }
    */
-  async bind({ auth }: HttpContext) {
+  async bind({ auth, serialize }: HttpContext) {
     const openid = await this.wechatService.getQrDataByTicket()
     const user = auth.getUserOrFail()
     if (openid) {
       const existUser = await User.query().where('openid', openid).whereNot('id', user.id).first()
-      if (existUser) {
-        return this.success('该微信已绑定其他用户', { status: 'exist' })
+      if (!existUser) {
+        user.openid = openid
+        await user.save()
+        return serialize(UserTransformer.transform(user, auth))
       }
-      user.openid = openid
-      await user.save()
-      return this.success('绑定成功', { status: 'success' })
     }
   }
 }

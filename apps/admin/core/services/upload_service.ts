@@ -1,16 +1,12 @@
 import Upload from '#core/models/upload'
-import { OssUploadSuccessResponse } from '#core/types/oss'
+import { ImageService } from '#core/services/image_service'
 import env from '#start/env'
 import { inject } from '@adonisjs/core'
 import { MultipartFile } from '@adonisjs/core/bodyparser'
 import string from '@adonisjs/core/helpers/string'
 import { HttpContext } from '@adonisjs/core/http'
-import app from '@adonisjs/core/services/app'
-import drive from '@adonisjs/drive/services/main'
 import { DateTime } from 'luxon'
 import { OssService } from './oss_service.ts'
-import { ImageService } from '#core/services/image_service'
-import { fileURLToPath } from 'node:url'
 
 /**
  * @class UploadService
@@ -71,7 +67,7 @@ export class UploadService {
    * 将已保存到本地的文件上传到阿里云 OSS。
    *
    * @param {MultipartFile} file - 已经调用过 `local()` 方法的文件对象。
-   * @returns {Promise<OssUploadSuccessResponse | undefined>} 成功则返回 OSS 的响应，失败则返回 `undefined`。
+   * @returns  成功则返回 OSS 的响应，失败则返回 `undefined`。
    */
   async oss(file: MultipartFile): Promise<Upload> {
     try {

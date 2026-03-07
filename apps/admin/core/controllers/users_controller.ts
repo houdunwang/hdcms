@@ -10,6 +10,11 @@ export default class UsersController extends BaseController {
   constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
     super()
   }
+
+  async test() {
+    return this.success('测试成功')
+  }
+
   /**
  * @me
  * @tag 用户管理
@@ -19,17 +24,9 @@ export default class UsersController extends BaseController {
  */
   async me({ auth, serialize }: HttpContext) {
     const user = auth.user!
-    // await new Promise((r) => {
-    //   setTimeout(() => {
-    //     r(null)
-    //   }, 3000)
-    // })
     return serialize(UserTransformer.transform(user, auth))
   }
 
-  async hd() {
-    return { name: 'ok' }
-  }
   /**
    * @index
    * @tag 用户管理
@@ -123,9 +120,9 @@ export default class UsersController extends BaseController {
    * @description 根据ID删除用户
    * @responseBody 200 - { "message": "User deleted successfully" }
    */
-  async destroy({ params, auth }: HttpContext) {
+  async destroy({ auth }: HttpContext) {
     const user = await User.findOrFail(auth.user!.id)
     await user.delete()
-    return { message: 'User deleted successfully' }
+    return this.success('帐号注销成功')
   }
 }

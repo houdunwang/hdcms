@@ -13,7 +13,7 @@ export function useRequestClient() {
 		baseUrl: import.meta.env.VITE_API_URL,
 		registry,
 		headers: { Accept: 'application/json' },
-		timeout: 600000,
+		timeout: 10000,
 		hooks: {
 			beforeRequest: [
 				(request) => {
@@ -29,7 +29,9 @@ export function useRequestClient() {
 					try {
 						if (response.ok) {
 							const res = await response.json() as { data: { message?: string } }
-							if (res?.data?.message) {
+							console.log('	response', response)
+							console.log('	res', res)
+							if (res.data.message) {
 								toast.success(res.data.message)
 							}
 						}
@@ -43,56 +45,36 @@ export function useRequestClient() {
 						toast.error('网络连接失败')
 						return error
 					}
-					let responseData
-					try {
-						responseData = await error.response.clone().json()
-					} catch (e) {
-					}
 
-					if (responseData) {
-						Object.assign(error, responseData)
-					}
-
+					const responseData = await error.response.clone().json() as { message: string }
+					console.log('responseData', responseData)
 					switch (error.response.status) {
 						case 401:
 							localStorage.removeItem(AuthEnum.TOKEN_NAME)
 							location.href = '/auth'
 							break
 						case 429:
-							const msg = responseData as { errors: { message: string }[] } | { message: string } | undefined
-							if (msg) {
-								if ('errors' in msg) {
-									toast.info(msg.errors[0].message as string)
-								} else if ('message' in msg) {
-									toast.info(msg.message)
-								}
-							}
+							const msg = responseData as unknown as { errors: { message: string, retryAfter: number }[] }
+							toast.info(msg.errors[0].message as string)
 							break
 						case 422:
-							const validationError = responseData as { errors: { message: string, field: string }[] } | undefined
-							if (validationError && validationError.errors) {
-								const errorsFields = {} as Record<string, string>
-								validationError.errors.forEach((item: { field: string, message: string }) => {
-									errorsFields[item.field] = item.message
-								})
-								setFieldError(errorsFields)
-							}
+							const validationError = responseData as unknown as { errors: { message: string, field: string }[] }
+							const errorsFields = {} as Record<string, string>
+							validationError.errors.forEach((item: { field: string, message: string }) => {
+								errorsFields[item.field] = item.message
+							})
+							setFieldError(errorsFields)
 							break;
 						default:
 							try {
-								const res = responseData as { message: string } | undefined
-								if (res && res.message) {
-									toast.error(res.message)
-								} else {
-									toast.error('请求失败')
-								}
+								const message = responseData.message || '请求失败'
+								toast.error(message)
 							} catch (error) {
 								toast.error('请求失败')
 							}
 							break
 					}
 					return error
-					// return Promise.resolve()
 				}
 			]
 		}

@@ -3,7 +3,6 @@ import User from '#models/user'
 
 export const UserFactory = factory
   .define(User, async ({ faker }) => {
-
     return {
       name: faker.person.firstName(),
       // password: 'admin888',

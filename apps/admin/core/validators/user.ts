@@ -25,7 +25,7 @@ export const createUserValidator = vine.create(
 createUserValidator.messagesProvider = validateProvider({
   fields: {
     name: '帐号',
-  }
+  },
 })
 
 export const updateUserValidator = vine.create(
@@ -38,7 +38,10 @@ export const updateUserValidator = vine.create(
     weibo: vine.string().optional(),
     wechat: vine.string().url().optional(),
     github: vine.string().url().optional(),
-    qq: vine.string().regex(/^[1-9]\d{4,10}$/).optional(),
+    qq: vine
+      .string()
+      .regex(/^[1-9]\d{4,10}$/)
+      .optional(),
     isLock: vine.boolean().optional(),
   })
 )
@@ -48,7 +51,7 @@ updateUserValidator.messagesProvider = validateProvider({
   },
   fields: {
     nickname: '昵称',
-  }
+  },
 })
 
 export const updatePasswordValidator = vine.create(
@@ -70,4 +73,3 @@ updatePasswordValidator.messagesProvider = validateProvider({
     'old_password.database.exists': '旧密码错误',
   },
 })
-

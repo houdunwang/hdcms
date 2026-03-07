@@ -21,7 +21,7 @@ export const findPasswordByEmailValidator = vine.create(
 findPasswordByEmailValidator.messagesProvider = validateProvider({
   fields: {
     code: '验证码',
-  }
+  },
 })
 
 export const findPasswordByMobileValidator = vine.create(
@@ -41,5 +41,5 @@ export const findPasswordByMobileValidator = vine.create(
 findPasswordByMobileValidator.messagesProvider = validateProvider({
   fields: {
     code: '验证码',
-  }
+  },
 })
