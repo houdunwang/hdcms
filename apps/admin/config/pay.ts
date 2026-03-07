@@ -1,8 +1,8 @@
-import SubscribeProcess from '#core/pay/process/subscribe'
+import PackageProcess from '#core/pay/process/package'
 
 const payConfig = {
   process: {
-    subscribe: SubscribeProcess,
+    pakcage: PackageProcess,
   },
 }
 
