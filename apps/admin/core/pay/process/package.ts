@@ -1,6 +1,10 @@
 import type Order from '#core/models/order';
 
-export default class SubscribeProcess {
+
+/**
+ * 处理套餐购买订单的支付成功事件。
+ */
+export default class PackageProcess {
   // 支付成功后，为用户关联课程
   async handle(_order: Order) {
     // 编写业务逻辑，例如：

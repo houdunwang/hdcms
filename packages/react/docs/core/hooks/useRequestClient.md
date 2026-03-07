@@ -1,0 +1,85 @@
+# useRequestClient 使用文档
+
+## 简介
+
+useRequestClient 返回一个基于 @tuyau/core/client 的请求客户端，内置基础配置与拦截器，自动处理鉴权头、成功提示与错误处理，适用于在 React 组件中发起接口请求。
+
+## 使用方法
+
+- 在组件中调用 useRequestClient 获取客户端实例 client
+- 使用 client 直接调用按 registry 定义的接口方法
+
+```tsx
+import { useRequestClient } from '@core/hooks/useRequestClient'
+
+function Demo() {
+  const client = useRequestClient()
+
+  // 示例：调用某接口（具体方法名称取决于项目的 registry 定义）
+  // await client.<资源>.<动作>(payload);
+}
+```
+
+## 常用示例
+
+```tsx
+import { useRequestClient } from '@core/hooks/useRequestClient'
+
+function Example() {
+  const client = useRequestClient()
+
+  // GET：查询列表，带查询参数
+  const list = await client.get('/articles', {
+    query: { page: 1, pageSize: 10 },
+  })
+
+  // GET：获取详情，路径参数
+  const detail = await client.get(`/articles/${id}`)
+
+  // POST：提交 JSON
+  const login = await client.post('/auth/login', {
+    body: { account, password },
+  })
+
+  // PUT：更新资源
+  await client.put(`/articles/${id}`, {
+    body: { title },
+  })
+
+  // DELETE：删除资源
+  await client.delete(`/articles/${id}`)
+
+  // POST：上传文件（FormData）
+  const form = new FormData()
+  form.append('file', file)
+  const upload = await client.post('/files', { body: form })
+
+  // GET：关闭重试
+  const me = await client.get('/core/users/me', { retry: 0 })
+}
+```
+
+## 返回值说明
+
+| 名称   | 类型        | 默认值 | 描述                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------ | ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| client | TuyauClient | 无     | 基于 @tuyau/core/client 生成的类型安全请求客户端。基础配置：baseUrl 来自环境变量 VITE_API_URL；统一携带 Accept: application/json；超时 10 秒。拦截器：beforeRequest 自动附加 Authorization Bearer Token 并清空字段错误；afterResponse 在响应 OK 且存在 data.message 时显示成功提示；beforeError 处理网络错误与常见 HTTP 状态码（401 跳转登录、429 限流提示、422 表单字段错误填充、其它显示错误信息）。 |
+
+## 行为说明
+
+- 鉴权头：从 localStorage 读取 Token（键名由 AuthEnum.TOKEN_NAME 指定），若存在则自动设置 Authorization: Bearer <token>
+- 字段错误：请求前清空字段错误；当返回 422 校验错误时，将后端返回的字段错误写入全局状态（fieldErrorAtom）
+- 成功提示：当响应为 OK 且 data.message 存在时，显示成功提示
+- 错误处理：网络失败显示“网络连接失败”；401 清除 Token 并跳转 /auth；429 显示限流消息；其它根据返回 message 或显示“请求失败”
+
+## 前置条件
+
+- 配置环境变量 VITE_API_URL 指向后端接口根地址
+- 登录成功后，将后端返回的 Token 写入 localStorage，键名使用 AuthEnum.TOKEN_NAME
+- 项目已提供接口注册表 registry（例如 @app/admin/registry）以生成类型化的客户端方法
+
+## 注意事项
+
+- client 的方法结构与命名由 registry 决定，使用时参考项目内接口定义
+- 表单页面可结合 fieldErrorAtom 展示 422 校验错误；拦截器已自动填充
+- 如需自定义提示或错误处理，可在调用处 try/catch 并根据业务覆盖默认行为
