@@ -90,11 +90,17 @@ const routes = {
     tokens: [{"old":"/core/order/create","type":0,"val":"core","end":""},{"old":"/core/order/create","type":0,"val":"order","end":""},{"old":"/core/order/create","type":0,"val":"create","end":""}],
     types: placeholder as Registry['orders.index']['types'],
   },
-  'pays': {
+  'pays.wepay': {
     methods: ["POST"],
-    pattern: '/core/pay',
-    tokens: [{"old":"/core/pay","type":0,"val":"core","end":""},{"old":"/core/pay","type":0,"val":"pay","end":""}],
-    types: placeholder as Registry['pays']['types'],
+    pattern: '/core/pay/wepay',
+    tokens: [{"old":"/core/pay/wepay","type":0,"val":"core","end":""},{"old":"/core/pay/wepay","type":0,"val":"pay","end":""},{"old":"/core/pay/wepay","type":0,"val":"wepay","end":""}],
+    types: placeholder as Registry['pays.wepay']['types'],
+  },
+  'pays.wepay_check': {
+    methods: ["POST"],
+    pattern: '/core/pay/wepay/check',
+    tokens: [{"old":"/core/pay/wepay/check","type":0,"val":"core","end":""},{"old":"/core/pay/wepay/check","type":0,"val":"pay","end":""},{"old":"/core/pay/wepay/check","type":0,"val":"wepay","end":""},{"old":"/core/pay/wepay/check","type":0,"val":"check","end":""}],
+    types: placeholder as Registry['pays.wepay_check']['types'],
   },
   'pay.notify': {
     methods: ["POST"],
@@ -120,23 +126,23 @@ const routes = {
     tokens: [{"old":"/core/upload/imageSingle","type":0,"val":"core","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"upload","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"imageSingle","end":""}],
     types: placeholder as Registry['uploads.image_single']['types'],
   },
-  'users.password': {
-    methods: ["PUT"],
-    pattern: '/core/users/password',
-    tokens: [{"old":"/core/users/password","type":0,"val":"core","end":""},{"old":"/core/users/password","type":0,"val":"users","end":""},{"old":"/core/users/password","type":0,"val":"password","end":""}],
-    types: placeholder as Registry['users.password']['types'],
-  },
   'users.me': {
     methods: ["GET","HEAD"],
     pattern: '/core/users/me',
     tokens: [{"old":"/core/users/me","type":0,"val":"core","end":""},{"old":"/core/users/me","type":0,"val":"users","end":""},{"old":"/core/users/me","type":0,"val":"me","end":""}],
     types: placeholder as Registry['users.me']['types'],
   },
-  'users.hd': {
+  'users.test': {
     methods: ["GET","HEAD"],
-    pattern: '/core/users/hd',
-    tokens: [{"old":"/core/users/hd","type":0,"val":"core","end":""},{"old":"/core/users/hd","type":0,"val":"users","end":""},{"old":"/core/users/hd","type":0,"val":"hd","end":""}],
-    types: placeholder as Registry['users.hd']['types'],
+    pattern: '/core/users/test',
+    tokens: [{"old":"/core/users/test","type":0,"val":"core","end":""},{"old":"/core/users/test","type":0,"val":"users","end":""},{"old":"/core/users/test","type":0,"val":"test","end":""}],
+    types: placeholder as Registry['users.test']['types'],
+  },
+  'users.password': {
+    methods: ["PUT"],
+    pattern: '/core/users/password',
+    tokens: [{"old":"/core/users/password","type":0,"val":"core","end":""},{"old":"/core/users/password","type":0,"val":"users","end":""},{"old":"/core/users/password","type":0,"val":"password","end":""}],
+    types: placeholder as Registry['users.password']['types'],
   },
   'users.update': {
     methods: ["PUT"],

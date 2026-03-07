@@ -1,10 +1,7 @@
-import { OssUploadSuccessResponse } from '#core/types/oss';
 import { inject } from "@adonisjs/core";
-import { MultipartFile } from '@adonisjs/core/bodyparser';
 import { HttpContext } from '@adonisjs/core/http';
-import drive from '@adonisjs/drive/services/main';
-import sharp from 'sharp'
-import { existsSync, promises as fs } from 'fs'
+import { existsSync, promises as fs } from 'fs';
+import sharp from 'sharp';
 
 @inject()
 export class ImageService {

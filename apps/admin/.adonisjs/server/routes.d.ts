@@ -18,14 +18,15 @@ export type ScannedRoutes = {
     'licenses': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
-    'pays': { paramsTuple?: []; params?: {} }
+    'pays.wepay': { paramsTuple?: []; params?: {} }
+    'pays.wepay_check': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads.file': { paramsTuple?: []; params?: {} }
     'uploads.image_single': { paramsTuple?: []; params?: {} }
-    'users.password': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
-    'users.hd': { paramsTuple?: []; params?: {} }
+    'users.test': { paramsTuple?: []; params?: {} }
+    'users.password': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'users.destroy': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
@@ -41,7 +42,7 @@ export type ScannedRoutes = {
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
-    'users.hd': { paramsTuple?: []; params?: {} }
+    'users.test': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }
@@ -51,7 +52,7 @@ export type ScannedRoutes = {
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'users.me': { paramsTuple?: []; params?: {} }
-    'users.hd': { paramsTuple?: []; params?: {} }
+    'users.test': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }
@@ -68,7 +69,8 @@ export type ScannedRoutes = {
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
-    'pays': { paramsTuple?: []; params?: {} }
+    'pays.wepay': { paramsTuple?: []; params?: {} }
+    'pays.wepay_check': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads.file': { paramsTuple?: []; params?: {} }

@@ -30,7 +30,10 @@ export interface ApiDefinition {
   orders: {
     index: typeof routes['orders.index']
   }
-  pays: typeof routes['pays']
+  pays: {
+    wepay: typeof routes['pays.wepay']
+    wepayCheck: typeof routes['pays.wepay_check']
+  }
   pay: {
     notify: typeof routes['pay.notify']
   }
@@ -42,9 +45,9 @@ export interface ApiDefinition {
     imageSingle: typeof routes['uploads.image_single']
   }
   users: {
-    password: typeof routes['users.password']
     me: typeof routes['users.me']
-    hd: typeof routes['users.hd']
+    test: typeof routes['users.test']
+    password: typeof routes['users.password']
     update: typeof routes['users.update']
     destroy: typeof routes['users.destroy']
     index: typeof routes['users.index']

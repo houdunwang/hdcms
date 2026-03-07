@@ -161,15 +161,26 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/orders_controller').default['index']>>>
     }
   }
-  'pays': {
+  'pays.wepay': {
     methods: ["POST"]
-    pattern: '/core/pay'
+    pattern: '/core/pay/wepay'
     types: {
       body: ExtractBody<InferInput<(typeof import('#core/validators/pay').payValidator)>>
       paramsTuple: []
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/pay').payValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepay']>>>
+    }
+  }
+  'pays.wepay_check': {
+    methods: ["POST"]
+    pattern: '/core/pay/wepay/check'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/pay').payCheckValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/pay').payCheckValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepayCheck']>>>
     }
   }
   'pay.notify': {
@@ -216,17 +227,6 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>>
     }
   }
-  'users.password': {
-    methods: ["PUT"]
-    pattern: '/core/users/password'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>>
-    }
-  }
   'users.me': {
     methods: ["GET","HEAD"]
     pattern: '/core/users/me'
@@ -238,15 +238,26 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['me']>>>
     }
   }
-  'users.hd': {
+  'users.test': {
     methods: ["GET","HEAD"]
-    pattern: '/core/users/hd'
+    pattern: '/core/users/test'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['hd']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['test']>>>
+    }
+  }
+  'users.password': {
+    methods: ["PUT"]
+    pattern: '/core/users/password'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>>
     }
   }
   'users.update': {

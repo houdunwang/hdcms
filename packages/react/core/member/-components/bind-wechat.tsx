@@ -16,12 +16,9 @@ export const BindWechat = () => {
         className="flex items-start"
         scene_str="bind" onSuccess={async (ticket) => {
           const res = await mutation.mutateAsync({ body: { ticket } })
-          if (res?.data?.data?.status == 'success') {
-            auth.setUser(res.data.data.user)
+          if (res?.data) {
+            auth.setUser(res.data)
             return 'success';
-          }
-          if (res?.data?.data?.status == 'exist') {
-            return 'exist';
           }
         }} />
     </div>

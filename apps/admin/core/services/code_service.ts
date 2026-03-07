@@ -1,13 +1,14 @@
-import env from '#start/env';
-import cache from '@adonisjs/cache/services/main';
-import { inject } from '@adonisjs/core';
-import { HttpContext } from '@adonisjs/core/http';
-import { emailVerificationTemplate } from '../templates/mail_template.js';
-import { AliyunService } from './aliyun_service.js';
-import { MailService } from './mail_service.js';
+import env from '#start/env'
+import cache from '@adonisjs/cache/services/main'
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
+import { emailVerificationTemplate } from '../templates/mail_template.js'
+import { AliyunService } from './aliyun_service.js'
+import { MailService } from './mail_service.js'
 
 @inject()
 export class CodeService {
+  protected timeout = 60
   constructor(
     private mailService: MailService,
     private aliyunService: AliyunService,
@@ -17,7 +18,10 @@ export class CodeService {
   async send(field: 'email' | 'mobile', value: string) {
     if (await this.isExpired(value)) {
       const remainingSeconds = await this.getElapsedSeconds(value)
-      this.ctx.response.abort({ message: `验证码已发送!!!，请${remainingSeconds}秒后再试`, remainingSeconds }, 400)
+      this.ctx.response.abort(
+        { message: `验证码已发送!!!，请${remainingSeconds}秒后再试`, remainingSeconds },
+        400
+      )
     }
     await this[field](value)
   }
@@ -30,7 +34,7 @@ export class CodeService {
 
   async isExpired(account: string) {
     const cachedData = await cache.get({ key: this.getCacheKey(account) })
-    return cachedData?.time && cachedData.time > Date.now() - 60 * 1000
+    return cachedData?.time && cachedData.time > Date.now() - this.timeout * 1000
   }
   // 发送邮件验证码
   private async email(mail: string) {
@@ -59,7 +63,7 @@ export class CodeService {
   /**
    * 生成验证码并缓存
    * @param value 邮箱或手机号
-   * @returns 
+   * @returns
    */
   private async generateCode(value: string) {
     const code = Math.floor(1000 + Math.random() * 9000).toString()
@@ -70,7 +74,7 @@ export class CodeService {
   /**
    * 获取验证码缓存键
    * @param value 邮箱或手机号
-   * @returns 
+   * @returns
    */
   private getCacheKey(value: string) {
     if (this.ctx.auth.isAuthenticated) {
@@ -83,7 +87,7 @@ export class CodeService {
    * 验证验证码是否正确
    * @param value 邮箱或手机号
    * @param code 用户提交的验证码
-   * @returns 
+   * @returns
    */
   public async verify(value: string, code: string) {
     // if (env.get('NODE_ENV') == 'development') return true;

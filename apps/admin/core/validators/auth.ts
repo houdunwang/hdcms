@@ -39,7 +39,7 @@ export const loginValidator = vine.create(
 loginValidator.messagesProvider = validateProvider({
   messages: {
     'password.database.exists': '密码错误',
-  }
+  },
 })
 
 export const registerValidator = vine.create(
@@ -60,5 +60,5 @@ export const registerValidator = vine.create(
 registerValidator.messagesProvider = validateProvider({
   fields: {
     name: '帐号',
-  }
+  },
 })

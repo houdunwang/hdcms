@@ -4,11 +4,11 @@ export default abstract class BaseController {
   protected abstract ctx: HttpContext
   // constructor(protected ctx: HttpContext) { }
 
-  success(message: string, data: Record<string, any> = {}) {
-    return this.ctx.serialize({ success: true, message, data })
+  success<T>(message = '操作成功', data?: T) {
+    return this.ctx.serialize({ message, data })
   }
 
-  error(message: string, status = 400, data: Record<string, any> = {}) {
-    return this.ctx.response.abort({ success: false, message: message, data }, status)
+  error(message = '操作失败', status = 400) {
+    return this.ctx.response.abort({ message }, status)
   }
 }

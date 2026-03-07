@@ -1,11 +1,13 @@
 import type User from '#models/user'
-import { Authenticator } from '@adonisjs/auth'
-import { Authenticators } from '@adonisjs/auth/types'
-import { HttpContext } from '@adonisjs/core/http'
+import { type Authenticator } from '@adonisjs/auth'
+import { type Authenticators } from '@adonisjs/auth/types'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class UserTransformer extends BaseTransformer<User> {
-  constructor(protected resource: User, protected auth?: Authenticator<Authenticators>) {
+  constructor(
+    protected resource: User,
+    protected auth?: Authenticator<Authenticators>
+  ) {
     super(resource)
   }
 
@@ -29,10 +31,10 @@ export default class UserTransformer extends BaseTransformer<User> {
         'createdAt',
         'updatedAt',
       ]),
-      'mobile': isSelf ? this.resource.mobile : null,
-      'realName': isSelf ? this.resource.realName : null,
-      'address': isSelf ? this.resource.address : null,
-      'openid': isSelf ? this.resource.openid : null,
+      mobile: isSelf ? this.resource.mobile : null,
+      realName: isSelf ? this.resource.realName : null,
+      address: isSelf ? this.resource.address : null,
+      openid: isSelf ? this.resource.openid : null,
     }
   }
 
