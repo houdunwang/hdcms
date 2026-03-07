@@ -3,9 +3,14 @@ import BindProcess from '#core/wechat/process/bindProcess'
 import LoginProcess from '#core/wechat/process/loginProcess'
 
 const hdConfig = {
-  wechatProcess: [LoginProcess, BindProcess],
+  //微信消息处理器
+  wechatProcess: [
+    LoginProcess,
+    BindProcess
+  ],
+  //支付处理器
   payProcess: {
-    pakcage: PackageProcess,
+    package: PackageProcess,
   },
 }
 
