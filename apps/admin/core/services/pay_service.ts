@@ -1,4 +1,4 @@
-import payConfig from '#config/pay'
+import hdConfig from '#config/hd'
 import Order from '#core/models/order'
 import env from '#start/env'
 import fs from 'node:fs'
@@ -34,10 +34,10 @@ export class PayService {
    * @returns {Promise<number>} 返回计算后的价格
    */
   public async getPrice(
-    orderable_type: keyof typeof payConfig.process,
+    orderable_type: keyof typeof hdConfig.payProcess,
     orderable_id: number
   ): Promise<number> {
-    const process = new payConfig.process[orderable_type]()
+    const process = new hdConfig.payProcess[orderable_type]()
     return await process.getPrice(orderable_id)
   }
 
@@ -50,8 +50,8 @@ export class PayService {
     const order = await Order.findByOrFail('sn', sn)
     if (!order.payState) {
       try {
-        const orderable_type = order.orderableType as keyof typeof payConfig.process
-        const process = new payConfig.process[orderable_type]()
+        const orderable_type = order.orderableType as keyof typeof hdConfig.payProcess
+        const process = new hdConfig.payProcess[orderable_type]()
         await process.handle(order)
         order.payState = true
         order.payType = payType

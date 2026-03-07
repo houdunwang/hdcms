@@ -1,12 +1,12 @@
-import payConfig from '#config/pay'
 import vine from '@vinejs/vine'
 import type { Infer } from '@vinejs/vine/types'
 import { validateProvider } from './config/validateProvider.ts'
+import hdConfig from '#config/hd'
 
 export const payValidator = vine.create(
   vine.object({
     subject: vine.string().trim(),
-    orderable_type: vine.enum(Object.keys(payConfig.process) as (keyof typeof payConfig.process)[]),
+    orderable_type: vine.enum(Object.keys(hdConfig.payProcess) as (keyof typeof hdConfig.payProcess)[]),
     orderable_id: vine.number(),
   })
 )
