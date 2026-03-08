@@ -2,27 +2,39 @@
 
 [English](./README_EN.md) | 简体中文
 
-
-这是一个基于现代技术栈构建的全栈开发脚手架，旨在为开发者提供一个高效、规范、可扩展的开发起点。项目采用 Monorepo 架构，前后端均使用 TypeScript 开发，确保了代码的一致性与类型安全。
+现代 TypeScript 全栈、开箱即用、面向生产的工程基座。采用 Monorepo 架构，前后端统一类型与规范，专注业务而非重复造轮子。
 
 ## 🚀 项目亮点
 
-- **全栈 TypeScript 支持**：从后端 API 到前端 UI，全程享受类型安全带来的开发便利，减少运行时错误。
-- **Monorepo 架构**：基于 `pnpm workspaces` 组织项目，轻松管理 `admin`（后端）、`front`（前端）及 `wechat`（微信插件）等多个包，实现代码共享。
-- **后端：AdonisJS**：使用强大的 Node.js 框架 AdonisJS，内置了 ORM、身份验证、验证器等企业级特性，开发体验如丝般顺滑。
-- **前端：TanStack 生态**：
-    - **TanStack Start**：下一代全栈 React 框架，提供极速的 SSR 和 SPA 体验。
-    - **TanStack Router & Query**：业内顶尖的路由管理与异步数据同步方案。
-    - **TanStack Form**：类型安全的表单处理。
-- **订单与支付**：集成了订单管理和支付功能。
-- **现代 UI 方案**：集成 Tailwind CSS 与 Shadcn UI，配合 Lucide 图标库，快速构建美观且响应式的界面。
-- **生产就绪**：内置 PM2 配置文件（`ecosystem.config.js`），支持集群模式，轻松部署至生产环境。
+- **全栈 TypeScript**：接口到组件统一类型，智能提示与重构友好，显著降低线上问题。
+- **Monorepo 管理**：以 `pnpm workspaces` 组织 `admin`（后端）、`front`（前端）、`wechat`（微信插件），代码可共享、模块可复用。
+- **后端 AdonisJS**：内置 ORM、身份验证、校验器等企业级能力，开发体验顺滑、规范统一。
+- **前端 TanStack 生态**：
+  - **TanStack Router & Query**：文件路由与数据同步的黄金组合。
+  - **TanStack Form**：类型驱动的表单体验，减少低级错误。
+- **现代 UI 方案**：Tailwind CSS + Shadcn UI + Lucide 图标，快速打造美观、响应式界面。
+- **内置业务能力**：提供订单与支付集成，直接用于实际业务场景。
+- **生产就绪**：提供 PM2 `ecosystem.config.js`，支持集群模式与平滑部署。
+
+## 💡 功能总览
+
+- **后端能力**：ORM 数据访问、认证与授权、请求校验、健壮的模块化结构
+- **前端能力**：SSR/SPA、文件路由、服务端/客户端数据协同、类型安全表单
+- **工程化与部署**：Monorepo 包管理、代码共享、PM2 部署、规范化目录与约定
+- **业务能力**：订单管理、支付对接、微信插件拓展（`wechat` 包）
+
+## 🧭 架构一览
+
+- **admin**：AdonisJS 后端（API/认证/数据）
+- **front**：TanStack Query Tanstack Form Shadcn UI 前端（路由/数据/表单/UI）
+- **wechat**：微信相关插件与扩展
+- **工具链**：`pnpm` + `workspaces` 持续构建与复用
 
 ## 📖 文档网站
 
 关于项目的详细使用指南、API 文档以及更多开发技巧，请访问我们的官方文档网站：
 
-👉 **[后盾人文档：https://www.houdunyun.com](https://www.houdunyun.com)**
+👉 **[后盾云文档：https://www.houdunyun.com](https://www.houdunyun.com)**
 
 这里有持续更新的教程和实战案例，帮助你快速上手并精通全栈开发。
 
@@ -32,8 +44,8 @@
 
 - **直播时间**：每晚八点（20:00）
 - **直播平台**：
-    - **抖音**：搜索「后盾人」
-    - **Bilibili**：搜索「后盾人」
+  - **抖音**：搜索「后盾云」
+  - **Bilibili**：搜索「后盾云」
 
 在直播间，我们会分享最新的技术趋势、项目开发过程，并实时解答大家在开发中遇到的问题。
 
@@ -42,11 +54,13 @@
 ## 🛠 快速开始
 
 1. **克隆项目**
+
    ```bash
-   git clone git@github.com:houdunwang/web.git
+   git clone git@github.com:houdunwang/framework.git
    ```
 
 2. **安装依赖**
+
    ```bash
    pnpm install
    ```
@@ -57,4 +71,5 @@
    ```
 
 ---
-感谢选择后盾人全栈开发脚手架，祝你编程愉快！
+
+感谢选择后盾云全栈开发脚手架，期待你的下一次发布！
