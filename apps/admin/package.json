@@ -73,7 +73,7 @@
     "@alicloud/openapi-client": "^0.4.15",
     "@alicloud/tea-typescript": "^1.8.0",
     "@alicloud/tea-util": "^1.4.11",
-    "@hd/wechat": "workspace:*",
+    "@houdunyun/wechat": "workspace:*",
     "@japa/api-client": "^3.2.1",
     "@tuyau/core": "^1.0.0",
     "@types/ali-oss": "^6.x",

@@ -2,14 +2,14 @@ import env from '#start/env'
 import cache from '@adonisjs/cache/services/main'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import Wechat from '@hd/wechat'
+import Wechat from '@houdunyun/wechat'
 
 @inject()
 export class WechatService {
   constructor(
     public wechat: Wechat,
     protected ctx: HttpContext
-  ) {}
+  ) { }
 
   public async init() {
     const config = {

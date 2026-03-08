@@ -1,8 +1,8 @@
 import cache from '@adonisjs/cache/services/main'
-import type Wechat from '@hd/wechat'
+import type Wechat from '@houdunyun/wechat'
 
 export default class BindProcess {
-  constructor(private wechat: Wechat) {}
+  constructor(private wechat: Wechat) { }
 
   /**
    * 处理微信扫码登录事件
