@@ -1,6 +1,6 @@
 import type { IUserDropdownMenus } from "@houdunyun/react/components";
 
-//导航栏下拉菜单
+//导航栏点击用户头像时的下拉菜单
 export const userDropdownMenus = {
 	label: '社区网站',
 	items: [
