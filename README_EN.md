@@ -4,14 +4,16 @@ English | [简体中文](./README.md)
 
 Modern TypeScript full‑stack, out‑of‑the‑box, production‑ready engineering base. Monorepo architecture with unified types and conventions across backend and frontend—focus on business, not boilerplate.
 
+> High‑quality video tutorials: [houdunren.com](https://www.houdunren.com)
+
 ## 🚀 Project Highlights
 
 - **Full-Stack TypeScript Support**: Enjoy the benefits of type safety from backend APIs to frontend UI, significantly reducing runtime errors.
 - **Monorepo Architecture**: Managed via `pnpm workspaces`, allowing seamless coordination between `admin` (backend), `front` (frontend), and `wechat` (wechat plugin) packages while sharing common code.
 - **Backend: AdonisJS**: Powered by the robust AdonisJS framework, featuring built-in ORM, authentication, validators, and other enterprise-grade features for a smooth developer experience.
 - **Frontend: TanStack Ecosystem**:
-    - **TanStack Router & Query**: Industry-leading solutions for type-safe routing and asynchronous data synchronization.
-    - **TanStack Form**: Type-safe form handling.
+  - **TanStack Router & Query**: Industry-leading solutions for type-safe routing and asynchronous data synchronization.
+  - **TanStack Form**: Type-safe form handling.
 - **Order & Payment**: Integrated order management and payment functionalities.
 - **Modern UI Solutions**: Integrated with Tailwind CSS and Shadcn UI, paired with Lucide icons for building beautiful, responsive interfaces quickly.
 - **Production Ready**: Includes a pre-configured PM2 setup (`ecosystem.config.js`) supporting cluster mode for easy deployment.
@@ -30,8 +32,8 @@ We highly value interaction with developers. Join our community or follow our li
 
 - **Live Time**: Every night at 8:00 PM (GMT+8)
 - **Platforms**:
-    - **Douyin**: Search for "后盾云" (HoudunYun)
-    - **Bilibili**: Search for "后盾云" (HoudunYun)
+  - **Douyin**: Search for "后盾云" (HoudunYun)
+  - **Bilibili**: Search for "后盾云" (HoudunYun)
 
 During live sessions, we share the latest technical trends, demonstrate project development, and answer your questions in real-time.
 
@@ -40,11 +42,13 @@ During live sessions, we share the latest technical trends, demonstrate project 
 ## 🛠 Quick Start
 
 1. **Clone the Project**
+
    ```bash
     git clone git@github.com:houdunwang/framework.git
    ```
 
 2. **Install Dependencies**
+
    ```bash
    pnpm install
    ```
@@ -55,4 +59,5 @@ During live sessions, we share the latest technical trends, demonstrate project 
    ```
 
 ---
-Thank you for choosing the HoudunYun Full-Stack Scaffold. Happy coding!
+
+Thank you for choosing the HoudunYun Full-Stack Scaffold.
