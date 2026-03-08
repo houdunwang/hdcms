@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "/Users/hd/code/frp/mac/frpc -c /Users/hd/code/frp/mac/frpc.toml",
+    "dev": "node scripts/run-frpc.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

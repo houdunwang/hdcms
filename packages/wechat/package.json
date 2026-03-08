@@ -1,5 +1,5 @@
 {
-  "name": "@hd/wechat",
+  "name": "@houdunyun/wechat",
   "description": "JS版本微信管理SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
