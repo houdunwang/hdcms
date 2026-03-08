@@ -68,7 +68,7 @@ importers:
       '@alicloud/tea-util':
         specifier: ^1.4.11
         version: 1.4.11
-      '@hd/wechat':
+      '@houdunyun/wechat':
         specifier: workspace:*
         version: link:../../packages/wechat
       '@japa/api-client':
