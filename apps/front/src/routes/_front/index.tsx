@@ -165,10 +165,10 @@ export function HomePage() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <WePay orderable_id={1} orderable_type={'subscribe'} subject='订阅'
+      {/* <WePay orderable_id={1} orderable_type={'subscribe'} subject='订阅'
         onSuccess={() => {
           toast.success('订阅成功')
-        }} />
+        }} /> */}
       <main className="flex-1">
         <section className="relative overflow-hidden border-b1">
           <div className="container mx-auto lg:px-16 px-6">
@@ -192,7 +192,7 @@ export function HomePage() {
                   </div>
 
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <Button asChild size="lg" className="gap-2 p-5">
+                    <Button asChild size="lg" variant={'default'} className="gap-2 p-5 bg-destructive!">
                       <Link to='/' >
                         马上学习
                         <ArrowRight className='size-4' />
