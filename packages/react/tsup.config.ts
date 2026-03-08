@@ -26,6 +26,5 @@ export default defineConfig({
   external: ['shadcn/tailwind.css', 'tw-animate-css', '@fontsource-variable/inter'],
   define: {
     'import.meta.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || ''),
-    'process.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || '')
   },
 })

@@ -6,7 +6,6 @@ import WxPay from 'wechatpay-node-v3'
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = resolve(__filename, '..', '..', '..');
-
 /**
  * 支付服务类，用于处理所有与支付相关的逻辑
  */
@@ -20,8 +19,8 @@ export class PayService {
     const pay = new WxPay({
       appid: env.get('WECHAT_PAY_APPID')!,
       mchid: env.get('WECHAT_PAY_MCHID')!,
-      publicKey: fs.readFileSync('../../config/pay/wepay/apiclient_cert.pem'), // 公钥
-      privateKey: fs.readFileSync('../../config/pay/wepay/apiclient_key.pem'), // 秘钥
+      publicKey: fs.readFileSync('./pay/wepay/apiclient_cert.pem'), // 公钥
+      privateKey: fs.readFileSync('./pay/wepay/apiclient_key.pem'), // 秘钥
       key: env.get('WECHAT_PAY_KEY')!,
     })
     return pay
