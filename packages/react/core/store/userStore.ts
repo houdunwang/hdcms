@@ -1,4 +1,4 @@
-import { registry } from '@app/admin/registry';
+import type { IUser } from '@core/types';
 import { atom } from 'jotai';
 
-export const userAtom = atom<typeof registry.$tree.users.profile.types.response.data | undefined>(undefined)
+export const userAtom = atom<IUser | undefined>(undefined)

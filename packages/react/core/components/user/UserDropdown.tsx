@@ -14,7 +14,7 @@ export const UserDropdown = ({ menus }: Props) => {
 	return (
 		<div className="flex gap-2 items-center">
 			<ModeToggle />
-			{isAuthenticated ? <LoginComponent menus={menus} /> : <UnLogin />}
+			{isAuthenticated() ? <LoginComponent menus={menus} /> : <UnLogin />}
 		</div>
 	)
 }

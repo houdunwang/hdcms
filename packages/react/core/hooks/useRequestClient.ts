@@ -9,7 +9,6 @@ import { toast } from "sonner";
 export function useRequestClient() {
 	const setFieldError = useSetAtom(fieldErrorAtom)
 
-	console.log('import.meta.env.VITE_API_URL', import.meta.env.VITE_API_URL)
 	return createTuyau({
 		baseUrl: import.meta.env.VITE_API_URL,
 		registry,
