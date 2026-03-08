@@ -3,7 +3,7 @@ import { QueryClient } from '@tanstack/react-query'
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import type { useAuth } from '@houdunyun/react/hooks'
-import '../assets/shadcn.css'
+import '../index.css'
 
 interface RootRouteContext {
   auth: ReturnType<typeof useAuth>

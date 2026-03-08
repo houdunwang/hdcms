@@ -6,12 +6,11 @@ type Props = {
 	siteName?: string
 	domain?: string
 	description?: string
-	copyright?: string
-	logo?: ReactNode
+	icp?: string | ReactNode
+	copyright?: string | ReactNode
+	logo?: ReactNode | string
 }
-export const Footer = ({ className, siteName, domain, description, copyright, logo }: Props) => {
-	siteName = siteName || import.meta.env.VITE_NAME
-	domain = (domain || import.meta.env.VITE_DOMAIN).replace(/https?:\/\//, '')
+export const Footer = ({ className, siteName, domain, description, copyright, logo, icp }: Props) => {
 	return (
 		<footer className={cn("border-t bg-muted/20", className)}>
 			<div className="container mx-auto px-6">
@@ -29,17 +28,17 @@ export const Footer = ({ className, siteName, domain, description, copyright, lo
 					</p>
 					<div className="mt-6 flex flex-col gap-2 border-t pt-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
 						<div>© {new Date().getFullYear()} {siteName} · {domain}</div>
-						{copyright ||
+						<div className="flex flex-col justify-end items-end">
+							{copyright}
 							<a
 								href="https://beian.miit.gov.cn/"
 								target='_blank'
 								rel='noreferrer'
 								className="underline-offset-4 hover:text-foreground hover:underline"
 							>
-								Copyright © {domain} All Rights Reserved
-								京ICP备122222232号-1
+								{icp}
 							</a>
-						}
+						</div>
 					</div>
 				</div>
 			</div>
