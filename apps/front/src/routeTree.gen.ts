@@ -10,26 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MemberRouteRouteImport } from './routes/member/route'
+import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as FrontRouteRouteImport } from './routes/_front/route'
-import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as FrontIndexRouteImport } from './routes/_front/index'
-import { Route as AuthWechatRouteImport } from './routes/auth/wechat'
-import { Route as AuthRegisterRouteImport } from './routes/auth/register'
-import { Route as AuthLoginRouteImport } from './routes/auth/login'
-import { Route as AuthForgetRouteImport } from './routes/auth/forget'
 
 const MemberRouteRoute = MemberRouteRouteImport.update({
   id: '/member',
   path: '/member',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FrontRouteRoute = FrontRouteRouteImport.update({
-  id: '/_front',
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthIndexRoute = AuthIndexRouteImport.update({
-  id: '/auth/',
-  path: '/auth/',
+const FrontRouteRoute = FrontRouteRouteImport.update({
+  id: '/_front',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrontIndexRoute = FrontIndexRouteImport.update({
@@ -37,95 +33,36 @@ const FrontIndexRoute = FrontIndexRouteImport.update({
   path: '/',
   getParentRoute: () => FrontRouteRoute,
 } as any)
-const AuthWechatRoute = AuthWechatRouteImport.update({
-  id: '/auth/wechat',
-  path: '/auth/wechat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRegisterRoute = AuthRegisterRouteImport.update({
-  id: '/auth/register',
-  path: '/auth/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/auth/login',
-  path: '/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthForgetRoute = AuthForgetRouteImport.update({
-  id: '/auth/forget',
-  path: '/auth/forget',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof FrontIndexRoute
+  '/auth': typeof AuthRouteRoute
   '/member': typeof MemberRouteRoute
-  '/auth/forget': typeof AuthForgetRoute
-  '/auth/login': typeof AuthLoginRoute
-  '/auth/register': typeof AuthRegisterRoute
-  '/auth/wechat': typeof AuthWechatRoute
-  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRouteRoute
   '/member': typeof MemberRouteRoute
-  '/auth/forget': typeof AuthForgetRoute
-  '/auth/login': typeof AuthLoginRoute
-  '/auth/register': typeof AuthRegisterRoute
-  '/auth/wechat': typeof AuthWechatRoute
   '/': typeof FrontIndexRoute
-  '/auth': typeof AuthIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_front': typeof FrontRouteRouteWithChildren
+  '/auth': typeof AuthRouteRoute
   '/member': typeof MemberRouteRoute
-  '/auth/forget': typeof AuthForgetRoute
-  '/auth/login': typeof AuthLoginRoute
-  '/auth/register': typeof AuthRegisterRoute
-  '/auth/wechat': typeof AuthWechatRoute
   '/_front/': typeof FrontIndexRoute
-  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/member'
-    | '/auth/forget'
-    | '/auth/login'
-    | '/auth/register'
-    | '/auth/wechat'
-    | '/auth/'
+  fullPaths: '/' | '/auth' | '/member'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/member'
-    | '/auth/forget'
-    | '/auth/login'
-    | '/auth/register'
-    | '/auth/wechat'
-    | '/'
-    | '/auth'
-  id:
-    | '__root__'
-    | '/_front'
-    | '/member'
-    | '/auth/forget'
-    | '/auth/login'
-    | '/auth/register'
-    | '/auth/wechat'
-    | '/_front/'
-    | '/auth/'
+  to: '/auth' | '/member' | '/'
+  id: '__root__' | '/_front' | '/auth' | '/member' | '/_front/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   FrontRouteRoute: typeof FrontRouteRouteWithChildren
+  AuthRouteRoute: typeof AuthRouteRoute
   MemberRouteRoute: typeof MemberRouteRoute
-  AuthForgetRoute: typeof AuthForgetRoute
-  AuthLoginRoute: typeof AuthLoginRoute
-  AuthRegisterRoute: typeof AuthRegisterRoute
-  AuthWechatRoute: typeof AuthWechatRoute
-  AuthIndexRoute: typeof AuthIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -137,18 +74,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemberRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_front': {
       id: '/_front'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof FrontRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/': {
-      id: '/auth/'
-      path: '/auth'
-      fullPath: '/auth/'
-      preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_front/': {
@@ -157,34 +94,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof FrontIndexRouteImport
       parentRoute: typeof FrontRouteRoute
-    }
-    '/auth/wechat': {
-      id: '/auth/wechat'
-      path: '/auth/wechat'
-      fullPath: '/auth/wechat'
-      preLoaderRoute: typeof AuthWechatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/register': {
-      id: '/auth/register'
-      path: '/auth/register'
-      fullPath: '/auth/register'
-      preLoaderRoute: typeof AuthRegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/login': {
-      id: '/auth/login'
-      path: '/auth/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/forget': {
-      id: '/auth/forget'
-      path: '/auth/forget'
-      fullPath: '/auth/forget'
-      preLoaderRoute: typeof AuthForgetRouteImport
-      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -203,12 +112,8 @@ const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   FrontRouteRoute: FrontRouteRouteWithChildren,
+  AuthRouteRoute: AuthRouteRoute,
   MemberRouteRoute: MemberRouteRoute,
-  AuthForgetRoute: AuthForgetRoute,
-  AuthLoginRoute: AuthLoginRoute,
-  AuthRegisterRoute: AuthRegisterRoute,
-  AuthWechatRoute: AuthWechatRoute,
-  AuthIndexRoute: AuthIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

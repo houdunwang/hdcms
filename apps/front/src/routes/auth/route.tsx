@@ -6,7 +6,7 @@ import { Footer } from '@houdunyun/react/components'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { CodeXml } from 'lucide-react'
 
-export const Route = createFileRoute('/auth/')({
+export const Route = createFileRoute('/auth')({
 	beforeLoad: ({ context }) => {
 		if (context.auth.isAuthenticated(true)) {
 			throw redirect({ to: '/' })
