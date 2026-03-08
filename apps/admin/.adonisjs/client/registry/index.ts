@@ -126,17 +126,11 @@ const routes = {
     tokens: [{"old":"/core/upload/imageSingle","type":0,"val":"core","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"upload","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"imageSingle","end":""}],
     types: placeholder as Registry['uploads.image_single']['types'],
   },
-  'users.me': {
+  'users.profile': {
     methods: ["GET","HEAD"],
-    pattern: '/core/users/me',
-    tokens: [{"old":"/core/users/me","type":0,"val":"core","end":""},{"old":"/core/users/me","type":0,"val":"users","end":""},{"old":"/core/users/me","type":0,"val":"me","end":""}],
-    types: placeholder as Registry['users.me']['types'],
-  },
-  'users.test': {
-    methods: ["GET","HEAD"],
-    pattern: '/core/users/test',
-    tokens: [{"old":"/core/users/test","type":0,"val":"core","end":""},{"old":"/core/users/test","type":0,"val":"users","end":""},{"old":"/core/users/test","type":0,"val":"test","end":""}],
-    types: placeholder as Registry['users.test']['types'],
+    pattern: '/core/users/profile',
+    tokens: [{"old":"/core/users/profile","type":0,"val":"core","end":""},{"old":"/core/users/profile","type":0,"val":"users","end":""},{"old":"/core/users/profile","type":0,"val":"profile","end":""}],
+    types: placeholder as Registry['users.profile']['types'],
   },
   'users.password': {
     methods: ["PUT"],

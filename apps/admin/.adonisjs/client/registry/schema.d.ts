@@ -114,7 +114,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByEmailValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/find_passwords_controller').default['email']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['email']>>>
     }
   }
   'find_passwords.mobile': {
@@ -125,7 +125,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByMobileValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/find_passwords_controller').default['mobile']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['mobile']>>>
     }
   }
   'licenses': {
@@ -227,26 +227,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>>
     }
   }
-  'users.me': {
+  'users.profile': {
     methods: ["GET","HEAD"]
-    pattern: '/core/users/me'
+    pattern: '/core/users/profile'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['me']>>>
-    }
-  }
-  'users.test': {
-    methods: ["GET","HEAD"]
-    pattern: '/core/users/test'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['test']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['profile']>>>
     }
   }
   'users.password': {

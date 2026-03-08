@@ -1,7 +1,7 @@
 import { UploadService } from '#core/services/upload_service'
 import { createUserValidator, updatePasswordValidator, updateUserValidator } from '#core/validators/user'
 import User from '#models/user'
-import UserTransformer from '#transformers/user_transformer'
+import UserTransformer from '#core/transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.ts'
@@ -11,10 +11,6 @@ export default class UsersController extends BaseController {
     super()
   }
 
-  async test() {
-    return this.success('测试成功')
-  }
-
   /**
  * @me
  * @tag 用户管理
@@ -22,7 +18,7 @@ export default class UsersController extends BaseController {
  * @description 获取当前认证用户的详细信息
  * @responseBody 200 - <User>
  */
-  async me({ auth, serialize }: HttpContext) {
+  async profile({ auth, serialize }: HttpContext) {
     const user = auth.user!
     return serialize(UserTransformer.transform(user, auth))
   }

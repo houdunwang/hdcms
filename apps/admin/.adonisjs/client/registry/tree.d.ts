@@ -45,8 +45,7 @@ export interface ApiDefinition {
     imageSingle: typeof routes['uploads.image_single']
   }
   users: {
-    me: typeof routes['users.me']
-    test: typeof routes['users.test']
+    profile: typeof routes['users.profile']
     password: typeof routes['users.password']
     update: typeof routes['users.update']
     destroy: typeof routes['users.destroy']
