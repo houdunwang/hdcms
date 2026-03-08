@@ -14,6 +14,7 @@ export function useRequestClient() {
 		registry,
 		headers: { Accept: 'application/json' },
 		timeout: 10000,
+		credentials: "include",
 		hooks: {
 			beforeRequest: [
 				(request) => {
@@ -29,8 +30,6 @@ export function useRequestClient() {
 					try {
 						if (response.ok) {
 							const res = await response.json() as { data: { message?: string } }
-							console.log('	response', response)
-							console.log('	res', res)
 							if (res.data.message) {
 								toast.success(res.data.message)
 							}
@@ -47,7 +46,6 @@ export function useRequestClient() {
 					}
 
 					const responseData = await error.response.clone().json() as { message: string }
-					console.log('responseData', responseData)
 					switch (error.response.status) {
 						case 401:
 							localStorage.removeItem(AuthEnum.TOKEN_NAME)

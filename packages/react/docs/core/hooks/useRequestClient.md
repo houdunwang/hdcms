@@ -37,7 +37,7 @@ function Example() {
   const detail = await client.get(`/articles/${id}`)
 
   // POST：提交 JSON
-  const login = await client.post('/auth/login', {
+  const login = await client.post('/auth', {
     body: { account, password },
   })
 

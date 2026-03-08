@@ -14,7 +14,8 @@ export default class AuthMiddleware {
       guards?: (keyof Authenticators)[]
     } = {}
   ) {
-    await ctx.auth.authenticateUsing(options.guards)
+    const guards = options.guards || ['web', 'api']
+    await ctx.auth.authenticateUsing(guards)
     return next()
   }
 }

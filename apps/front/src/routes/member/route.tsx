@@ -6,7 +6,7 @@ import { Handbag } from 'lucide-react'
 export const Route = createFileRoute('/member')({
 	beforeLoad: ({ context }) => {
 		if (!context.auth.isAuthenticated(true)) {
-			throw redirect({ to: '/auth/login' })
+			throw redirect({ to: '/auth' })
 		}
 	},
 	component: RouteComponent,

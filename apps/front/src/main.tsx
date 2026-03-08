@@ -3,6 +3,7 @@ import { createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
 import { HdProvider } from '@houdunyun/react'
+import { E404 } from './components/errors/E404'
 
 const router = createRouter({
   context: {
@@ -12,6 +13,9 @@ const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
+  defaultNotFoundComponent: () => <E404 />,
+
+
 })
 
 declare module '@tanstack/react-router' {

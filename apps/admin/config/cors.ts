@@ -14,7 +14,10 @@ const corsConfig = defineConfig({
    * allowed origins. For production, use environment variables to
    * configure allowed origins.
    */
-  origin: true,
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3333',
+  ],
 
   methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
   headers: true,
