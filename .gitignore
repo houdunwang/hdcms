@@ -32,7 +32,3 @@ yarn-error.log
 
 # Platform specific
 .DS_Store
-
-# Frontend compiled assets
-public/assets
-apps/admin_backup
