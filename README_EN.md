@@ -2,8 +2,7 @@
 
 English | [简体中文](./README.md)
 
-
-A modern full-stack development scaffold built for efficiency, standards, and scalability. This project utilizes a Monorepo architecture and is developed entirely in TypeScript, ensuring end-to-end type safety and consistency.
+Modern TypeScript full‑stack, out‑of‑the‑box, production‑ready engineering base. Monorepo architecture with unified types and conventions across backend and frontend—focus on business, not boilerplate.
 
 ## 🚀 Project Highlights
 
@@ -11,7 +10,6 @@ A modern full-stack development scaffold built for efficiency, standards, and sc
 - **Monorepo Architecture**: Managed via `pnpm workspaces`, allowing seamless coordination between `admin` (backend), `front` (frontend), and `wechat` (wechat plugin) packages while sharing common code.
 - **Backend: AdonisJS**: Powered by the robust AdonisJS framework, featuring built-in ORM, authentication, validators, and other enterprise-grade features for a smooth developer experience.
 - **Frontend: TanStack Ecosystem**:
-    - **TanStack Start**: The next-generation full-stack React framework providing blazing-fast SSR and SPA experiences.
     - **TanStack Router & Query**: Industry-leading solutions for type-safe routing and asynchronous data synchronization.
     - **TanStack Form**: Type-safe form handling.
 - **Order & Payment**: Integrated order management and payment functionalities.
@@ -22,7 +20,7 @@ A modern full-stack development scaffold built for efficiency, standards, and sc
 
 For detailed usage guides, API documentation, and advanced development tips, please visit our official documentation site:
 
-👉 **[Houdunren Docs: https://www.houdunyun.com](https://www.houdunyun.com)**
+👉 **[HoudunYun Docs: https://www.houdunyun.com](https://www.houdunyun.com)**
 
 We provide continuously updated tutorials and real-world cases to help you master full-stack development.
 
@@ -32,8 +30,8 @@ We highly value interaction with developers. Join our community or follow our li
 
 - **Live Time**: Every night at 8:00 PM (GMT+8)
 - **Platforms**:
-    - **Douyin**: Search for "后盾人" (Houdunren)
-    - **Bilibili**: Search for "后盾人" (Houdunren)
+    - **Douyin**: Search for "后盾云" (HoudunYun)
+    - **Bilibili**: Search for "后盾云" (HoudunYun)
 
 During live sessions, we share the latest technical trends, demonstrate project development, and answer your questions in real-time.
 
@@ -43,7 +41,7 @@ During live sessions, we share the latest technical trends, demonstrate project 
 
 1. **Clone the Project**
    ```bash
-   git clone git@github.com:houdunwang/web.git
+    git clone git@github.com:houdunwang/framework.git
    ```
 
 2. **Install Dependencies**
@@ -57,4 +55,4 @@ During live sessions, we share the latest technical trends, demonstrate project 
    ```
 
 ---
-Thank you for choosing the Houdunren Full-Stack Scaffold. Happy coding!
+Thank you for choosing the HoudunYun Full-Stack Scaffold. Happy coding!
