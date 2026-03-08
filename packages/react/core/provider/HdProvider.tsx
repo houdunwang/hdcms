@@ -28,7 +28,7 @@ function App({ router, queryClient }: { router: AnyRouter, queryClient: QueryCli
 	const auth = useAuth()
 	const { api } = useApi()
 	const setUser = useSetAtom(userAtom)
-	const { isLoading, data } = useQuery(api.users.me.queryOptions({},
+	const { isLoading, data } = useQuery(api.users.profile.queryOptions({},
 		{ enabled: !!localStorage.getItem(AuthEnum.TOKEN_NAME) })
 	)
 

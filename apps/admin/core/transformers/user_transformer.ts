@@ -1,7 +1,6 @@
 import type User from '#models/user'
 import { type Authenticator } from '@adonisjs/auth'
 import { type Authenticators } from '@adonisjs/auth/types'
-import { HttpContext } from '@adonisjs/core/http'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class UserTransformer extends BaseTransformer<User> {

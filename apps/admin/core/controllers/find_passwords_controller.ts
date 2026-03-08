@@ -6,7 +6,7 @@ import {
   findPasswordByMobileValidator,
 } from '#core/validators/findPassword'
 import User from '#models/user'
-import UserTransformer from '#transformers/user_transformer'
+import UserTransformer from '#core/transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 

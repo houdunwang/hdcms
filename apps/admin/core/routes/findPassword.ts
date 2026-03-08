@@ -1,6 +1,6 @@
 import router from '@adonisjs/core/services/router'
 
-const FindPasswordsController = () => import('#controllers/find_passwords_controller')
+const FindPasswordsController = () => import('#core/controllers/find_passwords_controller')
 // 登录注册
 router
   .group(() => {

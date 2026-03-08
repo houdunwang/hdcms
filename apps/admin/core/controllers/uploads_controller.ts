@@ -1,6 +1,6 @@
 import { UploadService } from '#core/services/upload_service'
 import { uploadImageSingleValidator } from '#core/validators/upload'
-import UploadTransformer from '#transformers/upload_transformer'
+import UploadTransformer from '#core/transformers/upload_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.js'

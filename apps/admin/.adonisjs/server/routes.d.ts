@@ -24,8 +24,7 @@ export type ScannedRoutes = {
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads.file': { paramsTuple?: []; params?: {} }
     'uploads.image_single': { paramsTuple?: []; params?: {} }
-    'users.me': { paramsTuple?: []; params?: {} }
-    'users.test': { paramsTuple?: []; params?: {} }
+    'users.profile': { paramsTuple?: []; params?: {} }
     'users.password': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'users.destroy': { paramsTuple?: []; params?: {} }
@@ -41,8 +40,7 @@ export type ScannedRoutes = {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
-    'users.me': { paramsTuple?: []; params?: {} }
-    'users.test': { paramsTuple?: []; params?: {} }
+    'users.profile': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }
@@ -51,8 +49,7 @@ export type ScannedRoutes = {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
-    'users.me': { paramsTuple?: []; params?: {} }
-    'users.test': { paramsTuple?: []; params?: {} }
+    'users.profile': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }

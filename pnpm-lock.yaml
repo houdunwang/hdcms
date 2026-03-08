@@ -329,6 +329,24 @@ importers:
         specifier: ^3.0.5
         version: 3.2.4(@types/node@22.19.12)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@2.0.1))(lightningcss@1.31.1)(msw@2.12.10(@types/node@22.19.12)(typescript@5.9.3))(tsx@4.21.0)
 
+  packages/frp: {}
+
+  packages/network:
+    dependencies:
+      ofetch:
+        specifier: ^1.5.1
+        version: 1.5.1
+      react:
+        specifier: ^19.2.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      tsup:
+        specifier: ^8.5.1
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
+
   packages/react:
     dependencies:
       '@app/admin':
