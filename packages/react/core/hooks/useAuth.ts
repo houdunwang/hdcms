@@ -28,7 +28,7 @@ export const useAuth = () => {
 
 	const getCurrentUser = async () => {
 		if (localStorage.getItem(AuthEnum.TOKEN_NAME)) {
-			const { data } = await request.get('/core/users/me', { retry: 0, })
+			const { data } = await request.get('/core/users/profile', { retry: 0, })
 			setUser(data)
 		}
 	}

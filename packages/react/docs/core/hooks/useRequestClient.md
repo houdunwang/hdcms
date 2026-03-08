@@ -55,7 +55,7 @@ function Example() {
   const upload = await client.post('/files', { body: form })
 
   // GET：关闭重试
-  const me = await client.get('/core/users/me', { retry: 0 })
+  const me = await client.get('/core/users/profile', { retry: 0 })
 }
 ```
 

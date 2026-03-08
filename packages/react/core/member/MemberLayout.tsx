@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
-import type { Data } from '@app/admin/data'
+import { registry } from '@app/admin/registry'
 import { Link, Outlet, useMatch, useMatchRoute } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { Dock, UserStar, type LucideIcon } from 'lucide-react'
@@ -16,7 +16,7 @@ const SystemMenus = [
 export type SystemMenuName = typeof SystemMenus[number]['name'] | undefined
 
 interface Props {
-	user: Data.User
+	user: typeof registry.$tree.users.profile.types.response.data
 	className?: string
 	menus?: Array<ILinkItem>
 }
@@ -58,7 +58,7 @@ export function MemberLayout({ user, className, menus }: Props) {
 }
 
 interface LeftMenuProps {
-	user: Data.User
+	user: typeof registry.$tree.users.profile.types.response.data
 	systemMenu: SystemMenuName
 	menus?: Array<{ title: string, to: string, icon?: LucideIcon }>
 }
