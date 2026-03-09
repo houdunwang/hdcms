@@ -68,7 +68,7 @@ pnpm create hdcms
 1. **克隆项目**
 
    ```bash
-   git clone git@github.com:houdunwang/framework.git
+   git clone git@github.com:houdunwang/hdcms.git
    ```
 
 2. **安装依赖**

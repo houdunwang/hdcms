@@ -18,11 +18,25 @@ Modern TypeScript full‑stack, out‑of‑the‑box, production‑ready enginee
 - **Modern UI Solutions**: Integrated with Tailwind CSS and Shadcn UI, paired with Lucide icons for building beautiful, responsive interfaces quickly.
 - **Production Ready**: Includes a pre-configured PM2 setup (`ecosystem.config.js`) supporting cluster mode for easy deployment.
 
+## 💡 Capabilities Overview
+
+- **Backend**: ORM data access, authentication & authorization, request validation, modular structure
+- **Frontend**: SSR/SPA, file routing, server/client data coordination, type-safe forms
+- **Engineering & Deployment**: Monorepo package management, code sharing, PM2 deployment, standardized directories and conventions
+- **Business**: Order management, payment integration, WeChat plugin extensions (`wechat` package)
+
+## 🧭 Architecture Overview
+
+- **admin**: AdonisJS backend (API/auth/data)
+- **front**: TanStack Router & Query, TanStack Form, Shadcn UI (routing/data/forms/UI)
+- **wechat**: WeChat-related plugins and extensions
+- **Toolchain**: `pnpm` + `workspaces` for continuous build and reuse
+
 ## 📖 Documentation
 
 For detailed usage guides, API documentation, and advanced development tips, please visit our official documentation site:
 
-👉 **[HoudunYun Docs: https://www.houdunyun.com](https://www.houdunyun.com)**
+👉 **[Usage Docs: https://www.hdcms.com](https://www.hdcms.com)**
 
 We provide continuously updated tutorials and real-world cases to help you master full-stack development.
 
@@ -41,10 +55,20 @@ During live sessions, we share the latest technical trends, demonstrate project 
 
 ## 🛠 Quick Start
 
+You can install the project using either the CLI or by cloning via Git.
+
+### Use CLI
+
+```bash
+pnpm create hdcms
+```
+
+### Clone via Git
+
 1. **Clone the Project**
 
    ```bash
-    git clone git@github.com:houdunwang/framework.git
+   git clone git@github.com:houdunwang/hdcms.git
    ```
 
 2. **Install Dependencies**
