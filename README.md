@@ -36,7 +36,7 @@
 
 关于项目的详细使用指南、API 文档以及更多开发技巧，请访问我们的官方文档网站：
 
-👉 **[后盾云文档：https://www.houdunyun.com](https://www.houdunyun.com)**
+👉 **[使用文档：https://www.hdcms.com](https://www.hdcms.com)**
 
 这里有持续更新的教程和实战案例，帮助你快速上手并精通全栈开发。
 
