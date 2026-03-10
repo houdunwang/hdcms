@@ -13,7 +13,7 @@ import { Route as FrontRouteRouteImport } from './routes/front/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MemberIndexRouteImport } from './routes/member/index'
-import { Route as FrontSubscribeRouteImport } from './routes/front/subscribe'
+import { Route as FrontPackageRouteImport } from './routes/front/package'
 
 const FrontRouteRoute = FrontRouteRouteImport.update({
   id: '/front',
@@ -35,9 +35,9 @@ const MemberIndexRoute = MemberIndexRouteImport.update({
   path: '/member/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FrontSubscribeRoute = FrontSubscribeRouteImport.update({
-  id: '/subscribe',
-  path: '/subscribe',
+const FrontPackageRoute = FrontPackageRouteImport.update({
+  id: '/package',
+  path: '/package',
   getParentRoute: () => FrontRouteRoute,
 } as any)
 
@@ -45,14 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
   '/front': typeof FrontRouteRouteWithChildren
-  '/front/subscribe': typeof FrontSubscribeRoute
+  '/front/package': typeof FrontPackageRoute
   '/member/': typeof MemberIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
   '/front': typeof FrontRouteRouteWithChildren
-  '/front/subscribe': typeof FrontSubscribeRoute
+  '/front/package': typeof FrontPackageRoute
   '/member': typeof MemberIndexRoute
 }
 export interface FileRoutesById {
@@ -60,15 +60,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
   '/front': typeof FrontRouteRouteWithChildren
-  '/front/subscribe': typeof FrontSubscribeRoute
+  '/front/package': typeof FrontPackageRoute
   '/member/': typeof MemberIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/front' | '/front/subscribe' | '/member/'
+  fullPaths: '/' | '/auth' | '/front' | '/front/package' | '/member/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/front' | '/front/subscribe' | '/member'
-  id: '__root__' | '/' | '/auth' | '/front' | '/front/subscribe' | '/member/'
+  to: '/' | '/auth' | '/front' | '/front/package' | '/member'
+  id: '__root__' | '/' | '/auth' | '/front' | '/front/package' | '/member/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -108,22 +108,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemberIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/front/subscribe': {
-      id: '/front/subscribe'
-      path: '/subscribe'
-      fullPath: '/front/subscribe'
-      preLoaderRoute: typeof FrontSubscribeRouteImport
+    '/front/package': {
+      id: '/front/package'
+      path: '/package'
+      fullPath: '/front/package'
+      preLoaderRoute: typeof FrontPackageRouteImport
       parentRoute: typeof FrontRouteRoute
     }
   }
 }
 
 interface FrontRouteRouteChildren {
-  FrontSubscribeRoute: typeof FrontSubscribeRoute
+  FrontPackageRoute: typeof FrontPackageRoute
 }
 
 const FrontRouteRouteChildren: FrontRouteRouteChildren = {
-  FrontSubscribeRoute: FrontSubscribeRoute,
+  FrontPackageRoute: FrontPackageRoute,
 }
 
 const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(

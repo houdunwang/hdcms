@@ -1,7 +1,8 @@
-import type { RouterContextConfig } from '@houdunyun/react/types'
 import { createFileRoute } from '@tanstack/react-router'
+import type { RouterContextConfig } from '@houdunyun/react/types'
+import { PackageList } from '@houdunyun/react/package'
 
-export const Route = createFileRoute('/front/subscribe')({
+export const Route = createFileRoute('/front/package')({
 	component: RouteComponent,
 	beforeLoad() {
 		return {
@@ -13,7 +14,7 @@ export const Route = createFileRoute('/front/subscribe')({
 })
 
 function RouteComponent() {
-	return <div>
-		dsfsdds
+	return <div className=''>
+		<PackageList />
 	</div>
 }

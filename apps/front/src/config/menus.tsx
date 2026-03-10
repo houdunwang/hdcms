@@ -4,7 +4,7 @@ import type { ILinkItem, IUserDropdownMenus } from "@houdunyun/react/types";
 export const headerMenus = [
 	{
 		title: '订阅会员',
-		to: '/front/subscribe',
+		to: '/front/package',
 		target: '_blank',
 	},
 	{
