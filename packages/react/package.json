@@ -2,78 +2,28 @@
   "name": "@houdunyun/react",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.30.1",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    "./auth": {
-      "types": "./dist/auth.d.ts",
-      "import": "./dist/auth.mjs"
-    },
-    "./common": {
-      "types": "./dist/common.d.ts",
-      "import": "./dist/common.mjs"
-    },
-    "./components": {
-      "types": "./dist/components.d.ts",
-      "import": "./dist/components.mjs"
-    },
-    "./form": {
-      "types": "./dist/form.d.ts",
-      "import": "./dist/form.mjs"
-    },
-    "./hooks": {
-      "types": "./dist/hooks.d.ts",
-      "import": "./dist/hooks.mjs"
-    },
-    "./lib": {
-      "types": "./dist/lib.d.ts",
-      "import": "./dist/lib.mjs"
-    },
-    "./member": {
-      "types": "./dist/member.d.ts",
-      "import": "./dist/member.mjs"
-    },
-    "./pay": {
-      "types": "./dist/pay.d.ts",
-      "import": "./dist/pay.mjs"
-    },
-    "./plugin": {
-      "types": "./dist/plugin.d.ts",
-      "import": "./dist/plugin.mjs"
-    },
-    "./provider": {
-      "types": "./dist/provider.d.ts",
-      "import": "./dist/provider.mjs"
-    },
-    "./store": {
-      "types": "./dist/store.d.ts",
-      "import": "./dist/store.mjs"
-    },
-    "./theme": {
-      "types": "./dist/theme.d.ts",
-      "import": "./dist/theme.mjs"
-    },
-    "./types": {
-      "types": "./dist/types.d.ts",
-      "import": "./dist/types.mjs"
-    },
-    "./user": {
-      "types": "./dist/user.d.ts",
-      "import": "./dist/user.mjs"
-    },
-    "./wechat": {
-      "types": "./dist/wechat.d.ts",
-      "import": "./dist/wechat.mjs"
-    },
-    "./package": {
-      "types": "./dist/package.d.ts",
-      "import": "./dist/package.mjs"
-    }
+    "./auth": "./dist/auth.mjs",
+    "./common": "./dist/common.mjs",
+    "./form": "./dist/form.mjs",
+    "./hooks": "./dist/hooks.mjs",
+    "./member": "./dist/member.mjs",
+    "./package": "./dist/package.mjs",
+    "./pay": "./dist/pay.mjs",
+    "./plugin": "./dist/plugin.mjs",
+    "./provider": "./dist/provider.mjs",
+    "./store": "./dist/store.mjs",
+    "./theme": "./dist/theme.mjs",
+    "./types": "./dist/types.mjs",
+    "./user": "./dist/user.mjs",
+    "./wechat": "./dist/wechat.mjs",
+    "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
@@ -125,7 +75,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsup --watch",
+    "dev": "tsdown --watch",
     "vite": "vite",
     "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -5,8 +5,11 @@ import { createTuyau } from '@tuyau/core/client';
 import { useSetAtom } from 'jotai';
 import { toast } from "sonner";
 
+import type { Tuyau } from '@tuyau/core/client'
+type Registry = typeof import('@app/admin/registry').registry
+type RequestClient = Tuyau<Registry>
 
-export function useRequestClient() {
+export function useRequestClient(): RequestClient {
 	const setFieldError = useSetAtom(fieldErrorAtom)
 
 	return createTuyau({
