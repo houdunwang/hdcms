@@ -90,6 +90,36 @@ const routes = {
     tokens: [{"old":"/core/order/create","type":0,"val":"core","end":""},{"old":"/core/order/create","type":0,"val":"order","end":""},{"old":"/core/order/create","type":0,"val":"create","end":""}],
     types: placeholder as Registry['orders.index']['types'],
   },
+  'package.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/package',
+    tokens: [{"old":"/core/package","type":0,"val":"core","end":""},{"old":"/core/package","type":0,"val":"package","end":""}],
+    types: placeholder as Registry['package.index']['types'],
+  },
+  'package.store': {
+    methods: ["POST"],
+    pattern: '/core/package',
+    tokens: [{"old":"/core/package","type":0,"val":"core","end":""},{"old":"/core/package","type":0,"val":"package","end":""}],
+    types: placeholder as Registry['package.store']['types'],
+  },
+  'package.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/package/:id',
+    tokens: [{"old":"/core/package/:id","type":0,"val":"core","end":""},{"old":"/core/package/:id","type":0,"val":"package","end":""},{"old":"/core/package/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['package.show']['types'],
+  },
+  'package.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/core/package/:id',
+    tokens: [{"old":"/core/package/:id","type":0,"val":"core","end":""},{"old":"/core/package/:id","type":0,"val":"package","end":""},{"old":"/core/package/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['package.update']['types'],
+  },
+  'package.destroy': {
+    methods: ["DELETE"],
+    pattern: '/core/package/:id',
+    tokens: [{"old":"/core/package/:id","type":0,"val":"core","end":""},{"old":"/core/package/:id","type":0,"val":"package","end":""},{"old":"/core/package/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['package.destroy']['types'],
+  },
   'pays.wepay': {
     methods: ["POST"],
     pattern: '/core/pay/wepay',
@@ -107,6 +137,36 @@ const routes = {
     pattern: '/core/pay/notify',
     tokens: [{"old":"/core/pay/notify","type":0,"val":"core","end":""},{"old":"/core/pay/notify","type":0,"val":"pay","end":""},{"old":"/core/pay/notify","type":0,"val":"notify","end":""}],
     types: placeholder as Registry['pay.notify']['types'],
+  },
+  'subscribe.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/subscribe',
+    tokens: [{"old":"/core/subscribe","type":0,"val":"core","end":""},{"old":"/core/subscribe","type":0,"val":"subscribe","end":""}],
+    types: placeholder as Registry['subscribe.index']['types'],
+  },
+  'subscribe.store': {
+    methods: ["POST"],
+    pattern: '/core/subscribe',
+    tokens: [{"old":"/core/subscribe","type":0,"val":"core","end":""},{"old":"/core/subscribe","type":0,"val":"subscribe","end":""}],
+    types: placeholder as Registry['subscribe.store']['types'],
+  },
+  'subscribe.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/subscribe/:id',
+    tokens: [{"old":"/core/subscribe/:id","type":0,"val":"core","end":""},{"old":"/core/subscribe/:id","type":0,"val":"subscribe","end":""},{"old":"/core/subscribe/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['subscribe.show']['types'],
+  },
+  'subscribe.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/core/subscribe/:id',
+    tokens: [{"old":"/core/subscribe/:id","type":0,"val":"core","end":""},{"old":"/core/subscribe/:id","type":0,"val":"subscribe","end":""},{"old":"/core/subscribe/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['subscribe.update']['types'],
+  },
+  'subscribe.destroy': {
+    methods: ["DELETE"],
+    pattern: '/core/subscribe/:id',
+    tokens: [{"old":"/core/subscribe/:id","type":0,"val":"core","end":""},{"old":"/core/subscribe/:id","type":0,"val":"subscribe","end":""},{"old":"/core/subscribe/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['subscribe.destroy']['types'],
   },
   'system.restart': {
     methods: ["POST"],

@@ -30,12 +30,26 @@ export interface ApiDefinition {
   orders: {
     index: typeof routes['orders.index']
   }
+  package: {
+    index: typeof routes['package.index']
+    store: typeof routes['package.store']
+    show: typeof routes['package.show']
+    update: typeof routes['package.update']
+    destroy: typeof routes['package.destroy']
+  }
   pays: {
     wepay: typeof routes['pays.wepay']
     wepayCheck: typeof routes['pays.wepay_check']
   }
   pay: {
     notify: typeof routes['pay.notify']
+  }
+  subscribe: {
+    index: typeof routes['subscribe.index']
+    store: typeof routes['subscribe.store']
+    show: typeof routes['subscribe.show']
+    update: typeof routes['subscribe.update']
+    destroy: typeof routes['subscribe.destroy']
   }
   system: {
     restart: typeof routes['system.restart']

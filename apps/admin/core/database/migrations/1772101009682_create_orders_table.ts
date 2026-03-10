@@ -18,6 +18,7 @@ export default class extends BaseSchema {
       table.text('data').comment('其他数据')
       table.index(['orderable_type', 'orderable_id'])
       table.index(['user_id', 'sn'])
+      table.timestamp('deleted_at')
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

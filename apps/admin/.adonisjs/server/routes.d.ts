@@ -18,9 +18,19 @@ export type ScannedRoutes = {
     'licenses': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
+    'package.index': { paramsTuple?: []; params?: {} }
+    'package.store': { paramsTuple?: []; params?: {} }
+    'package.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'package.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'package.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'pays.wepay': { paramsTuple?: []; params?: {} }
     'pays.wepay_check': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
+    'subscribe.index': { paramsTuple?: []; params?: {} }
+    'subscribe.store': { paramsTuple?: []; params?: {} }
+    'subscribe.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads.file': { paramsTuple?: []; params?: {} }
     'uploads.image_single': { paramsTuple?: []; params?: {} }
@@ -40,6 +50,10 @@ export type ScannedRoutes = {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
+    'package.index': { paramsTuple?: []; params?: {} }
+    'package.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.index': { paramsTuple?: []; params?: {} }
+    'subscribe.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.profile': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -49,6 +63,10 @@ export type ScannedRoutes = {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
+    'package.index': { paramsTuple?: []; params?: {} }
+    'package.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.index': { paramsTuple?: []; params?: {} }
+    'subscribe.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.profile': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'users.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -66,9 +84,11 @@ export type ScannedRoutes = {
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
+    'package.store': { paramsTuple?: []; params?: {} }
     'pays.wepay': { paramsTuple?: []; params?: {} }
     'pays.wepay_check': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
+    'subscribe.store': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads.file': { paramsTuple?: []; params?: {} }
     'uploads.image_single': { paramsTuple?: []; params?: {} }
@@ -79,18 +99,24 @@ export type ScannedRoutes = {
     'wechat_bind.bind': { paramsTuple?: []; params?: {} }
   }
   PUT: {
+    'package.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.password': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple?: [ParamValue?]; params?: {'id'?: ParamValue} }
     'wechats_message': { paramsTuple?: []; params?: {} }
   }
+  PATCH: {
+    'package.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'wechats_message': { paramsTuple?: []; params?: {} }
+  }
   DELETE: {
+    'package.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'subscribe.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.destroy': { paramsTuple?: []; params?: {} }
     'wechats_message': { paramsTuple?: []; params?: {} }
   }
   OPTIONS: {
-    'wechats_message': { paramsTuple?: []; params?: {} }
-  }
-  PATCH: {
     'wechats_message': { paramsTuple?: []; params?: {} }
   }
 }

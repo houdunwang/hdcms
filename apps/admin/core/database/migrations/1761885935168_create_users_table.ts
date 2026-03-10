@@ -23,8 +23,9 @@ export default class extends BaseSchema {
       table.string('openid', 255).nullable().unique().comment('微信 openid')
       table.string('unionid', 255).nullable().unique().comment('微信 unionid')
       table.boolean('is_lock').notNullable().defaultTo(false).comment('是否锁定')
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamp('deleted_at')
+      table.timestamp('created_at')
+      table.timestamp('updated_at')
     })
   }
 

@@ -6,11 +6,11 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.dateTime('end_time').notNullable().comment('到期时间')
-      table.string('description', 500).nullable().comment('额外描述信息')
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      table.integer('user_id').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE')
+      table.dateTime('end_time').notNullable()
+      table.string('description', 500).nullable()
+      table.timestamp('created_at').nullable()
+      table.timestamp('updated_at').nullable()
     })
   }
 

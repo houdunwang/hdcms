@@ -44,12 +44,14 @@ export class CacheSchema extends BaseModel {
 }
 
 export class OrderSchema extends BaseModel {
-  static $columns = ['createdAt', 'data', 'id', 'orderableId', 'orderableType', 'payState', 'payType', 'price', 'sn', 'subject', 'tradeNo', 'updatedAt', 'userId'] as const
+  static $columns = ['createdAt', 'data', 'deletedAt', 'id', 'orderableId', 'orderableType', 'payState', 'payType', 'price', 'sn', 'subject', 'tradeNo', 'updatedAt', 'userId'] as const
   $columns = OrderSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column()
   declare data: string | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column({ isPrimary: true })
   declare id: number
   @column()
@@ -75,7 +77,7 @@ export class OrderSchema extends BaseModel {
 }
 
 export class PackageSchema extends BaseModel {
-  static $columns = ['ad', 'createdAt', 'deletedAt', 'icon', 'id', 'months', 'originalPrice', 'price', 'recommend', 'state', 'title', 'updatedAt'] as const
+  static $columns = ['ad', 'createdAt', 'deletedAt', 'feature', 'icon', 'id', 'months', 'originalPrice', 'price', 'recommend', 'state', 'title', 'updatedAt'] as const
   $columns = PackageSchema.$columns
   @column()
   declare ad: string
@@ -83,6 +85,8 @@ export class PackageSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column.dateTime()
   declare deletedAt: DateTime | null
+  @column()
+  declare feature: any
   @column()
   declare icon: string
   @column({ isPrimary: true })
@@ -128,14 +132,16 @@ export class SubscribeSchema extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()
-  declare userId: number | null
+  declare userId: number
 }
 
 export class UploadSchema extends BaseModel {
-  static $columns = ['createdAt', 'driver', 'extension', 'id', 'mime', 'name', 'size', 'updatedAt', 'url', 'userId'] as const
+  static $columns = ['createdAt', 'deletedAt', 'driver', 'extension', 'id', 'mime', 'name', 'size', 'updatedAt', 'url', 'userId'] as const
   $columns = UploadSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column()
   declare driver: string
   @column()
@@ -157,14 +163,16 @@ export class UploadSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['address', 'avatar', 'createdAt', 'email', 'github', 'home', 'id', 'isLock', 'mobile', 'name', 'nickname', 'openid', 'password', 'qq', 'realName', 'sex', 'unionid', 'updatedAt', 'wechat', 'weibo'] as const
+  static $columns = ['address', 'avatar', 'createdAt', 'deletedAt', 'email', 'github', 'home', 'id', 'isLock', 'mobile', 'name', 'nickname', 'openid', 'password', 'qq', 'realName', 'sex', 'unionid', 'updatedAt', 'wechat', 'weibo'] as const
   $columns = UserSchema.$columns
   @column()
   declare address: string | null
   @column()
   declare avatar: string | null
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column()
   declare email: string | null
   @column()

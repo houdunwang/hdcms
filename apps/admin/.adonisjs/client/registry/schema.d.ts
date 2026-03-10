@@ -161,6 +161,61 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/orders_controller').default['index']>>>
     }
   }
+  'package.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/package'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['index']>>>
+    }
+  }
+  'package.store': {
+    methods: ["POST"]
+    pattern: '/core/package'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['store']>>>
+    }
+  }
+  'package.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/package/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['show']>>>
+    }
+  }
+  'package.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/core/package/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['update']>>>
+    }
+  }
+  'package.destroy': {
+    methods: ["DELETE"]
+    pattern: '/core/package/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['destroy']>>>
+    }
+  }
   'pays.wepay': {
     methods: ["POST"]
     pattern: '/core/pay/wepay'
@@ -192,6 +247,61 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
+    }
+  }
+  'subscribe.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/subscribe'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['index']>>>
+    }
+  }
+  'subscribe.store': {
+    methods: ["POST"]
+    pattern: '/core/subscribe'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['store']>>>
+    }
+  }
+  'subscribe.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/subscribe/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['show']>>>
+    }
+  }
+  'subscribe.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/core/subscribe/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['update']>>>
+    }
+  }
+  'subscribe.destroy': {
+    methods: ["DELETE"]
+    pattern: '/core/subscribe/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['destroy']>>>
     }
   }
   'system.restart': {
