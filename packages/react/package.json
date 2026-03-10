@@ -10,82 +10,107 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+    "./auth": {
+      "import": "./dist/auth.mjs",
+      "require": "./dist/auth.js"
+    },
+    "./common": {
+      "import": "./dist/common.mjs",
+      "require": "./dist/common.js"
     },
     "./components": {
       "import": "./dist/components.mjs",
       "require": "./dist/components.js"
     },
+    "./form": {
+      "import": "./dist/form.mjs",
+      "require": "./dist/form.js"
+    },
     "./hooks": {
       "import": "./dist/hooks.mjs",
       "require": "./dist/hooks.js"
     },
-    "./plugin": {
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.js"
-    },
-    "./store": {
-      "import": "./dist/store.mjs",
-      "require": "./dist/store.js"
-    },
-    "./enum": {
-      "import": "./dist/enum.mjs",
-      "require": "./dist/enum.js"
-    },
-    "./provider": {
-      "import": "./dist/provider.mjs",
-      "require": "./dist/provider.js"
+    "./lib": {
+      "import": "./dist/lib.mjs",
+      "require": "./dist/lib.js"
     },
     "./member": {
       "import": "./dist/member.mjs",
       "require": "./dist/member.js"
     },
-    "./form": {
-      "import": "./dist/form.mjs",
-      "require": "./dist/form.js"
-    },
-    "./auth": {
-      "import": "./dist/auth.mjs",
-      "require": "./dist/auth.js"
-    },
     "./pay": {
       "import": "./dist/pay.mjs",
       "require": "./dist/pay.js"
+    },
+    "./plugin": {
+      "import": "./dist/plugin.mjs",
+      "require": "./dist/plugin.js"
+    },
+    "./provider": {
+      "import": "./dist/provider.mjs",
+      "require": "./dist/provider.js"
+    },
+    "./store": {
+      "import": "./dist/store.mjs",
+      "require": "./dist/store.js"
+    },
+    "./theme": {
+      "import": "./dist/theme.mjs",
+      "require": "./dist/theme.js"
+    },
+    "./types": {
+      "import": "./dist/types.mjs",
+      "require": "./dist/types.js"
+    },
+    "./user": {
+      "import": "./dist/user.mjs",
+      "require": "./dist/user.js"
+    },
+    "./wechat": {
+      "import": "./dist/wechat.mjs",
+      "require": "./dist/wechat.js"
     }
   },
   "typesVersions": {
     "*": {
-      "components": [
-        "dist/components.d.ts"
+      "auth": [
+        "dist/auth.d.ts"
       ],
-      "hooks": [
-        "dist/hooks.d.ts"
-      ],
-      "plugin": [
-        "dist/plugin.d.ts"
-      ],
-      "store": [
-        "dist/store.d.ts"
-      ],
-      "enum": [
-        "dist/enum.d.ts"
-      ],
-      "provider": [
-        "dist/provider.d.ts"
-      ],
-      "member": [
-        "dist/member.d.ts"
+      "common": [
+        "dist/common.d.ts"
       ],
       "form": [
         "dist/form.d.ts"
       ],
-      "auth": [
-        "dist/auth.d.ts"
+      "hooks": [
+        "dist/hooks.d.ts"
+      ],
+      "member": [
+        "dist/member.d.ts"
       ],
       "pay": [
         "dist/pay.d.ts"
+      ],
+      "plugin": [
+        "dist/plugin.d.ts"
+      ],
+      "provider": [
+        "dist/provider.d.ts"
+      ],
+      "store": [
+        "dist/store.d.ts"
+      ],
+      "theme": [
+        "dist/theme.d.ts"
+      ],
+      "types": [
+        "dist/types.d.ts"
+      ],
+      "user": [
+        "dist/user.d.ts"
+      ],
+      "wechat": [
+        "dist/wechat.d.ts"
       ]
     }
   },

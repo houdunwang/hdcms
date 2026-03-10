@@ -1,5 +1,5 @@
 import { appConfig } from "@/config/app"
-import { Footer } from "@houdunyun/react/components"
+import { Footer } from "@houdunyun/react/common"
 
 export const FooterComponent = () => {
 	return (

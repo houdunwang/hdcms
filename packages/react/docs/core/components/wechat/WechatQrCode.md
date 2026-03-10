@@ -5,7 +5,7 @@
 ## 使用示例
 
 ```tsx
-import { WechatQrCode } from '@core/components/wechat/WechatQrCode'
+import { WechatQrCode } from '@/components/wechat/WechatQrCode'
 
 export function WechatQrSceneDemo() {
   const handleScene = async (ticket: string) => {

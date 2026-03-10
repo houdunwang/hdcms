@@ -1,7 +1,8 @@
 import { appConfig } from "@/config/app"
 import { headerMenus } from "@/config/headerMenu"
 import { userDropdownMenus } from "@/config/userDropdownMenus"
-import { Header, UserDropdown } from "@houdunyun/react/components"
+import { UserDropdown } from "@houdunyun/react/user"
+import { Header } from "@houdunyun/react/common"
 import { Link } from "@tanstack/react-router"
 
 export const HeaderBar = () => {

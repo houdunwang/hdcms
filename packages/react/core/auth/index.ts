@@ -1,5 +1,0 @@
-export * from './AuthLayout'
-export * from './Login'
-export * from './Register'
-export * from './WechatLogin'
-export * from './FindPassword'

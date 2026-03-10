@@ -1,4 +1,4 @@
-import { Footer } from "@houdunyun/react/components"
+import { Footer } from "@houdunyun/react/common"
 import { Code } from "lucide-react"
 
 export const appConfig: React.ComponentProps<typeof Footer> = {
