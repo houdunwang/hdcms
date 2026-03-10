@@ -19,9 +19,6 @@
 			"@/*": [
 				"./src/*"
 			],
-			"@core/*": [
-				"./core/*"
-			]
 		},
 		"outDir": "./dist",
 		"rootDir": "./",

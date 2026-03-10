@@ -1,8 +1,8 @@
 import { HeaderBar } from '@/components/HeaderBar'
 import { Button } from '@/components/ui/button'
-import { LoginRightSpace } from '@houdunyun/react'
+import { LoginRightSpace } from '@houdunyun/react/auth'
 import { AuthLayout } from '@houdunyun/react/auth'
-import { Footer } from '@houdunyun/react/components'
+import { Footer } from '@houdunyun/react/common'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { CodeXml } from 'lucide-react'
 
