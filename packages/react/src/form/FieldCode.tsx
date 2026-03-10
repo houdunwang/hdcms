@@ -1,6 +1,6 @@
 import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useFieldContext } from "@/index"
+import { useFieldContext } from "@/form"
 import { useField } from "@tanstack/react-form"
 import type { FormFieldProps } from "@/form/types"
 import z from "zod"

@@ -1,7 +1,7 @@
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { useFieldContext } from "@/index"
+import { useFieldContext } from "@/form"
 import type { FormFieldProps } from "@/form/types"
 import { FieldValidateError } from "./FieldValidateError"
 

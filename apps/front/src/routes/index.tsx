@@ -1,3 +1,5 @@
+import { FooterComponent } from '@/components/common/FooterComponent'
+import { HeaderBar } from '@/components/common/HeaderBar'
 import { Button } from '@/components/ui/button'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
@@ -14,8 +16,20 @@ import {
   Terminal
 } from 'lucide-react'
 
-export const Route = createFileRoute('/_front/')({
-  component: HomePage,
+export const Route = createFileRoute('/')({
+  beforeLoad() {
+    return {
+      config: {
+        title: '',
+        showHeader: true,
+      }
+    }
+  },
+  component: () => <div className=''>
+    <HeaderBar />
+    <HomePage />
+    <FooterComponent />
+  </div>,
 })
 
 export function HomePage() {

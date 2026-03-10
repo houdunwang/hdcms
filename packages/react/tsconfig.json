@@ -1,8 +1,6 @@
 {
 	"include": [
-		"**/*.ts",
-		"**/*.tsx",
-		"**/*.d.ts"
+		"src/**/*",
 	],
 	"compilerOptions": {
 		"target": "ES2022",

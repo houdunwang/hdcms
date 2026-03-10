@@ -10,7 +10,7 @@ export function useRequestClient() {
 	const setFieldError = useSetAtom(fieldErrorAtom)
 
 	return createTuyau({
-		baseUrl: import.meta.env.VITE_API_URL,
+		baseUrl: (import.meta as any).env?.VITE_API_URL,
 		registry,
 		headers: { Accept: 'application/json' },
 		timeout: 10000,

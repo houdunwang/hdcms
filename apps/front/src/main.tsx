@@ -9,13 +9,14 @@ const router = createRouter({
   context: {
     auth: undefined!,
     queryClient: undefined!,
+    config: {
+      title: '',
+    }
   },
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
   defaultNotFoundComponent: () => <E404 />,
-
-
 })
 
 declare module '@tanstack/react-router' {

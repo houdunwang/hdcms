@@ -5,3 +5,4 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 declare module '*.css'
+import 'dayjs/plugin/relativeTime'

@@ -1,19 +1,34 @@
+import { HeaderBar } from '@/components/common/HeaderBar'
+import type { useAuth } from '@houdunyun/react/hooks'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClient } from '@tanstack/react-query'
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
+import { Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import type { useAuth } from '@houdunyun/react/hooks'
+import { useTitle } from 'ahooks'
 import '../index.css'
+import { appConfig } from '@/config/app'
 
 interface RootRouteContext {
   auth: ReturnType<typeof useAuth>
-  queryClient: QueryClient
+  queryClient: QueryClient,
+  config?: {
+    title?: string,
+  }
+  // getTitle: () => string,
 }
 export const Route = createRootRouteWithContext<RootRouteContext>()({
   component: RootComponent,
 })
 
 function RootComponent() {
+  const matches = useRouterState({ select: (s) => s.matches })
+  // 网站标题设置
+  const matchWithTitle = [...matches]
+    .reverse()
+    .find((match) => match.context.config?.title)
+  const title = matchWithTitle?.context.config?.title
+  useTitle(title ? title + ' - ' + appConfig.siteName : appConfig.siteName || '');
+
   return (
     <>
       <Outlet />

@@ -5,7 +5,7 @@ import type { ILinkItem } from '@/types/types'
 import type { IUser } from '@/types/types'
 import { Link, Outlet, useMatch, useMatchRoute } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { Dock, UserStar, type LucideIcon } from 'lucide-react'
+import { Dock, UserStar } from 'lucide-react'
 import { Profile } from './Profile'
 import { Bind } from './bind'
 
@@ -60,7 +60,7 @@ export function MemberLayout({ user, className, menus }: Props) {
 interface LeftMenuProps {
 	user: IUser
 	systemMenu: SystemMenuName
-	menus?: Array<{ title: string, to: string, icon?: LucideIcon }>
+	menus?: ILinkItem[]
 }
 
 function MobileLeft({ systemMenu, menus }: Omit<LeftMenuProps, 'user'>) {

@@ -6,7 +6,6 @@ dotenv.config({ path: resolve(__dirname, '../../.env') })
 
 export default defineConfig({
   entry: {
-    // index: 'src/index.ts',
     auth: 'src/auth/index.ts',
     common: 'src/common/index.ts',
     form: 'src/form/index.ts',
@@ -19,6 +18,8 @@ export default defineConfig({
     theme: 'src/theme/index.ts',
     user: 'src/user/index.ts',
     wechat: 'src/wechat/index.ts',
+    subscribe: 'src/subscribe/index.ts',
+    types: 'src/types/index.ts',
   },
   dts: true,
   format: ['esm'],

@@ -9,14 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MemberRouteRouteImport } from './routes/member/route'
+import { Route as FrontRouteRouteImport } from './routes/front/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
-import { Route as FrontRouteRouteImport } from './routes/_front/route'
-import { Route as FrontIndexRouteImport } from './routes/_front/index'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as MemberIndexRouteImport } from './routes/member/index'
+import { Route as FrontSubscribeRouteImport } from './routes/front/subscribe'
 
-const MemberRouteRoute = MemberRouteRouteImport.update({
-  id: '/member',
-  path: '/member',
+const FrontRouteRoute = FrontRouteRouteImport.update({
+  id: '/front',
+  path: '/front',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -24,54 +25,66 @@ const AuthRouteRoute = AuthRouteRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FrontRouteRoute = FrontRouteRouteImport.update({
-  id: '/_front',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FrontIndexRoute = FrontIndexRouteImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberIndexRoute = MemberIndexRouteImport.update({
+  id: '/member/',
+  path: '/member/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrontSubscribeRoute = FrontSubscribeRouteImport.update({
+  id: '/subscribe',
+  path: '/subscribe',
   getParentRoute: () => FrontRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof FrontIndexRoute
+  '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
-  '/member': typeof MemberRouteRoute
+  '/front': typeof FrontRouteRouteWithChildren
+  '/front/subscribe': typeof FrontSubscribeRoute
+  '/member/': typeof MemberIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
-  '/member': typeof MemberRouteRoute
-  '/': typeof FrontIndexRoute
+  '/front': typeof FrontRouteRouteWithChildren
+  '/front/subscribe': typeof FrontSubscribeRoute
+  '/member': typeof MemberIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_front': typeof FrontRouteRouteWithChildren
+  '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
-  '/member': typeof MemberRouteRoute
-  '/_front/': typeof FrontIndexRoute
+  '/front': typeof FrontRouteRouteWithChildren
+  '/front/subscribe': typeof FrontSubscribeRoute
+  '/member/': typeof MemberIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/member'
+  fullPaths: '/' | '/auth' | '/front' | '/front/subscribe' | '/member/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/member' | '/'
-  id: '__root__' | '/_front' | '/auth' | '/member' | '/_front/'
+  to: '/' | '/auth' | '/front' | '/front/subscribe' | '/member'
+  id: '__root__' | '/' | '/auth' | '/front' | '/front/subscribe' | '/member/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  FrontRouteRoute: typeof FrontRouteRouteWithChildren
+  IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRoute
-  MemberRouteRoute: typeof MemberRouteRoute
+  FrontRouteRoute: typeof FrontRouteRouteWithChildren
+  MemberIndexRoute: typeof MemberIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/member': {
-      id: '/member'
-      path: '/member'
-      fullPath: '/member'
-      preLoaderRoute: typeof MemberRouteRouteImport
+    '/front': {
+      id: '/front'
+      path: '/front'
+      fullPath: '/front'
+      preLoaderRoute: typeof FrontRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -81,29 +94,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_front': {
-      id: '/_front'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof FrontRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_front/': {
-      id: '/_front/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof FrontIndexRouteImport
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/': {
+      id: '/member/'
+      path: '/member'
+      fullPath: '/member/'
+      preLoaderRoute: typeof MemberIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/front/subscribe': {
+      id: '/front/subscribe'
+      path: '/subscribe'
+      fullPath: '/front/subscribe'
+      preLoaderRoute: typeof FrontSubscribeRouteImport
       parentRoute: typeof FrontRouteRoute
     }
   }
 }
 
 interface FrontRouteRouteChildren {
-  FrontIndexRoute: typeof FrontIndexRoute
+  FrontSubscribeRoute: typeof FrontSubscribeRoute
 }
 
 const FrontRouteRouteChildren: FrontRouteRouteChildren = {
-  FrontIndexRoute: FrontIndexRoute,
+  FrontSubscribeRoute: FrontSubscribeRoute,
 }
 
 const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
@@ -111,9 +131,10 @@ const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  FrontRouteRoute: FrontRouteRouteWithChildren,
+  IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRoute,
-  MemberRouteRoute: MemberRouteRoute,
+  FrontRouteRoute: FrontRouteRouteWithChildren,
+  MemberIndexRoute: MemberIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

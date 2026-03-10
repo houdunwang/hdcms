@@ -1,6 +1,6 @@
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useFieldContext } from "@/index"
+import { useFieldContext } from "@/form"
 import { useApi } from "@/hooks/useApi"
 import { useQuery } from "@tanstack/react-query"
 import type { FormFieldProps } from "@/form/types"

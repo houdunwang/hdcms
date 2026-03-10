@@ -1,9 +1,10 @@
-import { HeaderBar } from '@/components/HeaderBar'
-import { MemberLayout, useAuth } from '@houdunyun/react'
+import { HeaderBar } from '@/components/common/HeaderBar'
+import { MemberLayout } from '@houdunyun/react/member'
+import { useAuth } from '@houdunyun/react/hooks'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Handbag } from 'lucide-react'
 
-export const Route = createFileRoute('/member')({
+export const Route = createFileRoute('/member/')({
 	beforeLoad: ({ context }) => {
 		if (!context.auth.isAuthenticated(true)) {
 			throw redirect({ to: '/auth' })

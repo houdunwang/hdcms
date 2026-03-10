@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
-import { useFormContext } from '@/index'
+import { useFormContext } from '@/form'
 
 type Props = Omit<
 	React.ComponentProps<"button">,

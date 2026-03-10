@@ -1,4 +1,4 @@
-import { HeaderBar } from '@/components/HeaderBar'
+import { HeaderBar } from '@/components/common/HeaderBar'
 import { Button } from '@/components/ui/button'
 import { LoginRightSpace } from '@houdunyun/react/auth'
 import { AuthLayout } from '@houdunyun/react/auth'
