@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { WePay } from "@houdunyun/react/pay"
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {
@@ -14,7 +13,6 @@ import {
   Star,
   Terminal
 } from 'lucide-react'
-import { toast } from 'sonner'
 
 export const Route = createFileRoute('/_front/')({
   component: HomePage,
