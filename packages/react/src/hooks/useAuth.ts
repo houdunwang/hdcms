@@ -15,7 +15,7 @@ export const useAuth = () => {
 	 * @returns 是否已认证 - boolean
 	 */
 	const isAuthenticated = (record = false) => {
-		const isLogin = !!user?.id
+		const isLogin = localStorage.getItem(AuthEnum.TOKEN_NAME)
 		if (!isLogin && record) {
 			localStorage.setItem('history', window.location.href)
 		}

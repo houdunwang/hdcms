@@ -9,6 +9,7 @@ import { CodeXml } from 'lucide-react'
 export const Route = createFileRoute('/auth')({
 	beforeLoad: ({ context }) => {
 		if (context.auth.isAuthenticated(true)) {
+			console.log('	', 111111)
 			throw redirect({ to: '/' })
 		}
 	},
