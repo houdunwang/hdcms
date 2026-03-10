@@ -70,9 +70,9 @@
       "types": "./dist/wechat.d.ts",
       "import": "./dist/wechat.mjs"
     },
-    "./subscribe": {
-      "types": "./dist/subscribe.d.ts",
-      "import": "./dist/subscribe.mjs"
+    "./package": {
+      "types": "./dist/package.d.ts",
+      "import": "./dist/package.mjs"
     }
   },
   "typesVersions": {
