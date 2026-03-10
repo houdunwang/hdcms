@@ -19,7 +19,7 @@ export default defineConfig({
     user: 'src/user/index.ts',
     wechat: 'src/wechat/index.ts',
     types: 'src/types/index.ts',
-    package: 'src/types/package.ts',
+    package: 'src/package/index.ts',
   },
   dts: true,
   format: ['esm'],
