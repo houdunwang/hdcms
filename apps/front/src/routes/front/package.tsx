@@ -1,7 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-import type { RouterContextConfig } from '@houdunyun/react/types'
 import { PackageList } from '@houdunyun/react/package'
-import { useApi } from '@houdunyun/react/hooks'
+import type { RouterContextConfig } from '@houdunyun/react/types'
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/front/package')({
 	component: RouteComponent,
@@ -15,7 +14,6 @@ export const Route = createFileRoute('/front/package')({
 })
 
 function RouteComponent() {
-	const { } = useApi()
 	return <div className=''>
 		<PackageList />
 	</div>

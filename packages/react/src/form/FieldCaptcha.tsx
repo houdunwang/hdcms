@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import { ScaleLoader } from "react-spinners"
 import { FieldValidateError } from "./FieldValidateError"
 export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {
+
 	const field = useFieldContext<string>()
 	const { api } = useApi()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'

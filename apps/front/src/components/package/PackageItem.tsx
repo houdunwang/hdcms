@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
-import { WePay } from '@/pay';
 import type { Data } from '@app/admin/data';
 import { Check, ShoppingBag } from 'lucide-react';
+import { WePay } from '@houdunyun/react/pay'
 
 interface Props {
 	item: Data.Package
@@ -16,7 +16,7 @@ export const PackageItem = ({ item }: Props) => {
 			<CardHeader className='bg-white'>
 				<CardTitle className='flex flex-col justify-center '>
 					<div className="mt-3 w-full truncate text-destructive">
-						{item.title}
+						123{item.title}
 					</div>
 					<div className="text-3xl font-bold text-primary mt-3">{item.price}</div>
 					<div className="text-sm opacity-50 line-through">{item.originalPrice}</div>

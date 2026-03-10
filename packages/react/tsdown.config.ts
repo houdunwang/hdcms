@@ -1,9 +1,12 @@
 import { defineConfig } from 'tsdown'
+import pluginBabel from '@rollup/plugin-babel'
+
+const isDev = process.argv.includes('--watch') || process.env.NODE_ENV === 'development'
 
 export default defineConfig({
-  dts: {
-    tsgo: false,
-  },
+  dts: !isDev,
+  clean: !isDev,
+  minify: !isDev,
   deps: {
     skipNodeModulesBundle: true,
   },
@@ -25,5 +28,17 @@ export default defineConfig({
   },
   format: ['esm'],
   exports: true,
-  // ...config options
+  plugins: [
+    !isDev &&
+    pluginBabel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      parserOpts: {
+        sourceType: 'module',
+        plugins: ['jsx', 'typescript'],
+      },
+      plugins: ['babel-plugin-react-compiler'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    }),
+  ].filter(Boolean) as any,
 })

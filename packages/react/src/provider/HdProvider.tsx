@@ -12,8 +12,11 @@ import { Toaster } from "sonner"
 import { useApi } from '../hooks/useApi'
 import { useAuth } from '../hooks/useAuth'
 
-
-export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }) => {
+export const config = {
+	baseUrl: ''
+}
+export const HdProvider = ({ router, queryClient, baseUrl }: { router: AnyRouter, queryClient: QueryClient, baseUrl: string }) => {
+	config.baseUrl = baseUrl
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 		<QueryClientProvider client={queryClient}>
 			<TooltipProvider >

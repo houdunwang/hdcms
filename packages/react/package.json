@@ -2,12 +2,22 @@
   "name": "@houdunyun/react",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "packageManager": "pnpm@10.30.1",
   "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "tsdown --watch --no-clean",
+    "build": "tsdown",
+    "dev:tsup": "tsup --watch",
+    "build:tsup": "tsup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./auth": "./dist/auth.mjs",
     "./common": "./dist/common.mjs",
@@ -71,15 +81,6 @@
       ]
     }
   },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dev": "tsdown --watch",
-    "vite": "vite",
-    "build": "tsup",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
     "motion": "^12.35.2"
   },
@@ -108,6 +109,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^7.0.0",
     "@tanstack/devtools-vite": "^0.3.11",
     "@tanstack/router-plugin": "^1.132.0",
     "@testing-library/dom": "^10.4.0",
@@ -116,9 +118,11 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "babel-plugin-react-compiler": "^1.0.0",
     "dotenv": "^16.4.5",
     "jsdom": "^27.0.0",
     "shadcn": "^3.8.5",
+    "tsdown": "^0.21.1",
     "tsup": "^8.5.1",
     "tw-animate-css": "^1.4.0",
     "typescript": "^5.7.2",

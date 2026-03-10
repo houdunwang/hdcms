@@ -6,14 +6,15 @@ import { useSetAtom } from 'jotai';
 import { toast } from "sonner";
 
 import type { Tuyau } from '@tuyau/core/client'
+import { config } from '@/provider';
 type Registry = typeof import('@app/admin/registry').registry
 type RequestClient = Tuyau<Registry>
 
 export function useRequestClient(): RequestClient {
 	const setFieldError = useSetAtom(fieldErrorAtom)
-
+	console.log('config', config)
 	return createTuyau({
-		baseUrl: (import.meta as any).env?.VITE_API_URL,
+		baseUrl: config.baseUrl,
 		registry,
 		headers: { Accept: 'application/json' },
 		timeout: 10000,
