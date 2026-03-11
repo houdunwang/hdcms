@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 export const Dasbard = (): React.JSX.Element => {
 	return (
 		<div className="@container/main flex flex-1 flex-col gap-2">

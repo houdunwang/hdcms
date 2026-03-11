@@ -1,16 +1,16 @@
 import { AppSidebar } from "@/admin/components/app-sidebar"
 import { SiteHeader } from "@/admin/components/site-header"
-import {
-	SidebarInset,
-	SidebarProvider,
-} from "@/components/ui/sidebar"
-
+import { SidebarInset, SidebarProvider, } from "@/components/ui/sidebar"
 import { Outlet, useMatchRoute, useNavigate } from "@tanstack/react-router"
 import { useEffect, type FC } from "react"
 import { Dasbard } from "./components/dasbard"
 import { useAuth } from "@/hooks"
 
-export const AdminLayout: FC = () => {
+interface Props {
+	width: number,
+	height: number
+}
+export const AdminLayout: FC<Props> = ({ width = 62, height = 12 }) => {
 	const matchRoute = useMatchRoute()
 	const isAdminHomePage = matchRoute({ to: "/admin", fuzzy: false })
 	const { isAdmin } = useAuth()
@@ -25,8 +25,8 @@ export const AdminLayout: FC = () => {
 		<SidebarProvider
 			style={
 				{
-					"--sidebar-width": "calc(var(--spacing) * 72)",
-					"--header-height": "calc(var(--spacing) * 12)",
+					"--sidebar-width": `calc(var(--spacing) * ${width})`,
+					"--header-height": `calc(var(--spacing) * ${height})`,
 				} as React.CSSProperties
 			}
 		>

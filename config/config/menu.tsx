@@ -1,4 +1,4 @@
-import { CommandIcon } from "lucide-react";
+import { CircleHelpIcon, CommandIcon, Rss, Settings2Icon, SquareUserRound } from "lucide-react";
 
 export const menu = {
 	// 网站导航菜单
@@ -21,15 +21,35 @@ export const menu = {
 				title: '后盾人教程',
 				to: 'https://www.houdunren.com',
 				target: '_blank',
+				icon: <Rss />
 			},
 		],
 	},
-	admin: [
-		{
-			title: '套餐管理',
-			icon: <CommandIcon />,
-			to: '/admin/package'
-		},
-	]
+	admin: {
+		main: [
+			{
+				title: '订阅套餐',
+				icon: <CommandIcon />,
+				to: '/admin/package'
+			},
+			{
+				title: '用户管理',
+				icon: <SquareUserRound />,
+				to: '/admin/user'
+			},
+		],
+		secondary: [
+			{
+				title: "视频教程",
+				url: "https://www.houdunren.com",
+				icon: <Settings2Icon />
+			},
+			{
+				title: "获取帮助",
+				url: "https://www.hdcms.com",
+				icon: <CircleHelpIcon />
+			},
+		]
+	}
 }
 

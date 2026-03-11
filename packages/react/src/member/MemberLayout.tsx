@@ -41,14 +41,14 @@ export function MemberLayout({ user, className, menus }: Props): React.JSX.Eleme
 	}
 	return <div className={cn('bg-muted pt-6', className)}>
 		<div className="container mx-auto px-3 lg:px-12 min-h-[calc(100vh-var(--header-height))] ">
-			<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 items-stretch">
+			<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 items-start">
 				{isMobile ?
 					<MobileMenu systemMenu={systemMenu} menus={menus} />
 					:
 					<PcMenu user={user} systemMenu={systemMenu} menus={menus} />
 				}
 				<Card className="bg-background">
-					<CardContent className='pb-20'>
+					<CardContent className=''>
 						{systemMenu ? (systemMenu == 'bind' ? <Bind /> : <Profile />) : <Outlet />}
 					</CardContent>
 				</Card>

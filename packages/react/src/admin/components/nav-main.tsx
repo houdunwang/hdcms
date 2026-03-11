@@ -1,44 +1,18 @@
-import { Button } from "@/components/ui/button"
-import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { CirclePlusIcon, MailIcon } from "lucide-react"
+import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 import * as config from '@hdcms/config'
-import { useNavigate } from "@tanstack/react-router"
-export function NavMain({ items, }: { items: { title: string, url: string, icon?: React.ReactNode }[] }): React.JSX.Element {
+import { useMatchRoute, useNavigate } from "@tanstack/react-router"
+export function NavMain(): React.JSX.Element {
+  const matchRoute = useMatchRoute()
   const navigate = useNavigate()
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
-        {/* <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton
-              tooltip="Quick Create"
-              className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
-            >
-              <CirclePlusIcon
-              />
-              <span>Quick Create</span>
-            </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="size-8 group-data-[collapsible=icon]:opacity-0"
-              variant="outline"
-            >
-              <MailIcon
-              />
-              <span className="sr-only">Inbox</span>
-            </Button>
-          </SidebarMenuItem>
-        </SidebarMenu> */}
-        <SidebarMenu>
-          {config.menu.admin.map((item) => (
+        <SidebarMenu className="space-y-1">
+          {config.menu.admin.main.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title} onClick={() => navigate({ to: item.to })}>
+              <SidebarMenuButton tooltip={item.title} onClick={() => navigate({ to: item.to })}
+                className={cn("py-5", { 'bg-muted': matchRoute({ to: item.to, fuzzy: true }) })}>
                 {item.icon}
                 <span>{item.title}</span>
               </SidebarMenuButton>

@@ -6,7 +6,7 @@ import '@/plugin/dayjs'
 import { ModeToggle } from '@/theme/mode-toggle'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { Settings } from 'lucide-react'
+import { LaptopMinimalCheck, LogOut, Settings, SquareUserRound } from 'lucide-react'
 import * as config from '@hdcms/config'
 
 export const UserDropdown = (): React.JSX.Element => {
@@ -48,10 +48,14 @@ function LoginComponent() {
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
 					<Link to='/member' search={{ system: 'profile' }}>
-						<DropdownMenuItem className='cursor-pointer py-1'>资料管理</DropdownMenuItem>
+						<DropdownMenuItem className='cursor-pointer py-1'>
+							<SquareUserRound /> 资料管理
+						</DropdownMenuItem>
 					</Link>
 					<Link to='/member' search={{ system: 'bind' }}>
-						<DropdownMenuItem className='cursor-pointer py-1'>帐号绑定</DropdownMenuItem>
+						<DropdownMenuItem className='cursor-pointer py-1'>
+							<LaptopMinimalCheck />帐号绑定
+						</DropdownMenuItem>
 					</Link>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
@@ -59,13 +63,17 @@ function LoginComponent() {
 					{config.menu.user?.label && <DropdownMenuLabel>{config.menu.user?.label}</DropdownMenuLabel>}
 					{config.menu.user?.items?.map((item) => (
 						<Link key={item.to} to={item.to} target={item.target || '_self'}>
-							<DropdownMenuItem className='cursor-pointer py-1'>{item.title}</DropdownMenuItem>
+							<DropdownMenuItem className='cursor-pointer py-1'>
+								{item.icon}{item.title}
+							</DropdownMenuItem>
 						</Link>
 					))}
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem className='cursor-pointer py-2 ' onClick={() => logout()}>退出登录</DropdownMenuItem>
+					<DropdownMenuItem className='cursor-pointer py-2 ' onClick={() => logout()}>
+						<LogOut />退出登录
+					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>

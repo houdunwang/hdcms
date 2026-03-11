@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import * as config from '@hdcms/config'
 
 import {
   SidebarGroup,
@@ -10,12 +11,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-export function NavSecondary({ items, ...props }: { items: { title: string, url: string, icon: React.ReactNode }[] } & React.ComponentPropsWithoutRef<typeof SidebarGroup>): React.JSX.Element {
+export function NavSecondary({ ...props }: React.ComponentPropsWithoutRef<typeof SidebarGroup>): React.JSX.Element {
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map((item) => (
+          {config.menu.admin.secondary.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
                 <a href={item.url}>
