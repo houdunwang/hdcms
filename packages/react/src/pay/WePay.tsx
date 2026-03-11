@@ -8,10 +8,12 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
-import { useApi } from '@/hooks'
+import { useApi, useAuth } from '@/hooks'
 import { useMutation } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
 import { CircleX, Clock } from 'lucide-react'
 import { useCallback, useEffect, useState, type ReactNode } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	subject: string
@@ -31,27 +33,35 @@ export const WePay = ({ payButton, ...props }: Props): React.JSX.Element => {
 		<AlertDialog open={open} onOpenChange={openHandle}>
 			<AlertDialogTrigger asChild>{payButton || <Button> 微信支付 </Button>}</AlertDialogTrigger>
 			<AlertDialogContent className="flex flex-col justify-center items-center ">
-
 				<AlertDialogHeader>
 					<AlertDialogTitle className="text-center"></AlertDialogTitle>
 					<AlertDialogDescription></AlertDialogDescription>
-					<PayQr {...props} setOpen={setOpen} />
+					<Pay {...props} setOpen={setOpen} />
 				</AlertDialogHeader>
-				{/* <AlertDialogFooter>
-					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction>Continue</AlertDialogAction>
-				</AlertDialogFooter> */}
 			</AlertDialogContent>
 		</AlertDialog>
 	)
 }
 
-function PayQr({
-	children,
-	setOpen,
-	qrRefreshTime = 120,
-	...props
-}: { setOpen: (open: boolean) => void } & Props) {
+//显示微信扫码二维码时验证是否登录
+function Pay({ setOpen, ...props }: { setOpen: (open: boolean) => void } & Props) {
+	const { isAuthenticated } = useAuth()
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (!isAuthenticated(true)) {
+			toast.error('请登录后操作')
+			navigate({ href: '/auth?action=login' })
+		}
+	}, [isAuthenticated])
+	if (!isAuthenticated()) {
+		return null
+	}
+	return <PayQr {...props} setOpen={setOpen} />
+}
+
+//微信扫码二维码
+function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: (open: boolean) => void } & Props) {
 	const { api } = useApi()
 	const qrMutation = useMutation(api.pays.wepay.mutationOptions({
 		onError: () => {
@@ -59,9 +69,7 @@ function PayQr({
 		},
 	}))
 	const [checkNum, setCheckNum] = useState(qrRefreshTime)
-	const checkMutation = useMutation(api.pays.wepayCheck.mutationOptions({
-
-	}))
+	const checkMutation = useMutation(api.pays.wepayCheck.mutationOptions())
 	const getQr = useCallback(async () => {
 		return qrMutation.mutateAsync({
 			body: {

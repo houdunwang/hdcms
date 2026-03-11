@@ -28,7 +28,9 @@ export function Header({ children, menus }: IProps): React.JSX.Element {
 				</Link>}
 				{isMobile || <div className="hidden lg:flex justify-start items-center gap-8 flex-1 ml-3">
 					{config.menu.header?.map((item) => (
-						<Link key={item.to} to={item.to} target={item.target || '_self'}>
+						<Link key={item.to} to={item.to} target={item.target || '_self'} activeProps={{
+							className: 'text-destructive'
+						}}>
 							<span>{item.title}</span>
 						</Link>
 					))}
@@ -39,7 +41,6 @@ export function Header({ children, menus }: IProps): React.JSX.Element {
 		</header>
 	)
 }
-
 
 export function MobileMenu({ menus, }: IProps): React.JSX.Element {
 	const [open, setOpen] = useState(false)

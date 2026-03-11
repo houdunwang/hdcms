@@ -11,3 +11,17 @@ body {
     @apply cursor-pointer;
   }
 }
+
+.theme-transition::view-transition-old(root),
+.theme-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-transition::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
+.theme-transition::view-transition-old(root) {
+  z-index: 1;
+}

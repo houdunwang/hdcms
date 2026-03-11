@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { useRequestClient } from './useRequestClient';
 import type { Data } from '@app/admin/data'
 export interface UseAuthReturn {
-	isAuthenticated: (record?: boolean) => string | null;
+	isAuthenticated: (record?: boolean) => boolean;
 	login: (data: typeof registry.$tree.auth.login.types.response.data) => void;
 	getCurrentUser: () => Promise<void>;
 	logout: () => void;
@@ -28,12 +28,12 @@ export const useAuth = (): UseAuthReturn => {
 	 * @param record - 是否记录当前页面路径，用于后续重定向 - boolean @default(false)
 	 * @returns 是否已认证 - boolean
 	 */
-	const isAuthenticated = (record = false): string | null => {
+	const isAuthenticated = (record = false): boolean => {
 		const isLogin = localStorage.getItem(AuthEnum.TOKEN_NAME)
 		if (!isLogin && record) {
 			localStorage.setItem('history', window.location.href)
 		}
-		return isLogin
+		return !!isLogin
 	}
 
 	/**
