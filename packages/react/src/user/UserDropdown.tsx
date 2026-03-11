@@ -8,10 +8,11 @@ import type { IUserDropdownMenus } from '@/types'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { Settings } from 'lucide-react'
+import * as config from '@hdcms/config'
 interface Props {
 	menus?: IUserDropdownMenus
 }
-export const UserDropdown = ({ menus }: Props): React.JSX.Element => {
+export const UserDropdown = (): React.JSX.Element => {
 	const { isAuthenticated, isAdmin } = useAuth()
 	return (
 		<div className="flex gap-3 items-center">
@@ -24,12 +25,12 @@ export const UserDropdown = ({ menus }: Props): React.JSX.Element => {
 				</a>
 				}
 			</div>
-			{isAuthenticated() ? <LoginComponent menus={menus} /> : <UnLogin />}
+			{isAuthenticated() ? <LoginComponent /> : <UnLogin />}
 		</div>
 	)
 }
 
-function LoginComponent({ menus }: Props) {
+function LoginComponent() {
 	const { user, logout } = useAuth()
 	return (
 		<DropdownMenu>
@@ -57,9 +58,9 @@ function LoginComponent({ menus }: Props) {
 					</Link>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
-					{menus?.label && <DropdownMenuSeparator />}
-					{menus?.label && <DropdownMenuLabel>{menus?.label}</DropdownMenuLabel>}
-					{menus?.items?.map((item) => (
+					{config.menu.user?.label && <DropdownMenuSeparator />}
+					{config.menu.user?.label && <DropdownMenuLabel>{config.menu.user?.label}</DropdownMenuLabel>}
+					{config.menu.user?.items?.map((item) => (
 						<Link key={item.to} to={item.to} target={item.target || '_self'}>
 							<DropdownMenuItem className='cursor-pointer py-1'>{item.title}</DropdownMenuItem>
 						</Link>

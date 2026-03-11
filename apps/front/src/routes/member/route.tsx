@@ -1,4 +1,4 @@
-import { HeaderBar } from '@/components/common/HeaderBar'
+import { Header } from '@houdunyun/react/common'
 import { useAuth } from '@houdunyun/react/hooks'
 import { MemberLayout } from '@houdunyun/react/member'
 import type { ILinkItem } from '@houdunyun/react/types'
@@ -24,7 +24,7 @@ const menus = [
 function RouteComponent() {
 	const { user } = useAuth()
 	return <div>
-		<HeaderBar />
+		<Header />
 		<MemberLayout user={user!} menus={menus} />
 	</div >
 }

@@ -1,7 +1,6 @@
 import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
 import type { RouterContextConfig } from '@houdunyun/react/types'
-import { HeaderBar } from '@/components/common/HeaderBar'
-import { FooterComponent } from '@/components/common/FooterComponent'
+import { Footer, Header } from '@houdunyun/react/common'
 
 export const Route = createFileRoute('/front')({
 	component: RouteComponent,
@@ -17,10 +16,10 @@ export const Route = createFileRoute('/front')({
 
 function RouteComponent() {
 	return <>
-		<HeaderBar />
+		<Header />
 		<div className="container mx-auto mt-12 min-h-[calc(100vh-var(--header-height))]">
 			<Outlet />
 		</div>
-		<FooterComponent />
+		<Footer />
 	</>
 }

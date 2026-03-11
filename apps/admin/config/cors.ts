@@ -1,5 +1,5 @@
 import { defineConfig } from '@adonisjs/cors'
-
+import * as config from '@hdcms/config'
 /**
  * Configuration options to tweak the CORS policy. The following
  * options are documented on the official documentation website.
@@ -15,11 +15,16 @@ const corsConfig = defineConfig({
    * configure allowed origins.
    */
   // origin: true,
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:3333',
-    'https://client.hdcms.com'
-  ],
+  origin: (requestOrigin) => {
+    if (!requestOrigin) return false
+    try {
+      const { hostname } = new URL(requestOrigin)
+      if (hostname === 'localhost') {
+        return requestOrigin
+      }
+    } catch { }
+    return [config.frp.clientUrl].includes(requestOrigin) ? requestOrigin : false
+  },
 
   methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
   headers: true,

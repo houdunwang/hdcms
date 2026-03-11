@@ -38,6 +38,9 @@
     "#start/*": "./start/*.js",
     "#config/*": "./config/*.js"
   },
+  "peerDependencies": {
+    "@hdcms/config": "workspace:*"
+  },
   "devDependencies": {
     "@adonisjs/assembler": "^8.0.0",
     "@adonisjs/eslint-config": "^3.0.0",

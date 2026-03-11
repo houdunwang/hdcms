@@ -36,5 +36,5 @@ const rootElement = document.getElementById('app')!
 
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
-  root.render(<HdProvider router={router} queryClient={queryClient} baseUrl={import.meta.env.VITE_API_URL} />)
+  root.render(<HdProvider router={router} queryClient={queryClient} />)
 }

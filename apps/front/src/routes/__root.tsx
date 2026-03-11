@@ -1,4 +1,3 @@
-import { HeaderBar } from '@/components/common/HeaderBar'
 import type { useAuth } from '@houdunyun/react/hooks'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClient } from '@tanstack/react-query'
@@ -6,7 +5,7 @@ import { Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/re
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { useTitle } from 'ahooks'
 import '../index.css'
-import { appConfig } from '@/config/app'
+import * as config from '@hdcms/config'
 
 interface RootRouteContext {
   auth: ReturnType<typeof useAuth>
@@ -27,7 +26,7 @@ function RootComponent() {
     .reverse()
     .find((match) => match.context.config?.title)
   const title = matchWithTitle?.context.config?.title
-  useTitle(title ? title + ' - ' + appConfig.siteName : appConfig.siteName || '');
+  useTitle(title ? title + ' - ' + config.app.appName : config.app.appName || '');
 
   return (
     <>

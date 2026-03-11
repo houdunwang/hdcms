@@ -42,6 +42,7 @@ export default defineConfig({
     'src/wechat/index.ts',
     'src/types/index.ts',
     'src/package/index.ts',
+    'src/admin/index.ts',
   ],
   unbundle: true,
   format: ['esm'],

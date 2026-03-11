@@ -4,16 +4,17 @@ import { fieldErrorAtom } from '@/store/fieldErrorStore';
 import { createTuyau } from '@tuyau/core/client';
 import { useSetAtom } from 'jotai';
 import { toast } from "sonner";
+import * as config from '@hdcms/config'
 
 import type { Tuyau } from '@tuyau/core/client'
-import { config } from '@/provider';
 type Registry = typeof import('@app/admin/registry').registry
 type RequestClient = Tuyau<Registry>
 
 export function useRequestClient(): RequestClient {
 	const setFieldError = useSetAtom(fieldErrorAtom)
+
 	return createTuyau({
-		baseUrl: config.baseUrl,
+		baseUrl: config.app.nodeEnv === 'development' ? `http://localhost:${config.app.port}` : '/',
 		registry,
 		headers: { Accept: 'application/json' },
 		timeout: 10000,

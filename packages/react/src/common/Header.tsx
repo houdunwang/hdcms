@@ -8,43 +8,48 @@ import {
 } from "@/components/ui/sheet"
 import { useIsMobile } from '@/hooks'
 import type { ILinkItem } from '@/types'
+import { UserDropdown } from "@/user"
 import { Link } from '@tanstack/react-router'
 import { House } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
+import * as config from '@hdcms/config'
 export interface IProps {
-	left?: ReactNode
 	menus?: ILinkItem[]
 	children?: ReactNode
-	right?: ReactNode
 }
-export function Header({ left, children, menus, right }: IProps): React.JSX.Element {
+export function Header({ children, menus }: IProps): React.JSX.Element {
 	const isMobile = useIsMobile()
 	return (
 		<header className="bg-background/80 backdrop-blur-xl shadow-[0_0_0px_rgba(0,0,0,0.1)]  flex items-center gap-3 justify-between sticky top-0 z-10 h-[var(--header-height)] px-6 lg:px-12">
 			<div className="flex items-center gap-1 justify-between flex-1">
-				{isMobile ? <MobileMenu menus={menus} children={left} /> : <Link to="/">{left}</Link>}
+				{isMobile ? <MobileMenu menus={menus} /> : <Link to="/" className="flex items-center gap-1">
+					{config.app.logo}
+					{config.app.appName}
+				</Link>}
 				{isMobile || <div className="hidden lg:flex justify-start items-center gap-8 flex-1 ml-3">
-					{menus?.map((item) => (
-						<Link key={item.to} to={item.to} target={item.target}>
-							{item.icon && <item.icon />}
+					{config.menu.header?.map((item) => (
+						<Link key={item.to} to={item.to} target={item.target || '_self'}>
 							<span>{item.title}</span>
 						</Link>
 					))}
 					{children}
 				</div>}
 			</div>
-			{right}
+			<UserDropdown />
 		</header>
 	)
 }
 
 
-export function MobileMenu({ menus, children }: IProps & { children: ReactNode }): React.JSX.Element {
+export function MobileMenu({ menus, }: IProps): React.JSX.Element {
 	const [open, setOpen] = useState(false)
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
-				{children}
+				<div className="flex items-center gap-2">
+					{config.app.logo}
+					{config.app.appName}
+				</div>
 			</SheetTrigger>
 			<SheetContent side='right'>
 				<SheetHeader>

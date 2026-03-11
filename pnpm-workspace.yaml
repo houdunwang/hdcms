@@ -5,6 +5,7 @@ packages:
   - packages/react
   - packages/network
   - packages/frp
+  - config
 
 onlyBuiltDependencies:
   - '@alicloud/openapi-core'

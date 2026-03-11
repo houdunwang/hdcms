@@ -1,6 +1,5 @@
-import { FooterComponent } from '@/components/common/FooterComponent'
-import { HeaderBar } from '@/components/common/HeaderBar'
 import { Button } from '@/components/ui/button'
+import { Footer, Header } from '@houdunyun/react/common'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {
@@ -26,9 +25,9 @@ export const Route = createFileRoute('/')({
     }
   },
   component: () => <div className=''>
-    <HeaderBar />
+    <Header />
     <HomePage />
-    <FooterComponent />
+    <Footer />
   </div>,
 })
 
