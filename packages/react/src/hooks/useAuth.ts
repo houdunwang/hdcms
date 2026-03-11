@@ -12,11 +12,18 @@ export interface UseAuthReturn {
 	logout: () => void;
 	user: IUser | undefined;
 	setUser: (update: IUser | undefined) => void;
+	isAdmin: () => boolean;
 }
 
 export const useAuth = (): UseAuthReturn => {
 	const [user, setUser] = useAtom(userAtom)
 	const request = useRequestClient()
+
+	const isAdmin = (): boolean => {
+		console.log('user', user)
+		console.log('user?.id === 1', user?.id === 1)
+		return user?.id === 1
+	}
 
 	/**
 	 * @summary 检查用户是否已认证
@@ -71,6 +78,7 @@ export const useAuth = (): UseAuthReturn => {
 
 	return {
 		isAuthenticated,
+		isAdmin,
 		login,
 		getCurrentUser,
 		logout,
