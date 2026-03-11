@@ -1,12 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
-import type { IUserDropdownMenus } from '@/types'
 import { useAuth } from '@/hooks/useAuth'
-import { Link } from '@tanstack/react-router'
-import dayjs from 'dayjs'
 import '@/plugin/dayjs'
 import { ModeToggle } from '@/theme/mode-toggle'
+import type { IUserDropdownMenus } from '@/types'
+import { Link } from '@tanstack/react-router'
+import dayjs from 'dayjs'
 interface Props {
 	menus?: IUserDropdownMenus
 }
@@ -51,8 +51,8 @@ function LoginComponent({ menus }: Props) {
 				<DropdownMenuGroup>
 					{menus?.label && <DropdownMenuSeparator />}
 					{menus?.label && <DropdownMenuLabel>{menus?.label}</DropdownMenuLabel>}
-					{(menus?.items ?? []).map((item) => (
-						<Link key={item.to} to={item.to} >
+					{menus?.items?.map((item) => (
+						<Link key={item.to} to={item.to} target={item.target || '_self'}>
 							<DropdownMenuItem className='cursor-pointer py-1'>{item.title}</DropdownMenuItem>
 						</Link>
 					))}

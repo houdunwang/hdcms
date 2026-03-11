@@ -14,7 +14,7 @@ export const PackageItem = ({ item }: Props): JSX.Element => {
 	}
 	return (
 		<Card className='min-w-92 py-12 rounded-none relative'>
-			<CardHeader className='bg-white'>
+			<CardHeader className=''>
 				<CardTitle className='flex flex-col justify-center '>
 					<div className="mt-3 w-full truncate text-destructive">
 						{item.title}

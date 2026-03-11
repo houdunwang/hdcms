@@ -53,11 +53,17 @@ function PayQr({
 	...props
 }: { setOpen: (open: boolean) => void } & Props) {
 	const { api } = useApi()
-	const { isPending, mutateAsync, data } = useMutation(api.pays.wepay.mutationOptions())
+	const qrMutation = useMutation(api.pays.wepay.mutationOptions({
+		onError: () => {
+			setOpen(false)
+		},
+	}))
 	const [checkNum, setCheckNum] = useState(qrRefreshTime)
-	const checkMutation = useMutation(api.pays.wepayCheck.mutationOptions())
+	const checkMutation = useMutation(api.pays.wepayCheck.mutationOptions({
+
+	}))
 	const getQr = useCallback(async () => {
-		return mutateAsync({
+		return qrMutation.mutateAsync({
 			body: {
 				subject: props.subject,
 				orderable_type: props.orderable_type,
@@ -67,10 +73,10 @@ function PayQr({
 	}, [])
 
 	const checkPay = useCallback(async () => {
-		if (!data?.data.sn) return
+		if (!qrMutation.data?.data.sn) return
 		try {
 			const res = await checkMutation.mutateAsync({
-				body: { sn: data?.data.sn },
+				body: { sn: qrMutation.data?.data.sn },
 			})
 			if (res?.data.success) {
 				props.onSuccess()
@@ -79,7 +85,7 @@ function PayQr({
 		} catch (error) {
 			setOpen(false)
 		}
-	}, [data?.data.sn, props.onSuccess])
+	}, [qrMutation.data?.data.sn, props.onSuccess])
 
 	useEffect(() => {
 		getQr()
@@ -98,7 +104,7 @@ function PayQr({
 		const timer = setTimeout(() => setCheckNum(checkNum - 1), 1000)
 		return () => clearTimeout(timer)
 	}, [checkNum])
-	if (isPending || !data)
+	if (qrMutation.isPending || !qrMutation.data)
 		return (
 			<div className="flex items-center justify-center py-12">
 				<Spinner className="size-12" />
@@ -113,7 +119,7 @@ function PayQr({
 			</div>
 			<div>请扫描下方二维码完成支付</div>
 			<div>
-				<img src={data?.data?.qrImg || ''} />
+				<img src={qrMutation.data?.data?.qrImg || ''} />
 			</div>
 			<div className="text-muted-foreground text-sm flex items-center justify-center gap-1">
 				<Clock size={15} /> {checkNum} 秒后自动刷新

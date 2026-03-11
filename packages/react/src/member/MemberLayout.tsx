@@ -43,9 +43,9 @@ export function MemberLayout({ user, className, menus }: Props): React.JSX.Eleme
 		<div className="container mx-auto px-3 lg:px-12 min-h-[calc(100vh-var(--header-height))] ">
 			<div className="grid lg:grid-cols-[auto_1fr] lg:gap-6 items-stretch">
 				{isMobile ?
-					<MobileLeft systemMenu={systemMenu} menus={menus} />
+					<MobileMenu systemMenu={systemMenu} menus={menus} />
 					:
-					<PcLeft user={user} systemMenu={systemMenu} menus={menus} />
+					<PcMenu user={user} systemMenu={systemMenu} menus={menus} />
 				}
 				<Card className="bg-background">
 					<CardContent className='pb-20'>
@@ -63,7 +63,7 @@ interface LeftMenuProps {
 	menus?: ILinkItem[]
 }
 
-function MobileLeft({ systemMenu, menus }: Omit<LeftMenuProps, 'user'>) {
+function MobileMenu({ systemMenu, menus }: Omit<LeftMenuProps, 'user'>) {
 	const menuClassName = useMemberClassName()
 	return <div className='flex justify-between bg-background border-t px-3 fixed bottom-0 left-0 right-0'>
 		{SystemMenus.map((menu: typeof SystemMenus[number]) => (
@@ -97,7 +97,7 @@ function MobileLeft({ systemMenu, menus }: Omit<LeftMenuProps, 'user'>) {
 	</div>
 }
 
-function PcLeft({ user, systemMenu, menus }: LeftMenuProps) {
+function PcMenu({ user, systemMenu, menus }: LeftMenuProps) {
 	const menuClassName = useMemberClassName()
 	return <section className='hidden lg:block'>
 		<Card>

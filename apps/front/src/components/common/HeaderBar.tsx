@@ -1,24 +1,17 @@
 import { appConfig } from "@/config/app"
 import { headerMenus, userDropdownMenus } from "@/config/menus"
-// import { userDropdownMenus } from "@/config/userDropdownMenus"
-import { UserDropdown } from "@houdunyun/react/user"
 import { Header } from "@houdunyun/react/common"
-import { Link } from "@tanstack/react-router"
+import { UserDropdown } from "@houdunyun/react/user"
 
 export const HeaderBar = () => {
-
 	return (
 		<Header
-			left={<Link to="/" className="flex items-center gap-1">
+			left={<div className="flex items-center gap-1">
 				{appConfig.logo} {appConfig.siteName}
-			</Link>}
+			</div>}
+			menus={headerMenus}
 			right={<UserDropdown menus={userDropdownMenus} />}
 		>
-			<div className="flex items-center gap-6 ml-3">
-				{headerMenus.map((item) => (
-					<Link key={item.title} to={item.to}>{item.title}</Link>
-				))}
-			</div>
 		</Header>
 	)
 }

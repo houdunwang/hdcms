@@ -2,7 +2,7 @@ import { Footer } from "@houdunyun/react/common"
 import { Code } from "lucide-react"
 
 export const appConfig: React.ComponentProps<typeof Footer> = {
-	siteName: '后盾云',
+	siteName: 'hdcms.com',
 	domain: 'https://www.houdunyun.com',
 	logo: <Code />,
 	icp: '鄂ICP备xxxxxxxxxx号',

@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MemberRouteRouteImport } from './routes/member/route'
 import { Route as FrontRouteRouteImport } from './routes/front/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as MemberIndexRouteImport } from './routes/member/index'
+import { Route as MemberExampleRouteImport } from './routes/member/example'
 import { Route as FrontPackageRouteImport } from './routes/front/package'
 
+const MemberRouteRoute = MemberRouteRouteImport.update({
+  id: '/member',
+  path: '/member',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FrontRouteRoute = FrontRouteRouteImport.update({
   id: '/front',
   path: '/front',
@@ -30,10 +36,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MemberIndexRoute = MemberIndexRouteImport.update({
-  id: '/member/',
-  path: '/member/',
-  getParentRoute: () => rootRouteImport,
+const MemberExampleRoute = MemberExampleRouteImport.update({
+  id: '/example',
+  path: '/example',
+  getParentRoute: () => MemberRouteRoute,
 } as any)
 const FrontPackageRoute = FrontPackageRouteImport.update({
   id: '/package',
@@ -45,41 +51,70 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
   '/front': typeof FrontRouteRouteWithChildren
+  '/member': typeof MemberRouteRouteWithChildren
   '/front/package': typeof FrontPackageRoute
-  '/member/': typeof MemberIndexRoute
+  '/member/example': typeof MemberExampleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
   '/front': typeof FrontRouteRouteWithChildren
+  '/member': typeof MemberRouteRouteWithChildren
   '/front/package': typeof FrontPackageRoute
-  '/member': typeof MemberIndexRoute
+  '/member/example': typeof MemberExampleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
   '/front': typeof FrontRouteRouteWithChildren
+  '/member': typeof MemberRouteRouteWithChildren
   '/front/package': typeof FrontPackageRoute
-  '/member/': typeof MemberIndexRoute
+  '/member/example': typeof MemberExampleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/front' | '/front/package' | '/member/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/front'
+    | '/member'
+    | '/front/package'
+    | '/member/example'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/front' | '/front/package' | '/member'
-  id: '__root__' | '/' | '/auth' | '/front' | '/front/package' | '/member/'
+  to:
+    | '/'
+    | '/auth'
+    | '/front'
+    | '/member'
+    | '/front/package'
+    | '/member/example'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/front'
+    | '/member'
+    | '/front/package'
+    | '/member/example'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRoute
   FrontRouteRoute: typeof FrontRouteRouteWithChildren
-  MemberIndexRoute: typeof MemberIndexRoute
+  MemberRouteRoute: typeof MemberRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/member': {
+      id: '/member'
+      path: '/member'
+      fullPath: '/member'
+      preLoaderRoute: typeof MemberRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/front': {
       id: '/front'
       path: '/front'
@@ -101,12 +136,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/member/': {
-      id: '/member/'
-      path: '/member'
-      fullPath: '/member/'
-      preLoaderRoute: typeof MemberIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/member/example': {
+      id: '/member/example'
+      path: '/example'
+      fullPath: '/member/example'
+      preLoaderRoute: typeof MemberExampleRouteImport
+      parentRoute: typeof MemberRouteRoute
     }
     '/front/package': {
       id: '/front/package'
@@ -130,11 +165,23 @@ const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
   FrontRouteRouteChildren,
 )
 
+interface MemberRouteRouteChildren {
+  MemberExampleRoute: typeof MemberExampleRoute
+}
+
+const MemberRouteRouteChildren: MemberRouteRouteChildren = {
+  MemberExampleRoute: MemberExampleRoute,
+}
+
+const MemberRouteRouteWithChildren = MemberRouteRoute._addFileChildren(
+  MemberRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRoute,
   FrontRouteRoute: FrontRouteRouteWithChildren,
-  MemberIndexRoute: MemberIndexRoute,
+  MemberRouteRoute: MemberRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

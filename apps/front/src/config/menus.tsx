@@ -5,11 +5,11 @@ export const headerMenus = [
 	{
 		title: '订阅会员',
 		to: '/front/package',
-		target: '_blank',
 	},
 	{
-		title: '订阅网站',
-		to: 'https://www.houdunyun.com',
+		title: '视频教程',
+		to: 'https://www.houdunren.com',
+		target: '_blank',
 	},
 ] as ILinkItem[]
 
@@ -18,12 +18,9 @@ export const userDropdownMenus = {
 	label: '社区网站',
 	items: [
 		{
-			title: '后盾云软件',
-			to: 'https://www.houdunyun.com',
-		},
-		{
 			title: '后盾人教程',
 			to: 'https://www.houdunren.com',
+			target: '_blank',
 		},
 	],
 } as IUserDropdownMenus

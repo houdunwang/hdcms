@@ -26,27 +26,31 @@ export default class PaysController extends BaseController {
    * @responseBody 200 - { "code": 200, "message": "生成成功", "data": { "sn": "string", "qrImg": "string" } }
    */
   async wepay({ request, serialize }: HttpContext) {
-    const payload: PayPayload = await request.validateUsing(payValidator)
-    const price = await this.payService.getPrice(payload.orderable_type, payload.orderable_id)
-    const order = await this.orderService.create({ ...payload, price })
-    const notifyUrl = url('pay.notify')
-    console.log('notifyUrl', notifyUrl)
-    const params = {
-      description: payload.subject,
-      out_trade_no: order.sn,
-      notify_url: notifyUrl,
-      amount: {
-        total: price * 100,
-      },
-      scene_info: {
-        payer_client_ip: request.ip(),
-      },
-    };
-    const result = await this.payService.pay().transactions_native(params);
-    const qrImg = await qrcode.toDataURL(result.data.code_url, {
-      width: 250,
-    })
-    return serialize({ sn: order.sn, qrImg })
+    try {
+      const payload: PayPayload = await request.validateUsing(payValidator)
+      const price = await this.payService.getPrice(payload.orderable_type, payload.orderable_id)
+      const order = await this.orderService.create({ ...payload, price })
+      const notifyUrl = url('pay.notify')
+      console.log('notifyUrl', notifyUrl)
+      const params = {
+        description: payload.subject,
+        out_trade_no: order.sn,
+        notify_url: notifyUrl,
+        amount: {
+          total: price * 100,
+        },
+        scene_info: {
+          payer_client_ip: request.ip(),
+        },
+      };
+      const result = await this.payService.pay().transactions_native(params);
+      const qrImg = await qrcode.toDataURL(result.data.code_url, {
+        width: 250,
+      })
+      return serialize({ sn: order.sn, qrImg })
+    } catch (error) {
+      return this.error('生成二维码失败')
+    }
   }
 
 
