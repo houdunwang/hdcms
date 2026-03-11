@@ -1,7 +1,7 @@
 import { UploadService } from '#core/services/upload_service'
 import { createUserValidator, updatePasswordValidator, updateUserValidator } from '#core/validators/user'
 import User from '#models/user'
-import UserTransformer from '#core/transformers/user_transformer'
+import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.ts'

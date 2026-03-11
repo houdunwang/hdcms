@@ -1,7 +1,7 @@
 import { getUserByName } from '#core/helper'
 import { loginValidator, registerValidator } from '#core/validators/auth'
 import User from '#models/user'
-import UserTransformer from '#core/transformers/user_transformer'
+import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import { errors } from '@vinejs/vine'
