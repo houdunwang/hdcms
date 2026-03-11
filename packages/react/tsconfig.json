@@ -2,6 +2,12 @@
 	"include": [
 		"src/**/*",
 	],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts",
+		"src/components/**/*",
+		"src/plugin/**/*",
+	],
 	"compilerOptions": {
 		"target": "ES2022",
 		"module": "ESNext",
@@ -30,6 +36,6 @@
 		"noEmit": false,
 		"declaration": true,
 		"emitDeclarationOnly": true,
-		"declarationMap": true
+		"declarationMap": false
 	}
 }

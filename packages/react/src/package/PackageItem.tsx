@@ -16,7 +16,7 @@ export const PackageItem = ({ item }: Props) => {
 			<CardHeader className='bg-white'>
 				<CardTitle className='flex flex-col justify-center '>
 					<div className="mt-3 w-full truncate text-destructive">
-						{item.title}
+						21{item.title}
 					</div>
 					<div className="text-3xl font-bold text-primary mt-3">{item.price}</div>
 					<div className="text-sm opacity-50 line-through">{item.originalPrice}</div>

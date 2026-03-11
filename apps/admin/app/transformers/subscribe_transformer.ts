@@ -5,7 +5,6 @@ export default class SubscribeTransformer extends BaseTransformer<Subscribe> {
   toObject() {
     return this.pick(this.resource, [
       'id',
-      'title',
       'description',
     ])
   }

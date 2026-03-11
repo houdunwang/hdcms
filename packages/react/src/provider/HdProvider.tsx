@@ -9,8 +9,8 @@ import { useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
-import { useApi } from '../hooks/useApi'
-import { useAuth } from '../hooks/useAuth'
+import { useApi } from '@/hooks/useApi'
+import { useAuth } from '@/hooks/useAuth'
 
 export const config = {
 	baseUrl: ''

@@ -1,5 +1,6 @@
 import { devtools } from '@tanstack/devtools-vite'
 import { defineConfig } from 'vite'
+import path from 'node:path'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
@@ -17,6 +18,7 @@ const config = defineConfig({
   ],
   resolve: {
     alias: {
+      '@': path.resolve(__dirname, 'src'),
       // '@core': path.resolve(__dirname, 'core')
     },
   },

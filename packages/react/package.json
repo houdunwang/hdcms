@@ -19,20 +19,19 @@
     "dist"
   ],
   "exports": {
-    "./auth": "./dist/auth.mjs",
-    "./common": "./dist/common.mjs",
-    "./form": "./dist/form.mjs",
-    "./hooks": "./dist/hooks.mjs",
-    "./member": "./dist/member.mjs",
-    "./package": "./dist/package.mjs",
-    "./pay": "./dist/pay.mjs",
-    "./plugin": "./dist/plugin.mjs",
-    "./provider": "./dist/provider.mjs",
-    "./store": "./dist/store.mjs",
-    "./theme": "./dist/theme.mjs",
-    "./types": "./dist/types.mjs",
-    "./user": "./dist/user.mjs",
-    "./wechat": "./dist/wechat.mjs",
+    "./auth": "./dist/auth/index.mjs",
+    "./common": "./dist/common/index.mjs",
+    "./form": "./dist/form/index.mjs",
+    "./hooks": "./dist/hooks/index.mjs",
+    "./member": "./dist/member/index.mjs",
+    "./package": "./dist/package/index.mjs",
+    "./pay": "./dist/pay/index.mjs",
+    "./provider": "./dist/provider/index.mjs",
+    "./store": "./dist/store/index.mjs",
+    "./theme": "./dist/theme/index.mjs",
+    "./types": "./dist/types/index.mjs",
+    "./user": "./dist/user/index.mjs",
+    "./wechat": "./dist/wechat/index.mjs",
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -54,9 +53,6 @@
       ],
       "pay": [
         "dist/pay.d.ts"
-      ],
-      "plugin": [
-        "dist/plugin.d.ts"
       ],
       "provider": [
         "dist/provider.d.ts"
