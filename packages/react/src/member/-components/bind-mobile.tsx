@@ -3,7 +3,7 @@ import { hdCreateFormHook, useApi } from "@/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 
-export const BindMobile = () => {
+export const BindMobile = (): React.JSX.Element => {
   const { api, auth } = useApi()
   const mutation = useMutation(api.binds.mobile.mutationOptions())
   const { useAppForm } = hdCreateFormHook()

@@ -12,7 +12,7 @@ interface Props {
 	type: 'email' | 'mobile'
 	value: string
 }
-export const SendCodeButton = ({ type, value }: Props) => {
+export function SendCodeButton({ type, value }: { type: 'email' | 'mobile', value: string }): React.JSX.Element {
 	const validates = {
 		email: z.string().min(1, '请输入正确的邮箱'),
 		mobile: z.string().regex(/^1[3-9]\d{9}$/, '请输入正确的手机号')

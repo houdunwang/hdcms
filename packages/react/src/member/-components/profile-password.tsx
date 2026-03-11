@@ -7,7 +7,7 @@ import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import z from "zod"
 
-export const ProfilePassword = () => {
+export const ProfilePassword = (): React.JSX.Element => {
   const { api } = useApi()
   const mutation = useMutation(api.users.password.mutationOptions())
   const { useAppForm } = createFormHook({

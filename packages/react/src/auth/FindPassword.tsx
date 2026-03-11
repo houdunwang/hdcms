@@ -15,7 +15,7 @@ import z from "zod"
 import { FieldCode } from "../form/FieldCode"
 import type { AuthComponentProps } from "./types"
 
-export function FindPassword(props: AuthComponentProps) {
+export function FindPassword(props: AuthComponentProps): React.JSX.Element {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const [codeType, setCodeType] = useState<'email' | 'mobile'>('email')
@@ -119,7 +119,7 @@ const highlights = [
 		icon: ShieldCheck,
 	},
 ] as const
-export function FindPasswordRightSpace() {
+export function FindPasswordRightSpace(): React.JSX.Element {
 	return <Card>
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

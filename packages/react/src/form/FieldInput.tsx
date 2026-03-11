@@ -5,7 +5,7 @@ import { useFieldContext } from "@/form"
 import type { FormFieldProps } from "@/form/types"
 import { FieldValidateError } from "./FieldValidateError"
 
-export function FieldInput({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {
+export function FieldInput({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
 	const field = useFieldContext<string>()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
 

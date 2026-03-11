@@ -4,7 +4,7 @@ import { ProfileAvatar } from './-components/profile-avatar'
 import { ProfileInfo } from './-components/profile-info'
 import { ProfilePassword } from './-components/profile-password'
 
-export function Profile() {
+export function Profile(): React.JSX.Element {
 	return (
 		<Tabs defaultValue="avatar">
 			<TabsList>

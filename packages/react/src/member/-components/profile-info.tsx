@@ -4,7 +4,7 @@ import { useApi } from "@/hooks"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 
-export const ProfileInfo = () => {
+export const ProfileInfo = (): React.JSX.Element => {
   const { auth, api } = useApi()
   const mutation = useMutation(api.users.update.mutationOptions({
     onSuccess: ({ data }) => {

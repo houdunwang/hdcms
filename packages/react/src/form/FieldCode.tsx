@@ -9,10 +9,10 @@ import { SendCodeButton } from "./SendCodeButton"
 import { useEffect } from "react"
 
 type CodeType = 'email' | 'mobile'
-interface Props extends FormFieldProps<'input'> {
+interface FieldCodeProps extends FormFieldProps<'input'> {
 	type: CodeType,
 }
-export function FieldCode({ label, description, className, fieldClassName, type, ...props }: Props) {
+export function FieldCode({ label, description, className, fieldClassName, type, ...props }: FieldCodeProps): React.JSX.Element {
 	const form = useFieldContext<string>().form
 	const value = type === 'email' ? form.state.values.email : form.state.values.mobile
 	const field = useField({

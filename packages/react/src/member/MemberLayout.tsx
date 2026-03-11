@@ -20,7 +20,7 @@ interface Props {
 	className?: string
 	menus?: Array<ILinkItem>
 }
-export const useMemberClassName = () => {
+export const useMemberClassName = (): { default: string; active: string } => {
 	const isMobile = useIsMobile()
 	const size = isMobile ? 'px-3 py-2' : 'px-5 py-3'
 	const menuClassName = {
@@ -30,7 +30,7 @@ export const useMemberClassName = () => {
 	return menuClassName
 }
 
-export function MemberLayout({ user, className, menus }: Props) {
+export function MemberLayout({ user, className, menus }: Props): React.JSX.Element {
 	const isMobile = useIsMobile()
 	const route = useMatch({ strict: false })
 	const matchRoute = useMatchRoute()

@@ -3,7 +3,7 @@ import { FieldDescription } from "@/components/ui/field"
 import { Link } from "@tanstack/react-router"
 import type { AuthProps } from "./types"
 
-export const AuthFooter = (props: AuthProps) => {
+export const AuthFooter = (props: AuthProps): React.JSX.Element => {
 	const WechatLoginButton = props.wechatLoginButton
 	return <div className={`space-y-2`}>
 		{props.showWechatLoginButton && (

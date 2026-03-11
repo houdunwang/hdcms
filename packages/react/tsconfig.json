@@ -36,6 +36,7 @@
 		"noEmit": false,
 		"declaration": true,
 		"emitDeclarationOnly": true,
-		"declarationMap": false
+		"declarationMap": false,
+		"isolatedDeclarations": true
 	}
 }

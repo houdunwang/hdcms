@@ -15,7 +15,7 @@ import { useAuth } from '@/hooks/useAuth'
 export const config = {
 	baseUrl: ''
 }
-export const HdProvider = ({ router, queryClient, baseUrl }: { router: AnyRouter, queryClient: QueryClient, baseUrl: string }) => {
+export const HdProvider = ({ router, queryClient, baseUrl }: { router: AnyRouter, queryClient: QueryClient, baseUrl: string }): React.JSX.Element => {
 	config.baseUrl = baseUrl
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 		<QueryClientProvider client={queryClient}>

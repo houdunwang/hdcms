@@ -1,5 +1,9 @@
 import { createFormHookContexts } from '@tanstack/react-form'
-export const { fieldContext, formContext, useFieldContext, useFormContext } = createFormHookContexts()
+const contexts: ReturnType<typeof createFormHookContexts> = createFormHookContexts()
+export const fieldContext: typeof contexts.fieldContext = contexts.fieldContext
+export const formContext: typeof contexts.formContext = contexts.formContext
+export const useFieldContext: typeof contexts.useFieldContext = contexts.useFieldContext
+export const useFormContext: typeof contexts.useFormContext = contexts.useFormContext
 export * from './FieldCaptcha'
 export * from './FieldCode'
 export * from './FieldImage'

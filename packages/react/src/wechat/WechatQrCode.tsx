@@ -18,7 +18,7 @@ type Props = {
 	timeout?: number
 	className?: string
 }
-export const WechatQrCode = ({ onSuccess, scene_str, className, requestCount = 30, timeout = 2000 }: Props) => {
+export function WechatQrCode({ onSuccess, scene_str, className, requestCount = 30, timeout = 2000 }: Props): React.JSX.Element {
 	const { api } = useApi()
 	type CreateQRCodeResponse = Parameters<NonNullable<ReturnType<typeof api.wechatQrs.create.mutationOptions>['onSuccess']>>[0]
 	const [tryCount, setTryCount] = useState(requestCount)

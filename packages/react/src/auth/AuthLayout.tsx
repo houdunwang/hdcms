@@ -13,7 +13,7 @@ const components = {
 	findPassword: FindPassword,
 	wechatLogin: WechatLogin,
 }
-export const AuthLayout = (props: AuthProps) => {
+export const AuthLayout = (props: AuthProps): React.JSX.Element => {
 	const route = useMatch({ strict: false })
 	let action = route.search.action as keyof typeof components | undefined || 'login'
 	const Component = components[action]

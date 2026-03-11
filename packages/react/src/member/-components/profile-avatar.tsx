@@ -6,7 +6,7 @@ import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import { useSetAtom } from "jotai"
 
-export const ProfileAvatar = () => {
+export const ProfileAvatar = (): React.JSX.Element => {
   const { auth, api } = useApi()
   const setUser = useSetAtom(userAtom)
   const mutation = useMutation(api.users.update.mutationOptions({

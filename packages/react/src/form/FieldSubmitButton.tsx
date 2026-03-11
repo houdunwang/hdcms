@@ -12,7 +12,7 @@ type Props = Omit<
 	buttonClassName?: string
 }
 
-export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }: Props) => {
+export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }: Props): React.JSX.Element => {
 	const form = useFormContext()
 	return (
 		<form.Subscribe selector={(state) => state.isSubmitting}>

@@ -10,7 +10,7 @@ import { ModeToggle } from '@/theme/mode-toggle'
 interface Props {
 	menus?: IUserDropdownMenus
 }
-export const UserDropdown = ({ menus }: Props) => {
+export const UserDropdown = ({ menus }: Props): React.JSX.Element => {
 	const { isAuthenticated } = useAuth()
 	return (
 		<div className="flex gap-2 items-center">

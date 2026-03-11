@@ -10,7 +10,7 @@ type Props = {
 	copyright?: string | ReactNode
 	logo?: ReactNode | string
 }
-export const Footer = ({ className, siteName, domain, description, copyright, logo, icp }: Props) => {
+export const Footer = ({ className, siteName, domain, description, copyright, logo, icp }: Props): React.JSX.Element => {
 	return (
 		<footer className={cn("border-t bg-muted/20", className)}>
 			<div className="container mx-auto px-6">

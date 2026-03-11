@@ -3,8 +3,18 @@ import { AuthEnum } from '@/types/enum';
 import { userAtom } from '@/store/userStore';
 import { useAtom } from 'jotai';
 import { useRequestClient } from './useRequestClient';
+import type { IUser } from '@/types';
 
-export const useAuth = () => {
+export interface UseAuthReturn {
+	isAuthenticated: (record?: boolean) => string | null;
+	login: (data: typeof registry.$tree.auth.login.types.response.data) => void;
+	getCurrentUser: () => Promise<void>;
+	logout: () => void;
+	user: IUser | undefined;
+	setUser: (update: IUser | undefined) => void;
+}
+
+export const useAuth = (): UseAuthReturn => {
 	const [user, setUser] = useAtom(userAtom)
 	const request = useRequestClient()
 
@@ -14,7 +24,7 @@ export const useAuth = () => {
 	 * @param record - 是否记录当前页面路径，用于后续重定向 - boolean @default(false)
 	 * @returns 是否已认证 - boolean
 	 */
-	const isAuthenticated = (record = false) => {
+	const isAuthenticated = (record = false): string | null => {
 		const isLogin = localStorage.getItem(AuthEnum.TOKEN_NAME)
 		if (!isLogin && record) {
 			localStorage.setItem('history', window.location.href)
@@ -27,7 +37,7 @@ export const useAuth = () => {
 	 * @description 处理用户登录认证，包括存储令牌、设置用户状态和重定向到登录前页面
 	 * @param data - 登录响应数据，包含令牌和用户信息
 	 */
-	const login = (data: typeof registry.$tree.auth.login.types.response.data) => {
+	const login = (data: typeof registry.$tree.auth.login.types.response.data): void => {
 		if (data.token) {
 			localStorage.setItem(AuthEnum.TOKEN_NAME, data.token)
 			const loginUrl = localStorage.getItem("history") || "/"
@@ -41,7 +51,7 @@ export const useAuth = () => {
 	 * @summary 获取当前登录用户
 	 * @description 从服务器获取当前认证用户的详细信息
 	 */
-	const getCurrentUser = async () => {
+	const getCurrentUser = async (): Promise<void> => {
 		if (localStorage.getItem(AuthEnum.TOKEN_NAME)) {
 			const res = await request.get('/core/users/profile', { retry: 0, })
 			if (res?.data) {
@@ -54,7 +64,7 @@ export const useAuth = () => {
 	 * @summary 注销登录
 	 * @description 清除本地存储中的认证令牌并重置用户状态
 	 */
-	const logout = () => {
+	const logout = (): void => {
 		localStorage.removeItem(AuthEnum.TOKEN_NAME)
 		setUser(undefined)
 		location.href = '/'

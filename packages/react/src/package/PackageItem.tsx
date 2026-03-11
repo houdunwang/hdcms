@@ -3,11 +3,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, 
 import { WePay } from '@/pay';
 import type { Data } from '@app/admin/data';
 import { Check, ShoppingBag } from 'lucide-react';
+import type { JSX } from 'react';
 
 interface Props {
 	item: Data.Package
 }
-export const PackageItem = ({ item }: Props) => {
+export const PackageItem = ({ item }: Props): JSX.Element => {
 	const payHandle = () => {
 
 	}
@@ -16,7 +17,7 @@ export const PackageItem = ({ item }: Props) => {
 			<CardHeader className='bg-white'>
 				<CardTitle className='flex flex-col justify-center '>
 					<div className="mt-3 w-full truncate text-destructive">
-						21{item.title}
+						{item.title}
 					</div>
 					<div className="text-3xl font-bold text-primary mt-3">{item.price}</div>
 					<div className="text-sm opacity-50 line-through">{item.originalPrice}</div>

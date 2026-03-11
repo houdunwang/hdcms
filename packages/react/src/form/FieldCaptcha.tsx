@@ -7,7 +7,7 @@ import type { FormFieldProps } from "@/form/types"
 import { useEffect } from "react"
 import { ScaleLoader } from "react-spinners"
 import { FieldValidateError } from "./FieldValidateError"
-export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>) {
+export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
 
 	const field = useFieldContext<string>()
 	const { api } = useApi()

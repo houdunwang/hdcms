@@ -11,7 +11,7 @@ type Props = {
 	className?: string
 }
 
-export const FieldValidateError = ({ field, className }: Props) => {
+export const FieldValidateError = ({ field, className }: Props): React.JSX.Element | null => {
 	const { name } = field
 	const [requestError, setRequestError] = useAtom(fieldErrorAtom)
 	const [content, setContent] = useState("")

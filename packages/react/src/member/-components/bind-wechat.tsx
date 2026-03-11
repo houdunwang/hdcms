@@ -4,7 +4,7 @@ import { useApi } from "@/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 
-export const BindWechat = () => {
+export const BindWechat = (): React.JSX.Element => {
   const { auth, api } = useApi()
   const mutation = useMutation(api.wechatBind.bind.mutationOptions())
   return (

@@ -3,7 +3,7 @@ import { useApi } from "@/hooks"
 import { useQuery } from "@tanstack/react-query"
 import { PackageItem } from "./PackageItem"
 
-export const PackageList = () => {
+export const PackageList = (): React.JSX.Element => {
 	const { api } = useApi()
 	const { isLoading, data } = useQuery(api.package.index.queryOptions())
 	if (isLoading) return <Loading />

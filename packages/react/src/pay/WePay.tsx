@@ -16,7 +16,7 @@ interface Props {
 	qrRefreshTime?: number
 	onSuccess: () => void
 }
-export const WePay = ({ payButton, ...props }: Props) => {
+export const WePay = ({ payButton, ...props }: Props): React.JSX.Element => {
 	const [open, setOpen] = useState(false)
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>

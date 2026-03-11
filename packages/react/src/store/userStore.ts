@@ -1,4 +1,4 @@
+import { atom, type WritableAtom } from 'jotai';
 import type { IUser } from '@/types/types';
-import { atom } from 'jotai';
 
-export const userAtom = atom<IUser | undefined>(undefined)
+export const userAtom: WritableAtom<IUser | undefined, [IUser | undefined], void> = atom<IUser | undefined>(undefined)

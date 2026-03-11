@@ -6,7 +6,7 @@ export interface IProps {
 	children: ReactNode
 	right?: ReactNode
 }
-export function Header({ left, children, right }: IProps) {
+export function Header({ left, children, right }: IProps): React.JSX.Element {
 	return (
 		<header className="bg-background flex items-center gap-3 justify-between sticky top-0 z-10 border-b h-[var(--header-height)] px-6 lg:px-12">
 			<div className="flex items-center gap-1 justify-between flex-1">

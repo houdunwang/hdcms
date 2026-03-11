@@ -5,7 +5,7 @@ import { BindEmail } from './-components/bind-email'
 import { BindMobile } from './-components/bind-mobile'
 import { BindWechat } from './-components/bind-wechat'
 
-export function Bind() {
+export function Bind(): React.JSX.Element {
 	return (
 		<Tabs defaultValue="email">
 			<TabsList>

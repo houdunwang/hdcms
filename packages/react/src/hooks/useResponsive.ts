@@ -6,7 +6,7 @@ configResponsive({
 	large: 1200,
 });
 
-export const useResponsive = () => {
+export const useResponsive = (): ReturnType<typeof useResponsiveHook> => {
 	const responsive = useResponsiveHook();
 	return responsive
 }

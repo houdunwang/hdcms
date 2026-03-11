@@ -13,7 +13,7 @@ interface Props extends FormFieldProps<'input'> {
 	onSuccess: (url: string) => void
 	maxSize?: number,
 }
-export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props) {
+export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props): React.JSX.Element {
 	const field = useFieldContext<string>()
 	const { api } = useApi()
 	const setFieldError = useSetAtom(fieldErrorAtom)

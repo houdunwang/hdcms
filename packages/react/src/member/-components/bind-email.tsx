@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 import z from "zod"
 
-export const BindEmail = () => {
+export const BindEmail = (): React.JSX.Element => {
   const { api, auth } = useApi()
   const mutation = useMutation(api.binds.email.mutationOptions())
   const { useAppForm } = hdCreateFormHook()
@@ -17,7 +17,7 @@ export const BindEmail = () => {
     },
     validators: {
       onSubmit: z.object({
-        email: z.email('请输入正确的邮箱'),
+        email: z.string().email('请输入正确的邮箱'),
         code: z.string().min(1, '请输入验证码')
       })
     },

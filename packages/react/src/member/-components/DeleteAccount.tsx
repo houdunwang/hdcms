@@ -14,7 +14,7 @@ import { useApi } from "@/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
 
-export const DeleteAccount = () => {
+export const DeleteAccount = (): React.JSX.Element => {
   const { api, auth } = useApi()
   const [isConfirm, setIsConfirm] = useState(false)
   const mutation = useMutation(api.users.destroy.mutationOptions({

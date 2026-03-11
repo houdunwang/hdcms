@@ -18,7 +18,7 @@ interface Props {
 	onConfirm?: () => void
 	submitButton?: React.ReactNode
 }
-export function ConfirmDialog({ title, description, submitButton, onConfirm = () => { }, children }: Props) {
+export function ConfirmDialog({ title, description, submitButton, onConfirm = () => { }, children }: Props): React.JSX.Element {
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>

@@ -6,7 +6,7 @@ import { WechatQrCode } from '../wechat/WechatQrCode'
 import type { AuthComponentProps } from './types'
 
 
-export function WechatLogin(props: AuthComponentProps) {
+export function WechatLogin(props: AuthComponentProps): React.JSX.Element {
 	const { api, auth } = useApi()
 	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
 	return (
@@ -18,7 +18,7 @@ export function WechatLogin(props: AuthComponentProps) {
 			<CardContent className="space-y-4">
 				<WechatQrCode
 					scene_str='login'
-					onSuccess={async (ticket: string) => {
+					onSuccess={async (ticket: string): Promise<'success' | undefined> => {
 						const res = await mutation.mutateAsync({ body: { ticket } })
 						if (res.data.token) {
 							auth.login(res.data)
@@ -56,7 +56,7 @@ const highlights = [
 	},
 ] as const
 
-export function WechatRightSpace() {
+export function WechatRightSpace(): React.JSX.Element {
 	return <Card className="order-2 lg:order-11">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

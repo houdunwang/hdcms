@@ -12,7 +12,7 @@ import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, UserPlus } from 'lucide
 import z from "zod"
 import type { AuthComponentProps } from "./types"
 
-export function Register(props: AuthComponentProps) {
+export function Register(props: AuthComponentProps): React.JSX.Element {
 	const { api } = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
@@ -115,7 +115,7 @@ const highlights = [
 	},
 ] as const
 
-export function RegisterRightSpace() {
+export function RegisterRightSpace(): React.JSX.Element {
 	return <Card className="">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">
