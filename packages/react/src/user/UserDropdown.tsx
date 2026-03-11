@@ -7,14 +7,23 @@ import { ModeToggle } from '@/theme/mode-toggle'
 import type { IUserDropdownMenus } from '@/types'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
+import { Settings } from 'lucide-react'
 interface Props {
 	menus?: IUserDropdownMenus
 }
 export const UserDropdown = ({ menus }: Props): React.JSX.Element => {
-	const { isAuthenticated } = useAuth()
+	const { isAuthenticated, isAdmin } = useAuth()
 	return (
-		<div className="flex gap-2 items-center">
-			<ModeToggle />
+		<div className="flex gap-3 items-center">
+			<div className="flex items-center gap-1">
+				<ModeToggle />
+				{isAdmin() && <a href="/admin" target="_blank">
+					<Button variant="outline" size="sm">
+						<Settings />
+					</Button>
+				</a>
+				}
+			</div>
 			{isAuthenticated() ? <LoginComponent menus={menus} /> : <UnLogin />}
 		</div>
 	)
@@ -46,7 +55,6 @@ function LoginComponent({ menus }: Props) {
 					<Link to='/member' search={{ system: 'bind' }}>
 						<DropdownMenuItem className='cursor-pointer py-1'>帐号绑定</DropdownMenuItem>
 					</Link>
-
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
 					{menus?.label && <DropdownMenuSeparator />}
