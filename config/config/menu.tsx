@@ -1,4 +1,4 @@
-import { CircleHelpIcon, CommandIcon, Rss, Settings2Icon, SquareUserRound } from "lucide-react";
+import { CircleHelpIcon, CommandIcon, Drum, Rss, Settings2Icon, SquareUserRound, SwatchBook } from "lucide-react";
 
 export const menu = {
 	// 网站导航菜单
@@ -28,7 +28,7 @@ export const menu = {
 	admin: {
 		main: [
 			{
-				title: '订阅套餐',
+				title: '网站套餐',
 				icon: <CommandIcon />,
 				to: '/admin/package'
 			},
@@ -36,6 +36,16 @@ export const menu = {
 				title: '用户管理',
 				icon: <SquareUserRound />,
 				to: '/admin/user'
+			},
+			{
+				title: '兑换码',
+				icon: <Drum />,
+				to: '/admin/code'
+			},
+			{
+				title: '订阅记录',
+				icon: <SwatchBook />,
+				to: '/admin/subscribe'
 			},
 		],
 		secondary: [

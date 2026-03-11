@@ -48,12 +48,12 @@ function LoginComponent() {
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
 					<Link to='/member' search={{ system: 'profile' }}>
-						<DropdownMenuItem className='cursor-pointer py-1'>
+						<DropdownMenuItem className='cursor-pointer py-2'>
 							<SquareUserRound /> 资料管理
 						</DropdownMenuItem>
 					</Link>
 					<Link to='/member' search={{ system: 'bind' }}>
-						<DropdownMenuItem className='cursor-pointer py-1'>
+						<DropdownMenuItem className='cursor-pointer py-2'>
 							<LaptopMinimalCheck />帐号绑定
 						</DropdownMenuItem>
 					</Link>
@@ -63,7 +63,7 @@ function LoginComponent() {
 					{config.menu.user?.label && <DropdownMenuLabel>{config.menu.user?.label}</DropdownMenuLabel>}
 					{config.menu.user?.items?.map((item) => (
 						<Link key={item.to} to={item.to} target={item.target || '_self'}>
-							<DropdownMenuItem className='cursor-pointer py-1'>
+							<DropdownMenuItem className='cursor-pointer py-2'>
 								{item.icon}{item.title}
 							</DropdownMenuItem>
 						</Link>

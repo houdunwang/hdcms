@@ -19,6 +19,7 @@ const corsConfig = defineConfig({
     if (!requestOrigin) return false
     try {
       const { hostname } = new URL(requestOrigin)
+      console.log('hostname', hostname)
       if (hostname === 'localhost') {
         return requestOrigin
       }

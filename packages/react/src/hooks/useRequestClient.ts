@@ -12,9 +12,8 @@ type RequestClient = Tuyau<Registry>
 
 export function useRequestClient(): RequestClient {
 	const setFieldError = useSetAtom(fieldErrorAtom)
-
 	return createTuyau({
-		baseUrl: config.app.nodeEnv === 'development' ? `http://localhost:${config.app.port}` : config.app.appUrl,
+		baseUrl: config.app.appUrl,
 		registry,
 		headers: { Accept: 'application/json' },
 		timeout: 10000,
