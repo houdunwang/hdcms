@@ -1,11 +1,11 @@
 import hdConfig from '#config/hd'
+import { currentDirectory } from '#core/helper'
 import Order from '#core/models/order'
 import env from '#start/env'
 import fs from 'node:fs'
+import { resolve } from 'node:path'
 import WxPay from 'wechatpay-node-v3'
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = resolve(__filename, '..', '..', '..');
 /**
  * 支付服务类，用于处理所有与支付相关的逻辑
  */
@@ -16,11 +16,12 @@ export class PayService {
    * @returns {WxPay} 微信支付SDK实例
    */
   public pay(): WxPay {
+    const __dirname = currentDirectory(import.meta.url);
     const pay = new WxPay({
       appid: env.get('WECHAT_PAY_APPID')!,
       mchid: env.get('WECHAT_PAY_MCHID')!,
-      publicKey: fs.readFileSync('./pay/wepay/apiclient_cert.pem'), // 公钥
-      privateKey: fs.readFileSync('./pay/wepay/apiclient_key.pem'), // 秘钥
+      publicKey: fs.readFileSync(resolve(__dirname, '../../../../config/pay/wepay/apiclient_cert.pem')), // 公钥
+      privateKey: fs.readFileSync(resolve(__dirname, '../../../../config/pay/wepay/apiclient_key.pem')), // 秘钥
       key: env.get('WECHAT_PAY_KEY')!,
     })
     return pay

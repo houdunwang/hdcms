@@ -21,7 +21,7 @@ export default defineConfig({
     skipNodeModulesBundle: true,
   },
   entry: [
-    'src/index.ts'
+    'config/index.ts'
   ],
   // unbundle: true,
   format: ['esm'],

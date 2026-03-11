@@ -31,7 +31,38 @@ const config = defineConfig({
     // 可选：配置输出目录下的静态资源子目录（默认是 assets）
     assetsDir: 'static',
     // 可选：清空输出目录后再打包（默认 true）
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          const lastIdx = id.lastIndexOf('node_modules/')
+          const sub = id.slice(lastIdx + 'node_modules/'.length)
+          const segs = sub.split('/')
+          const pkg = segs[0].startsWith('@') ? `${segs[0]}/${segs[1]}` : segs[0]
+          const groups: Record<string, string> = {
+            react: 'vendor-react',
+            'react-dom': 'vendor-react',
+            scheduler: 'vendor-react',
+            'react-is': 'vendor-react',
+            'use-sync-external-store': 'vendor-react',
+            'object-assign': 'vendor-react',
+            '@tanstack/react-router': 'vendor-tanstack-router',
+            '@tanstack/react-query': 'vendor-tanstack-query',
+            '@tanstack/query-core': 'vendor-tanstack-query',
+            '@tuyau/react-query': 'vendor-tanstack-query',
+            'lucide-react': 'vendor-icons',
+            recharts: 'vendor-recharts',
+            jotai: 'vendor-state',
+            zod: 'vendor-utils',
+            ahooks: 'vendor-utils',
+          }
+          if (groups[pkg]) return groups[pkg]
+          return 'vendor'
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   }
 })
 
