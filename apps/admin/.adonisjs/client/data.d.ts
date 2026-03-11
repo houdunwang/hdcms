@@ -7,6 +7,8 @@
 import type { InferData, InferVariants } from '@adonisjs/core/types/transformers'
 import type PackageTransformer from '#transformers/package_transformer'
 import type SubscribeTransformer from '#transformers/subscribe_transformer'
+import type UploadTransformer from '#transformers/upload_transformer'
+import type UserTransformer from '#transformers/user_transformer'
 
 export namespace Data {
   export type Package = InferData<PackageTransformer>
@@ -16,5 +18,13 @@ export namespace Data {
   export type Subscribe = InferData<SubscribeTransformer>
   export namespace Subscribe {
     export type Variants = InferVariants<SubscribeTransformer>
+  }
+  export type Upload = InferData<UploadTransformer>
+  export namespace Upload {
+    export type Variants = InferVariants<UploadTransformer>
+  }
+  export type User = InferData<UserTransformer>
+  export namespace User {
+    export type Variants = InferVariants<UserTransformer>
   }
 }

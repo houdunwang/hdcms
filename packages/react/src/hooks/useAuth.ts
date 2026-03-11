@@ -3,15 +3,14 @@ import { AuthEnum } from '@/types/enum';
 import { userAtom } from '@/store/userStore';
 import { useAtom } from 'jotai';
 import { useRequestClient } from './useRequestClient';
-import type { IUser } from '@/types';
-
+import type { Data } from '@app/admin/data'
 export interface UseAuthReturn {
 	isAuthenticated: (record?: boolean) => string | null;
 	login: (data: typeof registry.$tree.auth.login.types.response.data) => void;
 	getCurrentUser: () => Promise<void>;
 	logout: () => void;
-	user: IUser | undefined;
-	setUser: (update: IUser | undefined) => void;
+	user: Data.User | undefined;
+	setUser: (update: Data.User | undefined) => void;
 	isAdmin: () => boolean;
 }
 
@@ -20,8 +19,6 @@ export const useAuth = (): UseAuthReturn => {
 	const request = useRequestClient()
 
 	const isAdmin = (): boolean => {
-		console.log('user', user)
-		console.log('user?.id === 1', user?.id === 1)
 		return user?.id === 1
 	}
 

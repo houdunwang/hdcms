@@ -2,7 +2,7 @@ import env from '#start/env'
 import cache from '@adonisjs/cache/services/main'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import { emailVerificationTemplate } from '../templates/mail_template.js'
+import { emailVerificationTemplate } from '../templates/mail_code_template.js'
 import { AliyunService } from './aliyun_service.js'
 import { MailService } from './mail_service.js'
 

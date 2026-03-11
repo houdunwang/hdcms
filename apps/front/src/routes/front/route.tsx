@@ -1,6 +1,6 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
-import type { RouterContextConfig } from '@houdunyun/react/types'
 import { Footer, Header } from '@houdunyun/react/common'
+import type { RouterContextConfig } from '@houdunyun/react/types'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/front')({
 	component: RouteComponent,

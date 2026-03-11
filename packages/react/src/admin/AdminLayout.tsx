@@ -1,17 +1,26 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
-import { SectionCards } from "@/components/section-cards"
-import { SiteHeader } from "@/components/site-header"
+import { AppSidebar } from "@/admin/components/app-sidebar"
+import { SiteHeader } from "@/admin/components/site-header"
 import {
 	SidebarInset,
 	SidebarProvider,
 } from "@/components/ui/sidebar"
 
-import data from "./data.json"
-import type { FC } from "react"
+import { Outlet, useMatchRoute, useNavigate } from "@tanstack/react-router"
+import { useEffect, type FC } from "react"
+import { Dasbard } from "./components/dasbard"
+import { useAuth } from "@/hooks"
 
 export const AdminLayout: FC = () => {
+	const matchRoute = useMatchRoute()
+	const isAdminHomePage = matchRoute({ to: "/admin", fuzzy: false })
+	const { isAdmin } = useAuth()
+	const navigate = useNavigate()
+	useEffect(() => {
+		if (!isAdmin()) {
+			navigate({ href: '/auth?action=login' })
+		}
+	})
+	if (!isAdmin()) return null
 	return (
 		<SidebarProvider
 			style={
@@ -24,16 +33,8 @@ export const AdminLayout: FC = () => {
 			<AppSidebar variant="inset" />
 			<SidebarInset>
 				<SiteHeader />
-				<div className="flex flex-1 flex-col">
-					<div className="@container/main flex flex-1 flex-col gap-2">
-						<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-							<SectionCards />
-							<div className="px-4 lg:px-6">
-								<ChartAreaInteractive />
-							</div>
-							<DataTable data={data} />
-						</div>
-					</div>
+				<div className="flex flex-1 flex-col p-6">
+					{isAdminHomePage ? <Dasbard /> : <Outlet />}
 				</div>
 			</SidebarInset>
 		</SidebarProvider>

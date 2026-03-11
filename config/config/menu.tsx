@@ -1,3 +1,5 @@
+import { CommandIcon } from "lucide-react";
+
 export const menu = {
 	// 网站导航菜单
 	header: [
@@ -21,6 +23,13 @@ export const menu = {
 				target: '_blank',
 			},
 		],
-	}
+	},
+	admin: [
+		{
+			title: '套餐管理',
+			icon: <CommandIcon />,
+			to: '/admin/package'
+		},
+	]
 }
 
