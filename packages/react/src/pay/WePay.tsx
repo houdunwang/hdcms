@@ -1,16 +1,22 @@
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Spinner } from '@/components/ui/spinner';
-import { useApi } from '@/hooks';
-import { useMutation } from '@tanstack/react-query';
-import { Clock } from 'lucide-react';
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
-
+import {
+	AlertDialog,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { useApi } from '@/hooks'
+import { useMutation } from '@tanstack/react-query'
+import { CircleX, Clock } from 'lucide-react'
+import { useCallback, useEffect, useState, type ReactNode } from 'react'
 
 interface Props {
-	subject: string,
+	subject: string
 	orderable_type: any
-	orderable_id: number,
+	orderable_id: number
 	children?: ReactNode
 	payButton?: ReactNode
 	qrRefreshTime?: number
@@ -18,24 +24,34 @@ interface Props {
 }
 export const WePay = ({ payButton, ...props }: Props): React.JSX.Element => {
 	const [open, setOpen] = useState(false)
+	const openHandle = (open: boolean) => {
+		setOpen(open)
+	}
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				{payButton || <Button> 微信支付 </Button>}
-			</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>微信支付</DialogTitle>
-					<DialogDescription asChild>
-					</DialogDescription>
+		<AlertDialog open={open} onOpenChange={openHandle}>
+			<AlertDialogTrigger asChild>{payButton || <Button> 微信支付 </Button>}</AlertDialogTrigger>
+			<AlertDialogContent className="flex flex-col justify-center items-center ">
+
+				<AlertDialogHeader>
+					<AlertDialogTitle className="text-center"></AlertDialogTitle>
+					<AlertDialogDescription></AlertDialogDescription>
 					<PayQr {...props} setOpen={setOpen} />
-				</DialogHeader>
-			</DialogContent>
-		</Dialog>
+				</AlertDialogHeader>
+				{/* <AlertDialogFooter>
+					<AlertDialogCancel>Cancel</AlertDialogCancel>
+					<AlertDialogAction>Continue</AlertDialogAction>
+				</AlertDialogFooter> */}
+			</AlertDialogContent>
+		</AlertDialog>
 	)
 }
 
-function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: (open: boolean) => void } & Props) {
+function PayQr({
+	children,
+	setOpen,
+	qrRefreshTime = 120,
+	...props
+}: { setOpen: (open: boolean) => void } & Props) {
 	const { api } = useApi()
 	const { isPending, mutateAsync, data } = useMutation(api.pays.wepay.mutationOptions())
 	const [checkNum, setCheckNum] = useState(qrRefreshTime)
@@ -46,7 +62,7 @@ function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: 
 				subject: props.subject,
 				orderable_type: props.orderable_type,
 				orderable_id: props.orderable_id,
-			}
+			},
 		})
 	}, [])
 
@@ -54,9 +70,9 @@ function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: 
 		if (!data?.data.sn) return
 		try {
 			const res = await checkMutation.mutateAsync({
-				body: { sn: data?.data.sn }
+				body: { sn: data?.data.sn },
 			})
-			if (res?.data == 'success') {
+			if (res?.data.success) {
 				props.onSuccess()
 				setOpen(false)
 			}
@@ -65,7 +81,9 @@ function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: 
 		}
 	}, [data?.data.sn, props.onSuccess])
 
-	useEffect(() => { getQr() }, [])
+	useEffect(() => {
+		getQr()
+	}, [])
 
 	useEffect(() => {
 		if (checkNum > 0) checkPay()
@@ -80,16 +98,26 @@ function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: 
 		const timer = setTimeout(() => setCheckNum(checkNum - 1), 1000)
 		return () => clearTimeout(timer)
 	}, [checkNum])
-	if (isPending || !data) return <div className='flex items-center justify-center py-12'>
-		<Spinner className='size-12' />
-	</div>
+	if (isPending || !data)
+		return (
+			<div className="flex items-center justify-center py-12">
+				<Spinner className="size-12" />
+			</div>
+		)
 
-	return <div className='flex flex-col justify-center items-center'>
-		<div>{children}</div>
-		<div>请扫描下方二维码完成支付</div>
-		<div><img src={data?.data?.qrImg || ''} /></div>
-		<div className='text-muted-foreground text-sm flex items-center justify-center gap-1'>
-			<Clock size={15} /> {checkNum} 秒后自动刷新
+	return (
+		<div className="flex flex-col justify-center items-center ">
+			<div>{children}</div>
+			<div className='absolute right-2 top-2 cursor-pointer' onClick={() => setOpen(false)}>
+				<CircleX size={20} />
+			</div>
+			<div>请扫描下方二维码完成支付</div>
+			<div>
+				<img src={data?.data?.qrImg || ''} />
+			</div>
+			<div className="text-muted-foreground text-sm flex items-center justify-center gap-1">
+				<Clock size={15} /> {checkNum} 秒后自动刷新
+			</div>
 		</div>
-	</div>
+	)
 }

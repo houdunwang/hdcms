@@ -30,6 +30,7 @@ export default class PaysController extends BaseController {
     const price = await this.payService.getPrice(payload.orderable_type, payload.orderable_id)
     const order = await this.orderService.create({ ...payload, price })
     const notifyUrl = url('pay.notify')
+    console.log('notifyUrl', notifyUrl)
     const params = {
       description: payload.subject,
       out_trade_no: order.sn,
@@ -45,9 +46,6 @@ export default class PaysController extends BaseController {
     const qrImg = await qrcode.toDataURL(result.data.code_url, {
       width: 250,
     })
-    await new Promise(r => {
-      setTimeout(r, 100)
-    })
     return serialize({ sn: order.sn, qrImg })
   }
 
@@ -61,12 +59,13 @@ export default class PaysController extends BaseController {
    * @requestFormDataBody { "sn": { "type": "string", "required": "true", "description": "订单号", "example": "" } }
    * @responseBody 200 - {  "success": true }
    */
-  async wepayCheck({ request }: HttpContext) {
+  async wepayCheck({ request, serialize }: HttpContext) {
     const payload = await request.validateUsing(payCheckValidator)
     const isSuccess = await this.orderService.checkPaystatus(payload.sn)
     if (isSuccess) {
-      return this.success('支付成功', 'success' as const)
+      return serialize({ message: '支付成功', success: true })
     }
+    return serialize({ success: false })
   }
 
   /**
@@ -81,6 +80,7 @@ export default class PaysController extends BaseController {
   async notify({ request, response }: HttpContext) {
     try {
       const resource = request.input('resource')
+      console.log('resource', resource)
       const { ciphertext, associated_data, nonce } = resource
       const params = await this.payService.pay().decipher_gcm(ciphertext, associated_data, nonce, env.get('WECHAT_PAY_KEY')!) as PayResult
       if (params.trade_state === 'SUCCESS') {

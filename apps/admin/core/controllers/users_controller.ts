@@ -19,11 +19,8 @@ export default class UsersController extends BaseController {
  * @responseBody 200 - <User>
  */
   async profile({ auth, serialize }: HttpContext) {
-    try {
-      const user = await auth.authenticateUsing(['web', 'api'])
-      return serialize(UserTransformer.transform(user, auth))
-    } catch (error) {
-    }
+    const user = await auth.authenticateUsing(['web', 'api']);
+    return serialize(UserTransformer.transform(user, auth))
   }
 
   /**

@@ -5,12 +5,12 @@ const isDev = process.argv.includes('--watch') || process.env.NODE_ENV === 'deve
 
 export default defineConfig({
   dts: true,
-  sourcemap: false,
+  sourcemap: true,
   clean: !isDev,
   minify: !isDev,
   deps: {
     skipNodeModulesBundle: true,
-    neverBundle: [/^@\/components/]
+    // neverBundle: [/^@\/components/]
   },
   // watch: ['src/**/*.ts', 'src/**/*.tsx'],
   // entry: {

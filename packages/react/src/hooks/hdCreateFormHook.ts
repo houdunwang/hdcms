@@ -5,7 +5,6 @@ import { FieldSubmitButton } from "@/form/FieldSubmitButton"
 import { createFormHook } from "@tanstack/react-form"
 
 type IFieldComponents = Parameters<typeof createFormHook>[0]['fieldComponents']
-// export const hdCreateFormHook = (components: IFieldComponents = {}): any => {
 
 export const hdCreateFormHook: (components?: IFieldComponents) => ReturnType<typeof createFormHook<
 	{ FieldInput: typeof FieldInput; FieldCode: typeof FieldCode },

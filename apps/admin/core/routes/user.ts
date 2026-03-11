@@ -7,7 +7,7 @@ const UsersController = () => import('#core/controllers/users_controller')
 // 登录注册
 router
   .group(() => {
-    router.get('/users/profile', [UsersController, 'profile'])
+    router.get('/users/profile', [UsersController, 'profile']).use(middleware.auth())
     router.put('/users/password', [UsersController, 'password']).use(middleware.auth())
     router.put('/users/:id?', [UsersController, 'update']).use(middleware.auth())
     router.delete('/users/destroy', [UsersController, 'destroy']).use(middleware.auth())

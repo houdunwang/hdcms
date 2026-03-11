@@ -24,13 +24,16 @@ export const PackageItem = ({ item }: Props): JSX.Element => {
 				</CardTitle>
 				<CardDescription className='truncate opacity-100 mt-1'>
 					{item.ad}
+					<div className="text-sm opacity-50">
+						{item.months}个月权益
+					</div>
 				</CardDescription>
 			</CardHeader>
 			<CardContent className='flex flex-col justify-start flex-1 border-t pt-6'>
 				<div className='space-y-2'>
 					{item.feature.map((feature: string) => (
 						<div key={feature} className="text-sm opacity-50 flex items-center gap-1">
-							<Check size={16} />
+							<Check size={16} className='text-green-600' />
 							<div className="truncate w-32">{feature}</div>
 						</div>
 					))}

@@ -1,4 +1,7 @@
 import type Order from '#core/models/order';
+import Package from '#core/models/package';
+import Subscribe from '#core/models/subscribe';
+import { DateTime } from 'luxon';
 
 
 /**
@@ -6,7 +9,16 @@ import type Order from '#core/models/order';
  */
 export default class PackageProcess {
   // 支付成功后，为用户关联课程
-  async handle(_order: Order) {
+  async handle(order: Order) {
+    const packageInstance = await Package.findOrFail(order.orderableId)
+    const subscribe = await Subscribe.firstOrCreate({
+      userId: order.userId,
+    }, {
+      endTime: DateTime.now()
+    })
+    const endTime = DateTime.now() > subscribe.endTime ? DateTime.now() : subscribe.endTime
+    subscribe.endTime = endTime.plus({ month: packageInstance.months })
+    await subscribe.save()
     // 编写业务逻辑，例如：
     // await UserCourse.create({ userId: order.userId, courseId: order.orderableId });
     // console.log(`为用户 ${order.userId} 开通订阅权限 ${order.orderableId}`)
@@ -14,7 +26,8 @@ export default class PackageProcess {
   }
 
   // 根据课程ID从数据库获取价格
-  async getPrice(_id: number): Promise<number> {
-    return 0.01
+  async getPrice(id: number): Promise<number> {
+    const item = await Package.findOrFail(id)
+    return Number(item.price)
   }
 }
