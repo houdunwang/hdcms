@@ -41,8 +41,7 @@ export default class UsersController extends BaseController {
    */
   async index({ request, serialize }: HttpContext) {
     const page = request.input('page', 1)
-    const perPage = request.input('perPage', 10)
-    const users = await User.query().paginate(page, perPage)
+    const users = await User.query().paginate(page)
     return serialize(UserTransformer.paginate(users, users.getMeta()))
   }
 

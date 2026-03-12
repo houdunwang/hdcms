@@ -91,9 +91,9 @@ const routes = {
     types: placeholder as Registry['logs']['types'],
   },
   'orders.index': {
-    methods: ["POST"],
-    pattern: '/core/order/create',
-    tokens: [{"old":"/core/order/create","type":0,"val":"core","end":""},{"old":"/core/order/create","type":0,"val":"order","end":""},{"old":"/core/order/create","type":0,"val":"create","end":""}],
+    methods: ["GET","HEAD"],
+    pattern: '/core/order/index',
+    tokens: [{"old":"/core/order/index","type":0,"val":"core","end":""},{"old":"/core/order/index","type":0,"val":"order","end":""},{"old":"/core/order/index","type":0,"val":"index","end":""}],
     types: placeholder as Registry['orders.index']['types'],
   },
   'package.index': {

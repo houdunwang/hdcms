@@ -6,6 +6,7 @@ import { Outlet, useNavigate, useRouterState } from "@tanstack/react-router"
 import { useEffect, type FC } from "react"
 import { Dasbard } from "./pages/Dasbard"
 import { User } from "./pages/User"
+import { Order } from "./pages/Order"
 
 interface Props {
 	width: number,
@@ -14,6 +15,7 @@ interface Props {
 const routes = {
 	'/admin': Dasbard,
 	'/admin/user': User,
+	'/admin/order': Order
 }
 export const AdminLayout: FC<Props> = ({ width = 62, height = 12 }) => {
 	const { isAdmin } = useAuth()

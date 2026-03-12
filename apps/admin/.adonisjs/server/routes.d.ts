@@ -52,6 +52,7 @@ export type ScannedRoutes = {
     'admin': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
+    'orders.index': { paramsTuple?: []; params?: {} }
     'package.index': { paramsTuple?: []; params?: {} }
     'package.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'subscribe.index': { paramsTuple?: []; params?: {} }
@@ -66,6 +67,7 @@ export type ScannedRoutes = {
     'admin': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
+    'orders.index': { paramsTuple?: []; params?: {} }
     'package.index': { paramsTuple?: []; params?: {} }
     'package.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'subscribe.index': { paramsTuple?: []; params?: {} }
@@ -86,7 +88,6 @@ export type ScannedRoutes = {
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
-    'orders.index': { paramsTuple?: []; params?: {} }
     'package.store': { paramsTuple?: []; params?: {} }
     'pays.wepay': { paramsTuple?: []; params?: {} }
     'pays.wepay_check': { paramsTuple?: []; params?: {} }

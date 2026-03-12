@@ -162,8 +162,8 @@ export interface Registry {
     }
   }
   'orders.index': {
-    methods: ["POST"]
-    pattern: '/core/order/create'
+    methods: ["GET","HEAD"]
+    pattern: '/core/order/index'
     types: {
       body: {}
       paramsTuple: []

@@ -1,4 +1,4 @@
-import { CircleHelpIcon, CommandIcon, Drum, Rss, Settings2Icon, SquareUserRound, SwatchBook } from "lucide-react";
+import { ChartPie, CircleHelpIcon, CommandIcon, Drum, Rss, Settings2Icon, SquareUserRound, SwatchBook } from "lucide-react";
 
 export const menu = {
 	// 网站导航菜单
@@ -43,10 +43,16 @@ export const menu = {
 				to: '/admin/code'
 			},
 			{
-				title: '订阅记录',
-				icon: <SwatchBook />,
+				title: '网站订阅',
+				icon: <ChartPie />,
 				to: '/admin/subscribe'
 			},
+			{
+				title: '订单管理',
+				icon: <SwatchBook />,
+				to: '/admin/order'
+			},
+
 		],
 		secondary: [
 			{

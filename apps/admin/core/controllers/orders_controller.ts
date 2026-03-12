@@ -1,12 +1,11 @@
+import Order from '#core/models/order'
+import OrderTransformer from '#transformers/order_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import BaseController from './bases_controller.js'
 
 @inject()
-export default class OrdersController extends BaseController {
-  constructor(protected ctx: HttpContext) {
-    super()
-  }
+export default class OrdersController {
+  constructor(protected ctx: HttpContext) { }
 
   /**
    * @index
@@ -17,5 +16,8 @@ export default class OrdersController extends BaseController {
    * @requestFormDataBody { "subject": { "type": "string", "required": "true","example": "测试订单" }, "price": { "type": "number", "required": "true","example": "1" } }
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  async index({}: HttpContext) {}
+  async index(ctx: HttpContext) {
+    const orders = await Order.query().preload('user').paginate(ctx.request.input('page', 1))
+    return ctx.serialize(OrderTransformer.paginate(orders, orders.getMeta()))
+  }
 }
