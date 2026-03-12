@@ -1,9 +1,8 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import { PackageFactory } from '../factories/package_factory.ts'
 
 export default class extends BaseSeeder {
   static environment = ['development', 'testing']
   async run() {
-    await PackageFactory.createMany(3)
+    // Write your database queries inside the run method
   }
 }

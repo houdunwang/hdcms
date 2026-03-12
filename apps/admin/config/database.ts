@@ -20,7 +20,7 @@ const dbConfig = defineConfig({
         paths: ['core/database/migrations', 'database/migrations'],
       },
       seeders: {
-        paths: ['core/database/seeders', 'database/seeders'],
+        paths: ['core/database/seeders/main', 'database/seeders'],
       },
     },
     sqlite: {
