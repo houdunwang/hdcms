@@ -2,14 +2,25 @@ import { DateTime } from 'luxon'
 import db from '@adonisjs/lucid/services/db'
 
 export class UserService {
+
+  /**
+   * 获取总用户数
+   * @returns 总用户数
+   */
+  async getTotalUsersCount() {
+    const count = await db.from('users').count('id as count').first()
+    return count?.count ?? 0
+  }
+
   /**
    * 根据天数获取网站访问用户数，包含每一天的数据
    * @param days 天数
    * @returns 访问用户数，包含每一天的数据
    */
-  async getVisitorsCount(days: number) {
+  async getDaysVisitorsCount(days: number) {
     const now = DateTime.now()
-    const from = now.startOf('day').minus({ days })
+    const count = Math.max(1, days)
+    const from = now.startOf('day').minus({ days: count - 1 })
     const rows: Array<{ ymd: string; count: string | number }> = await db
       .from('users')
       .select(db.raw('DATE_FORMAT(updated_at, "%Y-%m-%d") as ymd'))
@@ -19,7 +30,7 @@ export class UserService {
       .orderBy('ymd', 'asc')
 
     const result: Array<{ day: string; count: number }> = []
-    for (let i = days; i >= 0; i--) {
+    for (let i = count - 1; i >= 0; i--) {
       const label = now.minus({ days: i }).toFormat('yyyy-LL-dd')
       const r = rows.find((x) => x.ymd === label)
       const cnt = r ? (typeof r.count === 'string' ? Number.parseInt(r.count, 10) : Number(r.count)) : 0

@@ -61,6 +61,44 @@ export class OrderService {
     const order = await Order.query().where('sn', sn).firstOrFail()
     return order
   }
+  /**
+   * 获取每年的订单统计数据
+   * @param prevYears 返回的年份数量（包含当年），例如 3 表示返回最近 3 年
+   * @returns 每年 { year, count, amount } 数组
+   */
+  async getOrderStatsByYear(prevYears: number) {
+    const now = DateTime.now()
+    const yearsToReturn = Math.max(1, prevYears)
+    const startYear = now.year - (yearsToReturn - 1)
+    const from = DateTime.fromObject({ year: startYear }).startOf('year')
+    const to = now.endOf('year')
+    const rows: Array<{ y: string; count: number | string; amount: string | number | null }> = await db
+      .from('orders')
+      .where('created_at', '>=', from.toSQL({ includeOffset: false })!)
+      .where('created_at', '<=', to.toSQL({ includeOffset: false })!)
+      .where('pay_state', true)
+      .select(db.raw('DATE_FORMAT(created_at, "%Y") as y'))
+      .select(db.raw('COUNT(*) as count'))
+      .select(db.raw('SUM(price) as amount'))
+      .groupBy('y')
+    const years: Array<{ year: number; count: number; amount: number }> = []
+    for (let y = startYear; y <= now.year; y++) {
+      const label = String(y)
+      const r = rows.find((x) => x.y === label)
+      const amt =
+        r && r.amount !== null
+          ? typeof r.amount === 'string'
+            ? Number.parseFloat(r.amount)
+            : (r.amount as number)
+          : 0
+      years.push({
+        year: y,
+        count: r ? Number(r.count) : 0,
+        amount: Number.isNaN(amt) ? 0 : amt,
+      })
+    }
+    return years
+  }
 
   /**
    * 获取指定月份前的订单统计数据
@@ -69,7 +107,8 @@ export class OrderService {
    */
   async getOrderStatsByMonth(prevMonths: number = 11) {
     const now = DateTime.now()
-    const from = now.minus({ months: prevMonths }).startOf('month')
+    const count = Math.max(1, prevMonths)
+    const from = now.minus({ months: count - 1 }).startOf('month')
     const rows: Array<{ ym: string; count: number; amount: string | number | null }> =
       await db
         .from('orders')
@@ -81,12 +120,12 @@ export class OrderService {
         .groupBy('ym')
 
     const months: Array<{ month: string; count: number; amount: number }> = []
-    for (let i = prevMonths; i >= 0; i--) {
+    for (let i = count - 1; i >= 0; i--) {
       const label = now.minus({ months: i }).toFormat('yyyy-LL')
       const r = rows.find((x) => x.ym === label)
       const amt =
-        r && r.amount !== null ? typeof r.amount === 'string' ? parseFloat(r.amount) : r.amount : 0
-      months.push({ month: label, count: r ? Number(r.count) : 0, amount: isNaN(amt as number) ? 0 : (amt as number) })
+        r && r.amount !== null ? (typeof r.amount === 'string' ? Number.parseFloat(r.amount) : r.amount) : 0
+      months.push({ month: label, count: r ? Number(r.count) : 0, amount: Number.isNaN(amt as number) ? 0 : (amt as number) })
     }
     return months
   }
@@ -98,7 +137,8 @@ export class OrderService {
    */
   async getDaySales(days = 7) {
     const now = DateTime.now()
-    const from = now.startOf('day').minus({ days })
+    const count = Math.max(1, days)
+    const from = now.startOf('day').minus({ days: count - 1 })
     const rows: Array<{ ymd: string; amount: string | number | null }> = await db
       .from('orders')
       .select(db.raw('DATE_FORMAT(created_at, "%Y-%m-%d") as ymd'))
@@ -108,14 +148,36 @@ export class OrderService {
       .sum('price as amount')
       .orderBy('ymd', 'asc')
     const daysSales: Array<{ day: string; amount: number }> = []
-    for (let i = days; i >= 0; i--) {
+    for (let i = count - 1; i >= 0; i--) {
       const label = now.minus({ days: i }).toFormat('yyyy-LL-dd')
       const r = rows.find((x) => x.ymd === label)
       const amt =
-        r && r.amount !== null ? (typeof r.amount === 'string' ? parseFloat(r.amount) : r.amount) : 0
-      daysSales.push({ day: label, amount: isNaN(amt as number) ? 0 : (amt as number) })
+        r && r.amount !== null ? (typeof r.amount === 'string' ? Number.parseFloat(r.amount) : r.amount) : 0
+      daysSales.push({ day: label, amount: Number.isNaN(amt as number) ? 0 : (amt as number) })
     }
     return daysSales
   }
 
+  /**
+   * 获取本周销售额
+   * @returns 本周销售额
+   */
+  async getWeekSales() {
+    const now = DateTime.now()
+    const from = now.startOf('week').startOf('day')
+    const to = now.endOf('week').endOf('day')
+    const rows: Array<{ amount: string | number | null }> = await db
+      .from('orders')
+      .select(db.raw('SUM(price) as amount'))
+      .where('created_at', '>=', from.toSQL({ includeOffset: false })!)
+      .where('created_at', '<=', to.toSQL({ includeOffset: false })!)
+      .where('pay_state', true)
+    const amount =
+      rows[0] && rows[0].amount !== null
+        ? typeof rows[0].amount === 'string'
+          ? Number.parseFloat(rows[0].amount)
+          : rows[0].amount
+        : 0
+    return Number.isNaN(amount as number) ? 0 : (amount as number)
+  }
 }
