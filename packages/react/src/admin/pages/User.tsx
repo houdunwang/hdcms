@@ -1,34 +1,15 @@
-import { Loading } from '@/common'
+import { Loading, UserAvatar } from '@/common'
 import { Page } from '@/common/Page'
 import { Button } from "@/components/ui/button"
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useApi } from '@/hooks'
 import { useCommon } from '@/hooks/useCommon'
 import { useQuery } from '@tanstack/react-query'
 import { CircleCheckBig } from "lucide-react"
 import { type JSX } from 'react'
+
 export function User(): JSX.Element {
 	const { api } = useApi()
 	const { getCurrentPage } = useCommon()
@@ -40,13 +21,13 @@ export function User(): JSX.Element {
 	if (!data?.data) return <></>
 	const users = data.data
 	return (
-		<Card>
+		<Card className=''>
 			<CardHeader>
 				<CardTitle>用户管理</CardTitle>
 				<CardDescription></CardDescription>
 			</CardHeader>
 			<CardContent>
-				<Table className='border'>
+				<Table className='bor1der'>
 					<TableHeader>
 						<TableRow>
 							<TableHead>ID</TableHead>
@@ -64,7 +45,7 @@ export function User(): JSX.Element {
 							<TableRow>
 								<TableCell className="font-medium">{user.id}</TableCell>
 								<TableCell>
-									<img src={user.avatar || ''} className='w-10 h-10 object-cover rounded-full' />
+									<UserAvatar user={user} />
 								</TableCell>
 								<TableCell>{user.name}</TableCell>
 								<TableCell>{user.nickname}</TableCell>

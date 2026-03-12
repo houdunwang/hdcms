@@ -20,9 +20,11 @@ export const Page = ({ meta }: { meta: typeof registry.$tree.users.index.types.r
 	}
 	return <Pagination>
 		<PaginationContent>
-			<PaginationItem>
-				<PaginationPrevious href="#" text='上一页' />
-			</PaginationItem>
+			{meta.previousPageUrl && (
+				<PaginationItem>
+					<PaginationPrevious href={url(Number(meta.currentPage) - 1)} text='上一页' />
+				</PaginationItem>
+			)}
 			{(() => {
 				const currentPage = Number(meta.currentPage ?? 1)
 				const startPage = Math.max(1, currentPage - 3)
@@ -62,9 +64,11 @@ export const Page = ({ meta }: { meta: typeof registry.$tree.users.index.types.r
 					</PaginationItem>
 				)
 			}
-			<PaginationItem>
-				<PaginationNext href="#" text='下一页' />
-			</PaginationItem>
+			{meta.nextPageUrl && (
+				<PaginationItem>
+					<PaginationNext href={url(Number(meta.currentPage) + 1)} text='下一页' />
+				</PaginationItem>
+			)}
 		</PaginationContent>
 	</Pagination>
 }

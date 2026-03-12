@@ -7,6 +7,7 @@ import { useEffect, type FC } from "react"
 import { Dasbard } from "./pages/Dasbard"
 import { User } from "./pages/User"
 import { Order } from "./pages/Order"
+import { Subscribe } from "./pages/Subscribe"
 
 interface Props {
 	width: number,
@@ -15,14 +16,14 @@ interface Props {
 const routes = {
 	'/admin': Dasbard,
 	'/admin/user': User,
-	'/admin/order': Order
+	'/admin/order': Order,
+	'/admin/subscribe': Subscribe
 }
 export const AdminLayout: FC<Props> = ({ width = 62, height = 12 }) => {
 	const { isAdmin } = useAuth()
 	const navigate = useNavigate()
 	const location = useRouterState({ select: s => s.location })
 	const Component = (routes as unknown as Record<string, React.ComponentType>)[location.pathname] || Dasbard
-	console.log('location.pathname', location.pathname)
 	useEffect(() => {
 		if (!isAdmin()) {
 			navigate({ href: '/auth?action=login' })
