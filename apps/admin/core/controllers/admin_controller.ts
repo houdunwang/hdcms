@@ -14,11 +14,11 @@ export default class AdminController {
 			totalUsersCount: any;
 			todayUsersCount: number;
 			todaySales: number;
-			orderYears: {
-				year: number;
-				count: number;
-				amount: number;
-			}[];
+			// orderYears: {
+			// 	year: number;
+			// 	count: number;
+			// 	amount: number;
+			// }[];
 			orderMonths: {
 				month: string;
 				count: number;
@@ -38,7 +38,7 @@ export default class AdminController {
 			if (cached) return ctx.serialize(cached as ReturnType) // 命中缓存直接返回
 		}
 		const totalUsersCount = await this.userService.getTotalUsersCount() // 总用户数
-		const orderMonths = await this.orderService.getOrderStatsByMonth(24) // 最近24个月订单统计
+		const orderMonths = await this.orderService.getOrderStatsByMonth(12) // 最近12个月订单统计
 		const weekSales = await this.orderService.getWeekSales() // 本周销售额
 		const todaySales = (await this.orderService.getDaySales(1))[0].amount // 今日销售额
 		const monthVisitorsCount = await this.userService.getDaysVisitorsCount(DateTime.now().day) // 本月访客数

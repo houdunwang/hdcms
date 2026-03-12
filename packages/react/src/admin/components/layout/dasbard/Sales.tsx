@@ -15,8 +15,8 @@ export function Sales({ data }: Props): React.JSX.Element {
 			color: "#2563eb",
 		},
 		count: {
-			label: "订单数量",
-			color: "#3B3B98",
+			label: "订单量",
+			color: "#7158e2",
 		},
 	} satisfies ChartConfig
 	const total = React.useMemo(
@@ -32,7 +32,7 @@ export function Sales({ data }: Props): React.JSX.Element {
 				<div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3">
 					<CardTitle>销售统计</CardTitle>
 					<CardDescription>
-						24个月销售额与订单数量统计
+						12个月销售额与订单数量统计
 					</CardDescription>
 				</div>
 				<div className="flex">

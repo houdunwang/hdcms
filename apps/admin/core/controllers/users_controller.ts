@@ -39,11 +39,11 @@ export default class UsersController extends BaseController {
    * @paramQuery perPage- 每页数量 - number @example(10)
    * @responseBody 200 - <User[]>
    */
-  async index({ request }: HttpContext) {
+  async index({ request, serialize }: HttpContext) {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 10)
     const users = await User.query().paginate(page, perPage)
-    return users
+    return serialize(UserTransformer.paginate(users, users.getMeta()))
   }
 
   /**

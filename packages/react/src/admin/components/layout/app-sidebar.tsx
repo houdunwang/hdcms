@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import { NavMain } from "@/admin/components/nav-main"
-import { NavUser } from "@/admin/components/nav-user"
+import { NavMain } from "@/admin/components/layout/nav-main"
+import { NavUser } from "@/admin/components/layout/nav-user"
 import { NavSecondary } from "@/components/nav-secondary"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar"
 import * as config from '@hdcms/config'

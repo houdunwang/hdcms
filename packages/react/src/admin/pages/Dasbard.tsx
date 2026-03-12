@@ -1,6 +1,6 @@
 import React from 'react'
-import { Sales } from './dasbard/Sales'
-import { Total } from './dasbard/Total'
+import { Sales } from '../components/layout/dasbard/Sales'
+import { Total } from '../components/layout/dasbard/Total'
 import { useQuery } from '@tanstack/react-query'
 import { useApi } from '@/hooks'
 import { Loading } from '@/common'
