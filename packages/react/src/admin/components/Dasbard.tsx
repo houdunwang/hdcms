@@ -1,13 +1,18 @@
 import React from 'react'
 import { Sales } from './dasbard/Sales'
-import { Total } from './dasbard/total'
-
+import { Total } from './dasbard/Total'
+import { useQuery } from '@tanstack/react-query'
+import { useApi } from '@/hooks'
+import { Loading } from '@/common'
 export const Dasbard = (): React.JSX.Element => {
+	const { api } = useApi()
+	const { isLoading, data } = useQuery(api.admin.queryOptions())
+	if (isLoading) return <Loading />
 	return (
 		<div className="@container/main flex flex-1 flex-col gap-2">
-			<Total />
+			{data?.data && <Total data={data.data} />}
 			<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-				<Sales />
+				{data?.data && <Sales data={data.data} />}
 			</div>
 		</div>
 	)

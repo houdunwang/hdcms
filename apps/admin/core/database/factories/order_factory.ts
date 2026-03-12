@@ -10,7 +10,7 @@ export const OrderFactory = factory
       'orderableId': 1,
       'sn': faker.string.uuid(),
       'subject': faker.lorem.sentence(),
-      'price': faker.number.int({ min: 50, max: 200 }),
+      'price': faker.number.int({ min: 50, max: 200 }).toFixed(2),
       'payState': faker.datatype.boolean(),
       'payType': faker.helpers.arrayElement(['alipay', 'wepay']),
       'tradeNo': faker.string.uuid(),
