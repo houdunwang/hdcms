@@ -26,8 +26,8 @@ export default class PackageProcess {
   }
 
   // 根据课程ID从数据库获取价格
-  async getPrice(id: number): Promise<number> {
+  async getPrice(id: number): Promise<string> {
     const item = await Package.findOrFail(id)
-    return Number(item.price)
+    return item.price
   }
 }

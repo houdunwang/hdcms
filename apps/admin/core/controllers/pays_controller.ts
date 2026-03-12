@@ -37,7 +37,7 @@ export default class PaysController extends BaseController {
         out_trade_no: order.sn,
         notify_url: notifyUrl,
         amount: {
-          total: price * 100,
+          total: Number(price) * 100,
         },
         scene_info: {
           payer_client_ip: request.ip(),

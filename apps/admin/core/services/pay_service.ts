@@ -36,7 +36,7 @@ export class PayService {
   public async getPrice(
     orderable_type: keyof typeof hdConfig.payProcess,
     orderable_id: number
-  ): Promise<number> {
+  ): Promise<string> {
     const process = new hdConfig.payProcess[orderable_type]()
     return await process.getPrice(orderable_id)
   }

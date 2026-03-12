@@ -5,6 +5,7 @@ import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.ts'
+import { DateTime } from 'luxon'
 @inject()
 export default class UsersController extends BaseController {
   constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
@@ -20,6 +21,12 @@ export default class UsersController extends BaseController {
  */
   async profile({ auth, serialize }: HttpContext) {
     const user = await auth.authenticateUsing(['web', 'api']);
+    //更新用户最后登录时间，1小时内登录不更新
+    if (user.updatedAt && user.updatedAt.plus({ hour: 1 }).toMillis() < DateTime.now().toMillis()) {
+      user.updatedAt = DateTime.now()
+      await user.save()
+    }
+    //更新用户最后登录时间
     return serialize(UserTransformer.transform(user, auth))
   }
 

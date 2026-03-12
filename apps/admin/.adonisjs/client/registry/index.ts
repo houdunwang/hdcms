@@ -12,6 +12,12 @@ const routes = {
     tokens: [{"old":"/uploads/*","type":0,"val":"uploads","end":""},{"old":"/uploads/*","type":2,"val":"*","end":""}],
     types: placeholder as Registry['drive.fs.serve']['types'],
   },
+  'admin': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/admin',
+    tokens: [{"old":"/core/admin","type":0,"val":"core","end":""},{"old":"/core/admin","type":0,"val":"admin","end":""}],
+    types: placeholder as Registry['admin']['types'],
+  },
   'auth.login': {
     methods: ["POST"],
     pattern: '/core/login',

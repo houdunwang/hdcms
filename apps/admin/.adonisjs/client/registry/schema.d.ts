@@ -18,6 +18,17 @@ export interface Registry {
       response: unknown
     }
   }
+  'admin': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/admin'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/admin_controller').default['handle']>>>
+    }
+  }
   'auth.login': {
     methods: ["POST"]
     pattern: '/core/login'

@@ -7,6 +7,7 @@ export interface ApiDefinition {
       serve: typeof routes['drive.fs.serve']
     }
   }
+  admin: typeof routes['admin']
   auth: {
     login: typeof routes['auth.login']
     register: typeof routes['auth.register']
