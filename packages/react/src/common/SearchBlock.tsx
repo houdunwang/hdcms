@@ -1,27 +1,21 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { fieldContext, FieldInput, FieldSubmitButton, formContext } from "@/form"
 import { FieldSelect } from "@/form/FieldSelect"
-import { useApi } from "@/hooks"
 import { cn } from "@/lib/utils"
 import { createFormHook } from "@tanstack/react-form"
 import { useNavigate, useRouterState } from "@tanstack/react-router"
-import qs from 'qs'
-import { type Dispatch, type FC, type SetStateAction } from 'react'
-import { toast } from "sonner"
+import { type FC } from 'react'
 
 type Props = {
 	className?: string,
-	setData: Dispatch<SetStateAction<any>>,
 	options: {
 		label: string,
 		value: string,
 	}[],
 }
-export const SearchBlock: FC<Props> = ({ className, setData, options }) => {
-	const { api } = useApi()
+export const SearchBlock: FC<Props> = ({ className, options }) => {
 	const location = useRouterState({ select: s => s.location })
 	const navigate = useNavigate()
-	// const mutation = useMutation(api.users.search.mutationOptions())
 	const { useAppForm } = createFormHook({
 		fieldComponents: {
 			FieldInput,
@@ -36,13 +30,10 @@ export const SearchBlock: FC<Props> = ({ className, setData, options }) => {
 	const form = useAppForm({
 		defaultValues: {
 			field: options[0].value as any,
-			keyword: ''
+			keyword: location.search.keyword || ''
 		},
 		onSubmit: async ({ value: body }) => {
-			if (!body.keyword) {
-				return toast.warning('请输入搜索关键词')
-			}
-			navigate({ to: location.pathname, search: { ...location.search, ...body } })
+			navigate({ to: location.pathname, search: { ...location.search, ...body, page: 1 } })
 		}
 	})
 	return (

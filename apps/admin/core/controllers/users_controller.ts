@@ -41,9 +41,10 @@ export default class UsersController extends BaseController {
    */
   async index({ request, serialize }: HttpContext) {
     const page = request.input('page', 1)
+    const field = request.qs().field || 'name'
     const keyword = request.qs().keyword
     if (keyword) {
-      const users = await User.query().where(request.qs().field || 'name', 'like', `%${keyword}%`).paginate(page)
+      const users = await User.query().where(field, 'like', `%${keyword}%`).paginate(page)
       return serialize(UserTransformer.paginate(users, users.getMeta()))
     }
     const users = await User.query().paginate(page)

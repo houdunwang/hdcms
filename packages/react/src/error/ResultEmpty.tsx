@@ -26,7 +26,7 @@ export const ResultEmpty = (): JSX.Element => {
 				<Empty className="h-full bg-muted/30">
 					<EmptyHeader>
 						<Info size={25} />
-						<EmptyTitle>没有结果</EmptyTitle>
+						<EmptyTitle>暂无数据</EmptyTitle>
 						<EmptyDescription className="max-w-xs text-pretty">
 							{/* You&apos;re all caught up. New notifications will appear here. */}
 						</EmptyDescription>

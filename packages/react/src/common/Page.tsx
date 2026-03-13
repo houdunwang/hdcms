@@ -18,7 +18,7 @@ export const Page = ({ meta }: { meta?: typeof registry.$tree.users.index.types.
 	const url = (page: number) => {
 		navigate({ to: location.pathname, search: { ...location.search, page } })
 	}
-	if (!meta) return <></>
+	if (!meta || Number(meta.lastPage) == 1) return <></>
 
 	return <Pagination>
 		<PaginationContent>

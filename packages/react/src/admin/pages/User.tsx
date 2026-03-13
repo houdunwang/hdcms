@@ -36,41 +36,34 @@ import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { useAtomValue } from 'jotai'
 import { CircleUser, SquareUser, TextAlignJustify, UserStar } from 'lucide-react'
-import { useEffect, useState, type JSX } from 'react'
+import { type JSX } from 'react'
 
 export function User(): JSX.Element {
 	const { api } = useApi()
 	const location = useRouterState({ select: s => s.location })
-	const [data, setData] = useState<typeof registry.$tree.users.index.types.response | undefined>(
-		undefined
-	)
 	const dasbardData = useAtomValue(dasbardStore)
-	const { isLoading, data: res } = useQuery(
+	const { isLoading, data } = useQuery(
 		api.users.index.queryOptions({
 			query: { ...location.search },
 		})
 	)
-	useEffect(() => {
-		setData(res)
-	}, [res])
 	if (isLoading) return <Loading />
-	if (!res?.data) return <></>
+	if (!data?.data) return <></>
 	const className =
 		'aspect-video rounded-xl bg-muted/50 flex flex-col justify-center items-center gap-3 text-sm lg:text-base border'
 	const iconClass = 'text-muted-foreground size-10 lg:size-8'
 	return (
 		<>
-			<div className="grid lg:grid-cols-2 gap-3 pb-3">
+			<div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-3 pb-3">
 				<SearchBlock
 					className="flex-1"
-					setData={setData}
 					options={[
 						{ label: '手机号', value: 'mobile' },
 						{ label: '帐号', value: 'name' },
 						{ label: '邮箱', value: 'email' },
 					]}
 				/>
-				<div className="lg:flex gap-3 justify-start hidden">
+				<div className="xl:flex gap-3 justify-start hidden">
 					<div className={className}>
 						<SquareUser className={iconClass} />
 						总用户：{dasbardData?.totalUsersCount}人
@@ -143,9 +136,7 @@ function RenderUserTable({ data }: { data: typeof registry.$tree.users.index.typ
 					</TableBody>
 				</Table>
 			</CardContent>
-			<CardFooter>
-				<Page meta={data?.metadata} />
-			</CardFooter>
+			<Page meta={data?.metadata} />
 		</Card>
 	)
 }
