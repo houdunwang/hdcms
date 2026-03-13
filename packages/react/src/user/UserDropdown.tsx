@@ -15,7 +15,7 @@ export const UserDropdown = (): React.JSX.Element => {
 		<div className="flex gap-3 items-center">
 			<div className="flex items-center gap-1">
 				<ModeToggle />
-				{isAdmin() && <a href="/admin" target="_blank">
+				{isAdmin && <a href="/admin" target="_blank">
 					<Button variant="outline" size="sm">
 						<Settings />
 					</Button>

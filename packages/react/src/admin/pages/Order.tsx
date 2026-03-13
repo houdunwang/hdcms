@@ -1,46 +1,29 @@
-import { Loading, UserAvatar } from '@/common'
+import { Loading, } from '@/common'
 import { Page } from '@/common/Page'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from "@/components/ui/button"
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useApi } from '@/hooks'
-import { useCommon } from '@/hooks/useCommon'
+import { UserAvatar } from '@/user'
+import type { Data } from '@app/admin/data'
 import { useQuery } from '@tanstack/react-query'
+import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { type JSX } from 'react'
+import { TextAlignJustify } from 'lucide-react'
+import { memo, type FC, type JSX } from 'react'
 
 export const Order = (): JSX.Element => {
 	const { api } = useApi()
-	const { getCurrentPage } = useCommon()
-	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
-		query: { page: getCurrentPage() }
-	}))
+	const location = useRouterState({ select: s => s.location })
 
+	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
+		query: location.search
+	}))
 	if (isLoading) return <Loading />
 	if (!data?.data) return <></>
 	const orders = data.data
+
 	return (
 		<Card>
 			<CardHeader>
@@ -54,6 +37,7 @@ export const Order = (): JSX.Element => {
 							<TableHead>ID</TableHead>
 							<TableHead>用户</TableHead>
 							<TableHead>订单号</TableHead>
+							<TableHead>订单类型</TableHead>
 							<TableHead>金额</TableHead>
 							<TableHead>状态</TableHead>
 							<TableHead>支付渠道</TableHead>
@@ -64,36 +48,7 @@ export const Order = (): JSX.Element => {
 					</TableHeader>
 					<TableBody>
 						{orders.map(order => (
-							<TableRow key={(order as any).id}>
-								<TableCell className="font-medium">{order.id}</TableCell>
-								<TableCell>
-									<UserAvatar user={order.user} />
-								</TableCell>
-								<TableCell>{order.sn}</TableCell>
-								<TableCell>{order.price}</TableCell>
-								<TableCell>{order.payState}</TableCell>
-								<TableCell>{order.payType}</TableCell>
-								<TableCell>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
-								<TableCell>{dayjs(order.createdAt).format('YYYY-MM-DD')}</TableCell>
-								<TableCell className="text-right pr-5">
-									<DropdownMenu>
-										<DropdownMenuTrigger asChild>
-											<Button variant="ghost" size="icon" className="size-8">
-												<Button variant={'outline'} size={'sm'}>操作</Button>
-												<span className="sr-only">Open menu</span>
-											</Button>
-										</DropdownMenuTrigger>
-										<DropdownMenuContent align="end">
-											<DropdownMenuItem>查看</DropdownMenuItem>
-											<DropdownMenuItem>标记已支付</DropdownMenuItem>
-											<DropdownMenuSeparator />
-											<DropdownMenuItem variant="destructive">
-												删除
-											</DropdownMenuItem>
-										</DropdownMenuContent>
-									</DropdownMenu>
-								</TableCell>
-							</TableRow>
+							<MemoOrderRow key={order.id} order={order} />
 						))}
 					</TableBody>
 				</Table>
@@ -104,3 +59,45 @@ export const Order = (): JSX.Element => {
 		</Card>
 	)
 }
+
+type RowProps = {
+	order: Data.Order
+}
+
+const OrderRow: FC<RowProps> = ({ order }) => {
+	return (
+		<TableRow>
+			<TableCell className="font-medium">{order.id}</TableCell>
+			<TableCell>
+				<UserAvatar user={order.user} />
+			</TableCell>
+			<TableCell>{order.sn}</TableCell>
+			<TableCell>
+			</TableCell>
+			<TableCell>{order.price}</TableCell>
+			<TableCell>{order.payState}</TableCell>
+			<TableCell>{order.payType}</TableCell>
+			<TableCell>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
+			<TableCell>{dayjs(order.createdAt).format('YYYY-MM-DD')}</TableCell>
+			<TableCell className="text-right pr-5">
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button variant="ghost" size="icon" className="size-8">
+							<TextAlignJustify />
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						<DropdownMenuItem>查看</DropdownMenuItem>
+						<DropdownMenuItem>标记已支付</DropdownMenuItem>
+						<DropdownMenuSeparator />
+						<DropdownMenuItem variant="destructive">
+							删除
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</TableCell>
+		</TableRow>
+	)
+}
+
+const MemoOrderRow = memo(OrderRow)

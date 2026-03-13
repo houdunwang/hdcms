@@ -9,20 +9,22 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination"
 import { registry } from '@app/admin/registry'
-import { useRouterState } from '@tanstack/react-router'
-import qs from 'qs'
+import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { type JSX } from 'react'
 
-export const Page = ({ meta }: { meta: typeof registry.$tree.users.index.types.response.metadata }): JSX.Element => {
+export const Page = ({ meta }: { meta?: typeof registry.$tree.users.index.types.response.metadata }): JSX.Element => {
 	const location = useRouterState({ select: s => s.location })
+	const navigate = useNavigate()
 	const url = (page: number) => {
-		return location.pathname + '?' + qs.stringify({ ...location.search, page })
+		navigate({ to: location.pathname, search: { ...location.search, page } })
 	}
+	if (!meta) return <></>
+
 	return <Pagination>
 		<PaginationContent>
 			{meta.previousPageUrl && (
 				<PaginationItem>
-					<PaginationPrevious href={url(Number(meta.currentPage) - 1)} text='上一页' />
+					<PaginationPrevious onClick={() => url(Number(meta.currentPage) - 1)} text='上一页' />
 				</PaginationItem>
 			)}
 			{(() => {
@@ -33,7 +35,7 @@ export const Page = ({ meta }: { meta: typeof registry.$tree.users.index.types.r
 					<>
 						{prevPages.map(p => (
 							<PaginationItem key={p}>
-								<PaginationLink href={url(p)}>{p}</PaginationLink>
+								<PaginationLink onClick={() => url(p)}>{p}</PaginationLink>
 							</PaginationItem>
 						))}
 						<PaginationItem>
@@ -51,7 +53,7 @@ export const Page = ({ meta }: { meta: typeof registry.$tree.users.index.types.r
 					<>
 						{nextPages.map(p => (
 							<PaginationItem key={p}>
-								<PaginationLink href={url(p)}>{p}</PaginationLink>
+								<PaginationLink onClick={() => url(p)}>{p}</PaginationLink>
 							</PaginationItem>
 						))}
 					</>
@@ -66,7 +68,7 @@ export const Page = ({ meta }: { meta: typeof registry.$tree.users.index.types.r
 			}
 			{meta.nextPageUrl && (
 				<PaginationItem>
-					<PaginationNext href={url(Number(meta.currentPage) + 1)} text='下一页' />
+					<PaginationNext onClick={() => url(Number(meta.currentPage) + 1)} text='下一页' />
 				</PaginationItem>
 			)}
 		</PaginationContent>

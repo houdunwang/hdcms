@@ -13,6 +13,10 @@ export default class OrderTransformer extends BaseTransformer<Order> {
         'userId',
         'price',
         'payType',
+        'orderableId',
+        'orderableType',
+        'subject',
+        'data',
         'createdAt',
         'updatedAt'
       ]),

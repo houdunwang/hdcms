@@ -7,4 +7,9 @@ export default class SubscribesController {
 		const subscribes = await Subscribe.query().paginate(request.input('page', 1))
 		return serialize(SubscribeTransformer.paginate(subscribes, subscribes.getMeta()))
 	}
+
+	async show({ params, serialize }: HttpContext) {
+		const subscribe = await Subscribe.findOrFail(params.id)
+		return serialize(SubscribeTransformer.transform(subscribe))
+	}
 }

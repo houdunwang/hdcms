@@ -4,8 +4,8 @@ import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import BaseController from './bases_controller.ts'
 import { DateTime } from 'luxon'
+import BaseController from './bases_controller.ts'
 @inject()
 export default class UsersController extends BaseController {
   constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
@@ -41,6 +41,11 @@ export default class UsersController extends BaseController {
    */
   async index({ request, serialize }: HttpContext) {
     const page = request.input('page', 1)
+    const keyword = request.qs().keyword
+    if (keyword) {
+      const users = await User.query().where(request.qs().field || 'name', 'like', `%${keyword}%`).paginate(page)
+      return serialize(UserTransformer.paginate(users, users.getMeta()))
+    }
     const users = await User.query().paginate(page)
     return serialize(UserTransformer.paginate(users, users.getMeta()))
   }

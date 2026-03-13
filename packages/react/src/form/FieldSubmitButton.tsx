@@ -10,6 +10,8 @@ type Props = Omit<
 	description?: React.ReactNode
 	fieldClassName?: string
 	buttonClassName?: string
+} & {
+	[key: string]: any
 }
 
 export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }: Props): React.JSX.Element => {
@@ -18,7 +20,8 @@ export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }
 		<form.Subscribe selector={(state) => state.isSubmitting}>
 			{(isSubmitting) => {
 				return <div className={fieldClassName}>
-					<Button type='submit' size={'lg'}
+					<Button
+						type='submit'
 						{...props}
 						disabled={isSubmitting}
 						className={className}

@@ -1,20 +1,23 @@
-import { Loading, UserAvatar } from '@/common'
+import { Loading, } from '@/common'
 import { Page } from '@/common/Page'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useApi } from '@/hooks'
-import { useCommon } from '@/hooks/useCommon'
+import { UserAvatar } from '@/user'
 import { useQuery } from '@tanstack/react-query'
+import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
+import { TextAlignJustify } from 'lucide-react'
 import { type JSX } from 'react'
 
 export const Subscribe = (): JSX.Element => {
 	const { api } = useApi()
-	const { getCurrentPage } = useCommon()
+	const location = useRouterState({ select: s => s.location })
+
 	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
-		query: { page: getCurrentPage() }
+		query: location.search
 	}))
 
 	if (isLoading) return <Loading />
@@ -56,8 +59,7 @@ export const Subscribe = (): JSX.Element => {
 									<DropdownMenu>
 										<DropdownMenuTrigger asChild>
 											<Button variant="ghost" size="icon" className="size-8">
-												<Button variant={'outline'} size={'sm'}>操作</Button>
-												<span className="sr-only">Open menu</span>
+												<TextAlignJustify />
 											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="end">

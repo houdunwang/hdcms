@@ -2,6 +2,7 @@ import hash from '@adonisjs/core/services/hash'
 import vine from '@vinejs/vine'
 import { validateProvider } from './config/validateProvider.ts'
 import { captchaRule } from './rules/captchaRule.js'
+import { UserSchema } from '#database/schema'
 
 /**
  * Validator to validate the payload when creating
@@ -73,3 +74,15 @@ updatePasswordValidator.messagesProvider = validateProvider({
     'old_password.database.exists': '旧密码错误',
   },
 })
+
+// export const indexSearchValidator = vine.create(
+//   vine.object({
+//     field: vine.string().optional(),
+//     keyword: vine.string().optional(),
+//   })
+// )
+// indexSearchValidator.messagesProvider = validateProvider({
+//   messages: {
+//     'field.enum': '字段不存在',
+//   },
+// })

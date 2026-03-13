@@ -1,13 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig, } from "@/components/ui/chart"
-import { registry } from '@app/admin/registry'
+import { dasbardStore } from "@/store/dasbardStore"
+import { useAtomValue } from "jotai"
 import * as React from "react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
-type Props = {
-	data: typeof registry.$tree.admin.types.response.data
-}
-export function Sales({ data }: Props): React.JSX.Element {
+export function Sales(): React.JSX.Element {
+	const dasbardData = useAtomValue(dasbardStore)
 	const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>("amount")
 	const chartConfig = {
 		amount: {
@@ -21,8 +20,8 @@ export function Sales({ data }: Props): React.JSX.Element {
 	} satisfies ChartConfig
 	const total = React.useMemo(
 		() => ({
-			amount: data.orderMonths.reduce((acc, curr) => acc + curr.amount, 0),
-			count: data.orderMonths.reduce((acc, curr) => acc + curr.count, 0),
+			amount: dasbardData?.orderMonths.reduce((acc, curr) => acc + curr.amount, 0),
+			count: dasbardData?.orderMonths.reduce((acc, curr) => acc + curr.count, 0),
 		}),
 		[]
 	)
@@ -58,7 +57,7 @@ export function Sales({ data }: Props): React.JSX.Element {
 			</CardHeader>
 			<CardContent className="px-2 sm:p-6">
 				<ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
-					<BarChart accessibilityLayer data={data?.orderMonths}>
+					<BarChart accessibilityLayer data={dasbardData?.orderMonths}>
 						<CartesianGrid vertical={false} />
 						<XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={(value) => value} />
 						<ChartTooltip content={<ChartTooltipContent />} />

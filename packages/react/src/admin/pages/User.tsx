@@ -1,48 +1,119 @@
-import { Loading, UserAvatar } from '@/common'
+import { Loading } from '@/common'
 import { Page } from '@/common/Page'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
+import { SearchBlock } from '@/common/SearchBlock'
+import { Button } from '@/components/ui/button'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card'
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from '@/components/ui/table'
+import { ResultEmpty } from '@/error/ResultEmpty'
 import { useApi } from '@/hooks'
-import { useCommon } from '@/hooks/useCommon'
+import { cn } from '@/lib/utils'
+import { dasbardStore } from '@/store/dasbardStore'
+import { UserAvatar } from '@/user'
+import { registry } from '@app/admin/registry'
 import { useQuery } from '@tanstack/react-query'
-import { CircleCheckBig } from "lucide-react"
-import { type JSX } from 'react'
+import { useRouterState } from '@tanstack/react-router'
+import dayjs from 'dayjs'
+import { useAtomValue } from 'jotai'
+import { CircleUser, SquareUser, TextAlignJustify, UserStar } from 'lucide-react'
+import { useEffect, useState, type JSX } from 'react'
 
 export function User(): JSX.Element {
 	const { api } = useApi()
-	const { getCurrentPage } = useCommon()
-	const { isLoading, data } = useQuery(api.users.index.queryOptions({
-		query: { page: getCurrentPage() }
-	}))
-
+	const location = useRouterState({ select: s => s.location })
+	const [data, setData] = useState<typeof registry.$tree.users.index.types.response | undefined>(
+		undefined
+	)
+	const dasbardData = useAtomValue(dasbardStore)
+	const { isLoading, data: res } = useQuery(
+		api.users.index.queryOptions({
+			query: { ...location.search },
+		})
+	)
+	useEffect(() => {
+		setData(res)
+	}, [res])
 	if (isLoading) return <Loading />
-	if (!data?.data) return <></>
-	const users = data.data
+	if (!res?.data) return <></>
+	const className =
+		'aspect-video rounded-xl bg-muted/50 flex flex-col justify-center items-center gap-3 text-sm lg:text-base border'
+	const iconClass = 'text-muted-foreground size-10 lg:size-8'
 	return (
-		<Card className=''>
+		<>
+			<div className="grid lg:grid-cols-2 gap-3 pb-3">
+				<SearchBlock
+					className="flex-1"
+					setData={setData}
+					options={[
+						{ label: '手机号', value: 'mobile' },
+						{ label: '帐号', value: 'name' },
+						{ label: '邮箱', value: 'email' },
+					]}
+				/>
+				<div className="lg:flex gap-3 justify-start hidden">
+					<div className={className}>
+						<SquareUser className={iconClass} />
+						总用户：{dasbardData?.totalUsersCount}人
+					</div>
+					<div className={cn(className)}>
+						<UserStar size={60} className={iconClass} />
+						本月访问：{dasbardData?.monthVisitorsCount.reduce((acc, curr) => acc + curr.count, 0)}人
+					</div>
+					<div className={className}>
+						<CircleUser size={60} className={iconClass} />
+						今日访问：{dasbardData?.todayUsersCount}人
+					</div>
+				</div>
+			</div>
+			{data?.data.length ? <RenderUserTable data={data} /> : <ResultEmpty />}
+		</>
+	)
+}
+
+function RenderUserTable({ data }: { data: typeof registry.$tree.users.index.types.response }) {
+	return (
+		<Card>
 			<CardHeader>
 				<CardTitle>用户管理</CardTitle>
 				<CardDescription></CardDescription>
 			</CardHeader>
-			<CardContent>
-				<Table className='bor1der'>
+			<CardContent className=" ">
+				<Table>
 					<TableHeader>
 						<TableRow>
-							<TableHead>ID</TableHead>
-							<TableHead>头像</TableHead>
-							<TableHead>帐号</TableHead>
+							<TableHead className="w-12">ID</TableHead>
+							<TableHead className="w-16">头像</TableHead>
+							<TableHead className="">帐号</TableHead>
 							<TableHead>昵称</TableHead>
 							<TableHead>邮箱</TableHead>
-							<TableHead>手机号</TableHead>
-							<TableHead>绑定微信</TableHead>
-							<TableHead className="text-right"></TableHead>
+							<TableHead>注册时间</TableHead>
+							<TableHead>最后登录</TableHead>
+							<TableHead></TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{users.map(user => (
-							<TableRow>
+						{data?.data.map((user) => (
+							<TableRow key={user.id}>
 								<TableCell className="font-medium">{user.id}</TableCell>
 								<TableCell>
 									<UserAvatar user={user} />
@@ -50,27 +121,20 @@ export function User(): JSX.Element {
 								<TableCell>{user.name}</TableCell>
 								<TableCell>{user.nickname}</TableCell>
 								<TableCell>{user.email}</TableCell>
-								<TableCell>{user.mobile}</TableCell>
-								<TableCell>
-									{user.openid ? <CircleCheckBig size={16} /> : null}
-								</TableCell>
-								<TableCell className="text-right pr-5">
+								<TableCell>{dayjs(user.createdAt).format('YYYY-MM-DD')}</TableCell>
+								<TableCell>{dayjs(user.updatedAt).format('YYYY-MM-DD')}</TableCell>
+								<TableCell className="text-right">
 									<DropdownMenu>
 										<DropdownMenuTrigger asChild>
 											<Button variant="ghost" size="icon" className="size-8">
-												{/* <MoreHorizontalIcon /> */}
-												{/* 操作 */}
-												<Button variant={'outline'} size={'sm'}>操作</Button>
-												<span className="sr-only">Open menu</span>
+												<TextAlignJustify />
 											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="end">
 											<DropdownMenuItem>Edit</DropdownMenuItem>
 											<DropdownMenuItem>Duplicate</DropdownMenuItem>
 											<DropdownMenuSeparator />
-											<DropdownMenuItem variant="destructive">
-												Delete
-											</DropdownMenuItem>
+											<DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
 										</DropdownMenuContent>
 									</DropdownMenu>
 								</TableCell>
@@ -80,10 +144,8 @@ export function User(): JSX.Element {
 				</Table>
 			</CardContent>
 			<CardFooter>
-				<Page meta={data.metadata} />
+				<Page meta={data?.metadata} />
 			</CardFooter>
 		</Card>
 	)
 }
-
-

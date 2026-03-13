@@ -10,7 +10,7 @@ export function FieldInput({ label, description, className, fieldClassName, type
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
 
 	return (
-		<Field className={className}>
+		<Field className={cn('w-full', className)}>
 			{label ? <FieldLabel htmlFor={field.name}>{label}</FieldLabel> : null}
 			<Input
 				id={field.name}

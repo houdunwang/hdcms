@@ -4,6 +4,7 @@ import { userAtom } from '@/store/userStore';
 import { useAtom } from 'jotai';
 import { useRequestClient } from './useRequestClient';
 import type { Data } from '@app/admin/data'
+import { useMemo } from 'react';
 export interface UseAuthReturn {
 	isAuthenticated: (record?: boolean) => boolean;
 	login: (data: typeof registry.$tree.auth.login.types.response.data) => void;
@@ -11,16 +12,16 @@ export interface UseAuthReturn {
 	logout: () => void;
 	user: Data.User | undefined;
 	setUser: (update: Data.User | undefined) => void;
-	isAdmin: () => boolean;
+	isAdmin: boolean;
 }
 
 export const useAuth = (): UseAuthReturn => {
 	const [user, setUser] = useAtom(userAtom)
 	const request = useRequestClient()
 
-	const isAdmin = (): boolean => {
-		return user?.id === 1
-	}
+	const isAdmin = useMemo((): boolean => {
+		return !!localStorage.getItem(AuthEnum.TOKEN_NAME) && user?.id === 1
+	}, [user])
 
 	/**
 	 * @summary 检查用户是否已认证
