@@ -16,7 +16,6 @@ import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as MemberExampleRouteImport } from './routes/member/example'
-import { Route as FrontPackageRouteImport } from './routes/front/package'
 import { Route as AdminUserRouteImport } from './routes/admin/user'
 import { Route as AdminPackageRouteImport } from './routes/admin/package'
 
@@ -55,11 +54,6 @@ const MemberExampleRoute = MemberExampleRouteImport.update({
   path: '/example',
   getParentRoute: () => MemberRouteRoute,
 } as any)
-const FrontPackageRoute = FrontPackageRouteImport.update({
-  id: '/package',
-  path: '/package',
-  getParentRoute: () => FrontRouteRoute,
-} as any)
 const AdminUserRoute = AdminUserRouteImport.update({
   id: '/user',
   path: '/user',
@@ -75,22 +69,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/auth': typeof AuthRouteRoute
-  '/front': typeof FrontRouteRouteWithChildren
+  '/front': typeof FrontRouteRoute
   '/member': typeof MemberRouteRouteWithChildren
   '/admin/package': typeof AdminPackageRoute
   '/admin/user': typeof AdminUserRoute
-  '/front/package': typeof FrontPackageRoute
   '/member/example': typeof MemberExampleRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRoute
-  '/front': typeof FrontRouteRouteWithChildren
+  '/front': typeof FrontRouteRoute
   '/member': typeof MemberRouteRouteWithChildren
   '/admin/package': typeof AdminPackageRoute
   '/admin/user': typeof AdminUserRoute
-  '/front/package': typeof FrontPackageRoute
   '/member/example': typeof MemberExampleRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -99,11 +91,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/auth': typeof AuthRouteRoute
-  '/front': typeof FrontRouteRouteWithChildren
+  '/front': typeof FrontRouteRoute
   '/member': typeof MemberRouteRouteWithChildren
   '/admin/package': typeof AdminPackageRoute
   '/admin/user': typeof AdminUserRoute
-  '/front/package': typeof FrontPackageRoute
   '/member/example': typeof MemberExampleRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -117,7 +108,6 @@ export interface FileRouteTypes {
     | '/member'
     | '/admin/package'
     | '/admin/user'
-    | '/front/package'
     | '/member/example'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -128,7 +118,6 @@ export interface FileRouteTypes {
     | '/member'
     | '/admin/package'
     | '/admin/user'
-    | '/front/package'
     | '/member/example'
     | '/admin'
   id:
@@ -140,7 +129,6 @@ export interface FileRouteTypes {
     | '/member'
     | '/admin/package'
     | '/admin/user'
-    | '/front/package'
     | '/member/example'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -149,7 +137,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRoute
-  FrontRouteRoute: typeof FrontRouteRouteWithChildren
+  FrontRouteRoute: typeof FrontRouteRoute
   MemberRouteRoute: typeof MemberRouteRouteWithChildren
 }
 
@@ -204,13 +192,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemberExampleRouteImport
       parentRoute: typeof MemberRouteRoute
     }
-    '/front/package': {
-      id: '/front/package'
-      path: '/package'
-      fullPath: '/front/package'
-      preLoaderRoute: typeof FrontPackageRouteImport
-      parentRoute: typeof FrontRouteRoute
-    }
     '/admin/user': {
       id: '/admin/user'
       path: '/user'
@@ -244,18 +225,6 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
   AdminRouteRouteChildren,
 )
 
-interface FrontRouteRouteChildren {
-  FrontPackageRoute: typeof FrontPackageRoute
-}
-
-const FrontRouteRouteChildren: FrontRouteRouteChildren = {
-  FrontPackageRoute: FrontPackageRoute,
-}
-
-const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
-  FrontRouteRouteChildren,
-)
-
 interface MemberRouteRouteChildren {
   MemberExampleRoute: typeof MemberExampleRoute
 }
@@ -272,7 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRoute,
-  FrontRouteRoute: FrontRouteRouteWithChildren,
+  FrontRouteRoute: FrontRouteRoute,
   MemberRouteRoute: MemberRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport

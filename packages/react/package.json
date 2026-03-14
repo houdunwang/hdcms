@@ -21,6 +21,7 @@
   "exports": {
     "./auth": "./dist/auth/index.mjs",
     "./common": "./dist/common/index.mjs",
+    "./errors": "./dist/errors/index.mjs",
     "./form": "./dist/form/index.mjs",
     "./hooks": "./dist/hooks/index.mjs",
     "./layouts": "./dist/layouts/index.mjs",
@@ -37,6 +38,9 @@
   },
   "typesVersions": {
     "*": {
+      "errors": [
+        "dist/errors.d.ts"
+      ],
       "config": [
         "dist/config.d.ts"
       ],

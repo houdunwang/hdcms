@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/empty"
 import { Link } from "@tanstack/react-router"
 import { BellRing } from "lucide-react"
+import type { JSX } from "react"
 
-export function E404() {
+export const E404 = (): JSX.Element => {
 	return (
 		<div className="flex h-screen items-center justify-center">
 			<Empty>

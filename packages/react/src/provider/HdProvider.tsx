@@ -12,6 +12,8 @@ import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
 import { useApi } from '@/hooks/useApi'
 import { useAuth } from '@/hooks/useAuth'
+import '../assets/global.css'
+
 export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }): React.JSX.Element => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 		<QueryClientProvider client={queryClient}>

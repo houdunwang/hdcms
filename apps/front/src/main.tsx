@@ -3,8 +3,7 @@ import { createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
 import { HdProvider } from '@hdcms/react/provider'
-import { E404 } from './components/errors/E404'
-// import "@hdcms/react/style.css"
+import { E404 } from '@hdcms/react/errors'
 
 const router = createRouter({
   context: {

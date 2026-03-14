@@ -11,7 +11,7 @@ import { UserDropdown } from "@/user"
 import * as config from '@hdcms/config'
 import { Link } from '@tanstack/react-router'
 import { House } from 'lucide-react'
-import { useState, type JSX, type ReactNode } from 'react'
+import { useState, type JSX } from 'react'
 export interface IProps {
 }
 export function Header({ }: IProps): React.JSX.Element {

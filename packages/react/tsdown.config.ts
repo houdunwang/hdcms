@@ -44,6 +44,7 @@ export default defineConfig({
     'src/layouts/index.ts',
     'src/assets/global.css',
     'src/assets/nprogress.css',
+    'src/errors/index.ts'
   ],
   unbundle: true,
   format: ['esm'],
