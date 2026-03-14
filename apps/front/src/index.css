@@ -1,5 +1,6 @@
 @source "../../../packages/react";
-@import '../../../packages/react/src/assets/global.css';
+/* @import '../../../packages/react/src/assets/global.css'; */
+@import '@hdcms/react/style.css';
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';

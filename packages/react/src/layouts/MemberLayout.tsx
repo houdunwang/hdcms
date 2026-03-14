@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils'
 import * as config from '@hdcms/config'
 import { Link, Outlet, useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { Profile } from './Profile'
-import { Bind } from './bind'
+import { Profile } from '../member/Profile'
+import { Bind } from '../member/bind'
 
 const systemRoutes = {
 	'/member/bind': <Bind />,

@@ -1,3 +1,4 @@
+import { RouteProgressBar } from '@/common'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { ThemeProvider } from '@/theme/theme-provider'
 import { AuthEnum } from '@/types/enum'
@@ -11,7 +12,6 @@ import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
 import { useApi } from '@/hooks/useApi'
 import { useAuth } from '@/hooks/useAuth'
-
 export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }): React.JSX.Element => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 		<QueryClientProvider client={queryClient}>
@@ -39,5 +39,8 @@ function App({ router, queryClient }: { router: AnyRouter, queryClient: QueryCli
 	}, [data])
 
 	if (isLoading) return <div className='w-screen h-screen flex justify-center items-center'><HashLoader size={50} color='#fb2c36' /></div>
-	return <RouterProvider router={router} context={{ auth, queryClient }} />
+	return <>
+		<RouteProgressBar router={router} />
+		<RouterProvider router={router} context={{ auth, queryClient }} />
+	</>
 }

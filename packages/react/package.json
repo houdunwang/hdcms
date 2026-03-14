@@ -24,7 +24,6 @@
     "./form": "./dist/form/index.mjs",
     "./hooks": "./dist/hooks/index.mjs",
     "./layouts": "./dist/layouts/index.mjs",
-    "./member": "./dist/member/index.mjs",
     "./package": "./dist/package/index.mjs",
     "./pay": "./dist/pay/index.mjs",
     "./provider": "./dist/provider/index.mjs",
@@ -33,7 +32,8 @@
     "./types": "./dist/types/index.mjs",
     "./user": "./dist/user/index.mjs",
     "./wechat": "./dist/wechat/index.mjs",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./style.css": "./dist/style.css"
   },
   "typesVersions": {
     "*": {
@@ -54,9 +54,6 @@
       ],
       "hooks": [
         "dist/hooks.d.ts"
-      ],
-      "member": [
-        "dist/member.d.ts"
       ],
       "pay": [
         "dist/pay.d.ts"
@@ -89,9 +86,12 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@tsdown/css": "^0.21.2",
+    "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.15.0",
     "motion": "^12.35.2",
     "next-themes": "^0.4.6",
+    "nprogress": "^0.2.0",
     "qs": "^6.15.0",
     "recharts": "2.15.4",
     "vaul": "^1.1.2"
