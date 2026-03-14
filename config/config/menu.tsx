@@ -1,4 +1,4 @@
-import { ChartPie, CircleHelpIcon, CommandIcon, Drum, Rss, Settings2Icon, SquareUserRound, SwatchBook } from "lucide-react";
+import { ChartPie, CircleHelpIcon, Clapperboard, CommandIcon, Dock, Drum, Handbag, MonitorPlay, Rss, Settings2Icon, SquareUserRound, SquareUserRoundIcon, SwatchBook, User, UserCheck, UserStar, Video, Youtube } from "lucide-react";
 
 export const menu = {
 	// 网站导航菜单
@@ -6,11 +6,13 @@ export const menu = {
 		{
 			title: '订阅会员',
 			to: '/front/package',
+			icon: <UserCheck size={16} />
 		},
 		{
 			title: '视频教程',
 			to: 'https://www.houdunren.com',
 			target: '_blank',
+			icon: <Clapperboard size={16} />
 		},
 	],
 	//导航栏点击用户头像时的下拉菜单
@@ -25,6 +27,23 @@ export const menu = {
 			},
 		],
 	},
+	member: [
+		{
+			title: '资料管理',
+			to: '/member/profile',
+			icon: UserStar
+		},
+		{
+			title: '绑定帐号',
+			to: '/member/bind',
+			icon: Dock
+		},
+		{
+			title: '示例页面',
+			to: '/member/example',
+			icon: Handbag,
+		},
+	],
 	admin: {
 		main: [
 			{

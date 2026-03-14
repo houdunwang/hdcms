@@ -23,6 +23,7 @@
     "./auth": "./dist/auth/index.mjs",
     "./common": "./dist/common/index.mjs",
     "./form": "./dist/form/index.mjs",
+    "./front": "./dist/front/index.mjs",
     "./hooks": "./dist/hooks/index.mjs",
     "./member": "./dist/member/index.mjs",
     "./package": "./dist/package/index.mjs",
@@ -42,6 +43,9 @@
       ],
       "admin": [
         "dist/admin.d.ts"
+      ],
+      "front": [
+        "dist/front.d.ts"
       ],
       "auth": [
         "dist/auth.d.ts"

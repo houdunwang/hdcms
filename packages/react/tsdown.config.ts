@@ -43,6 +43,7 @@ export default defineConfig({
     'src/types/index.ts',
     'src/package/index.ts',
     'src/admin/index.ts',
+    'src/front/index.ts',
   ],
   unbundle: true,
   format: ['esm'],
