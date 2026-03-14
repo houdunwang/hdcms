@@ -55,7 +55,7 @@ export function User(): JSX.Element {
 	const iconClass = 'text-muted-foreground size-10 lg:size-6'
 	return (
 		<>
-			<div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-3 pb-3">
+			<div className="grid xl:grid-cols-[1fr_3fr] gap-3 pb-3">
 				<SearchBlock
 					options={[
 						{ label: 'UID', value: 'id' },
@@ -66,7 +66,7 @@ export function User(): JSX.Element {
 				/>
 				<ChartBar
 					data={dasbardData?.monthVisitorsCount}
-					className='h-full border rounded-lg flex-1'
+					className='h-full border rounded-lg flex-1 hidden lg:flex'
 					dateKey='day'
 					chartConfig={{
 						count: {
@@ -75,7 +75,7 @@ export function User(): JSX.Element {
 						}
 					}}
 				/>
-				<div className="gap-3 grid grid-cols-3">
+				<div className="gap-3 grid grid-cols-3 hidden">
 					<div className={className}>
 						<SquareUser className={iconClass} />
 						总用户：{dasbardData?.totalUsersCount}人
@@ -102,7 +102,7 @@ function RenderUserTable({ data }: { data: typeof registry.$tree.users.index.typ
 				<CardTitle>用户管理</CardTitle>
 				<CardDescription></CardDescription>
 			</CardHeader>
-			<CardContent className=" ">
+			<CardContent className="max-w-full">
 				<Table>
 					<TableHeader>
 						<TableRow>

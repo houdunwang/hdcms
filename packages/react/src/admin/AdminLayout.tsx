@@ -47,7 +47,7 @@ export const AdminLayout: FC<Props> = ({ width = 52, height = 12 }) => {
 	return (
 		<SidebarProvider style={{ "--sidebar-width": `calc(var(--spacing) * ${width})`, "--header-height": `calc(var(--spacing) * ${height})`, } as React.CSSProperties} >
 			<AppSidebar variant="inset" />
-			<SidebarInset>
+			<SidebarInset className="min-w-0">
 				<SiteHeader />
 				<div className="flex flex-1 flex-col p-6 min-w-0">
 					{Component ? <Component /> : <Outlet />}

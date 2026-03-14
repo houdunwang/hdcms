@@ -18,7 +18,7 @@ export const UserAvatar = ({ user }: Props): JSX.Element => {
 					<AvatarFallback><User /></AvatarFallback>
 				</Avatar>
 			</DialogTrigger>
-			<DialogContent className='min-w-lg'>
+			<DialogContent className='lg:min-w-lg overflow-y-auto max-h-screen'>
 				<DialogHeader>
 					<DialogTitle>用户资料</DialogTitle>
 					<DialogDescription>

@@ -2,9 +2,7 @@ import { Loading, } from '@/common'
 import { ChartBar } from '@/common/ChartBar'
 import { Page } from '@/common/Page'
 import { SearchBlock } from '@/common/SearchBlock'
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { ResultEmpty } from '@/error/ResultEmpty'
 import { useApi } from '@/hooks'
@@ -16,7 +14,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useMatch } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { useAtomValue } from 'jotai'
-import { ShoppingBag, SquareUser, TextAlignJustify } from 'lucide-react'
+import { ShoppingBag } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
 
 export const Order = (): JSX.Element => {
@@ -116,23 +114,6 @@ const OrderRow: FC<RowProps> = ({ order }) => {
 			<TableCell>{order.payType}</TableCell>
 			<TableCell>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
 			<TableCell>{dayjs(order.createdAt).format('YYYY-MM-DD')}</TableCell>
-			{/* <TableCell className="text-right pr-5">
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" size="icon" className="size-8">
-							<TextAlignJustify />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DropdownMenuItem>查看</DropdownMenuItem>
-						<DropdownMenuItem>标记已支付</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem variant="destructive">
-							删除
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
-			</TableCell> */}
 		</TableRow>
 	)
 }
