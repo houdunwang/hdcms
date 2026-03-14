@@ -1,65 +1,79 @@
 import { Loading, } from '@/common'
 import { Page } from '@/common/Page'
+import { SearchBlock } from '@/common/SearchBlock'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
+import { ResultEmpty } from '@/error/ResultEmpty'
 import { useApi } from '@/hooks'
 import { UserAvatar } from '@/user'
 import type { Data } from '@app/admin/data'
+import { registry } from '@app/admin/registry'
 import { useQuery } from '@tanstack/react-query'
-import { useRouterState } from '@tanstack/react-router'
+import { useMatch } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { TextAlignJustify } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
 
 export const Order = (): JSX.Element => {
 	const { api } = useApi()
-	const location = useRouterState({ select: s => s.location })
-
+	const { search } = useMatch({ strict: false })
 	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
-		query: location.search
+		query: search
 	}))
 	if (isLoading) return <Loading />
 	if (!data?.data) return <></>
-	const orders = data.data
 
 	return (
-		<Card>
-			<CardHeader>
-				<CardTitle>订单管理</CardTitle>
-				<CardDescription></CardDescription>
-			</CardHeader>
-			<CardContent>
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead>ID</TableHead>
-							<TableHead>用户</TableHead>
-							<TableHead>订单号</TableHead>
-							<TableHead>订单类型</TableHead>
-							<TableHead>金额</TableHead>
-							<TableHead>状态</TableHead>
-							<TableHead>支付渠道</TableHead>
-							<TableHead>支付时间</TableHead>
-							<TableHead>创建时间</TableHead>
-							<TableHead className="text-right"></TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{orders.map(order => (
-							<MemoOrderRow key={order.id} order={order} />
-						))}
-					</TableBody>
-				</Table>
-			</CardContent>
-			<CardFooter>
-				<Page meta={data.metadata as any} />
-			</CardFooter>
-		</Card>
+		<>
+			<div className="grid lg:grid-cols-2 gap-3 pb-3">
+				<SearchBlock
+					options={[
+						{ label: '用户ID', value: 'userId' },
+						{ label: '订单号', value: 'sn' },
+						{ label: '支付订单号', value: 'tradeNo' },
+						{ label: '订单类型', value: 'orderableType' },
+					]}
+				/>
+			</div>
+			{data?.data.length ? <RenderOrderTable data={data} /> : <ResultEmpty />}
+		</>
 	)
 }
 
+const RenderOrderTable = ({ data }: { data: typeof registry.$tree.orders.index.types.response }) => {
+	return <Card>
+		<CardHeader>
+			<CardTitle>订单管理</CardTitle>
+			<CardDescription></CardDescription>
+		</CardHeader>
+		<CardContent>
+			<Table>
+				<TableHeader>
+					<TableRow>
+						<TableHead>ID</TableHead>
+						<TableHead>用户</TableHead>
+						<TableHead>订单号</TableHead>
+						<TableHead>订单类型</TableHead>
+						<TableHead>金额</TableHead>
+						<TableHead>状态</TableHead>
+						<TableHead>支付渠道</TableHead>
+						<TableHead>支付时间</TableHead>
+						<TableHead>创建时间</TableHead>
+						<TableHead className="text-right"></TableHead>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					{data.data.map(order => (
+						<MemoOrderRow key={order.id} order={order} />
+					))}
+				</TableBody>
+			</Table>
+		</CardContent>
+		<Page meta={data.metadata as any} />
+	</Card>
+}
 type RowProps = {
 	order: Data.Order
 }

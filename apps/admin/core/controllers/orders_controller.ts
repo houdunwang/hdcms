@@ -16,8 +16,21 @@ export default class OrdersController {
    * @requestFormDataBody { "subject": { "type": "string", "required": "true","example": "测试订单" }, "price": { "type": "number", "required": "true","example": "1" } }
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  async index(ctx: HttpContext) {
-    const orders = await Order.query().preload('user').paginate(ctx.request.input('page', 1))
-    return ctx.serialize(OrderTransformer.paginate(orders, orders.getMeta()))
+  async index({ request, serialize }: HttpContext) {
+    const field = request.input('field')
+    const keyword = request.input('keyword')
+    const page = request.input('page', 1)
+    const db = Order.query().preload('user')
+    if (keyword) {
+      if (field === 'userId') {
+        db.where('user_id', Number(keyword))
+      } else {
+        db.where(field, 'like', `%${keyword}%`)
+      }
+      const orders = await db.paginate(page)
+      return serialize(OrderTransformer.paginate(orders, orders.getMeta()))
+    }
+    const orders = await db.paginate(page)
+    return serialize(OrderTransformer.paginate(orders, orders.getMeta()))
   }
 }
