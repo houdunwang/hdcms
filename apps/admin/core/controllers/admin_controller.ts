@@ -5,10 +5,11 @@ import type { HttpContext } from '@adonisjs/core/http'
 import cache from '@adonisjs/cache/services/main'
 import app from '@adonisjs/core/services/app'
 import { DateTime } from 'luxon'
+import { SubscribeService } from '#core/services/subscribe_service'
 
 @inject()
 export default class AdminController {
-	constructor(private orderService: OrderService, private userService: UserService) { }
+	constructor(private orderService: OrderService, private userService: UserService, private subscribeService: SubscribeService) { }
 	async handle(ctx: HttpContext) {
 		type ReturnType = {
 			totalUsersCount: any;
@@ -29,6 +30,11 @@ export default class AdminController {
 				count: number;
 			}[];
 			weekSales: number;
+			subscribersByMonth: {
+				month: string;
+				count: number;
+			}[],
+			validSubscribers: number
 		}
 		await new Promise(r => setTimeout(r, 100))
 		const key = 'ADMIN:DASHBOARD:OVERVIEW'
@@ -37,15 +43,24 @@ export default class AdminController {
 			const cached = await cache.get({ key })
 			if (cached) return ctx.serialize(cached as ReturnType) // 命中缓存直接返回
 		}
+
+		//用户统计
 		const totalUsersCount = await this.userService.getTotalUsersCount() // 总用户数
-		const orderMonths = await this.orderService.getOrderStatsByMonth(12) // 最近12个月订单统计
-		const weekSales = await this.orderService.getWeekSales() // 本周销售额
-		const todaySales = (await this.orderService.getDaySales(1))[0].amount // 今日销售额
 		const monthVisitorsCount = await this.userService.getDaysVisitorsCount(DateTime.now().day) // 本月访客数
 		const todayUsersCount = monthVisitorsCount.reverse()[0].count // 今日用户数（从最近2天数组取今日）
-		// const orderYears = await this.orderService.getOrderStatsByYear(5) // 最近5年订单统计
-		const payload = { totalUsersCount, todayUsersCount, todaySales, orderMonths, monthVisitorsCount, weekSales } // 返回数据载荷
+		//订单相关
+		const orderMonths = await this.orderService.getOrderStatsByMonth(12) // 最近12个月订单统计
+		const orderYears = await this.orderService.getOrderStatsByYear(5) // 最近5年订单统计
+		//销售额
+		const weekSales = await this.orderService.getWeekSales() // 本周销售额
+		const todaySales = (await this.orderService.getDaySales(1))[0].amount // 今日销售额
+		//订阅相关
+		const totalSubscribers = await this.subscribeService.getTotalSubscribers() // 获取总订阅人数
+		const validSubscribers = await this.subscribeService.getTotalValidSubscribers() // 获取有效订阅人数
+		const subscribersByMonth = await this.subscribeService.getSubscribersByMonthCount(12) // 获取最近12个月订阅人数
 
+		//返回数据载荷
+		const payload = { validSubscribers, subscribersByMonth, totalUsersCount, todayUsersCount, todaySales, orderMonths, monthVisitorsCount, weekSales, orderYears, totalSubscribers }
 		if (!isDev) {
 			await cache.set({ key, value: payload, ttl: '1h' })
 		}

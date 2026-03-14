@@ -1,4 +1,5 @@
 import { Loading, } from '@/common'
+import { ChartBar } from '@/common/ChartBar'
 import { Page } from '@/common/Page'
 import { SearchBlock } from '@/common/SearchBlock'
 import { Button } from "@/components/ui/button"
@@ -7,18 +8,21 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { ResultEmpty } from '@/error/ResultEmpty'
 import { useApi } from '@/hooks'
+import { dasbardStore } from '@/store/dasbardStore'
 import { UserAvatar } from '@/user'
 import type { Data } from '@app/admin/data'
 import { registry } from '@app/admin/registry'
 import { useQuery } from '@tanstack/react-query'
 import { useMatch } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { TextAlignJustify } from 'lucide-react'
+import { useAtomValue } from 'jotai'
+import { ShoppingBag, SquareUser, TextAlignJustify } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
 
 export const Order = (): JSX.Element => {
 	const { api } = useApi()
 	const { search } = useMatch({ strict: false })
+	const dasbardData = useAtomValue(dasbardStore)
 	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
 		query: search
 	}))
@@ -27,7 +31,7 @@ export const Order = (): JSX.Element => {
 
 	return (
 		<>
-			<div className="grid lg:grid-cols-2 gap-3 pb-3">
+			<div className="grid lg:grid-cols-[1fr_2fr_auto] gap-3 pb-3">
 				<SearchBlock
 					options={[
 						{ label: '用户ID', value: 'userId' },
@@ -36,7 +40,26 @@ export const Order = (): JSX.Element => {
 						{ label: '订单类型', value: 'orderableType' },
 					]}
 				/>
+				<ChartBar
+					data={dasbardData?.orderMonths}
+					className='h-full border rounded-lg'
+					chartConfig={{
+						amount: {
+							label: "订单金额",
+							color: "#2563eb",
+						},
+						count: {
+							label: "订单量",
+							color: "#7158e2",
+						},
+					}}
+				/>
+				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg px-3 text-sm'}>
+					<ShoppingBag className={'size-6'} />
+					总销售：{dasbardData?.orderMonths.reduce((acc, curr) => acc + curr.amount, 0)} 元
+				</div>
 			</div>
+
 			{data?.data.length ? <RenderOrderTable data={data} /> : <ResultEmpty />}
 		</>
 	)

@@ -2,7 +2,6 @@ import hash from '@adonisjs/core/services/hash'
 import vine from '@vinejs/vine'
 import { validateProvider } from './config/validateProvider.ts'
 import { captchaRule } from './rules/captchaRule.js'
-import { UserSchema } from '#database/schema'
 
 /**
  * Validator to validate the payload when creating

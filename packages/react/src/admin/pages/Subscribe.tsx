@@ -1,4 +1,5 @@
 import { Loading, } from '@/common'
+import { ChartBar } from '@/common/ChartBar'
 import { Page } from '@/common/Page'
 import { SearchBlock } from '@/common/SearchBlock'
 import { Button } from "@/components/ui/button"
@@ -6,16 +7,19 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useApi } from '@/hooks'
+import { dasbardStore } from '@/store/dasbardStore'
 import { UserAvatar } from '@/user'
 import { useQuery } from '@tanstack/react-query'
 import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { TextAlignJustify } from 'lucide-react'
+import { useAtomValue } from 'jotai'
+import { Handbag, SquareUser, TextAlignJustify } from 'lucide-react'
 import { type JSX } from 'react'
 
 export const Subscribe = (): JSX.Element => {
 	const { api } = useApi()
 	const location = useRouterState({ select: s => s.location })
+	const dasbardData = useAtomValue(dasbardStore)
 	const { isLoading, data } = useQuery(api.subscribe.index.queryOptions({
 		query: location.search
 	}))
@@ -24,12 +28,27 @@ export const Subscribe = (): JSX.Element => {
 	if (!data?.data) return <></>
 	return (
 		<>
-			<div className="grid lg:grid-cols-2 gap-3 pb-3">
+			<div className="grid lg:grid-cols-[1fr_auto_2fr] gap-3 pb-3">
 				<SearchBlock
 					options={[
 						{ label: '用户ID', value: 'userId' },
 					]}
 				/>
+				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg px-3 text-sm'}>
+					<Handbag className={'size-6'} />
+					有效订阅：{dasbardData?.validSubscribers}人
+				</div>
+				<ChartBar
+					data={dasbardData?.subscribersByMonth}
+					className='h-full border rounded-lg'
+					chartConfig={{
+						count: {
+							label: "订阅量",
+							color: "#2563eb",
+						},
+					}}
+				/>
+
 			</div>
 			<Card>
 				<CardHeader>

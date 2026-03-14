@@ -1,6 +1,18 @@
 import Order from '#core/models/order'
 import factory from '@adonisjs/lucid/factories'
-import { monthDates } from './subscribe_factory.ts'
+import { DateTime } from 'luxon'
+export const monthDates = (() => {
+  const start = DateTime.fromISO('2025-01-01').startOf('month')
+  const now = DateTime.now()
+  const dates: DateTime[] = []
+  let cursor = start
+  while (cursor <= now) {
+    dates.push(cursor)
+    cursor = cursor.plus({ months: 1 })
+  }
+  return dates
+})()
+
 let monthIndex = 0
 
 export const OrderFactory = factory

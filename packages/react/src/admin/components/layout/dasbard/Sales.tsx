@@ -1,9 +1,9 @@
+import { ChartBar } from "@/common/ChartBar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig, } from "@/components/ui/chart"
+import { type ChartConfig } from "@/components/ui/chart"
 import { dasbardStore } from "@/store/dasbardStore"
 import { useAtomValue } from "jotai"
 import * as React from "react"
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 export function Sales(): React.JSX.Element {
 	const dasbardData = useAtomValue(dasbardStore)
@@ -56,14 +56,10 @@ export function Sales(): React.JSX.Element {
 				</div>
 			</CardHeader>
 			<CardContent className="px-2 sm:p-6">
-				<ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
-					<BarChart accessibilityLayer data={dasbardData?.orderMonths}>
-						<CartesianGrid vertical={false} />
-						<XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={(value) => value} />
-						<ChartTooltip content={<ChartTooltipContent />} />
-						<Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} radius={4} />
-					</BarChart>
-				</ChartContainer>
+				<ChartBar
+					data={dasbardData?.orderMonths}
+					chartConfig={{ [activeChart]: chartConfig[activeChart] }}
+				/>
 			</CardContent>
 		</Card>
 	)

@@ -1,4 +1,5 @@
 import { Loading } from '@/common'
+import { ChartBar } from '@/common/ChartBar'
 import { Page } from '@/common/Page'
 import { SearchBlock } from '@/common/SearchBlock'
 import { Button } from '@/components/ui/button'
@@ -50,8 +51,8 @@ export function User(): JSX.Element {
 	if (isLoading) return <Loading />
 	if (!data?.data) return <></>
 	const className =
-		'aspect-video rounded-xl bg-muted/50 flex flex-col justify-center items-center gap-3 text-sm lg:text-base border'
-	const iconClass = 'text-muted-foreground size-10 lg:size-8'
+		'rounded-xl bg-muted/50 flex flex-col justify-center items-center gap-3 border text-sm'
+	const iconClass = 'text-muted-foreground size-10 lg:size-6'
 	return (
 		<>
 			<div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-3 pb-3">
@@ -62,7 +63,18 @@ export function User(): JSX.Element {
 						{ label: '邮箱', value: 'email' },
 					]}
 				/>
-				<div className="xl:flex gap-3 justify-start hidden">
+				<ChartBar
+					data={dasbardData?.monthVisitorsCount}
+					className='h-full border rounded-lg flex-1'
+					dateKey='day'
+					chartConfig={{
+						count: {
+							label: "访问量",
+							color: "#2563eb",
+						}
+					}}
+				/>
+				<div className="gap-3 grid grid-cols-3">
 					<div className={className}>
 						<SquareUser className={iconClass} />
 						总用户：{dasbardData?.totalUsersCount}人
