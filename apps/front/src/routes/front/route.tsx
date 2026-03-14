@@ -1,6 +1,6 @@
-import { Footer, Header } from '@houdunyun/react/common'
-import { FrontLayout } from '@houdunyun/react/front'
-import type { RouterContextConfig } from '@houdunyun/react/types'
+import { Footer, Header } from '@hdcms/react/common'
+import { FrontLayout } from '@hdcms/react/front'
+import type { RouterContextConfig } from '@hdcms/react/types'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/front')({

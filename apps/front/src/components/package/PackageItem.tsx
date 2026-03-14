@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
 import type { Data } from '@app/admin/data';
 import { Check, ShoppingBag } from 'lucide-react';
-import { WePay } from '@houdunyun/react/pay'
+import { WePay } from '@hdcms/react/pay'
 
 interface Props {
 	item: Data.Package

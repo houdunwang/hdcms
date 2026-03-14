@@ -14,7 +14,7 @@ import { useAtomValue } from 'jotai'
 import { Handbag } from 'lucide-react'
 import { type JSX } from 'react'
 
-export const Subscribe = (): JSX.Element => {
+export const SubscribeAdminPage = (): JSX.Element => {
 	const { api } = useApi()
 	const location = useRouterState({ select: s => s.location })
 	const dasbardData = useAtomValue(dasbardStore)

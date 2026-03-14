@@ -47,12 +47,12 @@ function LoginComponent() {
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
-					<Link to='/member' search={{ system: 'profile' }}>
+					<Link to='/member/profile'>
 						<DropdownMenuItem className='cursor-pointer py-2'>
 							<SquareUserRound /> 资料管理
 						</DropdownMenuItem>
 					</Link>
-					<Link to='/member' search={{ system: 'bind' }}>
+					<Link to='/member/bind'>
 						<DropdownMenuItem className='cursor-pointer py-2'>
 							<LaptopMinimalCheck />帐号绑定
 						</DropdownMenuItem>

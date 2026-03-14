@@ -39,7 +39,7 @@ import { useAtomValue } from 'jotai'
 import { CircleUser, SquareUser, TextAlignJustify, UserStar } from 'lucide-react'
 import { type JSX } from 'react'
 
-export function User(): JSX.Element {
+export function UserAdminPage(): JSX.Element {
 	const { api } = useApi()
 	const location = useRouterState({ select: s => s.location })
 	const dasbardData = useAtomValue(dasbardStore)

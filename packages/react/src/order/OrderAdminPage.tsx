@@ -17,7 +17,7 @@ import { useAtomValue } from 'jotai'
 import { ShoppingBag } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
 
-export const Order = (): JSX.Element => {
+export const OrderAdminPage = (): JSX.Element => {
 	const { api } = useApi()
 	const { search } = useMatch({ strict: false })
 	const dasbardData = useAtomValue(dasbardStore)

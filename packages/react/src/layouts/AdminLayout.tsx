@@ -1,36 +1,39 @@
-import { AppSidebar } from "@/admin/components/layout/app-sidebar"
-import { SiteHeader } from "@/admin/components/layout/site-header"
+import { AppSidebar } from "@/layouts/admin/app-sidebar"
+import { SiteHeader } from "@/layouts/admin/site-header"
 import { Loading } from "@/common"
 import { SidebarInset, SidebarProvider, } from "@/components/ui/sidebar"
 import { useApi, useAuth, useIsMobile } from "@/hooks"
+import { dasbardStore } from "@/store/dasbardStore"
 import { useQuery } from "@tanstack/react-query"
 import { Outlet, useNavigate, useRouterState } from "@tanstack/react-router"
-import { useEffect, type FC } from "react"
-import { Dasbard } from "./pages/Dasbard"
-import { Order } from "./pages/Order"
-import { Subscribe } from "./pages/Subscribe"
-import { User } from "./pages/User"
-import { dasbardStore } from "@/store/dasbardStore"
 import { useAtom } from "jotai"
+import { useEffect, type FC } from "react"
+import { DasbardAdminPage } from "../dasbard/DasbardAdminPage"
+import { UserAdminPage } from "@/user/UserAdminPage"
+import { OrderAdminPage } from "@/order/OrderAdminPage"
+import { SubscribeAdminPage } from "@/subscribe/SubscribeAdminPage"
+import { PackageAdminPage } from "@/package/PackageAdminPage"
+
+export const routes = {
+	'/admin': DasbardAdminPage,
+	'/admin/user': UserAdminPage,
+	'/admin/order': OrderAdminPage,
+	'/admin/subscribe': SubscribeAdminPage,
+	'/admin/package': PackageAdminPage
+} as Record<string, React.ComponentType>
 
 interface Props {
-	width: number,
-	height: number
+	width?: number,
+	height?: number
 }
-const routes = {
-	'/admin': Dasbard,
-	'/admin/user': User,
-	'/admin/order': Order,
-	'/admin/subscribe': Subscribe
-}
+
 export const AdminLayout: FC<Props> = ({ width = 52, height = 12 }) => {
 	const isMobile = useIsMobile(1024)
 	width = isMobile ? 45 : width
-	console.log('isMobile', isMobile)
 	const { isAdmin } = useAuth()
 	const navigate = useNavigate()
 	const location = useRouterState({ select: s => s.location })
-	const Component = (routes as unknown as Record<string, React.ComponentType>)[location.pathname] || Dasbard
+	const Component = routes[location.pathname] || DasbardAdminPage
 	const { api } = useApi()
 	const { isLoading, data: dasbardData } = useQuery(api.admin.queryOptions())
 	const [, setDasbardStore] = useAtom(dasbardStore)

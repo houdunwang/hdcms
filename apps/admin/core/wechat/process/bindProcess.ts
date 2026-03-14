@@ -1,5 +1,5 @@
 import cache from '@adonisjs/cache/services/main'
-import type Wechat from '@houdunyun/wechat'
+import type Wechat from '@hdcms/wechat'
 
 export default class BindProcess {
   constructor(private wechat: Wechat) { }

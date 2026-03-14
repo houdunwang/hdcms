@@ -1,14 +1,13 @@
 import { Button } from '@/components/ui/button'
-import { LoginRightSpace } from '@houdunyun/react/auth'
-import { AuthLayout } from '@houdunyun/react/auth'
-import { Footer, Header } from '@houdunyun/react/common'
+import { LoginRightSpace } from '@hdcms/react/auth'
+import { AuthLayout } from '@hdcms/react/auth'
+import { Footer, Header } from '@hdcms/react/common'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { CodeXml } from 'lucide-react'
 
 export const Route = createFileRoute('/auth')({
 	beforeLoad: ({ context }) => {
 		if (context.auth.isAuthenticated(true)) {
-			console.log('	', 111111)
 			throw redirect({ to: '/' })
 		}
 	},

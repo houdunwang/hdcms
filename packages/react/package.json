@@ -1,5 +1,5 @@
 {
-  "name": "@houdunyun/react",
+  "name": "@hdcms/react",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -19,12 +19,11 @@
     "dist"
   ],
   "exports": {
-    "./admin": "./dist/admin/index.mjs",
     "./auth": "./dist/auth/index.mjs",
     "./common": "./dist/common/index.mjs",
     "./form": "./dist/form/index.mjs",
-    "./front": "./dist/front/index.mjs",
     "./hooks": "./dist/hooks/index.mjs",
+    "./layouts": "./dist/layouts/index.mjs",
     "./member": "./dist/member/index.mjs",
     "./package": "./dist/package/index.mjs",
     "./pay": "./dist/pay/index.mjs",
@@ -41,11 +40,8 @@
       "config": [
         "dist/config.d.ts"
       ],
-      "admin": [
-        "dist/admin.d.ts"
-      ],
-      "front": [
-        "dist/front.d.ts"
+      "layouts": [
+        "dist/layouts.d.ts"
       ],
       "auth": [
         "dist/auth.d.ts"

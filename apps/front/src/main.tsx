@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query'
 import { createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
-import { HdProvider } from '@houdunyun/react/provider'
+import { HdProvider } from '@hdcms/react/provider'
 import { E404 } from './components/errors/E404'
 
 const router = createRouter({

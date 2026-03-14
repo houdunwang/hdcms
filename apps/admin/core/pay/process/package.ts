@@ -21,7 +21,6 @@ export default class PackageProcess {
     await subscribe.save()
     // 编写业务逻辑，例如：
     // await UserCourse.create({ userId: order.userId, courseId: order.orderableId });
-    // console.log(`为用户 ${order.userId} 开通订阅权限 ${order.orderableId}`)
     return true;
   }
 

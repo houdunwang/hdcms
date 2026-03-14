@@ -1,8 +1,8 @@
-import { Loading } from "@houdunyun/react/common"
-import { useApi } from "@houdunyun/react/hooks"
+import { Loading } from "@hdcms/react/common"
+import { useApi } from "@hdcms/react/hooks"
 import { useQuery } from "@tanstack/react-query"
 import { PackageItem } from "./PackageItem"
-import { } from '@houdunyun/react/common'
+import { } from '@hdcms/react/common'
 export const PackageList = () => {
 	const { api } = useApi()
 	const { isLoading, data } = useQuery(api.package.index.queryOptions())

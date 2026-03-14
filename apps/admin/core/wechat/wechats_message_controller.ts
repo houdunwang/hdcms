@@ -17,7 +17,6 @@ export default class WechatsMessageController {
    */
   async handle() {
     const isBindRequest = await this.WechatService.init()
-    console.log('isBindRequest', isBindRequest)
     if (isBindRequest) return isBindRequest
 
     const processResult = await this.processHandle()

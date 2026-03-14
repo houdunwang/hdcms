@@ -1,6 +1,6 @@
 import User from '#models/user'
 import cache from '@adonisjs/cache/services/main'
-import type Wechat from '@houdunyun/wechat'
+import type Wechat from '@hdcms/wechat'
 
 export default class LoginProcess {
   constructor(private wechat: Wechat) { }

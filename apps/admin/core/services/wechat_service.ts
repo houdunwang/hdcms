@@ -2,7 +2,7 @@ import env from '#start/env'
 import cache from '@adonisjs/cache/services/main'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import Wechat from '@houdunyun/wechat'
+import Wechat from '@hdcms/wechat'
 
 @inject()
 export class WechatService {

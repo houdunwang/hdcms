@@ -58,7 +58,6 @@ export default class Qr {
 				method: 'GET',
 			});
 			const res = await response.json()
-			console.log('res', res)
 		} catch (error) {
 			console.error('Error getting QR image:', error);
 			throw error;

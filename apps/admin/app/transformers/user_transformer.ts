@@ -37,14 +37,4 @@ export default class UserTransformer extends BaseTransformer<User> {
       openid: showPrivateField ? this.resource.openid : null,
     }
   }
-
-  // async forDetailedView({ request }: HttpContext) {
-  //   console.log('request', request)
-  //   return {
-  //     ...this.toObject(),
-  //     can: {
-  //       view: true,
-  //     }
-  //   }
-  // }
 }

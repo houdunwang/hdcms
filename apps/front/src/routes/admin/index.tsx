@@ -1,4 +1,4 @@
-import type { RouterContextConfig } from '@houdunyun/react/types'
+import type { RouterContextConfig } from '@hdcms/react/types'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin/')({

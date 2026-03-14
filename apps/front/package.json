@@ -20,7 +20,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@fontsource-variable/inter": "^5.2.8",
     "@hdcms/config": "workspace:*",
-    "@houdunyun/react": "workspace:*",
+    "@hdcms/react": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-form": "^1.28.3",

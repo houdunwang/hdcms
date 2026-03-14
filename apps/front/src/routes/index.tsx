@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Footer, Header } from '@houdunyun/react/common'
+import { Footer, Header } from '@hdcms/react/common'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {

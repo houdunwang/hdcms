@@ -1,7 +1,7 @@
 import React from 'react'
-import { Sales } from '../components/layout/dasbard/Sales'
-import { Total } from '../components/layout/dasbard/Total'
-export const Dasbard = (): React.JSX.Element => {
+import { Sales } from './components/Sales'
+import { Total } from './components/Total'
+export const DasbardAdminPage = (): React.JSX.Element => {
 	return (
 		<div className="@container/main flex flex-1 flex-col gap-2">
 			<Total />

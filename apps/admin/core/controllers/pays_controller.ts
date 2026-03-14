@@ -31,7 +31,6 @@ export default class PaysController extends BaseController {
       const price = await this.payService.getPrice(payload.orderable_type, payload.orderable_id)
       const order = await this.orderService.create({ ...payload, price })
       const notifyUrl = url('pay.notify')
-      console.log('notifyUrl', notifyUrl)
       const params = {
         description: payload.subject,
         out_trade_no: order.sn,
@@ -84,7 +83,6 @@ export default class PaysController extends BaseController {
   async notify({ request, response }: HttpContext) {
     try {
       const resource = request.input('resource')
-      console.log('resource', resource)
       const { ciphertext, associated_data, nonce } = resource
       const params = await this.payService.pay().decipher_gcm(ciphertext, associated_data, nonce, env.get('WECHAT_PAY_KEY')!) as PayResult
       if (params.trade_state === 'SUCCESS') {

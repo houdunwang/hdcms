@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { AdminLayout } from '@houdunyun/react/admin'
-import type { RouterContextConfig } from '@houdunyun/react/types'
+import { AdminLayout } from '@hdcms/react/layouts'
+import type { RouterContextConfig } from '@hdcms/react/types'
 
 export const Route = createFileRoute('/admin')({
 	beforeLoad() {

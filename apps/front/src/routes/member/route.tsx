@@ -1,4 +1,4 @@
-import { MemberLayout } from '@houdunyun/react/member'
+import { MemberLayout } from '@hdcms/react/member'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/member')({

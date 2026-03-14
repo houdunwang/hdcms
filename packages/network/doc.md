@@ -4,11 +4,11 @@
 
 ## 安装与导入
 
-- 模块名：`@houdunyun/network`
+- 模块名：`@hdcms/network`
 - 在应用中直接导入使用：
 
 ```ts
-import { createClient, api, createQueryFn, createMutationFn } from '@houdunyun/network'
+import { createClient, api, createQueryFn, createMutationFn } from '@hdcms/network'
 ```
 
 ## 创建客户端
@@ -161,7 +161,7 @@ const client = createClient({
 - 查询函数
 
 ```ts
-import { createQueryFn } from '@houdunyun/network'
+import { createQueryFn } from '@hdcms/network'
 import { useQuery } from '@tanstack/react-query'
 
 const usersQueryFn = createQueryFn<{ list: any[] }>(client, '/core/users')
@@ -175,7 +175,7 @@ const { data, isLoading } = useQuery({
 - 变更函数
 
 ```ts
-import { createMutationFn } from '@houdunyun/network'
+import { createMutationFn } from '@hdcms/network'
 import { useMutation } from '@tanstack/react-query'
 
 const loginMutationFn = createMutationFn<{ account: string; password: string }, { token: string }>(
