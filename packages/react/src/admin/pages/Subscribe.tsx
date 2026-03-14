@@ -52,7 +52,7 @@ export const Subscribe = (): JSX.Element => {
 			</div>
 			<Card>
 				<CardHeader>
-					<CardTitle>订阅管理</CardTitle>
+					<CardTitle>网站订阅</CardTitle>
 					<CardDescription></CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -63,8 +63,8 @@ export const Subscribe = (): JSX.Element => {
 								<TableHead className='w-20'>用户</TableHead>
 								<TableHead>到期时间</TableHead>
 								<TableHead>更新时间</TableHead>
-								<TableHead>创建时间</TableHead>
-								<TableHead className="text-right"></TableHead>
+								<TableHead className='text-right'>创建时间</TableHead>
+								{/* <TableHead className="text-right"></TableHead> */}
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -74,8 +74,8 @@ export const Subscribe = (): JSX.Element => {
 									<TableCell> <UserAvatar user={order.user} /> </TableCell>
 									<TableCell>{dayjs(order.endTime).format('YYYY-MM-DD')}</TableCell>
 									<TableCell>{dayjs(order.createdAt).format('YYYY-MM-DD')}</TableCell>
-									<TableCell>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
-									<TableCell className="text-right pr-5">
+									<TableCell className='text-right'>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
+									{/* <TableCell className="text-right pr-5">
 										<DropdownMenu>
 											<DropdownMenuTrigger asChild>
 												<Button variant="ghost" size="icon" className="size-8">
@@ -90,7 +90,7 @@ export const Subscribe = (): JSX.Element => {
 												</DropdownMenuItem>
 											</DropdownMenuContent>
 										</DropdownMenu>
-									</TableCell>
+									</TableCell> */}
 								</TableRow>
 							))}
 						</TableBody>

@@ -12,7 +12,7 @@ export default class UserTransformer extends BaseTransformer<User> {
   }
 
   toObject() {
-    const isSelf = this.resource.id === this.auth?.user?.id
+    const showPrivateField = this.resource.id === this.auth?.user?.id || this.auth?.user?.isAdmin
     return {
       ...this.pick(this.resource, [
         'id',
@@ -31,10 +31,10 @@ export default class UserTransformer extends BaseTransformer<User> {
         'createdAt',
         'updatedAt',
       ]),
-      mobile: isSelf ? this.resource.mobile : null,
-      realName: isSelf ? this.resource.realName : null,
-      address: isSelf ? this.resource.address : null,
-      openid: isSelf ? this.resource.openid : null,
+      mobile: showPrivateField ? this.resource.mobile : null,
+      realName: showPrivateField ? this.resource.realName : null,
+      address: showPrivateField ? this.resource.address : null,
+      openid: showPrivateField ? this.resource.openid : null,
     }
   }
 

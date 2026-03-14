@@ -5,7 +5,7 @@ import { HttpContext } from '@adonisjs/core/http'
 
 @inject()
 export default class OrdersController {
-  constructor(protected ctx: HttpContext) { }
+  constructor(protected ctx: HttpContext,) { }
 
   /**
    * @index

@@ -84,7 +84,7 @@ const RenderOrderTable = ({ data }: { data: typeof registry.$tree.orders.index.t
 						<TableHead>支付渠道</TableHead>
 						<TableHead>支付时间</TableHead>
 						<TableHead>创建时间</TableHead>
-						<TableHead className="text-right"></TableHead>
+						{/* <TableHead className="text-right"></TableHead> */}
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -116,7 +116,7 @@ const OrderRow: FC<RowProps> = ({ order }) => {
 			<TableCell>{order.payType}</TableCell>
 			<TableCell>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
 			<TableCell>{dayjs(order.createdAt).format('YYYY-MM-DD')}</TableCell>
-			<TableCell className="text-right pr-5">
+			{/* <TableCell className="text-right pr-5">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" size="icon" className="size-8">
@@ -132,7 +132,7 @@ const OrderRow: FC<RowProps> = ({ order }) => {
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
-			</TableCell>
+			</TableCell> */}
 		</TableRow>
 	)
 }

@@ -58,6 +58,7 @@ export function User(): JSX.Element {
 			<div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-3 pb-3">
 				<SearchBlock
 					options={[
+						{ label: 'UID', value: 'id' },
 						{ label: '手机号', value: 'mobile' },
 						{ label: '帐号', value: 'name' },
 						{ label: '邮箱', value: 'email' },

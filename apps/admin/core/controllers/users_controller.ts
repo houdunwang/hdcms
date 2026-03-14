@@ -39,16 +39,16 @@ export default class UsersController extends BaseController {
    * @paramQuery perPage- 每页数量 - number @example(10)
    * @responseBody 200 - <User[]>
    */
-  async index({ request, serialize }: HttpContext) {
+  async index({ request, serialize, auth }: HttpContext) {
     const page = request.input('page', 1)
     const field = request.qs().field || 'name'
     const keyword = request.qs().keyword
     if (keyword) {
       const users = await User.query().where(field, 'like', `%${keyword}%`).paginate(page)
-      return serialize(UserTransformer.paginate(users, users.getMeta()))
+      return serialize(UserTransformer.paginate(users, users.getMeta(), auth))
     }
     const users = await User.query().paginate(page)
-    return serialize(UserTransformer.paginate(users, users.getMeta()))
+    return serialize(UserTransformer.paginate(users, users.getMeta(), auth))
   }
 
   /**
