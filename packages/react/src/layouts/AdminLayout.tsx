@@ -15,11 +15,11 @@ import { SubscribeAdminPage } from "@/subscribe/SubscribeAdminPage"
 import { PackageAdminPage } from "@/package/PackageAdminPage"
 
 export const routes = {
-	'/admin': DasbardAdminPage,
 	'/admin?system=user': UserAdminPage,
 	'/admin?system=order': OrderAdminPage,
 	'/admin?system=subscribe': SubscribeAdminPage,
-	'/admin?system=package': PackageAdminPage
+	'/admin?system=package': PackageAdminPage,
+	'/admin': DasbardAdminPage,
 } as Record<string, React.ComponentType>
 
 interface Props {
@@ -33,7 +33,7 @@ export const AdminLayout: FC<Props> = ({ width = 52, height = 12 }) => {
 	const { isAdmin } = useAuth()
 	const navigate = useNavigate()
 	const location = useRouterState({ select: s => s.location })
-	const Component = routes[location.href] || DasbardAdminPage
+	const Component = Object.entries(routes).find(([key]) => location.href.includes(key))?.[1] || DasbardAdminPage
 	const { api } = useApi()
 	const { isLoading, data: dasbardData } = useQuery(api.admin.queryOptions())
 	const [, setDasbardStore] = useAtom(dasbardStore)

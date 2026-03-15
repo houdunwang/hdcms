@@ -1,5 +1,5 @@
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogPortal, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
 import type { VariantProps } from 'class-variance-authority'
 import { SquarePen, SquarePlus } from 'lucide-react'
 import { useState, type FC } from 'react'
@@ -22,22 +22,30 @@ export const FormDialog: FC<{
 				{id ? <SquarePen /> : <SquarePlus />}
 				{buttonText ?? title ?? (id ? '编辑' : '添加')}
 			</Button>
-			<Dialog onOpenChange={setOpen} open={open}>
+			<Dialog onOpenChange={setOpen} open={open} modal={true}>
 				<DialogTrigger asChild> </DialogTrigger>
-				<DialogContent className='lg:min-w-xl'
-					onPointerDownOutside={(e) => {
-						e.preventDefault();
-					}}>
-					<DialogHeader>
-						<DialogTitle className='flex items-center gap-2'>
-							{title && <><SquarePen size={16} />	{title}</>}
-						</DialogTitle>
-						<DialogDescription>
-							{description}
-						</DialogDescription>
-					</DialogHeader>
-					{children({ id, closeDialog: () => setOpen(false) })}
-				</DialogContent>
+				<DialogPortal container={document.body}>
+					<DialogContent className='lg:min-w-xl'
+						onPointerDownOutside={(e) => {
+							e.preventDefault();
+						}}
+						onInteractOutside={(e) => {
+							e.preventDefault();
+						}}
+						onCloseAutoFocus={(e) => {
+							e.preventDefault();
+						}}>
+						<DialogHeader>
+							<DialogTitle className='flex items-center gap-2'>
+								{title && <><SquarePen size={16} />	{title}</>}
+							</DialogTitle>
+							<DialogDescription>
+								{description}
+							</DialogDescription>
+						</DialogHeader>
+						{children({ id, closeDialog: () => setOpen(false) })}
+					</DialogContent>
+				</DialogPortal>
 			</Dialog>
 		</>
 	)

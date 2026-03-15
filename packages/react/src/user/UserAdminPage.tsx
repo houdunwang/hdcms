@@ -7,7 +7,6 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
@@ -112,8 +111,7 @@ function RenderUserTable({ data }: { data: typeof registry.$tree.users.index.typ
 							<TableHead>昵称</TableHead>
 							<TableHead>邮箱</TableHead>
 							<TableHead>注册时间</TableHead>
-							<TableHead>最后登录</TableHead>
-							<TableHead></TableHead>
+							<TableHead className='w-12'>最后登录</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
@@ -128,21 +126,6 @@ function RenderUserTable({ data }: { data: typeof registry.$tree.users.index.typ
 								<TableCell>{user.email}</TableCell>
 								<TableCell>{dayjs(user.createdAt).format('YYYY-MM-DD')}</TableCell>
 								<TableCell>{dayjs(user.updatedAt).format('YYYY-MM-DD')}</TableCell>
-								<TableCell className="text-right">
-									<DropdownMenu>
-										<DropdownMenuTrigger asChild>
-											<Button variant="ghost" size="icon" className="size-8">
-												<TextAlignJustify />
-											</Button>
-										</DropdownMenuTrigger>
-										<DropdownMenuContent align="end">
-											<DropdownMenuItem>Edit</DropdownMenuItem>
-											<DropdownMenuItem>Duplicate</DropdownMenuItem>
-											<DropdownMenuSeparator />
-											<DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-										</DropdownMenuContent>
-									</DropdownMenu>
-								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>
