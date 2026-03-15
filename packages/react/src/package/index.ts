@@ -1,1 +1,1 @@
-export * from './PackageList'
+export * from './PackageFrontPage'

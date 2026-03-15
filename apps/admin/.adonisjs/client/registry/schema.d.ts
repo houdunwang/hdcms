@@ -209,10 +209,10 @@ export interface Registry {
     methods: ["PUT","PATCH"]
     pattern: '/core/package/:id'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/package').updatePackageValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/package').updatePackageValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['update']>>>
     }
   }

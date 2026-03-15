@@ -1,3 +1,12 @@
+import React, { type JSX } from 'react'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
 	Empty,
@@ -7,29 +16,31 @@ import {
 	EmptyMedia,
 	EmptyTitle,
 } from "@/components/ui/empty"
-import { Link } from "@tanstack/react-router"
-import { BellRing } from "lucide-react"
-import type { JSX } from "react"
-
+import { Info, RefreshCcwIcon } from "lucide-react"
 export const E404 = (): JSX.Element => {
 	return (
-		<div className="flex h-screen items-center justify-center">
-			<Empty>
-				<EmptyHeader>
-					<EmptyMedia variant="icon">
-						<BellRing />
-					</EmptyMedia>
-					<EmptyTitle>404!</EmptyTitle>
-					<EmptyDescription>
-						你访问的页面不存在或已被移除。
-					</EmptyDescription>
-				</EmptyHeader>
-				<EmptyContent className="flex-row justify-center gap-2">
-					<Link to='/'>
-						<Button>返回首页</Button>
-					</Link>
-				</EmptyContent>
-			</Empty>
-		</div>
+		<Card>
+			<CardHeader>
+				<CardTitle></CardTitle>
+				<CardDescription></CardDescription>
+			</CardHeader>
+			<CardContent>
+				<Empty className="h-full bg-muted/30">
+					<EmptyHeader>
+						<Info size={25} />
+						<EmptyTitle>你访问的页面不存在</EmptyTitle>
+						<EmptyDescription className="max-w-xs text-pretty">
+							{/* You&apos;re all caught up. New notifications will appear here. */}
+						</EmptyDescription>
+					</EmptyHeader>
+					<EmptyContent>
+						<Button variant="outline" onClick={() => window.location.reload()}>
+							<RefreshCcwIcon />
+							刷新
+						</Button>
+					</EmptyContent>
+				</Empty>
+			</CardContent>
+		</Card>
 	)
 }

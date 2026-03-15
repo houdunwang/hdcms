@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Footer, Header } from '@hdcms/react/common'
+import { FrontLayout } from '@hdcms/react/layouts'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {
@@ -25,9 +26,9 @@ export const Route = createFileRoute('/')({
     }
   },
   component: () => <div className=''>
-    <Header />
-    <HomePage />
-    <Footer />
+    <FrontLayout className='max-w-[100vw]'>
+      <HomePage />
+    </FrontLayout>
   </div>,
 })
 

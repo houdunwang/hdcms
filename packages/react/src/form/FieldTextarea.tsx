@@ -1,22 +1,19 @@
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+import { Textarea } from "@/components/ui/textarea"
 import { useFieldContext } from "@/form"
 import type { FormFieldProps } from "@/form/types"
+import { cn } from "@/lib/utils"
 import { FieldValidateError } from "./FieldValidateError"
 
-export function FieldInput({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
+export function FieldTextarea({ label, description, className, fieldClassName, ...props }: FormFieldProps<'textarea'>): React.JSX.Element {
 	const field = useFieldContext<string>()
-	const autoComplete = type === 'password' ? 'new-password' : 'off'
-
 	return (
 		<Field className={cn('w-full', className)}>
 			{label ? <FieldLabel htmlFor={field.name}>{label}</FieldLabel> : null}
 			{description ? <FieldDescription>{description}</FieldDescription> : null}
-			<Input
+			<Textarea
 				id={field.name}
 				name={field.name}
-				type={type}
 				value={field.state.value ?? ""}
 				onBlur={field.handleBlur}
 				onChange={(event) => {
@@ -24,7 +21,7 @@ export function FieldInput({ label, description, className, fieldClassName, type
 				}}
 				className={cn(fieldClassName)}
 				{...props}
-				autoComplete={autoComplete}
+				autoComplete={'off'}
 			/>
 			<FieldValidateError field={field} />
 		</Field>

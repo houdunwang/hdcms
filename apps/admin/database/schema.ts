@@ -8,39 +8,39 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
+  static $columns = ['id', 'tokenableId', 'type', 'name', 'hash', 'abilities', 'createdAt', 'updatedAt', 'lastUsedAt', 'expiresAt'] as const
   $columns = AuthAccessTokenSchema.$columns
-  @column()
-  declare abilities: string
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column.dateTime()
-  declare expiresAt: DateTime | null
-  @column()
-  declare hash: string
   @column({ isPrimary: true })
   declare id: number
-  @column.dateTime()
-  declare lastUsedAt: DateTime | null
-  @column()
-  declare name: string | null
   @column()
   declare tokenableId: number
   @column()
   declare type: string
+  @column()
+  declare name: string | null
+  @column()
+  declare hash: string
+  @column()
+  declare abilities: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column.dateTime()
+  declare lastUsedAt: DateTime | null
+  @column.dateTime()
+  declare expiresAt: DateTime | null
 }
 
 export class CacheSchema extends BaseModel {
-  static $columns = ['expiresAt', 'key', 'value'] as const
+  static $columns = ['key', 'value', 'expiresAt'] as const
   $columns = CacheSchema.$columns
-  @column.dateTime()
-  declare expiresAt: DateTime | null
   @column()
   declare key: string
   @column()
   declare value: string | null
+  @column.dateTime()
+  declare expiresAt: DateTime | null
 }
 
 export class OrderSchema extends BaseModel {
@@ -86,7 +86,7 @@ export class PackageSchema extends BaseModel {
   @column.dateTime()
   declare deletedAt: DateTime | null
   @column()
-  declare feature: any
+  declare feature: string
   @column()
   declare icon: string
   @column({ isPrimary: true })

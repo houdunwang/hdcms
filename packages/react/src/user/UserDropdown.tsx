@@ -44,29 +44,19 @@ function LoginComponent() {
 						UID:{user?.id} /  注册于 {dayjs(user?.createdAt).fromNow()}
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<DropdownMenuLabel>会员中心</DropdownMenuLabel>
-					<Link to='/member/profile'>
-						<DropdownMenuItem className='cursor-pointer py-2'>
-							<SquareUserRound /> 资料管理
-						</DropdownMenuItem>
-					</Link>
-					<Link to='/member/bind'>
-						<DropdownMenuItem className='cursor-pointer py-2'>
-							<LaptopMinimalCheck />帐号绑定
-						</DropdownMenuItem>
-					</Link>
-				</DropdownMenuGroup>
-				<DropdownMenuGroup>
-					{config.menu.user?.label && <DropdownMenuSeparator />}
-					{config.menu.user?.label && <DropdownMenuLabel>{config.menu.user?.label}</DropdownMenuLabel>}
-					{config.menu.user?.items?.map((item) => (
-						<Link key={item.to} to={item.to} target={item.target || '_self'}>
-							<DropdownMenuItem className='cursor-pointer py-2'>
-								{item.icon}{item.title}
-							</DropdownMenuItem>
-						</Link>
+					{config.menu.user.map(item => (
+						<>
+							<DropdownMenuSeparator />
+							<DropdownMenuLabel>{item.label}</DropdownMenuLabel>
+							{item.items.map(menu => (
+								<Link key={menu.to} to={menu.to} target={'target' in menu ? menu.target : '_self'}>
+									<DropdownMenuItem className='cursor-pointer py-2'>
+										{menu.icon}{menu.title}
+									</DropdownMenuItem>
+								</Link>
+							))}
+						</>
 					))}
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>

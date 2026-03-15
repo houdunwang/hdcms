@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('title', 100).notNullable().comment('标题')
       table.string('ad', 100).notNullable().comment('一句广告语')
-      table.json('feature').notNullable().comment('特点')
+      table.text('feature').notNullable().comment('特点')
       table.smallint('months').notNullable().comment('会员月数')
       table.boolean('state').notNullable().defaultTo(true).comment('开启')
       table.decimal('price', 8, 2).notNullable().comment('价格')

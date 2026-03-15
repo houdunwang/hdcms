@@ -18,7 +18,7 @@ export const FieldValidateError = ({ field, className }: Props): React.JSX.Eleme
 	const value = useStore(field.form.store, state => state.values[name])
 	useEffect(() => {
 		const errors = field.state.meta?.errors as Array<{ message?: string }>
-		const message = errors?.[0]?.message! as string
+		const message = errors?.[0]?.message as string
 		setContent(message ?? requestError?.[name] ?? "")
 	}, [field.state.meta?.errors[0], requestError])
 	useEffect(() => {
@@ -31,7 +31,7 @@ export const FieldValidateError = ({ field, className }: Props): React.JSX.Eleme
 	}
 
 	return (
-		<div className={cn("bg-primary/3 text-xs px-2 py-2 rounded-sm flex items-center gap-1 border border-primary/6", className)}>
+		<div className={cn("bg-destructive/2 text-xs text-primary/90 px-2 py-2 rounded-sm flex items-center gap-1 border border-destructive/5", className)}>
 			<MessageCircleWarning size={12} className="text-primary/50" />
 			{content}
 		</div>

@@ -26,7 +26,7 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
-import { ResultEmpty } from '@/error/ResultEmpty'
+import { ResultEmpty } from '@/errors/ResultEmpty'
 import { useApi } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { dasbardStore } from '@/store/dasbardStore'

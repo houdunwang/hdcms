@@ -10,8 +10,8 @@ import { Profile } from '../member/Profile'
 import { Bind } from '../member/bind'
 
 const systemRoutes = {
-	'/member/bind': <Bind />,
-	'/member/profile': <Profile />
+	'/member?system=bind': <Bind />,
+	'/member?system=profile': <Profile />
 }
 
 export const useMemberClassName = (): { default: string; active: string } => {
@@ -29,7 +29,6 @@ export function MemberLayout(): React.JSX.Element {
 	const location = useRouterState({ select: s => s.location })
 	const href = location.href === '/member' ? '/member/bind' : location.href
 	const systemPageComponent = systemRoutes[href as keyof typeof systemRoutes]
-
 	return (
 		<div>
 			<Header />
@@ -48,7 +47,6 @@ export function MemberLayout(): React.JSX.Element {
 		</div>
 	)
 }
-
 
 function MobileMenu() {
 	const menuClassName = useMemberClassName()

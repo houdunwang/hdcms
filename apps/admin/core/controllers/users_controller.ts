@@ -20,7 +20,7 @@ export default class UsersController extends BaseController {
  * @responseBody 200 - <User>
  */
   async profile({ auth, serialize }: HttpContext) {
-    await new Promise(r => setTimeout(r, 100))
+    // await new Promise(r => setTimeout(r, 100))
     const user = await auth.authenticateUsing(['web', 'api']);
     //更新用户最后登录时间，1小时内登录不更新
     if (user.updatedAt && user.updatedAt.plus({ hour: 1 }).toMillis() < DateTime.now().toMillis()) {
@@ -41,8 +41,7 @@ export default class UsersController extends BaseController {
    * @responseBody 200 - <User[]>
    */
   async index({ request, serialize, auth }: HttpContext) {
-    await new Promise(r => setTimeout(r, 10))
-
+    // await new Promise(r => setTimeout(r, 10))
     const page = request.input('page', 1)
     const field = request.qs().field || 'name'
     const keyword = request.qs().keyword

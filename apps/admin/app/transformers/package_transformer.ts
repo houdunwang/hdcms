@@ -16,6 +16,7 @@ export default class PackageTransformer extends BaseTransformer<Package> {
         'state',
         'feature'
       ]),
+      state: Boolean(this.resource.state),
     }
   }
 }

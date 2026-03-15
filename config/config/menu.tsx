@@ -1,11 +1,11 @@
-import { ChartPie, CircleHelpIcon, Clapperboard, CommandIcon, Dock, Drum, Handbag, MonitorPlay, Rss, Settings2Icon, SquareUserRound, SquareUserRoundIcon, SwatchBook, User, UserCheck, UserStar, Video, Youtube } from "lucide-react";
+import { ChartPie, CircleHelpIcon, Clapperboard, CommandIcon, Dock, Drum, Handbag, LaptopMinimalCheck, MonitorPlay, Rss, Settings2Icon, SquareUserRound, SquareUserRoundIcon, SwatchBook, User, UserCheck, UserStar, Video, Youtube } from "lucide-react";
 
 export const menu = {
 	// 网站导航菜单
 	header: [
 		{
 			title: '订阅会员',
-			to: '/front/package',
+			to: '/front?system=package',
 			icon: <UserCheck size={16} />
 		},
 		{
@@ -16,26 +16,43 @@ export const menu = {
 		},
 	],
 	//导航栏点击用户头像时的下拉菜单
-	user: {
-		label: '社区网站',
-		items: [
-			{
-				title: '后盾人教程',
-				to: 'https://www.houdunren.com',
-				target: '_blank',
-				icon: <Rss />
-			},
-		],
-	},
+	user: [
+		{
+			label: '会员中心',
+			items: [
+				{
+					title: '资料管理',
+					to: '/member?system=profile',
+					icon: <SquareUserRound />
+				},
+				{
+					title: '帐号绑定',
+					to: '/member?system=bnd',
+					icon: <LaptopMinimalCheck />
+				}
+			],
+		},
+		{
+			label: '社区网站',
+			items: [
+				{
+					title: '后盾人教程',
+					to: 'https://www.houdunren.com',
+					target: '_blank',
+					icon: <Rss />
+				},
+			],
+		}
+	],
 	member: [
 		{
 			title: '资料管理',
-			to: '/member/profile',
+			to: '/member?system=profile',
 			icon: UserStar
 		},
 		{
 			title: '绑定帐号',
-			to: '/member/bind',
+			to: '/member?system=bind',
 			icon: Dock
 		},
 		{
@@ -49,27 +66,27 @@ export const menu = {
 			{
 				title: '网站套餐',
 				icon: <CommandIcon />,
-				to: '/admin/package'
+				to: '/admin?system=package'
 			},
 			{
 				title: '用户管理',
 				icon: <SquareUserRound />,
-				to: '/admin/user'
+				to: '/admin?system=user'
 			},
 			{
 				title: '兑换码',
 				icon: <Drum />,
-				to: '/admin/code'
+				to: '/admin?system=code'
 			},
 			{
 				title: '网站订阅',
 				icon: <ChartPie />,
-				to: '/admin/subscribe'
+				to: '/admin?system=subscribe'
 			},
 			{
 				title: '订单管理',
 				icon: <SwatchBook />,
-				to: '/admin/order'
+				to: '/admin?system=order'
 			},
 
 		],

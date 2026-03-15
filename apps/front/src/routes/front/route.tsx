@@ -4,6 +4,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/front')({
 	component: RouteComponent,
+	notFoundComponent: () => <RouteComponent />,
 	beforeLoad() {
 		return {
 			config: {
@@ -15,7 +16,5 @@ export const Route = createFileRoute('/front')({
 })
 
 function RouteComponent() {
-	return <>
-		<FrontLayout />
-	</>
+	return <FrontLayout />
 }

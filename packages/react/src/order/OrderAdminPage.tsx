@@ -4,7 +4,7 @@ import { Page } from '@/common/Page'
 import { SearchBlock } from '@/common/SearchBlock'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
-import { ResultEmpty } from '@/error/ResultEmpty'
+import { ResultEmpty } from '@/errors/ResultEmpty'
 import { useApi } from '@/hooks'
 import { dasbardStore } from '@/store/dasbardStore'
 import { UserAvatar } from '@/user'
