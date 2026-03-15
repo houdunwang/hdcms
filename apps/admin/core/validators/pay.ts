@@ -6,7 +6,9 @@ import hdConfig from '#config/hd'
 export const payValidator = vine.create(
   vine.object({
     subject: vine.string().trim(),
-    orderable_type: vine.enum(Object.keys(hdConfig.payProcess) as (keyof typeof hdConfig.payProcess)[]),
+    orderable_type: vine.enum(
+      Object.keys(hdConfig.payProcess) as (keyof typeof hdConfig.payProcess)[]
+    ),
     orderable_id: vine.number(),
   })
 )

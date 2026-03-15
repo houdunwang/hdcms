@@ -1,5 +1,9 @@
 import { UploadService } from '#core/services/upload_service'
-import { createUserValidator, updatePasswordValidator, updateUserValidator } from '#core/validators/user'
+import {
+  createUserValidator,
+  updatePasswordValidator,
+  updateUserValidator,
+} from '#core/validators/user'
 import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
@@ -8,20 +12,23 @@ import { DateTime } from 'luxon'
 import BaseController from './bases_controller.ts'
 @inject()
 export default class UsersController extends BaseController {
-  constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
+  constructor(
+    protected ctx: HttpContext,
+    protected uploadService: UploadService
+  ) {
     super()
   }
 
   /**
- * @me
- * @tag 用户管理
- * @summary 获取当前登录用户资料
- * @description 获取当前认证用户的详细信息
- * @responseBody 200 - <User>
- */
+   * @me
+   * @tag 用户管理
+   * @summary 获取当前登录用户资料
+   * @description 获取当前认证用户的详细信息
+   * @responseBody 200 - <User>
+   */
   async profile({ auth, serialize }: HttpContext) {
     // await new Promise(r => setTimeout(r, 100))
-    const user = await auth.authenticateUsing(['web', 'api']);
+    const user = await auth.authenticateUsing(['web', 'api'])
     //更新用户最后登录时间，1小时内登录不更新
     if (user.updatedAt && user.updatedAt.plus({ hour: 1 }).toMillis() < DateTime.now().toMillis()) {
       user.updatedAt = DateTime.now()

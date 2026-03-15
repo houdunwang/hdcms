@@ -28,8 +28,8 @@ export default authConfig
  * guards.
  */
 declare module '@adonisjs/auth/types' {
-  export interface Authenticators extends InferAuthenticators<typeof authConfig> { }
+  export interface Authenticators extends InferAuthenticators<typeof authConfig> {}
 }
 declare module '@adonisjs/core/types' {
-  interface EventsList extends InferAuthEvents<Authenticators> { }
+  interface EventsList extends InferAuthEvents<Authenticators> {}
 }

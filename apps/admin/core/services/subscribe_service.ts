@@ -47,7 +47,11 @@ export class SubscribeService {
     for (let i = count - 1; i >= 0; i--) {
       const label = now.minus({ months: i }).toFormat('yyyy-LL')
       const r = rows.find((x) => x.ym === label)
-      const cnt = r ? (typeof r.count === 'string' ? Number.parseInt(r.count as string, 10) : Number(r.count)) : 0
+      const cnt = r
+        ? typeof r.count === 'string'
+          ? Number.parseInt(r.count as string, 10)
+          : Number(r.count)
+        : 0
       months.push({ month: label, count: Number.isNaN(cnt) ? 0 : cnt })
     }
     return months

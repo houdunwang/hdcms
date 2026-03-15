@@ -6,8 +6,17 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('user_id').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE')
-      table.string('orderable_type').notNullable().comment('端口类型，在 hdConfig.payProcess 的属性')
+      table
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+      table
+        .string('orderable_type')
+        .notNullable()
+        .comment('端口类型，在 hdConfig.payProcess 的属性')
       table.bigInteger('orderable_id').unsigned().notNullable().comment('这笔订单的商品ID')
       table.string('sn').notNullable().comment('定单号')
       table.string('subject').notNullable().comment('订单描述')

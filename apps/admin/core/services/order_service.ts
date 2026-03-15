@@ -14,7 +14,7 @@ export class OrderService {
   /**
    * @param ctx HTTP 上下文
    */
-  constructor(protected ctx: HttpContext) { }
+  constructor(protected ctx: HttpContext) {}
 
   /**
    * 检查订单支付状态
@@ -72,15 +72,16 @@ export class OrderService {
     const startYear = now.year - (yearsToReturn - 1)
     const from = DateTime.fromObject({ year: startYear }).startOf('year')
     const to = now.endOf('year')
-    const rows: Array<{ y: string; count: number | string; amount: string | number | null }> = await db
-      .from('orders')
-      .where('created_at', '>=', from.toSQL({ includeOffset: false })!)
-      .where('created_at', '<=', to.toSQL({ includeOffset: false })!)
-      .where('pay_state', true)
-      .select(db.raw('DATE_FORMAT(created_at, "%Y") as y'))
-      .select(db.raw('COUNT(*) as count'))
-      .select(db.raw('SUM(price) as amount'))
-      .groupBy('y')
+    const rows: Array<{ y: string; count: number | string; amount: string | number | null }> =
+      await db
+        .from('orders')
+        .where('created_at', '>=', from.toSQL({ includeOffset: false })!)
+        .where('created_at', '<=', to.toSQL({ includeOffset: false })!)
+        .where('pay_state', true)
+        .select(db.raw('DATE_FORMAT(created_at, "%Y") as y'))
+        .select(db.raw('COUNT(*) as count'))
+        .select(db.raw('SUM(price) as amount'))
+        .groupBy('y')
     const years: Array<{ year: number; count: number; amount: number }> = []
     for (let y = startYear; y <= now.year; y++) {
       const label = String(y)
@@ -109,23 +110,30 @@ export class OrderService {
     const now = DateTime.now()
     const count = Math.max(1, prevMonths)
     const from = now.minus({ months: count - 1 }).startOf('month')
-    const rows: Array<{ ym: string; count: number; amount: string | number | null }> =
-      await db
-        .from('orders')
-        .where('created_at', '>=', from.toSQL({ includeOffset: false })!)
-        .where('pay_state', true)
-        .select(db.raw('DATE_FORMAT(created_at, "%Y-%m") as ym'))
-        .select(db.raw('COUNT(*) as count'))
-        .select(db.raw('SUM(price) as amount'))
-        .groupBy('ym')
+    const rows: Array<{ ym: string; count: number; amount: string | number | null }> = await db
+      .from('orders')
+      .where('created_at', '>=', from.toSQL({ includeOffset: false })!)
+      .where('pay_state', true)
+      .select(db.raw('DATE_FORMAT(created_at, "%Y-%m") as ym'))
+      .select(db.raw('COUNT(*) as count'))
+      .select(db.raw('SUM(price) as amount'))
+      .groupBy('ym')
 
     const months: Array<{ month: string; count: number; amount: number }> = []
     for (let i = count - 1; i >= 0; i--) {
       const label = now.minus({ months: i }).toFormat('yyyy-LL')
       const r = rows.find((x) => x.ym === label)
       const amt =
-        r && r.amount !== null ? (typeof r.amount === 'string' ? Number.parseFloat(r.amount) : r.amount) : 0
-      months.push({ month: label, count: r ? Number(r.count) : 0, amount: Number.isNaN(amt as number) ? 0 : (amt as number) })
+        r && r.amount !== null
+          ? typeof r.amount === 'string'
+            ? Number.parseFloat(r.amount)
+            : r.amount
+          : 0
+      months.push({
+        month: label,
+        count: r ? Number(r.count) : 0,
+        amount: Number.isNaN(amt as number) ? 0 : (amt as number),
+      })
     }
     return months
   }
@@ -152,7 +160,11 @@ export class OrderService {
       const label = now.minus({ days: i }).toFormat('yyyy-LL-dd')
       const r = rows.find((x) => x.ymd === label)
       const amt =
-        r && r.amount !== null ? (typeof r.amount === 'string' ? Number.parseFloat(r.amount) : r.amount) : 0
+        r && r.amount !== null
+          ? typeof r.amount === 'string'
+            ? Number.parseFloat(r.amount)
+            : r.amount
+          : 0
       daysSales.push({ day: label, amount: Number.isNaN(amt as number) ? 0 : (amt as number) })
     }
     return daysSales

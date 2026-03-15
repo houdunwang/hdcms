@@ -28,7 +28,11 @@ export class UploadService {
    * @constructor
    * @param {HttpContext} ctx - 当前 HTTP 请求的上下文，由 AdonisJS 的依赖注入容器提供。
    */
-  constructor(protected ctx: HttpContext, protected ossService: OssService, protected imageService: ImageService) { }
+  constructor(
+    protected ctx: HttpContext,
+    protected ossService: OssService,
+    protected imageService: ImageService
+  ) {}
 
   /**
    * 处理文件上传的核心业务逻辑。
@@ -41,7 +45,7 @@ export class UploadService {
   async upload(file: MultipartFile): Promise<Upload> {
     //图片缩放处理
     await this.imageService.resize(file.tmpPath!)
-    const action = env.get('UPLOAD_DRIVER');
+    const action = env.get('UPLOAD_DRIVER')
     return await this[action](file)
   }
 
@@ -88,7 +92,14 @@ export class UploadService {
    */
   private fileName(file: MultipartFile) {
     const dir = `attachments/${DateTime.now().toFormat('yyyy/MM')}`
-    const fileName = 'U' + (this.ctx.auth.user?.id || 'anonymous') + DateTime.now().toFormat('yyyyMM') + '-' + string.uuid() + '.' + file.extname
+    const fileName =
+      'U' +
+      (this.ctx.auth.user?.id || 'anonymous') +
+      DateTime.now().toFormat('yyyyMM') +
+      '-' +
+      string.uuid() +
+      '.' +
+      file.extname
     const path = [dir, fileName].join('/')
     return path
   }

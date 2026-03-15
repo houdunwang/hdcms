@@ -5,7 +5,7 @@ import { inject } from '@adonisjs/core'
 
 @inject()
 export default class WechatsMessageController {
-  constructor(protected WechatService: WechatService) { }
+  constructor(protected WechatService: WechatService) {}
 
   /**
    * @handle

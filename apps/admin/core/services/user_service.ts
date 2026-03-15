@@ -2,7 +2,6 @@ import { DateTime } from 'luxon'
 import db from '@adonisjs/lucid/services/db'
 
 export class UserService {
-
   /**
    * 获取总用户数
    * @returns 总用户数
@@ -33,7 +32,11 @@ export class UserService {
     for (let i = count - 1; i >= 0; i--) {
       const label = now.minus({ days: i }).toFormat('yyyy-LL-dd')
       const r = rows.find((x) => x.ymd === label)
-      const cnt = r ? (typeof r.count === 'string' ? Number.parseInt(r.count, 10) : Number(r.count)) : 0
+      const cnt = r
+        ? typeof r.count === 'string'
+          ? Number.parseInt(r.count, 10)
+          : Number(r.count)
+        : 0
       result.push({ day: label, count: Number.isNaN(cnt) ? 0 : cnt })
     }
     return result

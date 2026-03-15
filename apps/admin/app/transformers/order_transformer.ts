@@ -1,4 +1,4 @@
-import Order from '#core/models/order'
+import type Order from '#core/models/order'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 import UserTransformer from './user_transformer.ts'
 
@@ -18,9 +18,9 @@ export default class OrderTransformer extends BaseTransformer<Order> {
         'subject',
         'data',
         'createdAt',
-        'updatedAt'
+        'updatedAt',
       ]),
-      user: UserTransformer.transform(this.resource.user)
+      user: UserTransformer.transform(this.resource.user),
     }
   }
 }

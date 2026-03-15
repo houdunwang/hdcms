@@ -187,10 +187,10 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/core/package'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['store']>>>
     }
   }
@@ -209,10 +209,10 @@ export interface Registry {
     methods: ["PUT","PATCH"]
     pattern: '/core/package/:id'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/package').updatePackageValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/package').updatePackageValidator)>>
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['update']>>>
     }
   }

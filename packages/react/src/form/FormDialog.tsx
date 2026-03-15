@@ -1,22 +1,29 @@
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
-import { SquarePen } from 'lucide-react'
+import type { VariantProps } from 'class-variance-authority'
+import { SquarePen, SquarePlus } from 'lucide-react'
 import { useState, type FC } from 'react'
 
-export const EditResource: FC<{
-	id: number,
+export const FormDialog: FC<{
+	id?: number,
+	button?: React.ComponentProps<"button"> &
+	VariantProps<typeof buttonVariants> & {
+		asChild?: boolean
+	},
+	buttonText?: string,
 	title?: string,
 	description?: string,
-	children: (props: { id: number, closeDialog: () => void }) => React.ReactNode
-}> = ({ id, title, description, children }) => {
+	children: (props: { id?: number, closeDialog: () => void }) => React.ReactNode
+}> = ({ id, buttonText, title, description, children, button }) => {
 	const [open, setOpen] = useState(false)
 	return (
 		<>
-			<Button variant="outline" size={'sm'} onClick={() => setOpen(true)}>
-				<SquarePen />编辑
+			<Button variant="outline" onClick={() => setOpen(true)} {...button}>
+				{id ? <SquarePen /> : <SquarePlus />}
+				{buttonText ?? title ?? (id ? '编辑' : '添加')}
 			</Button>
 			<Dialog onOpenChange={setOpen} open={open}>
-				<DialogTrigger> </DialogTrigger>
+				<DialogTrigger asChild> </DialogTrigger>
 				<DialogContent className='lg:min-w-xl'
 					onPointerDownOutside={(e) => {
 						e.preventDefault();

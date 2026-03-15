@@ -13,7 +13,7 @@ export class CodeService {
     private mailService: MailService,
     private aliyunService: AliyunService,
     private ctx: HttpContext
-  ) { }
+  ) {}
 
   async send(field: 'email' | 'mobile', value: string) {
     if (await this.isExpired(value)) {

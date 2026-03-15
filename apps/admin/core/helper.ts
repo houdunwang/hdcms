@@ -39,6 +39,6 @@ export function url(as: string, type: 'route' | 'const' = 'route') {
  * @returns 目录路径
  */
 export function currentDirectory(url: string) {
-  const __filename = fileURLToPath(url);
-  return dirname(__filename);
+  const __filename = fileURLToPath(url)
+  return dirname(__filename)
 }

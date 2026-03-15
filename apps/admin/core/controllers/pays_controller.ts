@@ -1,20 +1,23 @@
-import { url } from '#core/helper';
-import { OrderService } from '#core/services/order_service';
-import { PayService } from '#core/services/pay_service';
-import { PayResult } from '#core/types/payResult';
-import { payCheckValidator, payValidator, type PayPayload } from '#core/validators/pay';
-import env from '#start/env';
-import { inject } from '@adonisjs/core';
-import { HttpContext } from '@adonisjs/core/http';
-import qrcode from 'qrcode';
-import BaseController from './bases_controller.js';
+import { url } from '#core/helper'
+import { OrderService } from '#core/services/order_service'
+import { PayService } from '#core/services/pay_service'
+import { PayResult } from '#core/types/payResult'
+import { payCheckValidator, payValidator, type PayPayload } from '#core/validators/pay'
+import env from '#start/env'
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
+import qrcode from 'qrcode'
+import BaseController from './bases_controller.js'
 
 @inject()
 export default class PaysController extends BaseController {
-  constructor(private payService: PayService, protected ctx: HttpContext, protected orderService: OrderService) {
+  constructor(
+    private payService: PayService,
+    protected ctx: HttpContext,
+    protected orderService: OrderService
+  ) {
     super()
   }
-
 
   /**
    * @wepay
@@ -41,8 +44,8 @@ export default class PaysController extends BaseController {
         scene_info: {
           payer_client_ip: request.ip(),
         },
-      };
-      const result = await this.payService.pay().transactions_native(params);
+      }
+      const result = await this.payService.pay().transactions_native(params)
       const qrImg = await qrcode.toDataURL(result.data.code_url, {
         width: 250,
       })
@@ -51,7 +54,6 @@ export default class PaysController extends BaseController {
       return this.error('生成二维码失败')
     }
   }
-
 
   /**
    * @wepayCheck
@@ -84,7 +86,9 @@ export default class PaysController extends BaseController {
     try {
       const resource = request.input('resource')
       const { ciphertext, associated_data, nonce } = resource
-      const params = await this.payService.pay().decipher_gcm(ciphertext, associated_data, nonce, env.get('WECHAT_PAY_KEY')!) as PayResult
+      const params = (await this.payService
+        .pay()
+        .decipher_gcm(ciphertext, associated_data, nonce, env.get('WECHAT_PAY_KEY')!)) as PayResult
       if (params.trade_state === 'SUCCESS') {
         await this.payService.processPay('wepay', params.out_trade_no, params.transaction_id)
       }
@@ -93,4 +97,4 @@ export default class PaysController extends BaseController {
       return response.status(500).send({ code: 'FAIL', message: '失败' })
     }
   }
-}  
+}

@@ -12,13 +12,12 @@ export default class extends BaseSchema {
       table.smallint('months').notNullable().comment('会员月数')
       table.boolean('state').notNullable().defaultTo(true).comment('开启')
       table.decimal('price', 8, 2).notNullable().comment('价格')
-      table.string('icon', 255).notNullable().comment('图片')
+      table.string('icon', 255).nullable().comment('图片')
       table.boolean('recommend').notNullable().defaultTo(false).comment('推荐')
       table.decimal('original_price', 8, 2).nullable().comment('原价格')
       table.timestamp('deleted_at')
       table.timestamp('created_at')
       table.timestamp('updated_at')
-
     })
   }
 

@@ -31,9 +31,13 @@ export const FieldValidateError = ({ field, className }: Props): React.JSX.Eleme
 	}
 
 	return (
-		<div className={cn("bg-destructive/2 text-xs text-primary/90 px-2 py-2 rounded-sm flex items-center gap-1 border border-destructive/5", className)}>
+		<div className={cn("text-xs text-destructive/70 rounded-sm flex items-center gap-1", className)}>
 			<MessageCircleWarning size={12} className="text-primary/50" />
 			{content}
 		</div>
+		// <div className={cn("bg-destructive/2 text-xs text-primary/90 px-2 py-2 rounded-sm flex items-center gap-1 border border-destructive/5", className)}>
+		// 	<MessageCircleWarning size={12} className="text-primary/50" />
+		// 	{content}
+		// </div>
 	)
 }

@@ -8,7 +8,10 @@ import hash from '@adonisjs/core/services/hash'
 import { column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
-export default class User extends compose(UserSchema, withAuthFinder(() => hash.use())) {
+export default class User extends compose(
+  UserSchema,
+  withAuthFinder(() => hash.use())
+) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
   declare currentAccessToken?: AccessToken
 
@@ -24,8 +27,6 @@ export default class User extends compose(UserSchema, withAuthFinder(() => hash.
 
   @hasMany(() => Order)
   declare orders: HasMany<typeof Order>
-
-
 
   // get initials() {
   //   const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')

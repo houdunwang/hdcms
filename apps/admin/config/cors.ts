@@ -22,7 +22,7 @@ const corsConfig = defineConfig({
       if (hostname === 'localhost') {
         return requestOrigin
       }
-    } catch { }
+    } catch {}
     return [config.frp.clientUrl].includes(requestOrigin) ? requestOrigin : false
   },
 

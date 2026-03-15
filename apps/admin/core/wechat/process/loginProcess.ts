@@ -3,7 +3,7 @@ import cache from '@adonisjs/cache/services/main'
 import type Wechat from '@hdcms/wechat'
 
 export default class LoginProcess {
-  constructor(private wechat: Wechat) { }
+  constructor(private wechat: Wechat) {}
 
   /**
    * 处理微信扫码登录事件

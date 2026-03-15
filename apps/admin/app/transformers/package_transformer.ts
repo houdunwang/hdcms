@@ -1,4 +1,4 @@
-import Package from '#core/models/package'
+import type Package from '#core/models/package'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class PackageTransformer extends BaseTransformer<Package> {
@@ -14,9 +14,11 @@ export default class PackageTransformer extends BaseTransformer<Package> {
         'recommend',
         'originalPrice',
         'state',
-        'feature'
+        'feature',
       ]),
       state: Boolean(this.resource.state),
+      price: Number(this.resource.price),
+      originalPrice: Number(this.resource.originalPrice),
     }
   }
 }

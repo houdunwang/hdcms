@@ -9,7 +9,7 @@ export class WechatService {
   constructor(
     public wechat: Wechat,
     protected ctx: HttpContext
-  ) { }
+  ) {}
 
   public async init() {
     const config = {

@@ -3,12 +3,19 @@ import { Button } from '@/components/ui/button'
 import { Trash2, Trash2Icon } from 'lucide-react'
 import { type FC } from 'react'
 
-export const DelResource: FC<{ title?: string, description?: string, onSuccess: () => void }> = ({ title = '确定删除吗？', description = '删除后将无法恢复', onSuccess }) => {
+type Props = {
+	title?: string,
+	description?: string,
+	onSuccess: () => void
+	buttonText?: string
+}
+
+export const DelResource: FC<Props> = ({ onSuccess, title = '确定删除吗？', description = '删除后将无法恢复', buttonText }) => {
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button variant="outline" size={'sm'}>
-					<Trash2 /> 删除
+				<Button variant="outline" >
+					<Trash2 /> {buttonText ?? '删除'}
 				</Button>
 			</AlertDialogTrigger>
 			<AlertDialogContent size="sm">

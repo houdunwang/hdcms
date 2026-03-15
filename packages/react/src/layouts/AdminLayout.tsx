@@ -46,7 +46,7 @@ export const AdminLayout: FC<Props> = ({ width = 52, height = 12 }) => {
 		}
 	}, [dasbardData])
 	if (!isAdmin) return null
-	if (isLoading) return <Loading />
+	if (isLoading) return <Loading screen />
 	return (
 		<SidebarProvider style={{ "--sidebar-width": `calc(var(--spacing) * ${width})`, "--header-height": `calc(var(--spacing) * ${height})`, } as React.CSSProperties} >
 			<AppSidebar variant="inset" />

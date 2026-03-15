@@ -1,7 +1,7 @@
-import { inject } from "@adonisjs/core";
-import { HttpContext } from '@adonisjs/core/http';
-import { existsSync, promises as fs } from 'fs';
-import sharp from 'sharp';
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
+import { existsSync, promises as fs } from 'node:fs'
+import sharp from 'sharp'
 
 @inject()
 export class ImageService {
@@ -9,7 +9,7 @@ export class ImageService {
    * @constructor
    * @param {HttpContext} ctx - 当前 HTTP 请求的上下文，由 AdonisJS 的依赖注入容器提供。
    */
-  constructor(protected ctx: HttpContext) { }
+  constructor(protected ctx: HttpContext) {}
 
   /**
    * 调整图片大小
@@ -19,11 +19,13 @@ export class ImageService {
    */
   async resize(filePath: string): Promise<boolean> {
     try {
-      if (!await this.isImage(filePath)) return false
+      if (!(await this.isImage(filePath))) return false
       const image = sharp(filePath)
       const meta = await image.metadata()
       if (meta.width > 1920 || meta.height > 1080) {
-        const resizedBuffer = await image.resize({ width: 20, height: 20, fit: sharp.fit.contain, }).toBuffer()
+        const resizedBuffer = await image
+          .resize({ width: 20, height: 20, fit: sharp.fit.contain })
+          .toBuffer()
         await fs.writeFile(filePath, resizedBuffer)
       }
       return true

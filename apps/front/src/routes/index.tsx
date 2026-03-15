@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Footer, Header } from '@hdcms/react/common'
 import { FrontLayout } from '@hdcms/react/layouts'
 import { createFileRoute, Link } from '@tanstack/react-router'
 

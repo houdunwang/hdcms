@@ -5,7 +5,11 @@ import { PackageItem } from "./PackageItem"
 
 export const PackageFrontPage = (): React.JSX.Element => {
 	const { api } = useApi()
-	const { isLoading, data } = useQuery(api.package.index.queryOptions())
+	const { isLoading, data } = useQuery(api.package.index.queryOptions({
+		query: {
+			state: 1,
+		}
+	}))
 	if (isLoading) return <Loading />
 	return (
 		<div className=''>

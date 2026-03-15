@@ -1,4 +1,4 @@
-import Subscribe from '#core/models/subscribe'
+import type Subscribe from '#core/models/subscribe'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 import UserTransformer from './user_transformer.ts'
 
@@ -11,9 +11,9 @@ export default class SubscribeTransformer extends BaseTransformer<Subscribe> {
         'description',
         'userId',
         'createdAt',
-        'updatedAt'
+        'updatedAt',
       ]),
-      user: UserTransformer.transform(this.resource.user)
+      user: UserTransformer.transform(this.resource.user),
     }
   }
 }
