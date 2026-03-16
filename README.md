@@ -71,14 +71,12 @@ pnpm create hdcms@latest
 npm create hdcms@latest
 ```
 
-
-
 ### 使用GIT克隆项目
 
 1. **克隆项目**
 
    ```bash
-   git clone git@github.com:houdunwang/hdcms.git
+   git clone --depth 1 --branch master git@github.com:houdunwang/hdcms.git
    ```
 
 2. **安装依赖**

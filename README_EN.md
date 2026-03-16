@@ -72,7 +72,7 @@ npm create hdcms@latest
 1. **Clone the Project**
 
    ```bash
-   git clone git@github.com:houdunwang/hdcms.git
+   git clone --depth 1 --branch master git@github.com:houdunwang/hdcms.git
    ```
 
 2. **Install Dependencies**
