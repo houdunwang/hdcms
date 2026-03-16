@@ -19,8 +19,7 @@
     "lint": "turbo lint",
     "format": "turbo format",
     "typecheck": "turbo typecheck",
-    "deploy": "node scripts/deploy.ts",
-    "postbuild": "node scripts/post-build.ts"
+    "deploy": "node scripts/deploy.ts"
   },
   "devDependencies": {
     "@adonisjs/prettier-config": "^1.4.5",
