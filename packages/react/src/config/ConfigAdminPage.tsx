@@ -1,15 +1,14 @@
-import { useState, type FC } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
+import { wechat, wepay } from '@hdcms/config'
+import { useState, type FC } from 'react'
+import { Aliyun } from './Aliyun'
 import { Base } from './Base'
-import { WePay } from './Wepay'
+import { Email } from './Email'
+import { Sms } from './Sms'
 import { Upload } from './Upload'
 import { Wechat } from './Wechat'
-import { Sms } from './Sms'
-import { Email } from './Email'
-import { hdCreateFormHook } from '@/hooks'
-import { Aliyun } from './Aliyun'
-import { aliyun } from '@hdcms/config'
+import { WePay } from './Wepay'
 const configs = {
 	base: <Base />,
 	aliyun: <Aliyun />,
@@ -22,7 +21,6 @@ const configs = {
 export const ConfigAdminPage: FC = () => {
 	const [value, setValue] = useState('base')
 	// const { useAppForm } = hdCreateFormHook()
-	console.log(aliyun)
 	// const form = useAppForm({
 	// 	defaultValues: {} as any,
 	// 	onSubmit: async ({ value: body }) => {

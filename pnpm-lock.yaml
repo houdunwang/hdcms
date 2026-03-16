@@ -15,6 +15,9 @@ importers:
       '@adonisjs/prettier-config':
         specifier: ^1.4.5
         version: 1.4.5
+      '@types/node':
+        specifier: ^25.5.0
+        version: 25.5.0
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -430,24 +433,6 @@ importers:
         specifier: ^3.0.5
         version: 3.2.4(@types/node@22.19.12)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@2.0.1))(lightningcss@1.32.0)(msw@2.12.10(@types/node@22.19.12)(typescript@5.9.3))(tsx@4.21.0)
 
-  packages/frp: {}
-
-  packages/network:
-    dependencies:
-      ofetch:
-        specifier: ^1.5.1
-        version: 1.5.1
-      react:
-        specifier: ^19.2.0
-        version: 19.2.4
-      react-dom:
-        specifier: ^19.2.0
-        version: 19.2.4(react@19.2.4)
-    devDependencies:
-      tsup:
-        specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
-
   packages/react:
     dependencies:
       '@app/admin':
@@ -563,7 +548,7 @@ importers:
         version: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       zod:
         specifier: ^4.3.6
-        version: 3.25.76
+        version: 4.3.6
     devDependencies:
       '@rollup/plugin-babel':
         specifier: ^7.0.0
@@ -3687,6 +3672,9 @@ packages:
 
   '@types/node@25.3.1':
     resolution: {integrity: sha512-hj9YIJimBCipHVfHKRMnvmHg+wfhKc0o4mTtXh9pKBjC8TLJzz0nzGmLi5UJsYAUgSvXFHgb0V2oY10DUFtImw==}
+
+  '@types/node@25.5.0':
+    resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
 
   '@types/nodemailer@7.0.11':
     resolution: {integrity: sha512-E+U4RzR2dKrx+u3N4DlsmLaDC6mMZOM/TPROxA0UAPiTgI0y4CEFBmZE+coGWTjakDriRsXG368lNk1u9Q0a2g==}
@@ -10627,6 +10615,10 @@ snapshots:
       undici-types: 6.21.0
 
   '@types/node@25.3.1':
+    dependencies:
+      undici-types: 7.18.2
+
+  '@types/node@25.5.0':
     dependencies:
       undici-types: 7.18.2
 

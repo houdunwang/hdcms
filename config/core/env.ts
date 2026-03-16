@@ -1,15 +1,19 @@
 import fs from 'node:fs'
 
 const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+let cachedEnv: Record<string, string> | null = null;
 
 export const getEnvConfig = () => {
   if (!isNode) return { isDev: false, mode: 'production', selectedEnvFile: undefined }
   const isDev = process.argv.includes('--watch') || process.env.NODE_ENV === 'development'
   const mode = process.env.NODE_ENV || (isDev ? 'development' : 'production')
-  const preferredEnvFile = mode === 'production' ? '.env.production' : '.env'
-  const selectedEnvFile = fs.existsSync(preferredEnvFile)
-    ? preferredEnvFile
-    : (fs.existsSync('.env') ? '.env' : undefined)
+
+  let files = ['.env']
+  if (mode === 'production') {
+    files = ['.env.production', '../.env.production', '.env', '../.env']
+  }
+
+  const selectedEnvFile = files.find(file => fs.existsSync(file))
 
   return { isDev, mode, selectedEnvFile }
 }
@@ -52,8 +56,22 @@ export function env<T = any>(key: string, defaultValue?: T): T {
     return defaultValue as T
   }
 
+  const all = process.env.__HDCMS_ENV__
   // @ts-ignore
-  const all = process.env.__APP_ENV__
-  // @ts-ignore
-  return all?.[key] || defaultValue
+  if (all?.[key]) {
+    // @ts-ignore
+    return all[key]
+  }
+
+  // 如果构建时注入失败或没有值，尝试运行时读取（仅限 Node 环境）
+  if (isNode) {
+    if (!cachedEnv) {
+      cachedEnv = parseEnv()
+    }
+    if (cachedEnv[key]) {
+      return cachedEnv[key] as unknown as T
+    }
+  }
+
+  return defaultValue as T
 }

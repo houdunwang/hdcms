@@ -1,11 +1,11 @@
 packages:
   - apps/admin
   - apps/front
+  - config
   - packages/wechat
   - packages/react
-  - packages/network
-  - packages/frp
-  - config
+  # - packages/network
+  # - packages/frp
 
 onlyBuiltDependencies:
   - '@alicloud/openapi-core'

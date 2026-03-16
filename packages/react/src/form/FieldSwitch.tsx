@@ -12,7 +12,6 @@ export function FieldSwitch({ label, title, description, className, fieldClassNa
 			{label ? <FieldLabel htmlFor={field.name}>{label}</FieldLabel> : null}
 			<div className="flex items-center space-x-2">
 				<Switch id="airplane-mode" checked={Boolean(field.state.value)} onCheckedChange={(checked) => {
-					console.log(checked)
 					field.handleChange(checked)
 				}} />
 				<Label htmlFor="airplane-mode">{title}</Label>

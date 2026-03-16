@@ -28,7 +28,7 @@ const config = defineConfig({
   // 构建相关配置
   build: {
     // 设置输出目录，默认值是 "dist"
-    outDir: 'build', // 将输出目录设置到包内，便于 Turborepo 缓存与追踪
+    outDir: '../../build/apps/front', // 将输出目录设置到包内，便于 Turborepo 缓存与追踪
     // 可选：配置输出目录下的静态资源子目录（默认是 assets）
     assetsDir: 'static',
     // 可选：清空输出目录后再打包（默认 true）

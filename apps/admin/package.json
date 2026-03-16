@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "license": "MIT",
+  "files": [
+    "build"
+  ],
   "exports": {
     "./data": "./.adonisjs/client/data.d.ts",
     "./registry": "./.adonisjs/client/registry/index.ts"
@@ -37,9 +40,6 @@
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",
     "#config/*": "./config/*.js"
-  },
-  "peerDependencies": {
-    "@hdcms/config": "workspace:*"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^8.0.0",
@@ -76,6 +76,7 @@
     "@alicloud/openapi-client": "^0.4.15",
     "@alicloud/tea-typescript": "^1.8.0",
     "@alicloud/tea-util": "^1.4.11",
+    "@hdcms/config": "workspace:*",
     "@hdcms/wechat": "workspace:*",
     "@japa/api-client": "^3.2.1",
     "@tuyau/core": "^1.0.0",

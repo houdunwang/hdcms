@@ -5,6 +5,7 @@ node_modules
 build
 dist
 .turbo
+.deploy
 
 # Secrets
 .env
@@ -19,6 +20,13 @@ tmp
 npm-debug.log
 yarn-error.log
 *.log
+
+# Secrets
+.env
+.env.local
+.env.production
+.env.production.local
+.env.development.local
 
 # Editors
 .fleet

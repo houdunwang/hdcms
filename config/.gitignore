@@ -1,7 +1,6 @@
 # Dependencies
 node_modules
 *.pem
-
 # Build outputs
 build
 dist
@@ -10,6 +9,7 @@ dist
 # Secrets
 .env
 .env.local
+.env.production
 .env.production.local
 .env.development.local
 
