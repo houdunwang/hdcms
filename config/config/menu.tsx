@@ -1,4 +1,4 @@
-import { ChartPie, CircleHelpIcon, Clapperboard, CommandIcon, Dock, Drum, Handbag, LaptopMinimalCheck, MonitorPlay, Rss, Settings2Icon, SquareUserRound, SquareUserRoundIcon, SwatchBook, User, UserCheck, UserStar, Video, Youtube } from "lucide-react";
+import { ChartPie, CircleHelpIcon, Clapperboard, Cog, CommandIcon, Dock, Drum, Handbag, LaptopMinimalCheck, Rss, Settings2Icon, SquareUserRound, SwatchBook, UserCheck, UserStar } from "lucide-react";
 
 export const menu = {
 	// 网站导航菜单
@@ -67,6 +67,11 @@ export const menu = {
 				title: '网站套餐',
 				icon: <CommandIcon />,
 				to: '/admin?system=package'
+			},
+			{
+				title: '系统配置',
+				icon: <Cog />,
+				to: '/admin?system=config'
 			},
 			{
 				title: '用户管理',

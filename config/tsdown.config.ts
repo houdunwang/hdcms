@@ -1,11 +1,8 @@
 import { defineConfig } from 'tsdown'
 import pluginBabel from '@rollup/plugin-babel'
-import fs from 'node:fs'
+import { parseEnv, getEnvConfig } from './core/env.ts'
 
-const isDev = process.argv.includes('--watch') || process.env.NODE_ENV === 'development'
-const mode = process.env.NODE_ENV || (isDev ? 'development' : 'production')
-const preferredEnvFile = mode === 'production' ? '.env.production' : '.env'
-const selectedEnvFile = fs.existsSync(preferredEnvFile) ? preferredEnvFile : undefined
+const { isDev, mode, selectedEnvFile } = getEnvConfig()
 
 export default defineConfig({
   dts: true,
@@ -17,15 +14,18 @@ export default defineConfig({
   env: {
     NODE_ENV: mode,
   },
+  define: {
+    'process.env.__APP_ENV__': JSON.stringify(parseEnv(selectedEnvFile)),
+  },
   deps: {
     skipNodeModulesBundle: true,
   },
   entry: [
-    'config/index.ts',
+    'core/index.ts',
   ],
   // unbundle: true,
   format: ['esm'],
-  exports: true,
+  // exports: true,
   plugins: [
     !isDev &&
     pluginBabel({

@@ -1,6 +1,8 @@
 {
 	"include": [
-		"src/**/*",
+		"config/**/*",
+		"core/**/*",
+		"tsdown.config.ts"
 	],
 	"exclude": [
 		"node_modules",
@@ -34,6 +36,7 @@
 		"noEmit": false,
 		"declaration": true,
 		"emitDeclarationOnly": true,
+		"allowImportingTsExtensions": true,
 		"declarationMap": false,
 		// "isolatedDeclarations": true
 	}

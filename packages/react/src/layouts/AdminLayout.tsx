@@ -1,24 +1,26 @@
-import { AppSidebar } from "@/layouts/admin/app-sidebar"
-import { SiteHeader } from "@/layouts/admin/site-header"
 import { Loading } from "@/common"
 import { SidebarInset, SidebarProvider, } from "@/components/ui/sidebar"
+import { ConfigAdminPage } from "@/config/ConfigAdminPage"
 import { useApi, useAuth, useIsMobile } from "@/hooks"
+import { AppSidebar } from "@/layouts/admin/app-sidebar"
+import { SiteHeader } from "@/layouts/admin/site-header"
+import { OrderAdminPage } from "@/order/OrderAdminPage"
+import { PackageAdminPage } from "@/package/PackageAdminPage"
 import { dasbardStore } from "@/store/dasbardStore"
+import { SubscribeAdminPage } from "@/subscribe/SubscribeAdminPage"
+import { UserAdminPage } from "@/user/UserAdminPage"
 import { useQuery } from "@tanstack/react-query"
 import { Outlet, useNavigate, useRouterState } from "@tanstack/react-router"
 import { useAtom } from "jotai"
 import { useEffect, type FC } from "react"
 import { DasbardAdminPage } from "../dasbard/DasbardAdminPage"
-import { UserAdminPage } from "@/user/UserAdminPage"
-import { OrderAdminPage } from "@/order/OrderAdminPage"
-import { SubscribeAdminPage } from "@/subscribe/SubscribeAdminPage"
-import { PackageAdminPage } from "@/package/PackageAdminPage"
 
 export const routes = {
 	'/admin?system=user': UserAdminPage,
 	'/admin?system=order': OrderAdminPage,
 	'/admin?system=subscribe': SubscribeAdminPage,
 	'/admin?system=package': PackageAdminPage,
+	'/admin?system=config': ConfigAdminPage,
 	'/admin': DasbardAdminPage,
 } as Record<string, React.ComponentType>
 

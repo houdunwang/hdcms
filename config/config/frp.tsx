@@ -1,5 +1,7 @@
+import { env } from "../core/env";
+
 export const frp = {
-	clientUrl: import.meta.env.FRP_CLIENT_URL,
-	serverUrl: import.meta.env.FRP_SERVER_URL,
+	clientUrl: env('FRP_CLIENT_URL', ''),
+	serverUrl: env('FRP_SERVER_URL', ''),
 } as const
 

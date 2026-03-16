@@ -1,9 +1,10 @@
 import { Code } from "lucide-react"
+import { env } from "../core/env"
 export const app = {
-	appName: import.meta.env.APP_NAME,
-	appUrl: import.meta.env.APP_URL,
-	nodeEnv: import.meta.env.NODE_ENV,
-	port: import.meta.env.PORT,
+	appName: env('APP_NAME', ''),
+	appUrl: env('APP_URL', ''),
+	nodeEnv: env('NODE_ENV', 'development'),
+	port: env('PORT', '3000'),
 	logo: <Code />,
 	icp: '鄂ICP备xxxxxxxxxx号',
 	copyright: 'Copyright © 2023 Houdunyun.com All Rights Reserved',

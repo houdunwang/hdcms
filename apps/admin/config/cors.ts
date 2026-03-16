@@ -15,17 +15,7 @@ const corsConfig = defineConfig({
    * configure allowed origins.
    */
   // origin: true,
-  origin: (requestOrigin) => {
-    if (!requestOrigin) return false
-    try {
-      const { hostname } = new URL(requestOrigin)
-      if (hostname === 'localhost') {
-        return requestOrigin
-      }
-    } catch {}
-    return [config.frp.clientUrl].includes(requestOrigin) ? requestOrigin : false
-  },
-
+  origin: [config.frp.clientUrl, 'http://localhost:3000'],
   methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
   headers: true,
   exposeHeaders: [],

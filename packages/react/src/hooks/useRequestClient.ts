@@ -12,6 +12,7 @@ type RequestClient = Tuyau<Registry>
 
 export function useRequestClient(): RequestClient {
 	const setFieldError = useSetAtom(fieldErrorAtom)
+	console.log(config)
 	return createTuyau({
 		baseUrl: config.app.appUrl,
 		registry,
