@@ -4,10 +4,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { useAuth } from '@/hooks/useAuth'
 import '@/plugin/dayjs'
 import { ModeToggle } from '@/theme/mode-toggle'
+import * as config from '@hdcms/config'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { LaptopMinimalCheck, LogOut, Settings, SquareUserRound } from 'lucide-react'
-import * as config from '@hdcms/config'
+import { LogOut, Settings } from 'lucide-react'
 
 export const UserDropdown = (): React.JSX.Element => {
 	const { isAuthenticated, isAdmin } = useAuth()

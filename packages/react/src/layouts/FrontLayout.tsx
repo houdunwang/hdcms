@@ -4,19 +4,18 @@ import { PackageFrontPage } from "@/package/PackageFrontPage"
 import { Outlet, useRouterState } from "@tanstack/react-router"
 import { type FC, type PropsWithChildren } from "react"
 
-
-const systemRoutes = {
+const routes = {
 	'/front?system=package': <PackageFrontPage />,
 }
+
 export const FrontLayout: FC<PropsWithChildren & { className?: string }> = ({ children, className }) => {
 	const location = useRouterState({ select: s => s.location })
-	const href = location.href
-	const systemPageComponent = systemRoutes[href as keyof typeof systemRoutes]
+	const Component = Object.entries(routes).find(([key]) => location.href.includes(key))?.[1]
 	return (
 		<div>
 			<Header />
 			<div className={cn('container mx-auto mt-12 min-h-[calc(100vh-var(--header-height))]', className)}>
-				{children ?? systemPageComponent ?? <Outlet />}
+				{children ?? Component ?? <Outlet />}
 			</div>
 			<Footer />
 		</div>

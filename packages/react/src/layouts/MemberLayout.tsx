@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import { Profile } from '../member/Profile'
 import { Bind } from '../member/bind'
 
-const systemRoutes = {
+const routes = {
 	'/member?system=bind': <Bind />,
 	'/member?system=profile': <Profile />
 }
@@ -27,8 +27,7 @@ export const useMemberClassName = (): { default: string; active: string } => {
 export function MemberLayout(): React.JSX.Element {
 	const isMobile = useIsMobile()
 	const location = useRouterState({ select: s => s.location })
-	const href = location.href === '/member' ? '/member/bind' : location.href
-	const systemPageComponent = systemRoutes[href as keyof typeof systemRoutes]
+	const Component = Object.entries(routes).find(([key]) => location.href.includes(key))?.[1]
 	return (
 		<div>
 			<Header />
@@ -38,7 +37,7 @@ export function MemberLayout(): React.JSX.Element {
 						{isMobile ? <MobileMenu /> : <PcMenu />}
 						<Card className="bg-background">
 							<CardContent>
-								{systemPageComponent ? systemPageComponent : <Outlet />}
+								{Component ?? <Outlet />}
 							</CardContent>
 						</Card>
 					</div>

@@ -27,7 +27,7 @@ export const menu = {
 				},
 				{
 					title: '帐号绑定',
-					to: '/member?system=bnd',
+					to: '/member?system=bind',
 					icon: <LaptopMinimalCheck />
 				}
 			],
