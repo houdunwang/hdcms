@@ -46,6 +46,6 @@ router.use([
  */
 export const middleware = router.named({
   development: () => import('#middleware/development_middleware'),
-  admin: () => import('#middleware/admin_middleware'),
+  admin: () => import('@hdcms/adonis/middleware/admin_middleware.ts'),
   auth: () => import('#middleware/auth_middleware'),
 })
