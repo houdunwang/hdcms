@@ -9,9 +9,6 @@
       "#/app/*": [
         "../../apps/admin/app/*"
       ],
-      "#/core/*": [
-        "./*"
-      ],
       "#start/*": [
         "../../apps/admin/start/*"
       ],
