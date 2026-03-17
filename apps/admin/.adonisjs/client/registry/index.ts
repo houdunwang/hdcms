@@ -258,6 +258,12 @@ const routes = {
     tokens: [{"old":"/core/wechat/bind","type":0,"val":"core","end":""},{"old":"/core/wechat/bind","type":0,"val":"wechat","end":""},{"old":"/core/wechat/bind","type":0,"val":"bind","end":""}],
     types: placeholder as Registry['wechat_bind.bind']['types'],
   },
+  'users.test': {
+    methods: ["GET","HEAD"],
+    pattern: '/test',
+    tokens: [{"old":"/test","type":0,"val":"test","end":""}],
+    types: placeholder as Registry['users.test']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

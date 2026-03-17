@@ -63,7 +63,8 @@ figlet('hdcms.com', async function (err, data) {
 		//下载git代码
 		try {
 			const { source, dir } = await downloadTemplate("github:houdunwang/hdcms#master", {
-				dir: message.dirname
+				dir: message.dirname,
+				install: true
 			});
 			spinner.success({
 				text: '项目创建成功，请依次执行以下命令',

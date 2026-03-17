@@ -67,6 +67,7 @@ export interface ApiDefinition {
     index: typeof routes['users.index']
     store: typeof routes['users.store']
     show: typeof routes['users.show']
+    test: typeof routes['users.test']
   }
   wechatsMessage: typeof routes['wechats_message']
   wechatQrs: {

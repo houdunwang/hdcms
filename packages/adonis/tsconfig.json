@@ -1,0 +1,39 @@
+{
+	"include": [
+		"src/**/*",
+		"../../apps/admin/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts",
+	],
+	"compilerOptions": {
+		"target": "ES2022",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"jsx": "react-jsx",
+		"lib": [
+			"ES2022",
+			"DOM",
+			"DOM.Iterable"
+		],
+		"paths": {
+			"@/*": [
+				"./src/*"
+			],
+			"@app/admin/*": [
+				"../../apps/admin/*"
+			]
+		},
+		"outDir": "./dist",
+		"strict": true,
+		"skipLibCheck": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedSideEffectImports": true,
+		"verbatimModuleSyntax": true
+	}
+}

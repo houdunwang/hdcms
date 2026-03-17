@@ -17,7 +17,7 @@ export class AliyunService {
       endpoint: 'dysmsapi.aliyuncs.com',
     })
 
-    return new Dysmsapi20170525.default(config)
+    return new (Dysmsapi20170525 as any)(config)
   }
 
   async sendSms(

@@ -4,8 +4,9 @@ packages:
   - config
   - packages/wechat
   - packages/react
-  # - packages/network
-  # - packages/frp
+  - packages/network
+  - packages/frp
+  - packages/adonis
 
 onlyBuiltDependencies:
   - '@alicloud/openapi-core'

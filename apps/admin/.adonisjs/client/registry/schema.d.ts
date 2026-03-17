@@ -469,4 +469,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_bind_controller').default['bind']>>>
     }
   }
+  'users.test': {
+    methods: ["GET","HEAD"]
+    pattern: '/test'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+    }
+  }
 }

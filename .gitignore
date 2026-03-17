@@ -4,8 +4,9 @@ node_modules
 # Build outputs
 build
 dist
-.turbo
 deploy
+.deploy
+.turbo
 
 # Secrets
 .env
@@ -37,6 +38,7 @@ yarn-error.log
 *.tar.gz
 *.mp4
 *.mp3
+*.mov
 
 # Platform specific
 .DS_Store

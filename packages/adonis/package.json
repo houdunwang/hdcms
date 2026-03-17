@@ -1,0 +1,25 @@
+{
+  "name": "@hdcms/adonis",
+  "version": "1.0.0",
+  "description": "AdonisJS shared package for HDCMS",
+  "type": "module",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "peerDependencies": {
+    "@adonisjs/core": "^6.0.0",
+    "@adonisjs/lucid": "^20.0.0",
+    "@adonisjs/auth": "^9.0.0"
+  },
+  "dependencies": {
+    "@adonisjs/cache": "2.0.1-next.2",
+    "luxon": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
