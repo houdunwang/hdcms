@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
 import { HdProvider } from '@hdcms/react/provider'
 import { E404 } from '@hdcms/react/errors'
+import './index.css'
 
 const router = createRouter({
   context: {

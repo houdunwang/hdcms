@@ -1,10 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
-import { useAuth } from '@/hooks/useAuth'
-import '@/plugin/dayjs'
-import { ModeToggle } from '@/theme/mode-toggle'
-import * as config from '@hdcms/config'
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar'
+import { Button } from '../components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "../components/ui/dropdown-menu"
+import { useAuth } from '../hooks/useAuth'
+import '../plugin/dayjs'
+import { ModeToggle } from '../theme/mode-toggle'
+import { menu } from '@hdcms/config/menu'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { LogOut, Settings } from 'lucide-react'
@@ -45,7 +45,7 @@ function LoginComponent() {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
-					{config.menu.user.map(item => (
+					{menu.user.map(item => (
 						<>
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>{item.label}</DropdownMenuLabel>

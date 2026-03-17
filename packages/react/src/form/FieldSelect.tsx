@@ -1,10 +1,10 @@
-import { Field, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
-import { useFieldContext } from "@/form"
-import type { FormFieldProps } from "@/form/types"
+import { Field, FieldLabel } from "../components/ui/field"
+import { Input } from "../components/ui/input"
+import { cn } from "../components/lib/utils"
+import { useFieldContext } from "../form"
+import type { FormFieldProps } from "../form/types"
 import { FieldValidateError } from "./FieldValidateError"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "@/components/ui/select"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "../components/ui/select"
 
 interface Props extends FormFieldProps<'input'> {
 	defaultValue: any

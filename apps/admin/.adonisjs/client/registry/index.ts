@@ -12,6 +12,12 @@ const routes = {
     tokens: [{"old":"/uploads/*","type":0,"val":"uploads","end":""},{"old":"/uploads/*","type":2,"val":"*","end":""}],
     types: placeholder as Registry['drive.fs.serve']['types'],
   },
+  'users.test': {
+    methods: ["GET","HEAD"],
+    pattern: '/hd',
+    tokens: [{"old":"/hd","type":0,"val":"hd","end":""}],
+    types: placeholder as Registry['users.test']['types'],
+  },
   'admin': {
     methods: ["GET","HEAD"],
     pattern: '/core/admin',
@@ -257,12 +263,6 @@ const routes = {
     pattern: '/core/wechat/bind',
     tokens: [{"old":"/core/wechat/bind","type":0,"val":"core","end":""},{"old":"/core/wechat/bind","type":0,"val":"wechat","end":""},{"old":"/core/wechat/bind","type":0,"val":"bind","end":""}],
     types: placeholder as Registry['wechat_bind.bind']['types'],
-  },
-  'users.test': {
-    methods: ["GET","HEAD"],
-    pattern: '/test',
-    tokens: [{"old":"/test","type":0,"val":"test","end":""}],
-    types: placeholder as Registry['users.test']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

@@ -1,5 +1,5 @@
-import { Loading } from "@/common/Loading"
-import { useApi } from "@/hooks"
+import { Loading } from "../common/Loading"
+import { useApi } from "../hooks"
 import { useQuery } from "@tanstack/react-query"
 import { PackageItem } from "./PackageItem"
 

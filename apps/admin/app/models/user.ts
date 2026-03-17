@@ -1,5 +1,5 @@
-import Order from '#core/models/order'
-import Subscribe from '#core/models/subscribe'
+import Order from '@hdcms/adonis/models/order.ts'
+import Subscribe from '@hdcms/adonis/models/subscribe.ts'
 import { UserSchema } from '#database/schema'
 import { type AccessToken, DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'

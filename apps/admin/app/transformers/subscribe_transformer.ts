@@ -1,4 +1,4 @@
-import type Subscribe from '#core/models/subscribe'
+import type Subscribe from '@hdcms/adonis/models/subscribe.ts'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 import UserTransformer from './user_transformer.ts'
 

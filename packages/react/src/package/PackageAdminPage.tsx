@@ -1,13 +1,13 @@
-import { Loading } from "@/common"
-import { DelResource } from "@/common/DelResource"
-import { ButtonGroup } from "@/components/ui/button-group"
+import { Loading } from "../common"
+import { DelResource } from "../common/DelResource"
+import { ButtonGroup } from "../components/ui/button-group"
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle
-} from "@/components/ui/card"
+} from "../components/ui/card"
 import {
 	Table,
 	TableBody,
@@ -15,9 +15,9 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow
-} from "@/components/ui/table"
-import { FormDialog } from "@/form/FormDialog"
-import { useApi } from "@/hooks"
+} from "../components/ui/table"
+import { FormDialog } from "../form/FormDialog"
+import { useApi } from "../hooks"
 import { useQuery } from "@tanstack/react-query"
 import { CircleCheck } from "lucide-react"
 import type { JSX } from "react"

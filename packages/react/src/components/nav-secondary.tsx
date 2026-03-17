@@ -9,7 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "../components/ui/sidebar"
 
 export function NavSecondary({ ...props }: React.ComponentPropsWithoutRef<typeof SidebarGroup>): React.JSX.Element {
   return (

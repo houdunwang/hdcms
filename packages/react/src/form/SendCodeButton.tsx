@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { useApi } from "@/hooks/useApi"
+import { Button } from "../components/ui/button"
+import { useApi } from "../hooks/useApi"
 import { useMutation } from "@tanstack/react-query"
 import type { TuyauHTTPError } from "@tuyau/core/client"
 import dayjs from "dayjs"

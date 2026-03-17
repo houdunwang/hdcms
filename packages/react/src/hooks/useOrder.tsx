@@ -1,4 +1,4 @@
-import { SubscribeDetail } from '@/admin'
+import { SubscribeDetail } from '../admin'
 import type { Data } from '@app/admin/data'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 

@@ -1,5 +1,5 @@
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
-import { cn } from "@/lib/utils"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "../components/ui/chart"
+import { cn } from "../components/lib/utils"
 import type { JSX } from "react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 

@@ -1,8 +1,6 @@
-import '#core/routes/index'
 import router from '@adonisjs/core/services/router'
-import { wechat } from '@hdcms/config'
-import { UserController } from '@hdcms/adonis'
-router.get('/test', [UserController, 'test'])
+import '@hdcms/adonis/routes/index.ts'
+import { wechat } from '@hdcms/config/wechat'
 router.get('/', async ({ }) => {
   console.log(' wechat', wechat)
   return wechat

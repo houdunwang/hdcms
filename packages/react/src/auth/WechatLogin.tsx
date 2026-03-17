@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { useApi } from '@/hooks/useApi'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card'
+import { useApi } from '../hooks/useApi'
 import { useMutation } from '@tanstack/react-query'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
 import { WechatQrCode } from '../wechat/WechatQrCode'

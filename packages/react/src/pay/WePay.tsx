@@ -5,10 +5,10 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { Spinner } from '@/components/ui/spinner'
-import { useApi, useAuth } from '@/hooks'
+} from '../components/ui/alert-dialog'
+import { Button } from '../components/ui/button'
+import { Spinner } from '../components/ui/spinner'
+import { useApi, useAuth } from '../hooks'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { CircleX, Clock } from 'lucide-react'

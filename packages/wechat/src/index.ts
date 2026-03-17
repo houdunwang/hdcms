@@ -87,7 +87,7 @@ export class Wechat extends MessageType {
     }
     const { appid, secret } = this.config
     const res = await fetch(`${this.wechatHost}/token?grant_type=client_credential&appid=${appid}&secret=${secret}`)
-    const data = await res.json()
+    const data = await res.json() as any
     this.accessToken = data.access_token
     cachedToken = this.accessToken
     tokenExpiresAt = Date.now() + 7200 * 1000

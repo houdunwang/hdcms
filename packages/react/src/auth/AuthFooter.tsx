@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { FieldDescription } from "@/components/ui/field"
+import { Button } from "../components/ui/button"
+import { FieldDescription } from "../components/ui/field"
 import { Link } from "@tanstack/react-router"
 import type { AuthProps } from "./types"
 

@@ -5,10 +5,9 @@
   ],
   "compilerOptions": {
     "experimentalDecorators": true,
-    "target": "ES2022",
+    "target": "ES2020",
     "jsx": "react-jsx",
     "module": "ESNext",
-    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -17,9 +16,15 @@
       "@core/*": [
         "./core/*"
       ],
-      // "~registry": [
-      //   "../admin/.adonisjs/client/registry.ts"
-      // ]
+      "@hdcms/react": [
+        "../../packages/react/src"
+      ],
+      "@hdcms/react/style.css": [
+        "../../packages/react/src/assets/style.css"
+      ],
+      "@hdcms/react/*": [
+        "../../packages/react/src/*"
+      ]
     },
     "lib": [
       "ES2022",

@@ -1,6 +1,6 @@
 import { registry } from '@app/admin/registry';
-import { AuthEnum } from '@/types/enum';
-import { userAtom } from '@/store/userStore';
+import { AuthEnum } from '../types/enum';
+import { userAtom } from '../store/userStore';
 import { useAtom } from 'jotai';
 import { useRequestClient } from './useRequestClient';
 import type { Data } from '@app/admin/data'

@@ -1,6 +1,6 @@
-import { Breadcrumb } from "@/common/Breadcrumb"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { ModeToggle } from "@/theme"
+import { Breadcrumb } from "../../common/Breadcrumb"
+import { SidebarTrigger } from "../../components/ui/sidebar"
+import { ModeToggle } from "../../theme"
 import type { JSX } from "react"
 export function SiteHeader(): JSX.Element {
   return (

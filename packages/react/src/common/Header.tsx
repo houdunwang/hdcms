@@ -1,14 +1,8 @@
-import {
-	Sheet,
-	SheetContent,
-	SheetDescription,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger
-} from "@/components/ui/sheet"
-import { useIsMobile } from '@/hooks'
-import { UserDropdown } from "@/user"
-import * as config from '@hdcms/config'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../components/ui/sheet"
+import { useIsMobile } from '../hooks'
+import { UserDropdown } from "../user"
+import { app } from '@hdcms/config/app'
+import { menu } from '@hdcms/config/menu'
 import { Link } from '@tanstack/react-router'
 import { House } from 'lucide-react'
 import { useState, type JSX } from 'react'
@@ -32,8 +26,8 @@ export function MobileMenu(): React.JSX.Element {
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
 				<div className="flex items-center gap-2">
-					{config.app.logo}
-					{config.app.appName}
+					{app.logo}
+					{app.appName}
 				</div>
 			</SheetTrigger>
 			<SheetContent side='right'>
@@ -47,7 +41,7 @@ export function MobileMenu(): React.JSX.Element {
 					</SheetDescription>
 				</SheetHeader>
 				<div className="px-6 space-y-5">
-					{config.menu.header?.map((item) => (
+					{menu.header?.map((item) => (
 						<Link key={item.to} to={item.to} target={item.target} className='flex gap-2 items-center'>
 							{item.icon && item.icon}
 							<span>{item.title}</span>
@@ -63,11 +57,11 @@ export function PCHeader(): JSX.Element {
 	return (
 		<>
 			<Link to="/" className="flex items-center gap-1">
-				{config.app.logo}
-				{config.app.appName}
+				{app.logo}
+				{app.appName}
 			</Link>
 			<div className="hidden lg:flex justify-start items-center gap-8 flex-1 ml-3">
-				{config.menu.header?.map((item) => (
+				{menu.header?.map((item) => (
 					<Link key={item.to} to={item.to} target={item.target || '_self'} activeProps={{
 						className: 'text-destructive'
 					}}>

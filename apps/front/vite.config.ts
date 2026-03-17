@@ -16,13 +16,18 @@ const config = defineConfig({
   ],
   resolve: {
     alias: {
+      '@hdcms/react/style.css': path.resolve(__dirname, '../../packages/react/src/assets/style.css'),
+      '@hdcms/react': path.resolve(__dirname, '../../packages/react/src'),
       '@': path.resolve(__dirname, 'src'),
-    },
+    }
   },
   server: {
     port: 3000,
     host: '0.0.0.0',
     allowedHosts: ['client.hdcms.com'],
+    watch: {
+      ignored: ['!**/packages/react/**']
+    }
   },
   // 构建相关配置
   build: {

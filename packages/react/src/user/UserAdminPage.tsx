@@ -1,22 +1,22 @@
-import { Loading } from '@/common'
-import { ChartBar } from '@/common/ChartBar'
-import { Page } from '@/common/Page'
-import { SearchBlock } from '@/common/SearchBlock'
-import { Button } from '@/components/ui/button'
+import { Loading } from '../common'
+import { ChartBar } from '../common/ChartBar'
+import { Page } from '../common/Page'
+import { SearchBlock } from '../common/SearchBlock'
+import { Button } from '../components/ui/button'
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card'
+} from '../components/ui/card'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '../components/ui/dropdown-menu'
 import {
 	Table,
 	TableBody,
@@ -24,12 +24,12 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from '@/components/ui/table'
-import { ResultEmpty } from '@/errors/ResultEmpty'
-import { useApi } from '@/hooks'
-import { cn } from '@/lib/utils'
-import { dasbardStore } from '@/store/dasbardStore'
-import { UserAvatar } from '@/user'
+} from '../components/ui/table'
+import { ResultEmpty } from '../errors/ResultEmpty'
+import { useApi } from '../hooks'
+import { cn } from '../components/lib/utils'
+import { dasbardStore } from '../store/dasbardStore'
+import { UserAvatar } from '../user'
 import { registry } from '@app/admin/registry'
 import { useQuery } from '@tanstack/react-query'
 import { useRouterState } from '@tanstack/react-router'

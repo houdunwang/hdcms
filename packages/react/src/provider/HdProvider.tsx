@@ -1,17 +1,17 @@
-import { RouteProgressBar } from '@/common'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import { ThemeProvider } from '@/theme/theme-provider'
-import { AuthEnum } from '@/types/enum'
-import '@/plugin/dayjs'
-import { userAtom } from '@/store/userStore'
+import { RouteProgressBar } from '../common'
+import { TooltipProvider } from '../components/ui/tooltip'
+import { ThemeProvider } from '../theme/theme-provider'
+import { AuthEnum } from '../types/enum'
+import '../plugin/dayjs'
+import { userAtom } from '../store/userStore'
 import { QueryClientProvider, useQuery, type QueryClient } from '@tanstack/react-query'
 import { RouterProvider, type AnyRouter } from '@tanstack/react-router'
 import { useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
-import { useApi } from '@/hooks/useApi'
-import { useAuth } from '@/hooks/useAuth'
+import { useApi } from '../hooks/useApi'
+import { useAuth } from '../hooks/useAuth'
 
 export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }): React.JSX.Element => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

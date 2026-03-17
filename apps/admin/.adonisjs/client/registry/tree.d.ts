@@ -7,6 +7,16 @@ export interface ApiDefinition {
       serve: typeof routes['drive.fs.serve']
     }
   }
+  users: {
+    test: typeof routes['users.test']
+    profile: typeof routes['users.profile']
+    password: typeof routes['users.password']
+    update: typeof routes['users.update']
+    destroy: typeof routes['users.destroy']
+    index: typeof routes['users.index']
+    store: typeof routes['users.store']
+    show: typeof routes['users.show']
+  }
   admin: typeof routes['admin']
   auth: {
     login: typeof routes['auth.login']
@@ -58,16 +68,6 @@ export interface ApiDefinition {
   uploads: {
     file: typeof routes['uploads.file']
     imageSingle: typeof routes['uploads.image_single']
-  }
-  users: {
-    profile: typeof routes['users.profile']
-    password: typeof routes['users.password']
-    update: typeof routes['users.update']
-    destroy: typeof routes['users.destroy']
-    index: typeof routes['users.index']
-    store: typeof routes['users.store']
-    show: typeof routes['users.show']
-    test: typeof routes['users.test']
   }
   wechatsMessage: typeof routes['wechats_message']
   wechatQrs: {

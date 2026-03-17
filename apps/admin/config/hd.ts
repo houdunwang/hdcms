@@ -1,6 +1,6 @@
-import PackageProcess from '#core/pay/process/package'
-import BindProcess from '#core/wechat/process/bindProcess'
-import LoginProcess from '#core/wechat/process/loginProcess'
+import PackageProcess from '@hdcms/adonis/pay/process/package.ts'
+import BindProcess from '@hdcms/adonis/wechat/process/bindProcess.ts'
+import LoginProcess from '@hdcms/adonis/wechat/process/loginProcess.ts'
 
 const hdConfig = {
   //微信消息处理器

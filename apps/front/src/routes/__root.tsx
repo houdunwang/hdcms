@@ -4,8 +4,7 @@ import { QueryClient } from '@tanstack/react-query'
 import { Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { useTitle } from 'ahooks'
-import '../index.css'
-import * as config from '@hdcms/config'
+import { app } from '@hdcms/config/app'
 
 interface RootRouteContext {
   auth: ReturnType<typeof useAuth>
@@ -26,7 +25,7 @@ function RootComponent() {
     .reverse()
     .find((match) => match.context.config?.title)
   const title = matchWithTitle?.context.config?.title
-  useTitle(title ? title + ' - ' + config.app.appName : config.app.appName || '');
+  useTitle(title ? title + ' - ' + app.appName : app.appName || '');
 
   return (
     <>

@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils'
-import { dasbardStore } from '@/store/dasbardStore'
+import { cn } from '../../components/lib/utils'
+import { dasbardStore } from '../../store/dasbardStore'
 import { useAtomValue } from 'jotai'
 import { BadgeJapaneseYen, BriefcaseBusiness, CircleUser, SquareUser, UserStar } from 'lucide-react'
 import { type JSX } from 'react'

@@ -6,8 +6,8 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+} from "../components/ui/card"
+import { Button } from "../components/ui/button"
 import {
 	Empty,
 	EmptyContent,
@@ -15,7 +15,7 @@ import {
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
-} from "@/components/ui/empty"
+} from "../components/ui/empty"
 import { Info, RefreshCcwIcon } from "lucide-react"
 export const E404 = (): JSX.Element => {
 	return (

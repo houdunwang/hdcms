@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
+import { Card, CardContent } from "../components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger, } from "../components/ui/tabs"
 import { DeleteAccount } from './-components/DeleteAccount'
 import { BindEmail } from './-components/bind-email'
 import { BindMobile } from './-components/bind-mobile'

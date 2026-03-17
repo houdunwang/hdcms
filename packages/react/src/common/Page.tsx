@@ -7,7 +7,7 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "../components/ui/pagination"
 import { registry } from '@app/admin/registry'
 import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { type JSX } from 'react'

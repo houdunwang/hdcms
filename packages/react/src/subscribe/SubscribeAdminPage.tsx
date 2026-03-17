@@ -1,12 +1,12 @@
-import { Loading, } from '@/common'
-import { ChartBar } from '@/common/ChartBar'
-import { Page } from '@/common/Page'
-import { SearchBlock } from '@/common/SearchBlock'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
-import { useApi } from '@/hooks'
-import { dasbardStore } from '@/store/dasbardStore'
-import { UserAvatar } from '@/user'
+import { Loading, } from '../common'
+import { ChartBar } from '../common/ChartBar'
+import { Page } from '../common/Page'
+import { SearchBlock } from '../common/SearchBlock'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "../components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../components/ui/table"
+import { useApi } from '../hooks'
+import { dasbardStore } from '../store/dasbardStore'
+import { UserAvatar } from '../user'
 import { useQuery } from '@tanstack/react-query'
 import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'

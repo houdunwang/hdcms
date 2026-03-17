@@ -1,5 +1,6 @@
 export * from '../config/aliyun'
 export * from '../config/app'
+export * from '../config/client'
 export * from '../config/email'
 export * from '../config/frp'
 export * from '../config/menu'

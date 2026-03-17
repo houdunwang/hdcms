@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { fieldContext, FieldInput, FieldSubmitButton, formContext } from "@/form"
-import { FieldSelect } from "@/form/FieldSelect"
-import { cn } from "@/lib/utils"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
+import { fieldContext, FieldInput, FieldSubmitButton, formContext } from "../form"
+import { FieldSelect } from "../form/FieldSelect"
+import { cn } from "../components/lib/utils"
 import { createFormHook } from "@tanstack/react-form"
 import { useNavigate, useRouterState } from "@tanstack/react-router"
 import { type FC } from 'react'

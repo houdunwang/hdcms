@@ -14,8 +14,8 @@
 import { DateTime } from 'luxon'
 import { VineDate } from '@vinejs/vine'
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
-import { validateMessage } from '#core/validators/config/validateMessage'
-import { validateFields } from '#core/validators/config/validateFields'
+import { validateMessage } from '@hdcms/adonis/validators/config/validateMessage.ts'
+import { validateFields } from '@hdcms/adonis/validators/config/validateFields.ts'
 
 declare module '@vinejs/vine/types' {
   interface VineGlobalTransforms {

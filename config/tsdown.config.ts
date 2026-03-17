@@ -1,7 +1,6 @@
 import { defineConfig } from 'tsdown'
 import pluginBabel from '@rollup/plugin-babel'
 import { parseEnv, getEnvConfig } from './core/env.ts'
-import { cpSync } from 'node:fs'
 
 const { isDev, mode, selectedEnvFile } = getEnvConfig()
 
@@ -12,7 +11,6 @@ export default defineConfig({
   minify: !isDev,
   envFile: selectedEnvFile,
   envPrefix: [''],
-  // outDir: '../build/config',
   env: {
     NODE_ENV: mode,
   },
@@ -24,10 +22,9 @@ export default defineConfig({
   },
   entry: [
     'core/index.ts',
+    'config/*.tsx',
   ],
-  // unbundle: true,
   format: ['esm'],
-  // exports: true,
   plugins: [
     !isDev &&
     pluginBabel({
@@ -41,10 +38,4 @@ export default defineConfig({
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
   ].filter(Boolean) as any,
-  // hooks: {
-  //   'build:done': () => {
-  //     cpSync('./.env.production', '../build/config/.env')
-  //     cpSync('./.env.production', '../build/config/.env.production')
-  //   }
-  // }
 })

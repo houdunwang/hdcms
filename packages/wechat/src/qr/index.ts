@@ -38,7 +38,7 @@ export default class Qr {
 				body: JSON.stringify(params),
 				headers: { 'Content-Type': 'application/json' },
 			});
-			const res = await response.json()
+			const res = await response.json() as any
 			const qrImg = await qrcode.toDataURL(res.url)
 			return { ...res, qrImg }
 		} catch (error) {
@@ -58,6 +58,7 @@ export default class Qr {
 				method: 'GET',
 			});
 			const res = await response.json()
+			return res
 		} catch (error) {
 			console.error('Error getting QR image:', error);
 			throw error;

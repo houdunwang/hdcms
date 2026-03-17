@@ -1,6 +1,6 @@
-import { FieldInput, FieldSubmitButton } from "@/form"
-import { fieldContext, formContext } from "@/form"
-import { useApi } from "@/hooks"
+import { FieldInput, FieldSubmitButton } from "../../form"
+import { fieldContext, formContext } from "../../form"
+import { useApi } from "../../hooks"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 

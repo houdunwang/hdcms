@@ -1,4 +1,4 @@
-import type Package from '#core/models/package'
+import type Package from '@hdcms/adonis/models/package.ts'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class PackageTransformer extends BaseTransformer<Package> {

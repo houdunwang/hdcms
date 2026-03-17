@@ -1,7 +1,7 @@
-import { ChartBar } from "@/common/ChartBar"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
-import { type ChartConfig } from "@/components/ui/chart"
-import { dasbardStore } from "@/store/dasbardStore"
+import { ChartBar } from "../../common/ChartBar"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "../../components/ui/card"
+import { type ChartConfig } from "../../components/ui/chart"
+import { dasbardStore } from "../../store/dasbardStore"
 import { useAtomValue } from "jotai"
 import * as React from "react"
 

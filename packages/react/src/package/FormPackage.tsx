@@ -1,5 +1,5 @@
-import { Loading } from '@/common';
-import { hdCreateFormHook, useApi } from '@/hooks';
+import { Loading } from '../common';
+import { hdCreateFormHook, useApi } from '../hooks';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, type FC } from 'react';
 import { toast } from 'sonner';

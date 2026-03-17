@@ -2,12 +2,10 @@
   "name": "@hdcms/config",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
   "author": "",
-  "license": "ISC",
   "type": "module",
-  "packageManager": "pnpm@10.30.1",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/core/index.mjs",
+  "types": "./dist/core/index.d.mts",
   "scripts": {
     "dev": "tsdown --watch",
     "build": "tsdown",
@@ -17,14 +15,15 @@
     "dist"
   ],
   "exports": {
-    ".": "./dist/index.mjs",
-    "./package.json": "./package.json"
-  },
-  "typesVersions": {
-    "*": {
-      "config": [
-        "dist/config.d.ts"
-      ]
+    ".": {
+      "types": "./dist/core/index.d.mts",
+      "import": "./dist/core/index.mjs",
+      "default": "./dist/core/index.mjs"
+    },
+    "./*": {
+      "types": "./dist/config/*.d.mts",
+      "import": "./dist/config/*.mjs",
+      "default": "./dist/config/*.mjs"
     }
   },
   "dependencies": {

@@ -1,1 +1,1 @@
-export * from './src/controllers/index.js'
+export { default as UsersController } from './controllers/users_controller.js';

@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
-import { useOrder } from '@/hooks/useOrder'
-import { UserAvatar } from '@/user'
+import { Button } from '../components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "../components/ui/dialog"
+import { useOrder } from '../hooks/useOrder'
+import { UserAvatar } from '../user'
 import type { Data } from '@app/admin/data'
 import dayjs from 'dayjs'
 import { ShoppingBag } from 'lucide-react'
