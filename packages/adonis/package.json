@@ -45,7 +45,6 @@
     "#*": "@app/admin/app/*.js"
   },
   "exports": {
-    ".": "./index.ts",
     "./*": "./*"
   }
 }
