@@ -44,22 +44,22 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/core/login'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/auth').loginValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').loginValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['login']>>>
     }
   }
   'auth.register': {
     methods: ["POST"]
     pattern: '/core/register'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/auth').registerValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').registerValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['register']>>>
     }
   }
   'auth.logout': {
@@ -70,29 +70,29 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
     }
   }
   'binds.email': {
     methods: ["POST"]
     pattern: '/core/bind/email'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/bind').bindEmailValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/bind').bindEmailValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['email']>>>
     }
   }
   'binds.mobile': {
     methods: ["POST"]
     pattern: '/core/bind/mobile'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/bind').bindMobileValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/bind').bindMobileValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['mobile']>>>
     }
   }
   'captcha': {
@@ -103,51 +103,51 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/captcha_controller').default['handle']>>>
     }
   }
   'codes.email': {
     methods: ["POST"]
     pattern: '/core/code/email'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendEmailCodeValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendEmailCodeValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['email']>>>
     }
   }
   'codes.mobile': {
     methods: ["POST"]
     pattern: '/core/code/mobile'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/code').sendMobileCodeValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendMobileCodeValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['mobile']>>>
     }
   }
   'find_passwords.email': {
     methods: ["POST"]
     pattern: '/core/findPassword/email'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/findPassword').findPasswordByEmailValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByEmailValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['email']>>>
     }
   }
   'find_passwords.mobile': {
     methods: ["POST"]
     pattern: '/core/findPassword/mobile'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/findPassword').findPasswordByMobileValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByMobileValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['mobile']>>>
     }
   }
   'licenses': {
@@ -158,7 +158,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/licenses_controller').default['handle']>>>
     }
   }
   'logs': {
@@ -169,7 +169,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['handle']>>>
     }
   }
   'orders.index': {
@@ -180,7 +180,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/orders_controller').default['index']>>>
     }
   }
   'package.index': {
@@ -191,18 +191,18 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['index']>>>
     }
   }
   'package.store': {
     methods: ["POST"]
     pattern: '/core/package'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/package').packageValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['store']>>>
     }
   }
   'package.show': {
@@ -213,18 +213,18 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['show']>>>
     }
   }
   'package.update': {
     methods: ["PUT","PATCH"]
     pattern: '/core/package/:id'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/package').packageValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['update']>>>
     }
   }
   'package.destroy': {
@@ -235,29 +235,29 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['destroy']>>>
     }
   }
   'pays.wepay': {
     methods: ["POST"]
     pattern: '/core/pay/wepay'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/pay').payValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/pay').payValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepay']>>>
     }
   }
   'pays.wepay_check': {
     methods: ["POST"]
     pattern: '/core/pay/wepay/check'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/pay').payCheckValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/pay').payCheckValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepayCheck']>>>
     }
   }
   'pay.notify': {
@@ -268,7 +268,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
     }
   }
   'subscribe.index': {
@@ -279,7 +279,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['index']>>>
     }
   }
   'subscribe.store': {
@@ -290,7 +290,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['store']>>>
     }
   }
   'subscribe.show': {
@@ -301,7 +301,7 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['show']>>>
     }
   }
   'subscribe.update': {
@@ -312,7 +312,7 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['update']>>>
     }
   }
   'subscribe.destroy': {
@@ -323,7 +323,7 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['destroy']>>>
     }
   }
   'system.restart': {
@@ -334,7 +334,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/systems_controller').default['restart']>>>
     }
   }
   'uploads.file': {
@@ -345,18 +345,18 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['file']>>>
     }
   }
   'uploads.image_single': {
     methods: ["POST"]
     pattern: '/core/upload/imageSingle'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>>
     }
   }
   'users.profile': {
@@ -367,29 +367,29 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['profile']>>>
     }
   }
   'users.password': {
     methods: ["PUT"]
     pattern: '/core/users/password'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>>
     }
   }
   'users.update': {
     methods: ["PUT"]
     pattern: '/core/users/:id?'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>>
     }
   }
   'users.destroy': {
@@ -400,7 +400,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
     }
   }
   'users.index': {
@@ -411,18 +411,18 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['index']>>>
     }
   }
   'users.store': {
     methods: ["POST"]
     pattern: '/core/users'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').createUserValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').createUserValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['store']>>>
     }
   }
   'users.show': {
@@ -433,7 +433,7 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
     }
   }
   'wechats_message': {
@@ -444,7 +444,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechats_message_controller').default['handle']>>>
     }
   }
   'wechat_qrs.create': {
@@ -455,7 +455,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_qrs_controller').default['create']>>>
     }
   }
   'wechat_login.login': {
@@ -466,7 +466,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_login_controller').default['login']>>>
     }
   }
   'wechat_bind.bind': {
@@ -477,7 +477,7 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_bind_controller').default['bind']>>>
     }
   }
 }

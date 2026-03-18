@@ -1,4 +1,4 @@
-import type Order from '@hdcms/adonis/models/order.ts'
+import type Order from '#core/models/order'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 import UserTransformer from './user_transformer.ts'
 

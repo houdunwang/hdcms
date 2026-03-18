@@ -1,4 +1,4 @@
-import type Upload from '@hdcms/adonis/models/upload.ts'
+import type Upload from '#core/models/upload'
 import { BaseTransformer } from '@adonisjs/core/transformers'
 
 export default class UploadTransformer extends BaseTransformer<Upload> {

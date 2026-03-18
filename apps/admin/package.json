@@ -9,24 +9,19 @@
   ],
   "exports": {
     "./data": "./.adonisjs/client/data.d.ts",
-    "./registry": "./.adonisjs/client/registry/index.ts",
-    "./core/*": "./core/*",
-    "./app/*": "./app/*",
-    "./start/*": "./start/*",
-    "./config/*": "./config/*",
-    "./database/*": "./database/*"
+    "./registry": "./.adonisjs/client/registry/index.ts"
   },
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
-    "dev": "nodemon",
+    "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
   "imports": {
-    "#core/*": "../../packages/adonis/*.js",
+    "#core/*": "./core/*.js",
     "#controllers/*": "./app/controllers/*.js",
     "#exceptions/*": "./app/exceptions/*.js",
     "#models/*": "./app/models/*.js",
@@ -81,7 +76,6 @@
     "@alicloud/openapi-client": "^0.4.15",
     "@alicloud/tea-typescript": "^1.8.0",
     "@alicloud/tea-util": "^1.4.11",
-    "@hdcms/adonis": "workspace:*",
     "@hdcms/config": "workspace:*",
     "@hdcms/wechat": "workspace:*",
     "@japa/api-client": "^3.2.1",
@@ -96,7 +90,6 @@
     "luxon": "^3.7.2",
     "mysql2": "^3.18.1",
     "node-cron": "^4.2.1",
-    "nodemon": "^3.1.14",
     "pino-roll": "^4.0.0",
     "qrcode": "^1.5.4",
     "reflect-metadata": "^0.2.2",
@@ -106,9 +99,7 @@
   },
   "hotHook": {
     "boundaries": [
-      "./app/controllers/**/*.ts",
-      "./app/middleware/*.ts"
+      "./app/controllers/**/*.ts"
     ]
-  },
-  "prettier": "@adonisjs/prettier-config"
+  }
 }
