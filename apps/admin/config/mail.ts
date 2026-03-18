@@ -2,7 +2,7 @@ import env from '#start/env'
 import { defineConfig, transports } from '@adonisjs/mail'
 
 const mailConfig = defineConfig({
-  default: 'smtp',
+  default: env.get('MAIL_MAILER'),
 
   /**
    * The mailers object can be used to configure multiple mailers
@@ -10,8 +10,8 @@ const mailConfig = defineConfig({
    * options.
    */
   from: {
-    address: env.get('SMTP_USERNAME') ?? '',
-    name: env.get('APP_NAME') ?? '',
+    address: env.get('MAIL_FROM_ADDRESS'),
+    name: env.get('MAIL_FROM_NAME'),
   },
 
   /**
@@ -22,7 +22,7 @@ const mailConfig = defineConfig({
    * the brand name to be used within the emails
    */
   globals: {
-    brandName: 'Acme',
+    brandName: 'Acme'
   },
 
   /**
@@ -32,23 +32,24 @@ const mailConfig = defineConfig({
    */
   mailers: {
     smtp: transports.smtp({
-      host: env.get('SMTP_HOST') ?? '',
-      port: env.get('SMTP_PORT') ?? 0,
+      host: env.get('SMTP_HOST'),
+      port: env.get('SMTP_PORT'),
       /**
        * Uncomment the auth block if your SMTP
        * server needs authentication
        */
-      auth: {
+      /* auth: {
         type: 'login',
-        user: env.get('SMTP_USERNAME') ?? '',
-        pass: env.get('SMTP_PASSWORD') ?? '',
-      },
+        user: env.get('SMTP_USERNAME'),
+        pass: env.get('SMTP_PASSWORD'),
+      }, */
     }),
+
   },
 })
 
 export default mailConfig
 
 declare module '@adonisjs/mail/types' {
-  export interface MailersList extends InferMailers<typeof mailConfig> {}
+  export interface MailersList extends InferMailers<typeof mailConfig> { }
 }

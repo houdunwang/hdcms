@@ -9,9 +9,8 @@ const driveConfig = defineConfig({
    * The services object can be used to configure multiple file system
    * services each using the same or a different driver.
    */
-  services: {
+  services: { 
     fs: services.fs({
-      appUrl: env.get('APP_URL'),
       location: app.makePath('storage'),
       serveFiles: true,
       routeBasePath: '/uploads',

@@ -1,5 +1,5 @@
-import { FrontLayout } from '@hdcms/react/layouts'
-import type { RouterContextConfig } from '@hdcms/react/types'
+import { FrontLayout } from '@core/layouts'
+import type { RouterContextConfig } from '@core/types'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/front')({

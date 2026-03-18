@@ -1,7 +1,8 @@
 # Dependencies and AdonisJS build
 node_modules
 build
-tmp
+tmp/*
+!tmp/.gitkeep
 
 # Secrets
 .env
@@ -15,7 +16,7 @@ public/assets
 # Build tools specific
 npm-debug.log
 yarn-error.log
-deploy
+
 # Editors specific
 .fleet
 .idea
@@ -23,6 +24,3 @@ deploy
 
 # Platform specific
 .DS_Store
-
-# upload
-storage/

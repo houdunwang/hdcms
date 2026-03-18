@@ -1,12 +1,8 @@
 packages:
-  - apps/admin
-  - apps/front
-  - config
+  - apps/*
   - packages/frp
   - packages/wechat
-  - packages/react
   - packages/network
-  - packages/adonis
 
 onlyBuiltDependencies:
   - '@alicloud/openapi-core'

@@ -4,8 +4,6 @@ node_modules
 # Build outputs
 build
 dist
-deploy
-.deploy
 .turbo
 
 # Secrets
@@ -15,30 +13,26 @@ deploy
 .env.development.local
 
 # Temp files
-tmp
+/tmp
 
 # Logs
 npm-debug.log
 yarn-error.log
 *.log
 
-# Secrets
-.env
-.env.local
-.env.production
-.env.production.local
-.env.development.local
-
 # Editors
 .fleet
 .idea
 .vscode
 
-*.zip
-*.tar.gz
-*.mp4
-*.mp3
-*.mov
-
 # Platform specific
 .DS_Store
+
+# Frontend compiled assets
+public/assets
+
+# 
+.mp3
+.mp4
+.mov
+tmp

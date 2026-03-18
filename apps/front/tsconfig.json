@@ -4,27 +4,20 @@
     "**/*.tsx"
   ],
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "ES2020",
+    "target": "ES2022",
     "jsx": "react-jsx",
     "module": "ESNext",
     "baseUrl": ".",
     "paths": {
+      "#/*": [
+        "./src/*"
+      ],
       "@/*": [
         "./src/*"
       ],
       "@core/*": [
         "./core/*"
       ],
-      "@hdcms/react": [
-        "../../packages/react/src"
-      ],
-      "@hdcms/react/style.css": [
-        "../../packages/react/src/assets/style.css"
-      ],
-      "@hdcms/react/*": [
-        "../../packages/react/src/*"
-      ]
     },
     "lib": [
       "ES2022",

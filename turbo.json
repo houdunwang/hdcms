@@ -3,14 +3,8 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "build/**",
-        ".adonisjs/**",
-        "dist/**"
-      ],
+      "dependsOn": ["^build"],
+      "outputs": ["build/**", ".adonisjs/**"],
       "env": [
         "NODE_ENV",
         "APP_KEY",
@@ -24,15 +18,11 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "cache": false
     },
     "lint": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": []
     },
     "format": {
@@ -40,9 +30,7 @@
       "cache": false
     },
     "typecheck": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": []
     }
   }

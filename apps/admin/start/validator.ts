@@ -13,9 +13,9 @@
 
 import { DateTime } from 'luxon'
 import { VineDate } from '@vinejs/vine'
-import vine, { SimpleMessagesProvider } from '@vinejs/vine'
-import { validateMessage } from '#core/validators/config/validateMessage'
-import { validateFields } from '#core/validators/config/validateFields'
+// import vine, { SimpleMessagesProvider } from '@vinejs/vine'
+// import { validateMessage } from '#core/validators/config/validateMessage'
+// import { validateFields } from '#core/validators/config/validateFields'
 
 declare module '@vinejs/vine/types' {
   interface VineGlobalTransforms {
@@ -25,4 +25,4 @@ declare module '@vinejs/vine/types' {
 
 VineDate.transform((value) => DateTime.fromJSDate(value))
 
-vine.messagesProvider = new SimpleMessagesProvider(validateMessage, validateFields)
+// vine.messagesProvider = new SimpleMessagesProvider(validateMessage, validateFields)

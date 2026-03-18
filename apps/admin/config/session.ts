@@ -3,7 +3,14 @@ import app from '@adonisjs/core/services/app'
 import { defineConfig, stores } from '@adonisjs/session'
 
 const sessionConfig = defineConfig({
+  /**
+   * Enable or disable session support globally.
+   */
   enabled: true,
+
+  /**
+   * Cookie name storing the session identifier.
+   */
   cookieName: 'adonis-session',
 
   /**
@@ -20,12 +27,27 @@ const sessionConfig = defineConfig({
 
   /**
    * Configuration for session cookie and the
-   * cookie store
+   * cookie store.
    */
   cookie: {
+    /**
+     * Restrict the cookie to a URL path. '/' means all routes.
+     */
     path: '/',
+
+    /**
+     * Prevent JavaScript access to the cookie in the browser.
+     */
     httpOnly: true,
+
+    /**
+     * Send cookies only over HTTPS in production.
+     */
     secure: app.inProduction,
+
+    /**
+     * Cross-site policy for cookie sending.
+     */
     sameSite: 'lax',
   },
 
@@ -41,7 +63,14 @@ const sessionConfig = defineConfig({
    * list of available stores and their config.
    */
   stores: {
+    /**
+     * Store session data inside encrypted cookies.
+     */
     cookie: stores.cookie(),
+
+    /**
+     * Store session data inside the configured database.
+     */
     database: stores.database(),
   },
 })

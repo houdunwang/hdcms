@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /// <reference path="../manifest.d.ts" />
 
-import type { ExtractBody, ExtractQuery, ExtractQueryForGet, ExtractResponse } from '@tuyau/core/types'
-import type { InferInput } from '@vinejs/vine/types'
+import type { ExtractBody, ExtractErrorResponse, ExtractQuery, ExtractQueryForGet, ExtractResponse } from '@tuyau/core/types'
+import type { InferInput, SimpleError } from '@vinejs/vine/types'
 
 export type ParamValue = string | number | bigint | boolean
 
@@ -12,10 +12,11 @@ export interface Registry {
     pattern: '/uploads/*'
     types: {
       body: {}
-      paramsTuple: []
-      params: {}
+      paramsTuple: [ParamValue]
+      params: { '*': ParamValue[] }
       query: {}
       response: unknown
+      errorResponse: unknown
     }
   }
   'users.test': {
@@ -27,6 +28,7 @@ export interface Registry {
       params: {}
       query: {}
       response: unknown
+      errorResponse: unknown
     }
   }
   'admin': {
@@ -38,6 +40,7 @@ export interface Registry {
       params: {}
       query: {}
       response: unknown
+      errorResponse: unknown
     }
   }
   'auth.login': {
@@ -49,6 +52,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').loginValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['login']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['login']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'auth.register': {
@@ -60,6 +64,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').registerValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['register']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['register']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'auth.logout': {
@@ -71,6 +76,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
     }
   }
   'binds.email': {
@@ -82,6 +88,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/bind').bindEmailValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['email']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['email']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'binds.mobile': {
@@ -93,6 +100,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/bind').bindMobileValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['mobile']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/binds_controller').default['mobile']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'captcha': {
@@ -104,6 +112,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/captcha_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/captcha_controller').default['handle']>>>
     }
   }
   'codes.email': {
@@ -115,6 +124,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendEmailCodeValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['email']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['email']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'codes.mobile': {
@@ -126,6 +136,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/code').sendMobileCodeValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['mobile']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['mobile']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'find_passwords.email': {
@@ -137,6 +148,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByEmailValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['email']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['email']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'find_passwords.mobile': {
@@ -148,6 +160,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/findPassword').findPasswordByMobileValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['mobile']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['mobile']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'licenses': {
@@ -159,6 +172,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/licenses_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/licenses_controller').default['handle']>>>
     }
   }
   'logs': {
@@ -170,6 +184,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['handle']>>>
     }
   }
   'orders.index': {
@@ -181,6 +196,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/orders_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/orders_controller').default['index']>>>
     }
   }
   'package.index': {
@@ -192,6 +208,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['index']>>>
     }
   }
   'package.store': {
@@ -203,6 +220,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'package.show': {
@@ -214,6 +232,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['show']>>>
     }
   }
   'package.update': {
@@ -225,6 +244,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: ExtractQuery<InferInput<(typeof import('#core/validators/package').packageValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'package.destroy': {
@@ -236,6 +256,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/packages_controller').default['destroy']>>>
     }
   }
   'pays.wepay': {
@@ -247,6 +268,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/pay').payValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepay']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepay']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'pays.wepay_check': {
@@ -258,6 +280,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/pay').payCheckValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepayCheck']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['wepayCheck']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'pay.notify': {
@@ -269,6 +292,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
     }
   }
   'subscribe.index': {
@@ -280,6 +304,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['index']>>>
     }
   }
   'subscribe.store': {
@@ -291,6 +316,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['store']>>>
     }
   }
   'subscribe.show': {
@@ -302,6 +328,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['show']>>>
     }
   }
   'subscribe.update': {
@@ -313,6 +340,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['update']>>>
     }
   }
   'subscribe.destroy': {
@@ -324,6 +352,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['destroy']>>>
     }
   }
   'system.restart': {
@@ -335,6 +364,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/systems_controller').default['restart']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/systems_controller').default['restart']>>>
     }
   }
   'uploads.file': {
@@ -346,6 +376,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['file']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['file']>>>
     }
   }
   'uploads.image_single': {
@@ -357,6 +388,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'users.profile': {
@@ -368,6 +400,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['profile']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['profile']>>>
     }
   }
   'users.password': {
@@ -379,6 +412,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updatePasswordValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'users.update': {
@@ -390,6 +424,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'users.destroy': {
@@ -401,6 +436,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
     }
   }
   'users.index': {
@@ -412,6 +448,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['index']>>>
     }
   }
   'users.store': {
@@ -423,6 +460,7 @@ export interface Registry {
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/user').createUserValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'users.show': {
@@ -434,6 +472,7 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
     }
   }
   'wechats_message': {
@@ -445,6 +484,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechats_message_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/wechat/wechats_message_controller').default['handle']>>>
     }
   }
   'wechat_qrs.create': {
@@ -456,6 +496,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_qrs_controller').default['create']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/wechat/wechat_qrs_controller').default['create']>>>
     }
   }
   'wechat_login.login': {
@@ -467,6 +508,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_login_controller').default['login']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/wechat/wechat_login_controller').default['login']>>>
     }
   }
   'wechat_bind.bind': {
@@ -478,6 +520,7 @@ export interface Registry {
       params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/wechat/wechat_bind_controller').default['bind']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/wechat/wechat_bind_controller').default['bind']>>>
     }
   }
 }

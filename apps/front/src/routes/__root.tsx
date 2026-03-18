@@ -1,10 +1,10 @@
-import type { useAuth } from '@hdcms/react/hooks'
+import type { useAuth } from '@core/hooks'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClient } from '@tanstack/react-query'
 import { Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { useTitle } from 'ahooks'
-import { app } from '@hdcms/config/app'
+import { app } from '@/config/app'
 
 interface RootRouteContext {
   auth: ReturnType<typeof useAuth>

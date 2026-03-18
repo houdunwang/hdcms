@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { FrontLayout } from '@hdcms/react/layouts'
+import { FrontLayout } from '@core/layouts'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 import {

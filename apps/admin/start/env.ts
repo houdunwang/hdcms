@@ -11,32 +11,19 @@
 
 import { Env } from '@adonisjs/core/env'
 
-export default await Env.create(new URL('../../../config', import.meta.url), {
+export default await Env.create(new URL('../', import.meta.url), {
+  // Node
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
   PORT: Env.schema.number(),
-  APP_KEY: Env.schema.secret(),
-  APP_URL: Env.schema.string({ format: 'url', tld: false }),
   HOST: Env.schema.string({ format: 'host' }),
   LOG_LEVEL: Env.schema.string(),
-  APP_NAME: Env.schema.string(),
 
-  /*
-  |----------------------------------------------------------
-  | Variables for configuring session package
-  |----------------------------------------------------------
-  */
+  // App
+  APP_KEY: Env.schema.secret(),
+  APP_URL: Env.schema.string({ format: 'url', tld: false }),
+
+  // Session
   SESSION_DRIVER: Env.schema.enum(['cookie', 'memory', 'database'] as const),
-
-  /*
-  |----------------------------------------------------------
-  | Variables for configuring database connection
-  |----------------------------------------------------------
-  */
-  DB_HOST: Env.schema.string({ format: 'host' }),
-  DB_PORT: Env.schema.number(),
-  DB_USER: Env.schema.string(),
-  DB_PASSWORD: Env.schema.string.optional(),
-  DB_DATABASE: Env.schema.string(),
 
   /*
   |----------------------------------------------------------
@@ -44,6 +31,24 @@ export default await Env.create(new URL('../../../config', import.meta.url), {
   |----------------------------------------------------------
   */
   LIMITER_STORE: Env.schema.enum(['database', 'memory'] as const),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the drive package
+  |----------------------------------------------------------
+  */
+  DRIVE_DISK: Env.schema.enum(['fs'] as const),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the mail package
+  |----------------------------------------------------------
+  */
+  MAIL_MAILER: Env.schema.enum(['smtp'] as const),
+  MAIL_FROM_NAME: Env.schema.string(),
+  MAIL_FROM_ADDRESS: Env.schema.string(),
+  SMTP_HOST: Env.schema.string(),
+  SMTP_PORT: Env.schema.number(),
 
   /*
   |----------------------------------------------------------
@@ -55,16 +60,6 @@ export default await Env.create(new URL('../../../config', import.meta.url), {
   ALIYUN_SMS_CODE_SIGN: Env.schema.string.optional(),
   ALIYUN_SMS_CODE_TEMPLATE: Env.schema.string.optional(),
 
-  /*
-  |----------------------------------------------------------
-  | Variables for configuring the mail package
-  |----------------------------------------------------------
-  */
-  SMTP_HOST: Env.schema.string.optional(),
-  SMTP_PORT: Env.schema.number.optional(),
-  SMTP_USERNAME: Env.schema.string.optional(),
-  SMTP_PASSWORD: Env.schema.string.optional(),
-
   // 测试数据
   TEST_USER_EMAIL: Env.schema.string.optional({ format: 'email' }),
   TEST_USER_MOBILE: Env.schema.string.optional(),
@@ -75,25 +70,9 @@ export default await Env.create(new URL('../../../config', import.meta.url), {
   WECHAT_TOKEN: Env.schema.string.optional(),
   WECHAT_DEFAULT_REPLY: Env.schema.string.optional(),
 
-  /*
-  |----------------------------------------------------------
-  | Variables for configuring the drive package
-  |----------------------------------------------------------
-  */
-  DRIVE_DISK: Env.schema.enum(['fs'] as const),
-
   // 文件上传
   UPLOAD_DRIVER: Env.schema.enum(['oss', 'local'] as const),
   UPLOAD_OSS_REGION: Env.schema.string.optional(),
   UPLOAD_OSS_BUCKET: Env.schema.string.optional(),
   UPLOAD_OSS_ENDPOINT: Env.schema.string.optional(),
-
-  /*
-  |----------------------------------------------------------
-  | Variables for configuring the mail package
-  |----------------------------------------------------------
-  */
-  // MAIL_MAILER: Env.schema.enum(['smtp'] as const),
-  // MAIL_FROM_NAME: Env.schema.string(),
-  // MAIL_FROM_ADDRESS: Env.schema.string()
 })

@@ -12,6 +12,7 @@
   "homepage": "https://www.houdunyun.com",
   "type": "module",
   "scripts": {
+    "dev": "tsdown --watch",
     "build": "tsdown",
     "format": "prettier --write \"./**/*.{js,json}\""
   },

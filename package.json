@@ -1,15 +1,10 @@
 {
-  "name": "hdcms",
-  "version": "1.0.0",
-  "private": false,
+  "name": "adonisjs-app",
+  "version": "0.0.0",
+  "private": true,
   "type": "module",
-  "author": "后盾人 <2300071698@qq.com>",
-  "description": "现代 TypeScript 全栈、开箱即用、面向生产的工程基座。采用 Monorepo 架构，前后端统一类型与规范，专注业务而非重复造轮子。",
+  "description": "A batteries-included AdonisJS starter kit for building modern APIs with type-safe frontend integration",
   "license": "MIT",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "engines": {
     "node": ">=24.0.0"
   },
@@ -19,23 +14,13 @@
     "test": "turbo test",
     "lint": "turbo lint",
     "format": "turbo format",
-    "typecheck": "turbo typecheck",
-    "deploy": "node scripts/deploy.ts"
-  },
-  "peerDependencies": {
-    "@adonisjs/core": "^7.0.0",
-    "luxon": "^3.7.2"
+    "typecheck": "turbo typecheck"
   },
   "devDependencies": {
     "@adonisjs/prettier-config": "^1.4.5",
-    "@types/node": "^25.5.0",
     "prettier": "^3.8.1",
-    "turbo": "^2.8.10",
-    "@app/admin": "workspace:*"
+    "turbo": "^2.8.12"
   },
-  "packageManager": "pnpm@10.32.0",
-  "prettier": "@adonisjs/prettier-config",
-  "dependencies": {
-    "chalk": "^5.6.2"
-  }
+  "packageManager": "pnpm@10.29.3",
+  "prettier": "@adonisjs/prettier-config"
 }

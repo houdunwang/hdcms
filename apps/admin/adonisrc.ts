@@ -28,8 +28,8 @@ export default defineConfig({
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
     () => import('@adonisjs/session/commands'),
-    () => import('@adonisjs/mail/commands'),
     () => import('@adonisjs/cache/commands'),
+    () => import('@adonisjs/mail/commands')
   ],
 
   /*
@@ -56,9 +56,9 @@ export default defineConfig({
     () => import('@adonisjs/auth/auth_provider'),
     () => import('#providers/api_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
-    () => import('@adonisjs/drive/drive_provider'),
-    () => import('@adonisjs/mail/mail_provider'),
     () => import('@adonisjs/cache/cache_provider'),
+    () => import('@adonisjs/drive/drive_provider'),
+    () => import('@adonisjs/mail/mail_provider')
   ],
 
   /*
@@ -73,7 +73,6 @@ export default defineConfig({
     () => import('#start/routes'),
     () => import('#start/kernel'),
     () => import('#start/validator'),
-    () => import('#start/scheduler'),
   ],
 
   /*
@@ -119,6 +118,5 @@ export default defineConfig({
       }),
       generateRegistry(),
     ],
-    buildFinished: [() => import('./hooks/buildFinished.ts')],
   },
 })
