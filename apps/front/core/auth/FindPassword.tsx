@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "../components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "../components/ui/tabs"
-import { cn } from "../components/lib/utils"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { cn } from "@/lib/utils"
 import { fieldContext, formContext } from "../form"
 import { FieldCaptcha } from "../form/FieldCaptcha"
 import { FieldInput } from "../form/FieldInput"
@@ -16,7 +16,7 @@ import { FieldCode } from "../form/FieldCode"
 import type { AuthComponentProps } from "./types"
 
 export function FindPassword(props: AuthComponentProps): React.JSX.Element {
-	const { api } = useApi()
+	const api = useApi()
 	const { login } = useAuth()
 	const [codeType, setCodeType] = useState<'email' | 'mobile'>('email')
 	const mutationOptions = {

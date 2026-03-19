@@ -1,17 +1,13 @@
-import { RouteProgressBar } from '../common'
-import { TooltipProvider } from '../components/ui/tooltip'
-import { ThemeProvider } from '../theme/theme-provider'
-import { AuthEnum } from '../types/enum'
-import '../plugin/dayjs'
-import { userAtom } from '../store/userStore'
-import { QueryClientProvider, useQuery, type QueryClient } from '@tanstack/react-query'
+import { TooltipProvider } from '@/components/ui/tooltip'
+import { useInit } from '#core/hooks/useInit'
+import { QueryClientProvider, type QueryClient } from '@tanstack/react-query'
 import { RouterProvider, type AnyRouter } from '@tanstack/react-router'
-import { useSetAtom } from 'jotai'
-import { useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
-import { useApi } from '../hooks/useApi'
+import { RouteProgressBar } from '../common'
 import { useAuth } from '../hooks/useAuth'
+import '../plugin/dayjs'
+import { ThemeProvider } from '../theme/theme-provider'
 
 export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }): React.JSX.Element => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -26,19 +22,7 @@ export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryCl
 
 function App({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }) {
 	const auth = useAuth()
-	const { api } = useApi()
-	const setUser = useSetAtom(userAtom)
-
-	const { isLoading, data } = useQuery(api.users.profile.queryOptions({},
-		{ enabled: !!localStorage.getItem(AuthEnum.TOKEN_NAME) })
-	)
-
-	useEffect(() => {
-		if (data?.data) {
-			setUser(data.data)
-		}
-	}, [data])
-
+	const isLoading = useInit()
 	if (isLoading) return <div className='w-screen h-screen flex justify-center items-center'><HashLoader size={50} color='#fb2c36' /></div>
 	return <>
 		<RouteProgressBar router={router} />

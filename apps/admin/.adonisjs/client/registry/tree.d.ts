@@ -32,6 +32,11 @@ export interface ApiDefinition {
     email: typeof routes['codes.email']
     mobile: typeof routes['codes.mobile']
   }
+  configs: {
+    all: typeof routes['configs.all']
+    common: typeof routes['configs.common']
+    store: typeof routes['configs.store']
+  }
   findPasswords: {
     email: typeof routes['find_passwords.email']
     mobile: typeof routes['find_passwords.mobile']

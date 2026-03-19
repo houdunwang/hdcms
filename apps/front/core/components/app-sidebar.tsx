@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import { NavDocuments } from "../components/nav-documents"
-import { NavMain } from "../components/nav-main"
-import { NavSecondary } from "../components/nav-secondary"
-import { NavUser } from "../components/nav-user"
+import { NavDocuments } from "./nav-documents"
+import { NavMain } from "@/components/nav-main"
+import { NavSecondary } from "./nav-secondary"
+import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +12,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../components/ui/sidebar"
+} from "@/components/ui/sidebar"
 import { CameraIcon, ChartBarIcon, CircleHelpIcon, CommandIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, FileTextIcon, FolderIcon, LayoutDashboardIcon, ListIcon, SearchIcon, Settings2Icon, UsersIcon } from "lucide-react"
 
 const data = {

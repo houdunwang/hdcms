@@ -1,13 +1,13 @@
-import { Header } from '../common'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
-import { useAuth } from '../hooks'
-import { useIsMobile } from '../hooks/use-mobile'
-import { cn } from '../components/lib/utils'
+import { Header } from '#core/common'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useAuth } from '#core/hooks'
+import { useIsMobile } from '#core/hooks/use-mobile'
+import { cn } from '@/lib/utils'
 import { menu } from '@/config/menu'
 import { Link, Outlet, useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { Profile } from '../member/Profile'
-import { Bind } from '../member/bind'
+import { Profile } from '#core/member/Profile'
+import { Bind } from '#core/member/bind'
 
 const routes = {
 	'/member?system=bind': <Bind />,

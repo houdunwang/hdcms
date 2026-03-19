@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar'
-import { Button } from '../components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "../components/ui/dropdown-menu"
-import { useAuth } from '../hooks/useAuth'
-import '../plugin/dayjs'
-import { ModeToggle } from '../theme/mode-toggle'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import { useAuth } from '#core/hooks/useAuth'
+import '#core/plugin/dayjs'
+import { ModeToggle } from '#core/theme/mode-toggle'
 import { menu } from '@/config/menu'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
@@ -15,11 +15,11 @@ export const UserDropdown = (): React.JSX.Element => {
 		<div className="flex gap-3 items-center">
 			<div className="flex items-center gap-1">
 				<ModeToggle />
-				{isAdmin && <a href="/admin" target="_blank">
+				{isAdmin && <Link to="/admin">
 					<Button variant="outline" size="sm">
 						<Settings />
 					</Button>
-				</a>
+				</Link>
 				}
 			</div>
 			{isAuthenticated() ? <LoginComponent /> : <UnLogin />}
@@ -72,11 +72,11 @@ function LoginComponent() {
 
 function UnLogin() {
 	return <>
-		<Link to="/auth?action=login" className="flex items-center gap-1">
+		<a href="/auth?action=login" className="flex items-center gap-1">
 			<Button variant={'default'}>登录</Button>
-		</Link>
-		<Link to="/auth?action=register" className="flex items-center gap-1">
+		</a>
+		<a href="/auth?action=register" className="flex items-center gap-1">
 			<Button variant={'outline'}>注册</Button>
-		</Link>
+		</a>
 	</>
 }

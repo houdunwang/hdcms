@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { fieldContext, FieldInput, FieldSubmitButton, formContext } from "../form"
-import { FieldSelect } from "../form/FieldSelect"
-import { cn } from "../components/lib/utils"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { fieldContext, FieldInput, FieldSubmitButton, formContext } from "#core/form"
+import { FieldSelect } from "#core/form/FieldSelect"
+import { cn } from "@/lib/utils"
 import { createFormHook } from "@tanstack/react-form"
 import { useNavigate, useRouterState } from "@tanstack/react-router"
 import { type FC } from 'react'
@@ -27,13 +27,14 @@ export const SearchBlock: FC<Props> = ({ className, options }) => {
 		fieldContext,
 		formContext,
 	})
+	const search = location.search as Record<string, any>
 	const form = useAppForm({
 		defaultValues: {
 			field: options[0].value as any,
-			keyword: location.search.keyword || ''
+			keyword: search.keyword || ''
 		},
 		onSubmit: async ({ value: body }) => {
-			navigate({ to: location.pathname, search: { ...location.search, ...body, page: 1 } })
+			navigate({ to: location.pathname, search: { ...search, ...body, page: 1 } })
 		}
 	})
 	return (

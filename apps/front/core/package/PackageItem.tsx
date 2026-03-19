@@ -1,6 +1,6 @@
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "../components/ui/card";
-import { WePay } from '../pay';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
+import { WePay } from '#core/pay';
 import type { Data } from '@app/admin/data';
 import { Check, ShoppingBag } from 'lucide-react';
 import type { FC } from 'react';

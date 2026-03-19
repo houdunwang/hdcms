@@ -1,5 +1,5 @@
-import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "../../components/ui/sidebar"
-import { cn } from "../../components/lib/utils"
+import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 import { menu } from '@/config/menu'
 import { useMatchRoute, useNavigate } from "@tanstack/react-router"
 export function NavMain(): React.JSX.Element {

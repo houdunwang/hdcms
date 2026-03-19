@@ -1,4 +1,4 @@
-import { cn } from "../components/lib/utils"
+import { cn } from "@/lib/utils"
 import { app } from "@/config/app"
 
 type Props = {

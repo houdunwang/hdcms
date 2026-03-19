@@ -72,6 +72,24 @@ const routes = {
     tokens: [{"old":"/core/code/mobile","type":0,"val":"core","end":""},{"old":"/core/code/mobile","type":0,"val":"code","end":""},{"old":"/core/code/mobile","type":0,"val":"mobile","end":""}],
     types: placeholder as Registry['codes.mobile']['types'],
   },
+  'configs.all': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/configs/all',
+    tokens: [{"old":"/core/configs/all","type":0,"val":"core","end":""},{"old":"/core/configs/all","type":0,"val":"configs","end":""},{"old":"/core/configs/all","type":0,"val":"all","end":""}],
+    types: placeholder as Registry['configs.all']['types'],
+  },
+  'configs.common': {
+    methods: ["GET","HEAD"],
+    pattern: '/core/configs/common',
+    tokens: [{"old":"/core/configs/common","type":0,"val":"core","end":""},{"old":"/core/configs/common","type":0,"val":"configs","end":""},{"old":"/core/configs/common","type":0,"val":"common","end":""}],
+    types: placeholder as Registry['configs.common']['types'],
+  },
+  'configs.store': {
+    methods: ["POST"],
+    pattern: '/core/configs/store',
+    tokens: [{"old":"/core/configs/store","type":0,"val":"core","end":""},{"old":"/core/configs/store","type":0,"val":"configs","end":""},{"old":"/core/configs/store","type":0,"val":"store","end":""}],
+    types: placeholder as Registry['configs.store']['types'],
+  },
   'find_passwords.email': {
     methods: ["POST"],
     pattern: '/core/findPassword/email',

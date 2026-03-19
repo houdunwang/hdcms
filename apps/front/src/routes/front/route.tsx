@@ -1,5 +1,5 @@
-import { FrontLayout } from '@core/layouts'
-import type { RouterContextConfig } from '@core/types'
+import { FrontLayout } from '#core/layouts'
+import type { RouterContextConfig } from '#core/types'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/front')({
@@ -16,5 +16,7 @@ export const Route = createFileRoute('/front')({
 })
 
 function RouteComponent() {
-	return <FrontLayout />
+	return <div className=''>
+		<FrontLayout />
+	</div>
 }

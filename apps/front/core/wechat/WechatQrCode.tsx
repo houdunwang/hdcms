@@ -1,8 +1,8 @@
-import { Button } from '../components/ui/button'
-import { Spinner } from '../components/ui/spinner'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../components/ui/tooltip'
-import { cn } from '../components/lib/utils'
-import { useApi } from '../hooks/useApi'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { cn } from '@/lib/utils'
+import { useApi } from '#core/hooks/useApi'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import { RefreshCw } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -19,7 +19,7 @@ type Props = {
 	className?: string
 }
 export function WechatQrCode({ onSuccess, scene_str, className, requestCount = 30, timeout = 2000 }: Props): React.JSX.Element {
-	const { api } = useApi()
+	const api = useApi()
 	type CreateQRCodeResponse = Parameters<NonNullable<ReturnType<typeof api.wechatQrs.create.mutationOptions>['onSuccess']>>[0]
 	const [tryCount, setTryCount] = useState(requestCount)
 	const [data, setData] = useState<CreateQRCodeResponse>()

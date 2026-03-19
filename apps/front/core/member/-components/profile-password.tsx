@@ -1,14 +1,14 @@
-import { FieldCaptcha } from "../../form"
-import { FieldInput } from "../../form"
-import { FieldSubmitButton } from "../../form"
-import { fieldContext, formContext } from "../../form"
-import { useApi } from "../../hooks"
+import { FieldCaptcha } from "#core/form"
+import { FieldInput } from "#core/form"
+import { FieldSubmitButton } from "#core/form"
+import { fieldContext, formContext } from "#core/form"
+import { useApi } from "#core/hooks"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import z from "zod"
 
 export const ProfilePassword = (): React.JSX.Element => {
-  const { api } = useApi()
+  const api = useApi()
   const mutation = useMutation(api.users.password.mutationOptions())
   const { useAppForm } = createFormHook({
     fieldComponents: {

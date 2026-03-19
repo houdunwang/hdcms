@@ -1,11 +1,12 @@
-import { Alert } from "../../components/ui/alert"
-import { WechatQrCode } from "../../wechat"
-import { useApi } from "../../hooks"
+import { Alert } from "@/components/ui/alert"
+import { WechatQrCode } from "#core/wechat"
+import { useApi, useAuth } from "#core/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 
 export const BindWechat = (): React.JSX.Element => {
-  const { auth, api } = useApi()
+  const api = useApi()
+  const auth = useAuth()
   const mutation = useMutation(api.wechatBind.bind.mutationOptions())
   return (
     <div className="flex items-start flex-col">

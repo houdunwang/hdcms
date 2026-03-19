@@ -1,5 +1,5 @@
-import { Button, buttonVariants } from '../components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogPortal, DialogTitle, DialogTrigger, } from "../components/ui/dialog"
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogPortal, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
 import type { VariantProps } from 'class-variance-authority'
 import { SquarePen, SquarePlus } from 'lucide-react'
 import { useState, type FC } from 'react'

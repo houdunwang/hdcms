@@ -43,6 +43,23 @@ export class CacheSchema extends BaseModel {
   declare value: string | null
 }
 
+export class ConfigSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'name', 'system', 'updatedAt', 'value'] as const
+  $columns = ConfigSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare system: boolean | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare value: string
+}
+
 export class OrderSchema extends BaseModel {
   static $columns = ['createdAt', 'data', 'deletedAt', 'id', 'orderableId', 'orderableType', 'payState', 'payType', 'price', 'sn', 'subject', 'tradeNo', 'updatedAt', 'userId'] as const
   $columns = OrderSchema.$columns

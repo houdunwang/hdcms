@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import { NavMain } from "../../layouts/admin/nav-main"
-import { NavUser } from "../../layouts/admin/nav-user"
-import { NavSecondary } from "../../components/nav-secondary"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "../../components/ui/sidebar"
+import { NavMain } from "#core/layouts/admin/nav-main"
+import { NavUser } from "#core/layouts/admin/nav-user"
+import { NavSecondary } from "#core/components/nav-secondary"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar"
 import { app } from '@/config/app'
 import { Link } from "@tanstack/react-router"
 

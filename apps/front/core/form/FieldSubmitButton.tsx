@@ -1,6 +1,7 @@
-import { Button } from '../components/ui/button'
-import { Spinner } from '../components/ui/spinner'
-import { useFormContext } from '../form'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { useFormContext } from '#core/form'
+import { cn } from '#/lib/utils'
 
 type Props = Omit<
 	React.ComponentProps<"button">,
@@ -19,7 +20,7 @@ export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }
 	return (
 		<form.Subscribe selector={(state) => state.isSubmitting}>
 			{(isSubmitting) => {
-				return <div className={fieldClassName}>
+				return <div className={cn(fieldClassName)}>
 					<Button
 						type='submit'
 						{...props}

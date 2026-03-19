@@ -1,13 +1,13 @@
-import { Loading, } from '../common'
-import { ChartBar } from '../common/ChartBar'
-import { Page } from '../common/Page'
+import { Loading, } from '#core/common'
+import { ChartBar } from '#core/common/ChartBar'
+import { Page } from '#core/common/Page'
 import { SearchBlock } from '../common/SearchBlock'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../components/ui/table"
-import { ResultEmpty } from '../errors/ResultEmpty'
-import { useApi } from '../hooks'
-import { dasbardStore } from '../store/dasbardStore'
-import { UserAvatar } from '../user'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
+import { ResultEmpty } from '#core/errors/ResultEmpty'
+import { useApi } from '#core/hooks'
+import { dasbardStore } from '#core/store/dasbardStore'
+import { UserAvatar } from '#core/user'
 import type { Data } from '@app/admin/data'
 import { registry } from '@app/admin/registry'
 import { useQuery } from '@tanstack/react-query'
@@ -18,7 +18,7 @@ import { ShoppingBag } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
 
 export const OrderAdminPage = (): JSX.Element => {
-	const { api } = useApi()
+	const api = useApi()
 	const { search } = useMatch({ strict: false })
 	const dasbardData = useAtomValue(dasbardStore)
 	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
@@ -54,7 +54,7 @@ export const OrderAdminPage = (): JSX.Element => {
 				/>
 				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg px-3 text-sm'}>
 					<ShoppingBag className={'size-6'} />
-					总销售：{dasbardData?.orderMonths.reduce((acc, curr) => acc + curr.amount, 0)} 元
+					总销售：{dasbardData?.orderMonths.reduce((acc: number, curr: { amount: number }) => acc + curr.amount, 0)} 元
 				</div>
 			</div>
 

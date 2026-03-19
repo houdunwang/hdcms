@@ -1,6 +1,6 @@
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../components/ui/sheet"
-import { useIsMobile } from '../hooks'
-import { UserDropdown } from "../user"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useIsMobile } from '#core/hooks'
+import { UserDropdown } from "#core/user"
 import { app } from '@/config/app'
 import { menu } from '@/config/menu'
 import { Link } from '@tanstack/react-router'
@@ -62,9 +62,11 @@ export function PCHeader(): JSX.Element {
 			</Link>
 			<div className="hidden lg:flex justify-start items-center gap-8 flex-1 ml-3">
 				{menu.header?.map((item) => (
-					<Link key={item.to} to={item.to} target={item.target || '_self'} activeProps={{
-						className: 'text-destructive'
-					}}>
+					<Link key={item.to} to={item.to}
+						target={item.target || '_self'}
+						activeProps={{
+							className: 'text-destructive'
+						}}>
 						<span>{item.title}</span>
 					</Link>
 				))}

@@ -15,6 +15,9 @@ export type ScannedRoutes = {
     'captcha': { paramsTuple?: []; params?: {} }
     'codes.email': { paramsTuple?: []; params?: {} }
     'codes.mobile': { paramsTuple?: []; params?: {} }
+    'configs.all': { paramsTuple?: []; params?: {} }
+    'configs.common': { paramsTuple?: []; params?: {} }
+    'configs.store': { paramsTuple?: []; params?: {} }
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }
@@ -53,6 +56,8 @@ export type ScannedRoutes = {
     'users.test': { paramsTuple?: []; params?: {} }
     'admin': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
+    'configs.all': { paramsTuple?: []; params?: {} }
+    'configs.common': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'package.index': { paramsTuple?: []; params?: {} }
@@ -69,6 +74,8 @@ export type ScannedRoutes = {
     'users.test': { paramsTuple?: []; params?: {} }
     'admin': { paramsTuple?: []; params?: {} }
     'captcha': { paramsTuple?: []; params?: {} }
+    'configs.all': { paramsTuple?: []; params?: {} }
+    'configs.common': { paramsTuple?: []; params?: {} }
     'logs': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'package.index': { paramsTuple?: []; params?: {} }
@@ -88,6 +95,7 @@ export type ScannedRoutes = {
     'binds.mobile': { paramsTuple?: []; params?: {} }
     'codes.email': { paramsTuple?: []; params?: {} }
     'codes.mobile': { paramsTuple?: []; params?: {} }
+    'configs.store': { paramsTuple?: []; params?: {} }
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'licenses': { paramsTuple?: []; params?: {} }

@@ -1,5 +1,4 @@
-import { registry } from '@app/admin/registry';
 import { atom, type WritableAtom } from 'jotai';
 
-export const dasbardStore: WritableAtom<typeof registry.$tree.admin.types.response.data | undefined, [typeof registry.$tree.admin.types.response.data | undefined], void>
-	= atom<typeof registry.$tree.admin.types.response.data | undefined>(undefined)
+export const dasbardStore: WritableAtom<Record<string, any> | undefined, [Record<string, any> | undefined], void>
+	= atom<Record<string, any> | undefined>(undefined)

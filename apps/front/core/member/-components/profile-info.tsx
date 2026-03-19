@@ -1,11 +1,12 @@
-import { FieldInput, FieldSubmitButton } from "../../form"
-import { fieldContext, formContext } from "../../form"
-import { useApi } from "../../hooks"
+import { FieldInput, FieldSubmitButton } from "#core/form"
+import { fieldContext, formContext } from "#core/form"
+import { useApi, useAuth } from "#core/hooks"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 
 export const ProfileInfo = (): React.JSX.Element => {
-  const { auth, api } = useApi()
+  const api = useApi()
+  const auth = useAuth()
   const mutation = useMutation(api.users.update.mutationOptions({
     onSuccess: ({ data }) => {
       auth.setUser(data)

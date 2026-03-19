@@ -1,5 +1,5 @@
 // import { Spinner } from '../components/ui/spinner'
-import { cn } from '../components/lib/utils'
+import { cn } from '@/lib/utils'
 import { MoonLoader } from 'react-spinners'
 
 export const Loading = ({ className, screen = false }: { className?: string, screen?: boolean }): React.JSX.Element => {

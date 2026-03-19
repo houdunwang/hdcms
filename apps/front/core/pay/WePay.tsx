@@ -1,14 +1,7 @@
-import {
-	AlertDialog,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from '../components/ui/alert-dialog'
-import { Button } from '../components/ui/button'
-import { Spinner } from '../components/ui/spinner'
-import { useApi, useAuth } from '../hooks'
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { useApi, useAuth } from '#core/hooks'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { CircleX, Clock } from 'lucide-react'
@@ -62,7 +55,7 @@ function Pay({ setOpen, ...props }: { setOpen: (open: boolean) => void } & Props
 
 //微信扫码二维码
 function PayQr({ children, setOpen, qrRefreshTime = 120, ...props }: { setOpen: (open: boolean) => void } & Props) {
-	const { api } = useApi()
+	const api = useApi()
 	const qrMutation = useMutation(api.pays.wepay.mutationOptions({
 		onError: () => {
 			setOpen(false)

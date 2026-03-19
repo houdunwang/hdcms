@@ -1,8 +1,8 @@
-import { Loading } from '../common'
-import { Field, FieldLabel } from '../components/ui/field'
-import { Input } from '../components/ui/input'
-import { useApi } from '../hooks'
-import type { orderType } from '../hooks/useOrder'
+import { Loading } from '#core/common'
+import { Field, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { useApi } from '#core/hooks'
+import type { orderType } from '#core/hooks/useOrder'
 import type { Data } from '@app/admin/data'
 import { useQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -13,7 +13,7 @@ type Props = {
 	type: orderType | undefined
 }
 export const SubscribeDetail: FC<Props> = ({ order, type }): JSX.Element => {
-	const { api } = useApi();
+	const api = useApi();
 	const { isLoading, data: subscribe } = useQuery(api.subscribe.show.queryOptions({
 		params: { id: order.orderableId }
 	}))

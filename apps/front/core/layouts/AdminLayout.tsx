@@ -1,19 +1,19 @@
-import { Loading } from "../common"
-import { SidebarInset, SidebarProvider, } from "../components/ui/sidebar"
-import { ConfigAdminPage } from "../config/ConfigAdminPage"
-import { useApi, useAuth, useIsMobile } from "../hooks"
-import { AppSidebar } from "../layouts/admin/app-sidebar"
-import { SiteHeader } from "../layouts/admin/site-header"
-import { OrderAdminPage } from "../order/OrderAdminPage"
-import { PackageAdminPage } from "../package/PackageAdminPage"
-import { dasbardStore } from "../store/dasbardStore"
-import { SubscribeAdminPage } from "../subscribe/SubscribeAdminPage"
-import { UserAdminPage } from "../user/UserAdminPage"
+import { Loading } from "#core/common"
+import { SidebarInset, SidebarProvider, } from "@/components/ui/sidebar"
+import { ConfigAdminPage } from "#core/config/ConfigAdminPage"
+import { useApi, useAuth, useIsMobile } from "#core/hooks"
+import { AppSidebar } from "#core/layouts/admin/app-sidebar"
+import { SiteHeader } from "#core/layouts/admin/site-header"
+import { OrderAdminPage } from "#core/order/OrderAdminPage"
+import { PackageAdminPage } from "#core/package/PackageAdminPage"
+import { dasbardStore } from "#core/store/dasbardStore"
+import { SubscribeAdminPage } from "#core/subscribe/SubscribeAdminPage"
+import { UserAdminPage } from "#core/user/UserAdminPage"
 import { useQuery } from "@tanstack/react-query"
 import { Outlet, useNavigate, useRouterState } from "@tanstack/react-router"
 import { useAtom } from "jotai"
 import { useEffect, type FC } from "react"
-import { DasbardAdminPage } from "../dasbard/DasbardAdminPage"
+import { DasbardAdminPage } from "#core/dasbard/DasbardAdminPage"
 
 export const routes = {
 	'/admin?system=user': UserAdminPage,
@@ -36,9 +36,10 @@ export const AdminLayout: FC<Props> = ({ width = 52, height = 12 }) => {
 	const navigate = useNavigate()
 	const location = useRouterState({ select: s => s.location })
 	const Component = Object.entries(routes).find(([key]) => location.href.includes(key))?.[1] || DasbardAdminPage
-	const { api } = useApi()
-	const { isLoading, data: dasbardData } = useQuery(api.admin.queryOptions())
+	const api = useApi()
+	const { isLoading, data } = useQuery(api.admin.queryOptions())
 	const [, setDasbardStore] = useAtom(dasbardStore)
+	const dasbardData = data as Record<string, any>
 	useEffect(() => {
 		if (!isAdmin) {
 			navigate({ href: '/auth?action=login' })

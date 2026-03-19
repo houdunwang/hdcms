@@ -139,6 +139,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/codes_controller').default['mobile']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'configs.all': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/configs/all'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['all']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['all']>>>
+    }
+  }
+  'configs.common': {
+    methods: ["GET","HEAD"]
+    pattern: '/core/configs/common'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['common']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['common']>>>
+    }
+  }
+  'configs.store': {
+    methods: ["POST"]
+    pattern: '/core/configs/store'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['store']>>>
+    }
+  }
   'find_passwords.email': {
     methods: ["POST"]
     pattern: '/core/findPassword/email'

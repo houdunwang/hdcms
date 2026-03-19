@@ -1,11 +1,18 @@
-import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
-import { HdProvider } from 'core/provider'
 import { QueryClient } from '@tanstack/react-query'
-import './styles.css'
+import { createRouter } from '@tanstack/react-router'
+import { HdProvider } from '#core/provider'
+import ReactDOM from 'react-dom/client'
+import './assets/global.css'
+import { routeTree } from './routeTree.gen'
 
 const router = createRouter({
+  context: {
+    auth: undefined!,
+    queryClient: undefined!,
+    config: {
+      title: '',
+    }
+  },
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,

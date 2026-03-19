@@ -1,9 +1,9 @@
-import { cn } from "../components/lib/utils"
-import { useFieldContext } from "../form"
-import { useApi } from "../hooks/useApi"
-import { fieldErrorAtom } from "../store/fieldErrorStore"
+import { cn } from "@/lib/utils"
+import { useFieldContext } from "#core/form"
+import { useApi } from "#core/hooks/useApi"
+import { fieldErrorAtom } from "#core/store/fieldErrorStore"
 import { useMutation } from "@tanstack/react-query"
-import type { FormFieldProps } from "../form/types"
+import type { FormFieldProps } from "#core/form/types"
 import { useSetAtom } from "jotai"
 import { useDropzone } from 'react-dropzone'
 import { FieldValidateError } from "./FieldValidateError"
@@ -15,7 +15,7 @@ interface Props extends FormFieldProps<'input'> {
 }
 export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props): React.JSX.Element {
 	const field = useFieldContext<string>()
-	const { api } = useApi()
+	const api = useApi()
 	const setFieldError = useSetAtom(fieldErrorAtom)
 
 	const mutation = useMutation(api.uploads.imageSingle.mutationOptions({
@@ -24,7 +24,8 @@ export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props): React
 			onSuccess(data.url)
 		},
 		onError: (error) => {
-			const message = error.response?.errors[0].message
+			const errors = error.response as { errors: { message: string }[] }
+			const message = errors?.errors[0].message
 			if (message) {
 				setFieldError(state => ({
 					...state,

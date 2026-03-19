@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { menu } from '@/config/menu'
 
 import {
   SidebarGroup,
@@ -9,7 +8,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../components/ui/sidebar"
+} from "@/components/ui/sidebar"
+import { menu } from "#/config/menu"
 
 export function NavSecondary({ ...props }: React.ComponentPropsWithoutRef<typeof SidebarGroup>): React.JSX.Element {
   return (

@@ -1,11 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { Data } from '@app/admin/data'
 import { User } from 'lucide-react'
 import { type JSX } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "../components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
 import dayjs from 'dayjs'
-import { Field, FieldLabel } from '../components/ui/field'
-import { Input } from '../components/ui/input'
+import { Field, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 type Props = {
 	user: Data.User
 }

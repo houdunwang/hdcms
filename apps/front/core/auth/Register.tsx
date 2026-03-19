@@ -1,11 +1,11 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "../components/ui/card"
-import { cn } from "../components/lib/utils"
-import { fieldContext, formContext } from "../form"
-import { FieldCaptcha } from "../form/FieldCaptcha"
-import { FieldInput } from "../form/FieldInput"
-import { FieldSubmitButton } from "../form/FieldSubmitButton"
-import { useApi } from "../hooks/useApi"
-import { useAuth } from "../hooks/useAuth"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
+import { fieldContext, formContext } from "#core/form"
+import { FieldCaptcha } from "#core/form/FieldCaptcha"
+import { FieldInput } from "#core/form/FieldInput"
+import { FieldSubmitButton } from "#core/form/FieldSubmitButton"
+import { useApi } from "#core/hooks/useApi"
+import { useAuth } from "#core/hooks/useAuth"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, UserPlus } from 'lucide-react'
@@ -13,7 +13,7 @@ import z from "zod"
 import type { AuthComponentProps } from "./types"
 
 export function Register(props: AuthComponentProps): React.JSX.Element {
-	const { api } = useApi()
+	const api = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
 		api.auth.register.mutationOptions({

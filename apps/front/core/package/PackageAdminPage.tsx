@@ -1,29 +1,16 @@
-import { Loading } from "../common"
-import { DelResource } from "../common/DelResource"
-import { ButtonGroup } from "../components/ui/button-group"
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle
-} from "../components/ui/card"
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow
-} from "../components/ui/table"
-import { FormDialog } from "../form/FormDialog"
-import { useApi } from "../hooks"
+import { Loading } from "#core/common"
+import { DelResource } from "#core/common/DelResource"
+import { FormDialog } from "#core/form/FormDialog"
+import { useApi } from "#core/hooks"
+import { FormPackage } from "#core/package/FormPackage"
+import { ButtonGroup } from "@/components/ui/button-group"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useQuery } from "@tanstack/react-query"
 import { CircleCheck } from "lucide-react"
 import type { JSX } from "react"
-import { FormPackage } from "./FormPackage"
 export const PackageAdminPage = (): JSX.Element => {
-	const { api } = useApi()
+	const api = useApi()
 	const { isLoading, data } = useQuery(api.package.index.queryOptions())
 	if (isLoading || !data?.data) return <Loading screen />
 	return (

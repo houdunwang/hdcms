@@ -1,8 +1,8 @@
-import { Field, FieldDescription, FieldLabel } from "../components/ui/field"
-import { Textarea } from "../components/ui/textarea"
-import { useFieldContext } from "../form"
-import type { FormFieldProps } from "../form/types"
-import { cn } from "../components/lib/utils"
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
+import { Textarea } from "@/components/ui/textarea"
+import { useFieldContext } from "#core/form"
+import type { FormFieldProps } from "#core/form/types"
+import { cn } from "@/lib/utils"
 import { FieldValidateError } from "./FieldValidateError"
 
 export function FieldTextarea({ label, description, className, fieldClassName, ...props }: FormFieldProps<'textarea'>): React.JSX.Element {

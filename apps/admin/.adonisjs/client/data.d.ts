@@ -5,6 +5,7 @@
 
 /// <reference path="./manifest.d.ts" />
 import type { InferData, InferVariants } from '@adonisjs/core/types/transformers'
+import type ConfigTransformer from '#transformers/config_transformer'
 import type OrderTransformer from '#transformers/order_transformer'
 import type PackageTransformer from '#transformers/package_transformer'
 import type SubscribeTransformer from '#transformers/subscribe_transformer'
@@ -12,6 +13,10 @@ import type UploadTransformer from '#transformers/upload_transformer'
 import type UserTransformer from '#transformers/user_transformer'
 
 export namespace Data {
+  export type Config = InferData<ConfigTransformer>
+  export namespace Config {
+    export type Variants = InferVariants<ConfigTransformer>
+  }
   export type Order = InferData<OrderTransformer>
   export namespace Order {
     export type Variants = InferVariants<OrderTransformer>

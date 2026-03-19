@@ -1,10 +1,10 @@
-import { Loading } from "../common/Loading"
-import { useApi } from "../hooks"
+import { Loading } from "#core/common/Loading"
+import { useApi } from "#core/hooks"
 import { useQuery } from "@tanstack/react-query"
 import { PackageItem } from "./PackageItem"
 
 export const PackageFrontPage = (): React.JSX.Element => {
-	const { api } = useApi()
+	const api = useApi()
 	const { isLoading, data } = useQuery(api.package.index.queryOptions({
 		query: {
 			state: 1,

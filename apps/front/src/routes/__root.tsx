@@ -1,4 +1,4 @@
-import type { useAuth } from '@core/hooks'
+import type { useAuth } from '#core/hooks'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClient } from '@tanstack/react-query'
 import { Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router'

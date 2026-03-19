@@ -1,16 +1,16 @@
-import { Field, FieldLabel } from "../components/ui/field"
-import { Input } from "../components/ui/input"
-import { useFieldContext } from "../form"
-import { useApi } from "../hooks/useApi"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { useFieldContext } from "#core/form"
+import { useApi } from "#core/hooks/useApi"
 import { useQuery } from "@tanstack/react-query"
-import type { FormFieldProps } from "../form/types"
+import type { FormFieldProps } from "#core/form/types"
 import { useEffect } from "react"
 import { ScaleLoader } from "react-spinners"
 import { FieldValidateError } from "./FieldValidateError"
 export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
 
 	const field = useFieldContext<string>()
-	const { api } = useApi()
+	const api = useApi()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
 	const { data, isFetching, refetch } = useQuery(
 		api.captcha.queryOptions()

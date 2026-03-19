@@ -1,13 +1,15 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card'
-import { useApi } from '../hooks/useApi'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { useAuth } from '#core/hooks'
 import { useMutation } from '@tanstack/react-query'
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
-import { WechatQrCode } from '../wechat/WechatQrCode'
+import { useApi } from '#core/hooks/useApi'
+import { WechatQrCode } from '#core/wechat/WechatQrCode'
 import type { AuthComponentProps } from './types'
 
 
 export function WechatLogin(props: AuthComponentProps): React.JSX.Element {
-	const { api, auth } = useApi()
+	const api = useApi()
+	const auth = useAuth()
 	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
 	return (
 		<Card className={''}>

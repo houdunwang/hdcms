@@ -1,25 +1,25 @@
-import { Loading } from '../common';
-import { hdCreateFormHook, useApi } from '../hooks';
+import { Loading } from '#core/common';
+import { hdCreateFormHook, useApi } from '#core/hooks';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, type FC } from 'react';
 import { toast } from 'sonner';
 import z from 'zod';
 
 export const FormPackage: FC<{ id?: number, closeDialog: () => void; }> = ({ id = 0, closeDialog }) => {
-	const { api } = useApi()
+	const api = useApi()
 	const queryClient = useQueryClient()
 	const { isLoading, data } = useQuery(api.package.show.queryOptions({ params: { id } }, { enabled: !!id }))
 	const updateMutation = useMutation(api.package.update.mutationOptions())
 	const storeMutation = useMutation(api.package.store.mutationOptions())
 	const { useAppForm } = hdCreateFormHook()
 	const formSchema = z.object({
-		title: z.string({ required_error: '请输入套餐名称' }),
-		ad: z.string({ required_error: '请输入广告语' }),
-		state: z.coerce.boolean({ required_error: '请选择是否启用' }).transform((val) => typeof val === 'boolean' ? val : true),
-		months: z.preprocess((val) => (val ?? 0), z.coerce.number({ required_error: '请输入可用月数' }).positive('请输入大于0的月数')),
-		price: z.preprocess((val) => val ?? 0, z.coerce.number({ required_error: '请输入价格' }).positive('请输入大于0的价格')),
-		originalPrice: z.preprocess((val) => val ?? 0, z.coerce.number({ required_error: '请输入价格' }).positive('请输入大于0的原价格')),
-		feature: z.string({ required_error: '请输入套餐特征' }),
+		title: z.string({ error: () => '请输入套餐名称' }),
+		ad: z.string({ error: () => '请输入广告语' }),
+		state: z.coerce.boolean({ error: () => '请选择是否启用' }).transform((val) => typeof val === 'boolean' ? val : true),
+		months: z.preprocess((val) => (val ?? 0), z.coerce.number({ error: () => '请输入可用月数' }).positive('请输入大于0的月数')),
+		price: z.preprocess((val) => val ?? 0, z.coerce.number({ error: () => '请输入价格' }).positive('请输入大于0的价格')),
+		originalPrice: z.preprocess((val) => val ?? 0, z.coerce.number({ error: () => '请输入原价格' }).positive('请输入大于0的原价格')),
+		feature: z.string({ error: () => '请输入套餐特征' }),
 	})
 	const form = useAppForm({
 		defaultValues: {} as z.infer<typeof formSchema>,

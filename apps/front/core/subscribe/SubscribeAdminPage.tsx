@@ -1,12 +1,12 @@
-import { Loading, } from '../common'
-import { ChartBar } from '../common/ChartBar'
-import { Page } from '../common/Page'
-import { SearchBlock } from '../common/SearchBlock'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "../components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../components/ui/table"
-import { useApi } from '../hooks'
-import { dasbardStore } from '../store/dasbardStore'
-import { UserAvatar } from '../user'
+import { Loading, } from '#core/common'
+import { ChartBar } from '#core/common/ChartBar'
+import { Page } from '#core/common/Page'
+import { SearchBlock } from '#core/common/SearchBlock'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
+import { useApi } from '#core/hooks'
+import { dasbardStore } from '#core/store/dasbardStore'
+import { UserAvatar } from '#core/user'
 import { useQuery } from '@tanstack/react-query'
 import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
@@ -15,7 +15,7 @@ import { Handbag } from 'lucide-react'
 import { type JSX } from 'react'
 
 export const SubscribeAdminPage = (): JSX.Element => {
-	const { api } = useApi()
+	const api = useApi()
 	const location = useRouterState({ select: s => s.location })
 	const dasbardData = useAtomValue(dasbardStore)
 	const { isLoading, data } = useQuery(api.subscribe.index.queryOptions({

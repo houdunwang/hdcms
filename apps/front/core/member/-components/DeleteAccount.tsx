@@ -7,15 +7,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger
-} from "../../components/ui/alert-dialog"
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { useApi } from "../../hooks"
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { useApi, useAuth } from "#core/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
 
 export const DeleteAccount = (): React.JSX.Element => {
-  const { api, auth } = useApi()
+  const api = useApi()
+  const auth = useAuth()
   const [isConfirm, setIsConfirm] = useState(false)
   const mutation = useMutation(api.users.destroy.mutationOptions({
     onSuccess: () => {

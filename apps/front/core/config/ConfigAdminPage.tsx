@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "../components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger, } from "../components/ui/tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
 import { useState, type FC } from 'react'
 import { Aliyun } from './Aliyun'
 import { Base } from './Base'
@@ -31,12 +31,12 @@ export const ConfigAdminPage: FC = () => {
 		<Tabs value={value} onValueChange={setValue}>
 			<TabsList>
 				<TabsTrigger value="base" >基本配置</TabsTrigger>
-				<TabsTrigger value="aliyun" >阿里云</TabsTrigger>
+				{/* <TabsTrigger value="aliyun" >阿里云</TabsTrigger>
 				<TabsTrigger value="wepay">微信支付</TabsTrigger>
 				<TabsTrigger value="email">邮件发送</TabsTrigger>
 				<TabsTrigger value="sms">手机短信</TabsTrigger>
 				<TabsTrigger value="wechat">微信公众号</TabsTrigger>
-				<TabsTrigger value="upload">文件上传</TabsTrigger>
+				<TabsTrigger value="upload">文件上传</TabsTrigger> */}
 			</TabsList>
 			<TabsContent value={value}>
 				<Card>

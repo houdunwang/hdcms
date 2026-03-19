@@ -1,8 +1,8 @@
-import { Field, FieldDescription, FieldLabel } from "../components/ui/field"
-import { Input } from "../components/ui/input"
-import { cn } from "../components/lib/utils"
-import { useFieldContext } from "../form"
-import type { FormFieldProps } from "../form/types"
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+import { useFieldContext } from "#core/form"
+import type { FormFieldProps } from "#core/form/types"
 import { FieldValidateError } from "./FieldValidateError"
 
 export function FieldInput({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {

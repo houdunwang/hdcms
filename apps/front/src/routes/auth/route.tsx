@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
-import { LoginRightSpace } from '@core/auth'
-import { AuthLayout } from '@core/auth'
-import { Footer, Header } from '@core/common'
+import { LoginRightSpace } from '#core/auth'
+import { AuthLayout } from '#core/auth'
+import { Footer, Header } from '#core/common'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { CodeXml } from 'lucide-react'
 

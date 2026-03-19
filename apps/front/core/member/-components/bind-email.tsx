@@ -1,12 +1,13 @@
-import { Alert } from "../../components/ui/alert"
-import { hdCreateFormHook } from "../../hooks"
-import { useApi } from "../../hooks"
+import { Alert } from "@/components/ui/alert"
+import { hdCreateFormHook, useAuth } from "#core/hooks"
+import { useApi } from "#core/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 import z from "zod"
 
 export const BindEmail = (): React.JSX.Element => {
-  const { api, auth } = useApi()
+  const api = useApi()
+  const auth = useAuth()
   const mutation = useMutation(api.binds.email.mutationOptions())
   const { useAppForm } = hdCreateFormHook()
 

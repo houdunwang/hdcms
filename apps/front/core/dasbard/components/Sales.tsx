@@ -1,7 +1,7 @@
-import { ChartBar } from "../../common/ChartBar"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "../../components/ui/card"
-import { type ChartConfig } from "../../components/ui/chart"
-import { dasbardStore } from "../../store/dasbardStore"
+import { ChartBar } from "#core/common/ChartBar"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { type ChartConfig } from "@/components/ui/chart"
+import { dasbardStore } from "#core/store/dasbardStore"
 import { useAtomValue } from "jotai"
 import * as React from "react"
 
@@ -20,8 +20,8 @@ export function Sales(): React.JSX.Element {
 	} satisfies ChartConfig
 	const total = React.useMemo(
 		() => ({
-			amount: dasbardData?.orderMonths.reduce((acc, curr) => acc + curr.amount, 0),
-			count: dasbardData?.orderMonths.reduce((acc, curr) => acc + curr.count, 0),
+			amount: dasbardData?.orderMonths.reduce((acc: number, curr: { amount: number }) => acc + curr.amount, 0),
+			count: dasbardData?.orderMonths.reduce((acc: number, curr: { count: number }) => acc + curr.count, 0),
 		}),
 		[]
 	)

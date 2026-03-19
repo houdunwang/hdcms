@@ -1,10 +1,11 @@
-import { Alert } from "../../components/ui/alert"
-import { hdCreateFormHook, useApi } from "../../hooks"
+import { Alert } from "@/components/ui/alert"
+import { hdCreateFormHook, useApi, useAuth } from "#core/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { CheckCircle2Icon } from "lucide-react"
 
 export const BindMobile = (): React.JSX.Element => {
-  const { api, auth } = useApi()
+  const api = useApi()
+  const auth = useAuth()
   const mutation = useMutation(api.binds.mobile.mutationOptions())
   const { useAppForm } = hdCreateFormHook()
 

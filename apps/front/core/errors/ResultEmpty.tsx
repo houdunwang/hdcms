@@ -1,18 +1,18 @@
-import { Button } from "../components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle
-} from "../components/ui/card"
+} from "@/components/ui/card"
 import {
 	Empty,
 	EmptyContent,
 	EmptyDescription,
 	EmptyHeader,
 	EmptyTitle
-} from "../components/ui/empty"
+} from "@/components/ui/empty"
 import { Info, RefreshCcwIcon } from "lucide-react"
 import { type JSX } from 'react'
 export const ResultEmpty = (): JSX.Element => {

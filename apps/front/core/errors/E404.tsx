@@ -1,22 +1,8 @@
-import React, { type JSX } from 'react'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "../components/ui/card"
-import { Button } from "../components/ui/button"
-import {
-	Empty,
-	EmptyContent,
-	EmptyDescription,
-	EmptyHeader,
-	EmptyMedia,
-	EmptyTitle,
-} from "../components/ui/empty"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty"
 import { Info, RefreshCcwIcon } from "lucide-react"
+import { type JSX } from 'react'
 export const E404 = (): JSX.Element => {
 	return (
 		<Card>

@@ -1,6 +1,6 @@
-import { Footer, Header } from "../common"
-import { cn } from "../components/lib/utils"
-import { PackageFrontPage } from "../package/PackageFrontPage"
+import { Footer, Header } from "#core/common"
+import { cn } from "@/lib/utils"
+import { PackageFrontPage } from "#core/package/PackageFrontPage"
 import { Outlet, useRouterState } from "@tanstack/react-router"
 import { type FC, type PropsWithChildren } from "react"
 

@@ -1,4 +1,4 @@
-import { MemberLayout } from '@core/layouts'
+import { MemberLayout } from '#core/layouts'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/member')({
