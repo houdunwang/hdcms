@@ -1,7 +1,7 @@
+import { cn } from '#/lib/utils'
+import { useFormContext } from '#core/form'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
-import { useFormContext } from '#core/form'
-import { cn } from '#/lib/utils'
 
 type Props = Omit<
 	React.ComponentProps<"button">,
@@ -9,23 +9,23 @@ type Props = Omit<
 > & {
 	label?: React.ReactNode
 	description?: React.ReactNode
-	fieldClassName?: string
 	buttonClassName?: string
 } & {
 	[key: string]: any
 }
 
-export const FieldSubmitButton = ({ className, fieldClassName, label, ...props }: Props): React.JSX.Element => {
+export const FieldSubmitButton = ({ className, buttonClassName, label, ...props }: Props): React.JSX.Element => {
 	const form = useFormContext()
 	return (
 		<form.Subscribe selector={(state) => state.isSubmitting}>
 			{(isSubmitting) => {
-				return <div className={cn(fieldClassName)}>
+				return <div className={cn('mt-3', className)}>
 					<Button
 						type='submit'
+						size={'lg'}
 						{...props}
 						disabled={isSubmitting}
-						className={className}
+						className={buttonClassName}
 						variant={isSubmitting ? 'outline' : 'default'}>
 						{isSubmitting ? <><Spinner />提交中...</> : label || "保存提交"}
 					</Button>

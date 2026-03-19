@@ -1,7 +1,7 @@
+import { UserFactory } from '#core/database/factories/user_factory'
 import User from '#models/user'
 import env from '#start/env'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import { UserFactory } from '#core/database/factories/user_factory'
 
 export default class extends BaseSeeder {
   static environment = ['development', 'testing']

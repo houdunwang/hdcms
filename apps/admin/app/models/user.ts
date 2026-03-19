@@ -8,7 +8,11 @@ import hash from '@adonisjs/core/services/hash'
 import { hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
-export default class User extends compose(UserSchema, withAuthFinder(hash)) {
+const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
+  uids: ['email'],
+  passwordColumnName: 'password',
+})
+export default class User extends compose(UserSchema, AuthFinder) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
   declare currentAccessToken?: AccessToken
 

@@ -1,21 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { FrontLayout } from '#core/layouts'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { ArrowRight, Bell, Bookmark, BookOpen, Code2, LayoutGrid, ShieldCheck, Sparkles, Star, Terminal } from 'lucide-react'
 
-import {
-  ArrowRight,
-  Bell,
-  Bookmark,
-  BookOpen,
-  Code2,
-  LayoutGrid,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Terminal
-} from 'lucide-react'
-
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/_front/')({
   beforeLoad() {
     return {
       config: {
@@ -24,11 +11,7 @@ export const Route = createFileRoute('/')({
       }
     }
   },
-  component: () => <div className=''>
-    <FrontLayout className='max-w-[100vw]'>
-      <HomePage />
-    </FrontLayout>
-  </div>,
+  component: () => <HomePage />
 })
 
 export function HomePage() {

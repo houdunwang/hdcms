@@ -4,10 +4,10 @@ import { QueryClientProvider, type QueryClient } from '@tanstack/react-query'
 import { RouterProvider, type AnyRouter } from '@tanstack/react-router'
 import { HashLoader } from 'react-spinners'
 import { Toaster } from "sonner"
-import { RouteProgressBar } from '../common'
-import { useAuth } from '../hooks/useAuth'
-import '../plugin/dayjs'
-import { ThemeProvider } from '../theme/theme-provider'
+import { RouteProgressBar } from '#core/common'
+import { useAuth } from '#core/hooks/useAuth'
+import '#core/plugin/dayjs'
+import { ThemeProvider } from '#core/theme/theme-provider'
 
 export const HdProvider = ({ router, queryClient }: { router: AnyRouter, queryClient: QueryClient }): React.JSX.Element => {
 	return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

@@ -6,32 +6,35 @@ export interface AuthProps {
 	wechatLoginButton?: ReactNode
 	footerComponent?: ReactNode
 	helperComponent?: ReactNode
-	components?: {
-		login?: {
-			title?: string,
-			description?: string,
-			rightSpace?: ReactNode,
-		},
-		register?: {
-			title?: string,
-			description?: string,
-			rightSpace?: ReactNode,
-		},
-		findPassword?: {
-			title?: string,
-			description?: string,
-			rightSpace?: ReactNode,
-		},
-		wechatLogin?: {
-			title?: string,
-			description?: string,
-			rightSpace?: ReactNode,
-		},
-	}
+	title?: string,
+	description?: string,
+	rightSpace?: ReactNode,
+	// components?: {
+	// 	login?: {
+	// 		title?: string,
+	// 		description?: string,
+	// 		rightSpace?: ReactNode,
+	// 	},
+	// 	register?: {
+	// 		title?: string,
+	// 		description?: string,
+	// 		rightSpace?: ReactNode,
+	// 	},
+	// 	findPassword?: {
+	// 		title?: string,
+	// 		description?: string,
+	// 		rightSpace?: ReactNode,
+	// 	},
+	// 	wechatLogin?: {
+	// 		title?: string,
+	// 		description?: string,
+	// 		rightSpace?: ReactNode,
+	// 	},
+	// }
 }
 
 export interface AuthComponentProps {
 	title?: string
 	description?: string
-	children: ReactNode,
+	children: ReactNode
 }

@@ -57,7 +57,7 @@ export const SearchBlock: FC<Props> = ({ className, options }) => {
 							<field.FieldInput className="flex-1" fieldClassName="" placeholder="搜索关键词" />}
 						/>
 						<form.AppForm>
-							<form.FieldSubmitButton label='搜索' size={'default'} variant={'outline'} />
+							<form.FieldSubmitButton label='搜索' size={'default'} variant={'outline'} className="mt-0" />
 						</form.AppForm>
 					</div>
 				</CardContent>

@@ -9,10 +9,11 @@ const driveConfig = defineConfig({
    * The services object can be used to configure multiple file system
    * services each using the same or a different driver.
    */
-  services: { 
+  services: {
     fs: services.fs({
       location: app.makePath('storage'),
       serveFiles: true,
+      appUrl: env.get('APP_URL'),
       routeBasePath: '/uploads',
       visibility: 'public',
     }),
@@ -22,5 +23,5 @@ const driveConfig = defineConfig({
 export default driveConfig
 
 declare module '@adonisjs/drive/types' {
-  export interface DriveDisks extends InferDriveDisks<typeof driveConfig> {}
+  export interface DriveDisks extends InferDriveDisks<typeof driveConfig> { }
 }

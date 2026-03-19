@@ -1,9 +1,10 @@
-import { Button } from '@/components/ui/button'
-import { LoginRightSpace } from '#core/auth'
+import { app } from '#config/app.tsx'
+import { headerMenus } from '#config/header.tsx'
+import { userDropMenus } from '#config/user.tsx'
 import { AuthLayout } from '#core/auth'
 import { Footer, Header } from '#core/common'
-import { createFileRoute, redirect } from '@tanstack/react-router'
-import { CodeXml } from 'lucide-react'
+import { UserDropdown } from '#core/user/UserDropdown.tsx'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/auth')({
 	beforeLoad: ({ context }) => {
@@ -16,20 +17,11 @@ export const Route = createFileRoute('/auth')({
 
 function RouteComponent() {
 	return <div className=''>
-		<Header />
-
+		<Header config={app} menus={headerMenus} right={<UserDropdown menus={userDropMenus} />} />
 		<AuthLayout className="container mx-auto mt-20 p-3 min-h-[calc(100vh-var(--header-height))]"
-			helperComponent={<div>高质量编程课程，帮助你快速提升编程技能</div>}
-			showWechatLoginButton={true}
-			wechatLoginButton={<Button variant={'outline'} className='w-full'>微信登录</Button>}
-			components={
-				{
-					login: {
-						rightSpace: <LoginRightSpace />
-					}
-				}
-			}
-		/>
-		<Footer logo={<CodeXml />} />
+		>
+			<Outlet />
+		</AuthLayout>
+		<Footer config={app} />
 	</div>
 }

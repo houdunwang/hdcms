@@ -147,8 +147,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['all']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['all']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['all']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['all']>>>
     }
   }
   'configs.common': {
@@ -159,8 +159,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['common']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['common']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['common']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['common']>>>
     }
   }
   'configs.store': {
@@ -171,8 +171,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/configs_controller').default['store']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['store']>>>
     }
   }
   'find_passwords.email': {

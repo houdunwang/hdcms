@@ -14,6 +14,8 @@ import { useState } from "react"
 import z from "zod"
 import { FieldCode } from "../form/FieldCode"
 import type { AuthComponentProps } from "./types"
+import { WechatLoginButton } from "./WechatLoginButton"
+import { AuthFooter } from "./AuthFooter"
 
 export function FindPassword(props: AuthComponentProps): React.JSX.Element {
 	const api = useApi()
@@ -62,47 +64,51 @@ export function FindPassword(props: AuthComponentProps): React.JSX.Element {
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6")} >
-				<CardHeader>
-					<CardTitle className="flex items-center gap-2">
-						<ShieldCheck />
-						找回密码
-					</CardTitle>
-					<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
-				</CardHeader>
-				<CardContent className="space-y-2">
-					<Tabs defaultValue={codeType} className="w-[400px]">
-						<TabsList>
-							<TabsTrigger value="email" onClick={() => setCodeType('email')}>邮箱找回</TabsTrigger>
-							<TabsTrigger value="mobile" onClick={() => setCodeType('mobile')}>手机号找回</TabsTrigger>
-						</TabsList>
-					</Tabs>
-					<form.AppField name={'code'} children={field => <field.FieldCode type={codeType} />} />
-					<form.AppField name="password"
-						validators={{
-							onChange: z.string().min(5, '密码不能少于5位'),
-						}}
-						children={field => <field.FieldInput label="密码" type="password" />} />
-					<form.AppField
-						name="password_confirmation"
-						validators={{
-							onChange: z.string().min(5, '密码确认不能少于5位').refine((val) => val === form.state.values.password, '两次输入密码不一致'),
-						}}
-						children={field => <field.FieldInput label="确认密码" type="password" />}
-					/>
-					<form.AppField name="captcha"
-						validators={{
-							onChange: z.string().min(1, '请输入验证码'),
-						}}
-						children={field => <field.FieldCaptcha />} />
-					<form.AppForm>
-						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
-					</form.AppForm>
-				</CardContent>
-				<CardFooter className="flex justify-center">
-					{props.children}
-				</CardFooter>
-			</Card>
+			<div className="grid xl:grid-cols-[400px_1fr] gap-6 w-full">
+				<Card className={cn("flex flex-col gap-6")} >
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<ShieldCheck />
+							找回密码
+						</CardTitle>
+						<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
+					</CardHeader>
+					<CardContent className="space-y-2">
+						<Tabs defaultValue={codeType} className="w-[400px]">
+							<TabsList>
+								<TabsTrigger value="email" onClick={() => setCodeType('email')}>邮箱找回</TabsTrigger>
+								<TabsTrigger value="mobile" onClick={() => setCodeType('mobile')}>手机号找回</TabsTrigger>
+							</TabsList>
+						</Tabs>
+						<form.AppField name={'code'} children={field => <field.FieldCode type={codeType} />} />
+						<form.AppField name="password"
+							validators={{
+								onChange: z.string().min(5, '密码不能少于5位'),
+							}}
+							children={field => <field.FieldInput label="密码" type="password" />} />
+						<form.AppField
+							name="password_confirmation"
+							validators={{
+								onChange: z.string().min(5, '密码确认不能少于5位').refine((val) => val === form.state.values.password, '两次输入密码不一致'),
+							}}
+							children={field => <field.FieldInput label="确认密码" type="password" />}
+						/>
+						<form.AppField name="captcha"
+							validators={{
+								onChange: z.string().min(1, '请输入验证码'),
+							}}
+							children={field => <field.FieldCaptcha />} />
+						<form.AppForm>
+							<form.FieldSubmitButton type="submit" label="登录" buttonClassName="w-full" />
+						</form.AppForm>
+						<WechatLoginButton />
+					</CardContent>
+					<CardFooter className="flex flex-col justify-center items-center space-y-3">
+						<AuthFooter />
+					</CardFooter>
+				</Card>
+				{props.children || <FindPasswordRightSpace />}
+			</div>
 		</form>
 	)
 }
@@ -119,7 +125,7 @@ const highlights = [
 		icon: ShieldCheck,
 	},
 ] as const
-export function FindPasswordRightSpace(): React.JSX.Element {
+function FindPasswordRightSpace() {
 	return <Card>
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

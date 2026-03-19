@@ -1,18 +1,21 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
 import { fieldContext, formContext } from "#core/form"
 import { FieldCaptcha } from "#core/form/FieldCaptcha"
 import { FieldInput } from "#core/form/FieldInput"
 import { FieldSubmitButton } from "#core/form/FieldSubmitButton"
 import { useApi } from "#core/hooks/useApi"
 import { useAuth } from "#core/hooks/useAuth"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 import { createFormHook } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, User } from 'lucide-react'
 import z from "zod"
+import { AuthFooter } from "./AuthFooter"
 import type { AuthComponentProps } from "./types"
+import { WechatLoginButton } from "./WechatLoginButton"
+import type { FC, PropsWithChildren } from "react"
 
-export function Login(props: AuthComponentProps): React.JSX.Element {
+export const Login: FC<PropsWithChildren<AuthComponentProps>> = (props) => {
 	const api = useApi()
 	const { login } = useAuth()
 	const mutation = useMutation(
@@ -57,31 +60,33 @@ export function Login(props: AuthComponentProps): React.JSX.Element {
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6")}>
-				<CardHeader>
-					<CardTitle className="flex items-center gap-2">
-						<User className="w-5 h-5" />
-						登录你的账号
-					</CardTitle>
-					<CardDescription>你可以使用邮箱、手机号、用户名登录</CardDescription>
-				</CardHeader>
-				<CardContent className="space-y-2">
-					<form.AppField name="account" children={field => <field.FieldInput label="帐号" />} />
-					<form.AppField name="password" children={field => <field.FieldInput label="密码" type="password" />} />
-					<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
-					<form.AppForm>
-						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
-					</form.AppForm>
-				</CardContent>
-				{/* {footer ?? <Footer showWechatLoginButton={showWechatLoginButton} />} */}
-				<CardFooter className="flex justify-center">
-					{props.children}
-				</CardFooter>
-			</Card>
+			<div className="grid xl:grid-cols-[400px_1fr] gap-6 w-full">
+				<Card className={cn("flex flex-col gap-6")}>
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<User className="w-5 h-5" />
+							{props.title || '登录你的账号'}
+						</CardTitle>
+						<CardDescription>{props.description || '你可以使用邮箱、手机号、用户名登录'}</CardDescription>
+					</CardHeader>
+					<CardContent className="space-y-2 flex-1">
+						<form.AppField name="account" children={field => <field.FieldInput label="帐号" />} />
+						<form.AppField name="password" children={field => <field.FieldInput label="密码" type="password" />} />
+						<form.AppField name="captcha" children={field => <field.FieldCaptcha label="验证码" />} />
+						<form.AppForm>
+							<form.FieldSubmitButton type="submit" label="登录" buttonClassName="w-full" />
+						</form.AppForm>
+						<WechatLoginButton />
+					</CardContent>
+					<CardFooter className="flex flex-col justify-center items-center space-y-3">
+						<AuthFooter />
+					</CardFooter>
+				</Card>
+				{props.children || <LoginRightSpace />}
+			</div>
 		</form>
 	)
 }
-
 
 const highlights = [
 	{
@@ -106,7 +111,7 @@ const highlights = [
 	},
 ] as const
 
-export function LoginRightSpace(): React.JSX.Element {
+function LoginRightSpace(): React.JSX.Element {
 	return <Card>
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

@@ -33,7 +33,7 @@ export function UserAdminPage(): JSX.Element {
 	const iconClass = 'text-muted-foreground size-10 lg:size-6'
 	return (
 		<>
-			<div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] 2xl:grid-cols-[1fr_2fr_1fr] gap-3 pb-3">
+			<div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-[1fr_2fr_1fr] gap-3 pb-3">
 				<SearchBlock
 					options={[
 						{ label: 'UID', value: 'id' },

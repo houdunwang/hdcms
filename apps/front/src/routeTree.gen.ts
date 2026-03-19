@@ -10,20 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MemberRouteRouteImport } from './routes/member/route'
-import { Route as FrontRouteRouteImport } from './routes/front/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as MemberExampleRouteImport } from './routes/member/example'
+import { Route as FrontRouteRouteImport } from './routes/_front/route'
+import { Route as FrontIndexRouteImport } from './routes/_front/index'
+import { Route as MemberProfileRouteImport } from './routes/member/profile'
+import { Route as MemberBindRouteImport } from './routes/member/bind'
+import { Route as AuthWechatLoginRouteImport } from './routes/auth/wechatLogin'
+import { Route as AuthRegisterRouteImport } from './routes/auth/register'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthFindPasswordRouteImport } from './routes/auth/findPassword'
+import { Route as FrontPackageRouteImport } from './routes/_front/package'
 
 const MemberRouteRoute = MemberRouteRouteImport.update({
   id: '/member',
   path: '/member',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FrontRouteRoute = FrontRouteRouteImport.update({
-  id: '/front',
-  path: '/front',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -36,62 +37,139 @@ const AdminRouteRoute = AdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const FrontRouteRoute = FrontRouteRouteImport.update({
+  id: '/_front',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MemberExampleRoute = MemberExampleRouteImport.update({
-  id: '/example',
-  path: '/example',
+const FrontIndexRoute = FrontIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FrontRouteRoute,
+} as any)
+const MemberProfileRoute = MemberProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => MemberRouteRoute,
+} as any)
+const MemberBindRoute = MemberBindRouteImport.update({
+  id: '/bind',
+  path: '/bind',
+  getParentRoute: () => MemberRouteRoute,
+} as any)
+const AuthWechatLoginRoute = AuthWechatLoginRouteImport.update({
+  id: '/wechatLogin',
+  path: '/wechatLogin',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthFindPasswordRoute = AuthFindPasswordRouteImport.update({
+  id: '/findPassword',
+  path: '/findPassword',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const FrontPackageRoute = FrontPackageRouteImport.update({
+  id: '/package',
+  path: '/package',
+  getParentRoute: () => FrontRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof FrontIndexRoute
   '/admin': typeof AdminRouteRoute
-  '/auth': typeof AuthRouteRoute
-  '/front': typeof FrontRouteRoute
+  '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
-  '/member/example': typeof MemberExampleRoute
+  '/package': typeof FrontPackageRoute
+  '/auth/findPassword': typeof AuthFindPasswordRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/auth/wechatLogin': typeof AuthWechatLoginRoute
+  '/member/bind': typeof MemberBindRoute
+  '/member/profile': typeof MemberProfileRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/admin': typeof AdminRouteRoute
-  '/auth': typeof AuthRouteRoute
-  '/front': typeof FrontRouteRoute
+  '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
-  '/member/example': typeof MemberExampleRoute
+  '/package': typeof FrontPackageRoute
+  '/auth/findPassword': typeof AuthFindPasswordRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/auth/wechatLogin': typeof AuthWechatLoginRoute
+  '/member/bind': typeof MemberBindRoute
+  '/member/profile': typeof MemberProfileRoute
+  '/': typeof FrontIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_front': typeof FrontRouteRouteWithChildren
   '/admin': typeof AdminRouteRoute
-  '/auth': typeof AuthRouteRoute
-  '/front': typeof FrontRouteRoute
+  '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
-  '/member/example': typeof MemberExampleRoute
+  '/_front/package': typeof FrontPackageRoute
+  '/auth/findPassword': typeof AuthFindPasswordRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/auth/wechatLogin': typeof AuthWechatLoginRoute
+  '/member/bind': typeof MemberBindRoute
+  '/member/profile': typeof MemberProfileRoute
+  '/_front/': typeof FrontIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/auth' | '/front' | '/member' | '/member/example'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/auth' | '/front' | '/member' | '/member/example'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
     | '/admin'
     | '/auth'
-    | '/front'
     | '/member'
-    | '/member/example'
+    | '/package'
+    | '/auth/findPassword'
+    | '/auth/login'
+    | '/auth/register'
+    | '/auth/wechatLogin'
+    | '/member/bind'
+    | '/member/profile'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/admin'
+    | '/auth'
+    | '/member'
+    | '/package'
+    | '/auth/findPassword'
+    | '/auth/login'
+    | '/auth/register'
+    | '/auth/wechatLogin'
+    | '/member/bind'
+    | '/member/profile'
+    | '/'
+  id:
+    | '__root__'
+    | '/_front'
+    | '/admin'
+    | '/auth'
+    | '/member'
+    | '/_front/package'
+    | '/auth/findPassword'
+    | '/auth/login'
+    | '/auth/register'
+    | '/auth/wechatLogin'
+    | '/member/bind'
+    | '/member/profile'
+    | '/_front/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  FrontRouteRoute: typeof FrontRouteRouteWithChildren
   AdminRouteRoute: typeof AdminRouteRoute
-  AuthRouteRoute: typeof AuthRouteRoute
-  FrontRouteRoute: typeof FrontRouteRoute
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
   MemberRouteRoute: typeof MemberRouteRouteWithChildren
 }
 
@@ -102,13 +180,6 @@ declare module '@tanstack/react-router' {
       path: '/member'
       fullPath: '/member'
       preLoaderRoute: typeof MemberRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/front': {
-      id: '/front'
-      path: '/front'
-      fullPath: '/front'
-      preLoaderRoute: typeof FrontRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -125,29 +196,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
+    '/_front': {
+      id: '/_front'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof FrontRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/member/example': {
-      id: '/member/example'
-      path: '/example'
-      fullPath: '/member/example'
-      preLoaderRoute: typeof MemberExampleRouteImport
+    '/_front/': {
+      id: '/_front/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof FrontIndexRouteImport
+      parentRoute: typeof FrontRouteRoute
+    }
+    '/member/profile': {
+      id: '/member/profile'
+      path: '/profile'
+      fullPath: '/member/profile'
+      preLoaderRoute: typeof MemberProfileRouteImport
       parentRoute: typeof MemberRouteRoute
+    }
+    '/member/bind': {
+      id: '/member/bind'
+      path: '/bind'
+      fullPath: '/member/bind'
+      preLoaderRoute: typeof MemberBindRouteImport
+      parentRoute: typeof MemberRouteRoute
+    }
+    '/auth/wechatLogin': {
+      id: '/auth/wechatLogin'
+      path: '/wechatLogin'
+      fullPath: '/auth/wechatLogin'
+      preLoaderRoute: typeof AuthWechatLoginRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/auth/findPassword': {
+      id: '/auth/findPassword'
+      path: '/findPassword'
+      fullPath: '/auth/findPassword'
+      preLoaderRoute: typeof AuthFindPasswordRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/_front/package': {
+      id: '/_front/package'
+      path: '/package'
+      fullPath: '/package'
+      preLoaderRoute: typeof FrontPackageRouteImport
+      parentRoute: typeof FrontRouteRoute
     }
   }
 }
 
+interface FrontRouteRouteChildren {
+  FrontPackageRoute: typeof FrontPackageRoute
+  FrontIndexRoute: typeof FrontIndexRoute
+}
+
+const FrontRouteRouteChildren: FrontRouteRouteChildren = {
+  FrontPackageRoute: FrontPackageRoute,
+  FrontIndexRoute: FrontIndexRoute,
+}
+
+const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
+  FrontRouteRouteChildren,
+)
+
+interface AuthRouteRouteChildren {
+  AuthFindPasswordRoute: typeof AuthFindPasswordRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthWechatLoginRoute: typeof AuthWechatLoginRoute
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthFindPasswordRoute: AuthFindPasswordRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
+  AuthWechatLoginRoute: AuthWechatLoginRoute,
+}
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
+
 interface MemberRouteRouteChildren {
-  MemberExampleRoute: typeof MemberExampleRoute
+  MemberBindRoute: typeof MemberBindRoute
+  MemberProfileRoute: typeof MemberProfileRoute
 }
 
 const MemberRouteRouteChildren: MemberRouteRouteChildren = {
-  MemberExampleRoute: MemberExampleRoute,
+  MemberBindRoute: MemberBindRoute,
+  MemberProfileRoute: MemberProfileRoute,
 }
 
 const MemberRouteRouteWithChildren = MemberRouteRoute._addFileChildren(
@@ -155,10 +309,9 @@ const MemberRouteRouteWithChildren = MemberRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  FrontRouteRoute: FrontRouteRouteWithChildren,
   AdminRouteRoute: AdminRouteRoute,
-  AuthRouteRoute: AuthRouteRoute,
-  FrontRouteRoute: FrontRouteRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
   MemberRouteRoute: MemberRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport

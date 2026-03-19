@@ -1,15 +1,24 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { useAuth } from '#core/hooks/useAuth'
 import '#core/plugin/dayjs'
 import { ModeToggle } from '#core/theme/mode-toggle'
-import { menu } from '@/config/menu'
+import type { MenuType } from '#core/types'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import { LogOut, Settings } from 'lucide-react'
+import type { ComponentProps, FC, PropsWithChildren } from 'react'
 
-export const UserDropdown = (): React.JSX.Element => {
+export type UserDropMenusType = {
+	label: string,
+	items: MenuType[]
+}[]
+type UserDropdownProps = ComponentProps<'div'> & PropsWithChildren<{
+	menus?: UserDropMenusType
+}>
+
+export const UserDropdown: FC<UserDropdownProps> = (props) => {
 	const { isAuthenticated, isAdmin } = useAuth()
 	return (
 		<div className="flex gap-3 items-center">
@@ -22,12 +31,12 @@ export const UserDropdown = (): React.JSX.Element => {
 				</Link>
 				}
 			</div>
-			{isAuthenticated() ? <LoginComponent /> : <UnLogin />}
+			{isAuthenticated() ? <LoginComponent {...props} /> : <UnLogin />}
 		</div>
 	)
 }
 
-function LoginComponent() {
+function LoginComponent(props: UserDropdownProps) {
 	const { user, logout } = useAuth()
 	return (
 		<DropdownMenu>
@@ -45,14 +54,14 @@ function LoginComponent() {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup>
-					{menu.user.map(item => (
+					{props.menus?.map(item => (
 						<>
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>{item.label}</DropdownMenuLabel>
-							{item.items.map(menu => (
+							{item.items?.map(menu => (
 								<Link key={menu.to} to={menu.to} target={'target' in menu ? menu.target : '_self'}>
 									<DropdownMenuItem className='cursor-pointer py-2'>
-										{menu.icon}{menu.title}
+										<menu.icon />{menu.title}
 									</DropdownMenuItem>
 								</Link>
 							))}
@@ -72,11 +81,11 @@ function LoginComponent() {
 
 function UnLogin() {
 	return <>
-		<a href="/auth?action=login" className="flex items-center gap-1">
+		<Link to="/auth/login" className="flex items-center gap-1">
 			<Button variant={'default'}>登录</Button>
-		</a>
-		<a href="/auth?action=register" className="flex items-center gap-1">
+		</Link>
+		<Link to="/auth/register" className="flex items-center gap-1">
 			<Button variant={'outline'}>注册</Button>
-		</a>
+		</Link>
 	</>
 }

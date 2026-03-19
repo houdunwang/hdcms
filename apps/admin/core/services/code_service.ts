@@ -38,7 +38,7 @@ export class CodeService {
   }
   // 发送邮件验证码
   private async email(mail: string) {
-    const html = emailVerificationTemplate(env.get('APP_NAME'), await this.generateCode(mail))
+    const html = emailVerificationTemplate(env.get('APP_NAME') || '', await this.generateCode(mail))
     try {
       await this.mailService.send(mail, html)
     } catch (error) {

@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils'
-import { useMatch } from '@tanstack/react-router'
-import { AuthFooter } from './AuthFooter'
+import type { ComponentProps, FC, PropsWithChildren } from 'react'
+import { FindPassword } from './FindPassword'
 import { Login } from './Login'
 import { Register } from './Register'
-import type { AuthProps } from './types'
-import { FindPassword } from './FindPassword'
 import { WechatLogin } from './WechatLogin'
+
+type Props = ComponentProps<'div'> & PropsWithChildren<{}>
 
 const components = {
 	login: Login,
@@ -13,18 +13,16 @@ const components = {
 	findPassword: FindPassword,
 	wechatLogin: WechatLogin,
 }
-export const AuthLayout = (props: AuthProps): React.JSX.Element => {
-	const route = useMatch({ strict: false })
-	let action = route.search.action as keyof typeof components | undefined || 'login'
-	const Component = components[action]
-	const helperComponent = props.helperComponent
-	const RightSpaceComponent = props.components?.[action]?.rightSpace
+export const AuthLayout: FC<Props> = (props) => {
+	// const route = useMatch({ strict: false })
+	// let action = route.search.action as keyof typeof components | undefined || 'login'
+	// const Component = components[action]
+	// const helperComponent = props.helperComponent
+	// const RightSpaceComponent = props.components?.[action]?.rightSpace
 	return <section className={cn("flex items-start", props.className)}>
-		<div className={cn("container mx-auto  ", {
-			"flex justify-center": !RightSpaceComponent,
-			'content-center gap-10 grid lg:grid-cols-[auto_1fr]': RightSpaceComponent
-		})}>
-			<div className={cn("w-full lg:max-w-md bg-muted pt-5 rounded-lg border", {
+		<div className={cn("container mx-auto content-center")}>
+			{props.children}
+			{/* <div className={cn("w-full lg:max-w-md bg-muted pt-5 rounded-lg border", {
 				"pb-5": !helperComponent
 			})}>
 				<div className='px-5'>
@@ -36,7 +34,7 @@ export const AuthLayout = (props: AuthProps): React.JSX.Element => {
 					{helperComponent}
 				</div>}
 			</div>
-			{RightSpaceComponent && RightSpaceComponent}
+			{RightSpaceComponent && RightSpaceComponent} */}
 		</div>
 		<GradientAnimation />
 	</section>

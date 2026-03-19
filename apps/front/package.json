@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#/*": "./src/*"
+    "#/*": "./src/*",
+    "#config/*": "./config/*",
+    "#core/*": "./core/*"
   },
   "scripts": {
     "dev": "vite dev --port 3000",

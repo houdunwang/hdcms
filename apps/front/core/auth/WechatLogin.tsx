@@ -5,6 +5,7 @@ import { BookOpen, CalendarCheck, ShieldCheck, Sparkles } from 'lucide-react'
 import { useApi } from '#core/hooks/useApi'
 import { WechatQrCode } from '#core/wechat/WechatQrCode'
 import type { AuthComponentProps } from './types'
+import { AuthFooter } from './AuthFooter'
 
 
 export function WechatLogin(props: AuthComponentProps): React.JSX.Element {
@@ -12,26 +13,29 @@ export function WechatLogin(props: AuthComponentProps): React.JSX.Element {
 	const auth = useAuth()
 	const mutation = useMutation(api.wechatLogin.login.mutationOptions())
 	return (
-		<Card className={''}>
-			<CardHeader>
-				<CardTitle>微信扫码安全登录</CardTitle>
-				<CardDescription>打开手机微信扫描二维码，一键授权快速登录</CardDescription>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				<WechatQrCode
-					scene_str='login'
-					onSuccess={async (ticket: string): Promise<'success' | undefined> => {
-						const res = await mutation.mutateAsync({ body: { ticket } })
-						if (res.data.token) {
-							auth.login(res.data)
-							return 'success'
-						}
-					}} />
-			</CardContent>
-			<CardFooter className="flex justify-center">
-				{props.children}
-			</CardFooter>
-		</Card>
+		<div className="grid xl:grid-cols-[400px_1fr] gap-6 w-full">
+			<Card>
+				<CardHeader>
+					<CardTitle>{props.title || '微信扫码安全登录'}</CardTitle>
+					<CardDescription>{props.description || '打开手机微信扫描二维码，一键授权快速登录'}</CardDescription>
+				</CardHeader>
+				<CardContent className="flex items-center justify-center flex-1">
+					<WechatQrCode
+						scene_str='login'
+						onSuccess={async (ticket: string): Promise<'success' | undefined> => {
+							const res = await mutation.mutateAsync({ body: { ticket } })
+							if (res.data.token) {
+								auth.login(res.data)
+								return 'success'
+							}
+						}} />
+				</CardContent>
+				<CardFooter className="flex flex-col justify-center items-center space-y-3">
+					<AuthFooter />
+				</CardFooter>
+			</Card>
+			{props.children || <WechatRightSpace />}
+		</div>
 	)
 }
 
@@ -58,8 +62,8 @@ const highlights = [
 	},
 ] as const
 
-export function WechatRightSpace(): React.JSX.Element {
-	return <Card className="order-2 lg:order-11">
+function WechatRightSpace() {
+	return <Card className="hidden lg:flex lg:order-11">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">
 				<CardContent className="flex items-center gap-2 text-xs text-muted-foreground">

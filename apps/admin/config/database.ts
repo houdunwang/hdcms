@@ -10,6 +10,29 @@ const dbConfig = defineConfig({
 
   connections: {
     /**
+     * MySQL / MariaDB connection.
+     * Install package to switch: npm install mysql2
+     */
+    mysql: {
+      client: 'mysql2',
+      connection: {
+        host: process.env.MYSQL_HOST,
+        port: Number(process.env.MYSQL_PORT || 3306),
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DB_NAME,
+      },
+      migrations: {
+        naturalSort: true,
+        paths: ['core/database/migrations', 'database/migrations'],
+      },
+      seeders: {
+        paths: ['core/database/seeders/main', 'database/seeders'],
+      },
+      debug: app.inDev,
+    },
+
+    /**
      * SQLite connection (default).
      */
     sqlite: {
@@ -69,28 +92,7 @@ const dbConfig = defineConfig({
     //   debug: app.inDev,
     // },
 
-    /**
-     * MySQL / MariaDB connection.
-     * Install package to switch: npm install mysql2
-     */
-    mysql: {
-      client: 'mysql2',
-      connection: {
-        host: process.env.MYSQL_HOST,
-        port: Number(process.env.MYSQL_PORT || 3306),
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DB_NAME,
-      },
-      migrations: {
-        naturalSort: true,
-        paths: ['core/database/migrations', 'database/migrations'],
-      },
-      seeders: {
-        paths: ['core/database/seeders/main', 'database/seeders'],
-      },
-      debug: app.inDev,
-    },
+
 
     /**
      * Microsoft SQL Server connection.

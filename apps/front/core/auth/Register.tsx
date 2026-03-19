@@ -11,6 +11,8 @@ import { useMutation } from "@tanstack/react-query"
 import { BookOpen, CalendarCheck, ShieldCheck, Sparkles, UserPlus } from 'lucide-react'
 import z from "zod"
 import type { AuthComponentProps } from "./types"
+import { AuthFooter } from "./AuthFooter"
+import { WechatLoginButton } from "./WechatLoginButton"
 
 export function Register(props: AuthComponentProps): React.JSX.Element {
 	const api = useApi()
@@ -51,46 +53,49 @@ export function Register(props: AuthComponentProps): React.JSX.Element {
 			e.preventDefault()
 			void form.handleSubmit()
 		}} >
-			<Card className={cn("flex flex-col gap-6")}>
-				<CardHeader>
-					<CardTitle className="flex items-center gap-2">
-						<UserPlus /> 马上注册
-					</CardTitle>
-					<CardDescription>填写以下信息以注册新帐号</CardDescription>
-				</CardHeader>
-				<CardContent className="space-y-2">
-					<form.AppField name="name"
-						validators={{
-							onChange: z.string().regex(/^[a-zA-Z0-9_]{3,20}$/, '帐号只能包含字母、数字和下划线,长度为3-20位'),
-						}}
-						children={field => <field.FieldInput label="帐号" />} />
-					<form.AppField name="password"
-						validators={{
-							onChange: z.string().min(5, '密码不能少于5位'),
-						}}
-						children={field => <field.FieldInput label="密码" type="password" />} />
-					<form.AppField name="password_confirmation"
-						validators={{
-							onChange: z.string().min(5, '确认密码不能少于5位'),
-						}}
-						children={field => <field.FieldInput label="确认密码" type="password" />} />
-					<form.AppField name="captcha"
-						validators={{
-							onChange: z.string().min(1, '请输入验证码'),
-						}}
-						children={field => <field.FieldCaptcha label="验证码" />} />
-					<form.AppForm>
-						<form.FieldSubmitButton type="submit" label="登录" className="w-full" />
-					</form.AppForm>
-				</CardContent>
-				<CardFooter className="flex justify-center">
-					{props.children}
-				</CardFooter>
-			</Card>
+			<div className="grid xl:grid-cols-[400px_1fr] gap-6 w-full">
+				<Card className={cn("flex flex-col gap-6")}>
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<UserPlus /> 马上注册
+						</CardTitle>
+						<CardDescription>填写以下信息以注册新帐号</CardDescription>
+					</CardHeader>
+					<CardContent className="space-y-2">
+						<form.AppField name="name"
+							validators={{
+								onChange: z.string().regex(/^[a-zA-Z0-9_]{3,20}$/, '帐号只能包含字母、数字和下划线,长度为3-20位'),
+							}}
+							children={field => <field.FieldInput label="帐号" />} />
+						<form.AppField name="password"
+							validators={{
+								onChange: z.string().min(5, '密码不能少于5位'),
+							}}
+							children={field => <field.FieldInput label="密码" type="password" />} />
+						<form.AppField name="password_confirmation"
+							validators={{
+								onChange: z.string().min(5, '确认密码不能少于5位'),
+							}}
+							children={field => <field.FieldInput label="确认密码" type="password" />} />
+						<form.AppField name="captcha"
+							validators={{
+								onChange: z.string().min(1, '请输入验证码'),
+							}}
+							children={field => <field.FieldCaptcha label="验证码" />} />
+						<form.AppForm>
+							<form.FieldSubmitButton type="submit" label="注册" buttonClassName="w-full" />
+						</form.AppForm>
+						<WechatLoginButton />
+					</CardContent>
+					<CardFooter className="flex flex-col justify-center items-center space-y-3">
+						<AuthFooter />
+					</CardFooter>
+				</Card>
+				{props.children || <RegisterRightSpace />}
+			</div>
 		</form>
 	)
 }
-
 
 const highlights = [
 	{
@@ -115,7 +120,7 @@ const highlights = [
 	},
 ] as const
 
-export function RegisterRightSpace(): React.JSX.Element {
+function RegisterRightSpace() {
 	return <Card className="">
 		<CardContent className='space-y-6'>
 			<Card size="sm" className="w-fit">

@@ -1,5 +1,11 @@
+import { app } from '#config/app.tsx'
+import { headerMenus } from '#config/header.tsx'
+import { memberMenus } from '#config/member.tsx'
+import { userDropMenus } from '#config/user.tsx'
+import { Header } from '#core/common/Header.tsx'
 import { MemberLayout } from '#core/layouts'
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { UserDropdown } from '#core/user/UserDropdown.tsx'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/member')({
 	component: RouteComponent,
@@ -12,5 +18,10 @@ export const Route = createFileRoute('/member')({
 })
 
 function RouteComponent() {
-	return <MemberLayout />
+	return <>
+		<Header config={app} menus={headerMenus} right={<UserDropdown menus={userDropMenus} />} />
+		<MemberLayout menus={memberMenus}>
+			<Outlet />
+		</MemberLayout>
+	</>
 }

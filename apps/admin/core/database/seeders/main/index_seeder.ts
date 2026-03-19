@@ -22,7 +22,5 @@ export default class IndexSeeder extends BaseSeeder {
     await this.seed(await import('#core/database/seeders/user_seeder'))
     await this.seed(await import('#core/database/seeders/package_seeder'))
     await this.seed(await import('#core/database/seeders/config_seeder'))
-    // await this.seed(await import('#core/database/seeders/order_seeder'))
-    // await this.seed(await import('#core/database/seeders/subscribe_seeder'))
   }
 }
