@@ -1,12 +1,12 @@
 import { ChartBar } from "#core/common/ChartBar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
 import { type ChartConfig } from "@/components/ui/chart"
-import { dasbardStore } from "#core/store/dasbardStore"
+import { dasbardAtom } from "#core/store/dasbardAtom.ts"
 import { useAtomValue } from "jotai"
 import * as React from "react"
 
 export function Sales(): React.JSX.Element {
-	const dasbardData = useAtomValue(dasbardStore)
+	const dasbardData = useAtomValue(dasbardAtom)
 	const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>("amount")
 	const chartConfig = {
 		amount: {

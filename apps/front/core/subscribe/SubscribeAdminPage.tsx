@@ -5,7 +5,7 @@ import { SearchBlock } from '#core/common/SearchBlock'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useApi } from '#core/hooks'
-import { dasbardStore } from '#core/store/dasbardStore'
+import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { UserAvatar } from '#core/user'
 import { useQuery } from '@tanstack/react-query'
 import { useRouterState } from '@tanstack/react-router'
@@ -17,7 +17,7 @@ import { type JSX } from 'react'
 export const SubscribeAdminPage = (): JSX.Element => {
 	const api = useApi()
 	const location = useRouterState({ select: s => s.location })
-	const dasbardData = useAtomValue(dasbardStore)
+	const dasbardData = useAtomValue(dasbardAtom)
 	const { isLoading, data } = useQuery(api.subscribe.index.queryOptions({
 		query: location.search
 	}))

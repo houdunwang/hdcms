@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { ResultEmpty } from '#core/errors/ResultEmpty'
 import { useApi } from '#core/hooks'
-import { dasbardStore } from '#core/store/dasbardStore'
+import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { UserAvatar } from '#core/user'
 import type { Data } from '@app/admin/data'
 import { registry } from '@app/admin/registry'
@@ -22,7 +22,7 @@ import { OrderDetailDialog } from './OrderDetailDialog'
 export const OrderAdminPage = (): JSX.Element => {
 	const api = useApi()
 	const { search } = useMatch({ strict: false })
-	const dasbardData = useAtomValue(dasbardStore)
+	const dasbardData = useAtomValue(dasbardAtom)
 	const { isLoading, data } = useQuery(api.orders.index.queryOptions({
 		query: search
 	}))

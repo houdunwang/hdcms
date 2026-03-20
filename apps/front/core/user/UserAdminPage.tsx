@@ -14,13 +14,13 @@ import { Page } from '#core/common/Page'
 import { SearchBlock } from '#core/common/SearchBlock'
 import { ResultEmpty } from '#core/errors/ResultEmpty'
 import { useApi } from '#core/hooks'
-import { dasbardStore } from '#core/store/dasbardStore'
+import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { UserAvatar } from '#core/user'
 
 export function UserAdminPage(): JSX.Element {
 	const api = useApi()
 	const location = useRouterState({ select: s => s.location })
-	const dasbardData = useAtomValue(dasbardStore)
+	const dasbardData = useAtomValue(dasbardAtom)
 	const { isLoading, data } = useQuery(
 		api.users.index.queryOptions({
 			query: { ...location.search },

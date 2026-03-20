@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { useFieldContext } from "#core/form"
 import { useApi } from "#core/hooks/useApi"
-import { fieldErrorAtom } from "#core/store/fieldErrorStore"
+import { fieldErrorAtom } from "#core/store/fieldErrorAtom.ts"
 import { useMutation } from "@tanstack/react-query"
 import type { FormFieldProps } from "#core/form/types"
 import { useSetAtom } from "jotai"

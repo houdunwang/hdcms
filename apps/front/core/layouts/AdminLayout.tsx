@@ -2,7 +2,7 @@ import { Loading } from "#core/common"
 import { useApi, useIsMobile } from "#core/hooks"
 import { AppSidebar } from "#core/layouts/admin/app-sidebar"
 import { SiteHeader } from "#core/layouts/admin/site-header"
-import { dasbardStore } from "#core/store/dasbardStore"
+import { dasbardAtom } from "#core/store/dasbardAtom.ts"
 import type { AppConfigType, MenuType } from "#core/types"
 import { SidebarInset, SidebarProvider, } from "@/components/ui/sidebar"
 import { useQuery } from "@tanstack/react-query"
@@ -25,11 +25,11 @@ export const AdminLayout: FC<AdminLayoutProp> = ({ width = 52, height = 12, chil
 	width = isMobile ? 45 : width
 	const api = useApi()
 	const { isLoading, data } = useQuery(api.admin.queryOptions())
-	const setDasbardStore = useSetAtom(dasbardStore)
+	const setdasbardAtom = useSetAtom(dasbardAtom)
 	const dasbardData = data as Record<string, any>
 	useEffect(() => {
 		if (dasbardData) {
-			setDasbardStore(dasbardData.data)
+			setdasbardAtom(dasbardData.data)
 		}
 	}, [dasbardData])
 	if (isLoading) return <Loading screen />

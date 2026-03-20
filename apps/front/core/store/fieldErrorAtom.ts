@@ -1,2 +1,2 @@
-import { atom, type WritableAtom } from "jotai";
+import { atom } from "jotai";
 export const fieldErrorAtom = atom<Record<string, string>>({})

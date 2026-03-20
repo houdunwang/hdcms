@@ -30,11 +30,14 @@ export const ProfilePassword = (): React.JSX.Element => {
       captcha: ''
     },
     validators: {
-      onSubmit: z.object({
+      onChange: z.object({
         old_password: z.string().min(5, '旧密码不能少于5位'),
         password: z.string().min(5, '新密码不能少于5位'),
         password_confirmation: z.string().min(5, '确认新密码不能少于5位'),
         captcha: z.string().min(1, '请输入验证码'),
+      }).refine((data) => data.password === data.password_confirmation, {
+        message: "两次输入的密码不一致",
+        path: ["password_confirmation"],
       })
     },
     onSubmit: async ({ value: body }) => {

@@ -1,4 +1,4 @@
-import { userAtom } from '#core/store/userStore';
+import { userAtom } from '#core/store/userAtom';
 import type { Data } from '@app/admin/data';
 import { useAtom } from 'jotai';
 import { useMemo } from 'react';

@@ -1,5 +1,4 @@
 import type { Data } from '@app/admin/data';
 import { atom } from 'jotai';
 
-export const userAtom = atom<Data.User | undefined | null>(null)
-
+export const configAtom = atom<Data.Config[] | undefined>(undefined)

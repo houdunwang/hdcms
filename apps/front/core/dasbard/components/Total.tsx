@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils'
-import { dasbardStore } from '#core/store/dasbardStore'
+import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { useAtomValue } from 'jotai'
 import { BadgeJapaneseYen, BriefcaseBusiness, CircleUser, SquareUser, UserStar } from 'lucide-react'
 import { type JSX } from 'react'
 
 export const Total = (): JSX.Element => {
-	const dasbardData = useAtomValue(dasbardStore)
+	const dasbardData = useAtomValue(dasbardAtom)
 	const className = 'aspect-video rounded-xl bg-muted/50 text-muted-foreground flex flex-col justify-center items-center gap-3 text-sm lg:text-base'
 	const iconClass = 'text-muted-foreground size-10 lg:size-8 opacity-80'
 	return (

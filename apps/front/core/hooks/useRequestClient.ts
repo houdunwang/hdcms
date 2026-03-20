@@ -1,6 +1,6 @@
 import { registry } from '@app/admin/registry';
 import { AuthEnum } from '#core/types/enum';
-import { fieldErrorAtom } from '#core/store/fieldErrorStore';
+import { fieldErrorAtom } from '#core/store/fieldErrorAtom.ts';
 import { createTuyau } from '@tuyau/core/client';
 import { useSetAtom } from 'jotai';
 import { toast } from "sonner";
