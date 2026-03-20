@@ -7,10 +7,23 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+      fs-extra:
+        specifier: ^11.3.4
+        version: 11.3.4
     devDependencies:
       '@adonisjs/prettier-config':
         specifier: ^1.4.5
         version: 1.4.5
+      '@types/node':
+        specifier: ^25.5.0
+        version: 25.5.0
+      chalk:
+        specifier: ^5.6.2
+        version: 5.6.2
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -50,6 +63,9 @@ importers:
       '@adonisjs/shield':
         specifier: ^9.0.0
         version: 9.0.0(c68ab6830e5d337ba697741e986b5649)
+      '@adonisjs/static':
+        specifier: ^2.0.1
+        version: 2.0.1(@adonisjs/assembler@8.0.1(typescript@5.9.3))(@adonisjs/core@7.1.1(@adonisjs/assembler@8.0.1(typescript@5.9.3))(@vinejs/vine@4.3.0)(pino-pretty@13.1.3)(youch@4.1.0))
       '@alicloud/credentials':
         specifier: ^2.4.4
         version: 2.4.4
@@ -68,6 +84,9 @@ importers:
       '@alicloud/tea-util':
         specifier: ^1.4.11
         version: 1.4.11
+      '@hdcms/wechat':
+        specifier: workspace:*
+        version: link:../../packages/wechat
       '@japa/api-client':
         specifier: ^3.2.1
         version: 3.2.1(@japa/assert@4.2.0(@japa/runner@5.3.0))(@japa/runner@5.3.0)
@@ -92,6 +111,9 @@ importers:
       mysql2:
         specifier: ^3.20.0
         version: 3.20.0(@types/node@24.11.2)
+      qrcode:
+        specifier: ^1.5.4
+        version: 1.5.4
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -117,9 +139,6 @@ importers:
       '@adonisjs/tsconfig':
         specifier: ^2.0.0
         version: 2.0.0
-      '@hdcms/wechat':
-        specifier: workspace:*
-        version: link:../../packages/wechat
       '@japa/assert':
         specifier: ^4.2.0
         version: 4.2.0(@japa/runner@5.3.0)
@@ -705,6 +724,16 @@ packages:
       '@japa/plugin-adonisjs':
         optional: true
       edge.js:
+        optional: true
+
+  '@adonisjs/static@2.0.1':
+    resolution: {integrity: sha512-pXSyQgha1yfyQDXPp0ywv7hJqk4JgCCkzWLkku2PW3Y6i/9GUTyzzNTCpz29loZzSF0b/EpiHXQE/sqBhW+p7w==}
+    engines: {node: '>=24.0.0'}
+    peerDependencies:
+      '@adonisjs/assembler': ^8.0.0-next.7 || ^8.0.0
+      '@adonisjs/core': ^7.0.0-next.0 || ^7.0.0
+    peerDependenciesMeta:
+      '@adonisjs/assembler':
         optional: true
 
   '@adonisjs/tsconfig@2.0.0':
@@ -3237,6 +3266,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/fs-extra@11.0.4':
+    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
+
   '@types/he@1.2.3':
     resolution: {integrity: sha512-q67/qwlxblDzEDvzHhVkwc1gzVWxaNxeyHUBF4xElrvjL11O+Ytze+1fGpBHlr/H9myiBUaUXNnNPmBHxxfAcA==}
 
@@ -3248,6 +3280,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/jsonfile@6.1.4':
+    resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
   '@types/luxon@3.7.1':
     resolution: {integrity: sha512-H3iskjFIAn5SlJU7OuxUmTEpebK6TKB8rxZShDslBMZJ5u9S//KM1sbdAisiSrqwLQncVjnpi2OK2J51h+4lsg==}
@@ -3266,6 +3301,9 @@ packages:
 
   '@types/node@24.11.2':
     resolution: {integrity: sha512-HTsxyfkxTNxOXBsEdgIOzbMgBjDGPvkTfw0B1m09j1LFPk8u3tSL8SNBRTSc381wXXX/Wp93qPi1kQXwnWuHgA==}
+
+  '@types/node@25.5.0':
+    resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
 
   '@types/nodemailer@7.0.11':
     resolution: {integrity: sha512-E+U4RzR2dKrx+u3N4DlsmLaDC6mMZOM/TPROxA0UAPiTgI0y4CEFBmZE+coGWTjakDriRsXG368lNk1u9Q0a2g==}
@@ -6663,6 +6701,9 @@ packages:
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
+
   undici@7.24.4:
     resolution: {integrity: sha512-BM/JzwwaRXxrLdElV2Uo6cTLEjhSb3WXboncJamZ15NgUURmvlXvxa6xkwIOILIjPNo9i8ku136ZvWV0Uly8+w==}
     engines: {node: '>=20.18.1'}
@@ -7370,6 +7411,15 @@ snapshots:
       '@adonisjs/assembler': 8.0.1(typescript@5.9.3)
       '@japa/api-client': 3.2.1(@japa/assert@4.2.0(@japa/runner@5.3.0))(@japa/runner@5.3.0)
       '@japa/plugin-adonisjs': 5.1.0(@adonisjs/core@7.1.1(@adonisjs/assembler@8.0.1(typescript@5.9.3))(@vinejs/vine@4.3.0)(pino-pretty@13.1.3)(youch@4.1.0))(@japa/api-client@3.2.1(@japa/assert@4.2.0(@japa/runner@5.3.0))(@japa/runner@5.3.0))(@japa/runner@5.3.0)
+
+  '@adonisjs/static@2.0.1(@adonisjs/assembler@8.0.1(typescript@5.9.3))(@adonisjs/core@7.1.1(@adonisjs/assembler@8.0.1(typescript@5.9.3))(@vinejs/vine@4.3.0)(pino-pretty@13.1.3)(youch@4.1.0))':
+    dependencies:
+      '@adonisjs/core': 7.1.1(@adonisjs/assembler@8.0.1(typescript@5.9.3))(@vinejs/vine@4.3.0)(pino-pretty@13.1.3)(youch@4.1.0)
+      serve-static: 2.2.1
+    optionalDependencies:
+      '@adonisjs/assembler': 8.0.1(typescript@5.9.3)
+    transitivePeerDependencies:
+      - supports-color
 
   '@adonisjs/tsconfig@2.0.0': {}
 
@@ -9874,6 +9924,11 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
+  '@types/fs-extra@11.0.4':
+    dependencies:
+      '@types/jsonfile': 6.1.4
+      '@types/node': 22.19.15
+
   '@types/he@1.2.3': {}
 
   '@types/js-cookie@3.0.6': {}
@@ -9881,6 +9936,10 @@ snapshots:
   '@types/jsesc@2.5.1': {}
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/jsonfile@6.1.4':
+    dependencies:
+      '@types/node': 22.19.15
 
   '@types/luxon@3.7.1': {}
 
@@ -9900,6 +9959,10 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
+  '@types/node@25.5.0':
+    dependencies:
+      undici-types: 7.18.2
+
   '@types/nodemailer@7.0.11':
     dependencies:
       '@types/node': 22.19.15
@@ -9912,7 +9975,7 @@ snapshots:
 
   '@types/qrcode@1.5.6':
     dependencies:
-      '@types/node': 24.11.2
+      '@types/node': 22.19.15
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -13361,6 +13424,8 @@ snapshots:
   undici-types@6.21.0: {}
 
   undici-types@7.16.0: {}
+
+  undici-types@7.18.2: {}
 
   undici@7.24.4: {}
 

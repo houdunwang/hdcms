@@ -4,13 +4,13 @@
   "module": "./src/index.ts",
   "version": "1.0.1",
   "license": "MIT",
+  "type": "module",
   "author": {
     "name": "向军大叔",
     "email": "2300071698@qq.com",
     "url": "https://www.houdunyun.com"
   },
   "homepage": "https://www.houdunyun.com",
-  "type": "module",
   "scripts": {
     "dev": "tsdown --watch",
     "build": "tsdown",

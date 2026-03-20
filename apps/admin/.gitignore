@@ -3,6 +3,7 @@ node_modules
 build
 tmp/*
 !tmp/.gitkeep
+public
 
 # Secrets
 .env

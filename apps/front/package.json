@@ -7,6 +7,9 @@
     "#config/*": "./config/*",
     "#core/*": "./core/*"
   },
+  "files": [
+    "build"
+  ],
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
@@ -69,11 +72,5 @@
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss"
-    ]
   }
 }

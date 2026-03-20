@@ -11,3 +11,4 @@ onlyBuiltDependencies:
   - esbuild
   - msw
   - sharp
+inject-workspace-packages: true

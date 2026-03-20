@@ -11,6 +11,7 @@ export default defineConfig({
 		skipNodeModulesBundle: true,
 	},
 	entry: ['src/**/*.ts'],
+	outDir: "dist",
 	unbundle: true,
 	format: ['esm'],
 	exports: false,

@@ -17,6 +17,9 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
+  "files": [
+    "build"
+  ],
   "imports": {
     "#core/*": "./core/*.js",
     "#controllers/*": "./app/controllers/*.js",
@@ -39,7 +42,6 @@
     "#config/*": "./config/*.js"
   },
   "devDependencies": {
-    "@hdcms/wechat": "workspace:*",
     "@adonisjs/assembler": "^8.0.0",
     "@adonisjs/eslint-config": "^3.0.0",
     "@adonisjs/prettier-config": "^1.4.5",
@@ -70,12 +72,14 @@
     "@adonisjs/mail": "^10.0.0",
     "@adonisjs/session": "^8.0.0",
     "@adonisjs/shield": "^9.0.0",
+    "@adonisjs/static": "^2.0.1",
     "@alicloud/credentials": "^2.4.4",
     "@alicloud/dm20151123": "^1.8.3",
     "@alicloud/dysmsapi20170525": "^4.5.0",
     "@alicloud/openapi-client": "^0.4.15",
     "@alicloud/tea-typescript": "^1.8.0",
     "@alicloud/tea-util": "^1.4.11",
+    "@hdcms/wechat": "workspace:*",
     "@japa/api-client": "^3.2.1",
     "@tuyau/core": "^1.0.0",
     "@vinejs/vine": "^4.3.0",
@@ -84,6 +88,7 @@
     "better-sqlite3": "^12.6.2",
     "luxon": "^3.7.2",
     "mysql2": "^3.20.0",
+    "qrcode": "^1.5.4",
     "reflect-metadata": "^0.2.2",
     "sharp": "^0.34.5",
     "svg-captcha": "^1.4.0",
