@@ -20,6 +20,11 @@ import { Route as AuthWechatLoginRouteImport } from './routes/auth/wechatLogin'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthFindPasswordRouteImport } from './routes/auth/findPassword'
+import { Route as AdminUserRouteImport } from './routes/admin/user'
+import { Route as AdminSubscribeRouteImport } from './routes/admin/subscribe'
+import { Route as AdminPackageRouteImport } from './routes/admin/package'
+import { Route as AdminOrderRouteImport } from './routes/admin/order'
+import { Route as AdminConfigRouteImport } from './routes/admin/config'
 import { Route as FrontPackageRouteImport } from './routes/_front/package'
 
 const MemberRouteRoute = MemberRouteRouteImport.update({
@@ -76,6 +81,31 @@ const AuthFindPasswordRoute = AuthFindPasswordRouteImport.update({
   path: '/findPassword',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const AdminUserRoute = AdminUserRouteImport.update({
+  id: '/user',
+  path: '/user',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminSubscribeRoute = AdminSubscribeRouteImport.update({
+  id: '/subscribe',
+  path: '/subscribe',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminPackageRoute = AdminPackageRouteImport.update({
+  id: '/package',
+  path: '/package',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminOrderRoute = AdminOrderRouteImport.update({
+  id: '/order',
+  path: '/order',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminConfigRoute = AdminConfigRouteImport.update({
+  id: '/config',
+  path: '/config',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const FrontPackageRoute = FrontPackageRouteImport.update({
   id: '/package',
   path: '/package',
@@ -84,10 +114,15 @@ const FrontPackageRoute = FrontPackageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof FrontIndexRoute
-  '/admin': typeof AdminRouteRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
   '/package': typeof FrontPackageRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/order': typeof AdminOrderRoute
+  '/admin/package': typeof AdminPackageRoute
+  '/admin/subscribe': typeof AdminSubscribeRoute
+  '/admin/user': typeof AdminUserRoute
   '/auth/findPassword': typeof AuthFindPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -96,10 +131,15 @@ export interface FileRoutesByFullPath {
   '/member/profile': typeof MemberProfileRoute
 }
 export interface FileRoutesByTo {
-  '/admin': typeof AdminRouteRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
   '/package': typeof FrontPackageRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/order': typeof AdminOrderRoute
+  '/admin/package': typeof AdminPackageRoute
+  '/admin/subscribe': typeof AdminSubscribeRoute
+  '/admin/user': typeof AdminUserRoute
   '/auth/findPassword': typeof AuthFindPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -111,10 +151,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_front': typeof FrontRouteRouteWithChildren
-  '/admin': typeof AdminRouteRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
   '/_front/package': typeof FrontPackageRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/order': typeof AdminOrderRoute
+  '/admin/package': typeof AdminPackageRoute
+  '/admin/subscribe': typeof AdminSubscribeRoute
+  '/admin/user': typeof AdminUserRoute
   '/auth/findPassword': typeof AuthFindPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -131,6 +176,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/member'
     | '/package'
+    | '/admin/config'
+    | '/admin/order'
+    | '/admin/package'
+    | '/admin/subscribe'
+    | '/admin/user'
     | '/auth/findPassword'
     | '/auth/login'
     | '/auth/register'
@@ -143,6 +193,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/member'
     | '/package'
+    | '/admin/config'
+    | '/admin/order'
+    | '/admin/package'
+    | '/admin/subscribe'
+    | '/admin/user'
     | '/auth/findPassword'
     | '/auth/login'
     | '/auth/register'
@@ -157,6 +212,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/member'
     | '/_front/package'
+    | '/admin/config'
+    | '/admin/order'
+    | '/admin/package'
+    | '/admin/subscribe'
+    | '/admin/user'
     | '/auth/findPassword'
     | '/auth/login'
     | '/auth/register'
@@ -168,7 +228,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   FrontRouteRoute: typeof FrontRouteRouteWithChildren
-  AdminRouteRoute: typeof AdminRouteRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   MemberRouteRoute: typeof MemberRouteRouteWithChildren
 }
@@ -252,6 +312,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthFindPasswordRouteImport
       parentRoute: typeof AuthRouteRoute
     }
+    '/admin/user': {
+      id: '/admin/user'
+      path: '/user'
+      fullPath: '/admin/user'
+      preLoaderRoute: typeof AdminUserRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/subscribe': {
+      id: '/admin/subscribe'
+      path: '/subscribe'
+      fullPath: '/admin/subscribe'
+      preLoaderRoute: typeof AdminSubscribeRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/package': {
+      id: '/admin/package'
+      path: '/package'
+      fullPath: '/admin/package'
+      preLoaderRoute: typeof AdminPackageRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/order': {
+      id: '/admin/order'
+      path: '/order'
+      fullPath: '/admin/order'
+      preLoaderRoute: typeof AdminOrderRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/config': {
+      id: '/admin/config'
+      path: '/config'
+      fullPath: '/admin/config'
+      preLoaderRoute: typeof AdminConfigRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/_front/package': {
       id: '/_front/package'
       path: '/package'
@@ -274,6 +369,26 @@ const FrontRouteRouteChildren: FrontRouteRouteChildren = {
 
 const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
   FrontRouteRouteChildren,
+)
+
+interface AdminRouteRouteChildren {
+  AdminConfigRoute: typeof AdminConfigRoute
+  AdminOrderRoute: typeof AdminOrderRoute
+  AdminPackageRoute: typeof AdminPackageRoute
+  AdminSubscribeRoute: typeof AdminSubscribeRoute
+  AdminUserRoute: typeof AdminUserRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminConfigRoute: AdminConfigRoute,
+  AdminOrderRoute: AdminOrderRoute,
+  AdminPackageRoute: AdminPackageRoute,
+  AdminSubscribeRoute: AdminSubscribeRoute,
+  AdminUserRoute: AdminUserRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
 )
 
 interface AuthRouteRouteChildren {
@@ -310,7 +425,7 @@ const MemberRouteRouteWithChildren = MemberRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   FrontRouteRoute: FrontRouteRouteWithChildren,
-  AdminRouteRoute: AdminRouteRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   MemberRouteRoute: MemberRouteRouteWithChildren,
 }

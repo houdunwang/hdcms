@@ -1,10 +1,10 @@
-import { registry } from '@app/admin/registry';
-import { AuthEnum } from '#core/types/enum';
 import { userAtom } from '#core/store/userStore';
+import { AuthEnum } from '#core/types/enum';
+import type { Data } from '@app/admin/data';
+import { registry } from '@app/admin/registry';
 import { useAtom } from 'jotai';
-import { useRequestClient } from './useRequestClient';
-import type { Data } from '@app/admin/data'
 import { useMemo } from 'react';
+import { useRequestClient } from './useRequestClient';
 export interface UseAuthReturn {
 	isAuthenticated: (record?: boolean) => boolean;
 	login: (data: typeof registry.$tree.auth.login.types.response.data) => void;

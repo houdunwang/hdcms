@@ -6,8 +6,9 @@ import { NavSecondary } from "#core/components/nav-secondary"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar"
 import { app } from '../../../config/app'
 import { Link } from "@tanstack/react-router"
+import type { AdminLayoutProp } from "../AdminLayout"
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>): React.JSX.Element {
+export const AppSidebar: React.FC<AdminLayoutProp & React.ComponentProps<typeof Sidebar>> = (props) => {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -23,9 +24,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>): 
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain />
+        <NavMain {...props} />
         {/* <NavDocuments items={data.documents} /> */}
-        <NavSecondary className="mt-auto" />
+        <NavSecondary className="mt-auto" {...props} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
