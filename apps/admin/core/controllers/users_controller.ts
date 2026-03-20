@@ -21,6 +21,7 @@ export default class UsersController extends BaseController {
    * @responseBody 200 - <User>
    */
   async profile({ bouncer, auth, serialize }: HttpContext) {
+
     // await new Promise(r => setTimeout(r, 3000))
     await bouncer.with(UserPolicy).authorize('profile', auth.user!)
     const isLogin = await auth.checkUsing(['web', 'api'])

@@ -26,6 +26,6 @@ router.any('/*', async ({ request, response }) => {
     // 返回前设置正确的 Content-Type 为 html
     return response.header('Content-Type', 'text/html').send(html)
   } catch (error) {
-    return response.notFound('React index.html not found')
+    return response.notFound('<div style="font-size: 25px; padding:50px;"> 项目未构建！根目录执行 `pnpm run deploy` </div>')
   }
 })
