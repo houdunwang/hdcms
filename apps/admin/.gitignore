@@ -25,3 +25,5 @@ yarn-error.log
 
 # Platform specific
 .DS_Store
+pay/wepay/*
+!pay/wepay/.gitkeep

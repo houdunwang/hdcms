@@ -51,7 +51,7 @@ export default class PaysController extends BaseController {
       })
       return serialize({ sn: order.sn, qrImg })
     } catch (error) {
-      return this.error('生成二维码失败')
+      return this.error('生成二维码失败' + error,)
     }
   }
 

@@ -21,10 +21,10 @@ export class PayService {
       appid: env.get('WECHAT_PAY_APPID')!,
       mchid: env.get('WECHAT_PAY_MCHID')!,
       publicKey: fs.readFileSync(
-        resolve(__dirname, '#core/../../config/pay/wepay/apiclient_cert.pem')
+        resolve(__dirname, '../../pay/wepay/apiclient_cert.pem')
       ), // 公钥
       privateKey: fs.readFileSync(
-        resolve(__dirname, '#core/../../config/pay/wepay/apiclient_key.pem')
+        resolve(__dirname, '../../pay/wepay/apiclient_key.pem')
       ), // 秘钥
       key: env.get('WECHAT_PAY_KEY')!,
     })
