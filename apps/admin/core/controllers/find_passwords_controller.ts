@@ -20,19 +20,18 @@ export default class FindPasswordsController extends BaseController {
   }
 
   /**
-   * @findPassword
-   * @tag 登录注册
-   * @summary 找回密码
-   * @operationId register
-   * @description 找回密码
-   * @requestFormDataBody { "email": { "type": "string", "minLength": 3, "maxLength": 20, "required": "true" }, "password": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" }, "password_confirmation": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" } }
-   * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
+   * @email
+   * @tag 找回密码
+   * @summary 使用邮箱找回密码
+   * @operationId email
+   * @description 使用邮箱找回密码
+   * @requestFormDataBody { "email": { "type": "string", "minLength": 3, "maxLength": 20, "required": "true" }, "password": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" }, "password_confirmation": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" },"code": { "type": "string", "minLength": 6, "maxLength": 6, "required": "true" } }
+   * @responseBody 200 - { "token":"string", "user": "User" }
    */
   async email({ request, serialize, auth }: HttpContext) {
     const { email, password } = await request.validateUsing(findPasswordByEmailValidator, {
       meta: {
-        codeService: this.codeService,
-        type: 'email',
+        codeService: this.codeService
       },
     })
     const user = await User.findByOrFail('email', email)
@@ -45,19 +44,18 @@ export default class FindPasswordsController extends BaseController {
   }
 
   /**
-   * @findPassword
-   * @tag 登录注册
-   * @summary 找回密码
-   * @operationId register
-   * @description 找回密码
+   * @mobile
+   * @operationId mobile
+   * @tag 找回密码
+   * @summary 短信找回
+   * @description 使用短信找回密码
    * @requestFormDataBody { "email": { "type": "string", "minLength": 3, "maxLength": 20, "required": "true" }, "password": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" }, "password_confirmation": { "type": "string", "minLength": 5, "maxLength": 20, "required": "true" } }
-   * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
+   * @responseBody 200 - { "token":"string", "user": "User" }
    */
   async mobile({ request, serialize, auth }: HttpContext) {
     const { mobile, password } = await request.validateUsing(findPasswordByMobileValidator, {
       meta: {
         codeService: this.codeService,
-        type: 'mobile',
       },
     })
     const user = await User.findByOrFail('mobile', mobile)

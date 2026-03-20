@@ -42,12 +42,12 @@ function Pay({ setOpen, ...props }: { setOpen: (open: boolean) => void } & Props
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (!isAuthenticated(true)) {
+		if (!isAuthenticated) {
 			toast.error('请登录后操作')
 			navigate({ href: '/auth?action=login' })
 		}
 	}, [isAuthenticated])
-	if (!isAuthenticated()) {
+	if (!isAuthenticated) {
 		return null
 	}
 	return <PayQr {...props} setOpen={setOpen} />

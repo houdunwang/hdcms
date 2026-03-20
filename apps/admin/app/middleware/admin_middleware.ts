@@ -7,8 +7,9 @@ export default class AdminMiddleware {
     /**
      * Middleware logic goes here (before the next call)
      */
-    const user = await ctx.auth.authenticate()
-    if (user.id !== 1) {
+    const user = await ctx.auth.authenticateUsing(['web', 'api'])
+
+    if (!user.isAdmin) {
       throw new Exception('你不是管理员', {
         code: 'E_UNAUTHORIZED_ACCESS',
         status: 403,

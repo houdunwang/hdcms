@@ -4,13 +4,11 @@ import UploadTransformer from '#transformers/upload_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import BaseController from './bases_controller.js'
+import UploadPolicy from '#core/policies/upload_policy'
 
 @inject()
 export default class UploadsController extends BaseController {
-  constructor(
-    protected uploadService: UploadService,
-    protected ctx: HttpContext
-  ) {
+  constructor(protected uploadService: UploadService, protected ctx: HttpContext) {
     super()
   }
 
@@ -23,7 +21,8 @@ export default class UploadsController extends BaseController {
    * @requestFormDataBody { "file": { "type": "file", "description": "文件", "required": "true" }}
    * @responseBody 200 - {"type": "object", "properties": {"url": {"type": "string"}}}
    */
-  async file({ request }: HttpContext) {
+  async file({ bouncer, request }: HttpContext) {
+    await bouncer.with(UploadPolicy).authorize('file')
     const file = request.file('file')
     if (!file) {
       return this.error('文件不能为空')
@@ -41,7 +40,9 @@ export default class UploadsController extends BaseController {
    * @requestFormDataBody {"avatar":{"type":"file","format":"binary"}}
    * @responseBody 200 - { "url": "https://example.com/avatar.jpg" }
    */
-  async imageSingle({ request, serialize }: HttpContext) {
+  async image({ bouncer, request, serialize }: HttpContext) {
+    await bouncer.with(UploadPolicy).authorize('image')
+
     const payload = await request.validateUsing(uploadImageSingleValidator)
     const result = await this.uploadService.upload(payload.file)
     return serialize(UploadTransformer.transform(result))

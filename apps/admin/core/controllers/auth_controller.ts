@@ -1,3 +1,8 @@
+/**
+ * 作者: 向军大叔
+ * 邮箱: 2300071698@qq.com
+ * 直播: 抖音、B站 搜索 后盾云
+ */
 import { getUserByName } from '#core/helper'
 import { loginValidator, registerValidator } from '#core/validators/auth'
 import User from '#models/user'
@@ -14,14 +19,14 @@ export default class AuthController extends BaseController {
 
   /**
    * @login
-   * @tag 登录注册
    * @operationId login
+   * @tag 登录注册
    * @summary 用户登录
    * @description 用户登录，支持邮箱、手机号、帐号登录
    * @requestFormDataBody { "account": { "type": "string", "description": "登录帐号、手机号、邮箱", "example": "admin", "required": "true" }, "password": { "type": "string", "description": "登录密码", "example": "admin888", "required": "true" } , "captcha": { "type": "string", "description": "验证码", "example": "" }, "captcha_key": { "type": "string", "description": "验证码key", "example": "" }}
-   * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
+   * @responseBody 200 - { "token":"string", "user": "User" }
    */
-  public async login({ request, serialize, auth }: HttpContext) {
+  async login({ request, serialize, auth }: HttpContext) {
     const payload = await request.validateUsing(loginValidator)
     const user = await getUserByName(payload.account)
     if (!user) {
@@ -43,13 +48,12 @@ export default class AuthController extends BaseController {
    * @description 用户退出登录
    * @responseBody 200 - { success: true, message: 'User logged out' }
    */
-  async logout({ auth, response }: HttpContext) {
+  async logout({ auth }: HttpContext) {
     const user = auth.getUserOrFail()
     if (user.currentAccessToken) {
       await User.accessTokens.delete(user, user.currentAccessToken.identifier)
     }
     await auth.use('web').logout()
-    return response.ok({ success: true, message: 'User logged out' })
   }
 
   /**

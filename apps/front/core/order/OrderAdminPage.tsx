@@ -16,6 +16,8 @@ import dayjs from 'dayjs'
 import { useAtomValue } from 'jotai'
 import { ShoppingBag } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
+import { orderTypes } from '#config/order.tsx'
+import { OrderDetailDialog } from './OrderDetailDialog'
 
 export const OrderAdminPage = (): JSX.Element => {
 	const api = useApi()
@@ -108,6 +110,7 @@ const OrderRow: FC<RowProps> = ({ order }) => {
 			</TableCell>
 			<TableCell>{order.sn}</TableCell>
 			<TableCell>
+				<OrderDetailDialog order={order} />
 			</TableCell>
 			<TableCell>{order.price}</TableCell>
 			<TableCell>{order.payState}</TableCell>

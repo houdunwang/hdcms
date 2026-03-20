@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('title', 100).notNullable().comment('标题')
       table.string('ad', 100).notNullable().comment('一句广告语')
       table.text('feature').notNullable().comment('特点')
-      table.smallint('months').notNullable().comment('会员月数')
+      table.smallint('months').unsigned().notNullable().comment('会员月数')
       table.boolean('state').notNullable().defaultTo(true).comment('开启')
       table.decimal('price', 8, 2).notNullable().comment('价格')
       table.string('icon', 255).nullable().comment('图片')

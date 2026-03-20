@@ -3,6 +3,4 @@
  * DO NOT EDIT manually
  */
 
-export const controllers = {
-  Profile: () => import('#controllers/profile_controller'),
-}
+export const controllers = {}

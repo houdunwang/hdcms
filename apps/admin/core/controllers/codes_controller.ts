@@ -1,3 +1,8 @@
+/**
+ * 作者: 向军大叔
+ * 邮箱: 2300071698@qq.com
+ * 直播: 抖音、B站 搜索 后盾云
+ */
 import { CodeService } from '#core/services/code_service'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
@@ -6,19 +11,16 @@ import { sendEmailCodeValidator, sendMobileCodeValidator } from '#core/validator
 
 @inject()
 export default class CodesController extends BaseController {
-  constructor(
-    protected ctx: HttpContext,
-    private codeService: CodeService
-  ) {
+  constructor(protected ctx: HttpContext, private codeService: CodeService) {
     super()
   }
 
   /**
-   * @send
-   * @tag 系统功能
-   * @operationId sendCode
-   * @summary 发送验证码
-   * @description 发送验证码到指定的邮箱或手机号
+   * @email
+   * @tag 发送验证码
+   * @operationId email
+   * @summary 发送邮件验证码
+   * @description 发送邮件验证码
    * @requestFormDataBody { "account": { "type": "string", "required": "true", "description": "邮箱或手机号" ,"example":"2300071698@qq.com" } }
    * @responseBody 200 - { "success": true, "message": "验证码发送成功" }
    */
@@ -33,11 +35,11 @@ export default class CodesController extends BaseController {
   }
 
   /**
-   * @send
-   * @tag 系统功能
-   * @operationId sendCode
-   * @summary 发送验证码
-   * @description 发送验证码到指定的邮箱或手机号
+   * @mobile
+   * @tag 发送验证码
+   * @operationId mobile
+   * @summary 发送短信验证码
+   * @description 发送短信验证码
    * @requestFormDataBody { "account": { "type": "string", "required": "true", "description": "邮箱或手机号" ,"example":"2300071698@qq.com" } }
    * @responseBody 200 - { "success": true, "message": "验证码发送成功" }
    */

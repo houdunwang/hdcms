@@ -1,4 +1,5 @@
-import { atom, type WritableAtom } from 'jotai';
-import type { Data } from '@app/admin/data'
+import type { Data } from '@app/admin/data';
+import { atom } from 'jotai';
 
-export const userAtom: WritableAtom<Data.User | undefined, [Data.User | undefined], void> = atom<Data.User | undefined>(undefined)
+export const userAtom = atom<Data.User | undefined | null>(null)
+

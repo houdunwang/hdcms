@@ -1,4 +1,5 @@
 import Order from '#core/models/order'
+import OrderPolicy from '#core/policies/order_policy'
 import OrderTransformer from '#transformers/order_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
@@ -16,7 +17,8 @@ export default class OrdersController {
    * @requestFormDataBody { "subject": { "type": "string", "required": "true","example": "测试订单" }, "price": { "type": "number", "required": "true","example": "1" } }
    * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
    */
-  async index({ request, serialize }: HttpContext) {
+  async index({ bouncer, request, serialize }: HttpContext) {
+    await bouncer.with(OrderPolicy).authorize('index')
     const field = request.input('field')
     const keyword = request.input('keyword')
     const page = request.input('page', 1)

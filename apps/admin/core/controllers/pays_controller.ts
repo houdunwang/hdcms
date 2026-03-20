@@ -11,11 +11,7 @@ import BaseController from './bases_controller.js'
 
 @inject()
 export default class PaysController extends BaseController {
-  constructor(
-    private payService: PayService,
-    protected ctx: HttpContext,
-    protected orderService: OrderService
-  ) {
+  constructor(private payService: PayService, protected ctx: HttpContext, protected orderService: OrderService) {
     super()
   }
 

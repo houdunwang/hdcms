@@ -3,15 +3,12 @@ import { validateProvider } from './config/validateProvider.ts'
 
 export const sendEmailCodeValidator = vine.create(
   vine.object({
-    email: vine
-      .string()
-      .email()
-      .exists(async (db, value, field) => {
-        if (!field.meta.isAuthenticated) {
-          return !!(await db.from('users').where('email', value).first())
-        }
-        return true
-      }),
+    email: vine.string().email().exists(async (db, value, field) => {
+      if (!field.meta.isAuthenticated) {
+        return !!(await db.from('users').where('email', value).first())
+      }
+      return true
+    }),
   })
 )
 
@@ -23,14 +20,12 @@ sendEmailCodeValidator.messagesProvider = validateProvider({
 
 export const sendMobileCodeValidator = vine.create(
   vine.object({
-    mobile: vine
-      .string()
-      .exists(async (db, value, field) => {
-        if (!field.meta.isAuthenticated) {
-          return !!(await db.from('users').where('mobile', value).first())
-        }
-        return true
-      })
+    mobile: vine.string().exists(async (db, value, field) => {
+      if (!field.meta.isAuthenticated) {
+        return !!(await db.from('users').where('mobile', value).first())
+      }
+      return true
+    })
       .regex(/^1[3-9]\d{9}$/),
   })
 )

@@ -4,14 +4,11 @@ import { emailCodeRule } from './rules/emailCodeRule.ts'
 
 export const bindEmailValidator = vine.create(
   vine.object({
-    email: vine
-      .string()
-      .email()
-      .unique(async (db, value, field) => {
-        if (value == field.meta.user.email) return true
-        const isExists = await db.from('users').where('email', value).first()
-        return !isExists
-      }),
+    email: vine.string().email().unique(async (db, value, field) => {
+      if (value == field.meta.user.email) return true
+      const isExists = await db.from('users').where('email', value).first()
+      return !isExists
+    }),
     code: vine.string().use(emailCodeRule()),
   })
 )
@@ -27,14 +24,11 @@ bindEmailValidator.messagesProvider = validateProvider({
 
 export const bindMobileValidator = vine.create(
   vine.object({
-    mobile: vine
-      .string()
-      .regex(/^1[3-9]\d{9}$/)
-      .unique(async (db, value, field) => {
-        if (value == field.meta.user.mobile) return true
-        const isExists = await db.from('users').where('mobile', value).first()
-        return !isExists
-      }),
+    mobile: vine.string().regex(/^1[3-9]\d{9}$/).unique(async (db, value, field) => {
+      if (value == field.meta.user.mobile) return true
+      const isExists = await db.from('users').where('mobile', value).first()
+      return !isExists
+    }),
     code: vine.string().use(emailCodeRule()),
   })
 )

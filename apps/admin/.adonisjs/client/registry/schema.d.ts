@@ -19,19 +19,7 @@ export interface Registry {
       errorResponse: unknown
     }
   }
-  'users.test': {
-    methods: ["GET","HEAD"]
-    pattern: '/hd'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
-    }
-  }
-  'admin': {
+  'admin.index': {
     methods: ["GET","HEAD"]
     pattern: '/core/admin'
     types: {
@@ -77,6 +65,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['logout']>>>
+    }
+  }
+  'authorize': {
+    methods: ["POST"]
+    pattern: '/core/authorize'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/authorize_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/authorize_controller').default['handle']>>>
     }
   }
   'binds.email': {
@@ -199,19 +199,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/find_passwords_controller').default['mobile']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'licenses': {
-    methods: ["POST"]
-    pattern: '/core/license/check'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/licenses_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/licenses_controller').default['handle']>>>
-    }
-  }
-  'logs': {
+  'logs.index': {
     methods: ["GET","HEAD"]
     pattern: '/core/logs'
     types: {
@@ -219,13 +207,13 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['index']>>>
     }
   }
   'orders.index': {
     methods: ["GET","HEAD"]
-    pattern: '/core/order/index'
+    pattern: '/core/order'
     types: {
       body: {}
       paramsTuple: []
@@ -343,18 +331,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['index']>>>
     }
   }
-  'subscribe.store': {
-    methods: ["POST"]
-    pattern: '/core/subscribe'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['store']>>>
-    }
-  }
   'subscribe.show': {
     methods: ["GET","HEAD"]
     pattern: '/core/subscribe/:id'
@@ -365,30 +341,6 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['show']>>>
-    }
-  }
-  'subscribe.update': {
-    methods: ["PUT","PATCH"]
-    pattern: '/core/subscribe/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['update']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['update']>>>
-    }
-  }
-  'subscribe.destroy': {
-    methods: ["DELETE"]
-    pattern: '/core/subscribe/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/subscribes_controller').default['destroy']>>>
     }
   }
   'system.restart': {
@@ -415,16 +367,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['file']>>>
     }
   }
-  'uploads.image_single': {
+  'uploads.image': {
     methods: ["POST"]
-    pattern: '/core/upload/imageSingle'
+    pattern: '/core/upload/image'
     types: {
       body: ExtractBody<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
       paramsTuple: []
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#core/validators/upload').uploadImageSingleValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['imageSingle']>>> | { status: 422; response: { errors: SimpleError[] } }
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['image']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/uploads_controller').default['image']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'users.profile': {
@@ -451,30 +403,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['password']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'users.update': {
-    methods: ["PUT"]
-    pattern: '/core/users/:id?'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
-  'users.destroy': {
-    methods: ["DELETE"]
-    pattern: '/core/users/destroy'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
-    }
-  }
   'users.index': {
     methods: ["GET","HEAD"]
     pattern: '/core/users'
@@ -487,18 +415,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['index']>>>
     }
   }
-  'users.store': {
-    methods: ["POST"]
-    pattern: '/core/users'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/user').createUserValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').createUserValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
   'users.show': {
     methods: ["GET","HEAD"]
     pattern: '/core/users/:id'
@@ -509,6 +425,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['show']>>>
+    }
+  }
+  'users.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/core/users/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/user').updateUserValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'users.destroy': {
+    methods: ["DELETE"]
+    pattern: '/core/users/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/users_controller').default['destroy']>>>
     }
   }
   'wechats_message': {

@@ -12,17 +12,11 @@ const routes = {
     tokens: [{"old":"/uploads/*","type":0,"val":"uploads","end":""},{"old":"/uploads/*","type":2,"val":"*","end":""}],
     types: placeholder as Registry['drive.fs.serve']['types'],
   },
-  'users.test': {
-    methods: ["GET","HEAD"],
-    pattern: '/hd',
-    tokens: [{"old":"/hd","type":0,"val":"hd","end":""}],
-    types: placeholder as Registry['users.test']['types'],
-  },
-  'admin': {
+  'admin.index': {
     methods: ["GET","HEAD"],
     pattern: '/core/admin',
     tokens: [{"old":"/core/admin","type":0,"val":"core","end":""},{"old":"/core/admin","type":0,"val":"admin","end":""}],
-    types: placeholder as Registry['admin']['types'],
+    types: placeholder as Registry['admin.index']['types'],
   },
   'auth.login': {
     methods: ["POST"],
@@ -41,6 +35,12 @@ const routes = {
     pattern: '/core/logout',
     tokens: [{"old":"/core/logout","type":0,"val":"core","end":""},{"old":"/core/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['auth.logout']['types'],
+  },
+  'authorize': {
+    methods: ["POST"],
+    pattern: '/core/authorize',
+    tokens: [{"old":"/core/authorize","type":0,"val":"core","end":""},{"old":"/core/authorize","type":0,"val":"authorize","end":""}],
+    types: placeholder as Registry['authorize']['types'],
   },
   'binds.email': {
     methods: ["POST"],
@@ -102,22 +102,16 @@ const routes = {
     tokens: [{"old":"/core/findPassword/mobile","type":0,"val":"core","end":""},{"old":"/core/findPassword/mobile","type":0,"val":"findPassword","end":""},{"old":"/core/findPassword/mobile","type":0,"val":"mobile","end":""}],
     types: placeholder as Registry['find_passwords.mobile']['types'],
   },
-  'licenses': {
-    methods: ["POST"],
-    pattern: '/core/license/check',
-    tokens: [{"old":"/core/license/check","type":0,"val":"core","end":""},{"old":"/core/license/check","type":0,"val":"license","end":""},{"old":"/core/license/check","type":0,"val":"check","end":""}],
-    types: placeholder as Registry['licenses']['types'],
-  },
-  'logs': {
+  'logs.index': {
     methods: ["GET","HEAD"],
     pattern: '/core/logs',
     tokens: [{"old":"/core/logs","type":0,"val":"core","end":""},{"old":"/core/logs","type":0,"val":"logs","end":""}],
-    types: placeholder as Registry['logs']['types'],
+    types: placeholder as Registry['logs.index']['types'],
   },
   'orders.index': {
     methods: ["GET","HEAD"],
-    pattern: '/core/order/index',
-    tokens: [{"old":"/core/order/index","type":0,"val":"core","end":""},{"old":"/core/order/index","type":0,"val":"order","end":""},{"old":"/core/order/index","type":0,"val":"index","end":""}],
+    pattern: '/core/order',
+    tokens: [{"old":"/core/order","type":0,"val":"core","end":""},{"old":"/core/order","type":0,"val":"order","end":""}],
     types: placeholder as Registry['orders.index']['types'],
   },
   'package.index': {
@@ -174,29 +168,11 @@ const routes = {
     tokens: [{"old":"/core/subscribe","type":0,"val":"core","end":""},{"old":"/core/subscribe","type":0,"val":"subscribe","end":""}],
     types: placeholder as Registry['subscribe.index']['types'],
   },
-  'subscribe.store': {
-    methods: ["POST"],
-    pattern: '/core/subscribe',
-    tokens: [{"old":"/core/subscribe","type":0,"val":"core","end":""},{"old":"/core/subscribe","type":0,"val":"subscribe","end":""}],
-    types: placeholder as Registry['subscribe.store']['types'],
-  },
   'subscribe.show': {
     methods: ["GET","HEAD"],
     pattern: '/core/subscribe/:id',
     tokens: [{"old":"/core/subscribe/:id","type":0,"val":"core","end":""},{"old":"/core/subscribe/:id","type":0,"val":"subscribe","end":""},{"old":"/core/subscribe/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['subscribe.show']['types'],
-  },
-  'subscribe.update': {
-    methods: ["PUT","PATCH"],
-    pattern: '/core/subscribe/:id',
-    tokens: [{"old":"/core/subscribe/:id","type":0,"val":"core","end":""},{"old":"/core/subscribe/:id","type":0,"val":"subscribe","end":""},{"old":"/core/subscribe/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['subscribe.update']['types'],
-  },
-  'subscribe.destroy': {
-    methods: ["DELETE"],
-    pattern: '/core/subscribe/:id',
-    tokens: [{"old":"/core/subscribe/:id","type":0,"val":"core","end":""},{"old":"/core/subscribe/:id","type":0,"val":"subscribe","end":""},{"old":"/core/subscribe/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['subscribe.destroy']['types'],
   },
   'system.restart': {
     methods: ["POST"],
@@ -210,11 +186,11 @@ const routes = {
     tokens: [{"old":"/core/upload/file","type":0,"val":"core","end":""},{"old":"/core/upload/file","type":0,"val":"upload","end":""},{"old":"/core/upload/file","type":0,"val":"file","end":""}],
     types: placeholder as Registry['uploads.file']['types'],
   },
-  'uploads.image_single': {
+  'uploads.image': {
     methods: ["POST"],
-    pattern: '/core/upload/imageSingle',
-    tokens: [{"old":"/core/upload/imageSingle","type":0,"val":"core","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"upload","end":""},{"old":"/core/upload/imageSingle","type":0,"val":"imageSingle","end":""}],
-    types: placeholder as Registry['uploads.image_single']['types'],
+    pattern: '/core/upload/image',
+    tokens: [{"old":"/core/upload/image","type":0,"val":"core","end":""},{"old":"/core/upload/image","type":0,"val":"upload","end":""},{"old":"/core/upload/image","type":0,"val":"image","end":""}],
+    types: placeholder as Registry['uploads.image']['types'],
   },
   'users.profile': {
     methods: ["GET","HEAD"],
@@ -228,35 +204,29 @@ const routes = {
     tokens: [{"old":"/core/users/password","type":0,"val":"core","end":""},{"old":"/core/users/password","type":0,"val":"users","end":""},{"old":"/core/users/password","type":0,"val":"password","end":""}],
     types: placeholder as Registry['users.password']['types'],
   },
-  'users.update': {
-    methods: ["PUT"],
-    pattern: '/core/users/:id?',
-    tokens: [{"old":"/core/users/:id?","type":0,"val":"core","end":""},{"old":"/core/users/:id?","type":0,"val":"users","end":""},{"old":"/core/users/:id?","type":3,"val":"id","end":""}],
-    types: placeholder as Registry['users.update']['types'],
-  },
-  'users.destroy': {
-    methods: ["DELETE"],
-    pattern: '/core/users/destroy',
-    tokens: [{"old":"/core/users/destroy","type":0,"val":"core","end":""},{"old":"/core/users/destroy","type":0,"val":"users","end":""},{"old":"/core/users/destroy","type":0,"val":"destroy","end":""}],
-    types: placeholder as Registry['users.destroy']['types'],
-  },
   'users.index': {
     methods: ["GET","HEAD"],
     pattern: '/core/users',
     tokens: [{"old":"/core/users","type":0,"val":"core","end":""},{"old":"/core/users","type":0,"val":"users","end":""}],
     types: placeholder as Registry['users.index']['types'],
   },
-  'users.store': {
-    methods: ["POST"],
-    pattern: '/core/users',
-    tokens: [{"old":"/core/users","type":0,"val":"core","end":""},{"old":"/core/users","type":0,"val":"users","end":""}],
-    types: placeholder as Registry['users.store']['types'],
-  },
   'users.show': {
     methods: ["GET","HEAD"],
     pattern: '/core/users/:id',
     tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['users.show']['types'],
+  },
+  'users.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/core/users/:id',
+    tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['users.update']['types'],
+  },
+  'users.destroy': {
+    methods: ["DELETE"],
+    pattern: '/core/users/:id',
+    tokens: [{"old":"/core/users/:id","type":0,"val":"core","end":""},{"old":"/core/users/:id","type":0,"val":"users","end":""},{"old":"/core/users/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['users.destroy']['types'],
   },
   'wechats_message': {
     methods: ["HEAD","OPTIONS","GET","POST","PUT","PATCH","DELETE"],

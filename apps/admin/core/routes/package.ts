@@ -4,5 +4,5 @@ const PackagesController = () => import('#core/controllers/packages_controller')
 
 // 登录注册
 router.group(() => {
-  router.resource('package', PackagesController).apiOnly().use(['update', 'destroy', 'store'], middleware.admin())
+  router.resource('package', PackagesController).apiOnly().use(['update', 'destroy', 'store', 'show'], middleware.admin())
 }).prefix('core')

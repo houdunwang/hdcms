@@ -1,9 +1,6 @@
+import UserPolicy from '#core/policies/user_policy'
 import { UploadService } from '#core/services/upload_service'
-import {
-  createUserValidator,
-  updatePasswordValidator,
-  updateUserValidator,
-} from '#core/validators/user'
+import { updatePasswordValidator, updateUserValidator } from '#core/validators/user'
 import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
@@ -12,16 +9,10 @@ import { DateTime } from 'luxon'
 import BaseController from './bases_controller.ts'
 @inject()
 export default class UsersController extends BaseController {
-  constructor(
-    protected ctx: HttpContext,
-    protected uploadService: UploadService
-  ) {
+  constructor(protected ctx: HttpContext, protected uploadService: UploadService) {
     super()
   }
 
-  async test({ }: HttpContext) {
-    return 'test11222'
-  }
   /**
    * @me
    * @tag 用户管理
@@ -29,16 +20,20 @@ export default class UsersController extends BaseController {
    * @description 获取当前认证用户的详细信息
    * @responseBody 200 - <User>
    */
-  async profile({ auth, serialize }: HttpContext) {
-    // await new Promise(r => setTimeout(r, 2000))
-    const user = await auth.authenticateUsing(['web', 'api'])
-    //更新用户最后登录时间，1小时内登录不更新
-    if (user.updatedAt && user.updatedAt.plus({ hour: 1 }).toMillis() < DateTime.now().toMillis()) {
-      user.updatedAt = DateTime.now()
-      await user.save()
+  async profile({ bouncer, auth, serialize }: HttpContext) {
+    // await new Promise(r => setTimeout(r, 3000))
+    await bouncer.with(UserPolicy).authorize('profile', auth.user!)
+    const isLogin = await auth.checkUsing(['web', 'api'])
+    if (isLogin) {
+      // 更新用户最后登录时间，1小时内登录不更新
+      const user = await auth.authenticateUsing(['web', 'api'])
+      if (user.updatedAt && user.updatedAt.plus({ hour: 1 }).toMillis() < DateTime.now().toMillis()) {
+        user.updatedAt = DateTime.now()
+        await user.save()
+      }
+      //更新用户最后登录时间
+      return serialize(UserTransformer.transform(user, auth))
     }
-    //更新用户最后登录时间
-    return serialize(UserTransformer.transform(user, auth))
   }
 
   /**
@@ -50,8 +45,8 @@ export default class UsersController extends BaseController {
    * @paramQuery perPage- 每页数量 - number @example(10)
    * @responseBody 200 - <User[]>
    */
-  async index({ request, serialize, auth }: HttpContext) {
-    // await new Promise(r => setTimeout(r, 10))
+  async index({ bouncer, request, serialize, auth }: HttpContext) {
+    await bouncer.with(UserPolicy).authorize('index')
     const page = request.input('page', 1)
     const field = request.qs().field || 'name'
     const keyword = request.qs().keyword
@@ -71,11 +66,11 @@ export default class UsersController extends BaseController {
    * @requestBody <createUserValidator>
    * @responseBody 200 - <User>
    */
-  async store({ request }: HttpContext) {
-    const payload = await request.validateUsing(createUserValidator)
-    const user = await User.create(payload)
-    return user
-  }
+  // async store({ request }: HttpContext) {
+  //   const payload = await request.validateUsing(createUserValidator)
+  //   const user = await User.create(payload)
+  //   return user
+  // }
 
   /**
    * @show
@@ -85,7 +80,8 @@ export default class UsersController extends BaseController {
    * @paramPath id - 用户编号 - @type(number) @required @example(1)
    * @responseBody 200 - <User>
    */
-  async show({ params }: HttpContext) {
+  async show({ bouncer, params }: HttpContext) {
+    await bouncer.with(UserPolicy).authorize('show')
     const user = await User.findOrFail(params.id)
     return user
   }
@@ -99,12 +95,9 @@ export default class UsersController extends BaseController {
    * @requestBody <updateUserValidator>
    * @responseBody 200 - <User>
    */
-  async update({ params, request, auth, serialize }: HttpContext) {
-    const id = params.id ?? auth.user!.id
-    if (id !== auth.user!.id && !auth.user!.isAdmin) {
-      return this.error('没有操作权限', 403)
-    }
-    const user = auth.user!
+  async update({ bouncer, params, request, auth, serialize }: HttpContext) {
+    const user = await User.findOrFail(params.id)
+    await bouncer.with(UserPolicy).authorize('update', user)
     const payload = await request.validateUsing(updateUserValidator, {
       meta: {
         user: auth.user!,
@@ -122,8 +115,9 @@ export default class UsersController extends BaseController {
    * @requestFormDataBody {"password":{"type":"string","description":"新密码","example":"admin888","required":"true"},"password_confirmation":{"type":"string","description":"确认密码","example":"admin888","required":"true"},"old_password":{"type":"string","description":"原密码","example":"admin888","required":"true"},"account":{"type":"string","description":"发送验证码的邮箱或手机号","example":"2300071698@qq.com","required":"true"},"code":{"type":"string","description":"验证码","example":"admin888","required":"true"}}
    * @responseBody 200 - { "message": "密码修改成功" }
    */
-  async password({ request, auth }: HttpContext) {
+  async password({ bouncer, request, auth }: HttpContext) {
     const user = await auth.authenticate()
+    await bouncer.with(UserPolicy).authorize('password', user)
     const payload = await request.validateUsing(updatePasswordValidator, {
       meta: { user },
     })
@@ -140,8 +134,9 @@ export default class UsersController extends BaseController {
    * @description 根据ID删除用户
    * @responseBody 200 - { "message": "User deleted successfully" }
    */
-  async destroy({ auth }: HttpContext) {
+  async destroy({ bouncer, auth }: HttpContext) {
     const user = await User.findOrFail(auth.user!.id)
+    await bouncer.with(UserPolicy).authorize('destroy', user)
     await user.delete()
     return this.success('帐号注销成功')
   }

@@ -1,20 +1,29 @@
+
+import AdminPolicy from '#core/policies/admin_policy'
 import { OrderService } from '#core/services/order_service'
+import { SubscribeService } from '#core/services/subscribe_service'
 import { UserService } from '#core/services/user_service'
+import cache from '@adonisjs/cache/services/main'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import cache from '@adonisjs/cache/services/main'
 import app from '@adonisjs/core/services/app'
 import { DateTime } from 'luxon'
-import { SubscribeService } from '#core/services/subscribe_service'
 
 @inject()
 export default class AdminController {
-  constructor(
-    private orderService: OrderService,
-    private userService: UserService,
-    private subscribeService: SubscribeService
-  ) { }
-  async handle(ctx: HttpContext) {
+  constructor(private orderService: OrderService, private userService: UserService, private subscribeService: SubscribeService) {
+  }
+
+  /**
+   * @index
+   * @operationId index
+   * @tag 统计数据
+   * @summary 统计数据
+   * @description 获取统计数据
+   * @responseBody 200 - { "token":{"type": "string", "token": "string"}, "user": "<User>" }
+   */
+  async index(ctx: HttpContext) {
+    await ctx.bouncer.with(AdminPolicy).authorize('handle')
     type ReturnType = {
       totalUsersCount: any
       todayUsersCount: number

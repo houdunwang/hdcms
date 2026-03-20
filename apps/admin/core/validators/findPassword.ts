@@ -6,12 +6,9 @@ import { mobileCodeRule } from './rules/mobileCodeRule.ts'
 
 export const findPasswordByEmailValidator = vine.create(
   vine.object({
-    email: vine
-      .string()
-      .email()
-      .exists(async (db, value) => {
-        return !!(await db.from('users').where('email', value).first())
-      }),
+    email: vine.string().email().exists(async (db, value) => {
+      return !!(await db.from('users').where('email', value).first())
+    }),
     password: vine.string().minLength(5).maxLength(20).confirmed(),
     password_confirmation: vine.string().minLength(5).maxLength(20),
     code: vine.string().optional().requiredIfExists('email').use(emailCodeRule()),
@@ -26,12 +23,9 @@ findPasswordByEmailValidator.messagesProvider = validateProvider({
 
 export const findPasswordByMobileValidator = vine.create(
   vine.object({
-    mobile: vine
-      .string()
-      .regex(/^1[3-9]\d{9}$/)
-      .exists(async (db, value) => {
-        return !!(await db.from('users').where('mobile', value).first())
-      }),
+    mobile: vine.string().regex(/^1[3-9]\d{9}$/).exists(async (db, value) => {
+      return !!(await db.from('users').where('mobile', value).first())
+    }),
     password: vine.string().minLength(5).maxLength(20).confirmed(),
     password_confirmation: vine.string().minLength(5).maxLength(20),
     code: vine.string().optional().requiredIfExists('mobile').use(mobileCodeRule()),

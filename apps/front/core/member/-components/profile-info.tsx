@@ -26,7 +26,7 @@ export const ProfileInfo = (): React.JSX.Element => {
   const form = useAppForm({
     defaultValues: auth.user,
     onSubmit: async ({ value: body }) => {
-      await mutation.mutateAsync({ body })
+      await mutation.mutateAsync({ params: { id: 2 }, body })
     }
   })
   return (

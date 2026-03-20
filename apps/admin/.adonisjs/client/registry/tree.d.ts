@@ -7,22 +7,15 @@ export interface ApiDefinition {
       serve: typeof routes['drive.fs.serve']
     }
   }
-  users: {
-    test: typeof routes['users.test']
-    profile: typeof routes['users.profile']
-    password: typeof routes['users.password']
-    update: typeof routes['users.update']
-    destroy: typeof routes['users.destroy']
-    index: typeof routes['users.index']
-    store: typeof routes['users.store']
-    show: typeof routes['users.show']
+  admin: {
+    index: typeof routes['admin.index']
   }
-  admin: typeof routes['admin']
   auth: {
     login: typeof routes['auth.login']
     register: typeof routes['auth.register']
     logout: typeof routes['auth.logout']
   }
+  authorize: typeof routes['authorize']
   binds: {
     email: typeof routes['binds.email']
     mobile: typeof routes['binds.mobile']
@@ -41,8 +34,9 @@ export interface ApiDefinition {
     email: typeof routes['find_passwords.email']
     mobile: typeof routes['find_passwords.mobile']
   }
-  licenses: typeof routes['licenses']
-  logs: typeof routes['logs']
+  logs: {
+    index: typeof routes['logs.index']
+  }
   orders: {
     index: typeof routes['orders.index']
   }
@@ -62,17 +56,22 @@ export interface ApiDefinition {
   }
   subscribe: {
     index: typeof routes['subscribe.index']
-    store: typeof routes['subscribe.store']
     show: typeof routes['subscribe.show']
-    update: typeof routes['subscribe.update']
-    destroy: typeof routes['subscribe.destroy']
   }
   system: {
     restart: typeof routes['system.restart']
   }
   uploads: {
     file: typeof routes['uploads.file']
-    imageSingle: typeof routes['uploads.image_single']
+    image: typeof routes['uploads.image']
+  }
+  users: {
+    profile: typeof routes['users.profile']
+    password: typeof routes['users.password']
+    index: typeof routes['users.index']
+    show: typeof routes['users.show']
+    update: typeof routes['users.update']
+    destroy: typeof routes['users.destroy']
   }
   wechatsMessage: typeof routes['wechats_message']
   wechatQrs: {

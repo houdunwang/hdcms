@@ -8,13 +8,13 @@ export default {
   path: path.dirname(url.fileURLToPath(import.meta.url)) + '/../',
   title: 'Foo', // use info instead
   version: '3.0.0', // use info instead
-  description: '', // use info instead
-  tagIndex: 2,
+  description: ' TypeScript 全栈、开箱即用、面向生产的工程基座。采用 Monorepo 架构，前后端统一类型与规范，专注业务而非重复造轮子。', // use info instead
+  tagIndex: 1,
   productionEnv: 'production', // optional
   info: {
-    title: '后盾全栈',
-    version: '3.0.0',
-    description: '使用adonis与react 构建的全栈脚手架',
+    title: 'HDCMS',
+    version: '1.0.1',
+    description: ' TypeScript 全栈、开箱即用、面向生产的工程基座。采用 Monorepo 架构，前后端统一类型与规范，专注业务而非重复造轮子。',
   },
   snakeCase: true,
 

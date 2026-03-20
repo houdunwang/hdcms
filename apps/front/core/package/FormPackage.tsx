@@ -15,7 +15,7 @@ export const FormPackage: FC<{ id?: number, closeDialog: () => void; }> = ({ id 
 	const formSchema = z.object({
 		title: z.string({ error: () => '请输入套餐名称' }),
 		ad: z.string({ error: () => '请输入广告语' }),
-		state: z.coerce.boolean({ error: () => '请选择是否启用' }).transform((val) => typeof val === 'boolean' ? val : true),
+		state: z.coerce.boolean({ error: () => '请选择是否启用' }),
 		months: z.preprocess((val) => (val ?? 0), z.coerce.number({ error: () => '请输入可用月数' }).positive('请输入大于0的月数')),
 		price: z.preprocess((val) => val ?? 0, z.coerce.number({ error: () => '请输入价格' }).positive('请输入大于0的价格')),
 		originalPrice: z.preprocess((val) => val ?? 0, z.coerce.number({ error: () => '请输入原价格' }).positive('请输入大于0的原价格')),
@@ -47,21 +47,21 @@ export const FormPackage: FC<{ id?: number, closeDialog: () => void; }> = ({ id 
 	}, [data?.data])
 	if (isLoading) return <Loading />
 	return (
-		<form.AppForm>
-			<form onSubmit={(e) => {
-				e.preventDefault();
-				e.stopPropagation();
-				void form.handleSubmit()
-			}} className="space-y-4 pt-4">
-				<form.AppField name="title" children={(field) => <field.FieldInput label="套餐名称" />} />
-				<form.AppField name="ad" children={(field) => <field.FieldInput label="广告语" />} />
-				<form.AppField name="months" children={(field) => <field.FieldInput type="number" label="可用月数" />} />
-				<form.AppField name="state" children={(field) => <field.FieldSwitch label="是否启用" />} />
-				<form.AppField name="price" children={(field) => <field.FieldInput type="number" label="价格" />} />
-				<form.AppField name="originalPrice" children={(field) => <field.FieldInput type="number" label="原价格" />} />
-				<form.AppField name="feature" children={(field) => <field.FieldTextarea label="套餐福利" description="每行一个套餐福利" />} />
+		<form onSubmit={(e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			void form.handleSubmit()
+		}} className="space-y-4 pt-4">
+			<form.AppField name="title" children={(field) => <field.FieldInput label="套餐名称" />} />
+			<form.AppField name="ad" children={(field) => <field.FieldInput label="广告语" />} />
+			<form.AppField name="months" children={(field) => <field.FieldInput type="number" label="可用月数" />} />
+			<form.AppField name="state" children={(field) => <field.FieldSwitch label="是否启用" />} />
+			<form.AppField name="price" children={(field) => <field.FieldInput type="number" label="价格" />} />
+			<form.AppField name="originalPrice" children={(field) => <field.FieldInput type="number" label="原价格" />} />
+			<form.AppField name="feature" children={(field) => <field.FieldTextarea label="套餐福利" description="每行一个套餐福利" />} />
+			<form.AppForm>
 				<form.FieldSubmitButton />
-			</form>
-		</form.AppForm>
+			</form.AppForm>
+		</form>
 	)
 }

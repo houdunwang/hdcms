@@ -36,5 +36,5 @@ export interface AuthProps {
 export interface AuthComponentProps {
 	title?: string
 	description?: string
-	children: ReactNode
+	children?: ReactNode
 }

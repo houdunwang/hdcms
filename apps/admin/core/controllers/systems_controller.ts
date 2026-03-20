@@ -1,3 +1,4 @@
+import SystemPolicy from '#core/policies/system_policy'
 import { type HttpContext } from '@adonisjs/core/http'
 
 export default class SystemsController {
@@ -9,7 +10,8 @@ export default class SystemsController {
    * @description 重启系统，所有正在运行的任务将被中断
    * @responseBody 200 - { "success": true, "message": "系统正在重启，请稍候..." }
    */
-  async restart({ response }: HttpContext) {
+  async restart({ bouncer, response }: HttpContext) {
+    await bouncer.with(SystemPolicy).authorize('restart')
     setTimeout(() => {
       process.exit(0)
     }, 1000)

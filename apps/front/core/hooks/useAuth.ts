@@ -1,26 +1,19 @@
 import { userAtom } from '#core/store/userStore';
-import { AuthEnum } from '#core/types/enum';
 import type { Data } from '@app/admin/data';
-import { registry } from '@app/admin/registry';
 import { useAtom } from 'jotai';
 import { useMemo } from 'react';
 import { useRequestClient } from './useRequestClient';
-export interface UseAuthReturn {
-	isAuthenticated: (record?: boolean) => boolean;
-	login: (data: typeof registry.$tree.auth.login.types.response.data) => void;
-	getCurrentUser: () => Promise<void>;
-	logout: () => void;
-	user: Data.User | undefined;
-	setUser: (update: Data.User | undefined) => void;
-	isAdmin: boolean;
-}
+import { useApi } from './useApi';
+import { useMutation } from '@tanstack/react-query';
 
-export const useAuth = (): UseAuthReturn => {
+export const useAuth = () => {
 	const [user, setUser] = useAtom(userAtom)
+	const api = useApi()
 	const request = useRequestClient()
+	const logoutMutation = useMutation(api.auth.logout.mutationOptions())
 
-	const isAdmin = useMemo((): boolean => {
-		return !!localStorage.getItem(AuthEnum.TOKEN_NAME) && user?.id === 1
+	const isAdmin = useMemo(() => {
+		return user?.id === 1
 	}, [user])
 
 	/**
@@ -29,26 +22,25 @@ export const useAuth = (): UseAuthReturn => {
 	 * @param record - 是否记录当前页面路径，用于后续重定向 - boolean @default(false)
 	 * @returns 是否已认证 - boolean
 	 */
-	const isAuthenticated = (record = false): boolean => {
-		const isLogin = localStorage.getItem(AuthEnum.TOKEN_NAME)
-		if (!isLogin && record) {
+	const isAuthenticated = useMemo(() => {
+		// console.log('user-------init', user)
+		const isLogin = Boolean(user?.id)
+		if (!isLogin && !location.pathname.startsWith('/auth')) {
 			localStorage.setItem('history', window.location.href)
 		}
-		return !!isLogin
-	}
+		return isLogin
+
+	}, [user])
 
 	/**
 	 * @summary 登录认证
 	 * @description 处理用户登录认证，包括存储令牌、设置用户状态和重定向到登录前页面
 	 * @param data - 登录响应数据，包含令牌和用户信息
 	 */
-	const login = (data: typeof registry.$tree.auth.login.types.response.data): void => {
-		if (data.token) {
-			localStorage.setItem(AuthEnum.TOKEN_NAME, data.token)
-			const loginUrl = localStorage.getItem("history") || "/"
-			setUser(data.user)
-			location.href = loginUrl
-		}
+	const login = (user: Data.User): void => {
+		const loginUrl = localStorage.getItem("history") || "/"
+		setUser(user)
+		location.href = loginUrl
 	}
 
 	/**
@@ -56,11 +48,9 @@ export const useAuth = (): UseAuthReturn => {
 	 * @description 从服务器获取当前认证用户的详细信息
 	 */
 	const getCurrentUser = async (): Promise<void> => {
-		if (localStorage.getItem(AuthEnum.TOKEN_NAME)) {
-			const res = await request.get('/core/users/profile', { retry: 0, })
-			if (res?.data) {
-				setUser(res.data)
-			}
+		const res = await request.get('/core/users/profile', { retry: 0, })
+		if (res?.data) {
+			setUser(res.data)
 		}
 	}
 
@@ -68,8 +58,8 @@ export const useAuth = (): UseAuthReturn => {
 	 * @summary 注销登录
 	 * @description 清除本地存储中的认证令牌并重置用户状态
 	 */
-	const logout = (): void => {
-		localStorage.removeItem(AuthEnum.TOKEN_NAME)
+	const logout = async () => {
+		await logoutMutation.mutateAsync({})
 		setUser(undefined)
 		location.href = '/'
 	}

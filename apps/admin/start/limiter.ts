@@ -19,13 +19,7 @@ import limiter from '@adonisjs/limiter/services/main'
  * @param message 自定义错误消息
  * @returns
  */
-export function apiLimiter(
-  key: string,
-  requestNumber = 20,
-  few = 1,
-  unit: 'minute' | 'second' | 'hour' = 'minute',
-  message = '请求频率过快, '
-) {
+export function apiLimiter(key: string, requestNumber = 30, few = 1, unit: 'minute' | 'second' | 'hour' = 'minute', message = '请求频率过快, ') {
   return limiter.define(key, () => {
     return limiterDefined(requestNumber, few, unit, message)
   })
@@ -39,12 +33,7 @@ export function apiLimiter(
  * @param message 自定义错误消息
  * @returns
  */
-function limiterDefined(
-  requestNumber = 20,
-  few = 1,
-  unit: 'minute' | 'second' | 'hour' = 'minute',
-  message = '请求频率过快, '
-) {
+function limiterDefined(requestNumber = 20, few = 1, unit: 'minute' | 'second' | 'hour' = 'minute', message = '请求频率过快, ') {
   return limiter
     .allowRequests(requestNumber)
     .every(`${few} ${unit}`)
@@ -62,7 +51,7 @@ function limiterDefined(
 // 全局请求频率限制
 export const throttle = limiter.define('global', () => {
   return limiter
-    .allowRequests(30)
+    .allowRequests(60)
     .every('1 minute')
     .limitExceeded((error) => {
       error.setStatus(429).setMessage(`请求频率过快，请${error.response.availableIn}秒后再试`)

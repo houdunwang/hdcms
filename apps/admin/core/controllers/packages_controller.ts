@@ -1,9 +1,11 @@
 import Package from '#core/models/package'
+import PackagePolicy from '#core/policies/package_policy'
 import { packageValidator } from '#core/validators/package'
 import PackageTransformer from '#transformers/package_transformer'
 import { type HttpContext } from '@adonisjs/core/http'
 
 export default class PackagesController {
+
   async index({ serialize, request, auth }: HttpContext) {
     const db = Package.query()
     db.if(request.input('state'), (query) => {
@@ -15,11 +17,14 @@ export default class PackagesController {
     return serialize(PackageTransformer.transform(await db))
   }
 
-  async show({ params, serialize }: HttpContext) {
+  async show({ bouncer, params, serialize }: HttpContext) {
+    await bouncer.with(PackagePolicy).authorize('show')
     return serialize(PackageTransformer.transform(await Package.findOrFail(params.id)))
   }
 
-  async update({ params, request, serialize }: HttpContext) {
+  async update({ bouncer, params, request, serialize }: HttpContext) {
+    await bouncer.with(PackagePolicy).authorize('update')
+
     const model = await Package.findOrFail(params.id)
     const payload = await request.validateUsing(packageValidator, {
       meta: {
@@ -31,7 +36,9 @@ export default class PackagesController {
     return serialize(PackageTransformer.transform(model))
   }
 
-  async store({ request, serialize }: HttpContext) {
+  async store({ bouncer, request, serialize }: HttpContext) {
+    await bouncer.with(PackagePolicy).authorize('store')
+
     const payload = await request.validateUsing(packageValidator)
     const model = await Package.create({ ...payload })
     return serialize(PackageTransformer.transform(model))

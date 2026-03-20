@@ -13,6 +13,8 @@ import { Route as MemberRouteRouteImport } from './routes/member/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as FrontRouteRouteImport } from './routes/_front/route'
+import { Route as AuthIndexRouteImport } from './routes/auth/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as FrontIndexRouteImport } from './routes/_front/index'
 import { Route as MemberProfileRouteImport } from './routes/member/profile'
 import { Route as MemberBindRouteImport } from './routes/member/bind'
@@ -45,6 +47,16 @@ const AdminRouteRoute = AdminRouteRouteImport.update({
 const FrontRouteRoute = FrontRouteRouteImport.update({
   id: '/_front',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
 const FrontIndexRoute = FrontIndexRouteImport.update({
   id: '/',
@@ -129,10 +141,10 @@ export interface FileRoutesByFullPath {
   '/auth/wechatLogin': typeof AuthWechatLoginRoute
   '/member/bind': typeof MemberBindRoute
   '/member/profile': typeof MemberProfileRoute
+  '/admin/': typeof AdminIndexRoute
+  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRoutesByTo {
-  '/admin': typeof AdminRouteRouteWithChildren
-  '/auth': typeof AuthRouteRouteWithChildren
   '/member': typeof MemberRouteRouteWithChildren
   '/package': typeof FrontPackageRoute
   '/admin/config': typeof AdminConfigRoute
@@ -147,6 +159,8 @@ export interface FileRoutesByTo {
   '/member/bind': typeof MemberBindRoute
   '/member/profile': typeof MemberProfileRoute
   '/': typeof FrontIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/auth': typeof AuthIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -167,6 +181,8 @@ export interface FileRoutesById {
   '/member/bind': typeof MemberBindRoute
   '/member/profile': typeof MemberProfileRoute
   '/_front/': typeof FrontIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,10 +203,10 @@ export interface FileRouteTypes {
     | '/auth/wechatLogin'
     | '/member/bind'
     | '/member/profile'
+    | '/admin/'
+    | '/auth/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/admin'
-    | '/auth'
     | '/member'
     | '/package'
     | '/admin/config'
@@ -205,6 +221,8 @@ export interface FileRouteTypes {
     | '/member/bind'
     | '/member/profile'
     | '/'
+    | '/admin'
+    | '/auth'
   id:
     | '__root__'
     | '/_front'
@@ -224,6 +242,8 @@ export interface FileRouteTypes {
     | '/member/bind'
     | '/member/profile'
     | '/_front/'
+    | '/admin/'
+    | '/auth/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -262,6 +282,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof FrontRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/auth/': {
+      id: '/auth/'
+      path: '/'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
     '/_front/': {
       id: '/_front/'
@@ -377,6 +411,7 @@ interface AdminRouteRouteChildren {
   AdminPackageRoute: typeof AdminPackageRoute
   AdminSubscribeRoute: typeof AdminSubscribeRoute
   AdminUserRoute: typeof AdminUserRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
@@ -385,6 +420,7 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminPackageRoute: AdminPackageRoute,
   AdminSubscribeRoute: AdminSubscribeRoute,
   AdminUserRoute: AdminUserRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
@@ -396,6 +432,7 @@ interface AuthRouteRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   AuthWechatLoginRoute: typeof AuthWechatLoginRoute
+  AuthIndexRoute: typeof AuthIndexRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
@@ -403,6 +440,7 @@ const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   AuthWechatLoginRoute: AuthWechatLoginRoute,
+  AuthIndexRoute: AuthIndexRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

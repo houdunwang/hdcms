@@ -10,10 +10,10 @@ export const packageValidator = vine.create(
     }),
     ad: vine.string(),
     feature: vine.string(),
-    months: vine.number(),
+    months: vine.number().min(1).max(100),
     state: vine.boolean(),
-    price: vine.number().positive().transform((value) => value.toFixed(2)),
-    originalPrice: vine.number().positive().optional().transform((value) => value.toFixed(2))
+    price: vine.number().max(9999999.99).positive().transform((value) => value.toFixed(2)),
+    originalPrice: vine.number().max(9999999.99).positive().optional().transform((value) => value.toFixed(2))
   })
 )
 
@@ -25,6 +25,7 @@ packageValidator.messagesProvider = validateProvider({
     title: '套餐名称',
     ad: '广告语',
     price: '价格',
-    state: '套餐开启状态'
+    state: '套餐开启状态',
+    months: '会员月数',
   },
 })

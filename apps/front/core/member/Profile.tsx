@@ -6,13 +6,13 @@ import { ProfilePassword } from './-components/profile-password'
 
 export const Profile = () => {
 	return (
-		<Tabs defaultValue="avatar">
+		<Tabs defaultValue="profile">
 			<TabsList>
-				<TabsTrigger value="overview">基础资料</TabsTrigger>
+				<TabsTrigger value="profile">基础资料</TabsTrigger>
 				<TabsTrigger value="analytics">修改密码</TabsTrigger>
 				<TabsTrigger value="avatar">用户头像</TabsTrigger>
 			</TabsList>
-			<TabsContent value="overview">
+			<TabsContent value="profile">
 				<Card>
 					<CardContent className="text-muted-foreground">
 						<ProfileInfo />

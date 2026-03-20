@@ -5,7 +5,7 @@ import { type AccessToken, DbAccessTokensProvider } from '@adonisjs/auth/access_
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { compose } from '@adonisjs/core/helpers'
 import hash from '@adonisjs/core/services/hash'
-import { hasMany } from '@adonisjs/lucid/orm'
+import { column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -16,9 +16,26 @@ export default class User extends compose(UserSchema, AuthFinder) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
   declare currentAccessToken?: AccessToken
 
-  get isAdmin() {
-    return this.id === 1
-  }
+  @column({ serializeAs: null })
+  declare name: string
+
+  @column({ serializeAs: null })
+  declare address: string
+
+  @column({ serializeAs: null })
+  declare realName: string
+
+  @column({ serializeAs: null })
+  declare password: string
+
+  @column({ serializeAs: null })
+  declare mobile: string
+
+  @column({ serializeAs: null })
+  declare openid: string
+
+  @column({ serializeAs: null })
+  declare unionid: string
 
   @hasMany(() => Subscribe)
   declare subscribes: HasMany<typeof Subscribe>
@@ -26,11 +43,7 @@ export default class User extends compose(UserSchema, AuthFinder) {
   @hasMany(() => Order)
   declare orders: HasMany<typeof Order>
 
-  // get initials() {
-  //   const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')
-  //   if (first && last) {
-  //     return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase()
-  //   }
-  //   return `${first.slice(0, 2)}`.toUpperCase()
-  // }
+  get isAdmin() {
+    return this.id === 1
+  }
 }

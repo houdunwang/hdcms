@@ -21,7 +21,7 @@ export const Login: FC<PropsWithChildren<AuthComponentProps>> = (props) => {
 	const mutation = useMutation(
 		api.auth.login.mutationOptions({
 			onSuccess: ({ data }) => {
-				login(data)
+				login(data.user)
 			}
 		})
 	)

@@ -9,9 +9,8 @@ import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/member')({
 	component: RouteComponent,
-	notFoundComponent: () => <div>ddd11111111dd</div>,
 	beforeLoad: ({ context }) => {
-		if (!context.auth.isAuthenticated(true)) {
+		if (!context.auth.isAuthenticated) {
 			throw redirect({ to: '/auth' })
 		}
 	},

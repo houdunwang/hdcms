@@ -1,21 +1,12 @@
 import { middleware } from '#start/kernel'
-import { throttle } from '#start/limiter'
+import { apiLimiter, throttle } from '#start/limiter'
 import router from '@adonisjs/core/services/router'
 
 const UsersController = () => import('#core/controllers/users_controller')
 
 // 登录注册
-router
-  .group(() => {
-    router.get('/users/profile', [UsersController, 'profile']).use(middleware.auth())
-    router.put('/users/password', [UsersController, 'password']).use(middleware.auth())
-    router.put('/users/:id?', [UsersController, 'update']).use(middleware.auth())
-    router.delete('/users/destroy', [UsersController, 'destroy']).use(middleware.auth())
-    router
-      .resource('/users', UsersController)
-      .use(['update'], middleware.auth())
-      .apiOnly()
-      .except(['update', 'destroy'])
-  })
-  .prefix('core')
-  .use([throttle])
+router.group(() => {
+  router.get('/users/profile', [UsersController, 'profile']).use([middleware.auth()])
+  router.put('/users/password', [UsersController, 'password']).use([middleware.auth(), apiLimiter('users-password')])
+  router.resource('/users', UsersController).use(['update', 'destroy'], middleware.auth()).apiOnly().except(['store'])
+}).prefix('core').use([throttle])

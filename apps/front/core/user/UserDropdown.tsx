@@ -31,7 +31,7 @@ export const UserDropdown: FC<UserDropdownProps> = (props) => {
 				</Link>
 				}
 			</div>
-			{isAuthenticated() ? <LoginComponent {...props} /> : <UnLogin />}
+			{isAuthenticated ? <LoginComponent {...props} /> : <UnLogin />}
 		</div>
 	)
 }

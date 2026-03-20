@@ -1,4 +1,5 @@
 import Subscribe from '#core/models/subscribe'
+import SubscribePolicy from '#core/policies/subscribe_policy'
 import SubscribeTransformer from '#transformers/subscribe_transformer'
 import { type HttpContext } from '@adonisjs/core/http'
 
@@ -21,8 +22,9 @@ export default class SubscribesController {
     return serialize(SubscribeTransformer.paginate(subscribes, subscribes.getMeta()))
   }
 
-  async show({ params, serialize }: HttpContext) {
+  async show({ bouncer, params, serialize }: HttpContext) {
     const subscribe = await Subscribe.findOrFail(params.id)
+    await bouncer.with(SubscribePolicy).authorize('show', subscribe)
     return serialize(SubscribeTransformer.transform(subscribe))
   }
 }

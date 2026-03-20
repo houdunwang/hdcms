@@ -1,3 +1,4 @@
+import LogPolicy from '#core/policies/log_policy'
 import { LogService } from '#core/services/log_service'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
@@ -15,7 +16,8 @@ export default class LogsController {
    * @summary 获取日志列表
    * @description 获取日志列表
    */
-  async handle({ serialize }: HttpContext) {
+  async index({ bouncer, serialize }: HttpContext) {
+    await bouncer.with(LogPolicy).authorize('index')
     const disk = drive.use('fs')
     const response = await disk.listAll('logs' as any)
     const files = Array.from(response.objects)

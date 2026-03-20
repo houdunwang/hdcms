@@ -1,6 +1,6 @@
+import { HdProvider } from '#core/provider'
 import { QueryClient } from '@tanstack/react-query'
 import { createRouter } from '@tanstack/react-router'
-import { HdProvider } from '#core/provider'
 import ReactDOM from 'react-dom/client'
 import './assets/global.css'
 import { routeTree } from './routeTree.gen'
@@ -17,7 +17,14 @@ const router = createRouter({
   defaultPreload: 'intent',
   scrollRestoration: true,
 })
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0
+    },
+  },
+})
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router

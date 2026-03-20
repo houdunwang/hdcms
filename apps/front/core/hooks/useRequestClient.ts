@@ -18,11 +18,7 @@ export function useRequestClient(): RequestClient {
 		credentials: "include",
 		hooks: {
 			beforeRequest: [
-				(request) => {
-					const token = localStorage.getItem(AuthEnum.TOKEN_NAME)
-					if (token) {
-						request.headers.set('Authorization', `Bearer ${token}`)
-					}
+				(_request) => {
 					setFieldError({})
 				}
 			],
@@ -46,27 +42,27 @@ export function useRequestClient(): RequestClient {
 						return error
 					}
 
-					const responseData = await error.response.clone().json() as { message: string }
+					const responseData = await error.response.clone().json() as { message?: string, errors: { field: string, message: string, retryAfter: number }[] }
 					switch (error.response.status) {
 						case 401:
-							localStorage.removeItem(AuthEnum.TOKEN_NAME)
 							location.href = '/auth'
 							break
 						case 429:
-							const msg = responseData as unknown as { errors: { message: string, retryAfter: number }[] }
-							toast.info(msg.errors[0].message as string)
+							toast.info(responseData.errors[0].message as string)
 							break
+						case 403:
+							toast.error('没有操作权限')
+							break;
 						case 422:
-							const validationError = responseData as unknown as { errors: { message: string, field: string }[] }
 							const errorsFields = {} as Record<string, string>
-							validationError.errors.forEach((item: { field: string, message: string }) => {
+							responseData.errors.forEach((item: { field: string, message: string }) => {
 								errorsFields[item.field] = item.message
 							})
 							setFieldError(errorsFields)
 							break;
 						default:
 							try {
-								const message = responseData.message || '请求失败'
+								const message = responseData.message || responseData.errors[0].message || '请求失败'
 								toast.error(message)
 							} catch (error) {
 								toast.error('请求失败')
