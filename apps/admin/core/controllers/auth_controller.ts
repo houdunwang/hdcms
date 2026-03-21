@@ -23,9 +23,14 @@ export default class AuthController extends BaseController {
    */
   async login({ request, serialize, auth }: HttpContext) {
     const payload = await request.validateUsing(loginValidator)
-    const user = await getUserByName(payload.account)
+    const field = payload.email ? 'email' : payload.mobile ? 'mobile' : 'name'
+    const value = payload[field]
+    if (!value) {
+      return this.error(`请输入${field}`)
+    }
+    const user = await User.findByOrFail(field, value)
     if (!user) {
-      throw new errors.E_VALIDATION_ERROR([{ message: '账号不存在', field: 'account' }])
+      throw new errors.E_VALIDATION_ERROR([{ message: '账号不存在', field: field }])
     }
     await auth.use('web').login(user)
     const token = await User.accessTokens.create(user)

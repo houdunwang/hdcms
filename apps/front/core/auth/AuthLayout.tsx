@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import type { ComponentProps, FC, PropsWithChildren } from 'react'
 import { FindPassword } from './FindPassword'
-import { Login } from './Login'
+import { Login } from './login'
 import { Register } from './Register'
 import { WechatLogin } from './WechatLogin'
 

@@ -1,8 +1,6 @@
-import { FieldImage } from "#core/form"
-import { fieldContext, formContext } from "#core/form"
-import { useApi, useAuth } from "#core/hooks"
+import { hdCreateFormHook, useApi, useAuth } from "#core/hooks"
 import { userAtom } from "#core/store"
-import { createFormHook } from "@tanstack/react-form"
+import { UserIcon } from "#core/user/UserIcon.tsx"
 import { useMutation } from "@tanstack/react-query"
 import { useSetAtom } from "jotai"
 
@@ -15,14 +13,7 @@ export const ProfileAvatar = (): React.JSX.Element => {
       setUser(data)
     }
   }))
-  const { useAppForm } = createFormHook({
-    fieldComponents: {
-      FieldImage
-    },
-    formComponents: {},
-    fieldContext,
-    formContext
-  })
+  const { useAppForm } = hdCreateFormHook()
 
   const form = useAppForm({
     defaultValues: {
@@ -38,10 +29,17 @@ export const ProfileAvatar = (): React.JSX.Element => {
       }} >
       <form.AppField
         name="avatar"
-        children={field => <field.FieldImage label="头像"
-          onSuccess={url => {
-            mutation.mutateAsync({ body: { avatar: url } })
-          }} />}
+        children={field =>
+          <field.FieldImage
+            label="头像"
+            fallback={<UserIcon user={auth.user!} className="rounded-sm" />}
+            onSuccess={url =>
+              mutation.mutateAsync({
+                params: { id: auth.user!.id },
+                body: { avatar: url }
+              })
+            } />
+        }
       />
     </form>
   )

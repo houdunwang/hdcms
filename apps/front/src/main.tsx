@@ -1,5 +1,5 @@
 import { HdProvider } from '#core/provider'
-import { QueryClient } from '@tanstack/react-query'
+import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query'
 import { createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import './assets/global.css'
@@ -21,9 +21,21 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      retry: 0
+      retry: 0,
     },
   },
+  queryCache: new QueryCache({
+    onError: (_error, query) => {
+      if (query.meta?.skipGlobalError) return
+      // toast.error('查询失败')
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (_error, _variables, _context, mutation) => {
+      if (mutation.meta?.skipGlobalError) return
+      // toast.error('提交失败')
+    },
+  }),
 })
 declare module '@tanstack/react-router' {
   interface Register {

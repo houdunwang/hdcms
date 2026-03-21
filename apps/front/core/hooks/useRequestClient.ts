@@ -1,10 +1,9 @@
-import { registry } from '@app/admin/registry';
-import { AuthEnum } from '#core/types/enum';
 import { fieldErrorAtom } from '#core/store/fieldErrorAtom.ts';
+import { registry } from '@app/admin/registry';
+import type { Tuyau } from '@tuyau/core/client';
 import { createTuyau } from '@tuyau/core/client';
 import { useSetAtom } from 'jotai';
 import { toast } from "sonner";
-import type { Tuyau } from '@tuyau/core/client'
 type Registry = typeof import('@app/admin/registry').registry
 type RequestClient = Tuyau<Registry>
 

@@ -1,18 +1,12 @@
 import { useAuth } from '#core/hooks'
 import { useIsMobile } from '#core/hooks/use-mobile'
-import { Profile } from '#core/member/Profile'
-import { Bind } from '#core/member/bind'
 import type { MenuType } from '#core/types'
+import { UserIcon } from '#core/user/UserIcon.tsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { Link, Outlet, useRouterState } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import type { ComponentProps, FC, PropsWithChildren } from 'react'
-
-const routes = {
-	'/member?system=bind': <Bind />,
-	'/member?system=profile': <Profile />
-}
 
 export const useMemberClassName = (): { default: string; active: string } => {
 	const isMobile = useIsMobile()
@@ -31,8 +25,6 @@ type Props = {
 
 export const MemberLayout: FC<ComponentProps<'div'> & PropsWithChildren<Props>> = (props) => {
 	const isMobile = useIsMobile()
-	// const location = useRouterState({ select: s => s.location })
-	// const Component = Object.entries(routes).find(([key]) => location.href.includes(key))?.[1]
 	return (
 		<div className="bg-muted pt-6">
 			<div className={cn("container mx-auto px-3 lg:px-12 min-h-[calc(100vh-var(--header-height))]", props.className)}>
@@ -41,7 +33,6 @@ export const MemberLayout: FC<ComponentProps<'div'> & PropsWithChildren<Props>> 
 					<Card className="bg-background">
 						<CardContent>
 							{props.children}
-							{/* {Component ?? <Outlet />} */}
 						</CardContent>
 					</Card>
 				</div>
@@ -73,8 +64,10 @@ function PcMenu({ menus }: ComponentProps<'div'> & PropsWithChildren<Props>) {
 	const { user } = useAuth()
 	const menuClassName = useMemberClassName()
 	return <section className='hidden lg:block'>
-		<Card>
-			<img src={user?.avatar || '/images/avatar.jpeg'} className='w-72 object-cover max-h-72' />
+		<Card className='pt-0'>
+			<div className="w-72">
+				<UserIcon user={user!} className='w-72 object-cover h-72 rounded-b-none' />
+			</div>
 			<CardHeader>
 				<CardTitle className='text-center'>
 					{user?.name || ''}

@@ -1,11 +1,11 @@
+import { useFieldContext } from "#core/form"
+import type { FormFieldProps } from "#core/form/types"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
 import { Switch, } from '@/components/ui/switch'
-import { useFieldContext } from "#core/form"
-import type { FormFieldProps } from "#core/form/types"
 import { cn } from "@/lib/utils"
 import { FieldValidateError } from "./FieldValidateError"
-export function FieldSwitch({ label, title, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
+export function FieldSwitch({ label, title, className }: FormFieldProps<'input'>): React.JSX.Element {
 	const field = useFieldContext<boolean | number>()
 	return (
 		<Field className={cn('w-full', className)}>

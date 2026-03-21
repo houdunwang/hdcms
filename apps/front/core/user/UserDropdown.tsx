@@ -7,8 +7,9 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
-import { LogOut, Settings } from 'lucide-react'
+import { LogOut, Settings, } from 'lucide-react'
 import type { ComponentProps, FC, PropsWithChildren } from 'react'
+import { UserIcon } from './UserIcon'
 
 export type UserDropMenusType = {
 	label: string,
@@ -42,8 +43,7 @@ function LoginComponent(props: UserDropdownProps) {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className='cursor-pointer'>
 				<Avatar>
-					<AvatarImage src={user?.avatar!} className='rounded-sm' />
-					<AvatarFallback>{user?.name?.slice(0, 2)}</AvatarFallback>
+					<UserIcon user={user!} className='rounded-sm' />
 				</Avatar>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='w-auto'>

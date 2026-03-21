@@ -1,0 +1,180 @@
+c[ info ] loading hooks...
+[ info ] generating indexes...
+[ info ] codegen: created 6 file(s)
+[ info ] booting application to run tests...
+
+functional / Auth controller (tests/functional/auth_controller.spec.ts)
+  ✔ login: should return 422 when account is missing (83.07ms)
+  ✔ login: should return 422 when password is missing (21.66ms)
+  ✔ login: should return 422 when account length is less than 3 (11.06ms)
+  ✔ login: should return 422 when password length is less than 5 (15.36ms)
+  ✖ login: should return 422 when user does not exist (10.74ms)
+  ✔ login: should return 422 when password is incorrect (135.76ms)
+  ✖ login: should return 200 and token when login successful (118.68ms)
+  ✖ login: should return 200 when login with email (121.47ms)
+  ✖ login: should return 200 when login with mobile (121.21ms)
+  ✔ logout: should return 401 when not authenticated (6.33ms)
+  ✔ logout: should return 200 when logout successful (23.43ms)
+  ✔ register: should return 422 when name is missing (17.44ms)
+  ✔ register: should return 422 when password is missing (12.24ms)
+  ✔ register: should return 422 when name length is less than 3 (14.18ms)
+  ✔ register: should return 422 when name length is more than 20 (8.36ms)
+  ✔ register: should return 422 when password length is less than 5 (8.95ms)
+  ✔ register: should return 422 when password does not match confirmation (8.87ms)
+  ✔ register: should return 422 when name already exists (12.38ms)
+  ✔ register: should return 200 and token when register successful (63.46ms)
+  ✔ register: should create user in database when register successful (48.06ms)
+ ERRORS 
+
+❯ Auth controller / login: should return 422 when user does not exist
+
+- Expected  - 1
++ Received  + 2
+
+  Object {
+    "errors": Array [
+      Object {
+        "field": "account",
+-       "message": "帐号不存在",
++       "message": "帐号 不存在",
++       "rule": "database.exists",
+      },
+    ],
+  }
+
+[31mℹ AssertionError: expected { errors: [ { …(3) } ] } to contain subset { errors: [ { …(2) } ] }[39m
+
+ ⁃ at assert.containsSubset [33m(/Users/hd/code/hdcms/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:4116:30)[39m
+ ⁃ at Assert.containSubset [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+assert@4.2.0_@japa+runner@5.3.0/node_modules/@japa/assert/build/index.js:446:19)[39m
+ ⁃ at Assert.containsSubset [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+assert@4.2.0_@japa+runner@5.3.0/node_modules/@japa/assert/build/index.js:453:15)[39m
+ ⁃ at ApiResponse.assertBodyContains [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+api-client@3.2.1_@japa+assert@4.2.0_@japa+runner@5.3.0__@japa+runner@5.3.0/node_modules/@japa/api-client/build/index.js:204:15)[39m
+ ⁃ at Object.executor [33m(tests/functional/auth_controller.spec.ts:74:14)[39m
+
+   [2m69[22m [2m┃[22m        password[34m:[0m [32m'admin888'[0m[34m,[0m
+   [2m70[22m [2m┃[22m        captcha[34m:[0m [32m'1234'[0m[34m,[0m
+   [2m71[22m [2m┃[22m        captcha_key[34m:[0m captchaKey[34m,[0m
+   [2m72[22m [2m┃[22m      } [31mas[0m any)
+   [2m73[22m [2m┃[22m      response[34m.[0m[35massertStatus[0m([33m422[0m)
+ [41m❯ 74 ┃      response.assertBodyContains({ errors: [{ message: '帐号不存在', field: 'account' }] })[49m
+   [2m75[22m [2m┃[22m    })
+   [2m76[22m [2m┃[22m  
+   [2m77[22m [2m┃[22m    [35mtest[0m([32m'login: should return 422 when password is incorrect'[0m[34m,[0m [31masync[0m ({ client }) [31m=>[0m {
+   [2m78[22m [2m┃[22m      [31mconst[0m captchaKey [34m=[0m [32m'test-captcha-key-6'[0m
+   [2m79[22m [2m┃[22m      [31mawait[0m cache[34m.[0m[31mset[0m({ key[34m:[0m captchaKey[34m,[0m value[34m:[0m [32m'1234'[0m[34m,[0m ttl[34m:[0m [32m'5m'[0m })
+
+[2m ⁃ at [3mprocess.processTicksAndRejections[23m ([3mnode:internal/process/task_queues:104:5[23m)[22m
+ ⁃ at async #wrapTestInTimeout [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:680:4)[39m
+ ⁃ at async TestRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:710:4)[39m
+ ⁃ at async Test$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:918:3)[39m
+ ⁃ at async GroupRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:259:4)[39m
+[1/4]─
+
+❯ Auth controller / login: should return 200 and token when login successful
+
+- Expected  - 1
++ Received  + 1
+
+- 200
++ 422
+
+[31mℹ AssertionError: expected 422 to equal 200[39m
+
+ ⁃ at Assert.equal [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+assert@4.2.0_@japa+runner@5.3.0/node_modules/@japa/assert/build/index.js:69:19)[39m
+ ⁃ at ApiResponse.assertStatus [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+api-client@3.2.1_@japa+assert@4.2.0_@japa+runner@5.3.0__@japa+runner@5.3.0/node_modules/@japa/api-client/build/index.js:196:15)[39m
+ ⁃ at Object.executor [33m(tests/functional/auth_controller.spec.ts:113:14)[39m
+
+   [2m108[22m [2m┃[22m        account[34m:[0m [32m'loginuser7'[0m[34m,[0m
+   [2m109[22m [2m┃[22m        password[34m:[0m password[34m,[0m
+   [2m110[22m [2m┃[22m        captcha[34m:[0m [32m'1234'[0m[34m,[0m
+   [2m111[22m [2m┃[22m        captcha_key[34m:[0m captchaKey[34m,[0m
+   [2m112[22m [2m┃[22m      } [31mas[0m any)
+ [41m❯ 113 ┃      response.assertStatus(200)[49m
+   [2m114[22m [2m┃[22m      [31mconst[0m body [34m=[0m response[34m.[0m[35mbody[0m() [31mas[0m any
+   [2m115[22m [2m┃[22m      assert[34m.[0m[35mproperty[0m(body[34m.[0mdata[34m,[0m [32m'token'[0m)
+   [2m116[22m [2m┃[22m      assert[34m.[0m[35mproperty[0m(body[34m.[0mdata[34m,[0m [32m'user'[0m)
+   [2m117[22m [2m┃[22m      assert[34m.[0m[35mequal[0m(body[34m.[0mdata[34m.[0muser[34m.[0mid[34m,[0m user[34m.[0mid)
+   [2m118[22m [2m┃[22m      assert[34m.[0m[35mequal[0m(body[34m.[0mdata[34m.[0muser[34m.[0mname[34m,[0m user[34m.[0mname)
+
+[2m ⁃ at [3mprocess.processTicksAndRejections[23m ([3mnode:internal/process/task_queues:104:5[23m)[22m
+ ⁃ at async #wrapTestInTimeout [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:680:4)[39m
+ ⁃ at async TestRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:710:4)[39m
+ ⁃ at async Test$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:918:3)[39m
+ ⁃ at async GroupRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:259:4)[39m
+ ⁃ at async Group$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:354:3)[39m
+ ⁃ at async SuiteRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:1100:4)[39m
+[2/4]─
+
+❯ Auth controller / login: should return 200 when login with email
+
+- Expected  - 1
++ Received  + 1
+
+- 200
++ 422
+
+[31mℹ AssertionError: expected 422 to equal 200[39m
+
+ ⁃ at Assert.equal [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+assert@4.2.0_@japa+runner@5.3.0/node_modules/@japa/assert/build/index.js:69:19)[39m
+ ⁃ at ApiResponse.assertStatus [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+api-client@3.2.1_@japa+assert@4.2.0_@japa+runner@5.3.0__@japa+runner@5.3.0/node_modules/@japa/api-client/build/index.js:196:15)[39m
+ ⁃ at Object.executor [33m(tests/functional/auth_controller.spec.ts:138:14)[39m
+
+   [2m133[22m [2m┃[22m        account[34m:[0m [32m'test8@example.com'[0m[34m,[0m
+   [2m134[22m [2m┃[22m        password[34m:[0m password[34m,[0m
+   [2m135[22m [2m┃[22m        captcha[34m:[0m [32m'1234'[0m[34m,[0m
+   [2m136[22m [2m┃[22m        captcha_key[34m:[0m captchaKey[34m,[0m
+   [2m137[22m [2m┃[22m      } [31mas[0m any)
+ [41m❯ 138 ┃      response.assertStatus(200)[49m
+   [2m139[22m [2m┃[22m      [31mconst[0m body [34m=[0m response[34m.[0m[35mbody[0m() [31mas[0m any
+   [2m140[22m [2m┃[22m      assert[34m.[0m[35mproperty[0m(body[34m.[0mdata[34m,[0m [32m'token'[0m)
+   [2m141[22m [2m┃[22m      assert[34m.[0m[35mequal[0m(body[34m.[0mdata[34m.[0muser[34m.[0mid[34m,[0m user[34m.[0mid)
+   [2m142[22m [2m┃[22m    })
+   [2m143[22m [2m┃[22m  
+
+[2m ⁃ at [3mprocess.processTicksAndRejections[23m ([3mnode:internal/process/task_queues:104:5[23m)[22m
+ ⁃ at async #wrapTestInTimeout [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:680:4)[39m
+ ⁃ at async TestRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:710:4)[39m
+ ⁃ at async Test$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:918:3)[39m
+ ⁃ at async GroupRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:259:4)[39m
+ ⁃ at async Group$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:354:3)[39m
+ ⁃ at async SuiteRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:1100:4)[39m
+[3/4]─
+
+❯ Auth controller / login: should return 200 when login with mobile
+
+- Expected  - 1
++ Received  + 1
+
+- 200
++ 422
+
+[31mℹ AssertionError: expected 422 to equal 200[39m
+
+ ⁃ at Assert.equal [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+assert@4.2.0_@japa+runner@5.3.0/node_modules/@japa/assert/build/index.js:69:19)[39m
+ ⁃ at ApiResponse.assertStatus [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+api-client@3.2.1_@japa+assert@4.2.0_@japa+runner@5.3.0__@japa+runner@5.3.0/node_modules/@japa/api-client/build/index.js:196:15)[39m
+ ⁃ at Object.executor [33m(tests/functional/auth_controller.spec.ts:161:14)[39m
+
+   [2m156[22m [2m┃[22m        account[34m:[0m [32m'13800138009'[0m[34m,[0m
+   [2m157[22m [2m┃[22m        password[34m:[0m password[34m,[0m
+   [2m158[22m [2m┃[22m        captcha[34m:[0m [32m'1234'[0m[34m,[0m
+   [2m159[22m [2m┃[22m        captcha_key[34m:[0m captchaKey[34m,[0m
+   [2m160[22m [2m┃[22m      } [31mas[0m any)
+ [41m❯ 161 ┃      response.assertStatus(200)[49m
+   [2m162[22m [2m┃[22m      [31mconst[0m body [34m=[0m response[34m.[0m[35mbody[0m() [31mas[0m any
+   [2m163[22m [2m┃[22m      assert[34m.[0m[35mproperty[0m(body[34m.[0mdata[34m,[0m [32m'token'[0m)
+   [2m164[22m [2m┃[22m      assert[34m.[0m[35mequal[0m(body[34m.[0mdata[34m.[0muser[34m.[0mid[34m,[0m user[34m.[0mid)
+   [2m165[22m [2m┃[22m    })
+   [2m166[22m [2m┃[22m  
+
+[2m ⁃ at [3mprocess.processTicksAndRejections[23m ([3mnode:internal/process/task_queues:104:5[23m)[22m
+ ⁃ at async #wrapTestInTimeout [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:680:4)[39m
+ ⁃ at async TestRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:710:4)[39m
+ ⁃ at async Test$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:918:3)[39m
+ ⁃ at async GroupRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:259:4)[39m
+ ⁃ at async Group$1.exec [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:354:3)[39m
+ ⁃ at async SuiteRunner.run [33m(/Users/hd/code/hdcms/node_modules/.pnpm/@japa+core@10.4.0/node_modules/@japa/core/build/index.js:1100:4)[39m
+[4/4]─
+
+ FAILED 
+
+Tests  16 passed, 4 failed (20)
+ Time  875ms

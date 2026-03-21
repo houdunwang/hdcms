@@ -8,17 +8,20 @@ import { useSetAtom } from "jotai"
 import { useDropzone } from 'react-dropzone'
 import { FieldValidateError } from "./FieldValidateError"
 import { ImageUp } from "lucide-react"
+import { Image } from "#core/common/Image.tsx"
+import type { ReactNode } from "react"
 
 interface Props extends FormFieldProps<'input'> {
 	onSuccess: (url: string) => void
 	maxSize?: number,
+	fallback?: ReactNode
 }
-export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props): React.JSX.Element {
+export function FieldImage({ onSuccess, maxSize, fieldClassName, fallback }: Props): React.JSX.Element {
 	const field = useFieldContext<string>()
 	const api = useApi()
 	const setFieldError = useSetAtom(fieldErrorAtom)
 
-	const mutation = useMutation(api.uploads.imageSingle.mutationOptions({
+	const mutation = useMutation(api.uploads.image.mutationOptions({
 		onSuccess: ({ data }) => {
 			field.setValue(data.url)
 			onSuccess(data.url)
@@ -48,7 +51,8 @@ export function FieldImage({ onSuccess, maxSize, fieldClassName }: Props): React
 		<input {...getInputProps()} />
 		<div  {...getRootProps({ className: 'dropzone  p-3 rounded-lg cursor-pointer' })}>
 			{field.state.value ?
-				<img src={field.state.value}
+				<Image src={field.state.value}
+					fallback={fallback}
 					className={cn('group-hover:scale-105 duration-300 object-cover h-32 rounded-lg cursor-pointer', fieldClassName)} />
 				: <div className="flex flex-col items-center justify-center border p-3 rounded-lg hover:border-primary/30 duration-200">
 					<ImageUp size={70} strokeWidth={1} className="cursor-pointer" />

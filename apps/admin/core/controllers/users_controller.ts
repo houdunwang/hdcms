@@ -21,9 +21,8 @@ export default class UsersController extends BaseController {
    * @responseBody 200 - <User>
    */
   async profile({ bouncer, auth, serialize }: HttpContext) {
-
     // await new Promise(r => setTimeout(r, 3000))
-    await bouncer.with(UserPolicy).authorize('profile', auth.user!)
+    // await bouncer.with(UserPolicy).authorize('profile', auth.user!)
     const isLogin = await auth.checkUsing(['web', 'api'])
     if (isLogin) {
       // 更新用户最后登录时间，1小时内登录不更新
@@ -104,6 +103,7 @@ export default class UsersController extends BaseController {
         user: auth.user!,
       },
     })
+    console.log('payload', payload)
     await user.merge(payload).save()
     return serialize(UserTransformer.transform(user, auth))
   }

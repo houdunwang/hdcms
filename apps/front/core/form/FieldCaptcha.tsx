@@ -7,8 +7,8 @@ import type { FormFieldProps } from "#core/form/types"
 import { useEffect } from "react"
 import { ScaleLoader } from "react-spinners"
 import { FieldValidateError } from "./FieldValidateError"
-export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
 
+export function FieldCaptcha({ label, description, className, fieldClassName, type, ...props }: FormFieldProps<'input'>): React.JSX.Element {
 	const field = useFieldContext<string>()
 	const api = useApi()
 	const autoComplete = type === 'password' ? 'new-password' : 'off'
@@ -38,7 +38,8 @@ export function FieldCaptcha({ label, description, className, fieldClassName, ty
 					{...props}
 					autoComplete={autoComplete}
 				/>
-				{<div className="border border-input rounded-sm h-[32px] w-[120px] flex items-center justify-center cursor-pointer" onClick={() => refetch()}>
+				{<div className="border border-input rounded-sm h-[32px] w-[120px] flex items-center justify-center cursor-pointer"
+					onClick={() => refetch()}>
 					{isFetching ?
 						<ScaleLoader height={20} color="#e74c3c" /> :
 						<div dangerouslySetInnerHTML={{ __html: data?.data?.svg || '' }} />
