@@ -1,8 +1,3 @@
-/**
- * 作者: 向军大叔
- * 邮箱: 2300071698@qq.com
- * 直播: 抖音、B站 搜索 后盾云
- */
 import { getUserByName } from '#core/helper'
 import { loginValidator, registerValidator } from '#core/validators/auth'
 import User from '#models/user'

@@ -1,12 +1,8 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
+/**
+ * 作者: 向军大叔
+ * 邮箱: 2300071698@qq.com
+ * 直播: 抖音、B站 搜索 后盾云
+ */
 import router from '@adonisjs/core/services/router'
 import "#core/routes/index"
 import { currentDirectory } from '#core/helper'

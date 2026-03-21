@@ -1,8 +1,4 @@
-/**
- * 作者: 向军大叔
- * 邮箱: 2300071698@qq.com
- * 直播: 抖音、B站 搜索 后盾云
- */
+
 import User from '#models/user'
 import { BasePolicy } from '@adonisjs/bouncer'
 import type { AuthorizerResponse } from '@adonisjs/bouncer/types'

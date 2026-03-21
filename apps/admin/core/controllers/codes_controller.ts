@@ -1,8 +1,4 @@
-/**
- * 作者: 向军大叔
- * 邮箱: 2300071698@qq.com
- * 直播: 抖音、B站 搜索 后盾云
- */
+
 import { CodeService } from '#core/services/code_service'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
