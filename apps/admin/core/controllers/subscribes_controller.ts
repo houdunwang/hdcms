@@ -8,17 +8,14 @@ export default class SubscribesController {
     const field = request.input('field')
     const keyword = request.input('keyword')
     const page = request.input('page', 1)
-    const db = Subscribe.query().preload('user')
-    if (keyword) {
+    const subscribes = await Subscribe.query().preload('user').if(keyword, (query) => {
       if (field === 'userId') {
-        db.where('user_id', Number(keyword))
+        query.where('user_id', Number(keyword) || 0)
       } else {
-        db.where(field, 'like', `%${keyword}%`)
+        query.where(field, 'like', `%${keyword}%`)
       }
-      const subscribes = await db.paginate(page)
-      return serialize(SubscribeTransformer.paginate(subscribes, subscribes.getMeta()))
-    }
-    const subscribes = await db.paginate(page)
+    }).paginate(page)
+
     return serialize(SubscribeTransformer.paginate(subscribes, subscribes.getMeta()))
   }
 

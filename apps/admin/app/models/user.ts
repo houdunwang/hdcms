@@ -29,7 +29,7 @@ export default class User extends compose(UserSchema, AuthFinder) {
   declare password: string
 
   @column({ serializeAs: null })
-  declare mobile: string
+  declare mobile: string | null
 
   @column({ serializeAs: null })
   declare openid: string

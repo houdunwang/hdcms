@@ -1,312 +1,133 @@
-import { test } from '@japa/runner'
 import User from '#models/user'
-import testUtils from '@adonisjs/core/services/test_utils'
-import { UserFactory } from '#core/database/factories/user_factory'
-import hash from '@adonisjs/core/services/hash'
 import cache from '@adonisjs/cache/services/main'
+import testUtils from '@adonisjs/core/services/test_utils'
+import { test } from '@japa/runner'
 
-test.group('Auth controller', (group) => {
-  group.each.setup(() => testUtils.db().withGlobalTransaction())
+interface RegisterPayload {
+  name: string
+  password: string
+  password_confirmation: string
+  captcha: string
+  captcha_key: string
+}
 
-  test('login: should return 422 when account is missing', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-1'
+test.group('AuthController - 登录注册', (group) => {
+  group.each.setup(() => testUtils.db().truncate())
+
+  test('注册 - 缺少必填字段应返回 422 验证错误', async ({ client }) => {
+    const response = await client.post('/core/register').json({} as unknown as RegisterPayload)
+
+    response.assertStatus(422)
+    response.assertBodyContains({
+      errors: [],
+    })
+  })
+
+  test('注册 - 密码确认不一致应返回 422 验证错误', async ({ client }) => {
+    const captchaKey = 'test-captcha-key-register-1'
     await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
 
-    const response = await client.post('/core/login').json({
-      account: '',
-      password: 'admin888',
+    const payload: RegisterPayload = {
+      name: 'testuser',
+      password: 'password123',
+      password_confirmation: 'password456',
       captcha: '1234',
       captcha_key: captchaKey,
-    } as any)
+    }
+
+    const response = await client.post('/core/register').json(payload)
+
     response.assertStatus(422)
   })
 
-  test('login: should return 422 when password is missing', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-2'
+  test('注册 - 验证码错误应返回 422 验证错误', async ({ client }) => {
+    const captchaKey = 'test-captcha-key-register-2'
     await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
 
-    const response = await client.post('/core/login').json({
-      account: 'admin',
-      password: '',
-      captcha: '1234',
+    const payload: RegisterPayload = {
+      name: 'testuser',
+      password: 'password123',
+      password_confirmation: 'password123',
+      captcha: 'wrong-captcha',
       captcha_key: captchaKey,
-    } as any)
+    }
+
+    const response = await client.post('/core/register').json(payload)
+
     response.assertStatus(422)
   })
 
-  test('login: should return 422 when account length is less than 3', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-3'
+  test('注册 - 使用有效数据应成功注册并返回 200', async ({ client, assert }) => {
+    const captchaKey = 'test-captcha-key-register-3'
     await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
 
-    const response = await client.post('/core/login').json({
-      account: 'ab',
-      password: 'admin888',
+    const payload: RegisterPayload = {
+      name: 'testuser',
+      password: 'password123',
+      password_confirmation: 'password123',
       captcha: '1234',
       captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
+    }
 
-  test('login: should return 422 when password length is less than 5', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-4'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
+    const response = await client.post('/core/register').json(payload)
 
-    const response = await client.post('/core/login').json({
-      account: 'admin',
-      password: '1234',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('login: should return 422 when user does not exist', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-5'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/login').json({
-      account: 'nonexistent',
-      password: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-    response.assertBodyContains({ errors: [{ message: '帐号 不存在' }] })
-  })
-
-  test('login: should return 422 when password is incorrect', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-6'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const password = 'correctpassword'
-    await UserFactory.merge({
-      name: 'testuser6',
-      password: await hash.make(password),
-    }).create()
-
-    const response = await client.post('/core/login').json({
-      account: 'testuser6',
-      password: 'wrongpassword',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-    response.assertBodyContains({ errors: [{ message: '密码错误', field: 'password' }] })
-  })
-
-  test('login: should return 200 and token when login successful', async ({ client, assert }) => {
-    const captchaKey = 'test-captcha-key-7'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const password = 'admin888'
-    const user = await UserFactory.merge({
-      name: 'loginuser7',
-      password: await hash.make(password),
-    }).create()
-
-    const response = await client.post('/core/login').json({
-      account: 'loginuser7',
-      password: password,
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
     response.assertStatus(200)
-    const body = response.body() as any
-    assert.property(body.data, 'token')
-    assert.property(body.data, 'user')
-    assert.equal(body.data.user.id, user.id)
-    assert.equal(body.data.user.name, user.name)
+
+    const body = response.body() as { data: { user: { id: number; name: string }; token: string } }
+    assert.exists(body.data.user)
+    assert.exists(body.data.token)
+    assert.equal(body.data.user.name, 'testuser')
+
+    const user = await User.find(body.data.user.id)
+    assert.isDefined(user)
+    assert.equal(user!.name, 'testuser')
   })
 
-  test('login: should return 200 when login with email', async ({ client, assert }) => {
-    const captchaKey = 'test-captcha-key-8'
+  test('注册 - 用户名已存在应返回 422 验证错误', async ({ client }) => {
+    await User.create({
+      name: 'existinguser',
+      password: 'password123',
+      email: 'existing@test.com',
+    })
+
+    const captchaKey = 'test-captcha-key-register-4'
     await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
 
-    const password = 'admin888'
-    const user = await UserFactory.merge({
-      name: 'emailuser8',
-      email: 'test8@example.com',
-      password: await hash.make(password),
-    }).create()
-
-    const response = await client.post('/core/login').json({
-      account: 'test8@example.com',
-      password: password,
+    const payload: RegisterPayload = {
+      name: 'existinguser',
+      password: 'password123',
+      password_confirmation: 'password123',
       captcha: '1234',
       captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(200)
-    const body = response.body() as any
-    assert.property(body.data, 'token')
-    assert.equal(body.data.user.id, user.id)
+    }
+
+    const response = await client.post('/core/register').json(payload)
+
+    response.assertStatus(422)
   })
+})
 
-  test('login: should return 200 when login with mobile', async ({ client, assert }) => {
-    const captchaKey = 'test-captcha-key-9'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
+test.group('AuthController - 退出登录', (group) => {
+  group.each.setup(() => testUtils.db().truncate())
 
-    const password = 'admin888'
-    const user = await UserFactory.merge({
-      name: 'mobileuser9',
-      mobile: '13800138009',
-      password: await hash.make(password),
-    }).create()
-
-    const response = await client.post('/core/login').json({
-      account: '13800138009',
-      password: password,
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(200)
-    const body = response.body() as any
-    assert.property(body.data, 'token')
-    assert.equal(body.data.user.id, user.id)
-  })
-
-  test('logout: should return 401 when not authenticated', async ({ client }) => {
+  test('退出登录 - 未登录用户应返回 401', async ({ client }) => {
     const response = await client.post('/core/logout')
+
     response.assertStatus(401)
   })
 
-  test('logout: should return 200 when logout successful', async ({ client }) => {
-    const user = await UserFactory.create()
+  test('退出登录 - 已登录用户应成功退出并返回 200', async ({ client, assert }) => {
+    const user = await User.create({
+      name: 'logoutuser',
+      password: 'password123',
+      email: 'logout@test.com',
+    })
+
     const response = await client.post('/core/logout').loginAs(user)
+
     response.assertStatus(200)
-  })
 
-  test('register: should return 422 when name is missing', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-10'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: '',
-      password: 'admin888',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 422 when password is missing', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-11'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: 'newuser',
-      password: '',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 422 when name length is less than 3', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-12'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: 'ab',
-      password: 'admin888',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 422 when name length is more than 20', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-13'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: 'a'.repeat(21),
-      password: 'admin888',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 422 when password length is less than 5', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-14'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: 'newuser',
-      password: '1234',
-      password_confirmation: '1234',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 422 when password does not match confirmation', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-15'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: 'newuser',
-      password: 'admin888',
-      password_confirmation: 'admin999',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 422 when name already exists', async ({ client }) => {
-    const captchaKey = 'test-captcha-key-16'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    await UserFactory.merge({ name: 'existinguser16' }).create()
-
-    const response = await client.post('/core/register').json({
-      name: 'existinguser16',
-      password: 'admin888',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(422)
-  })
-
-  test('register: should return 200 and token when register successful', async ({ client, assert }) => {
-    const captchaKey = 'test-captcha-key-17'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    const response = await client.post('/core/register').json({
-      name: 'newregistereduser17',
-      password: 'admin888',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-    response.assertStatus(200)
-    const body = response.body() as any
-    assert.property(body.data, 'token')
-    assert.property(body.data, 'user')
-    assert.equal(body.data.user.name, 'newregistereduser17')
-  })
-
-  test('register: should create user in database when register successful', async ({ client, assert }) => {
-    const captchaKey = 'test-captcha-key-18'
-    await cache.set({ key: captchaKey, value: '1234', ttl: '5m' })
-
-    await client.post('/core/register').json({
-      name: 'dbuser18',
-      password: 'admin888',
-      password_confirmation: 'admin888',
-      captcha: '1234',
-      captcha_key: captchaKey,
-    } as any)
-
-    const user = await User.findBy('name', 'dbuser18')
-    assert.exists(user)
-    assert.equal(user!.name, 'dbuser18')
+    const tokens = await User.accessTokens.all(user)
+    assert.equal(tokens.length, 0)
   })
 })

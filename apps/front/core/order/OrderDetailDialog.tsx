@@ -14,7 +14,6 @@ type Props = {
 
 export const OrderDetailDialog = ({ order }: Props) => {
 	const orderType = orderTypes[order.orderableType as keyof typeof orderTypes]
-	console.log('orderType.detailComponent', orderType?.detailComponent)
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -28,15 +27,17 @@ export const OrderDetailDialog = ({ order }: Props) => {
 					<DialogTitle>{orderType?.label}</DialogTitle>
 					<DialogDescription asChild>
 						<div>
-							<UserAvatar user={order.user} />
+							<div className='flex gap-2 text-sm'>
+								<UserAvatar user={order.user} />
+								<div className='flex flex-col'>
+									UID: {order.user.id}
+									<div className='text-xs'>
+										注册于 {dayjs(order.user?.createdAt).fromNow()}
+									</div>
+								</div>
+							</div>
 							<div>
-								<div>
-									{order.user.nickname}
-								</div>
-								<div>
-									购买于 {dayjs(order.updatedAt).format('YYYY-MM-DD HH:mm')}
-								</div>
-								<div>电话: {order.user.mobile}</div>
+								{/* 购买于 {dayjs(order.updatedAt).format('YYYY-MM-DD HH:mm')} */}
 							</div>
 						</div>
 					</DialogDescription>

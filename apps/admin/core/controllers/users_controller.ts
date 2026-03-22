@@ -20,7 +20,7 @@ export default class UsersController extends BaseController {
    * @description 获取当前认证用户的详细信息
    * @responseBody 200 - <User>
    */
-  async profile({ bouncer, auth, serialize }: HttpContext) {
+  async profile({ auth, serialize }: HttpContext) {
     // await new Promise(r => setTimeout(r, 3000))
     // await bouncer.with(UserPolicy).authorize('profile', auth.user!)
     const isLogin = await auth.checkUsing(['web', 'api'])
@@ -50,11 +50,14 @@ export default class UsersController extends BaseController {
     const page = request.input('page', 1)
     const field = request.qs().field || 'name'
     const keyword = request.qs().keyword
-    if (keyword) {
-      const users = await User.query().where(field, 'like', `%${keyword}%`).paginate(page)
-      return serialize(UserTransformer.paginate(users, users.getMeta(), auth))
-    }
-    const users = await User.query().paginate(page)
+    const users = await User.query().if(keyword, (query) => {
+      if (field === 'id') {
+        query.where('id', Number(keyword) || 0)
+      } else {
+        query.where(field, 'like', `%${keyword}%`)
+      }
+    }).paginate(page)
+
     return serialize(UserTransformer.paginate(users, users.getMeta(), auth))
   }
 

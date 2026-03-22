@@ -23,7 +23,6 @@ export const useAuth = () => {
 	 * @returns 是否已认证 - boolean
 	 */
 	const isAuthenticated = useMemo(() => {
-		// console.log('user-------init', user)
 		const isLogin = Boolean(user?.id)
 		if (!isLogin && !location.pathname.startsWith('/auth')) {
 			localStorage.setItem('history', window.location.href)

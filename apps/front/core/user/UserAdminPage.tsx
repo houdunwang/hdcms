@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
 import { registry } from '@app/admin/registry'
@@ -110,7 +110,9 @@ function RenderUserTable({ data }: { data: typeof registry.$tree.users.index.typ
 					</TableBody>
 				</Table>
 			</CardContent>
-			<Page meta={data?.metadata} />
+			<CardFooter className={cn({ 'hidden': data?.metadata.lastPage == '1' })}>
+				<Page meta={data?.metadata} />
+			</CardFooter>
 		</Card>
 	)
 }

@@ -1,9 +1,9 @@
 // import type { HttpContext } from '@adonisjs/core/http'
 
 import { AliyunSmsService } from "#core/services/aliyun_sms_service"
-import SmsPolicy from "#policies/sms_policy"
+import SmsPolicy from "#core/policies/sms_policy"
 import env from "#start/env"
-import { testSmsValidate } from "#validators/sms"
+import { testSmsValidate } from "#core/validators/sms"
 import { inject } from "@adonisjs/core"
 import { HttpContext } from "@adonisjs/core/http"
 

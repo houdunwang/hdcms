@@ -10,10 +10,7 @@ export default class AdminMiddleware {
     const user = await ctx.auth.authenticateUsing(['web', 'api'])
 
     if (!user.isAdmin) {
-      throw new Exception('你不是管理员', {
-        code: 'E_UNAUTHORIZED_ACCESS',
-        status: 403,
-      })
+      throw new Exception('你不是管理员', { code: 'E_UNAUTHORIZED_ACCESS', status: 403, })
     }
     /**
      * Call next method in the pipeline and return its output

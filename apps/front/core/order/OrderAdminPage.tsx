@@ -5,7 +5,7 @@ import { ResultEmpty } from '#core/errors/ResultEmpty'
 import { useApi } from '#core/hooks'
 import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { UserAvatar } from '#core/user'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import type { Data } from '@app/admin/data'
 import { registry } from '@app/admin/registry'
@@ -17,6 +17,7 @@ import { ShoppingBag } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
 import { SearchBlock } from '../common/SearchBlock'
 import { OrderDetailDialog } from './OrderDetailDialog'
+import { cn } from '#/lib/utils'
 
 export const OrderAdminPage = (): JSX.Element => {
 	const api = useApi()
@@ -93,7 +94,9 @@ const RenderOrderTable = ({ data }: { data: typeof registry.$tree.orders.index.t
 				</TableBody>
 			</Table>
 		</CardContent>
-		<Page meta={data.metadata as any} />
+		<CardFooter className={cn({ 'hidden': data?.metadata.lastPage == '1' })}>
+			<Page meta={data.metadata as any} />
+		</CardFooter>
 	</Card>
 }
 type RowProps = {

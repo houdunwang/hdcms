@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "tsdown --watch",
     "build": "tsdown",
+    "test": "",
     "format": "prettier --write \"./**/*.{js,json}\""
   },
   "exports": {

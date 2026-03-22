@@ -1,5 +1,3 @@
-import User from '#models/user'
-import hash from '@adonisjs/core/services/hash'
 import vine from '@vinejs/vine'
 import { validateProvider } from './config/validateProvider.ts'
 import { captchaRule } from './rules/captchaRule.js'

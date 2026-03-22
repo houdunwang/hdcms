@@ -1,3 +1,4 @@
+import { cn } from '#/lib/utils'
 import { Loading, } from '#core/common'
 import { ChartBar } from '#core/common/ChartBar'
 import { Page } from '#core/common/Page'
@@ -73,28 +74,12 @@ export const SubscribeAdminPage = (): JSX.Element => {
 									<TableCell>{dayjs(order.endTime).format('YYYY-MM-DD')}</TableCell>
 									<TableCell>{dayjs(order.createdAt).format('YYYY-MM-DD')}</TableCell>
 									<TableCell className='text-right'>{dayjs(order.updatedAt).format('YYYY-MM-DD')}</TableCell>
-									{/* <TableCell className="text-right pr-5">
-										<DropdownMenu>
-											<DropdownMenuTrigger asChild>
-												<Button variant="ghost" size="icon" className="size-8">
-													<TextAlignJustify />
-												</Button>
-											</DropdownMenuTrigger>
-											<DropdownMenuContent align="end">
-												<DropdownMenuItem>标记已取消</DropdownMenuItem>
-												<DropdownMenuSeparator />
-												<DropdownMenuItem variant="destructive">
-													删除
-												</DropdownMenuItem>
-											</DropdownMenuContent>
-										</DropdownMenu>
-									</TableCell> */}
 								</TableRow>
 							))}
 						</TableBody>
 					</Table>
 				</CardContent>
-				<CardFooter>
+				<CardFooter className={cn({ 'hidden': data?.metadata.lastPage == '1' })}>
 					<Page meta={data.metadata as any} />
 				</CardFooter>
 			</Card>

@@ -1,8 +1,6 @@
-// import type { HttpContext } from '@adonisjs/core/http'
-
 import { MailService } from "#core/services/mail_service"
 import { testEmailValidate } from "#core/validators/email"
-import EmailPolicy from "#policies/email_policy"
+import EmailPolicy from "#core/policies/email_policy"
 import env from "#start/env"
 import { inject } from "@adonisjs/core"
 import { HttpContext } from "@adonisjs/core/http"

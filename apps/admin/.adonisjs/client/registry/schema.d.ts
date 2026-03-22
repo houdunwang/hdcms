@@ -359,10 +359,10 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/core/sms/test'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/sms').testSmsValidate)>>
+      body: ExtractBody<InferInput<(typeof import('#core/validators/sms').testSmsValidate)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/sms').testSmsValidate)>>
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/sms').testSmsValidate)>>
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/sms_controller').default['test']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/sms_controller').default['test']>>> | { status: 422; response: { errors: SimpleError[] } }
     }

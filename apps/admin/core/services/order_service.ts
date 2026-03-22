@@ -98,7 +98,7 @@ export class OrderService {
         amount: Number.isNaN(amt) ? 0 : amt,
       })
     }
-    return years
+    return years.reverse()
   }
 
   /**
@@ -135,7 +135,7 @@ export class OrderService {
         amount: Number.isNaN(amt as number) ? 0 : (amt as number),
       })
     }
-    return months
+    return months.reverse()
   }
 
   /**
@@ -167,7 +167,7 @@ export class OrderService {
           : 0
       daysSales.push({ day: label, amount: Number.isNaN(amt as number) ? 0 : (amt as number) })
     }
-    return daysSales
+    return daysSales.reverse()
   }
 
   /**

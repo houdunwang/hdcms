@@ -22,17 +22,14 @@ export default class OrdersController {
     const field = request.input('field')
     const keyword = request.input('keyword')
     const page = request.input('page', 1)
-    const db = Order.query().preload('user')
-    if (keyword) {
+    const orders = await Order.query().preload('user').if(keyword, (query) => {
       if (field === 'userId') {
-        db.where('user_id', Number(keyword))
+        query.where('user_id', Number(keyword) || 0)
       } else {
-        db.where(field, 'like', `%${keyword}%`)
+        query.where(field, 'like', `%${keyword}%`)
       }
-      const orders = await db.paginate(page)
-      return serialize(OrderTransformer.paginate(orders, orders.getMeta()))
-    }
-    const orders = await db.paginate(page)
+    }).paginate(page)
+
     return serialize(OrderTransformer.paginate(orders, orders.getMeta()))
   }
 }

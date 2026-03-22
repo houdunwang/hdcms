@@ -37,7 +37,7 @@ export class UserService {
           ? Number.parseInt(r.count, 10)
           : Number(r.count)
         : 0
-      result.push({ day: label, count: Number.isNaN(cnt) ? 0 : cnt })
+      result.push({ day: now.minus({ days: i }).toFormat('LL-dd'), count: Number.isNaN(cnt) ? 0 : cnt })
     }
     return result
   }

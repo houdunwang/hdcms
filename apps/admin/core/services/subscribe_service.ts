@@ -54,6 +54,6 @@ export class SubscribeService {
         : 0
       months.push({ month: label, count: Number.isNaN(cnt) ? 0 : cnt })
     }
-    return months
+    return months.reverse()
   }
 }

@@ -59,12 +59,10 @@ export default class AdminController {
 
     //用户统计
     const totalUsersCount = await this.userService.getTotalUsersCount() // 总用户数
-    const monthVisitorsCount = await this.userService.getDaysVisitorsCount(
-      DateTime.now().day - 15 > 0 ? 15 : DateTime.now().day
-    ) // 15天访客数
+    const monthVisitorsCount = await this.userService.getDaysVisitorsCount(7) // 最近7天访客数
     const todayUsersCount = monthVisitorsCount.reverse()[0].count // 今日用户数（从最近2天数组取今日）
     //订单相关
-    const orderMonths = await this.orderService.getOrderStatsByMonth(12) // 最近12个月订单统计
+    const orderMonths = await this.orderService.getOrderStatsByMonth(6) // 最近12个月订单统计
     const orderYears = await this.orderService.getOrderStatsByYear(5) // 最近5年订单统计
     //销售额
     const weekSales = await this.orderService.getWeekSales() // 本周销售额
