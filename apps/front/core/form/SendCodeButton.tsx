@@ -9,7 +9,7 @@ import z from "zod"
 
 interface Props {
 	type: 'email' | 'mobile'
-	value: string
+	value: string //手机号或邮箱
 }
 export function SendCodeButton({ type, value }: Props): React.JSX.Element {
 	const validates = {
@@ -23,12 +23,13 @@ export function SendCodeButton({ type, value }: Props): React.JSX.Element {
 		onSuccess: ({ data }: typeof registry.$tree.codes.email.types.response) => {
 			localStorage.setItem('remainingSeconds', dayjs().add(data.remainingSeconds, 'second').toString())
 			setCountdown(60)
+			toast.success('验证码发送成功')
 		},
 		onError: (error: any) => {
 			if (error.status === 400) {
 				const response = error.response as { message: string, remainingSeconds?: number }
 				localStorage.setItem('remainingSeconds', dayjs().add(response.remainingSeconds || 0, 'second').toString())
-				if (response?.remainingSeconds) {
+				if (response.remainingSeconds) {
 					setCountdown(response.remainingSeconds)
 				}
 			}
@@ -67,7 +68,6 @@ export function SendCodeButton({ type, value }: Props): React.JSX.Element {
 				}
 			})
 		}
-
 	}
 	return <Button
 		variant={'outline'}

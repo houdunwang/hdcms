@@ -36,6 +36,7 @@ export default class FindPasswordsController extends BaseController {
     })
     const user = await User.findByOrFail('email', email)
     await user.merge({ password }).save()
+    await auth.use('web').login(user)
     const token = await auth.use('api').createToken(user)
     return serialize({
       user: UserTransformer.transform(await user.refresh(), auth),
@@ -60,6 +61,7 @@ export default class FindPasswordsController extends BaseController {
     })
     const user = await User.findByOrFail('mobile', mobile)
     await user.merge({ password }).save()
+    await auth.use('web').login(user)
     const token = await auth.use('api').createToken(user)
     return serialize({
       user: UserTransformer.transform(await user.refresh(), auth),

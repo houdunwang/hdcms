@@ -61,7 +61,7 @@ export const useAuth = () => {
 	const logout = async () => {
 		await logoutMutation.mutateAsync({})
 		setUser(undefined)
-		location.href = '/'
+		// location.href = '/'
 	}
 
 	return {

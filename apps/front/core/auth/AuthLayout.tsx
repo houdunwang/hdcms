@@ -1,40 +1,12 @@
 import { cn } from '@/lib/utils'
 import type { ComponentProps, FC, PropsWithChildren } from 'react'
-import { FindPassword } from './FindPassword'
-import { Login } from './login'
-import { Register } from './Register'
-import { WechatLogin } from './WechatLogin'
 
 type Props = ComponentProps<'div'> & PropsWithChildren<{}>
 
-const components = {
-	login: Login,
-	register: Register,
-	findPassword: FindPassword,
-	wechatLogin: WechatLogin,
-}
 export const AuthLayout: FC<Props> = (props) => {
-	// const route = useMatch({ strict: false })
-	// let action = route.search.action as keyof typeof components | undefined || 'login'
-	// const Component = components[action]
-	// const helperComponent = props.helperComponent
-	// const RightSpaceComponent = props.components?.[action]?.rightSpace
 	return <section className={cn("flex items-start", props.className)}>
 		<div className={cn("container mx-auto content-center")}>
 			{props.children}
-			{/* <div className={cn("w-full lg:max-w-md bg-muted pt-5 rounded-lg border", {
-				"pb-5": !helperComponent
-			})}>
-				<div className='px-5'>
-					{Component && <Component {...props} >
-						<AuthFooter {...props} />
-					</Component>}
-				</div>
-				{helperComponent && <div className="border-t flex items-center justify-center py-3 mt-4 px-5 text-muted-foreground text-sm">
-					{helperComponent}
-				</div>}
-			</div>
-			{RightSpaceComponent && RightSpaceComponent} */}
 		</div>
 		<GradientAnimation />
 	</section>

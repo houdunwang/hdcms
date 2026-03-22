@@ -1,12 +1,11 @@
+import { useFieldContext } from "#core/form"
+import type { FormFieldProps } from "#core/form/types"
 import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useFieldContext } from "#core/form"
 import { useField } from "@tanstack/react-form"
-import type { FormFieldProps } from "#core/form/types"
-import z from "zod"
+import { useEffect } from "react"
 import { FieldValidateError } from "./FieldValidateError"
 import { SendCodeButton } from "./SendCodeButton"
-import { useEffect } from "react"
 
 type CodeType = 'email' | 'mobile'
 interface FieldCodeProps extends FormFieldProps<'input'> {
@@ -18,18 +17,10 @@ export function FieldCode({ label, description, className, fieldClassName, type,
 	const field = useField({
 		form: form,
 		name: type,
-		validators: {
-			onChange: type === 'email' ?
-				z.string().min(1, '请输入正确的邮箱')
-				: z.string().refine((val) => /^1[3-9]\d{9}$/.test(val), '请输入正确的手机号'),
-		},
 	})
 	const codeField = useField({
 		form: form,
 		name: 'code',
-		validators: {
-			onChange: z.string().min(4, '请输入正确的验证码'),
-		},
 	})
 	useEffect(() => {
 		form.resetField(type == 'email' ? 'mobile' : 'email')

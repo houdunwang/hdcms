@@ -6,7 +6,6 @@ export type ScannedRoutes = {
   ALL: {
     'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'admin.index': { paramsTuple?: []; params?: {} }
-    'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
     'authorize': { paramsTuple?: []; params?: {} }
@@ -21,6 +20,9 @@ export type ScannedRoutes = {
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'logs.index': { paramsTuple?: []; params?: {} }
+    'login.name': { paramsTuple?: []; params?: {} }
+    'login.email': { paramsTuple?: []; params?: {} }
+    'login.mobile': { paramsTuple?: []; params?: {} }
     'orders.index': { paramsTuple?: []; params?: {} }
     'package.index': { paramsTuple?: []; params?: {} }
     'package.store': { paramsTuple?: []; params?: {} }
@@ -81,7 +83,6 @@ export type ScannedRoutes = {
     'wechats_message': { paramsTuple?: []; params?: {} }
   }
   POST: {
-    'auth.login': { paramsTuple?: []; params?: {} }
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
     'authorize': { paramsTuple?: []; params?: {} }
@@ -92,6 +93,9 @@ export type ScannedRoutes = {
     'configs.store': { paramsTuple?: []; params?: {} }
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
+    'login.name': { paramsTuple?: []; params?: {} }
+    'login.email': { paramsTuple?: []; params?: {} }
+    'login.mobile': { paramsTuple?: []; params?: {} }
     'package.store': { paramsTuple?: []; params?: {} }
     'pays.wepay': { paramsTuple?: []; params?: {} }
     'pays.wepay_check': { paramsTuple?: []; params?: {} }

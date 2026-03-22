@@ -18,12 +18,6 @@ const routes = {
     tokens: [{"old":"/core/admin","type":0,"val":"core","end":""},{"old":"/core/admin","type":0,"val":"admin","end":""}],
     types: placeholder as Registry['admin.index']['types'],
   },
-  'auth.login': {
-    methods: ["POST"],
-    pattern: '/core/login',
-    tokens: [{"old":"/core/login","type":0,"val":"core","end":""},{"old":"/core/login","type":0,"val":"login","end":""}],
-    types: placeholder as Registry['auth.login']['types'],
-  },
   'auth.register': {
     methods: ["POST"],
     pattern: '/core/register',
@@ -107,6 +101,24 @@ const routes = {
     pattern: '/core/logs',
     tokens: [{"old":"/core/logs","type":0,"val":"core","end":""},{"old":"/core/logs","type":0,"val":"logs","end":""}],
     types: placeholder as Registry['logs.index']['types'],
+  },
+  'login.name': {
+    methods: ["POST"],
+    pattern: '/core/login/name',
+    tokens: [{"old":"/core/login/name","type":0,"val":"core","end":""},{"old":"/core/login/name","type":0,"val":"login","end":""},{"old":"/core/login/name","type":0,"val":"name","end":""}],
+    types: placeholder as Registry['login.name']['types'],
+  },
+  'login.email': {
+    methods: ["POST"],
+    pattern: '/core/login/email',
+    tokens: [{"old":"/core/login/email","type":0,"val":"core","end":""},{"old":"/core/login/email","type":0,"val":"login","end":""},{"old":"/core/login/email","type":0,"val":"email","end":""}],
+    types: placeholder as Registry['login.email']['types'],
+  },
+  'login.mobile': {
+    methods: ["POST"],
+    pattern: '/core/login/mobile',
+    tokens: [{"old":"/core/login/mobile","type":0,"val":"core","end":""},{"old":"/core/login/mobile","type":0,"val":"login","end":""},{"old":"/core/login/mobile","type":0,"val":"mobile","end":""}],
+    types: placeholder as Registry['login.mobile']['types'],
   },
   'orders.index': {
     methods: ["GET","HEAD"],

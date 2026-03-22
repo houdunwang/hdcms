@@ -11,7 +11,6 @@ export interface ApiDefinition {
     index: typeof routes['admin.index']
   }
   auth: {
-    login: typeof routes['auth.login']
     register: typeof routes['auth.register']
     logout: typeof routes['auth.logout']
   }
@@ -36,6 +35,11 @@ export interface ApiDefinition {
   }
   logs: {
     index: typeof routes['logs.index']
+  }
+  login: {
+    name: typeof routes['login.name']
+    email: typeof routes['login.email']
+    mobile: typeof routes['login.mobile']
   }
   orders: {
     index: typeof routes['orders.index']

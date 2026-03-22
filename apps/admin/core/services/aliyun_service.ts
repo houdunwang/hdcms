@@ -17,15 +17,10 @@ export class AliyunService {
       endpoint: 'dysmsapi.aliyuncs.com',
     })
 
-    return new (Dysmsapi20170525 as any)(config)
+    return new (Dysmsapi20170525.default as any)(config)
   }
 
-  async sendSms(
-    phoneNumbers: string,
-    signName: string,
-    templateCode?: string,
-    templateParam?: Record<string, string>
-  ): Promise<void> {
+  async sendSms(phoneNumbers: string, signName: string, templateCode?: string, templateParam?: Record<string, string>): Promise<void> {
     const client = this.createClient()
 
     const request = new $Dysmsapi20170525.SendSmsRequest({

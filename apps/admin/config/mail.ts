@@ -10,7 +10,7 @@ const mailConfig = defineConfig({
    * options.
    */
   from: {
-    address: env.get('MAIL_FROM_ADDRESS'),
+    address: env.get('SMTP_USERNAME'),
     name: env.get('MAIL_FROM_NAME'),
   },
 
@@ -38,11 +38,12 @@ const mailConfig = defineConfig({
        * Uncomment the auth block if your SMTP
        * server needs authentication
        */
-      /* auth: {
+      secure: env.get('SMTP_SECURE') ?? true,
+      auth: {
         type: 'login',
-        user: env.get('SMTP_USERNAME'),
-        pass: env.get('SMTP_PASSWORD'),
-      }, */
+        user: env.get('SMTP_USERNAME') ?? '',
+        pass: env.get('SMTP_PASSWORD') ?? '',
+      },
     }),
 
   },

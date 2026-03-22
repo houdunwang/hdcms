@@ -31,18 +31,6 @@ export interface Registry {
       errorResponse: unknown
     }
   }
-  'auth.login': {
-    methods: ["POST"]
-    pattern: '/core/login'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#core/validators/auth').loginValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#core/validators/auth').loginValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['login']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/auth_controller').default['login']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
   'auth.register': {
     methods: ["POST"]
     pattern: '/core/register'
@@ -209,6 +197,42 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['index']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/logs_controller').default['index']>>>
+    }
+  }
+  'login.name': {
+    methods: ["POST"]
+    pattern: '/core/login/name'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/login').nameLoginValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/login').nameLoginValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/login_controller').default['name']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/login_controller').default['name']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'login.email': {
+    methods: ["POST"]
+    pattern: '/core/login/email'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/login').emailLoginValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/login').emailLoginValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/login_controller').default['email']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/login_controller').default['email']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'login.mobile': {
+    methods: ["POST"]
+    pattern: '/core/login/mobile'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/login').mobileLoginValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/login').mobileLoginValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/login_controller').default['mobile']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/login_controller').default['mobile']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'orders.index': {

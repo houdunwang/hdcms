@@ -1,43 +1,13 @@
-import { getUserByName } from '#core/helper'
-import { loginValidator, registerValidator } from '#core/validators/auth'
+import { registerValidator } from '#core/validators/auth'
 import User from '#models/user'
 import UserTransformer from '#transformers/user_transformer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import { errors } from '@vinejs/vine'
 import BaseController from './bases_controller.js'
 @inject()
 export default class AuthController extends BaseController {
   constructor(protected ctx: HttpContext) {
     super()
-  }
-
-  /**
-   * @login
-   * @operationId login
-   * @tag 登录注册
-   * @summary 用户登录
-   * @description 用户登录，支持邮箱、手机号、帐号登录
-   * @requestFormDataBody { "account": { "type": "string", "description": "登录帐号、手机号、邮箱", "example": "admin", "required": "true" }, "password": { "type": "string", "description": "登录密码", "example": "admin888", "required": "true" } , "captcha": { "type": "string", "description": "验证码", "example": "" }, "captcha_key": { "type": "string", "description": "验证码key", "example": "" }}
-   * @responseBody 200 - { "token":"string", "user": "User" }
-   */
-  async login({ request, serialize, auth }: HttpContext) {
-    const payload = await request.validateUsing(loginValidator)
-    const field = payload.email ? 'email' : payload.mobile ? 'mobile' : 'name'
-    const value = payload[field]
-    if (!value) {
-      return this.error(`请输入${field}`)
-    }
-    const user = await User.findByOrFail(field, value)
-    if (!user) {
-      throw new errors.E_VALIDATION_ERROR([{ message: '账号不存在', field: field }])
-    }
-    await auth.use('web').login(user)
-    const token = await User.accessTokens.create(user)
-    return serialize({
-      user: UserTransformer.transform(user, auth),
-      token: token.value!.release(),
-    })
   }
 
   /**
@@ -70,6 +40,7 @@ export default class AuthController extends BaseController {
     const user = new User()
     const { captcha, password_confirmation, ...userPayload } = payload
     await user.fill(userPayload).save()
+    await auth.use('web').login(user)
     const token = await auth.use('api').createToken(user)
     return serialize({
       user: UserTransformer.transform(user, auth),

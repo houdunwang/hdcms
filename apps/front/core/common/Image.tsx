@@ -18,11 +18,5 @@ export const Image: FC<Props> = ({ src, fallback, className, imgClassName }) => 
 				loader={<div className="flex justify-center items-center w-full h-full opacity-50"><Spinner /></div>}
 			/>
 		</div>
-		// <Img
-		// 	className={className}
-		// 	src={src}
-		// 	unloader={fallback || <img src='/nopic160x160.jpg' className='w-full h-full rounded-sm' />}
-		// 	loader={<Loading />}
-		// />
 	)
 }

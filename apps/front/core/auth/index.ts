@@ -1,7 +1,6 @@
 export * from './AuthLayout'
-export * from './FindPassword'
+export * from './findPassword'
 export * from './login'
-export * from './Register'
+export * from './register'
 export * from './WechatLogin'
-
 

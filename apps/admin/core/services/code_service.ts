@@ -6,6 +6,7 @@ import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import { AliyunService } from './aliyun_service.js'
 import { MailService } from './mail_service.js'
+import app from '@adonisjs/core/services/app'
 
 @inject()
 export class CodeService {
@@ -28,7 +29,7 @@ export class CodeService {
     if (await this.isExpired(value)) {
       const remainingSeconds = await this.getElapsedSeconds(value)
       this.ctx.response.abort(
-        { message: `验证码已发送!!!，请${remainingSeconds}秒后再试`, remainingSeconds },
+        { message: `验证码已发送。请${remainingSeconds}秒后再试`, remainingSeconds },
         400
       )
     }
@@ -48,11 +49,11 @@ export class CodeService {
 
   /**
    * 检查指定账号的验证码是否仍在发送冷却期内
-   * @param account 账号（邮箱或手机号）
+   * @param field 账号（邮箱或手机号）
    * @returns 如果在冷却期内返回 true，否则返回 false
    */
-  async isExpired(account: string) {
-    const cachedData = await cache.get({ key: this.getCacheKey(account) })
+  async isExpired(field: string) {
+    const cachedData = await cache.get({ key: this.getCacheKey(field) })
     return cachedData?.time && cachedData.time > Date.now() - this.timeout * 1000
   }
 
@@ -62,12 +63,16 @@ export class CodeService {
    * @param mail 目标邮箱地址
    */
   private async email(mail: string) {
-    const code = await this.generateCode(mail)
-    const html = emailVerificationTemplate(env.get('APP_NAME') || '', code)
     try {
+      const code = await this.generateCode(mail)
+      console.log('email', mail)
+      console.log('code', code)
+      console.log("env.get('APP_NAME')", env.get('APP_NAME'))
+      const html = emailVerificationTemplate(env.get('APP_NAME') || '', code)
       await this.mailService.send(mail, html)
     } catch (error) {
-      throw new Error('发送验证码失败')
+      await cache.delete({ key: this.getCacheKey(mail) })
+      throw new Error((app.inDev && (error.message || String(error))) + '发送验证码失败')
     }
   }
 
@@ -85,7 +90,8 @@ export class CodeService {
         { code: await this.generateCode(phone) } // 模板参数
       )
     } catch (error) {
-      throw new Error(error.message ?? '发送验证码失败!!')
+      await cache.delete({ key: this.getCacheKey(phone) })
+      throw new Error((app.inDev && error.message) + '发送验证码失败!!')
     }
   }
 
@@ -114,15 +120,15 @@ export class CodeService {
   }
 
   /**
-   * 验证用户提交的验证码是否正确（10分钟内有效）
-   * @param value 邮箱或手机号
+   * 验证用户提交的验证码是否正确（20分钟内有效）
+   * @param field 邮箱或手机号
    * @param code 用户提交的验证码
    * @returns {Promise<boolean>} 验证成功返回 true，否则返回 false
    */
-  async verify(value: string, code: string): Promise<boolean> {
-    const cachedData = await cache.get({ key: this.getCacheKey(value) })
+  async verify(field: string, code: string): Promise<boolean> {
+    const cachedData = await cache.get({ key: this.getCacheKey(field) })
     if (!cachedData) return false
 
-    return cachedData.code == code && cachedData.time > Date.now() - 10 * 60 * 1000
+    return cachedData.code == code && cachedData.time > Date.now() - 20 * 60 * 1000
   }
 }
