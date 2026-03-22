@@ -1,13 +1,12 @@
 import { Loading, } from '#core/common'
 import { ChartBar } from '#core/common/ChartBar'
 import { Page } from '#core/common/Page'
-import { SearchBlock } from '../common/SearchBlock'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { ResultEmpty } from '#core/errors/ResultEmpty'
 import { useApi } from '#core/hooks'
 import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { UserAvatar } from '#core/user'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import type { Data } from '@app/admin/data'
 import { registry } from '@app/admin/registry'
 import { useQuery } from '@tanstack/react-query'
@@ -16,7 +15,7 @@ import dayjs from 'dayjs'
 import { useAtomValue } from 'jotai'
 import { ShoppingBag } from 'lucide-react'
 import { memo, type FC, type JSX } from 'react'
-import { orderTypes } from '#config/order.tsx'
+import { SearchBlock } from '../common/SearchBlock'
 import { OrderDetailDialog } from './OrderDetailDialog'
 
 export const OrderAdminPage = (): JSX.Element => {
@@ -54,7 +53,7 @@ export const OrderAdminPage = (): JSX.Element => {
 						},
 					}}
 				/>
-				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg px-3 text-sm'}>
+				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg px-3 text-sm opacity-80'}>
 					<ShoppingBag className={'size-6'} />
 					总销售：{dasbardData?.orderMonths.reduce((acc: number, curr: { amount: number }) => acc + curr.amount, 0)} 元
 				</div>

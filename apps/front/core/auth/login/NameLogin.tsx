@@ -1,4 +1,3 @@
-import { WechatLoginButton } from '#core/auth/WechatLoginButton'
 import { hdCreateFormHook } from '#core/form/hdCreateFormHook.ts'
 import { useApi } from '#core/hooks/useApi'
 import { useAuth } from '#core/hooks/useAuth'

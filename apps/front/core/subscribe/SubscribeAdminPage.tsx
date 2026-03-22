@@ -2,11 +2,11 @@ import { Loading, } from '#core/common'
 import { ChartBar } from '#core/common/ChartBar'
 import { Page } from '#core/common/Page'
 import { SearchBlock } from '#core/common/SearchBlock'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useApi } from '#core/hooks'
 import { dasbardAtom } from '#core/store/dasbardAtom.ts'
 import { UserAvatar } from '#core/user'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useQuery } from '@tanstack/react-query'
 import { useRouterState } from '@tanstack/react-router'
 import dayjs from 'dayjs'
@@ -32,7 +32,7 @@ export const SubscribeAdminPage = (): JSX.Element => {
 						{ label: '用户ID', value: 'userId' },
 					]}
 				/>
-				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg border-box p-3 text-sm'}>
+				<div className={'flex flex-col justify-center items-center gap-3 border rounded-lg border-box p-3 text-sm opacity-80'}>
 					<Handbag className={'size-6'} />
 					有效订阅：{dasbardData?.validSubscribers}人
 				</div>

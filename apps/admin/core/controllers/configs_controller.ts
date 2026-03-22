@@ -24,4 +24,6 @@ export default class ConfigsController {
 		})
 		return serialize(ConfigTransformer.transform(await Config.all()))
 	}
+
+
 }

@@ -4,7 +4,7 @@ import env from '#start/env'
 import cache from '@adonisjs/cache/services/main'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
-import { AliyunService } from './aliyun_service.js'
+import { AliyunSmsService } from './aliyun_sms_service.ts'
 import { MailService } from './mail_service.js'
 import app from '@adonisjs/core/services/app'
 
@@ -14,10 +14,10 @@ export class CodeService {
   /**
    * 构造函数，注入依赖服务
    * @param mailService 邮件服务实例
-   * @param aliyunService 阿里云服务实例
+   * @param aliyunSmsService 阿里云服务实例
    * @param ctx HTTP 上下文
    */
-  constructor(private mailService: MailService, private aliyunService: AliyunService, private ctx: HttpContext) { }
+  constructor(private mailService: MailService, private aliyunSmsService: AliyunSmsService, private ctx: HttpContext) { }
 
   /**
    * 发送验证码（邮件或短信）
@@ -83,10 +83,10 @@ export class CodeService {
    */
   private async mobile(phone: string) {
     try {
-      await this.aliyunService.sendSms(
+      await this.aliyunSmsService.sendSms(
         phone,
         env.get('ALIYUN_SMS_CODE_SIGN')!, // 阿里云短信签名
-        env.get('ALIYUN_SMS_CODE_TEMPLATE'), // 模板代码
+        env.get('ALIYUN_SMS_CODE_TEMPLATE')!, // 模板代码
         { code: await this.generateCode(phone) } // 模板参数
       )
     } catch (error) {

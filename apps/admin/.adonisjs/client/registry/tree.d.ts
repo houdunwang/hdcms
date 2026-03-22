@@ -29,6 +29,9 @@ export interface ApiDefinition {
     common: typeof routes['configs.common']
     store: typeof routes['configs.store']
   }
+  emails: {
+    test: typeof routes['emails.test']
+  }
   findPasswords: {
     email: typeof routes['find_passwords.email']
     mobile: typeof routes['find_passwords.mobile']
@@ -57,6 +60,9 @@ export interface ApiDefinition {
   }
   pay: {
     notify: typeof routes['pay.notify']
+  }
+  sms: {
+    test: typeof routes['sms.test']
   }
   subscribe: {
     index: typeof routes['subscribe.index']

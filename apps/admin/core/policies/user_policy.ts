@@ -19,6 +19,7 @@ export default class UserPolicy extends BasePolicy {
 	}
 
 	index(user: User): AuthorizerResponse {
+		console.log('user', user)
 		return user.isAdmin
 	}
 

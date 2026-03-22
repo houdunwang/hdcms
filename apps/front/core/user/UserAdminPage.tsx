@@ -29,7 +29,7 @@ export function UserAdminPage(): JSX.Element {
 	if (isLoading) return <Loading />
 	if (!data?.data) return <></>
 	const className =
-		'rounded-xl bg-muted/50 flex flex-col justify-center items-center gap-3 border text-sm'
+		'rounded-xl bg-muted/50 flex flex-col justify-center items-center gap-3 border text-sm opacity-80'
 	const iconClass = 'text-muted-foreground size-10 lg:size-6'
 	return (
 		<>

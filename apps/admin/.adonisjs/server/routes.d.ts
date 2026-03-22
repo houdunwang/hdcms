@@ -17,6 +17,7 @@ export type ScannedRoutes = {
     'configs.all': { paramsTuple?: []; params?: {} }
     'configs.common': { paramsTuple?: []; params?: {} }
     'configs.store': { paramsTuple?: []; params?: {} }
+    'emails.test': { paramsTuple?: []; params?: {} }
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'logs.index': { paramsTuple?: []; params?: {} }
@@ -32,6 +33,7 @@ export type ScannedRoutes = {
     'pays.wepay': { paramsTuple?: []; params?: {} }
     'pays.wepay_check': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
+    'sms.test': { paramsTuple?: []; params?: {} }
     'subscribe.index': { paramsTuple?: []; params?: {} }
     'subscribe.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'system.restart': { paramsTuple?: []; params?: {} }
@@ -91,6 +93,7 @@ export type ScannedRoutes = {
     'codes.email': { paramsTuple?: []; params?: {} }
     'codes.mobile': { paramsTuple?: []; params?: {} }
     'configs.store': { paramsTuple?: []; params?: {} }
+    'emails.test': { paramsTuple?: []; params?: {} }
     'find_passwords.email': { paramsTuple?: []; params?: {} }
     'find_passwords.mobile': { paramsTuple?: []; params?: {} }
     'login.name': { paramsTuple?: []; params?: {} }
@@ -100,6 +103,7 @@ export type ScannedRoutes = {
     'pays.wepay': { paramsTuple?: []; params?: {} }
     'pays.wepay_check': { paramsTuple?: []; params?: {} }
     'pay.notify': { paramsTuple?: []; params?: {} }
+    'sms.test': { paramsTuple?: []; params?: {} }
     'system.restart': { paramsTuple?: []; params?: {} }
     'uploads.file': { paramsTuple?: []; params?: {} }
     'uploads.image': { paramsTuple?: []; params?: {} }

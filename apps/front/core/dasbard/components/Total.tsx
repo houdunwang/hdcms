@@ -6,8 +6,8 @@ import { type JSX } from 'react'
 
 export const Total = (): JSX.Element => {
 	const dasbardData = useAtomValue(dasbardAtom)
-	const className = 'aspect-video rounded-xl bg-muted/50 text-muted-foreground flex flex-col justify-center items-center gap-3 text-sm lg:text-base'
-	const iconClass = 'text-muted-foreground size-10 lg:size-8 opacity-80'
+	const className = 'aspect-video rounded-xl bg-muted/80 text-muted-foreground flex flex-col justify-center items-center gap-3 text-sm lg:text-sm'
+	const iconClass = 'text-muted-foreground size-10 lg:size-8 opacity-90'
 	return (
 		<div className="grid auto-rows-min gap-1 lg:gap-4 grid-cols-3 lg:grid-cols-5">
 			<div className={className}>

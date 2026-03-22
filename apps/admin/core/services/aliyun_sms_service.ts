@@ -2,7 +2,7 @@ import env from '#start/env'
 import Dysmsapi20170525, * as $Dysmsapi20170525 from '@alicloud/dysmsapi20170525'
 import * as $OpenApi from '@alicloud/openapi-client'
 
-export class AliyunService {
+export class AliyunSmsService {
   /**
    * @remarks
    * 使用凭据初始化账号Client
@@ -20,17 +20,16 @@ export class AliyunService {
     return new (Dysmsapi20170525.default as any)(config)
   }
 
-  async sendSms(phoneNumbers: string, signName: string, templateCode?: string, templateParam?: Record<string, string>): Promise<void> {
-    const client = this.createClient()
-
-    const request = new $Dysmsapi20170525.SendSmsRequest({
-      phoneNumbers,
-      signName,
-      templateCode,
-      templateParam: JSON.stringify(templateParam),
-    })
-
+  async sendSms(phoneNumbers: string, signName: string, templateCode: string, templateParam: Record<string, string>): Promise<void> {
     try {
+      const client = this.createClient()
+      const request = new $Dysmsapi20170525.SendSmsRequest({
+        phoneNumbers,
+        signName,
+        templateCode,
+        templateParam: JSON.stringify(templateParam),
+      })
+
       await client.sendSms(request)
     } catch (error: any) {
       if (error.data?.Recommend) {

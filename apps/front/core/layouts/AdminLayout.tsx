@@ -24,7 +24,7 @@ export const AdminLayout: FC<AdminLayoutProp> = ({ width = 52, height = 12, chil
 	const isMobile = useIsMobile(1024)
 	width = isMobile ? 45 : width
 	const api = useApi()
-	const { isLoading, data } = useQuery(api.admin.queryOptions())
+	const { isLoading, data } = useQuery(api.admin.index.queryOptions())
 	const setdasbardAtom = useSetAtom(dasbardAtom)
 	const dasbardData = data as Record<string, any>
 	useEffect(() => {

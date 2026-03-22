@@ -84,6 +84,12 @@ const routes = {
     tokens: [{"old":"/core/configs/store","type":0,"val":"core","end":""},{"old":"/core/configs/store","type":0,"val":"configs","end":""},{"old":"/core/configs/store","type":0,"val":"store","end":""}],
     types: placeholder as Registry['configs.store']['types'],
   },
+  'emails.test': {
+    methods: ["POST"],
+    pattern: '/core/email/test',
+    tokens: [{"old":"/core/email/test","type":0,"val":"core","end":""},{"old":"/core/email/test","type":0,"val":"email","end":""},{"old":"/core/email/test","type":0,"val":"test","end":""}],
+    types: placeholder as Registry['emails.test']['types'],
+  },
   'find_passwords.email': {
     methods: ["POST"],
     pattern: '/core/findPassword/email',
@@ -173,6 +179,12 @@ const routes = {
     pattern: '/core/pay/notify',
     tokens: [{"old":"/core/pay/notify","type":0,"val":"core","end":""},{"old":"/core/pay/notify","type":0,"val":"pay","end":""},{"old":"/core/pay/notify","type":0,"val":"notify","end":""}],
     types: placeholder as Registry['pay.notify']['types'],
+  },
+  'sms.test': {
+    methods: ["POST"],
+    pattern: '/core/sms/test',
+    tokens: [{"old":"/core/sms/test","type":0,"val":"core","end":""},{"old":"/core/sms/test","type":0,"val":"sms","end":""},{"old":"/core/sms/test","type":0,"val":"test","end":""}],
+    types: placeholder as Registry['sms.test']['types'],
   },
   'subscribe.index': {
     methods: ["GET","HEAD"],

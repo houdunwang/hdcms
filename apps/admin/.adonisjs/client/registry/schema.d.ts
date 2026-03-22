@@ -163,6 +163,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/configs_controller').default['store']>>>
     }
   }
+  'emails.test': {
+    methods: ["POST"]
+    pattern: '/core/email/test'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#core/validators/email').testEmailValidate)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#core/validators/email').testEmailValidate)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/emails_controller').default['test']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/emails_controller').default['test']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'find_passwords.email': {
     methods: ["POST"]
     pattern: '/core/findPassword/email'
@@ -341,6 +353,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/pays_controller').default['notify']>>>
+    }
+  }
+  'sms.test': {
+    methods: ["POST"]
+    pattern: '/core/sms/test'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/sms').testSmsValidate)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/sms').testSmsValidate)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#core/controllers/sms_controller').default['test']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#core/controllers/sms_controller').default['test']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'subscribe.index': {
